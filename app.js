@@ -17,4 +17,76 @@ const activeRow=document.createElement('div');activeRow.className='row maxrow';a
 const axis=document.createElement('div');axis.className='axis';axis.innerHTML='<div></div><div class="axisTrack"></div>';const at=axis.lastElementChild;for(let i=0;i<=10;i++){const x=i*10,t=T*i/10,d=document.createElement('div');d.className='tick';d.style.left=x+'%';d.innerHTML=`<span>${t.toFixed(2)}</span>`;at.append(d)}tl.append(axis);
 
 ms.forEach((m,i)=>{const row=document.createElement('div');row.className=`row slot${i+1}`;row.innerHTML=`<div class="name">${m.slot}. ${m.name}<br><span class="sub">${m.interval>0?adjustedInterval(m).toFixed(2)+'s周期':'未入力'}</span></div><div class="track"></div>`;const tr=row.lastElementChild;by[i].forEach((e,n)=>{const b=document.createElement('button');b.type='button';b.className='bar';b.style.left=(e.start/T*100)+'%';b.style.width=(Math.max(0,e.end-e.start)/T*100)+'%';b.title=`${e.start.toFixed(2)}–${e.end.toFixed(2)}s`;b.addEventListener('click',()=>{document.querySelector('#detail').textContent=`${m.name} / ${m.costume||'衣装未入力'} — 第${n+1}候補 ${e.start.toFixed(2)}s → ${e.end.toFixed(2)}s / ${m.prob==='low'?'低':m.prob==='mid'?'中':'高'} ${probs[m.prob].toFixed(2)}% / +${m.boost.toFixed(2)}% / 短縮 ${m.short.toFixed(2)}%`});tr.append(b)});tl.append(row)})}
-document.addEventListener('input',e=>{if(e.target.closest('.wrap'))render()});document.addEventListener('change',e=>{if(e.target.closest('.wrap'))render()});render();
+// ===== 入力状態の保存・復元 =====
+const STORAGE_KEY = 'holodori-active-input-v1';
+
+function saveState(){
+  const state = {
+    song: document.querySelector('#song').value,
+    members: [...document.querySelectorAll('.card')].map(card => {
+      const get = key => card.querySelector(`[data-k="${key}"]`).value;
+
+      return {
+        name: get('name'),
+        costume: get('costume'),
+        interval: get('interval'),
+        prob: get('prob'),
+        duration: get('duration'),
+        boost: get('boost'),
+        short: get('short')
+      };
+    })
+  };
+
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+
+function loadState(){
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if(!saved) return;
+
+  try{
+    const state = JSON.parse(saved);
+
+    if(state.song !== undefined){
+      document.querySelector('#song').value = state.song;
+    }
+
+    if(Array.isArray(state.members)){
+      const cards = [...document.querySelectorAll('.card')];
+
+      state.members.forEach((member, i) => {
+        const card = cards[i];
+        if(!card) return;
+
+        Object.entries(member).forEach(([key, value]) => {
+          const input = card.querySelector(`[data-k="${key}"]`);
+          if(input) input.value = value;
+        });
+      });
+    }
+  }catch(error){
+    console.warn('保存データを読み込めませんでした', error);
+  }
+}
+
+
+// 入力するたびに保存して再描画
+document.addEventListener('input', e => {
+  if(e.target.closest('.wrap')){
+    saveState();
+    render();
+  }
+});
+
+document.addEventListener('change', e => {
+  if(e.target.closest('.wrap')){
+    saveState();
+    render();
+  }
+});
+
+
+// ページ読み込み時に前回の入力を復元
+loadState();
+render();
