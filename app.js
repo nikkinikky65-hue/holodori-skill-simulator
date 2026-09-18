@@ -9,10 +9,93 @@ function adjustedInterval(m){return m.interval>0?m.interval*(1-m.short/100):0}
 function events(m,T){const iv=adjustedInterval(m),out=[];if(iv<=0||m.duration<=0||m.boost<=0)return out;for(let t=iv;t<=T+1e-9&&out.length<1000;t+=iv)out.push({start:t,end:Math.min(T,t+m.duration),boost:m.boost,m});return out}
 function calcMax(all,T){const pts=[0,T];all.forEach(e=>{pts.push(e.start,e.end)});pts.sort((a,b)=>a-b);let total=0;for(let i=0;i<pts.length-1;i++){const a=pts[i],b=pts[i+1];if(b<=a)continue;const mid=(a+b)/2;let mx=0;for(const e of all)if(e.start<=mid&&mid<e.end)mx=Math.max(mx,e.boost);total+=mx*(b-a)}return total}
 
-function maxSegments(all,T){const pts=[0,T];all.forEach(e=>{pts.push(e.start,e.end)});pts.sort((a,b)=>a-b);const segments=[];for(let i=0;i<pts.length-1;i++){const a=pts[i],b=pts[i+1];if(b<=a)continue;const mid=(a+b)/2;let mx=0;for(const e of all)if(e.start<=mid&&mid<e.end)mx=Math.max(mx,e.boost);if(mx>0){const prev=segments[segments.length-1];if(prev&&Math.abs(prev.end-a)<1e-9&&prev.boost===mx)prev.end=b;else segments.push({start:a,end:b,boost:mx})}}return segments}
+function maxSegments(all,T){
+  const pts=[0,T];
+
+  all.forEach(e=>{
+    pts.push(e.start,e.end);
+  });
+
+  pts.sort((a,b)=>a-b);
+
+  const segments=[];
+
+  for(let i=0;i<pts.length-1;i++){
+    const a=pts[i];
+    const b=pts[i+1];
+
+    if(b<=a) continue;
+
+    const mid=(a+b)/2;
+    let winner=null;
+
+    for(const e of all){
+      if(
+        e.start<=mid &&
+        mid<e.end &&
+        (!winner || e.boost>winner.boost)
+      ){
+        winner=e;
+      }
+    }
+
+    if(winner){
+      const slot=winner.m.slot;
+      const prev=segments[segments.length-1];
+
+      if(
+        prev &&
+        Math.abs(prev.end-a)<1e-9 &&
+        prev.boost===winner.boost &&
+        prev.slot===slot
+      ){
+        prev.end=b;
+      }else{
+        segments.push({
+          start:a,
+          end:b,
+          boost:winner.boost,
+          slot
+        });
+      }
+    }
+  }
+
+  return segments;
+}
 function render(){const T=Math.max(.01,num(document.querySelector('#song').value,120)),ms=getMembers(),by=ms.map(m=>events(m,T)),all=by.flat(),max=calcMax(all,T);document.querySelector('#max').textContent=max.toFixed(2);document.querySelector('#avg').textContent=`+${(max/T).toFixed(2)}%`;document.querySelector('#count').textContent=all.length;const tl=document.querySelector('#timeline');tl.innerHTML='';
 
-const activeRow=document.createElement('div');activeRow.className='row maxrow';activeRow.innerHTML=`<div class="name">有効スキル<br><span class="sub">全発動時</span></div><div class="track"></div>`;const activeTrack=activeRow.lastElementChild;maxSegments(all,T).forEach(seg=>{const b=document.createElement('button');b.type='button';b.className='bar';b.style.left=(seg.start/T*100)+'%';b.style.width=((seg.end-seg.start)/T*100)+'%';b.title=`${seg.start.toFixed(2)}–${seg.end.toFixed(2)}s / +${seg.boost.toFixed(2)}%`;b.addEventListener('click',()=>{document.querySelector('#detail').textContent=`有効スキル — ${seg.start.toFixed(2)}s → ${seg.end.toFixed(2)}s / 有効補正 +${seg.boost.toFixed(2)}%`});activeTrack.append(b)});tl.append(activeRow);
+const activeRow=document.createElement('div');
+activeRow.className='row maxrow';
+
+activeRow.innerHTML=`
+  <div class="name">Activeタイムライン</div>
+  <div class="track"></div>
+`;
+
+const activeTrack=activeRow.lastElementChild;
+
+maxSegments(all,T).forEach(seg=>{
+  const b=document.createElement('button');
+
+  b.type='button';
+  b.className=`bar active-slot${seg.slot}`;
+
+  b.style.left=(seg.start/T*100)+'%';
+  b.style.width=((seg.end-seg.start)/T*100)+'%';
+
+  b.title=
+    `枠${seg.slot} / ${seg.start.toFixed(2)}–${seg.end.toFixed(2)}s / +${seg.boost.toFixed(2)}%`;
+
+  b.addEventListener('click',()=>{
+    document.querySelector('#detail').textContent=
+      `Activeタイムライン — 枠${seg.slot} / ${seg.start.toFixed(2)}s → ${seg.end.toFixed(2)}s / 有効補正 +${seg.boost.toFixed(2)}%`;
+  });
+
+  activeTrack.append(b);
+});
+
+tl.append(activeRow);
 
 const axis=document.createElement('div');axis.className='axis';axis.innerHTML='<div></div><div class="axisTrack"></div>';const at=axis.lastElementChild;for(let i=0;i<=10;i++){const x=i*10,t=T*i/10,d=document.createElement('div');d.className='tick';d.style.left=x+'%';d.innerHTML=`<span>${t.toFixed(2)}</span>`;at.append(d)}tl.append(axis);
 
