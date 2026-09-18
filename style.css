@@ -41,9 +41,77 @@
   border-color:#c96373;
 }
 
-.maxrow .name{
-  font-weight:700;
-}
 .maxrow .name{font-weight:700}
 .bar:hover{filter:brightness(.94)}#detail{min-height:24px;margin-top:8px;font-size:13px;color:#555}
 .note{font-size:12px;color:#666;margin-top:8px}@media(max-width:800px){.card{grid-template-columns:1fr 1fr}.wrap{padding:10px}}
+
+/* ===== 短縮率最適化 ===== */
+
+.optimizeArea{
+  margin-top:16px;
+  padding-top:12px;
+  border-top:1px solid #ddd;
+}
+
+#optimizeBtn{
+  width:100%;
+  padding:10px 12px;
+  border:1px solid #444;
+  border-radius:7px;
+  background:#fff;
+  font-weight:700;
+  cursor:pointer;
+}
+
+#optimizeBtn:hover{
+  background:#f5f5f5;
+}
+
+#optimizeBtn:active{
+  transform:translateY(1px);
+}
+
+#optimizeResult{
+  margin-top:7px;
+  min-height:18px;
+}
+
+
+/* ===== 最適化結果タイムライン ===== */
+
+.optimizeTimeline{
+  margin-top:24px;
+  padding-top:18px;
+  border-top:2px solid #ddd;
+}
+
+.optimizeHeader{
+  display:flex;
+  align-items:baseline;
+  gap:14px;
+  margin-bottom:10px;
+}
+
+.optimizeHeader strong{
+  font-size:15px;
+}
+
+.optimizeScore{
+  font-size:12px;
+  color:#666;
+}
+
+.optimizeShorts{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-bottom:10px;
+}
+
+.optimizeShort{
+  padding:4px 8px;
+  border:1px solid #ddd;
+  border-radius:5px;
+  font-size:12px;
+  background:#fafafa;
+}
