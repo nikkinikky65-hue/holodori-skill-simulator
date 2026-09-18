@@ -4,8 +4,13 @@ const cards=document.querySelector('#cards');
 init.forEach((d,i)=>{const el=document.createElement('div');el.className='card';el.innerHTML=`<label><span class="slot">${i+1}</span>キャラ<input data-k="name" value="${d[0]}"></label><label>衣装<input data-k="costume" value="${d[1]}"></label><label>周期(s)<input data-k="interval" type="number" min="0.01" step="0.01" value="${d[2]}"></label><label>確率<select data-k="prob"><option value="low">低</option><option value="mid">中</option><option value="high">高</option></select></label><label>発動時間(s)<input data-k="duration" type="number" min="0" step="0.01" value="${d[4]}"></label><label>補正(%)<input data-k="boost" type="number" min="0" step="0.01" value="${d[5]}"></label><label>短縮<select data-k="short"><option>0</option><option>4</option><option>8</option><option>12</option></select></label>`;el.querySelector('[data-k=prob]').value=d[3];el.querySelector('[data-k=short]').value=d[6];cards.append(el)});
 function num(v,f=0){const x=Number(v);return Number.isFinite(x)?x:f}
 function getMembers(){return [...document.querySelectorAll('.card')].map((c,i)=>{const g=k=>c.querySelector(`[data-k=${k}]`).value;return{slot:i+1,name:g('name')||`枠${i+1}`,costume:g('costume'),interval:Math.max(0,num(g('interval'),0)),prob:g('prob'),duration:Math.max(0,num(g('duration'))),boost:Math.max(0,num(g('boost'))),short:num(g('short'))}})}
-// α版の短縮計算は base interval × (1 - short/100)。仕様確定時はこの1関数だけ差し替え可能。
-function adjustedInterval(m){return m.interval>0?m.interval*(1-m.short/100):0}
+// 発動頻度UP：実効周期 = 基礎周期 / (1 + 発動頻度アップ率)
+function adjustedInterval(m){
+  return m.interval > 0
+    ? m.interval / (1 + m.short / 100)
+    : 0;
+}
+
 function events(m,T){const iv=adjustedInterval(m),out=[];if(iv<=0||m.duration<=0||m.boost<=0)return out;for(let t=iv;t<=T+1e-9&&out.length<1000;t+=iv)out.push({start:t,end:Math.min(T,t+m.duration),boost:m.boost,m});return out}
 function calcMax(all,T){const pts=[0,T];all.forEach(e=>{pts.push(e.start,e.end)});pts.sort((a,b)=>a-b);let total=0;for(let i=0;i<pts.length-1;i++){const a=pts[i],b=pts[i+1];if(b<=a)continue;const mid=(a+b)/2;let mx=0;for(const e of all)if(e.start<=mid&&mid<e.end)mx=Math.max(mx,e.boost);total+=mx*(b-a)}return total}
 
