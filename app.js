@@ -69,7 +69,7 @@ const activeRow=document.createElement('div');
 activeRow.className='row maxrow';
 
 activeRow.innerHTML=`
-  <div class="name">Activeタイムライン</div>
+  <div class="name"></div>
   <div class="track"></div>
 `;
 
