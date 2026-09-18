@@ -115,3 +115,30 @@
   font-size:12px;
   background:#fafafa;
 }
+
+.optimizeTitle{
+  font-weight:700;
+  margin-bottom:3px;
+}
+
+.optimizeLimits{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:8px;
+  margin:10px 0 12px;
+}
+
+.optimizeLimit{
+  font-size:11px;
+  color:#666;
+}
+
+.optimizeLimit select{
+  margin-top:3px;
+}
+
+@media(max-width:800px){
+  .optimizeLimits{
+    grid-template-columns:1fr 1fr;
+  }
+}

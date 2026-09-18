@@ -18,45 +18,75 @@ function calcMax(all,T){const pts=[0,T];all.forEach(e=>{pts.push(e.start,e.end)}
 
 const SHORT_OPTIONS = [0, 4, 8, 12];
 
-function optimizeShortRates(members, T){
+const optimizeLimits =
+  document.querySelector('#optimizeLimits');
+
+for(let i = 0; i < 5; i++){
+  const label = document.createElement('label');
+  label.className = 'optimizeLimit';
+
+  label.innerHTML = `
+    <span data-limit-name="${i}">${i + 1}. 枠${i + 1}</span>
+    <select data-limit="${i}">
+      <option value="0">最大 0%</option>
+      <option value="4">最大 4%</option>
+      <option value="8">最大 8%</option>
+      <option value="12" selected>最大 12%</option>
+    </select>
+  `;
+
+  optimizeLimits.append(label);
+}
+
+function optimizeShortRates(members, T, limits){
   let best = null;
+  let tested = 0;
 
-  for(const s1 of SHORT_OPTIONS){
-    for(const s2 of SHORT_OPTIONS){
-      for(const s3 of SHORT_OPTIONS){
-        for(const s4 of SHORT_OPTIONS){
-          for(const s5 of SHORT_OPTIONS){
+  const candidates = limits.map(limit =>
+    SHORT_OPTIONS.filter(v => v <= limit)
+  );
 
-            const shorts = [s1, s2, s3, s4, s5];
-
-            const testMembers = members.map((m, i) => ({
-              ...m,
-              short: shorts[i]
-            }));
-
-            const by = testMembers.map(m => events(m, T));
-            const all = by.flat();
-            const score = calcMax(all, T);
-
-            if(
-              best === null ||
-              score > best.score + 1e-9
-            ){
-              best = {
-                score,
-                shorts: [...shorts],
-                members: testMembers,
-                by,
-                all
-              };
-            }
-          }
-        }
+  function search(index, shorts){
+    if(index < members.length){
+      for(const value of candidates[index]){
+        shorts.push(value);
+        search(index + 1, shorts);
+        shorts.pop();
       }
+      return;
+    }
+
+    tested++;
+
+    const testMembers = members.map((m, i) => ({
+      ...m,
+      short: shorts[i]
+    }));
+
+    const by = testMembers.map(m => events(m, T));
+    const all = by.flat();
+    const score = calcMax(all, T);
+
+    if(
+      best === null ||
+      score > best.score + 1e-9
+    ){
+      best = {
+        score,
+        shorts: [...shorts],
+        members: testMembers,
+        by,
+        all
+      };
     }
   }
 
-  return best;
+  search(0, []);
+
+  return {
+    ...best,
+    tested
+  };
 }
 
 function renderOptimizedTimeline(result, T, currentScore){
@@ -404,6 +434,10 @@ document.querySelector('#optimizeBtn')
 
     const members = getMembers();
 
+    const limits =
+  [...document.querySelectorAll('[data-limit]')]
+    .map(el => num(el.value, 12));
+
     button.disabled = true;
     button.textContent = '計算中...';
 
@@ -415,7 +449,7 @@ document.querySelector('#optimizeBtn')
       calcMax(currentBy.flat(), T);
 
     const result =
-      optimizeShortRates(members, T);
+      optimizeShortRates(members, T, limits);
 
     renderOptimizedTimeline(
       result,
@@ -424,7 +458,7 @@ document.querySelector('#optimizeBtn')
     );
 
     resultText.textContent =
-      `探索完了：${SHORT_OPTIONS.length ** members.length}通り`;
+      `探索完了：${result.tested}通り`;
 
     button.disabled = false;
     button.textContent = '最適化探索';
@@ -432,4 +466,19 @@ document.querySelector('#optimizeBtn')
 
 // ページ読み込み時に前回の入力を復元
 loadState();
+
+function updateOptimizeNames(){
+  const members = getMembers();
+
+  members.forEach((m, i) => {
+    const el =
+      document.querySelector(`[data-limit-name="${i}"]`);
+
+    if(el){
+      el.textContent = `${i + 1}. ${m.name}`;
+    }
+  });
+}
+
 render();
+updateOptimizeNames();
