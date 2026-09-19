@@ -8,7 +8,7 @@
 </head>
 <body>
 <main class="wrap">
-<div class="panel">
+ <div class="panel">
   <div class="pageHeader">
     <div>
       <h1>ホロドリ Active Timeline α</h1>
@@ -21,10 +21,10 @@
       メンバーカードライブラリ
     </a>
   </div>
-</div>
-<div class="panel top"><label>楽曲時間 (s)<input id="song" type="number" min="1" step="0.01" value="120"></label><div class="sub">初期値 120.00s ／ 表示は小数第2位、内部値は丸めません</div></div>
-<div class="panel"><h2>編成・Active入力</h2><div id="cards" class="cards"></div></div>
-<div class="optimizeArea">
+ </div>
+ <div class="panel top"><label>楽曲時間 (s)<input id="song" type="number" min="1" step="0.01" value="120"></label><div class="sub">初期値 120.00s ／ 表示は小数第2位、内部値は丸めません</div></div>
+ <div class="panel"><h2>編成・Active入力</h2><div id="cards" class="cards"></div></div>
+ <div class="optimizeArea">
   <div class="optimizeTitle">最適化探索</div>
   <div class="sub">探索で使用できる発動頻度UPの上限</div>
 
@@ -32,10 +32,25 @@
 
   <button id="optimizeBtn" type="button">最適化探索</button>
   <div id="optimizeResult" class="sub"></div>
+ </div>
+ <div class="panel"><div class="metrics"><div class="metric"><span class="sub">MAX発動スコア評価値</span><b id="max">0.00</b></div><div class="metric"><span class="sub">曲全体平均Active補正</span><b id="avg">+0.00%</b></div><div class="metric"><span class="sub">発動候補数</span><b id="count">0</b></div></div><div class="note">評価値 = ∫ max(発動中Active補正率) dt。重複区間は最も高い補正だけを採用します。</div></div>
+ <div class="panel"><h2>Activeタイムライン</h2><div class="timeline-scroll"><div id="timeline" class="timeline"></div></div><div id="detail">バーを選ぶと詳細を表示します。</div></div>
+ <div id="cardLoadModal" class="cardLoadModal" hidden>
+  <div class="cardLoadBackdrop" data-close-card-modal></div>
+
+  <div class="cardLoadDialog">
+    <div class="cardLoadHeader">
+      <strong>メンバーカード呼出</strong>
+      <button type="button" data-close-card-modal>閉じる</button>
+    </div>
+
+    <div id="cardLoadTarget" class="sub"></div>
+
+    <div id="cardLoadList" class="cardLoadList"></div>
+  </div>
 </div>
-<div class="panel"><div class="metrics"><div class="metric"><span class="sub">MAX発動スコア評価値</span><b id="max">0.00</b></div><div class="metric"><span class="sub">曲全体平均Active補正</span><b id="avg">+0.00%</b></div><div class="metric"><span class="sub">発動候補数</span><b id="count">0</b></div></div><div class="note">評価値 = ∫ max(発動中Active補正率) dt。重複区間は最も高い補正だけを採用します。</div></div>
-<div class="panel"><h2>Activeタイムライン</h2><div class="timeline-scroll"><div id="timeline" class="timeline"></div></div><div id="detail">バーを選ぶと詳細を表示します。</div></div>
 </main>
+<script src="members.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

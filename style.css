@@ -265,3 +265,120 @@
     flex-direction:column;
   }
 }
+
+/* ===== Timeline ライブラリ操作 ===== */
+
+.cardLibraryActions{
+  display:flex;
+  gap:5px;
+}
+
+.cardLibraryActions button{
+  padding:8px 9px;
+  border:1px solid #bbb;
+  border-radius:7px;
+  background:#fff;
+  cursor:pointer;
+  font-size:12px;
+}
+
+.cardLibraryActions button:hover{
+  background:#f5f5f5;
+}
+
+
+/* ===== カード呼出モーダル ===== */
+
+.cardLoadModal{
+  position:fixed;
+  inset:0;
+  z-index:1000;
+}
+
+.cardLoadModal[hidden]{
+  display:none;
+}
+
+.cardLoadBackdrop{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.35);
+}
+
+.cardLoadDialog{
+  position:absolute;
+
+  top:50%;
+  left:50%;
+
+  transform:
+    translate(-50%,-50%);
+
+  width:min(620px,calc(100% - 28px));
+  max-height:80vh;
+
+  overflow:auto;
+
+  padding:16px;
+
+  background:#fff;
+
+  border-radius:12px;
+
+  box-shadow:
+    0 10px 35px rgba(0,0,0,.2);
+}
+
+.cardLoadHeader{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+
+  margin-bottom:6px;
+}
+
+.cardLoadHeader button{
+  padding:6px 9px;
+  border:1px solid #bbb;
+  border-radius:7px;
+  background:#fff;
+  cursor:pointer;
+}
+
+.cardLoadList{
+  display:grid;
+  gap:7px;
+
+  margin-top:12px;
+}
+
+.cardLoadItem{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+
+  width:100%;
+
+  padding:10px 12px;
+
+  border:1px solid #ddd;
+  border-radius:8px;
+
+  background:#fff;
+
+  cursor:pointer;
+
+  text-align:left;
+}
+
+.cardLoadItem:hover{
+  background:#f5f5f5;
+}
+
+.cardLoadItem span{
+  margin-top:3px;
+
+  color:#666;
+  font-size:12px;
+}

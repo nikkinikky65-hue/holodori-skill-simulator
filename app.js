@@ -1,7 +1,563 @@
 const init=Array.from({length:5},()=>['','', '', 'mid', '', '', 0]);
 const probs={low:35,mid:45,high:55};
 const cards=document.querySelector('#cards');
-init.forEach((d,i)=>{const el=document.createElement('div');el.className='card';el.innerHTML=`<label><span class="slot">${i+1}</span>キャラ<input data-k="name" value="${d[0]}"></label><label>衣装<input data-k="costume" value="${d[1]}"></label><label>周期(s)<input data-k="interval" type="number" min="0.01" step="0.01" value="${d[2]}"></label><label>確率<select data-k="prob"><option value="low">低</option><option value="mid">中</option><option value="high">高</option></select></label><label>発動時間(s)<input data-k="duration" type="number" min="0" step="0.01" value="${d[4]}"></label><label>補正(%)<input data-k="boost" type="number" min="0" step="0.01" value="${d[5]}"></label><label>短縮<select data-k="short"><option>0</option><option>4</option><option>8</option><option>12</option></select></label>`;el.querySelector('[data-k=prob]').value=d[3];el.querySelector('[data-k=short]').value=d[6];cards.append(el)});
+init.forEach((d,i)=>{
+  const el=document.createElement('div');
+
+  el.className='card';
+
+  el.innerHTML=`
+    <label>
+      <span class="slot">${i+1}</span>
+      キャラ
+      <input data-k="name" value="${d[0]}">
+    </label>
+
+    <label>
+      衣装
+      <input data-k="costume" value="${d[1]}">
+    </label>
+
+    <label>
+      周期(s)
+      <input
+        data-k="interval"
+        type="number"
+        min="0.01"
+        step="0.01"
+        value="${d[2]}"
+      >
+    </label>
+
+    <label>
+      確率
+      <select data-k="prob">
+        <option value="low">低</option>
+        <option value="mid">中</option>
+        <option value="high">高</option>
+      </select>
+    </label>
+
+    <label>
+      発動時間(s)
+      <input
+        data-k="duration"
+        type="number"
+        min="0"
+        step="0.01"
+        value="${d[4]}"
+      >
+    </label>
+
+    <label>
+      補正(%)
+      <input
+        data-k="boost"
+        type="number"
+        min="0"
+        step="0.01"
+        value="${d[5]}"
+      >
+    </label>
+
+    <label>
+      短縮
+      <select data-k="short">
+        <option>0</option>
+        <option>4</option>
+        <option>8</option>
+        <option>12</option>
+      </select>
+    </label>
+
+    <div class="cardLibraryActions">
+      <button
+        type="button"
+        data-save-library="${i}"
+      >
+        保存
+      </button>
+
+      <button
+        type="button"
+        data-load-library="${i}"
+      >
+        呼出
+      </button>
+    </div>
+  `;
+
+  el.querySelector('[data-k=prob]').value=d[3];
+  el.querySelector('[data-k=short]').value=d[6];
+
+  cards.append(el);
+});
+
+// ========================================
+// メンバーカードライブラリ接続
+// ========================================
+
+const MEMBER_CARD_STORAGE_KEY =
+  'holodori-member-card-library-v1';
+
+
+function loadMemberCardLibrary(){
+
+  const saved =
+    localStorage.getItem(
+      MEMBER_CARD_STORAGE_KEY
+    );
+
+  if(!saved){
+    return [];
+  }
+
+  try{
+
+    const data =
+      JSON.parse(saved);
+
+    return Array.isArray(data)
+      ? data
+      : [];
+
+  }catch(error){
+
+    console.warn(
+      'メンバーカードライブラリを読み込めませんでした',
+      error
+    );
+
+    return [];
+  }
+}
+
+
+function saveMemberCardLibrary(data){
+
+  localStorage.setItem(
+    MEMBER_CARD_STORAGE_KEY,
+    JSON.stringify(data)
+  );
+}
+
+
+function createLibraryCardId(){
+
+  return (
+    'card-' +
+    Date.now().toString(36) +
+    '-' +
+    Math.random().toString(36).slice(2,8)
+  );
+}
+
+
+function getMasterMember(memberId){
+
+  return HOLO_MEMBERS.find(
+    member =>
+      member.id === memberId
+  );
+}
+
+
+function getMasterMemberByName(name){
+
+  const target =
+    name.trim();
+
+  return HOLO_MEMBERS.find(
+    member =>
+      member.name === target
+  );
+}
+
+// ========================================
+// 現在の枠 → ライブラリ保存
+// ========================================
+
+document.addEventListener(
+  'click',
+  event => {
+
+    const button =
+      event.target.closest(
+        '[data-save-library]'
+      );
+
+    if(!button){
+      return;
+    }
+
+
+    const slotIndex =
+      Number(
+        button.dataset.saveLibrary
+      );
+
+    const card =
+      document.querySelectorAll('.card')[
+        slotIndex
+      ];
+
+    if(!card){
+      return;
+    }
+
+
+    const get =
+      key =>
+        card.querySelector(
+          `[data-k="${key}"]`
+        ).value;
+
+
+    const enteredName =
+      get('name').trim();
+
+
+    const member =
+      getMasterMemberByName(
+        enteredName
+      );
+
+
+    if(!member){
+
+      alert(
+        `「${enteredName}」は共通メンバー一覧にありません。\n` +
+        `members.js の名前と同じ表記にしてください。`
+      );
+
+      return;
+    }
+
+
+    const costume =
+      get('costume').trim();
+
+
+    if(!costume){
+
+      alert(
+        '衣装名を入力してください。'
+      );
+
+      return;
+    }
+
+
+    const library =
+      loadMemberCardLibrary();
+
+
+    const newCard = {
+
+      id:
+        createLibraryCardId(),
+
+      memberId:
+        member.id,
+
+      costume,
+
+      interval:
+        Number(get('interval')),
+
+      prob:
+        get('prob'),
+
+      duration:
+        Number(get('duration')),
+
+      boost:
+        Number(get('boost'))
+    };
+
+
+    library.push(
+      newCard
+    );
+
+
+    saveMemberCardLibrary(
+      library
+    );
+
+
+    alert(
+      `${member.name} / ${costume} を保存しました。`
+    );
+  }
+);
+
+// ========================================
+// ライブラリ呼出
+// ========================================
+
+const cardLoadModal =
+  document.querySelector(
+    '#cardLoadModal'
+  );
+
+const cardLoadList =
+  document.querySelector(
+    '#cardLoadList'
+  );
+
+const cardLoadTarget =
+  document.querySelector(
+    '#cardLoadTarget'
+  );
+
+
+let loadTargetSlot =
+  null;
+
+
+function openCardLoadModal(slotIndex){
+
+  loadTargetSlot =
+    slotIndex;
+
+  const library =
+    loadMemberCardLibrary();
+
+
+  cardLoadList.innerHTML =
+    '';
+
+  cardLoadTarget.textContent =
+    `読込先：枠${slotIndex + 1}`;
+
+
+  if(library.length === 0){
+
+    cardLoadList.innerHTML =
+      '<div class="libraryEmpty">' +
+      '保存済みカードがありません。' +
+      '</div>';
+
+    cardLoadModal.hidden =
+      false;
+
+    return;
+  }
+
+
+  const sorted =
+    [...library].sort(
+      (a,b) => {
+
+        const memberA =
+          getMasterMember(a.memberId);
+
+        const memberB =
+          getMasterMember(b.memberId);
+
+        const nameA =
+          memberA
+            ? memberA.name
+            : '';
+
+        const nameB =
+          memberB
+            ? memberB.name
+            : '';
+
+        const memberCompare =
+          nameA.localeCompare(
+            nameB,
+            'ja'
+          );
+
+        if(memberCompare !== 0){
+          return memberCompare;
+        }
+
+        return a.costume.localeCompare(
+          b.costume,
+          'ja'
+        );
+      }
+    );
+
+
+  sorted.forEach(
+    libraryCard => {
+
+      const member =
+        getMasterMember(
+          libraryCard.memberId
+        );
+
+
+      const button =
+        document.createElement(
+          'button'
+        );
+
+      button.type =
+        'button';
+
+      button.className =
+        'cardLoadItem';
+
+
+      const probability =
+        libraryCard.prob === 'low'
+          ? '低'
+          : libraryCard.prob === 'high'
+            ? '高'
+            : '中';
+
+
+      button.innerHTML = `
+        <strong>
+          ${member
+            ? member.name
+            : '不明なメンバー'}
+          /
+          ${libraryCard.costume}
+        </strong>
+
+        <span>
+          ${libraryCard.interval}s周期 /
+          ${probability} /
+          ${libraryCard.duration}s /
+          +${libraryCard.boost}%
+        </span>
+      `;
+
+
+      button.addEventListener(
+        'click',
+        () => {
+
+          loadLibraryCardIntoSlot(
+            libraryCard,
+            slotIndex
+          );
+
+          closeCardLoadModal();
+        }
+      );
+
+
+      cardLoadList.append(
+        button
+      );
+    }
+  );
+
+
+  cardLoadModal.hidden =
+    false;
+}
+
+
+function closeCardLoadModal(){
+
+  cardLoadModal.hidden =
+    true;
+
+  loadTargetSlot =
+    null;
+}
+
+function loadLibraryCardIntoSlot(
+  libraryCard,
+  slotIndex
+){
+
+  const card =
+    document.querySelectorAll('.card')[
+      slotIndex
+    ];
+
+  if(!card){
+    return;
+  }
+
+
+  const member =
+    getMasterMember(
+      libraryCard.memberId
+    );
+
+
+  if(!member){
+
+    alert(
+      '対応するメンバーが members.js にありません。'
+    );
+
+    return;
+  }
+
+
+  const set =
+    (key,value) => {
+
+      const input =
+        card.querySelector(
+          `[data-k="${key}"]`
+        );
+
+      if(input){
+        input.value =
+          value;
+      }
+    };
+
+
+  // 短縮率には触らない
+  set(
+    'name',
+    member.name
+  );
+
+  set(
+    'costume',
+    libraryCard.costume
+  );
+
+  set(
+    'interval',
+    libraryCard.interval
+  );
+
+  set(
+    'prob',
+    libraryCard.prob
+  );
+
+  set(
+    'duration',
+    libraryCard.duration
+  );
+
+  set(
+    'boost',
+    libraryCard.boost
+  );
+
+
+  // 現在状態として保存
+  saveState();
+
+
+  // タイムライン再計算
+  render();
+
+
+  // 最適化欄の名前も更新
+  updateOptimizeNames();
+}
+
+
+
 function num(v,f=0){const x=Number(v);return Number.isFinite(x)?x:f}
 function getMembers(){return [...document.querySelectorAll('.card')].map((c,i)=>{const g=k=>c.querySelector(`[data-k=${k}]`).value;return{slot:i+1,name:g('name')||`枠${i+1}`,costume:g('costume'),interval:Math.max(0,num(g('interval'),0)),prob:g('prob'),duration:Math.max(0,num(g('duration'))),boost:Math.max(0,num(g('boost'))),short:num(g('short'))}})}
 // 発動頻度UP：実効周期 = 基礎周期 / (1 + 発動頻度アップ率)
