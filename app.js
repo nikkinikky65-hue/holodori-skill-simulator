@@ -10,7 +10,14 @@ init.forEach((d,i)=>{
     <label>
       <span class="slot">${i+1}</span>
       キャラ
-      <input data-k="name" value="${d[0]}">
+      <select data-k="memberId">
+        <option value="">未選択</option>
+        ${HOLO_MEMBERS.map(member => `
+          <option value="${member.id}">
+            ${member.name}
+          </option>
+        `).join('')}
+      </select>
     </label>
 
     <label>
@@ -213,21 +220,16 @@ document.addEventListener(
         ).value;
 
 
-    const enteredName =
-      get('name').trim();
-
+    const memberId =
+      get('memberId');
 
     const member =
-      getMasterMemberByName(
-        enteredName
-      );
-
+      getMasterMember(memberId);
 
     if(!member){
 
       alert(
-        `「${enteredName}」は共通メンバー一覧にありません。\n` +
-        `members.js の名前と同じ表記にしてください。`
+        'メンバーを選択してください。'
       );
 
       return;
@@ -257,10 +259,29 @@ document.addEventListener(
       id:
         createLibraryCardId(),
 
+      // ===== Member =====
+
       memberId:
         member.id,
 
+
+      // ===== Member Card =====
+
       costume,
+
+      // カード固有タイプ
+      // 現在は予約領域
+      characterType: '',
+
+
+      // ===== Status =====
+      // 現在は予約領域
+      stats: {},
+
+
+      // ===== Active Skill =====
+      // 現在実装済み
+      // 互換性維持のため当面フラット構造
 
       interval:
         Number(get('interval')),
@@ -272,25 +293,29 @@ document.addEventListener(
         Number(get('duration')),
 
       boost:
-        Number(get('boost'))
-    };
+        Number(get('boost')),
 
 
-    library.push(
-      newCard
-    );
+      // ===== Costume Skill =====
+      // 現在は保存領域のみ
+      // UI・計算から未参照
+
+      costumeSkill: {},
 
 
-    saveMemberCardLibrary(
-      library
-    );
+      // ===== Special Skill =====
+      // 現在は保存領域のみ
+      // UI・計算から未参照
+
+      specialSkill: {},
 
 
-    alert(
-      `${member.name} / ${costume} を保存しました。`
-    );
-  }
-);
+      // ===== Passive Skill =====
+      // 現在は保存領域のみ
+      // UI・計算から未参照
+
+      passiveSkill: {}
+};
 
 // ========================================
 // ライブラリ呼出
@@ -514,9 +539,9 @@ function loadLibraryCardIntoSlot(
 
   // 短縮率には触らない
   set(
-    'name',
-    member.name
-  );
+  'memberId',
+  libraryCard.memberId
+);
 
   set(
     'costume',
@@ -559,7 +584,60 @@ function loadLibraryCardIntoSlot(
 
 
 function num(v,f=0){const x=Number(v);return Number.isFinite(x)?x:f}
-function getMembers(){return [...document.querySelectorAll('.card')].map((c,i)=>{const g=k=>c.querySelector(`[data-k=${k}]`).value;return{slot:i+1,name:g('name')||`枠${i+1}`,costume:g('costume'),interval:Math.max(0,num(g('interval'),0)),prob:g('prob'),duration:Math.max(0,num(g('duration'))),boost:Math.max(0,num(g('boost'))),short:num(g('short'))}})}
+function getMembers(){
+  return [...document.querySelectorAll('.card')].map((c,i)=>{
+
+    const g = k =>
+      c.querySelector(`[data-k="${k}"]`)?.value ?? '';
+
+    const memberId = g('memberId');
+
+    const member =
+      HOLO_MEMBERS.find(
+        m => m.id === memberId
+      );
+
+    return {
+      slot: i + 1,
+
+      memberId,
+
+      name:
+        member?.name ||
+        `枠${i+1}`,
+
+      generation:
+        member?.generation || '',
+
+      costume:
+        g('costume'),
+
+      interval:
+        Math.max(
+          0,
+          num(g('interval'),0)
+        ),
+
+      prob:
+        g('prob'),
+
+      duration:
+        Math.max(
+          0,
+          num(g('duration'))
+        ),
+
+      boost:
+        Math.max(
+          0,
+          num(g('boost'))
+        ),
+
+      short:
+        num(g('short'))
+    };
+  });
+}
 // 発動頻度UP：実効周期 = 基礎周期 / (1 + 発動頻度アップ率)
 function adjustedInterval(m){
   return m.interval > 0
@@ -913,7 +991,7 @@ function saveState(){
       const get = key => card.querySelector(`[data-k="${key}"]`).value;
 
       return {
-        name: get('name'),
+        memberId: get('memberId'),
         costume: get('costume'),
         interval: get('interval'),
         prob: get('prob'),
