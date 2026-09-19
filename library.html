@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ホロドリ メンバーカードライブラリ</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<main class="wrap">
+
+  <div class="panel">
+    <h1>メンバーカードライブラリ</h1>
+
+    <div class="sub">
+      所持しているメンバーカードを登録・管理します。
+    </div>
+
+    <div class="libraryNav">
+      <a href="index.html">← Active Timelineへ戻る</a>
+    </div>
+  </div>
+
+
+  <div class="panel">
+
+    <h2>メンバーカード登録</h2>
+
+    <form id="memberCardForm" class="libraryCardForm">
+
+      <input
+        id="memberCardId"
+        type="hidden"
+      >
+
+
+      <label>
+        メンバー
+
+        <select
+          id="memberCardMember"
+          required
+        >
+          <option value="">
+            選択してください
+          </option>
+        </select>
+      </label>
+
+
+      <label>
+        衣装
+
+        <input
+          id="memberCardCostume"
+          type="text"
+          placeholder="衣装名"
+          required
+        >
+      </label>
+
+
+      <label>
+        周期(s)
+
+        <input
+          id="memberCardInterval"
+          type="number"
+          min="0.01"
+          step="0.01"
+          required
+        >
+      </label>
+
+
+      <label>
+        発動確率
+
+        <select id="memberCardProb">
+          <option value="low">低</option>
+          <option value="mid" selected>中</option>
+          <option value="high">高</option>
+        </select>
+      </label>
+
+
+      <label>
+        発動時間(s)
+
+        <input
+          id="memberCardDuration"
+          type="number"
+          min="0"
+          step="0.01"
+          required
+        >
+      </label>
+
+
+      <label>
+        補正(%)
+
+        <input
+          id="memberCardBoost"
+          type="number"
+          min="0"
+          step="0.01"
+          required
+        >
+      </label>
+
+
+      <div class="libraryFormButtons">
+
+        <button type="submit">
+          保存
+        </button>
+
+        <button
+          id="memberCardCancel"
+          type="button"
+        >
+          キャンセル
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+
+  <div class="panel">
+
+    <h2>登録済みカード</h2>
+
+    <div
+      id="memberCardCount"
+      class="sub"
+    ></div>
+
+    <div
+      id="memberCardList"
+      class="libraryList"
+    ></div>
+
+  </div>
+
+</main>
+
+
+<!-- 順番重要 -->
+<script src="members.js"></script>
+<script src="library.js"></script>
+
+</body>
+</html>

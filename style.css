@@ -142,3 +142,97 @@
     grid-template-columns:1fr 1fr;
   }
 }
+
+/* ===== メンバーカードライブラリ ===== */
+
+.libraryNav{
+  margin-top:10px;
+}
+
+.libraryNav a{
+  color:inherit;
+}
+
+.libraryCardForm{
+  display:grid;
+  grid-template-columns:
+    1.2fr
+    1.4fr
+    repeat(4,.8fr)
+    auto;
+  gap:8px;
+  align-items:end;
+}
+
+.libraryCardForm label{
+  font-size:11px;
+  color:#666;
+}
+
+.libraryFormButtons{
+  display:flex;
+  gap:6px;
+}
+
+.libraryFormButtons button,
+.libraryItemButtons button{
+  padding:7px 10px;
+  border:1px solid #bbb;
+  border-radius:7px;
+  background:#fff;
+  cursor:pointer;
+}
+
+.libraryFormButtons button:hover,
+.libraryItemButtons button:hover{
+  background:#f5f5f5;
+}
+
+.libraryList{
+  display:grid;
+  gap:7px;
+  margin-top:10px;
+}
+
+.libraryCardItem{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+
+  padding:10px;
+
+  border:1px solid #e2e2e2;
+  border-radius:9px;
+}
+
+.libraryCardInfo{
+  min-width:0;
+}
+
+.libraryItemButtons{
+  display:flex;
+  gap:5px;
+  flex-shrink:0;
+}
+
+.libraryEmpty{
+  padding:14px;
+  text-align:center;
+  color:#888;
+  font-size:13px;
+
+  border:1px dashed #ccc;
+  border-radius:8px;
+}
+
+@media(max-width:800px){
+
+  .libraryCardForm{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .libraryFormButtons{
+    grid-column:1 / -1;
+  }
+}
