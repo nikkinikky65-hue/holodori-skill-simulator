@@ -310,12 +310,30 @@ document.addEventListener(
       specialSkill: {},
 
 
-      // ===== Passive Skill =====
+            // ===== Passive Skill =====
       // 現在は保存領域のみ
       // UI・計算から未参照
 
       passiveSkill: {}
-};
+    };
+
+    library.push(
+      newCard
+    );
+
+    saveMemberCardLibrary(
+      library
+    );
+
+    alert(
+      `${member.name} / ${costume} を保存しました。`
+    );
+  }
+);
+
+// ========================================
+// ライブラリ呼出
+// ========================================
 
 // ========================================
 // ライブラリ呼出
