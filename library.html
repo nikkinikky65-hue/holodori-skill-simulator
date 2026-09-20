@@ -39,11 +39,11 @@
   <!-- =========================
        基本情報
   ========================== -->
-<section class="libraryFormSection">
+<section class="libraryFormSection basicInfoSection">
   <h3>基本情報</h3>
 
   <label>
-    タレント
+    メンバー
 
     <select
       id="cardTalent"
@@ -57,23 +57,10 @@
 
 
   <label>
-    カード名
-
-    <input
-      id="cardName"
-      type="text"
-      required
-    >
-  </label>
-
-
-  <label>
     タイプ
 
-    <select
-      id="cardType"
-      required
-    >
+    <select id="cardType">
+      <option value="" selected>未登録</option>
       <option value="cute">キュート</option>
       <option value="pure">ピュア</option>
       <option value="happy">ハッピー</option>
@@ -90,9 +77,21 @@
     >
       <option value="3">★3</option>
       <option value="4">★4</option>
-      <option value="5">★5</option>
+      <option value="5" selected>★5</option>
     </select>
   </label>
+
+
+  <label class="cardNameField">
+    カード名
+
+    <input
+      id="cardName"
+      type="text"
+      required
+    >
+  </label>
+
 </section>
 
   <!-- =========================

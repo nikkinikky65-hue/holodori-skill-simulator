@@ -209,8 +209,12 @@
 }
 
 /* スキル名・効果説明は横幅を全部使う */
-.libraryFormSection label:first-of-type,
-.libraryFormSection label:last-of-type{
+.basicInfoSection{
+  grid-template-columns:
+    2fr 1fr 1fr 1fr;
+}
+
+.basicInfoSection .cardNameField{
   grid-column:1 / -1;
 }
 
