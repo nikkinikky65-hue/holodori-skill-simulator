@@ -110,7 +110,7 @@ init.forEach((d,i)=>{
 // ========================================
 
 const MEMBER_CARD_STORAGE_KEY =
-  'holodori-member-card-library-v1';
+  'holodori-member-card-library-v2';
 
 
 function loadMemberCardLibrary(){
@@ -126,12 +126,18 @@ function loadMemberCardLibrary(){
 
   try{
 
-    const data =
+    const library =
       JSON.parse(saved);
 
-    return Array.isArray(data)
-      ? data
-      : [];
+    if(
+      !library ||
+      library.version !== 2 ||
+      !Array.isArray(library.cards)
+    ){
+      return [];
+    }
+
+    return library.cards;
 
   }catch(error){
 
