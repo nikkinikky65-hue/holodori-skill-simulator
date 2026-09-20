@@ -22,7 +22,12 @@ init.forEach((d,i)=>{
 
     <label>
       衣装
-      <input data-k="costume" value="${d[1]}">
+      <select data-k="costume">
+        <option value="未分類" selected>未分類</option>
+        <option value="★5恒常">★5恒常</option>
+        <option value="★4">★4</option>
+        <option value="★3">★3</option>
+      </select>
     </label>
 
     <label>
