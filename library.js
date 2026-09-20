@@ -530,7 +530,7 @@ function resetMemberCardForm(){
     '';
 
   memberCardCostume.value =
-    '';
+  '未分類';
 
   memberCardInterval.value =
     '';
