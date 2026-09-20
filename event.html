@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>ホロドリ イベント編成探索</title>
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
+</head>
+
+<body>
+
+  <main class="container">
+
+    <header class="pageHeader">
+      <div>
+        <h1>イベント編成探索</h1>
+        <p class="sub">
+          イベント条件から編成候補を探索
+        </p>
+      </div>
+
+      <nav>
+        <a href="index.html">
+          Active Timeline
+        </a>
+
+        <a href="library.html">
+          カードライブラリ
+        </a>
+      </nav>
+    </header>
+
+
+    <!-- =====================================
+         必須メンバー
+    ====================================== -->
+
+    <section class="panel">
+
+      <h2>必須メンバー</h2>
+
+      <p class="sub">
+        最大4人まで指定できます。
+        メンバー選択後、必要なら使用カードまで固定できます。
+      </p>
+
+      <div
+        id="requiredSlots"
+        class="requiredSlots"
+      ></div>
+
+    </section>
+
+
+    <!-- =====================================
+         探索
+    ====================================== -->
+
+    <section class="panel">
+
+      <h2>探索</h2>
+
+      <div class="eventSearchActions">
+
+        <button
+          id="searchFormation"
+          type="button"
+        >
+          編成候補を計算
+        </button>
+
+        <button
+          id="clearConditions"
+          type="button"
+        >
+          条件クリア
+        </button>
+
+      </div>
+
+      <p
+        id="searchStatus"
+        class="sub"
+      ></p>
+
+    </section>
+
+
+    <!-- =====================================
+         結果
+    ====================================== -->
+
+    <section class="panel">
+
+      <h2>編成候補</h2>
+
+      <div
+        id="formationResults"
+        class="formationResults"
+      >
+        <div class="libraryEmpty">
+          条件を指定して探索してください
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <script src="members.js"></script>
+  <script src="event.js"></script>
+
+</body>
+</html>
