@@ -151,11 +151,16 @@ function loadMemberCardLibrary(){
 }
 
 
-function saveMemberCardLibrary(data){
+function saveMemberCardLibrary(cards){
+
+  const library = {
+    version: 2,
+    cards
+  };
 
   localStorage.setItem(
     MEMBER_CARD_STORAGE_KEY,
-    JSON.stringify(data)
+    JSON.stringify(library)
   );
 }
 
@@ -270,62 +275,97 @@ document.addEventListener(
       id:
         createLibraryCardId(),
 
-      // ===== Member =====
-
-      memberId:
+      talentId:
         member.id,
 
+      cardName:
+        costume,
 
-      // ===== Member Card =====
+      type:
+        'cute',
 
-      costume,
+      rarity:
+        5,
 
-      // カード固有タイプ
-      // 現在は予約領域
-      characterType: '',
+      progression: {
+    
+        level:
+          1,
 
+        training:
+          0,
 
-      // ===== Status =====
-      // 現在は予約領域
-      stats: {},
+        bloom:
+          0
+      },
 
+      stats: {
 
-      // ===== Active Skill =====
-      // 現在実装済み
-      // 互換性維持のため当面フラット構造
+        total:
+          0,
 
-      interval:
-        Number(get('interval')),
+        performance:
+          0,
 
-      prob:
-        get('prob'),
+        technique:
+          0,
 
-      duration:
-        Number(get('duration')),
+        sense:
+          0
+      },
 
-      boost:
-        Number(get('boost')),
+      skills: {
 
+        special: {
 
-      // ===== Costume Skill =====
-      // 現在は保存領域のみ
-      // UI・計算から未参照
+          name:
+            '',
 
-      costumeSkill: {},
+          description:
+            ''
+        },
 
+        active: {
 
-      // ===== Special Skill =====
-      // 現在は保存領域のみ
-      // UI・計算から未参照
+          name:
+            '',
 
-      specialSkill: {},
+          interval:
+            Number(get('interval')),
 
+          probability:
+            get('prob'),
 
-            // ===== Passive Skill =====
-      // 現在は保存領域のみ
-      // UI・計算から未参照
+          duration:
+            Number(get('duration')),
 
-      passiveSkill: {}
+          boost:
+            Number(get('boost')),
+
+          description:
+            ''
+        },
+
+        passive: {
+
+          name:
+            '',
+
+          description:
+            ''
+        }
+      },
+
+      outfitSkill: {
+
+        name:
+          '',
+
+        description:
+          ''
+      },
+
+      extensions: {}
     };
 
     library.push(
@@ -401,109 +441,113 @@ function openCardLoadModal(slotIndex){
 
 
   const sorted =
-    [...library].sort(
-      (a,b) => {
+  [...library].sort(
+    (a,b) => {
 
-        const memberA =
-          getMasterMember(a.memberId);
+      const memberA =
+        getMasterMember(a.talentId);
 
-        const memberB =
-          getMasterMember(b.memberId);
+      const memberB =
+        getMasterMember(b.talentId);
 
-        const nameA =
-          memberA
-            ? memberA.name
-            : '';
+      const nameA =
+        memberA
+          ? memberA.name
+          : '';
 
-        const nameB =
-          memberB
-            ? memberB.name
-            : '';
+      const nameB =
+        memberB
+          ? memberB.name
+          : '';
 
-        const memberCompare =
-          nameA.localeCompare(
-            nameB,
-            'ja'
-          );
-
-        if(memberCompare !== 0){
-          return memberCompare;
-        }
-
-        return a.costume.localeCompare(
-          b.costume,
+      const memberCompare =
+        nameA.localeCompare(
+          nameB,
           'ja'
         );
+
+      if(memberCompare !== 0){
+        return memberCompare;
+      }
+
+      return a.cardName.localeCompare(
+        b.cardName,
+        'ja'
+      );
+    }
+  );
+
+
+
+  sorted.forEach(
+      libraryCard => {
+
+    const member =
+      getMasterMember(
+        libraryCard.talentId
+      );
+
+    const active =
+      libraryCard.skills.active;
+
+
+    const button =
+      document.createElement(
+        'button'
+      );
+
+    button.type =
+      'button';
+
+    button.className =
+      'cardLoadItem';
+
+
+    const probability =
+      active.probability === 'low'
+        ? '低'
+        : active.probability === 'high'
+          ? '高'
+          : '中';
+
+
+    button.innerHTML = `
+      <strong>
+        ${member
+          ? member.name
+          : '不明なメンバー'}
+        /
+        ${libraryCard.cardName}
+      </strong>
+
+      <span>
+        ${active.interval}s周期 /
+        ${probability} /
+        ${active.duration}s /
+        +${active.boost}%
+      </span>
+    `;
+
+
+    button.addEventListener(
+      'click',
+      () => {
+
+        loadLibraryCardIntoSlot(
+          libraryCard,
+          slotIndex
+        );
+
+        closeCardLoadModal();
       }
     );
 
 
-  sorted.forEach(
-    libraryCard => {
-
-      const member =
-        getMasterMember(
-          libraryCard.memberId
-        );
-
-
-      const button =
-        document.createElement(
-          'button'
-        );
-
-      button.type =
-        'button';
-
-      button.className =
-        'cardLoadItem';
-
-
-      const probability =
-        libraryCard.prob === 'low'
-          ? '低'
-          : libraryCard.prob === 'high'
-            ? '高'
-            : '中';
-
-
-      button.innerHTML = `
-        <strong>
-          ${member
-            ? member.name
-            : '不明なメンバー'}
-          /
-          ${libraryCard.costume}
-        </strong>
-
-        <span>
-          ${libraryCard.interval}s周期 /
-          ${probability} /
-          ${libraryCard.duration}s /
-          +${libraryCard.boost}%
-        </span>
-      `;
-
-
-      button.addEventListener(
-        'click',
-        () => {
-
-          loadLibraryCardIntoSlot(
-            libraryCard,
-            slotIndex
-          );
-
-          closeCardLoadModal();
-        }
-      );
-
-
-      cardLoadList.append(
-        button
-      );
-    }
-  );
+    cardLoadList.append(
+      button
+    );
+      }
+    );
 
 
   cardLoadModal.hidden =
@@ -537,7 +581,7 @@ function loadLibraryCardIntoSlot(
 
   const member =
     getMasterMember(
-      libraryCard.memberId
+      libraryCard.talentId
     );
 
 
@@ -549,6 +593,10 @@ function loadLibraryCardIntoSlot(
 
     return;
   }
+
+
+  const active =
+    libraryCard.skills.active;
 
 
   const set =
@@ -567,34 +615,35 @@ function loadLibraryCardIntoSlot(
 
 
   // 短縮率には触らない
+
   set(
-  'memberId',
-  libraryCard.memberId
-);
+    'memberId',
+    libraryCard.talentId
+  );
 
   set(
     'costume',
-    libraryCard.costume
+    libraryCard.cardName
   );
 
   set(
     'interval',
-    libraryCard.interval
+    active.interval
   );
 
   set(
     'prob',
-    libraryCard.prob
+    active.probability
   );
 
   set(
     'duration',
-    libraryCard.duration
+    active.duration
   );
 
   set(
     'boost',
-    libraryCard.boost
+    active.boost
   );
 
 
