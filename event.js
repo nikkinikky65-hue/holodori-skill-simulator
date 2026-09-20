@@ -6,8 +6,30 @@ const MEMBER_CARD_STORAGE_KEY =
   'holodori-member-card-library-v1';
 
 const FORMATION_SIZE = 5;
-
 const REQUIRED_SLOT_COUNT = 4;
+
+// 一次選考を通す編成数
+const FINALIST_COUNT = 3;
+
+// A面と同じ初期曲時間
+const DEFAULT_SONG_LENGTH = 120;
+
+// A面と同じ短縮候補
+const SHORT_OPTIONS = [0, 4, 8, 12];
+
+
+// ========================================
+// 共通
+// ========================================
+
+function num(value, fallback = 0){
+
+  const n = Number(value);
+
+  return Number.isFinite(n)
+    ? n
+    : fallback;
+}
 
 
 // ========================================
@@ -81,7 +103,7 @@ const searchStatus =
 
 
 // ========================================
-// メンバー名
+// メンバー
 // ========================================
 
 function getMemberName(memberId){
@@ -98,21 +120,17 @@ function getMemberName(memberId){
 }
 
 
-// ========================================
-// カード表示名
-// ========================================
-
 function getCardLabel(card){
 
   return (
     `${getMemberName(card.memberId)} / ` +
-    `${card.costume}`
+    `${card.costume || '未分類'}`
   );
 }
 
 
 // ========================================
-// 必須枠生成
+// 必須枠
 // ========================================
 
 function renderRequiredSlots(){
@@ -126,22 +144,14 @@ function renderRequiredSlots(){
   ){
 
     const slot =
-      document.createElement(
-        'div'
-      );
+      document.createElement('div');
 
     slot.className =
       'requiredSlot';
 
 
-    // ----------------------------
-    // タイトル
-    // ----------------------------
-
     const title =
-      document.createElement(
-        'strong'
-      );
+      document.createElement('strong');
 
     title.textContent =
       `必須枠 ${i + 1}`;
@@ -152,18 +162,14 @@ function renderRequiredSlots(){
     // ----------------------------
 
     const memberLabel =
-      document.createElement(
-        'label'
-      );
+      document.createElement('label');
 
     memberLabel.textContent =
       'メンバー';
 
 
     const memberSelect =
-      document.createElement(
-        'select'
-      );
+      document.createElement('select');
 
     memberSelect.dataset.role =
       'member';
@@ -172,13 +178,10 @@ function renderRequiredSlots(){
       '<option value="">指定なし</option>';
 
 
-    // members.js の順番をそのまま使用
     HOLO_MEMBERS.forEach(member => {
 
       const option =
-        document.createElement(
-          'option'
-        );
+        document.createElement('option');
 
       option.value =
         member.id;
@@ -186,9 +189,7 @@ function renderRequiredSlots(){
       option.textContent =
         member.name;
 
-      memberSelect.append(
-        option
-      );
+      memberSelect.append(option);
     });
 
 
@@ -197,18 +198,14 @@ function renderRequiredSlots(){
     // ----------------------------
 
     const cardLabel =
-      document.createElement(
-        'label'
-      );
+      document.createElement('label');
 
     cardLabel.textContent =
       'カード';
 
 
     const cardSelect =
-      document.createElement(
-        'select'
-      );
+      document.createElement('select');
 
     cardSelect.dataset.role =
       'card';
@@ -219,10 +216,6 @@ function renderRequiredSlots(){
     cardSelect.innerHTML =
       '<option value="">指定なし</option>';
 
-
-    // ----------------------------
-    // メンバー変更
-    // ----------------------------
 
     memberSelect.addEventListener(
       'change',
@@ -236,10 +229,6 @@ function renderRequiredSlots(){
     );
 
 
-    // ----------------------------
-    // 組み立て
-    // ----------------------------
-
     slot.append(
       title,
       memberLabel,
@@ -248,15 +237,13 @@ function renderRequiredSlots(){
       cardSelect
     );
 
-    requiredSlots.append(
-      slot
-    );
+    requiredSlots.append(slot);
   }
 }
 
 
 // ========================================
-// カード候補
+// カード選択肢
 // ========================================
 
 function renderCardOptions(
@@ -290,19 +277,15 @@ function renderCardOptions(
   cards.forEach(card => {
 
     const option =
-      document.createElement(
-        'option'
-      );
+      document.createElement('option');
 
     option.value =
       card.id;
 
     option.textContent =
-      card.costume;
+      card.costume || '未分類';
 
-    cardSelect.append(
-      option
-    );
+    cardSelect.append(option);
   });
 
 
@@ -317,15 +300,11 @@ function renderCardOptions(
 
 function getRequiredConditions(){
 
-  const slots =
-    [
-      ...document.querySelectorAll(
-        '.requiredSlot'
-      )
-    ];
-
-
-  return slots
+  return [
+    ...document.querySelectorAll(
+      '.requiredSlot'
+    )
+  ]
     .map(slot => {
 
       const memberSelect =
@@ -337,7 +316,6 @@ function getRequiredConditions(){
         slot.querySelector(
           '[data-role="card"]'
         );
-
 
       return {
 
@@ -357,7 +335,7 @@ function getRequiredConditions(){
 
 
 // ========================================
-// 条件チェック
+// 条件検証
 // ========================================
 
 function validateConditions(
@@ -371,14 +349,8 @@ function validateConditions(
     );
 
 
-  const uniqueMembers =
-    new Set(
-      memberIds
-    );
-
-
   if(
-    uniqueMembers.size !==
+    new Set(memberIds).size !==
     memberIds.length
   ){
 
@@ -395,7 +367,7 @@ function validateConditions(
 
 
 // ========================================
-// 必須カード候補を作る
+// 必須カード候補
 // ========================================
 
 function buildRequiredCardGroups(
@@ -405,7 +377,7 @@ function buildRequiredCardGroups(
   return conditions.map(
     condition => {
 
-      // カード固定
+      // カードまで固定
       if(condition.cardId){
 
         const card =
@@ -421,7 +393,7 @@ function buildRequiredCardGroups(
       }
 
 
-      // メンバーのみ固定
+      // メンバーだけ固定
       return memberCards.filter(
         card =>
           card.memberId ===
@@ -436,9 +408,7 @@ function buildRequiredCardGroups(
 // 直積
 // ========================================
 
-function cartesianProduct(
-  groups
-){
+function cartesianProduct(groups){
 
   if(groups.length === 0){
     return [[]];
@@ -512,9 +482,7 @@ function combinations(
       i++
     ){
 
-      current.push(
-        items[i]
-      );
+      current.push(items[i]);
 
       walk(
         i + 1,
@@ -526,11 +494,7 @@ function combinations(
   }
 
 
-  walk(
-    0,
-    []
-  );
-
+  walk(0, []);
 
   return results;
 }
@@ -550,14 +514,12 @@ function generateFormations(
     );
 
 
-  // 登録カードがない必須メンバー
   if(
     requiredGroups.some(
       group =>
         group.length === 0
     )
   ){
-
     return [];
   }
 
@@ -613,7 +575,6 @@ function generateFormations(
           ];
 
 
-          // 同一メンバー重複防止
           const memberIds =
             formation.map(
               card =>
@@ -621,6 +582,8 @@ function generateFormations(
             );
 
 
+          // 同じ人物の別カードを
+          // 同一編成には入れない
           if(
             new Set(memberIds).size !==
             FORMATION_SIZE
@@ -643,11 +606,468 @@ function generateFormations(
 
 
 // ========================================
+// A面互換データへ変換
+// ========================================
+
+function cardToActiveMember(
+  card,
+  slot,
+  short = 0
+){
+
+  return {
+
+    slot,
+
+    memberId:
+      card.memberId,
+
+    name:
+      getMemberName(
+        card.memberId
+      ),
+
+    costume:
+      card.costume || '未分類',
+
+    interval:
+      Math.max(
+        0,
+        num(card.interval)
+      ),
+
+    prob:
+      card.prob,
+
+    duration:
+      Math.max(
+        0,
+        num(card.duration)
+      ),
+
+    boost:
+      Math.max(
+        0,
+        num(card.boost)
+      ),
+
+    short:
+      short
+  };
+}
+
+
+function formationToMembers(
+  formation,
+  shorts = null
+){
+
+  return formation.map(
+    (card, index) =>
+      cardToActiveMember(
+        card,
+        index + 1,
+        shorts
+          ? shorts[index]
+          : 0
+      )
+  );
+}
+
+
+// ========================================
+// A面と同じActive計算
+// ========================================
+
+// 発動頻度UP
+function adjustedInterval(member){
+
+  return member.interval > 0
+    ? member.interval /
+      (1 + member.short / 100)
+    : 0;
+}
+
+
+// 発動候補
+function events(member, T){
+
+  const interval =
+    adjustedInterval(member);
+
+  const output = [];
+
+
+  if(
+    interval <= 0 ||
+    member.duration <= 0 ||
+    member.boost <= 0
+  ){
+    return output;
+  }
+
+
+  for(
+    let t = interval;
+    t <= T + 1e-9 &&
+    output.length < 1000;
+    t += interval
+  ){
+
+    output.push({
+
+      start:
+        t,
+
+      end:
+        Math.min(
+          T,
+          t + member.duration
+        ),
+
+      boost:
+        member.boost,
+
+      m:
+        member
+    });
+  }
+
+
+  return output;
+}
+
+
+// MAX評価値
+// ∫ max(発動中Active補正率) dt
+function calcMax(all, T){
+
+  const points =
+    [0, T];
+
+
+  all.forEach(event => {
+
+    points.push(
+      event.start,
+      event.end
+    );
+  });
+
+
+  points.sort(
+    (a, b) =>
+      a - b
+  );
+
+
+  let total = 0;
+
+
+  for(
+    let i = 0;
+    i < points.length - 1;
+    i++
+  ){
+
+    const a =
+      points[i];
+
+    const b =
+      points[i + 1];
+
+
+    if(b <= a){
+      continue;
+    }
+
+
+    const mid =
+      (a + b) / 2;
+
+
+    let maxBoost = 0;
+
+
+    for(const event of all){
+
+      if(
+        event.start <= mid &&
+        mid < event.end
+      ){
+
+        maxBoost =
+          Math.max(
+            maxBoost,
+            event.boost
+          );
+      }
+    }
+
+
+    total +=
+      maxBoost *
+      (b - a);
+  }
+
+
+  return total;
+}
+
+
+// ========================================
+// 一次評価
+// ========================================
+
+function evaluateFormation(
+  formation,
+  T
+){
+
+  // 一次評価では全員短縮0%
+  const members =
+    formationToMembers(
+      formation
+    );
+
+
+  const all =
+    members
+      .map(
+        member =>
+          events(member, T)
+      )
+      .flat();
+
+
+  const score =
+    calcMax(
+      all,
+      T
+    );
+
+
+  return {
+
+    formation,
+
+    members,
+
+    score,
+
+    // A面の「曲全体平均Active補正」
+    average:
+      score / T
+  };
+}
+
+
+// ========================================
+// 一次選考
+// ========================================
+
+function selectFinalists(
+  formations,
+  T
+){
+
+  const evaluated =
+    formations.map(
+      formation =>
+        evaluateFormation(
+          formation,
+          T
+        )
+    );
+
+
+  evaluated.sort(
+    (a, b) =>
+      b.score -
+      a.score
+  );
+
+
+  return evaluated.slice(
+    0,
+    FINALIST_COUNT
+  );
+}
+
+
+// ========================================
+// 短縮最適化
+// ========================================
+
+function optimizeFormation(
+  formation,
+  T
+){
+
+  let best = null;
+  let tested = 0;
+
+
+  function search(
+    index,
+    shorts
+  ){
+
+    if(
+      index <
+      FORMATION_SIZE
+    ){
+
+      for(
+        const value
+        of SHORT_OPTIONS
+      ){
+
+        shorts.push(value);
+
+        search(
+          index + 1,
+          shorts
+        );
+
+        shorts.pop();
+      }
+
+      return;
+    }
+
+
+    tested++;
+
+
+    const members =
+      formationToMembers(
+        formation,
+        shorts
+      );
+
+
+    const all =
+      members
+        .map(
+          member =>
+            events(
+              member,
+              T
+            )
+        )
+        .flat();
+
+
+    const score =
+      calcMax(
+        all,
+        T
+      );
+
+
+    if(
+      best === null ||
+      score >
+      best.score + 1e-9
+    ){
+
+      best = {
+
+        score,
+
+        average:
+          score / T,
+
+        shorts:
+          [...shorts],
+
+        members
+      };
+    }
+  }
+
+
+  search(
+    0,
+    []
+  );
+
+
+  return {
+
+    ...best,
+
+    tested
+  };
+}
+
+
+// ========================================
+// 最終候補作成
+// ========================================
+
+function buildFinalResults(
+  finalists,
+  T
+){
+
+  const results =
+    finalists.map(
+      preliminary => {
+
+        const optimized =
+          optimizeFormation(
+            preliminary.formation,
+            T
+          );
+
+
+        return {
+
+          formation:
+            preliminary.formation,
+
+          preliminaryScore:
+            preliminary.score,
+
+          preliminaryAverage:
+            preliminary.average,
+
+          optimizedScore:
+            optimized.score,
+
+          optimizedAverage:
+            optimized.average,
+
+          shorts:
+            optimized.shorts,
+
+          tested:
+            optimized.tested
+        };
+      }
+    );
+
+
+  // 最適化後の評価値で並び直す
+  results.sort(
+    (a, b) =>
+      b.optimizedScore -
+      a.optimizedScore
+  );
+
+
+  return results;
+}
+
+
+// ========================================
 // 結果表示
 // ========================================
 
-function renderResults(
-  formations
+function renderFinalResults(
+  results
 ){
 
   formationResults.innerHTML =
@@ -655,7 +1075,7 @@ function renderResults(
 
 
   if(
-    formations.length === 0
+    results.length === 0
   ){
 
     formationResults.innerHTML =
@@ -667,103 +1087,166 @@ function renderResults(
   }
 
 
-  // 第一版では表示数を制限
-  const DISPLAY_LIMIT = 30;
+  results.forEach(
+    (result, index) => {
+
+      const item =
+        document.createElement(
+          'div'
+        );
+
+      item.className =
+        'formationResultItem';
 
 
-  formations
-    .slice(
-      0,
-      DISPLAY_LIMIT
-    )
-    .forEach(
-      (formation, index) => {
+      // ----------------------------
+      // タイトル
+      // ----------------------------
 
-        const item =
-          document.createElement(
-            'div'
-          );
+      const title =
+        document.createElement(
+          'h3'
+        );
 
-        item.className =
-          'formationResultItem';
+      title.textContent =
+        `候補 ${index + 1}`;
 
 
-        const title =
-          document.createElement(
-            'strong'
-          );
+      // ----------------------------
+      // 評価
+      // ----------------------------
 
-        title.textContent =
-          `候補 ${index + 1}`;
+      const score =
+        document.createElement(
+          'div'
+        );
 
-
-        const members =
-          document.createElement(
-            'div'
-          );
-
-        members.className =
-          'formationMembers';
+      score.className =
+        'formationScore';
 
 
-        formation.forEach(card => {
+      const improvement =
+        result.optimizedScore -
+        result.preliminaryScore;
 
-          const cardItem =
+
+      score.innerHTML = `
+
+        <div>
+          一次評価：
+          <strong>
+            ${result.preliminaryScore.toFixed(2)}
+          </strong>
+        </div>
+
+        <div>
+          短縮最適化後：
+          <strong>
+            ${result.optimizedScore.toFixed(2)}
+          </strong>
+        </div>
+
+        <div class="sub">
+          曲全体平均Active補正：
+          +${result.optimizedAverage.toFixed(2)}%
+        </div>
+
+        <div class="sub">
+          短縮による伸び：
+          +${improvement.toFixed(2)}
+        </div>
+
+      `;
+
+
+      // ----------------------------
+      // メンバー
+      // ----------------------------
+
+      const members =
+        document.createElement(
+          'div'
+        );
+
+      members.className =
+        'formationMembers';
+
+
+      result.formation.forEach(
+        (card, memberIndex) => {
+
+          const member =
             document.createElement(
               'div'
             );
 
-          cardItem.className =
+          member.className =
             'formationMember';
 
-          cardItem.textContent =
-            getCardLabel(card);
+
+          member.innerHTML = `
+
+            <strong>
+              ${getMemberName(
+                card.memberId
+              )}
+            </strong>
+
+            <span>
+              ${card.costume || '未分類'}
+            </span>
+
+            <span>
+              短縮
+              ${result.shorts[
+                memberIndex
+              ]}%
+            </span>
+
+          `;
+
 
           members.append(
-            cardItem
+            member
           );
-        });
-
-
-        item.append(
-          title,
-          members
-        );
-
-
-        formationResults.append(
-          item
-        );
-      }
-    );
-
-
-  if(
-    formations.length >
-    DISPLAY_LIMIT
-  ){
-
-    const more =
-      document.createElement(
-        'p'
+        }
       );
 
-    more.className =
-      'sub';
 
-    more.textContent =
-      `全${formations.length}編成中、` +
-      `先頭${DISPLAY_LIMIT}件を表示`;
+      // ----------------------------
+      // 探索情報
+      // ----------------------------
 
-    formationResults.append(
-      more
-    );
-  }
+      const detail =
+        document.createElement(
+          'div'
+        );
+
+      detail.className =
+        'sub';
+
+      detail.textContent =
+        `短縮配置 ${result.tested}通りを検証`;
+
+
+      item.append(
+        title,
+        score,
+        members,
+        detail
+      );
+
+
+      formationResults.append(
+        item
+      );
+    }
+  );
 }
 
 
 // ========================================
-// 探索
+// 探索実行
 // ========================================
 
 searchFormationButton.addEventListener(
@@ -796,18 +1279,77 @@ searchFormationButton.addEventListener(
     }
 
 
-    const formations =
-      generateFormations(
-        conditions
-      );
-
+    searchFormationButton.disabled =
+      true;
 
     searchStatus.textContent =
-      `${formations.length}通りの編成候補`;
+      '編成候補を探索中...';
 
 
-    renderResults(
-      formations
+    // 描画を先に反映させる
+    setTimeout(
+      () => {
+
+        try{
+
+          const T =
+            DEFAULT_SONG_LENGTH;
+
+
+          // ① 条件を満たす編成生成
+          const formations =
+            generateFormations(
+              conditions
+            );
+
+
+          if(
+            formations.length === 0
+          ){
+
+            searchStatus.textContent =
+              '条件を満たす編成がありません';
+
+            renderFinalResults([]);
+
+            return;
+          }
+
+
+          // ② 全編成を短縮0%で一次評価
+          const finalists =
+            selectFinalists(
+              formations,
+              T
+            );
+
+
+          // ③ 上位3編成だけ短縮総当たり
+          const results =
+            buildFinalResults(
+              finalists,
+              T
+            );
+
+
+          searchStatus.textContent =
+            `${formations.length}編成を一次評価 → ` +
+            `上位${results.length}編成を短縮最適化`;
+
+
+          renderFinalResults(
+            results
+          );
+
+
+        }finally{
+
+          searchFormationButton.disabled =
+            false;
+        }
+
+      },
+      0
     );
   }
 );
