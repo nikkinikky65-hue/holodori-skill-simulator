@@ -8,6 +8,9 @@ const MEMBER_CARD_STORAGE_KEY =
 const FORMATION_SIZE = 5;
 const REQUIRED_SLOT_COUNT = 4;
 
+const EVENT_SEARCH_STORAGE_KEY =
+  'holodori-event-search-v1';
+
 // 一次選考を通す編成数
 const FINALIST_COUNT = 3;
 
@@ -292,6 +295,125 @@ function renderCardOptions(
   cardSelect.disabled =
     false;
 }
+
+// ========================================
+// イベント探索条件の保存・復元
+// ========================================
+
+function saveEventSearchState(){
+
+  const conditions =
+    [...document.querySelectorAll('.requiredSlot')]
+      .map(slot => ({
+
+        memberId:
+          slot.querySelector(
+            '[data-role="member"]'
+          ).value,
+
+        cardId:
+          slot.querySelector(
+            '[data-role="card"]'
+          ).value
+      }));
+
+
+  localStorage.setItem(
+    EVENT_SEARCH_STORAGE_KEY,
+    JSON.stringify({
+      conditions
+    })
+  );
+}
+
+
+function loadEventSearchState(){
+
+  const saved =
+    localStorage.getItem(
+      EVENT_SEARCH_STORAGE_KEY
+    );
+
+  if(!saved){
+    return;
+  }
+
+
+  try{
+
+    const state =
+      JSON.parse(saved);
+
+    if(!Array.isArray(state.conditions)){
+      return;
+    }
+
+
+    const slots =
+      [...document.querySelectorAll('.requiredSlot')];
+
+
+    state.conditions.forEach(
+      (condition, index) => {
+
+        const slot =
+          slots[index];
+
+        if(!slot){
+          return;
+        }
+
+
+        const memberSelect =
+          slot.querySelector(
+            '[data-role="member"]'
+          );
+
+        const cardSelect =
+          slot.querySelector(
+            '[data-role="card"]'
+          );
+
+
+        memberSelect.value =
+          condition.memberId || '';
+
+
+        renderCardOptions(
+          memberSelect,
+          cardSelect
+        );
+
+
+        cardSelect.value =
+          condition.cardId || '';
+      }
+    );
+
+  }catch(error){
+
+    console.warn(
+      'イベント探索条件を復元できませんでした',
+      error
+    );
+  }
+}
+
+
+// メンバー・カード変更時に自動保存
+requiredSlots.addEventListener(
+  'change',
+  event => {
+
+    if(
+      event.target.matches(
+        '[data-role="member"], [data-role="card"]'
+      )
+    ){
+      saveEventSearchState();
+    }
+  }
+);
 
 
 // ========================================
@@ -1363,6 +1485,10 @@ clearConditionsButton.addEventListener(
   'click',
   () => {
 
+    localStorage.removeItem(
+      EVENT_SEARCH_STORAGE_KEY
+    );
+
     renderRequiredSlots();
 
     searchStatus.textContent =
@@ -1375,9 +1501,9 @@ clearConditionsButton.addEventListener(
   }
 );
 
-
 // ========================================
 // 初期表示
 // ========================================
 
 renderRequiredSlots();
+loadEventSearchState();
