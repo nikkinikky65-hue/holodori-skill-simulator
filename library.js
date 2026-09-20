@@ -140,16 +140,7 @@ function renderMemberSelect(){
   memberCardMember.innerHTML =
     '<option value="">選択してください</option>';
 
-  const sorted =
-    [...HOLO_MEMBERS].sort(
-      (a, b) =>
-        a.name.localeCompare(
-          b.name,
-          'ja'
-        )
-    );
-
-  sorted.forEach(member => {
+  HOLO_MEMBERS.forEach(member => {
 
     const option =
       document.createElement(
@@ -167,7 +158,6 @@ function renderMemberSelect(){
     );
   });
 }
-
 
 function getMemberName(memberId){
 
