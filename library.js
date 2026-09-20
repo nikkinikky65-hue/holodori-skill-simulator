@@ -61,6 +61,17 @@ function loadMemberCards(){
 
 function saveMemberCards(){
 
+  const library = {
+    version: 2,
+    cards: memberCards
+  };
+
+  localStorage.setItem(
+    MEMBER_CARD_STORAGE_KEY,
+    JSON.stringify(library)
+  );
+}function saveMemberCards(){
+
   localStorage.setItem(
     MEMBER_CARD_STORAGE_KEY,
     JSON.stringify(memberCards)

@@ -30,104 +30,330 @@
 
     <form id="memberCardForm" class="libraryCardForm">
 
-      <input
-        id="memberCardId"
-        type="hidden"
-      >
+  <input
+    id="memberCardId"
+    type="hidden"
+  >
 
 
-      <label>
-        メンバー
+  <!-- =========================
+       基本情報
+  ========================== -->
 
-        <select
-          id="memberCardMember"
-          required
-        >
-          <option value="">
-            選択してください
-          </option>
-        </select>
-      </label>
+  <h3>基本情報</h3>
 
+  <label>
+    タレント
 
-      <label>
-        衣装
-
-        <select id="memberCardCostume">
-          <option value="未分類" selected>未分類</option>
-          <option value="★5恒常">★5恒常</option>
-          <option value="★4">★4</option>
-          <option value="★3">★3</option>
-        </select>
-      </label>
+    <select
+      id="cardTalent"
+      required
+    >
+      <option value="">
+        選択してください
+      </option>
+    </select>
+  </label>
 
 
-      <label>
-        周期(s)
+  <label>
+    カード名
 
-        <input
-          id="memberCardInterval"
-          type="number"
-          min="0.01"
-          step="0.01"
-          required
-        >
-      </label>
+    <input
+      id="cardName"
+      type="text"
+      required
+    >
+  </label>
 
 
-      <label>
-        発動確率
+  <label>
+    タイプ
 
-        <select id="memberCardProb">
-          <option value="low">低</option>
-          <option value="mid" selected>中</option>
-          <option value="high">高</option>
-        </select>
-      </label>
-
-
-      <label>
-        発動時間(s)
-
-        <input
-          id="memberCardDuration"
-          type="number"
-          min="0"
-          step="0.01"
-          required
-        >
-      </label>
+    <select
+      id="cardType"
+      required
+    >
+      <option value="cute">キュート</option>
+      <option value="pure">ピュア</option>
+      <option value="happy">ハッピー</option>
+    </select>
+  </label>
 
 
-      <label>
-        補正(%)
+  <label>
+    レア度
 
-        <input
-          id="memberCardBoost"
-          type="number"
-          min="0"
-          step="0.01"
-          required
-        >
-      </label>
+    <select
+      id="cardRarity"
+      required
+    >
+      <option value="3">★3</option>
+      <option value="4">★4</option>
+      <option value="5">★5</option>
+    </select>
+  </label>
 
 
-      <div class="libraryFormButtons">
+  <!-- =========================
+       育成状態
+  ========================== -->
 
-        <button type="submit">
-          保存
-        </button>
+  <h3>育成状態</h3>
 
-        <button
-          id="memberCardCancel"
-          type="button"
-        >
-          キャンセル
-        </button>
+  <label>
+    レベル
 
-      </div>
+    <input
+      id="cardLevel"
+      type="number"
+      min="1"
+      step="1"
+      required
+    >
+  </label>
 
-    </form>
+
+  <label>
+    特訓
+
+    <input
+      id="cardTraining"
+      type="number"
+      min="0"
+      step="1"
+      required
+    >
+  </label>
+
+
+  <label>
+    開花
+
+    <input
+      id="cardBloom"
+      type="number"
+      min="0"
+      step="1"
+      required
+    >
+  </label>
+
+
+  <!-- =========================
+       ステータス
+  ========================== -->
+
+  <h3>ステータス</h3>
+
+  <label>
+    トータル
+
+    <input
+      id="cardTotal"
+      type="number"
+      min="0"
+      step="1"
+    >
+  </label>
+
+
+  <label>
+    パフォーマンス
+
+    <input
+      id="cardPerformance"
+      type="number"
+      min="0"
+      step="1"
+    >
+  </label>
+
+
+  <label>
+    テクニック
+
+    <input
+      id="cardTechnique"
+      type="number"
+      min="0"
+      step="1"
+    >
+  </label>
+
+
+  <label>
+    センス
+
+    <input
+      id="cardSense"
+      type="number"
+      min="0"
+      step="1"
+    >
+  </label>
+
+
+  <!-- =========================
+     スキル
+========================== -->
+
+<h3>スキル</h3>
+
+
+<!-- スペシャルスキル -->
+
+<h4>スペシャルスキル</h4>
+
+<label>
+  スキル名
+
+  <input
+    id="specialSkillName"
+    type="text"
+  >
+</label>
+
+<label>
+  効果
+
+  <textarea
+    id="specialSkillDescription"
+    rows="3"
+  ></textarea>
+</label>
+
+
+<!-- アクティブスキル -->
+
+<h4>アクティブスキル</h4>
+
+<label>
+  スキル名
+
+  <input
+    id="activeSkillName"
+    type="text"
+  >
+</label>
+
+<label>
+  周期(s)
+
+  <input
+    id="activeSkillInterval"
+    type="number"
+    min="0"
+    step="0.01"
+  >
+</label>
+
+<label>
+  発動確率
+
+  <select id="activeSkillProb">
+    <option value="low">低</option>
+    <option value="mid" selected>中</option>
+    <option value="high">高</option>
+  </select>
+</label>
+
+<label>
+  発動時間(s)
+
+  <input
+    id="activeSkillDuration"
+    type="number"
+    min="0"
+    step="0.01"
+  >
+</label>
+
+<label>
+  補正(%)
+
+  <input
+    id="activeSkillBoost"
+    type="number"
+    min="0"
+    step="0.01"
+  >
+</label>
+
+<label>
+  効果
+
+  <textarea
+    id="activeSkillDescription"
+    rows="3"
+  ></textarea>
+</label>
+
+
+<!-- パッシブスキル -->
+
+<h4>パッシブスキル</h4>
+
+<label>
+  スキル名
+
+  <input
+    id="passiveSkillName"
+    type="text"
+  >
+</label>
+
+<label>
+  効果
+
+  <textarea
+    id="passiveSkillDescription"
+    rows="3"
+  ></textarea>
+</label>
+
+
+<!-- =========================
+     衣装スキル
+========================== -->
+
+<h3>衣装スキル</h3>
+
+<label>
+  スキル名
+
+  <input
+    id="outfitSkillName"
+    type="text"
+  >
+</label>
+
+<label>
+  効果
+
+  <textarea
+    id="outfitSkillDescription"
+    rows="3"
+  ></textarea>
+</label>
+
+
+  <div class="libraryFormButtons">
+
+    <button type="submit">
+      保存
+    </button>
+
+    <button
+      id="memberCardCancel"
+      type="button"
+    >
+      キャンセル
+    </button>
+
+  </div>
+
+</form>
 
   </div>
 
