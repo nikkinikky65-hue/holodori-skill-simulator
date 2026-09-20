@@ -155,18 +155,63 @@
 
 .libraryCardForm{
   display:grid;
+  gap:14px;
+}
+
+.libraryFormSection{
+  display:grid;
   grid-template-columns:
-    1.2fr
-    1.4fr
-    repeat(4,.8fr)
-    auto;
-  gap:8px;
-  align-items:end;
+    repeat(4,minmax(0,1fr));
+  gap:10px;
+
+  padding:14px;
+
+  border:1px solid #e2e2e2;
+  border-radius:10px;
+
+  background:#fafafa;
+}
+
+.libraryFormSection h3{
+  grid-column:1 / -1;
+  margin:0 0 4px;
+
+  font-size:14px;
 }
 
 .libraryCardForm label{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+
+  min-width:0;
+
   font-size:11px;
   color:#666;
+}
+
+.libraryCardForm textarea{
+  width:100%;
+  resize:vertical;
+
+  font:inherit;
+  padding:8px;
+
+  border:1px solid #bbb;
+  border-radius:8px;
+
+  background:#fff;
+}
+
+/* Activeは今後かなり項目が増えるので専用クラスを確保 */
+.libraryActiveSection{
+  border-width:2px;
+}
+
+/* スキル名・効果説明は横幅を全部使う */
+.libraryFormSection label:first-of-type,
+.libraryFormSection label:last-of-type{
+  grid-column:1 / -1;
 }
 
 .libraryFormButtons{
@@ -228,7 +273,7 @@
 
 @media(max-width:800px){
 
-  .libraryCardForm{
+  .libraryFormSection{
     grid-template-columns:1fr 1fr;
   }
 
