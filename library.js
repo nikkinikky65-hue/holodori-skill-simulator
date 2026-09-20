@@ -144,9 +144,6 @@ const cardSense =
 // スペシャルスキル
 // ========================================
 
-const specialSkillName =
-  document.querySelector('#specialSkillName');
-
 const specialSkillDescription =
   document.querySelector('#specialSkillDescription');
 
@@ -155,8 +152,6 @@ const specialSkillDescription =
 // アクティブスキル
 // ========================================
 
-const activeSkillName =
-  document.querySelector('#activeSkillName');
 
 const activeSkillInterval =
   document.querySelector('#activeSkillInterval');
@@ -177,9 +172,6 @@ const activeSkillDescription =
 // ========================================
 // パッシブスキル
 // ========================================
-
-const passiveSkillName =
-  document.querySelector('#passiveSkillName');
 
 const passiveSkillDescription =
   document.querySelector('#passiveSkillDescription');
@@ -298,17 +290,11 @@ function getMemberCardFormData(){
 
       special: {
 
-        name:
-          specialSkillName.value.trim(),
-
         description:
           specialSkillDescription.value.trim()
       },
 
       active: {
-
-        name:
-          activeSkillName.value.trim(),
 
         interval:
           Number(activeSkillInterval.value),
@@ -327,9 +313,6 @@ function getMemberCardFormData(){
       },
 
       passive: {
-
-        name:
-          passiveSkillName.value.trim(),
 
         description:
           passiveSkillDescription.value.trim()
