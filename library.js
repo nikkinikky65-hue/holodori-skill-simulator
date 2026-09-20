@@ -122,6 +122,34 @@ const cardTraining =
 const cardBloom =
   document.querySelector('#cardBloom');
 
+function updateCardLevel(){
+
+  const rarity =
+    Number(cardRarity.value);
+
+  const limitBreak =
+    Number(cardTraining.value);
+
+  const baseLevel = {
+    5: 40,
+    4: 30,
+    3: 20
+  };
+
+  cardLevel.value =
+    (baseLevel[rarity] ?? 0)
+    + limitBreak * 10;
+}
+
+cardRarity.addEventListener(
+  'change',
+  updateCardLevel
+);
+
+cardTraining.addEventListener(
+  'input',
+  updateCardLevel
+);
 
 // ========================================
 // ステータス
@@ -695,4 +723,5 @@ memberCardCancel.addEventListener(
 // ========================================
 
 renderTalentSelect();
+updateCardLevel();
 renderMemberCards();
