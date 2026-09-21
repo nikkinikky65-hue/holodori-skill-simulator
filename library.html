@@ -310,13 +310,75 @@
     ></textarea>
   </label>
 
-  <label>
-    スコアサポート強化
+<label>
+  スコアサポート強化
+</label>
 
-    <textarea
-      id="passiveSkillDescription2"
-      rows="3"
-    ></textarea>
+  <label>
+  発動条件タイプ
+
+  <select id="scoreSupportConditionType">
+    <option value="" selected>条件なし</option>
+    <option value="cute">キュート</option>
+    <option value="pure">ピュア</option>
+    <option value="happy">ハッピー</option>
+  </select>
+  </label>
+
+  <label>
+  発動条件人数
+
+  <input
+    id="scoreSupportConditionCount"
+    type="number"
+    min="0"
+    step="1"
+    value="0"
+  >
+  </label>
+
+  <label>
+  強化対象タイプ
+
+  <select id="scoreSupportTargetType">
+    <option value="" selected>未設定</option>
+    <option value="cute">キュート</option>
+    <option value="pure">ピュア</option>
+    <option value="happy">ハッピー</option>
+  </select>
+  </label>
+
+  <label>
+  強化対象人数
+
+  <input
+    id="scoreSupportTargetCount"
+    type="number"
+    min="0"
+    step="1"
+    value="0"
+  >
+  </label>
+
+  <label>
+  スコアサポート強化率(%)
+
+  <input
+    id="scoreSupportBoost"
+    type="number"
+    min="0"
+    step="0.01"
+    value="0"
+  >
+  </label>
+
+  <label>
+  効果原文
+
+  <textarea
+    id="passiveSkillDescription2"
+    rows="3"
+  ></textarea>
   </label>
 </section>
 

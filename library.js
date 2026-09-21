@@ -204,9 +204,36 @@ const activeSkillDescription =
 // パッシブスキル
 // ========================================
 
+// ステータス強化
 const passiveSkillDescription1 =
   document.querySelector(
     '#passiveSkillDescription1'
+  );
+
+// スコアサポート強化
+const scoreSupportConditionType =
+  document.querySelector(
+    '#scoreSupportConditionType'
+  );
+
+const scoreSupportConditionCount =
+  document.querySelector(
+    '#scoreSupportConditionCount'
+  );
+
+const scoreSupportTargetType =
+  document.querySelector(
+    '#scoreSupportTargetType'
+  );
+
+const scoreSupportTargetCount =
+  document.querySelector(
+    '#scoreSupportTargetCount'
+  );
+
+const scoreSupportBoost =
+  document.querySelector(
+    '#scoreSupportBoost'
   );
 
 const passiveSkillDescription2 =
