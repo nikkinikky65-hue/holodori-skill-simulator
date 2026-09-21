@@ -148,7 +148,10 @@ cardRarity.addEventListener(
 
 cardTraining.addEventListener(
   'input',
-  updateCardLevel
+  () => {
+    updateCardLevel();
+    applyStatPreset();
+  }
 );
 
 // ========================================
