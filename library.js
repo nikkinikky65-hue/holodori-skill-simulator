@@ -515,9 +515,30 @@ function getMemberCardFormData(){
       },
 
       passive: {
+        status: {
+          description:
+            passiveSkillDescription1.value.trim()
+        },
 
-        description:
-          passiveSkillDescription.value.trim()
+        scoreSupport: {
+          conditionType:
+            scoreSupportConditionType.value,
+
+          conditionCount:
+            Number(scoreSupportConditionCount.value) || 0,
+
+          targetType:
+            scoreSupportTargetType.value,
+
+          targetCount:
+            Number(scoreSupportTargetCount.value) || 0,
+
+          boost:
+            Number(scoreSupportBoost.value) || 0,
+
+          description:
+            passiveSkillDescription2.value.trim()
+        }
       }
     },
 
