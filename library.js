@@ -865,4 +865,5 @@ memberCardCancel.addEventListener(
 
 renderTalentSelect();
 updateCardLevel();
+applyStatPreset();
 renderMemberCards();
