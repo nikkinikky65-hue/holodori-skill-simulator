@@ -268,6 +268,144 @@ function getTalentName(talentId){
 }
 
 // ========================================
+// 仮ステータス自動入力
+// ========================================
+
+const CARD_STAT_PRESETS = {
+
+  3: {
+    0: 10000,
+    1: 12000,
+    2: 16000,
+    3: 18000,
+    4: 20000
+  },
+
+  4: {
+    30: 14000,
+    40: 16000,
+    50: 19000,
+    60: 21000,
+    70: 25000
+  },
+
+  5: {
+    40: 18000,
+    50: 19000,
+    60: 22000,
+    70: 24500,
+    80: 32000
+  }
+};
+
+
+function splitTotalStats(total){
+
+  const base =
+    Math.floor(total / 300) * 100;
+
+  const remainder =
+    total - base * 3;
+
+  return {
+    performance:
+      base + Math.min(remainder, 100),
+
+    technique:
+      base + Math.max(
+        Math.min(remainder - 100, 100),
+        0
+      ),
+
+    sense:
+      base
+  };
+}
+
+
+function updateTotalFromStats(){
+
+  cardTotal.value =
+    Number(cardPerformance.value || 0) +
+    Number(cardTechnique.value || 0) +
+    Number(cardSense.value || 0);
+}
+
+
+function applyStatPreset(){
+
+  const rarity =
+    Number(cardRarity.value);
+
+  const level =
+    Number(cardLevel.value);
+
+  const bloom =
+    Number(cardBloom.value);
+
+  let total = null;
+
+  if(rarity === 3){
+
+    total =
+      CARD_STAT_PRESETS[3][bloom];
+
+  }else{
+
+    total =
+      CARD_STAT_PRESETS[rarity]?.[level];
+  }
+
+  if(total == null){
+    return;
+  }
+
+  const stats =
+    splitTotalStats(total);
+
+  cardPerformance.value =
+    stats.performance;
+
+  cardTechnique.value =
+    stats.technique;
+
+  cardSense.value =
+    stats.sense;
+
+  updateTotalFromStats();
+}
+
+cardRarity.addEventListener(
+  'change',
+  applyStatPreset
+);
+
+cardLevel.addEventListener(
+  'change',
+  applyStatPreset
+);
+
+cardBloom.addEventListener(
+  'change',
+  applyStatPreset
+);
+
+cardPerformance.addEventListener(
+  'input',
+  updateTotalFromStats
+);
+
+cardTechnique.addEventListener(
+  'input',
+  updateTotalFromStats
+);
+
+cardSense.addEventListener(
+  'input',
+  updateTotalFromStats
+);
+
+// ========================================
 // フォーム → カードデータ
 // ========================================
 
