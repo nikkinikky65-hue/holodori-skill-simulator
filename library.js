@@ -779,19 +779,12 @@ function renderMemberCards(){
         cardSense.value =
           card.stats.sense;
 
-
         // スペシャルスキル
-        specialSkillName.value =
-          card.skills.special.name;
-
         specialSkillDescription.value =
           card.skills.special.description;
 
 
         // アクティブスキル
-        activeSkillName.value =
-          card.skills.active.name;
-
         activeSkillInterval.value =
           card.skills.active.interval;
 
@@ -809,12 +802,26 @@ function renderMemberCards(){
 
 
         // パッシブスキル
-        passiveSkillName.value =
-          card.skills.passive.name;
+        passiveSkillDescription1.value =
+          card.skills.passive.status.description;
 
-        passiveSkillDescription.value =
-          card.skills.passive.description;
+        scoreSupportConditionType.value =
+          card.skills.passive.scoreSupport.conditionType;
 
+        scoreSupportConditionCount.value =
+          card.skills.passive.scoreSupport.conditionCount;
+
+        scoreSupportTargetType.value =
+          card.skills.passive.scoreSupport.targetType;
+
+        scoreSupportTargetCount.value =
+          card.skills.passive.scoreSupport.targetCount;
+
+        scoreSupportBoost.value =
+          card.skills.passive.scoreSupport.boost;
+
+        passiveSkillDescription2.value =
+          card.skills.passive.scoreSupport.description;
 
         // 衣装スキル
         outfitSkillName.value =
