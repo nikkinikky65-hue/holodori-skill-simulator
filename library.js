@@ -204,9 +204,15 @@ const activeSkillDescription =
 // パッシブスキル
 // ========================================
 
-const passiveSkillDescription =
-  document.querySelector('#passiveSkillDescription');
+const passiveSkillDescription1 =
+  document.querySelector(
+    '#passiveSkillDescription1'
+  );
 
+const passiveSkillDescription2 =
+  document.querySelector(
+    '#passiveSkillDescription2'
+  );
 
 // ========================================
 // 衣装スキル
