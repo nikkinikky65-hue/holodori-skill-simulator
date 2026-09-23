@@ -1289,7 +1289,6 @@ function render(){
     party.members.map(
       member => ({
         ...member,
-
         boost:
           member.effectiveBoost
       })
@@ -1332,108 +1331,224 @@ function render(){
 
   tl.innerHTML = '';
 
-  const T =
-    Math.max(
-      .01,
-      num(
-        document.querySelector('#song').value,
-        120
-      )
+
+  // ========================================
+  // 統合Activeタイムライン
+  // ========================================
+
+  const activeRow =
+    document.createElement('div');
+
+  activeRow.className =
+    'row maxrow';
+
+  activeRow.innerHTML = `
+    <div class="name"></div>
+    <div class="track"></div>
+  `;
+
+  const activeTrack =
+    activeRow.lastElementChild;
+
+
+  maxSegments(
+    all,
+    T
+  ).forEach(seg => {
+
+    const b =
+      document.createElement('button');
+
+    b.type =
+      'button';
+
+    b.className =
+      `bar active-slot${seg.slot}`;
+
+    b.style.left =
+      (seg.start / T * 100) + '%';
+
+    b.style.width =
+      (
+        (seg.end - seg.start) /
+        T *
+        100
+      ) + '%';
+
+    b.title =
+      `枠${seg.slot} / ` +
+      `${seg.start.toFixed(2)}–${seg.end.toFixed(2)}s / ` +
+      `+${seg.boost.toFixed(2)}%`;
+
+
+    b.addEventListener(
+      'click',
+      () => {
+
+        document.querySelector(
+          '#detail'
+        ).textContent =
+          `Activeタイムライン — ` +
+          `枠${seg.slot} / ` +
+          `${seg.start.toFixed(2)}s → ` +
+          `${seg.end.toFixed(2)}s / ` +
+          `有効補正 +${seg.boost.toFixed(2)}%`;
+      }
     );
 
 
-  const rawMembers =
-    getMembers();
-
-
-  const party =
-    precalculateParty(
-      rawMembers
-    );
-
-
-  const ms =
-    party.members.map(
-      member => ({
-        ...member,
-
-        boost:
-          member.effectiveBoost
-      })
-    );
-
-
-  const by =
-    ms.map(
-      member =>
-        events(
-          member,
-          T
-        )
-    );
-
-
-  const all =
-    by.flat();
-
-
-  const max =
-    calcMax(
-      all,
-      T
-    );
-
-
-  document.querySelector('#max').textContent =
-    max.toFixed(2);
-
-  document.querySelector('#avg').textContent =
-    `+${(max / T).toFixed(2)}%`;
-
-  document.querySelector('#count').textContent =
-    all.length;
-
-
-  const tl =
-    document.querySelector('#timeline');
-
-  tl.innerHTML = '';
-
-const activeRow=document.createElement('div');
-activeRow.className='row maxrow';
-
-activeRow.innerHTML=`
-  <div class="name"></div>
-  <div class="track"></div>
-`;
-
-const activeTrack=activeRow.lastElementChild;
-
-maxSegments(all,T).forEach(seg=>{
-  const b=document.createElement('button');
-
-  b.type='button';
-  b.className=`bar active-slot${seg.slot}`;
-
-  b.style.left=(seg.start/T*100)+'%';
-  b.style.width=((seg.end-seg.start)/T*100)+'%';
-
-  b.title=
-    `枠${seg.slot} / ${seg.start.toFixed(2)}–${seg.end.toFixed(2)}s / +${seg.boost.toFixed(2)}%`;
-
-  b.addEventListener('click',()=>{
-    document.querySelector('#detail').textContent=
-      `Activeタイムライン — 枠${seg.slot} / ${seg.start.toFixed(2)}s → ${seg.end.toFixed(2)}s / 有効補正 +${seg.boost.toFixed(2)}%`;
+    activeTrack.append(b);
   });
 
-  activeTrack.append(b);
-});
 
-tl.append(activeRow);
+  tl.append(activeRow);
 
-const axis=document.createElement('div');axis.className='axis';axis.innerHTML='<div></div><div class="axisTrack"></div>';const at=axis.lastElementChild;for(let i=0;i<=10;i++){const x=i*10,t=T*i/10,d=document.createElement('div');d.className='tick';d.style.left=x+'%';d.innerHTML=`<span>${t.toFixed(2)}</span>`;at.append(d)}tl.append(axis);
 
-ms.forEach((m,i)=>{const row=document.createElement('div');row.className=`row slot${i+1}`;row.innerHTML=`<div class="name">${m.slot}. ${m.name}<br><span class="sub">${m.interval>0?adjustedInterval(m).toFixed(2)+'s周期':'未入力'}</span></div><div class="track"></div>`;const tr=row.lastElementChild;by[i].forEach((e,n)=>{const b=document.createElement('button');b.type='button';b.className='bar';b.style.left=(e.start/T*100)+'%';b.style.width=(Math.max(0,e.end-e.start)/T*100)+'%';b.title=`${e.start.toFixed(2)}–${e.end.toFixed(2)}s`;b.addEventListener('click',()=>{document.querySelector('#detail').textContent=`${m.name} / ${m.costume||'衣装未入力'} — 第${n+1}候補 ${e.start.toFixed(2)}s → ${e.end.toFixed(2)}s / ${m.prob==='low'?'低':m.prob==='mid'?'中':'高'} ${probs[m.prob].toFixed(2)}% / +${m.boost.toFixed(2)}% / 短縮 ${m.short.toFixed(2)}%`});tr.append(b)});tl.append(row)})}
+  // ========================================
+  // 時間目盛り
+  // ========================================
+
+  const axis =
+    document.createElement('div');
+
+  axis.className =
+    'axis';
+
+  axis.innerHTML =
+    '<div></div>' +
+    '<div class="axisTrack"></div>';
+
+  const axisTrack =
+    axis.lastElementChild;
+
+
+  for(let i = 0; i <= 10; i++){
+
+    const x =
+      i * 10;
+
+    const t =
+      T * i / 10;
+
+    const tick =
+      document.createElement('div');
+
+    tick.className =
+      'tick';
+
+    tick.style.left =
+      x + '%';
+
+    tick.innerHTML =
+      `<span>${t.toFixed(2)}</span>`;
+
+    axisTrack.append(tick);
+  }
+
+
+  tl.append(axis);
+
+
+  // ========================================
+  // 各メンバーのActiveタイムライン
+  // ========================================
+
+  ms.forEach(
+    (m,i) => {
+
+      const row =
+        document.createElement('div');
+
+      row.className =
+        `row slot${i + 1}`;
+
+      row.innerHTML = `
+        <div class="name">
+          ${m.slot}. ${m.name}
+          <br>
+          <span class="sub">
+            ${
+              m.interval > 0
+                ? adjustedInterval(m).toFixed(2) +
+                  's周期'
+                : '未入力'
+            }
+          </span>
+        </div>
+
+        <div class="track"></div>
+      `;
+
+
+      const track =
+        row.lastElementChild;
+
+
+      by[i].forEach(
+        (e,n) => {
+
+          const b =
+            document.createElement('button');
+
+          b.type =
+            'button';
+
+          b.className =
+            'bar';
+
+          b.style.left =
+            (e.start / T * 100) + '%';
+
+          b.style.width =
+            (
+              Math.max(
+                0,
+                e.end - e.start
+              ) /
+              T *
+              100
+            ) + '%';
+
+          b.title =
+            `${e.start.toFixed(2)}–` +
+            `${e.end.toFixed(2)}s`;
+
+
+          b.addEventListener(
+            'click',
+            () => {
+
+              document.querySelector(
+                '#detail'
+              ).textContent =
+                `${m.name} / ` +
+                `${m.costume || '衣装未入力'} — ` +
+                `第${n + 1}候補 ` +
+                `${e.start.toFixed(2)}s → ` +
+                `${e.end.toFixed(2)}s / ` +
+                `${
+                  m.prob === 'low'
+                    ? '低'
+                    : m.prob === 'mid'
+                      ? '中'
+                      : '高'
+                } ` +
+                `${probs[m.prob].toFixed(2)}% / ` +
+                `+${m.boost.toFixed(2)}% / ` +
+                `短縮 ${m.short.toFixed(2)}%`;
+            }
+          );
+
+
+          track.append(b);
+        }
+      );
+
+
+      tl.append(row);
+    }
+  );
+}
 // ===== 入力状態の保存・復元 =====
 const STORAGE_KEY = 'holodori-active-input-v1';
 
