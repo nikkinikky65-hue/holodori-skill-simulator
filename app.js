@@ -4,6 +4,7 @@ const cards=document.querySelector('#cards');
 init.forEach((d,i)=>{
   const el=document.createElement('div');
 
+  
   el.className='card';
 
   el.innerHTML=`
