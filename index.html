@@ -49,6 +49,115 @@
     <div id="cardLoadList" class="cardLoadList"></div>
   </div>
 </div>
+<div id="cardSaveModal" class="modal" hidden>
+  <div class="modalPanel">
+
+    <div class="modalHeader">
+      <strong>カード保存</strong>
+
+      <button
+        type="button"
+        id="cardSaveClose"
+      >
+        ×
+      </button>
+    </div>
+
+    <div id="cardSaveTarget" class="modalTarget">
+      保存元：枠-
+    </div>
+
+    <div class="cardSaveForm">
+
+      <label>
+        カード名
+        <input
+          id="cardSaveName"
+          type="text"
+        >
+      </label>
+
+      <label>
+        レアリティ
+        <select id="cardSaveRarity">
+          <option value="3">★3</option>
+          <option value="4">★4</option>
+          <option value="5" selected>★5</option>
+        </select>
+      </label>
+
+      <label>
+        タイプ
+        <select id="cardSaveType">
+          <option value="cute">キュート</option>
+          <option value="pure">ピュア</option>
+          <option value="happy">ハッピー</option>
+        </select>
+      </label>
+
+      <hr>
+
+      <strong>Active</strong>
+
+      <label>
+        周期(s)
+        <input
+          id="cardSaveInterval"
+          type="number"
+          min="0"
+          step="0.01"
+        >
+      </label>
+
+      <label>
+        確率
+        <select id="cardSaveProbability">
+          <option value="low">低</option>
+          <option value="mid">中</option>
+          <option value="high">高</option>
+        </select>
+      </label>
+
+      <label>
+        発動時間(s)
+        <input
+          id="cardSaveDuration"
+          type="number"
+          min="0"
+          step="0.01"
+        >
+      </label>
+
+      <label>
+        補正(%)
+        <input
+          id="cardSaveBoost"
+          type="number"
+          min="0"
+          step="0.01"
+        >
+      </label>
+
+    </div>
+
+    <div class="modalActions">
+      <button
+        type="button"
+        id="cardSaveCancel"
+      >
+        キャンセル
+      </button>
+
+      <button
+        type="button"
+        id="cardSaveConfirm"
+      >
+        Libraryに保存
+      </button>
+    </div>
+
+  </div>
+</div>
 </main>
 <script src="members.js"></script>
 <script src="app.js"></script>

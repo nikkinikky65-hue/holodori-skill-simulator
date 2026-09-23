@@ -202,8 +202,107 @@ function getMasterMemberByName(name){
 }
 
 // ========================================
-// 現在の枠 → ライブラリ保存
+// 現在の枠 → ライブラリ保存モーダル
 // ========================================
+
+const cardSaveModal =
+  document.querySelector('#cardSaveModal');
+
+const cardSaveTarget =
+  document.querySelector('#cardSaveTarget');
+
+let saveTargetSlot =
+  null;
+
+
+function openCardSaveModal(slotIndex){
+
+  const card =
+    document.querySelectorAll('.card')[
+      slotIndex
+    ];
+
+  if(!card){
+    return;
+  }
+
+
+  const get =
+    key =>
+      card.querySelector(
+        `[data-k="${key}"]`
+      )?.value ?? '';
+
+
+  const memberId =
+    get('memberId');
+
+  const member =
+    getMasterMember(memberId);
+
+
+  if(!member){
+
+    alert(
+      'メンバーを選択してください。'
+    );
+
+    return;
+  }
+
+
+  saveTargetSlot =
+    slotIndex;
+
+
+  cardSaveTarget.textContent =
+    `保存元：枠${slotIndex + 1} / ${member.name}`;
+
+
+  document.querySelector(
+    '#cardSaveName'
+  ).value =
+    get('costume');
+
+
+  document.querySelector(
+    '#cardSaveInterval'
+  ).value =
+    get('interval');
+
+
+  document.querySelector(
+    '#cardSaveProbability'
+  ).value =
+    get('prob');
+
+
+  document.querySelector(
+    '#cardSaveDuration'
+  ).value =
+    get('duration');
+
+
+  document.querySelector(
+    '#cardSaveBoost'
+  ).value =
+    get('boost');
+
+
+  cardSaveModal.hidden =
+    false;
+}
+
+
+function closeCardSaveModal(){
+
+  cardSaveModal.hidden =
+    true;
+
+  saveTargetSlot =
+    null;
+}
+
 
 document.addEventListener(
   'click',
@@ -219,173 +318,30 @@ document.addEventListener(
     }
 
 
-    const slotIndex =
+    openCardSaveModal(
       Number(
         button.dataset.saveLibrary
-      );
-
-    const card =
-      document.querySelectorAll('.card')[
-        slotIndex
-      ];
-
-    if(!card){
-      return;
-    }
-
-
-    const get =
-      key =>
-        card.querySelector(
-          `[data-k="${key}"]`
-        ).value;
-
-
-    const memberId =
-      get('memberId');
-
-    const member =
-      getMasterMember(memberId);
-
-    if(!member){
-
-      alert(
-        'メンバーを選択してください。'
-      );
-
-      return;
-    }
-
-
-    const costume =
-      get('costume').trim();
-
-
-    if(!costume){
-
-      alert(
-        '衣装名を入力してください。'
-      );
-
-      return;
-    }
-
-
-    const library =
-      loadMemberCardLibrary();
-
-
-    const newCard = {
-
-      id:
-        createLibraryCardId(),
-
-      talentId:
-        member.id,
-
-      cardName:
-        costume,
-
-      type:
-        'cute',
-
-      rarity:
-        5,
-
-      progression: {
-    
-        level:
-          1,
-
-        training:
-          0,
-
-        bloom:
-          0
-      },
-
-      stats: {
-
-        total:
-          0,
-
-        performance:
-          0,
-
-        technique:
-          0,
-
-        sense:
-          0
-      },
-
-      skills: {
-
-        special: {
-
-          name:
-            '',
-
-          description:
-            ''
-        },
-
-        active: {
-
-          name:
-            '',
-
-          interval:
-            Number(get('interval')),
-
-          probability:
-            get('prob'),
-
-          duration:
-            Number(get('duration')),
-
-          boost:
-            Number(get('boost')),
-
-          description:
-            ''
-        },
-
-        passive: {
-
-          name:
-            '',
-
-          description:
-            ''
-        }
-      },
-
-      outfitSkill: {
-
-        name:
-          '',
-
-        description:
-          ''
-      },
-
-      extensions: {}
-    };
-
-    library.push(
-      newCard
-    );
-
-    saveMemberCardLibrary(
-      library
-    );
-
-    alert(
-      `${member.name} / ${costume} を保存しました。`
+      )
     );
   }
 );
+
+
+document.querySelector(
+  '#cardSaveClose'
+).addEventListener(
+  'click',
+  closeCardSaveModal
+);
+
+
+document.querySelector(
+  '#cardSaveCancel'
+).addEventListener(
+  'click',
+  closeCardSaveModal
+);
+
 
 // ========================================
 // ライブラリ呼出
