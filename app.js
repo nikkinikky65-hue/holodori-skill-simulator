@@ -7,6 +7,11 @@ init.forEach((d,i)=>{
   el.className='card';
 
   el.innerHTML=`
+  <input
+    data-k="libraryCardId"
+    type="hidden"
+    value=""
+  >
     <label>
       <span class="slot">${i+1}</span>
       キャラ
@@ -617,6 +622,11 @@ function loadLibraryCardIntoSlot(
   // 短縮率には触らない
 
   set(
+    'libraryCardId',
+    libraryCard.id
+  );
+
+  set(
     'memberId',
     libraryCard.talentId
   );
@@ -678,6 +688,9 @@ function getMembers(){
     return {
       slot: i + 1,
 
+      libraryCardId:
+        g('libraryCardId'),
+
       memberId,
 
       name:
@@ -716,6 +729,234 @@ function getMembers(){
     };
   });
 }
+
+// ========================================
+// 編成評価用・事前計算レイヤー
+// ========================================
+
+function precalculateParty(members){
+
+  const library =
+    loadMemberCardLibrary();
+
+
+  const libraryMap =
+    new Map(
+      library.map(
+        card => [
+          card.id,
+          card
+        ]
+      )
+    );
+
+
+  const partyMembers =
+    members.map(member => {
+
+      const libraryCard =
+        member.libraryCardId
+          ? libraryMap.get(
+              member.libraryCardId
+            )
+          : null;
+
+
+      return {
+
+        ...member,
+
+        libraryCard,
+
+        type:
+          libraryCard?.type || '',
+
+        baseBoost:
+          member.boost,
+
+        scoreSupportBoost:
+          0,
+
+        effectiveBoost:
+          member.boost
+      };
+    });
+
+
+  // ======================================
+  // タイプ構成
+  // ======================================
+
+  const composition = {
+    cute: 0,
+    pure: 0,
+    happy: 0
+  };
+
+
+  partyMembers.forEach(member => {
+
+    if(
+      Object.hasOwn(
+        composition,
+        member.type
+      )
+    ){
+      composition[
+        member.type
+      ]++;
+    }
+  });
+
+
+  // ======================================
+  // Score Support Passive
+  // ======================================
+
+  const passiveResults = [];
+
+
+  partyMembers.forEach(sourceMember => {
+
+    const scoreSupport =
+      sourceMember
+        .libraryCard
+        ?.skills
+        ?.passive
+        ?.scoreSupport;
+
+
+    if(!scoreSupport){
+      return;
+    }
+
+
+    const conditionType =
+      scoreSupport.conditionType || '';
+
+    const conditionCount =
+      Math.max(
+        0,
+        num(
+          scoreSupport.conditionCount
+        )
+      );
+
+    const targetType =
+      scoreSupport.targetType || '';
+
+    const targetCount =
+      Math.max(
+        0,
+        num(
+          scoreSupport.targetCount
+        )
+      );
+
+    const supportBoost =
+      Math.max(
+        0,
+        num(
+          scoreSupport.boost
+        )
+      );
+
+
+    // 条件なしPassiveは常時発動
+    const activated =
+      !conditionType ||
+      composition[
+        conditionType
+      ] >= conditionCount;
+
+
+    const result = {
+
+      sourceSlot:
+        sourceMember.slot,
+
+      sourceCardId:
+        sourceMember.libraryCardId,
+
+      activated,
+
+      conditionType,
+
+      conditionCount,
+
+      targetType,
+
+      targetCount,
+
+      boost:
+        supportBoost,
+
+      targetSlots:
+        []
+    };
+
+
+    if(!activated){
+
+      passiveResults.push(
+        result
+      );
+
+      return;
+    }
+
+
+    // 対象タイプに一致するメンバー
+    const candidates =
+      partyMembers.filter(
+        member =>
+          member.type ===
+          targetType
+      );
+
+
+    // 現時点では編成順で対象を決定
+    const targets =
+      targetCount > 0
+        ? candidates.slice(
+            0,
+            targetCount
+          )
+        : candidates;
+
+
+    targets.forEach(target => {
+
+      target.scoreSupportBoost +=
+        supportBoost;
+
+      target.effectiveBoost =
+        target.baseBoost +
+        target.scoreSupportBoost;
+
+      result.targetSlots.push(
+        target.slot
+      );
+    });
+
+
+    passiveResults.push(
+      result
+    );
+  });
+
+
+  return {
+
+    members:
+      partyMembers,
+
+    composition,
+
+    passiveResults
+  };
+}
+
 // 発動頻度UP：実効周期 = 基礎周期 / (1 + 発動頻度アップ率)
 function adjustedInterval(m){
   return m.interval > 0
@@ -1022,7 +1263,141 @@ function maxSegments(all,T){
 
   return segments;
 }
-function render(){const T=Math.max(.01,num(document.querySelector('#song').value,120)),ms=getMembers(),by=ms.map(m=>events(m,T)),all=by.flat(),max=calcMax(all,T);document.querySelector('#max').textContent=max.toFixed(2);document.querySelector('#avg').textContent=`+${(max/T).toFixed(2)}%`;document.querySelector('#count').textContent=all.length;const tl=document.querySelector('#timeline');tl.innerHTML='';
+function render(){
+
+  const T =
+    Math.max(
+      .01,
+      num(
+        document.querySelector('#song').value,
+        120
+      )
+    );
+
+
+  const rawMembers =
+    getMembers();
+
+
+  const party =
+    precalculateParty(
+      rawMembers
+    );
+
+
+  const ms =
+    party.members.map(
+      member => ({
+        ...member,
+
+        boost:
+          member.effectiveBoost
+      })
+    );
+
+
+  const by =
+    ms.map(
+      member =>
+        events(
+          member,
+          T
+        )
+    );
+
+
+  const all =
+    by.flat();
+
+
+  const max =
+    calcMax(
+      all,
+      T
+    );
+
+
+  document.querySelector('#max').textContent =
+    max.toFixed(2);
+
+  document.querySelector('#avg').textContent =
+    `+${(max / T).toFixed(2)}%`;
+
+  document.querySelector('#count').textContent =
+    all.length;
+
+
+  const tl =
+    document.querySelector('#timeline');
+
+  tl.innerHTML = '';
+
+  const T =
+    Math.max(
+      .01,
+      num(
+        document.querySelector('#song').value,
+        120
+      )
+    );
+
+
+  const rawMembers =
+    getMembers();
+
+
+  const party =
+    precalculateParty(
+      rawMembers
+    );
+
+
+  const ms =
+    party.members.map(
+      member => ({
+        ...member,
+
+        boost:
+          member.effectiveBoost
+      })
+    );
+
+
+  const by =
+    ms.map(
+      member =>
+        events(
+          member,
+          T
+        )
+    );
+
+
+  const all =
+    by.flat();
+
+
+  const max =
+    calcMax(
+      all,
+      T
+    );
+
+
+  document.querySelector('#max').textContent =
+    max.toFixed(2);
+
+  document.querySelector('#avg').textContent =
+    `+${(max / T).toFixed(2)}%`;
+
+  document.querySelector('#count').textContent =
+    all.length;
+
+
+  const tl =
+    document.querySelector('#timeline');
+
+  tl.innerHTML = '';
 
 const activeRow=document.createElement('div');
 activeRow.className='row maxrow';
@@ -1069,6 +1444,7 @@ function saveState(){
       const get = key => card.querySelector(`[data-k="${key}"]`).value;
 
       return {
+        libraryCardId: get('libraryCardId'),
         memberId: get('memberId'),
         costume: get('costume'),
         interval: get('interval'),
