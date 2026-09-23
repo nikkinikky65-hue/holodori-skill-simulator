@@ -180,25 +180,7 @@ function createLibraryCardId(){
   );
 }
 
-function getCardLevelFromProgression(rarity, bloom){
 
-  rarity = Number(rarity);
-  bloom = Number(bloom);
-
-  if(rarity === 3){
-    return 1;
-  }
-
-  if(rarity === 4){
-    return 30 + bloom * 10;
-  }
-
-  if(rarity === 5){
-    return 40 + bloom * 10;
-  }
-
-  return 1;
-}
 
 function getMasterMember(memberId){
 
@@ -429,18 +411,27 @@ document.querySelector(
       );
 
 
-    const bloom =
-        Number(
-          document.querySelector(
-            '#cardSaveBloom'
-         ).value
-        );
+    const training =
+      Number(
+        document.querySelector(
+          '#cardSaveBloom'
+        ).value
+      );
 
     const level =
-        getCardLevelFromProgression(
-          rarity,
-          bloom
-        );
+      getCardLevel(
+        rarity,
+        training
+      );
+
+    const bloom = 0;
+
+    const stats =
+      getCardPresetStats(
+        rarity,
+        level,
+        bloom
+      );
 
 
     const interval =
@@ -485,16 +476,23 @@ document.querySelector(
       rarity,
 
       progression: {
-        level: 1,
-        training: 0,
+        level, 
+        training,
         bloom
       },
 
       stats: {
-        total: 0,
-        performance: 0,
-        technique: 0,
-        sense: 0
+        total:
+          stats?.total ?? 0,
+
+        performance:
+          stats?.performance ?? 0,
+
+        technique:
+          stats?.technique ?? 0,
+
+        sense:
+          stats?.sense ?? 0
       },
 
       skills: {
