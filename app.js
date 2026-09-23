@@ -180,6 +180,25 @@ function createLibraryCardId(){
   );
 }
 
+function getCardLevelFromProgression(rarity, bloom){
+
+  rarity = Number(rarity);
+  bloom = Number(bloom);
+
+  if(rarity === 3){
+    return 1;
+  }
+
+  if(rarity === 4){
+    return 30 + bloom * 10;
+  }
+
+  if(rarity === 5){
+    return 40 + bloom * 10;
+  }
+
+  return 1;
+}
 
 function getMasterMember(memberId){
 
@@ -408,6 +427,20 @@ document.querySelector(
           '#cardSaveRarity'
         ).value
       );
+
+
+    const bloom =
+        Number(
+          document.querySelector(
+            '#cardSaveBloom'
+         ).value
+        );
+
+    const level =
+        getCardLevelFromProgression(
+          rarity,
+          bloom
+        );
 
 
     const interval =
