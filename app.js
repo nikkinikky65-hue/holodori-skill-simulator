@@ -342,10 +342,196 @@ document.querySelector(
   closeCardSaveModal
 );
 
+document.querySelector(
+  '#cardSaveConfirm'
+).addEventListener(
+  'click',
+  () => {
 
-// ========================================
-// ライブラリ呼出
-// ========================================
+    if(saveTargetSlot === null){
+      return;
+    }
+
+
+    const sourceCard =
+      document.querySelectorAll('.card')[
+        saveTargetSlot
+      ];
+
+    if(!sourceCard){
+      return;
+    }
+
+
+    const get =
+      key =>
+        sourceCard.querySelector(
+          `[data-k="${key}"]`
+        )?.value ?? '';
+
+
+    const memberId =
+      get('memberId');
+
+    const member =
+      getMasterMember(memberId);
+
+    if(!member){
+      alert(
+        'メンバーを選択してください。'
+      );
+      return;
+    }
+
+
+    const cardName =
+      document.querySelector(
+        '#cardSaveName'
+      ).value.trim();
+
+    if(!cardName){
+      alert(
+        'カード名を入力してください。'
+      );
+      return;
+    }
+
+
+    const type =
+      document.querySelector(
+        '#cardSaveType'
+      ).value;
+
+    const rarity =
+      Number(
+        document.querySelector(
+          '#cardSaveRarity'
+        ).value
+      );
+
+
+    const interval =
+      Number(
+        document.querySelector(
+          '#cardSaveInterval'
+        ).value
+      );
+
+    const probability =
+      document.querySelector(
+        '#cardSaveProbability'
+      ).value;
+
+    const duration =
+      Number(
+        document.querySelector(
+          '#cardSaveDuration'
+        ).value
+      );
+
+    const boost =
+      Number(
+        document.querySelector(
+          '#cardSaveBoost'
+        ).value
+      );
+
+
+    const newCard = {
+
+      id:
+        createLibraryCardId(),
+
+      talentId:
+        member.id,
+
+      cardName,
+
+      type,
+
+      rarity,
+
+      progression: {
+        level: 1,
+        training: 0,
+        bloom: 0
+      },
+
+      stats: {
+        total: 0,
+        performance: 0,
+        technique: 0,
+        sense: 0
+      },
+
+      skills: {
+
+        special: {
+          description: ''
+        },
+
+        active: {
+          interval,
+          probability,
+          duration,
+          boost,
+          description: ''
+        },
+
+        passive: {
+
+          status: {
+            description: ''
+          },
+
+          scoreSupport: {
+            conditionType: '',
+            conditionCount: 0,
+            targetType: '',
+            targetCount: 0,
+            boost: 0,
+            description: ''
+          }
+        }
+      },
+
+      outfitSkill: {
+        name: '',
+        description: ''
+      },
+
+      extensions: {}
+    };
+
+
+    const library =
+      loadMemberCardLibrary();
+
+    library.push(
+      newCard
+    );
+
+    saveMemberCardLibrary(
+      library
+    );
+
+
+    sourceCard.querySelector(
+      '[data-k="libraryCardId"]'
+    ).value =
+      newCard.id;
+
+
+    saveState();
+
+    closeCardSaveModal();
+
+
+    alert(
+      `${member.name} / ${cardName} を保存しました。`
+    );
+  }
+);
 
 // ========================================
 // ライブラリ呼出
