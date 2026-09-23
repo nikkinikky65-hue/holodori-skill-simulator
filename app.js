@@ -487,7 +487,7 @@ document.querySelector(
       progression: {
         level: 1,
         training: 0,
-        bloom: 0
+        bloom
       },
 
       stats: {
