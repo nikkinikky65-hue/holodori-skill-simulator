@@ -154,8 +154,33 @@
 }
 
 .libraryCardForm{
+  position:relative;
   display:grid;
   gap:14px;
+}
+
+.talentPortraitBackdrop{
+  position:absolute;
+  z-index:0;
+  top:0;
+  right:0;
+  bottom:0;
+  width:min(50%,560px);
+  opacity:0;
+  background-position:68% top;
+  background-repeat:no-repeat;
+  background-size:auto 145%;
+  pointer-events:none;
+  transition:opacity .15s ease;
+}
+
+.talentPortraitBackdrop.is-visible{
+  opacity:.80;
+}
+
+.libraryCardForm > :not(.talentPortraitBackdrop){
+  position:relative;
+  z-index:1;
 }
 
 .libraryFormSection{
@@ -169,7 +194,7 @@
   border:1px solid #e2e2e2;
   border-radius:10px;
 
-  background:#fafafa;
+  background:rgba(250,250,250,.8);
 }
 
 .libraryFormSection h3{
@@ -334,6 +359,11 @@
 
   .libraryOutfitSection{
     grid-template-columns:1fr 1fr;
+  }
+
+  .talentPortraitBackdrop{
+    width:58%;
+    background-size:auto 112%;
   }
 }
 

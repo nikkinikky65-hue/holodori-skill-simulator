@@ -45,6 +45,9 @@ const memberCardForm =
 const memberCardIdInput =
   document.querySelector('#memberCardId');
 
+const talentPortraitBackdrop =
+  document.querySelector('#talentPortraitBackdrop');
+
 
 // ========================================
 // 基本情報
@@ -193,6 +196,70 @@ const outfitSkillName =
 
 const outfitSkillDescription =
   document.querySelector('#outfitSkillDescription');
+
+const talentPortraitFiles = [
+  '0_azki.webp', '0_hoshimachi_suisei.png', '0_robocosan.webp',
+  '0_sakura_miko.webp', '0_tokino_sora.webp', '1_akai_haato.webp',
+  '1_aki_rosenthal.png', '1_natsuiro_matsuri.png',
+  '1_shirakami_fubuki.webp', '2_nakiri_ayame.webp',
+  '2_oozora_subaru.webp', '2_yuzuki_choco.webp',
+  '3_houshou_marine.png', '3_shiranui_flare.png',
+  '3_shirogane_noel.webp', '3_usada_pekora.webp',
+  '4_himemori_luna.webp', '4_tokoyami_towa.webp',
+  '4_tsunomaki_watame.webp', '5_momosuzu_nene.webp',
+  '5_omaru_polka.webp', '5_shishiro_botan.webp',
+  '5_yukihana_lamy.webp', '6_hakui_koyori.webp',
+  '6_kazama_iroha.png', '6_laplus_darknesss.webp',
+  '6_takane_lui.webp', 'Ad_fuwawa_abyssgard.webp',
+  'Ad_koseki_bijou.webp', 'Ad_mococo_abyssgard.webp',
+  'Ad_nerissa_ravencroft.webp', 'Ad_shiori_novella.webp',
+  'Gm_inugami_korone.png', 'Gm_nekomata_okayu.png',
+  'Gm_ookami_mio.webp', 'ID1_airani_iofifteen.webp',
+  'ID1_ayunda_risu.webp', 'ID1_moona_hoshinova.webp',
+  'ID2_anya_melfissa.png', 'ID2_kureiji_ollie.png',
+  'ID2_pavolia_reine.png', 'ID3_kaela_kovalskia.webp',
+  'ID3_kobo_kanaeru.webp', 'ID3_vestia_zeta.webp',
+  'My_mori_calliope.webp', 'My_ninomae_inanis.webp',
+  'My_takanashi_kiara.webp', 'Pr_hakos_baelz.png',
+  'Pr_irys.webp', 'Pr_ouro_kronii.webp',
+  'Rg_ichijou_ririka.webp', 'Rg_juufuutei_raden.webp',
+  'Rg_otonose_kanade.png', 'Rg_todoroki_hajime.png'
+];
+let portraitRequestNumber = 0;
+
+function resolveTalentPortrait(talentId){
+  if(!talentId){
+    return Promise.resolve('');
+  }
+
+  const filename = talentPortraitFiles.find(file =>
+    file.replace(/^[^_]+_/, '').replace(/\.[^.]+$/, '') === talentId
+  );
+
+  return Promise.resolve(
+    filename
+      ? `assets/talents/original/${filename}`
+      : ''
+  );
+}
+
+function updateTalentPortrait(){
+  const requestNumber = ++portraitRequestNumber;
+  const talentId = cardTalent.value;
+
+  talentPortraitBackdrop.style.backgroundImage = '';
+  talentPortraitBackdrop.classList.remove('is-visible');
+
+  resolveTalentPortrait(talentId).then(path => {
+    if(requestNumber !== portraitRequestNumber || !path){
+      return;
+    }
+    talentPortraitBackdrop.style.backgroundImage = `url("${path}")`;
+    talentPortraitBackdrop.classList.add('is-visible');
+  });
+}
+
+cardTalent.addEventListener('change', updateTalentPortrait);
 
 
 // ========================================
@@ -598,6 +665,8 @@ function renderMemberCards(){
         cardTalent.value =
           card.talentId;
 
+        updateTalentPortrait();
+
         cardName.value =
           card.cardName;
 
@@ -776,6 +845,8 @@ function resetMemberCardForm(){
   memberCardIdInput.value =
     '';
 
+  updateTalentPortrait();
+
   activeSkillProb.value =
     'mid';
   updateCardLevel();
@@ -797,6 +868,7 @@ memberCardCancel.addEventListener(
 
 populateSkillOptions();
 renderTalentSelect();
+updateTalentPortrait();
 updateCardLevel();
 applyStatPreset();
 renderMemberCards();
