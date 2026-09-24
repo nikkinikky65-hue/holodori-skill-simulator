@@ -11,8 +11,7 @@ jsc = '/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Helpers/js
 app = (root / 'app.js').read_text()
 lib = (root / 'library.js').read_text()
 old = subprocess.check_output(['git', 'show', 'HEAD:app.js'], cwd=root, text=True)
-for start, end in [('function precalculateParty(', '// 発動頻度UP：'),
-                   ('function adjustedInterval(', '// ====='),
+for start, end in [('function adjustedInterval(', '// ====='),
                    ('function maxSegments(', 'function render(){'),
                    ('function optimizeShortRates(', 'function renderOptimizedTimeline(')]:
     def section(text):
@@ -132,13 +131,15 @@ try{writeCardLibrary([]);}catch(e){refused=true;}
 assert(refused && localStorage.getItem(MEMBER_CARD_STORAGE_KEY)==='{bad json','invalid storage preserved');
 print('Score/segments regression and invalid-storage preservation: PASS');
 """
-for name in ['app.js','library.js','event.js','members.js','card-rules.js','formation-rules.js','formation.js','active-snapshot.js']:
+for name in ['app.js','library.js','event.js','members.js','card-rules.js','formation-rules.js','formation.js','active-snapshot.js','support-rules.js']:
     js += '\nnew Function(readFile('+repr(str(root/name))+'));'
 js += "\nprint('All JavaScript syntax: PASS');"
 with tempfile.NamedTemporaryFile(mode='w',suffix='.js') as f:
     f.write(js);f.flush()
     subprocess.run([jsc,f.name],check=True,cwd=root)
 subprocess.run([jsc,'card-rules.js','tests/card-rules.test.js'],check=True,cwd=root)
-print('DOM IDs, script order, unchanged Passive/optimizer/timeline evaluation functions: PASS')
+print('DOM IDs, script order, unchanged optimizer/timeline evaluation functions: PASS')
 
 subprocess.run([jsc,'formation-rules.js','tests/formation-rules.test.js'],check=True,cwd=root)
+
+subprocess.run([jsc,'support-rules.js','tests/support-rules.test.js'],check=True,cwd=root)

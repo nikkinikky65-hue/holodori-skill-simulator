@@ -2,7 +2,7 @@
 // 最適化候補の計算・参照、再描画、保存は行わない。
 function createActiveTimelineSnapshot(){
   if(!currentActiveTimelineData) throw new Error('通常タイムラインがまだ計算されていません。');
-  const { songDuration, members, eventsByMember, maxScore } = currentActiveTimelineData;
+  const { songDuration, members, eventsByMember, maxScore, passiveResults } = currentActiveTimelineData;
   return {
     version: 1,
     songDuration,
@@ -13,6 +13,12 @@ function createActiveTimelineSnapshot(){
       leaderCardId: document.querySelector('#formationLeader')?.value || null
     },
     maxScore,
+    supportCalculationModel: 'base-boost-times-support-rate-v1',
+    supportEvaluation: {
+      status: members.some(member => member.supportStatus === 'partial') ? 'partial' : 'resolved',
+      policy: 'unresolved-modifiers-excluded',
+      passiveResults: JSON.parse(JSON.stringify(passiveResults || []))
+    },
     activeTimeline: members.map((member, index) => ({
       slot: member.slot,
       cardId: member.libraryCardId || null,
@@ -24,6 +30,14 @@ function createActiveTimelineSnapshot(){
       probability: member.prob,
       duration: member.duration,
       baseBoost: member.baseBoost,
+      scoreSupportRate: member.scoreSupportRate,
+      passiveAdditionalSupportRate: member.passiveAdditionalSupportRate,
+      additionalSupportRate: member.additionalSupportRate,
+      effectiveSupportRate: member.effectiveSupportRate,
+      supportBoost: member.supportBoost,
+      effectiveBoost: member.effectiveBoost,
+      supportStatus: member.supportStatus,
+      supportRateModifiers: member.supportRateModifiers.map(modifier => ({ ...modifier })),
       scoreSupportBoost: member.scoreSupportBoost,
       boost: member.boost,
       activationTimes: eventsByMember[index].map(event => event.start)

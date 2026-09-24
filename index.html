@@ -34,7 +34,10 @@
   <p id="formationStatus" class="sub" role="status" aria-live="polite"></p>
  </section>
  <div class="panel top"><label>楽曲時間 (s)<input id="song" type="number" min="1" step="0.01" value="120"></label><div class="sub">初期値 120.00s ／ 表示は小数第2位、内部値は丸めません</div></div>
- <div class="panel"><h2>編成・Active入力</h2><div id="cards" class="cards"></div></div>
+ <div class="panel"><h2>編成・Active入力</h2><div id="cards" class="cards"></div>
+  <p class="sub">Special由来の通常Score Support率は未接続です。Special Timeline実装時に対応します。</p>
+  <p id="supportEvaluation" class="sub" role="status"></p>
+ </div>
  <div class="optimizeArea">
   <div class="optimizeTitle">最適化探索</div>
   <div class="sub">探索で使用できる発動頻度UPの上限</div>
@@ -192,6 +195,7 @@
 </main>
 <script src="members.js"></script>
 <script src="card-rules.js"></script>
+<script src="support-rules.js"></script>
 <script src="app.js"></script>
 <script src="formation-rules.js"></script>
 <script src="formation.js"></script>
