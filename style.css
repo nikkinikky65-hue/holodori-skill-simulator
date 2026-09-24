@@ -165,11 +165,11 @@
   top:0;
   right:0;
   bottom:0;
-  width:min(50%,560px);
+  width:min(64%,760px);
   opacity:0;
-  background-position:68% top;
+  background-position:right center;
   background-repeat:no-repeat;
-  background-size:auto 145%;
+  background-size:contain;
   pointer-events:none;
   transition:opacity .15s ease;
 }
@@ -362,8 +362,12 @@
   }
 
   .talentPortraitBackdrop{
-    width:58%;
-    background-size:auto 112%;
+    width:100%;
+    top:0;
+    bottom:auto;
+    height:520px;
+    background-position:center center;
+    background-size:contain;
   }
 }
 
