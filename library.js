@@ -140,36 +140,49 @@ const passiveSkillDescription1 =
     '#passiveSkillDescription1'
   );
 
-// スコアサポート強化
-const scoreSupportConditionType =
-  document.querySelector(
-    '#scoreSupportConditionType'
-  );
+const passiveEffectType = document.querySelector('#passiveEffectType');
+const passiveCondition = document.querySelector('#passiveCondition');
+const passiveConditionText = document.querySelector('#passiveConditionText');
+const passiveConditionCount = document.querySelector('#passiveConditionCount');
+const passiveTarget = document.querySelector('#passiveTarget');
+const passiveTargetText = document.querySelector('#passiveTargetText');
+const passiveTargetCount = document.querySelector('#passiveTargetCount');
+const passiveValue = document.querySelector('#passiveValue');
+const passiveDescription = document.querySelector('#passiveDescription');
+const specialEffectTypes = document.querySelector('#specialEffectTypes');
+const specialSkillDuration = document.querySelector('#specialSkillDuration');
+const specialSkillBoost = document.querySelector('#specialSkillBoost');
+const activeEffectType = document.querySelector('#activeEffectType');
 
-const scoreSupportConditionCount =
-  document.querySelector(
-    '#scoreSupportConditionCount'
-  );
+function populateSkillOptions(){
+  for(const [select, category] of [[specialEffectTypes,'special'],[activeEffectType,'active'],[passiveEffectType,'passive']]){
+    if(category === 'passive') select.add(new Option('未設定', ''));
+    SKILL_EFFECT_TYPES[category].forEach(([value,label]) => select.add(new Option(label,value)));
+  }
+  const affiliations = [...new Set(HOLO_MEMBERS.flatMap(member => member.affiliations || []))];
+  for(const select of [passiveCondition, passiveTarget]){
+    select.add(new Option(select === passiveCondition ? '条件なし' : '未設定', ''));
+    for(const [value,label] of [['cute','キュート'],['pure','ピュア'],['happy','ハッピー']]){
+      select.add(new Option(`タイプ：${label}`, `type:${value}`));
+    }
+    affiliations.forEach(value => select.add(new Option(`所属：${value}`, `affiliation:${value}`)));
+    select.add(new Option('その他（原文を保存）', 'text'));
+  }
+}
 
-const scoreSupportTargetType =
-  document.querySelector(
-    '#scoreSupportTargetType'
-  );
+function selectStoredOption(select, value){
+  if(value && ![...select.options].some(option => option.value === value)){
+    select.add(new Option(`保存済み：${value}`, value));
+  }
+  select.value = value;
+}
 
-const scoreSupportTargetCount =
-  document.querySelector(
-    '#scoreSupportTargetCount'
-  );
-
-const scoreSupportBoost =
-  document.querySelector(
-    '#scoreSupportBoost'
-  );
-
-const passiveSkillDescription2 =
-  document.querySelector(
-    '#passiveSkillDescription2'
-  );
+function updateConditionTextVisibility(){
+  document.querySelector('#passiveConditionTextLabel').hidden = passiveCondition.value !== 'text';
+  document.querySelector('#passiveTargetTextLabel').hidden = passiveTarget.value !== 'text';
+}
+passiveCondition.addEventListener('change', updateConditionTextVisibility);
+passiveTarget.addEventListener('change', updateConditionTextVisibility);
 
 // ========================================
 // 衣装スキル
@@ -340,13 +353,15 @@ function getMemberCardFormData(){
     skills: {
 
       special: {
-
+        effectTypes: [...specialEffectTypes.selectedOptions].map(option => option.value),
+        boost: nullableNumber(specialSkillBoost),
+        duration: nullableNumber(specialSkillDuration),
         description:
           specialSkillDescription.value.trim()
       },
 
       active: {
-
+        effectType: activeEffectType.value,
         interval:
           Number(activeSkillInterval.value),
 
@@ -369,24 +384,14 @@ function getMemberCardFormData(){
             passiveSkillDescription1.value.trim()
         },
 
-        scoreSupport: {
-          conditionType:
-            scoreSupportConditionType.value,
-
-          conditionCount:
-            Number(scoreSupportConditionCount.value) || 0,
-
-          targetType:
-            scoreSupportTargetType.value,
-
-          targetCount:
-            Number(scoreSupportTargetCount.value) || 0,
-
-          boost:
-            Number(scoreSupportBoost.value) || 0,
-
-          description:
-            passiveSkillDescription2.value.trim()
+        effect: {
+          type: passiveEffectType.value,
+          condition: skillConditionFromKey(passiveCondition.value, passiveConditionText.value),
+          conditionCount: Number(passiveConditionCount.value) || 0,
+          target: skillConditionFromKey(passiveTarget.value, passiveTargetText.value),
+          targetCount: Number(passiveTargetCount.value) || 0,
+          value: Number(passiveValue.value) || 0,
+          description: passiveDescription.value.trim()
         }
       }
     },
@@ -634,6 +639,17 @@ function renderMemberCards(){
           card.skills.special.description;
 
 
+        [...specialEffectTypes.options].forEach(option => option.selected = false);
+        (card.skills.special.effectTypes || []).forEach(value => {
+          selectStoredOption(specialEffectTypes, value);
+        });
+        [...specialEffectTypes.options].forEach(option => {
+          option.selected = (card.skills.special.effectTypes || []).includes(option.value);
+        });
+        specialSkillBoost.value = card.skills.special.boost ?? '';
+        specialSkillDuration.value = card.skills.special.duration ?? '';
+        selectStoredOption(activeEffectType, card.skills.active.effectType || 'score_up');
+
         // アクティブスキル
         activeSkillInterval.value =
           card.skills.active.interval;
@@ -655,23 +671,18 @@ function renderMemberCards(){
         passiveSkillDescription1.value =
           card.skills.passive.status.description;
 
-        scoreSupportConditionType.value =
-          card.skills.passive.scoreSupport.conditionType;
-
-        scoreSupportConditionCount.value =
-          card.skills.passive.scoreSupport.conditionCount;
-
-        scoreSupportTargetType.value =
-          card.skills.passive.scoreSupport.targetType;
-
-        scoreSupportTargetCount.value =
-          card.skills.passive.scoreSupport.targetCount;
-
-        scoreSupportBoost.value =
-          card.skills.passive.scoreSupport.boost;
-
-        passiveSkillDescription2.value =
-          card.skills.passive.scoreSupport.description;
+        const effect = getPassiveEffect(card);
+        selectStoredOption(passiveEffectType, effect.type);
+        selectStoredOption(passiveCondition, effect.condition?.kind === 'text' ? 'text' : skillConditionKey(effect.condition));
+        passiveConditionText.value = effect.condition?.kind === 'text' ? effect.condition.value : '';
+        passiveConditionCount.value = effect.conditionCount;
+        selectStoredOption(passiveTarget, effect.target?.kind === 'text' ? 'text' : skillConditionKey(effect.target));
+        passiveTargetText.value = effect.target?.kind === 'text' ? effect.target.value : '';
+        passiveTargetCount.value = effect.targetCount;
+        passiveValue.value = effect.value;
+        passiveDescription.value = effect.description;
+        updateConditionTextVisibility();
+        document.querySelector('#legacyPassiveDetails').hidden = !card.skills.passive.status.description;
 
         // 衣装スキル
         outfitSkillName.value =
@@ -754,6 +765,13 @@ function renderMemberCards(){
 function resetMemberCardForm(){
 
   memberCardForm.reset();
+  [...specialEffectTypes.options].forEach(option => option.selected = false);
+  activeEffectType.value = 'score_up';
+  passiveEffectType.value = '';
+  passiveCondition.value = '';
+  passiveTarget.value = '';
+  updateConditionTextVisibility();
+  document.querySelector('#legacyPassiveDetails').hidden = true;
 
   memberCardIdInput.value =
     '';
@@ -777,6 +795,7 @@ memberCardCancel.addEventListener(
 // 初期表示
 // ========================================
 
+populateSkillOptions();
 renderTalentSelect();
 updateCardLevel();
 applyStatPreset();

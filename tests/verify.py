@@ -46,7 +46,7 @@ const assert = (ok,msg) => {if(!ok) throw Error(msg);};
 const stored = new Map();
 const localStorage = {getItem:k=>stored.get(k)??null,setItem:(k,v)=>stored.set(k,v)};
 const nodes = new Map();
-const node = key => {if(!nodes.has(key)) nodes.set(key,{value:''});return nodes.get(key);};
+const node = key => {if(!nodes.has(key)) nodes.set(key,{value:'',selectedOptions:[]});return nodes.get(key);};
 const slot = {querySelector:node};
 const document = {querySelector:node,querySelectorAll:()=>[slot]};
 let saveTargetSlot=0;
@@ -66,7 +66,7 @@ saveFromA();
 let card=readCardLibrary()[0];
 assert(card.id==='test-id' && card.progression.level===60 && card.stats.total===22000,'A save');
 const shape = value => value && typeof value==='object' ? Object.fromEntries(Object.keys(value).sort().map(k=>[k,shape(value[k])])) : true;
-const initialShape=JSON.stringify(shape(card));
+const initialShape=shape(card);
 card.extensions.future=42;card.skills.active.future='keep';
 memberCards=[card];
 const values={memberCardId:card.id,cardTalent:card.talentId,cardName:'編集後',cardType:card.type,cardRarity:5,cardTraining:2,cardBloom:5,cardTotal:22001,cardPerformance:7401,cardTechnique:7300,cardSense:7300,activeSkillInterval:15,activeSkillProb:'mid',activeSkillDuration:5,activeSkillBoost:25};
@@ -83,7 +83,8 @@ card=readCardLibrary()[0];
 assert(readCardLibrary().length===1 && card.progression.bloom===5 && card.stats.total===22001,'A resave');
 assert(card.extensions.future===42 && card.skills.active.future==='keep','A metadata');
 delete card.extensions.future;delete card.skills.active.future;
-assert(JSON.stringify(shape(card))===initialShape,'same schema');
+const retainsShape=(expected,actual)=>expected===true ? actual===true : Object.keys(expected).every(k=>k in actual && retainsShape(expected[k],actual[k]));
+assert(retainsShape(initialShape,shape(card)),'existing schema retained');
 // Blank quick-save defaults and explicit names; updates keep existing names.
 writeCardLibrary([]);
 node('[data-k="libraryCardId"]').value='';
@@ -142,4 +143,6 @@ print('DOM IDs, script order, unchanged optimizer/timeline evaluation functions:
 
 subprocess.run([jsc,'formation-rules.js','tests/formation-rules.test.js'],check=True,cwd=root)
 
-subprocess.run([jsc,'support-rules.js','tests/support-rules.test.js'],check=True,cwd=root)
+subprocess.run([jsc,'card-rules.js','support-rules.js','tests/support-rules.test.js'],check=True,cwd=root)
+
+subprocess.run([jsc,'card-rules.js','support-rules.js','tests/skill-data.test.js'],check=True,cwd=root)

@@ -1,4 +1,4 @@
-// jsc support-rules.js tests/support-rules.test.js
+// jsc card-rules.js support-rules.js tests/support-rules.test.js
 function assert(ok, message){ if(!ok) throw Error(message); }
 for(const [base,rate,extra,support,effective] of [
   [75,80,0,60,135], [85,80,0,68,153], [65,80,0,52,117],

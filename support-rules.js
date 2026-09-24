@@ -46,18 +46,20 @@ function precalculateSupportParty(members, cards){
   });
   const passiveResults = [];
   partyMembers.forEach(source => {
-    const effect = source.libraryCard?.skills?.passive?.scoreSupport;
+    const effect = getPassiveScoreSupport(source.libraryCard);
     const value = supportNumber(effect?.boost);
     if(!effect || value === 0) return;
     const conditionType = effect.conditionType || '';
     const conditionCount = supportNumber(effect.conditionCount);
-    const activated = !conditionType || composition[conditionType] >= conditionCount;
+    const activated = effect.unresolvedCondition ? null : (!conditionType || composition[conditionType] >= conditionCount);
     const targetType = effect.targetType || '';
     const targetCount = supportNumber(effect.targetCount);
     const candidates = partyMembers.filter(member => member.type === targetType && targetType !== '');
-    const resolution = !activated
+    const resolution = activated === null
+      ? { status: 'unresolved-condition', targets: [] }
+      : !activated
       ? { status: 'inactive', targets: [] }
-      : !Object.hasOwn(composition, targetType)
+      : (effect.unresolvedTarget || !Object.hasOwn(composition, targetType))
         ? { status: 'unresolved-target-type', targets: [] }
         : resolveSupportTargets(candidates, targetCount);
     const result = {
@@ -68,9 +70,9 @@ function precalculateSupportParty(members, cards){
       additionalSupportRate: value, status: resolution.status
     };
     passiveResults.push(result);
-    if(!activated) return;
+    if(activated === false) return;
     // 未設定の対象タイプも、適用済みと誤認しないよう全枠へ保留情報を渡す。
-    const affected = resolution.status === 'unresolved-target-type' ? partyMembers : candidates;
+    const affected = (resolution.status === 'unresolved-target-type' || effect.unresolvedTarget) ? partyMembers : candidates;
     affected.forEach(target => target.supportRateModifiers.push({
       sourceType: 'passive', sourceCardId: source.libraryCardId, sourceSlot: source.slot,
       value, status: resolution.status, applied: resolution.status === 'resolved'

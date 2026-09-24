@@ -133,6 +133,7 @@ function normalizeCardV2(card){
 
 function createCardV2(data, existing = {}){
   const card = normalizeCardV2(mergeCardFields(existing, data));
+  card.cardName = String(data.cardName ?? '').trim() || existing.cardName || '未分類';
   const derived = getCardDerived(card.rarity, card.progression.training, card.progression.bloom);
   card.progression = { ...card.progression, ...derived.progression };
   if(!data.stats && !existing.stats && derived.stats) card.stats = derived.stats;
@@ -164,4 +165,66 @@ function writeCardLibrary(cards){
   // 読み込みに失敗した既存データを空のライブラリで上書きしない。
   const library = parseCardLibrary(localStorage.getItem(MEMBER_CARD_STORAGE_KEY));
   localStorage.setItem(MEMBER_CARD_STORAGE_KEY, JSON.stringify({ ...library, cards }));
+}
+
+// ゲーム表記の効果種別。SP/Pのscore_supportは同じ率（%）で、発生源は親の分類で区別する。
+const SKILL_EFFECT_TYPES = {
+  special: [
+    ['score_support', 'スコアサポート'], ['life_recovery', 'ライフ回復'],
+    ['skill_activation_rate_up', 'スキル発動率UP'], ['judgement_enhancement', '判定強化']
+  ],
+  active: [['score_up', 'スコアUP']],
+  passive: [
+    ['performance_up', 'パフォーマンスUP'], ['technique_up', 'テクニックUP'],
+    ['sense_up', 'センスUP'], ['all_parameters_up', '全パラメーターUP'],
+    ['score_support', 'スコアサポート']
+  ]
+};
+
+function getPassiveEffect(card){
+  const passive = card?.skills?.passive || {};
+  const defaults = {
+    type: '', condition: { kind: 'none', value: '' }, conditionCount: 0,
+    target: { kind: 'none', value: '' }, targetCount: 0, value: 0, description: ''
+  };
+  if(passive.effect && typeof passive.effect === 'object'){
+    return mergeCardFields(defaults, passive.effect);
+  }
+  const legacy = passive.scoreSupport;
+  if(!legacy) return defaults;
+  const hasEffect = Boolean(legacy.boost || legacy.description || legacy.conditionType || legacy.targetType || legacy.conditionCount || legacy.targetCount);
+  return {
+    ...defaults, type: hasEffect ? 'score_support' : '',
+    condition: { kind: legacy.conditionType ? 'type' : 'none', value: legacy.conditionType || '' },
+    conditionCount: legacy.conditionCount ?? 0,
+    target: { kind: legacy.targetType ? 'type' : 'none', value: legacy.targetType || '' },
+    targetCount: legacy.targetCount ?? 0,
+    value: legacy.boost ?? 0, description: legacy.description || ''
+  };
+}
+
+// 計算側の既存インターフェースへのアダプター。新effectが存在すれば旧scoreSupportより優先。
+function getPassiveScoreSupport(card){
+  if(!card?.skills?.passive?.effect) return card?.skills?.passive?.scoreSupport || null;
+  const effect = getPassiveEffect(card);
+  if(effect.type !== 'score_support') return null;
+  const supported = condition => condition && ['none', 'type'].includes(condition.kind);
+  return {
+    conditionType: effect.condition?.kind === 'type' ? effect.condition.value : '',
+    conditionCount: effect.conditionCount,
+    targetType: effect.target?.kind === 'type' ? effect.target.value : '',
+    targetCount: effect.targetCount, boost: effect.value, description: effect.description,
+    unresolvedCondition: !supported(effect.condition), unresolvedTarget: !supported(effect.target)
+  };
+}
+
+function skillConditionKey(condition){
+  return !condition || condition.kind === 'none' ? '' : `${condition.kind}:${condition.value}`;
+}
+
+function skillConditionFromKey(key, text = ''){
+  if(!key) return { kind: 'none', value: '' };
+  if(key === 'text') return { kind: 'text', value: text.trim() };
+  const separator = key.indexOf(':');
+  return { kind: key.slice(0, separator), value: key.slice(separator + 1) };
 }
