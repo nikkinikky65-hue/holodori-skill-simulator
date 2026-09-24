@@ -22,6 +22,17 @@
     </a>
   </div>
  </div>
+ <section class="panel">
+  <h2>編成保存・呼出</h2>
+  <label>リーダー<select id="formationLeader"></select></label>
+  <p class="sub">リーダーは保存・呼出のみで、現在のActive計算には参加しません。</p>
+  <label>編成名<input id="formationName" type="text" placeholder="編成名を入力"></label>
+  <button id="formationSave" type="button">編成保存（新規）</button>
+  <label>保存済み編成<select id="formationSelect"></select></label>
+  <button id="formationLoad" type="button">編成呼出</button>
+  <p class="sub">6枠ともライブラリのカードを選んで保存してください。手入力による変更、曲時間、発動頻度UPは編成には保存しません。呼出時は最新のカード情報を反映します。</p>
+  <p id="formationStatus" class="sub" role="status" aria-live="polite"></p>
+ </section>
  <div class="panel top"><label>楽曲時間 (s)<input id="song" type="number" min="1" step="0.01" value="120"></label><div class="sub">初期値 120.00s ／ 表示は小数第2位、内部値は丸めません</div></div>
  <div class="panel"><h2>編成・Active入力</h2><div id="cards" class="cards"></div></div>
  <div class="optimizeArea">
@@ -175,5 +186,7 @@
 <script src="members.js"></script>
 <script src="card-rules.js"></script>
 <script src="app.js"></script>
+<script src="formation-rules.js"></script>
+<script src="formation.js"></script>
 </body>
 </html>

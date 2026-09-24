@@ -20,7 +20,7 @@ for start, end in [('function precalculateParty(', '// 発動頻度UP：'),
         return text[a:text.index(end, a)].strip()
     assert section(app) == section(old), start + ' changed'
 
-for page, script in [('index.html','app.js'),('library.html','library.js'),('event.html','event.js')]:
+for page, script in [('index.html','app.js'),('library.html','library.js'),('event.html','event.js'),('index.html','formation.js')]:
     html = (root / page).read_text()
     ids = set(re.findall(r'id="([\w-]+)"', html))
     source = (root / script).read_text()
@@ -132,7 +132,7 @@ try{writeCardLibrary([]);}catch(e){refused=true;}
 assert(refused && localStorage.getItem(MEMBER_CARD_STORAGE_KEY)==='{bad json','invalid storage preserved');
 print('Score/segments regression and invalid-storage preservation: PASS');
 """
-for name in ['app.js','library.js','event.js','members.js','card-rules.js']:
+for name in ['app.js','library.js','event.js','members.js','card-rules.js','formation-rules.js','formation.js']:
     js += '\nnew Function(readFile('+repr(str(root/name))+'));'
 js += "\nprint('All JavaScript syntax: PASS');"
 with tempfile.NamedTemporaryFile(mode='w',suffix='.js') as f:
@@ -140,3 +140,5 @@ with tempfile.NamedTemporaryFile(mode='w',suffix='.js') as f:
     subprocess.run([jsc,f.name],check=True,cwd=root)
 subprocess.run([jsc,'card-rules.js','tests/card-rules.test.js'],check=True,cwd=root)
 print('DOM IDs, script order, unchanged Passive/optimizer/timeline evaluation functions: PASS')
+
+subprocess.run([jsc,'formation-rules.js','tests/formation-rules.test.js'],check=True,cwd=root)
