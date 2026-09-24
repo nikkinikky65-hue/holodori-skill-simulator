@@ -149,7 +149,7 @@
   ========================== -->
 <section class="libraryFormSection">
   <h3>ステータス</h3>
-  <p id="statPresetNote" class="sub"></p>
+  <p id="statPresetNote" class="sub libraryPresetNote" aria-hidden="true"></p>
 
   <label>
     トータル
@@ -206,12 +206,12 @@
 
 <h3>スキル</h3>
 
+<div class="librarySkillsGrid">
 
 <!-- スペシャルスキル -->
-<section class="libraryFormSection">
+<section class="libraryFormSection librarySkillPanel librarySpecialPanel">
   <h4>SPスキル</h4>
   <label>効果種別（複数選択可）<select id="specialEffectTypes" multiple size="4"></select></label>
-  <p class="sub">複数選択はCtrl／Commandキーを使用します。効果値・効果時間はSP全体で共通です。発動時刻は保存しません。</p>
 
   <label>
     効果時間(s)
@@ -233,7 +233,7 @@
     >
   </label>
 
-  <label>
+  <label class="librarySecondaryField">
     効果
     <textarea
       id="specialSkillDescription"
@@ -243,7 +243,7 @@
 </section>
 
 <!-- アクティブスキル -->
-<section class="libraryFormSection">
+<section class="libraryFormSection librarySkillPanel libraryActivePanel">
 <h4>Aスキル</h4>
 <label>効果種別<select id="activeEffectType"></select></label>
 
@@ -291,7 +291,7 @@
   >
 </label>
 
-<label>
+<label class="librarySecondaryField">
   効果
 
   <textarea
@@ -302,7 +302,7 @@
 </section>
 
 <!-- パッシブスキル -->
-<section class="libraryFormSection">
+<section class="libraryFormSection librarySkillPanel libraryPassivePanel">
   <h4>Pスキル</h4>
   <label>効果種別<select id="passiveEffectType"></select></label>
   <label>条件<select id="passiveCondition"></select></label>
@@ -312,18 +312,19 @@
   <label id="passiveTargetTextLabel" hidden>対象条件の原文<input id="passiveTargetText" type="text"></label>
   <label>人数（指定）<input id="passiveTargetCount" type="number" min="0" step="1" value="0"></label>
   <label>効果値（%）<input id="passiveValue" type="number" min="0" step="0.01" value="0"></label>
-  <label>説明<textarea id="passiveDescription" rows="3"></textarea></label>
-  <p class="sub">条件と対象条件は独立して保存します。所属・原文条件とステータスUPの計算は未対応です。指定人数0は未設定、候補数が指定人数を超える場合の選択は未確定として扱います。</p>
+  <label class="librarySecondaryField">説明<textarea id="passiveDescription" rows="3"></textarea></label>
   <details id="legacyPassiveDetails" hidden>
     <summary>旧カードのステータス説明</summary>
     <label>保存済みの説明（効果種別の自動推定はしません）<textarea id="passiveSkillDescription1" rows="3"></textarea></label>
   </details>
 </section>
+</div>
 
 <!-- =========================
      衣装スキル
 ========================== -->
 
+<section class="libraryFormSection libraryOutfitSection">
 <h3>衣装スキル</h3>
 
 <label>
@@ -338,11 +339,13 @@
 <label>
   効果
 
+<label class="librarySecondaryField">
   <textarea
     id="outfitSkillDescription"
     rows="3"
   ></textarea>
 </label>
+</section>
 
 
   <div class="libraryFormButtons">

@@ -179,6 +179,13 @@
   font-size:14px;
 }
 
+.libraryFormSection h4{
+  grid-column:1 / -1;
+  margin:0 0 2px;
+  font-size:14px;
+  color:#202124;
+}
+
 .libraryCardForm label{
   display:flex;
   flex-direction:column;
@@ -215,6 +222,42 @@
 }
 
 .basicInfoSection .cardNameField{
+  grid-column:1 / -1;
+}
+
+.libraryPresetNote{
+  display:none;
+}
+
+.librarySkillsGrid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+}
+
+.librarySkillPanel{
+  grid-template-columns:1fr;
+  align-content:start;
+  gap:9px;
+  min-width:0;
+}
+
+.librarySkillPanel .librarySecondaryField,
+.libraryOutfitSection .librarySecondaryField{
+  color:#888;
+}
+
+.librarySkillPanel .librarySecondaryField textarea,
+.libraryOutfitSection .librarySecondaryField textarea{
+  background:#fcfcfc;
+}
+
+.libraryOutfitSection{
+  grid-template-columns:1fr 2fr;
+  align-items:end;
+}
+
+.libraryOutfitSection h3{
   grid-column:1 / -1;
 }
 
@@ -283,6 +326,14 @@
 
   .libraryFormButtons{
     grid-column:1 / -1;
+  }
+
+  .librarySkillsGrid{
+    grid-template-columns:1fr;
+  }
+
+  .libraryOutfitSection{
+    grid-template-columns:1fr 1fr;
   }
 }
 
