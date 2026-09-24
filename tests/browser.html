@@ -153,8 +153,38 @@
     assert(w.document.querySelector('#formationStatus').textContent.includes('リーダー'),'missing leader notice');
     assert(slots.every(slot=>slot.querySelector('[data-k=libraryCardId]').value),'missing leader does not block members');
     assert(localStorage.getItem(formationKey)===formationSnapshot,'missing references do not rewrite saved formation');
+    // Snapshot reads the normal render's internal results without side effects.
+    input(w,'[data-k=short]',12);
+    const beforeStorage=JSON.stringify(Object.keys(localStorage).sort().map(k=>[k,localStorage.getItem(k)]));
+    const beforeScore=w.document.querySelector('#max').textContent;
+    const beforeTimeline=w.document.querySelector('#timeline').innerHTML;
+    const beforeInputs=JSON.stringify([...w.document.querySelectorAll('input,select')].map(el=>el.value));
+    w.eval("optimizeShortRates = () => { throw Error('snapshot must not optimize'); }");
+    const snapshot=w.createActiveTimelineSnapshot();
+    const source=w.eval('currentActiveTimelineData');
+    assert(snapshot.activeTimeline.length===5,'snapshot five slots');
+    snapshot.activeTimeline.forEach((slot,i)=>{
+      assert(JSON.stringify(slot.activationTimes)===JSON.stringify(source.eventsByMember[i].map(e=>e.start)),'exact displayed source times');
+      assert(slot.effectiveInterval===w.adjustedInterval(source.members[i]),'effective interval');
+      assert(slot.cardId===f.members[i] && slot.boost===source.members[i].boost,'snapshot IDs and effective boost');
+    });
+    assert(snapshot.activeTimeline[0].effectiveInterval===16/1.12,'frequency UP precision');
+    assert(snapshot.formation.leaderCardId===f.leader && snapshot.formation.id===null,'leader and honest formation linkage');
+    assert(snapshot.maxScore===source.maxScore,'unrounded max score');
+    snapshot.activeTimeline[0].activationTimes.push(-1);
+    assert(!w.createActiveTimelineSnapshot().activeTimeline[0].activationTimes.includes(-1),'detached snapshot');
+    assert(JSON.stringify(Object.keys(localStorage).sort().map(k=>[k,localStorage.getItem(k)]))===beforeStorage,'snapshot does not persist');
+    assert(w.document.querySelector('#max').textContent===beforeScore && w.document.querySelector('#timeline').innerHTML===beforeTimeline,'snapshot does not redraw');
+    assert(JSON.stringify([...w.document.querySelectorAll('input,select')].map(el=>el.value))===beforeInputs,'snapshot does not change inputs');
+    let copied;
+    Object.defineProperty(w.navigator,'clipboard',{configurable:true,value:{writeText:async value=>{copied=value;}}});
+    await w.copyActiveTimelineSnapshot();
+    assert(JSON.parse(copied).activeTimeline.length===5 && w.document.querySelector('#activeSnapshotStatus').textContent==='解析用JSONをコピーしました','clipboard success');
+    Object.defineProperty(w.navigator,'clipboard',{configurable:true,value:{writeText:async ()=>{throw Error('denied');}}});
+    await w.copyActiveTimelineSnapshot();
+    assert(!w.document.querySelector('#activeSnapshotFallback').hidden && JSON.parse(w.document.querySelector('#activeSnapshotText').value).activeTimeline.length===5,'clipboard fallback');
     assert(errors.length===0,errors.join('\n'));
-    result.textContent='PASS: startup, timeline, save/edit/load, metadata, derived values, star3 presets, bloom independence, event v2, formations';
+    result.textContent='PASS: startup, timeline, save/edit/load, metadata, derived values, star3 presets, bloom independence, event v2, formations, snapshot';
   } catch(e){ result.textContent='FAIL: '+e.stack; }
   finally {
     localStorage.clear(); for(const [k,v] of backup) localStorage.setItem(k,v);

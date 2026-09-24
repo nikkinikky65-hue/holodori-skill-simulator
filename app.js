@@ -1,3 +1,6 @@
+// 通常描画で使用した計算結果。解析出力はこの結果だけを参照する。
+let currentActiveTimelineData = null;
+
 const init=Array.from({length:5},()=>['','', '', 'mid', '', '', 0]);
 const probs={low:35,mid:45,high:55};
 const cards=document.querySelector('#cards');
@@ -1349,6 +1352,8 @@ function render(){
       T
     );
 
+
+  currentActiveTimelineData = { songDuration: T, members: ms, eventsByMember: by, maxScore: max };
 
   document.querySelector('#max').textContent =
     max.toFixed(2);

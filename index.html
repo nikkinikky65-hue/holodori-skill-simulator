@@ -45,6 +45,13 @@
   <div id="optimizeResult" class="sub"></div>
  </div>
  <div class="panel"><div class="metrics"><div class="metric"><span class="sub">MAX発動スコア評価値</span><b id="max">0.00</b></div><div class="metric"><span class="sub">曲全体平均Active補正</span><b id="avg">+0.00%</b></div><div class="metric"><span class="sub">発動候補数</span><b id="count">0</b></div></div><div class="note">評価値 = ∫ max(発動中Active補正率) dt。重複区間は最も高い補正だけを採用します。</div></div>
+ <section class="panel">
+  <button id="copyActiveSnapshot" type="button">解析用JSONをコピー</button>
+  <p id="activeSnapshotStatus" class="sub" role="status" aria-live="polite"></p>
+  <label id="activeSnapshotFallback" hidden>解析用JSON（選択してコピーしてください）
+    <textarea id="activeSnapshotText" readonly rows="12" style="width:100%"></textarea>
+  </label>
+ </section>
  <div class="panel"><h2>Activeタイムライン</h2><div class="timeline-scroll"><div id="timeline" class="timeline"></div></div><div id="detail">バーを選ぶと詳細を表示します。</div></div>
  <div id="cardLoadModal" class="cardLoadModal" hidden>
   <div class="cardLoadBackdrop" data-close-card-modal></div>
@@ -188,5 +195,6 @@
 <script src="app.js"></script>
 <script src="formation-rules.js"></script>
 <script src="formation.js"></script>
+<script src="active-snapshot.js"></script>
 </body>
 </html>
