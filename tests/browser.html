@@ -82,9 +82,28 @@
     click(w,'#cardSaveConfirm');
     const aStar3=read().find(c=>c.cardName==='A面★3');
     assert(aStar3.progression.level===40 && aStar3.stats.total===16000 && aStar3.progression.bloom===0,'A star3 preset');
+    // Blank quick save → Library rename → A-side recall/update.
+    input(w,'[data-k=memberId]','azki');input(w,'[data-k=costume]','');
+    click(w,'[data-save-library="0"]');
+    assert(w.document.querySelector('#cardSaveName').value==='未分類','modal default');
+    input(w,'#cardSaveName','   ');click(w,'#cardSaveConfirm');
+    const quick=read().find(c=>c.talentId==='azki');
+    assert(quick.cardName==='未分類','quick-save default');
+    assert(w.document.querySelector('[data-k=costume]').value==='未分類','costume default');
+    w=await open('library.html');watch(w);
+    const row=[...w.document.querySelectorAll('.libraryCardItem')].find(el=>el.textContent.includes('AZKi'));
+    row.querySelector('button').click();
+    assert(w.document.querySelector('#cardName').value==='未分類','Library reads default');
+    input(w,'#cardName','正式カード名');w.document.querySelector('#memberCardForm').requestSubmit();
+    w=await open('index.html');watch(w);w.alert=()=>{};
+    click(w,'[data-load-library="0"]');
+    [...w.document.querySelectorAll('.cardLoadItem')].find(el=>el.textContent.includes('正式カード名')).click();
+    assert(w.document.querySelector('[data-k=costume]').value==='正式カード名','renamed recall');
+    click(w,'[data-save-library="0"]');input(w,'#cardSaveName','');click(w,'#cardSaveConfirm');
+    assert(read().find(c=>c.id===quick.id).cardName==='正式カード名','blank update preserves name');
     // Event page reads v2 and maps its Active fields.
     w=await open('event.html');watch(w);
-    assert(w.eval('memberCards.length')===3,'event v2');
+    assert(w.eval('memberCards.length')===4,'event v2');
     assert(w.eval('cardToActiveMember(memberCards[0],1).interval')===15,'event active mapping');
     assert(errors.length===0,errors.join('\n'));
     result.textContent='PASS: startup, timeline, save/edit/load, metadata, derived values, star3 presets, bloom independence, event v2';

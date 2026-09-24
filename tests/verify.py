@@ -85,6 +85,22 @@ assert(readCardLibrary().length===1 && card.progression.bloom===5 && card.stats.
 assert(card.extensions.future===42 && card.skills.active.future==='keep','A metadata');
 delete card.extensions.future;delete card.skills.active.future;
 assert(JSON.stringify(shape(card))===initialShape,'same schema');
+// Blank quick-save defaults and explicit names; updates keep existing names.
+writeCardLibrary([]);
+node('[data-k="libraryCardId"]').value='';
+node('[data-k="costume"]').value='   ';
+node('#cardSaveName').value='   ';
+saveFromA();
+assert(readCardLibrary()[0].cardName==='未分類','blank new name default');
+assert(node('[data-k="costume"]').value==='未分類','blank costume default');
+node('#cardSaveName').value='正式名';saveFromA();
+node('#cardSaveName').value='';node('[data-k="costume"]').value='未分類';saveFromA();
+assert(readCardLibrary()[0].cardName==='正式名','blank update preserves existing name');
+writeCardLibrary([]);node('[data-k="libraryCardId"]').value='';
+node('[data-k="costume"]').value='明示した衣装';saveFromA();
+assert(readCardLibrary()[0].cardName==='明示した衣装','explicit costume wins over default');
+node('#cardSaveName').value='明示したカード名';saveFromA();
+assert(readCardLibrary()[0].cardName==='明示したカード名','explicit card name wins');
 // Missing nested properties can be opened without resetting saved stats.
 writeCardLibrary([{id:'partial',stats:{total:123},skills:{active:null}}]);
 assert(readCardLibrary()[0].skills.active.interval===0 && readCardLibrary()[0].stats.total===123,'partial card');

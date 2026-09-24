@@ -212,7 +212,7 @@ function openCardSaveModal(slotIndex){
   document.querySelector(
     '#cardSaveName'
   ).value =
-    get('costume');
+    get('costume').trim() || linked?.cardName || '未分類';
 
 
   document.querySelector(
@@ -334,18 +334,7 @@ document.querySelector(
     }
 
 
-    const cardName =
-      document.querySelector(
-        '#cardSaveName'
-      ).value.trim();
-
-    if(!cardName){
-      alert(
-        'カード名を入力してください。'
-      );
-      return;
-    }
-
+    const enteredCardName = document.querySelector('#cardSaveName').value.trim();
 
     const type =
       document.querySelector(
@@ -369,6 +358,8 @@ document.querySelector(
 
     const library = loadMemberCardLibrary();
     const existing = library.find(item => item.id === get('libraryCardId') && item.talentId === member.id);
+    // A面の「衣装」はCard v2のcardNameに対応する。同じ保存項目を増やさない。
+    const cardName = enteredCardName || existing?.cardName || get('costume').trim() || '未分類';
     const bloom = existing?.progression.bloom ?? 0;
     const derived = getCardDerived(rarity, training, bloom);
     const growthChanged = existing && (existing.rarity !== rarity || existing.progression.training !== training);
