@@ -2,14 +2,6 @@
 // メンバーカードライブラリ
 // ========================================
 
-const MEMBER_CARD_STORAGE_KEY =
-  'holodori-member-card-library-v2';
-
-
-// ========================================
-// 共通
-// ========================================
-
 function createId(prefix){
 
   return (
@@ -22,56 +14,18 @@ function createId(prefix){
 }
 
 
-function loadMemberCards(){
-
-  const saved =
-    localStorage.getItem(
-      MEMBER_CARD_STORAGE_KEY
-    );
-
-  if(!saved){
-    return [];
-  }
-
-  try{
-
-    const library =
-      JSON.parse(saved);
-
-    if(
-      !library ||
-      library.version !== 2 ||
-      !Array.isArray(library.cards)
-    ){
-      return [];
-    }
-
-    return library.cards;
-
-  }catch(error){
-
-    console.warn(
-      'メンバーカードライブラリを読み込めませんでした',
-      error
-    );
-
-    return [];
-  }
-}
-
+function loadMemberCards(){ return readCardLibrary(); }
 function saveMemberCards(){
-
-  const library = {
-    version: 2,
-    cards: memberCards
-  };
-
-  localStorage.setItem(
-    MEMBER_CARD_STORAGE_KEY,
-    JSON.stringify(library)
-  );
+  try{
+    writeCardLibrary(memberCards);
+    return true;
+  }catch(error){
+    alert('カードを保存できませんでした。' + error.message);
+    memberCards = loadMemberCards();
+    renderMemberCards();
+    return false;
+  }
 }
-
 
 // ========================================
 // データ
@@ -122,33 +76,13 @@ const cardTraining =
 const cardBloom =
   document.querySelector('#cardBloom');
 
-function updateCardLevel(){
-
-  const rarity =
-    Number(cardRarity.value);
-
-  const training =
-    Number(cardTraining.value);
-
-  cardLevel.value =
-    getCardLevel(
-      rarity,
-      training
-    );
+function formDerived(){
+  return getCardDerived(Number(cardRarity.value), Number(cardTraining.value), Number(cardBloom.value));
 }
 
-cardRarity.addEventListener(
-  'change',
-  updateCardLevel
-);
-
-cardTraining.addEventListener(
-  'input',
-  () => {
-    updateCardLevel();
-    applyStatPreset();
-  }
-);
+function updateCardLevel(){
+  cardLevel.value = formDerived().progression.level;
+}
 
 // ========================================
 // ステータス
@@ -314,21 +248,10 @@ function updateTotalFromStats(){
 
 function applyStatPreset(){
 
-  const rarity =
-    Number(cardRarity.value);
-
-  const level =
-    Number(cardLevel.value);
-
-  const bloom =
-    Number(cardBloom.value);
-
-  const stats =
-    getCardPresetStats(
-      rarity,
-      level,
-      bloom
-    );
+  const stats = formDerived().stats;
+  document.querySelector('#statPresetNote').textContent = stats
+    ? 'プリセットは仮ステータスです。各能力値は手動で修正できます。'
+    : '対応する概算値がありません。既存の能力値を保持します。';
 
   if(!stats){
     return;
@@ -346,20 +269,19 @@ function applyStatPreset(){
   updateTotalFromStats();
 }
 
-cardRarity.addEventListener(
-  'change',
-  applyStatPreset
-);
-
-cardLevel.addEventListener(
-  'change',
-  applyStatPreset
-);
-
-cardBloom.addEventListener(
-  'change',
-  applyStatPreset
-);
+cardRarity.addEventListener('change', () => {
+  updateCardLevel();
+  // 対応する概算値がない場合、別レアリティの仮値を流用しない。
+  if(!memberCardIdInput.value && !formDerived().stats){
+    [cardTotal, cardPerformance, cardTechnique, cardSense].forEach(input => input.value = '');
+  }
+  applyStatPreset();
+});
+cardTraining.addEventListener('input', () => {
+  updateCardLevel();
+  applyStatPreset();
+});
+// 開花のステータス効果は未確定。変更時に能力値を上書きしない。
 
 cardPerformance.addEventListener(
   'input',
@@ -382,7 +304,9 @@ cardSense.addEventListener(
 
 function getMemberCardFormData(){
 
-  return {
+  const existing = memberCards.find(card => card.id === memberCardIdInput.value);
+  const nullableNumber = input => input.value === '' ? null : Number(input.value);
+  return createCardV2({
 
     talentId:
       cardTalent.value,
@@ -396,31 +320,21 @@ function getMemberCardFormData(){
     rarity:
       Number(cardRarity.value),
 
-    progression: {
-
-      level:
-        Number(cardLevel.value),
-
-      training:
-        Number(cardTraining.value),
-
-      bloom:
-        Number(cardBloom.value)
-    },
+    progression: formDerived().progression,
 
     stats: {
 
       total:
-        Number(cardTotal.value),
+        nullableNumber(cardTotal),
 
       performance:
-        Number(cardPerformance.value),
+        nullableNumber(cardPerformance),
 
       technique:
-        Number(cardTechnique.value),
+        nullableNumber(cardTechnique),
 
       sense:
-        Number(cardSense.value)
+        nullableNumber(cardSense)
     },
 
     skills: {
@@ -486,8 +400,7 @@ function getMemberCardFormData(){
         outfitSkillDescription.value.trim()
     },
 
-    extensions: {}
-  };
+  }, existing);
 }
 
 // ========================================
@@ -531,12 +444,12 @@ memberCardForm.addEventListener(
     }else{
 
       memberCards.push({
-        id: createId('card'),
-        ...data
+        ...data,
+        id: createId('card')
       });
     }
 
-    saveMemberCards();
+    if(!saveMemberCards()) return;
 
     resetMemberCardForm();
 
@@ -701,18 +614,20 @@ function renderMemberCards(){
           card.progression.bloom;
 
 
+        updateCardLevel();
+
         // ステータス
         cardTotal.value =
-          card.stats.total;
+          card.stats.total ?? '';
 
         cardPerformance.value =
-          card.stats.performance;
+          card.stats.performance ?? '';
 
         cardTechnique.value =
-          card.stats.technique;
+          card.stats.technique ?? '';
 
         cardSense.value =
-          card.stats.sense;
+          card.stats.sense ?? '';
 
         // スペシャルスキル
         specialSkillDescription.value =
@@ -766,6 +681,7 @@ function renderMemberCards(){
           card.outfitSkill.description;
 
 
+        document.querySelector('#statPresetNote').textContent = '保存済みの能力値を表示しています。開花を変更しても能力値は上書きしません。';
         cardName.focus();
 
         window.scrollTo({
@@ -806,7 +722,7 @@ function renderMemberCards(){
           item.id !== card.id
       );
 
-    saveMemberCards();
+    if(!saveMemberCards()) return;
 
     resetMemberCardForm();
 
@@ -844,6 +760,8 @@ function resetMemberCardForm(){
 
   activeSkillProb.value =
     'mid';
+  updateCardLevel();
+  applyStatPreset();
 }
 
 // ========================================

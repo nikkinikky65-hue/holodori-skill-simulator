@@ -28,12 +28,7 @@ init.forEach((d,i)=>{
 
     <label>
       衣装
-      <select data-k="costume">
-        <option value="未分類" selected>未分類</option>
-        <option value="★5恒常">★5恒常</option>
-        <option value="★4">★4</option>
-        <option value="★3">★3</option>
-      </select>
+      <input data-k="costume" type="text" value="未分類">
     </label>
 
     <label>
@@ -79,7 +74,7 @@ init.forEach((d,i)=>{
     </label>
 
     <label>
-      短縮
+      発動頻度UP
       <select data-k="short">
         <option>0</option>
         <option>4</option>
@@ -115,61 +110,8 @@ init.forEach((d,i)=>{
 // メンバーカードライブラリ接続
 // ========================================
 
-const MEMBER_CARD_STORAGE_KEY =
-  'holodori-member-card-library-v2';
-
-
-function loadMemberCardLibrary(){
-
-  const saved =
-    localStorage.getItem(
-      MEMBER_CARD_STORAGE_KEY
-    );
-
-  if(!saved){
-    return [];
-  }
-
-  try{
-
-    const library =
-      JSON.parse(saved);
-
-    if(
-      !library ||
-      library.version !== 2 ||
-      !Array.isArray(library.cards)
-    ){
-      return [];
-    }
-
-    return library.cards;
-
-  }catch(error){
-
-    console.warn(
-      'メンバーカードライブラリを読み込めませんでした',
-      error
-    );
-
-    return [];
-  }
-}
-
-
-function saveMemberCardLibrary(cards){
-
-  const library = {
-    version: 2,
-    cards
-  };
-
-  localStorage.setItem(
-    MEMBER_CARD_STORAGE_KEY,
-    JSON.stringify(library)
-  );
-}
-
+function loadMemberCardLibrary(){ return readCardLibrary(); }
+function saveMemberCardLibrary(cards){ writeCardLibrary(cards); }
 
 function createLibraryCardId(){
 
@@ -260,6 +202,12 @@ function openCardSaveModal(slotIndex){
   cardSaveTarget.textContent =
     `保存元：枠${slotIndex + 1} / ${member.name}`;
 
+
+  const linked = loadMemberCardLibrary().find(item => item.id === get('libraryCardId') && item.talentId === memberId);
+  document.querySelector('#cardSaveConfirm').textContent = linked ? 'Libraryのカードを更新' : 'Libraryに保存';
+  document.querySelector('#cardSaveRarity').value = linked?.rarity ?? 5;
+  document.querySelector('#cardSaveType').value = linked?.type ?? '';
+  document.querySelector('#cardSaveTraining').value = linked?.progression.training ?? 0;
 
   document.querySelector(
     '#cardSaveName'
@@ -415,25 +363,15 @@ document.querySelector(
     const training =
       Number(
         document.querySelector(
-          '#cardSaveBloom'
+          '#cardSaveTraining'
         ).value
       );
 
-    const level =
-      getCardLevel(
-        rarity,
-        training
-      );
-
-    const bloom = 0;
-
-    const stats =
-      getCardPresetStats(
-        rarity,
-        level,
-        bloom
-      );
-
+    const library = loadMemberCardLibrary();
+    const existing = library.find(item => item.id === get('libraryCardId') && item.talentId === member.id);
+    const bloom = existing?.progression.bloom ?? 0;
+    const derived = getCardDerived(rarity, training, bloom);
+    const growthChanged = existing && (existing.rarity !== rarity || existing.progression.training !== training);
 
     const interval =
       Number(
@@ -462,90 +400,23 @@ document.querySelector(
       );
 
 
-    const newCard = {
+    const newCard = createCardV2({
+      id: existing?.id || createLibraryCardId(),
+      talentId: member.id, cardName, type, rarity,
+      progression: derived.progression,
+      ...(!existing || growthChanged ? { stats: derived.stats || existing?.stats || {} } : {}),
+      skills: { active: { interval, probability, duration, boost } }
+    }, existing);
 
-      id:
-        createLibraryCardId(),
+    if(existing) library[library.indexOf(existing)] = newCard;
+    else library.push(newCard);
 
-      talentId:
-        member.id,
-
-      cardName,
-
-      type,
-
-      rarity,
-
-      progression: {
-        level, 
-        training,
-        bloom
-      },
-
-      stats: {
-        total:
-          stats?.total ?? 0,
-
-        performance:
-          stats?.performance ?? 0,
-
-        technique:
-          stats?.technique ?? 0,
-
-        sense:
-          stats?.sense ?? 0
-      },
-
-      skills: {
-
-        special: {
-          description: ''
-        },
-
-        active: {
-          interval,
-          probability,
-          duration,
-          boost,
-          description: ''
-        },
-
-        passive: {
-
-          status: {
-            description: ''
-          },
-
-          scoreSupport: {
-            conditionType: '',
-            conditionCount: 0,
-            targetType: '',
-            targetCount: 0,
-            boost: 0,
-            description: ''
-          }
-        }
-      },
-
-      outfitSkill: {
-        name: '',
-        description: ''
-      },
-
-      extensions: {}
-    };
-
-
-    const library =
-      loadMemberCardLibrary();
-
-    library.push(
-      newCard
-    );
-
-    saveMemberCardLibrary(
-      library
-    );
+    try{
+      saveMemberCardLibrary(library);
+    }catch(error){
+      alert('カードを保存できませんでした。既存データは上書きしていません。' + error.message);
+      return;
+    }
 
 
     sourceCard.querySelector(
@@ -554,8 +425,12 @@ document.querySelector(
       newCard.id;
 
 
+    sourceCard.querySelector('[data-k="costume"]').value = cardName;
+    for(const [key, value] of Object.entries({ interval, prob: probability, duration, boost })){
+      sourceCard.querySelector(`[data-k="${key}"]`).value = value;
+    }
     saveState();
-
+    render();
     closeCardSaveModal();
 
 
@@ -690,23 +565,11 @@ function openCardLoadModal(slotIndex){
           : '中';
 
 
-    button.innerHTML = `
-      <strong>
-        ${member
-          ? member.name
-          : '不明なメンバー'}
-        /
-        ${libraryCard.cardName}
-      </strong>
-
-      <span>
-        ${active.interval}s周期 /
-        ${probability} /
-        ${active.duration}s /
-        +${active.boost}%
-      </span>
-    `;
-
+    const title = document.createElement('strong');
+    title.textContent = `${member?.name || '不明なメンバー'} / ${libraryCard.cardName}`;
+    const detail = document.createElement('span');
+    detail.textContent = `${active.interval}s周期 / ${probability} / ${active.duration}s / +${active.boost}%`;
+    button.append(title, detail);
 
     button.addEventListener(
       'click',
@@ -733,6 +596,12 @@ function openCardLoadModal(slotIndex){
     false;
 }
 
+
+document.addEventListener('click', event => {
+  const button = event.target.closest('[data-load-library]');
+  if(button) openCardLoadModal(Number(button.dataset.loadLibrary));
+  if(event.target.closest('[data-close-card-modal]')) closeCardLoadModal();
+});
 
 function closeCardLoadModal(){
 
@@ -793,7 +662,7 @@ function loadLibraryCardIntoSlot(
     };
 
 
-  // 短縮率には触らない
+  // 発動頻度UPには触らない
 
   set(
     'libraryCardId',
@@ -1141,7 +1010,7 @@ function adjustedInterval(m){
 function events(m,T){const iv=adjustedInterval(m),out=[];if(iv<=0||m.duration<=0||m.boost<=0)return out;for(let t=iv;t<=T+1e-9&&out.length<1000;t+=iv)out.push({start:t,end:Math.min(T,t+m.duration),boost:m.boost,m});return out}
 function calcMax(all,T){const pts=[0,T];all.forEach(e=>{pts.push(e.start,e.end)});pts.sort((a,b)=>a-b);let total=0;for(let i=0;i<pts.length-1;i++){const a=pts[i],b=pts[i+1];if(b<=a)continue;const mid=(a+b)/2;let mx=0;for(const e of all)if(e.start<=mid&&mid<e.end)mx=Math.max(mx,e.boost);total+=mx*(b-a)}return total}
 
-// ===== 短縮率最適化 =====
+// ===== 発動頻度UP最適化 =====
 
 const SHORT_OPTIONS = [0, 4, 8, 12];
 
@@ -1239,7 +1108,7 @@ function renderOptimizedTimeline(result, T, currentScore){
   header.className = 'optimizeHeader';
 
   header.innerHTML = `
-    <strong>短縮率最適化</strong>
+    <strong>発動頻度UP最適化</strong>
     <span class="optimizeScore">
       現在 ${currentScore.toFixed(2)}
       →
@@ -1253,7 +1122,7 @@ function renderOptimizedTimeline(result, T, currentScore){
   area.append(header);
 
 
-  // 各枠の最適短縮率
+  // 各枠の最適発動頻度UP
   const shorts = document.createElement('div');
   shorts.className = 'optimizeShorts';
 
@@ -1344,7 +1213,7 @@ function renderOptimizedTimeline(result, T, currentScore){
         <br>
         <span class="sub">
           ${adjustedInterval(m).toFixed(2)}s周期
-          / 短縮 ${result.shorts[i]}%
+          / 発動頻度UP ${result.shorts[i]}%
         </span>
       </div>
       <div class="track"></div>
@@ -1373,7 +1242,7 @@ function renderOptimizedTimeline(result, T, currentScore){
           `最適化 第${n + 1}候補 ` +
           `${e.start.toFixed(2)}s → ${e.end.toFixed(2)}s / ` +
           `+${m.boost.toFixed(2)}% / ` +
-          `短縮 ${result.shorts[i]}%`;
+          `発動頻度UP ${result.shorts[i]}%`;
       });
 
       track.append(b);
@@ -1709,7 +1578,7 @@ function render(){
                 } ` +
                 `${probs[m.prob].toFixed(2)}% / ` +
                 `+${m.boost.toFixed(2)}% / ` +
-                `短縮 ${m.short.toFixed(2)}%`;
+                `発動頻度UP ${m.short.toFixed(2)}%`;
             }
           );
 
@@ -1780,14 +1649,22 @@ function loadState(){
 
 // 入力するたびに保存して再描画
 document.addEventListener('input', e => {
-  if(e.target.closest('.wrap')){
+  if(e.target.closest('#cards, #song')){
+    if(e.target.matches('[data-k=memberId]')){
+      e.target.closest('.card').querySelector('[data-k=libraryCardId]').value = '';
+    }
+    updateOptimizeNames();
     saveState();
     render();
   }
 });
 
 document.addEventListener('change', e => {
-  if(e.target.closest('.wrap')){
+  if(e.target.closest('#cards, #song')){
+    if(e.target.matches('[data-k=memberId]')){
+      e.target.closest('.card').querySelector('[data-k=libraryCardId]').value = '';
+    }
+    updateOptimizeNames();
     saveState();
     render();
   }
@@ -1809,7 +1686,9 @@ document.querySelector('#optimizeBtn')
       num(document.querySelector('#song').value, 120)
     );
 
-    const members = getMembers();
+    const members = precalculateParty(getMembers()).members.map(member => ({
+      ...member, boost: member.effectiveBoost
+    }));
 
     const limits =
   [...document.querySelectorAll('[data-limit]')]

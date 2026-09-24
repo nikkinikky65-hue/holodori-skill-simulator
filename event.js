@@ -2,7 +2,7 @@
 // イベント編成探索
 // ========================================
 
-const MEMBER_CARD_STORAGE_KEY =
+const LEGACY_MEMBER_CARD_STORAGE_KEY =
   'holodori-member-card-library-v1';
 
 const FORMATION_SIZE = 5;
@@ -17,7 +17,7 @@ const FINALIST_COUNT = 3;
 // A面と同じ初期曲時間
 const DEFAULT_SONG_LENGTH = 120;
 
-// A面と同じ短縮候補
+// A面と同じ発動頻度UP候補
 const SHORT_OPTIONS = [0, 4, 8, 12];
 
 
@@ -40,10 +40,13 @@ function num(value, fallback = 0){
 // ========================================
 
 function loadMemberCards(){
+  if(localStorage.getItem(MEMBER_CARD_STORAGE_KEY) !== null) return readCardLibrary();
+  // v1しかない環境では読み取り専用で互換表示。旧データは書き換えない。
+
 
   const saved =
     localStorage.getItem(
-      MEMBER_CARD_STORAGE_KEY
+      LEGACY_MEMBER_CARD_STORAGE_KEY
     );
 
   if(!saved){
@@ -56,7 +59,13 @@ function loadMemberCards(){
       JSON.parse(saved);
 
     return Array.isArray(data)
-      ? data
+      ? data.filter(card => card && typeof card === 'object').map(card => createCardV2({
+          ...card, talentId: card.memberId, cardName: card.costume || '未分類',
+          skills: { active: {
+            interval: card.interval, probability: card.prob,
+            duration: card.duration, boost: card.boost
+          } }
+        }))
       : [];
 
   }catch(error){
@@ -126,8 +135,8 @@ function getMemberName(memberId){
 function getCardLabel(card){
 
   return (
-    `${getMemberName(card.memberId)} / ` +
-    `${card.costume || '未分類'}`
+    `${getMemberName(card.talentId)} / ` +
+    `${card.cardName || '未分類'}`
   );
 }
 
@@ -273,7 +282,7 @@ function renderCardOptions(
   const cards =
     memberCards.filter(
       card =>
-        card.memberId === memberId
+        card.talentId === memberId
     );
 
 
@@ -286,7 +295,7 @@ function renderCardOptions(
       card.id;
 
     option.textContent =
-      card.costume || '未分類';
+      card.cardName || '未分類';
 
     cardSelect.append(option);
   });
@@ -509,7 +518,7 @@ function buildRequiredCardGroups(
               condition.cardId
           );
 
-        return card
+        return card && card.talentId === condition.memberId
           ? [card]
           : [];
       }
@@ -518,7 +527,7 @@ function buildRequiredCardGroups(
       // メンバーだけ固定
       return memberCards.filter(
         card =>
-          card.memberId ===
+          card.talentId ===
           condition.memberId
       );
     }
@@ -662,7 +671,7 @@ function generateFormations(
         new Set(
           requiredCards.map(
             card =>
-              card.memberId
+              card.talentId
           )
         );
 
@@ -671,7 +680,7 @@ function generateFormations(
         memberCards.filter(
           card =>
             !usedMemberIds.has(
-              card.memberId
+              card.talentId
             )
         );
 
@@ -700,7 +709,7 @@ function generateFormations(
           const memberIds =
             formation.map(
               card =>
-                card.memberId
+                card.talentId
             );
 
 
@@ -742,35 +751,35 @@ function cardToActiveMember(
     slot,
 
     memberId:
-      card.memberId,
+      card.talentId,
 
     name:
       getMemberName(
-        card.memberId
+        card.talentId
       ),
 
     costume:
-      card.costume || '未分類',
+      card.cardName || '未分類',
 
     interval:
       Math.max(
         0,
-        num(card.interval)
+        num(card.skills.active.interval)
       ),
 
     prob:
-      card.prob,
+      card.skills.active.probability,
 
     duration:
       Math.max(
         0,
-        num(card.duration)
+        num(card.skills.active.duration)
       ),
 
     boost:
       Math.max(
         0,
-        num(card.boost)
+        num(card.skills.active.boost)
       ),
 
     short:
@@ -946,7 +955,7 @@ function evaluateFormation(
   T
 ){
 
-  // 一次評価では全員短縮0%
+  // 一次評価では全員発動頻度UP0%
   const members =
     formationToMembers(
       formation
@@ -1018,7 +1027,7 @@ function selectFinalists(
 
 
 // ========================================
-// 短縮最適化
+// 発動頻度UP最適化
 // ========================================
 
 function optimizeFormation(
@@ -1262,7 +1271,7 @@ function renderFinalResults(
         </div>
 
         <div>
-          短縮最適化後：
+          発動頻度UP最適化後：
           <strong>
             ${result.optimizedScore.toFixed(2)}
           </strong>
@@ -1274,7 +1283,7 @@ function renderFinalResults(
         </div>
 
         <div class="sub">
-          短縮による伸び：
+          発動頻度UPによる伸び：
           +${improvement.toFixed(2)}
         </div>
 
@@ -1310,16 +1319,16 @@ function renderFinalResults(
 
             <strong>
               ${getMemberName(
-                card.memberId
+                card.talentId
               )}
             </strong>
 
             <span>
-              ${card.costume || '未分類'}
+
             </span>
 
             <span>
-              短縮
+              発動頻度UP
               ${result.shorts[
                 memberIndex
               ]}%
@@ -1328,6 +1337,7 @@ function renderFinalResults(
           `;
 
 
+          member.querySelector('span').textContent = card.cardName || '未分類';
           members.append(
             member
           );
@@ -1348,7 +1358,7 @@ function renderFinalResults(
         'sub';
 
       detail.textContent =
-        `短縮配置 ${result.tested}通りを検証`;
+        `発動頻度UP配置 ${result.tested}通りを検証`;
 
 
       item.append(
@@ -1438,7 +1448,7 @@ searchFormationButton.addEventListener(
           }
 
 
-          // ② 全編成を短縮0%で一次評価
+          // ② 全編成を発動頻度UP0%で一次評価
           const finalists =
             selectFinalists(
               formations,
@@ -1446,7 +1456,7 @@ searchFormationButton.addEventListener(
             );
 
 
-          // ③ 上位3編成だけ短縮総当たり
+          // ③ 上位3編成だけ発動頻度UP総当たり
           const results =
             buildFinalResults(
               finalists,
@@ -1456,7 +1466,7 @@ searchFormationButton.addEventListener(
 
           searchStatus.textContent =
             `${formations.length}編成を一次評価 → ` +
-            `上位${results.length}編成を短縮最適化`;
+            `上位${results.length}編成を発動頻度UP最適化`;
 
 
           renderFinalResults(

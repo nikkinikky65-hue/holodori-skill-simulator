@@ -1,0 +1,96 @@
+<!doctype html><meta charset="utf-8"><title>Card v2 regression tests</title>
+<p>専用ブラウザープロファイルで実行してください。このオリジンのテスト用保存データを使用します。</p>
+<pre id="result">RUNNING</pre><iframe id="page"></iframe>
+<script>
+(async () => {
+  const result = document.querySelector('#result');
+  const frame = document.querySelector('#page');
+  const errors = [];
+  const key = 'holodori-member-card-library-v2';
+  const backup = new Map(Object.keys(localStorage).map(k => [k,localStorage.getItem(k)]));
+  const assert = (c,m) => { if(!c) throw Error(m); };
+  const open = name => new Promise(resolve => {
+    frame.onload = () => resolve(frame.contentWindow);
+    frame.src = '../' + name;
+  });
+  const watch = w => w.addEventListener('error', e => errors.push(e.message));
+  const input = (w, selector, value) => {
+    const el = w.document.querySelector(selector); assert(el,selector);
+    el.value = value; el.dispatchEvent(new w.Event('input',{bubbles:true}));
+    el.dispatchEvent(new w.Event('change',{bubbles:true}));
+  };
+  const click = (w,s) => {const el=w.document.querySelector(s);assert(el,s);el.click();};
+  const read = () => JSON.parse(localStorage.getItem(key)).cards;
+  try{
+    localStorage.clear();
+    let w = await open('index.html'); watch(w); w.alert = () => {};
+    assert(w.document.querySelectorAll('.card').length === 5,'A startup');
+    input(w,'[data-k=memberId]','tokino_sora');
+    input(w,'[data-k=interval]',15);input(w,'[data-k=duration]',5);input(w,'[data-k=boost]',20);
+    const before = w.document.querySelector('#max').textContent;
+    assert(Number(before) === 700,'known timeline score');
+    click(w,'[data-save-library="0"]');
+    input(w,'#cardSaveName','自由なカード名');input(w,'#cardSaveTraining',2);
+    click(w,'#cardSaveConfirm');
+    let card = read()[0]; const id=card.id;
+    assert(id && card.progression.level===60 && card.stats.total===22000,'A save derived');
+    assert(card.progression.bloom===0 && card.talentId==='tokino_sora','A schema');
+    assert(w.document.querySelector('#max').textContent===before,'score unchanged');
+    // Future fields must survive a Library edit and an A-side update.
+    card.extensions={future:42};card.skills.active.extra='keep';
+    localStorage.setItem(key,JSON.stringify({version:2,cards:[card]}));
+    w=await open('library.html');watch(w);
+    click(w,'.libraryItemButtons button');
+    input(w,'#cardName','編集したカード名');input(w,'#cardBloom',5);
+    assert(Number(w.document.querySelector('#cardTotal').value)===22000,'bloom keeps stats');
+    input(w,'#cardPerformance',7777);
+    const total=Number(w.document.querySelector('#cardTotal').value);
+    w.document.querySelector('#memberCardForm').requestSubmit();
+    card=read()[0];
+    assert(card.id===id && card.progression.bloom===5 && card.stats.total===total,'Library edit');
+    assert(card.extensions.future===42 && card.skills.active.extra==='keep','unknown fields survive');
+    assert(Number(w.document.querySelector('#cardLevel').value)===40,'reset derived');
+    w=await open('index.html');watch(w);w.alert=()=>{};
+    click(w,'[data-load-library="0"]');
+    assert(!w.document.querySelector('#cardLoadModal').hidden,'load button wired');
+    click(w,'.cardLoadItem');
+    assert(w.document.querySelector('#cardLoadModal').hidden,'modal closes');
+    assert(w.document.querySelector('[data-k=costume]').value==='編集したカード名','name roundtrip');
+    assert(w.document.querySelector('[data-k=libraryCardId]').value===id,'id roundtrip');
+    click(w,'[data-save-library="0"]');click(w,'#cardSaveConfirm');
+    card=read()[0];
+    assert(read().length===1 && card.id===id && card.stats.total===total && card.progression.bloom===5,'A update preserves metadata');
+    assert(card.extensions.future===42 && card.skills.active.extra==='keep','A preserves future fields');
+    // Library ★3 presets at every training level and bloom independence.
+    w=await open('library.html');watch(w);
+    input(w,'#cardTalent','robocosan');input(w,'#cardName','★3概算');input(w,'#cardRarity',3);
+    for(const [training,total] of [10000,12000,16000,18000,20000].entries()){
+      input(w,'#cardTraining',training);
+      assert(Number(w.document.querySelector('#cardLevel').value)===20+training*10,'star3 level');
+      assert(Number(w.document.querySelector('#cardTotal').value)===total,'star3 total');
+      input(w,'#cardBloom',training+1);
+      assert(Number(w.document.querySelector('#cardTotal').value)===total,'bloom independent');
+    }
+    w.document.querySelector('#memberCardForm').requestSubmit();
+    const star3=read().find(c=>c.cardName==='★3概算');
+    assert(star3.id && star3.progression.level===60 && star3.stats.total===20000 && star3.progression.bloom===5,'Library new star3 card');
+    // New A-side ★3 uses exactly the same domain presets.
+    w=await open('index.html');watch(w);w.alert=()=>{};
+    input(w,'[data-k=memberId]','robocosan');
+    click(w,'[data-save-library="0"]');
+    input(w,'#cardSaveName','A面★3');input(w,'#cardSaveRarity',3);input(w,'#cardSaveTraining',2);
+    click(w,'#cardSaveConfirm');
+    const aStar3=read().find(c=>c.cardName==='A面★3');
+    assert(aStar3.progression.level===40 && aStar3.stats.total===16000 && aStar3.progression.bloom===0,'A star3 preset');
+    // Event page reads v2 and maps its Active fields.
+    w=await open('event.html');watch(w);
+    assert(w.eval('memberCards.length')===3,'event v2');
+    assert(w.eval('cardToActiveMember(memberCards[0],1).interval')===15,'event active mapping');
+    assert(errors.length===0,errors.join('\n'));
+    result.textContent='PASS: startup, timeline, save/edit/load, metadata, derived values, star3 presets, bloom independence, event v2';
+  } catch(e){ result.textContent='FAIL: '+e.stack; }
+  finally {
+    localStorage.clear(); for(const [k,v] of backup) localStorage.setItem(k,v);
+  }
+})();
+</script>
