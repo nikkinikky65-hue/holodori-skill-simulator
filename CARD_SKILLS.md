@@ -4,7 +4,7 @@
 
 | 分類 | 保存先 | 内容 |
 | --- | --- | --- |
-| SP | `skills.special` | 新形式は`effects`（効果ごとの`type`、`value`、任意の`duration`）、`description`。旧形式の`effectTypes`、共通`boost`、`duration`も読み書き可能 |
+| SP | `skills.special` | `effects`（効果ごとの`type`、`value`、任意の`duration`）、`description`。旧形式の`effectTypes`、共通`boost`、`duration`は読み込み互換のみ |
 | A | `skills.active` | `effectType: "score_up"`を追加。既存のinterval/probability/duration/boost/descriptionを維持 |
 | P | `skills.passive.effect` | 単一の`type`、`condition`、`conditionCount`、`target`、`targetCount`、`value`（%）、`description` |
 
@@ -20,7 +20,7 @@ SP/Pともスコアサポートの効果種別は `score_support`。新形式で
 }
 ```
 
-`duration`不要の効果には保存しない。旧形式は共通値を各効果へ展開して読むが、一括移行はしない。
+`duration`不要の効果には保存しない。旧形式は共通値を各効果へ展開して読み込み、Libraryで保存すると`effects[]`へ移行する。
 
 Pの例：
 

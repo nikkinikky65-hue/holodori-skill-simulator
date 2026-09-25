@@ -262,8 +262,11 @@
     input(w,'#passiveEffectType','score_support');input(w,'#passiveCondition','affiliation:0期生');
     input(w,'#passiveConditionCount',3);input(w,'#passiveTarget','type:cute');input(w,'#passiveTargetCount',2);
     input(w,'#passiveValue',8);input(w,'#passiveDescription','P説明');
-    [...w.document.querySelector('#specialEffectTypes').options].forEach(option=>option.selected=['score_support','life_recovery'].includes(option.value));
-    input(w,'#specialSkillBoost',80);input(w,'#specialSkillDuration',10);input(w,'#specialSkillDescription','複合SP');
+    input(w,'#specialEffectAddType','life_recovery');
+    input(w,'#specialFixedEffects .specialFixedEffectRow[data-special-fixed-type="score_support"] input[data-special-effect-field="value"]',80);
+    input(w,'#specialFixedEffects .specialFixedEffectRow[data-special-fixed-type="score_support"] input[data-special-effect-field="duration"]',10);
+    input(w,'#specialFixedEffects .specialFixedEffectRow[data-special-fixed-type="life_recovery"] input[data-special-effect-field="value"]',300);
+    input(w,'#specialSkillDescription','複合SP');
     input(w,'#activeSkillInterval',35);input(w,'#activeSkillDuration',8);input(w,'#activeSkillBoost',75);
     w.document.querySelector('#memberCardForm').requestSubmit();
     const manual=read().find(c=>c.talentId==='robocosan');
@@ -271,12 +274,12 @@
     assert(manual.skills.passive.effect.type==='score_support' && manual.skills.passive.effect.value===8,'P effect saved');
     assert(manual.skills.passive.effect.condition.kind==='affiliation' && manual.skills.passive.effect.condition.value==='0期生' && manual.skills.passive.effect.target.value==='cute','condition and target independent');
     assert(manual.skills.passive.effect.conditionCount===3 && manual.skills.passive.effect.targetCount===2,'counts independent');
-    assert(manual.skills.special.effectTypes.join(',')==='score_support,life_recovery' && manual.skills.special.boost===80 && manual.skills.special.duration===10,'SP compound saved');
+    assert(manual.skills.special.effects.length===2 && manual.skills.special.effects.some(effect=>effect.type==='score_support' && effect.value===80 && effect.duration===10) && manual.skills.special.effects.some(effect=>effect.type==='life_recovery' && effect.value===300),'SP compound saved');
     assert(manual.skills.active.effectType==='score_up' && manual.skills.active.boost===75,'A effect preserved');
     const editNamed=(win,name)=>[...win.document.querySelectorAll('.libraryCardItem')].find(el=>el.querySelector('strong').textContent.includes(name)).querySelector('button').click();
     w=await open('library.html');watch(w);editNamed(w,'未分類');
     assert(w.document.querySelector('#passiveCondition').value==='affiliation:0期生' && w.document.querySelector('#passiveValue').value==='8','P reload');
-    assert(w.document.querySelector('#specialEffectTypes').selectedOptions.length===2 && w.document.querySelector('#specialSkillBoost').value==='80' && w.document.querySelector('#specialSkillDuration').value==='10','SP reload');
+    assert(w.document.querySelector('#specialFixedEffects .specialFixedEffectRow[data-special-fixed-type="score_support"] input[data-special-effect-field="value"]').value==='80' && w.document.querySelector('#specialFixedEffects .specialFixedEffectRow[data-special-fixed-type="score_support"] input[data-special-effect-field="duration"]').value==='10' && w.document.querySelector('#specialFixedEffects .specialFixedEffectRow[data-special-fixed-type="life_recovery"] input[data-special-effect-field="value"]').value==='300','SP reload');
     input(w,'#passiveEffectType','performance_up');w.document.querySelector('#memberCardForm').requestSubmit();
     w=await open('library.html');watch(w);editNamed(w,'未分類');
     assert(w.document.querySelector('#passiveEffectType').value==='performance_up' && w.document.querySelector('#passiveValue').value==='8','status P reload');
@@ -286,7 +289,8 @@
     assert(!w.document.querySelector('#legacyPassiveDetails').hidden,'legacy status description accessible');
     input(w,'#cardName','');input(w,'#passiveValue',9);w.document.querySelector('#memberCardForm').requestSubmit();
     let upgraded=read().find(c=>c.id==='legacy-manual');
-    assert(upgraded.cardName==='旧カード名' && upgraded.skills.passive.effect.value===9 && upgraded.skills.passive.scoreSupport.boost===8,'blank edit preserves name and legacy record');
+    assert(upgraded.cardName==='旧カード名' && upgraded.skills.passive.effect.value===9 && upgraded.skills.passive.scoreSupport.boost===8 && Array.isArray(upgraded.skills.special.effects) &&
+      !Object.hasOwn(upgraded.skills.special,'effectTypes') && !Object.hasOwn(upgraded.skills.special,'boost') && !Object.hasOwn(upgraded.skills.special,'duration'),'blank edit preserves name and migrates SP');
     assert(upgraded.extensions.future===42 && upgraded.skills.active.future===1 && upgraded.skills.special.future===2 && upgraded.skills.passive.scoreSupport.future===3,'unknown data survives editing');
     w=await open('library.html');watch(w);editNamed(w,'旧カード名');
     assert(w.document.querySelector('#passiveValue').value==='9','new P takes precedence');

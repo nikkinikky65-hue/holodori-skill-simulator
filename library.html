@@ -23,23 +23,11 @@
     </div>
   </div>
 
-
   <div class="panel">
-
     <h2>メンバーカード登録</h2>
-
     <form id="memberCardForm" class="libraryCardForm">
-
-  <div
-    id="talentPortraitBackdrop"
-    class="talentPortraitBackdrop"
-    aria-hidden="true"
-  ></div>
-
-  <input
-    id="memberCardId"
-    type="hidden"
-  >
+      <div id="talentPortraitBackdrop" class="talentPortraitBackdrop" aria-hidden="true"></div>
+      <input id="memberCardId" type="hidden">
 
 
   <!-- =========================
@@ -147,34 +135,6 @@
       <option value="">＋効果を追加</option>
     </select>
   </div>
-
-  <div class="librarySkillMain librarySkillRow" hidden>
-    <div class="librarySkillBadge">SP</div>
-
-    <label class="libraryField libraryFieldMulti">
-      <span class="libraryLabel">効果種別</span>
-      <select id="specialEffectTypes" multiple size="4"></select>
-    </label>
-
-    <label class="libraryField libraryShortField">
-      <span class="libraryLabel">効果時間</span>
-      <div class="libraryValueWithUnit">
-        <input id="specialSkillDuration" type="number" min="0" step="0.01" class="libraryShortInput">
-        <span class="libraryUnit">秒</span>
-      </div>
-    </label>
-
-    <label class="libraryField libraryShortField">
-      <span class="libraryLabel">効果値</span>
-      <div class="libraryValueWithUnit">
-        <input id="specialSkillBoost" type="number" min="0" step="0.01" class="libraryShortInput">
-        <span class="libraryUnit">%</span>
-      </div>
-    </label>
-  </div>
-
-  <div id="specialEffectsEditor" class="librarySecondaryField" hidden></div>
-  <button id="addSpecialEffect" type="button" hidden>その他の効果を追加</button>
 
   <label class="libraryField librarySecondaryField">
     <span class="libraryLabel">効果</span>
