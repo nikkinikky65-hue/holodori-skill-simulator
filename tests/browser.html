@@ -217,7 +217,28 @@
     click(w,'#optimizeBtn');
     assert(w.document.querySelector('#optimizedTimeline').textContent.includes('現在'),'optimizer accepts prepared support boost');
     // Card library still retains boost=8 as a Passive rate modifier.
+    const exportFixture=JSON.parse(localStorage.getItem(key));
+    exportFixture.cards[0].extensions={future:42};
+    exportFixture.cards[0].skills.active.extra='keep';
+    localStorage.setItem(key,JSON.stringify(exportFixture));
     w=await open('library.html');watch(w);
+    const exportStorageBefore=localStorage.getItem(key);
+    let exportedBlob;
+    let exportedFilename;
+    w.URL.createObjectURL=blob => { exportedBlob=blob; return 'blob:test'; };
+    w.URL.revokeObjectURL=() => {};
+    w.HTMLAnchorElement.prototype.click=function(){ exportedFilename=this.download; };
+    click(w,'#memberCardExport');
+    const exportedLibrary=JSON.parse(await exportedBlob.text());
+    const savedLibrary=JSON.parse(exportStorageBefore);
+    assert(exportedFilename==='holodori-card-library-v2.json','library export filename');
+    assert(exportedLibrary.version===2 && exportedLibrary.cards.length===savedLibrary.cards.length,'library export root');
+    assert(exportedLibrary.cards[0].extensions && exportedLibrary.cards[0].skills.active.extra==='keep','library export unknown fields');
+    assert(localStorage.getItem(key)===exportStorageBefore,'library export leaves storage unchanged');
+    localStorage.setItem(key,'broken');
+    click(w,'#memberCardExport');
+    assert(w.document.querySelector('#memberCardExportStatus').textContent.includes('出力できませんでした'),'library export invalid data error');
+    localStorage.setItem(key,exportStorageBefore);
     const sourceRow=[...w.document.querySelectorAll('.libraryCardItem')].find(el=>el.textContent.includes('Support検証2'));
     sourceRow.querySelector('button').click();
     assert(Number(w.document.querySelector('#passiveValue').value)===8,'legacy passive boost retained');

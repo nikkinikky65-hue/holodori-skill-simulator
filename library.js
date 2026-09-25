@@ -269,11 +269,47 @@ cardTalent.addEventListener('change', updateTalentPortrait);
 const memberCardCancel =
   document.querySelector('#memberCardCancel');
 
+const memberCardExport =
+  document.querySelector('#memberCardExport');
+
+const memberCardExportStatus =
+  document.querySelector('#memberCardExportStatus');
+
 const memberCardList =
   document.querySelector('#memberCardList');
 
 const memberCardCount =
   document.querySelector('#memberCardCount');
+
+function exportMemberCardLibrary(){
+  const saved = localStorage.getItem(MEMBER_CARD_STORAGE_KEY);
+
+  if(!saved){
+    throw new Error('保存されているCard v2ライブラリがありません。');
+  }
+
+  const library = parseCardLibrary(saved);
+  const json = JSON.stringify(library, null, 2);
+  const blob = new Blob([json], {type: 'application/json;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+
+  link.href = url;
+  link.download = 'holodori-card-library-v2.json';
+  link.click();
+  URL.revokeObjectURL(url);
+}
+
+memberCardExport.addEventListener('click', () => {
+  memberCardExportStatus.textContent = '';
+
+  try{
+    exportMemberCardLibrary();
+    memberCardExportStatus.textContent = 'JSONを出力しました。';
+  }catch(error){
+    memberCardExportStatus.textContent = `JSONを出力できませんでした。${error.message}`;
+  }
+});
 
 // ========================================
 // タレント選択肢
