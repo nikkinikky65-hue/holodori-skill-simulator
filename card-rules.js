@@ -87,6 +87,19 @@ function getCardDerived(rarity, training, bloom = 0){
   };
 }
 
+// Bloomの段階ごとの強化領域だけを共有する。具体的な値の解決はまだ行わない。
+function getBloomEffectType(rarity, bloomLevel){
+  const level = Number(bloomLevel);
+  if(level < 1 || level > 5) return null;
+  if(Number(rarity) === 3){
+    return ['active', 'all_parameters', 'special', 'passive', 'all_parameters'][level - 1];
+  }
+  if([4, 5].includes(Number(rarity))){
+    return ['active', 'all_parameters', 'special', 'passive', 'connect'][level - 1];
+  }
+  return null;
+}
+
 // 未知のフィールドも保持する。既存カードの読み込み時に能力値を再計算しない。
 function mergeCardFields(base, patch){
   const result = { ...base };
@@ -171,7 +184,9 @@ function writeCardLibrary(cards){
 const SKILL_EFFECT_TYPES = {
   special: [
     ['score_support', 'スコアサポート'], ['life_recovery', 'ライフ回復'],
-    ['skill_activation_rate_up', 'スキル発動率UP'], ['judgement_enhancement', '判定強化']
+    ['skill_frequency_up', 'スキル発動頻度UP'], ['judgment_enhancement', '判定強化'],
+    // 旧Card v2で使われている識別子も読み書きできるよう残す。
+    ['skill_activation_rate_up', 'スキル発動率UP（旧）'], ['judgement_enhancement', '判定強化（旧）']
   ],
   active: [['score_up', 'スコアUP']],
   passive: [
@@ -219,12 +234,25 @@ function getPassiveScoreSupport(card){
 }
 
 function skillConditionKey(condition){
-  return !condition || condition.kind === 'none' ? '' : `${condition.kind}:${condition.value}`;
+  if(!condition || condition.kind === 'none') return '';
+  if(condition.kind === 'self') return 'self';
+  return `${condition.kind}:${condition.value}`;
 }
 
 function skillConditionFromKey(key, text = ''){
   if(!key) return { kind: 'none', value: '' };
   if(key === 'text') return { kind: 'text', value: text.trim() };
+  if(key === 'self') return { kind: 'self', value: '' };
   const separator = key.indexOf(':');
   return { kind: key.slice(0, separator), value: key.slice(separator + 1) };
+}
+
+function getSpecialEffects(card){
+  const special = card?.skills?.special || {};
+  if(Array.isArray(special.effects)) return special.effects;
+  return (special.effectTypes || []).map(type => {
+    const effect = { type, value: special.boost ?? null };
+    if(special.duration != null) effect.duration = special.duration;
+    return effect;
+  });
 }

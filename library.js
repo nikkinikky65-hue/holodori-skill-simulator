@@ -156,6 +156,8 @@ const specialEffectTypes = document.querySelector('#specialEffectTypes');
 const specialSkillDuration = document.querySelector('#specialSkillDuration');
 const specialSkillBoost = document.querySelector('#specialSkillBoost');
 const activeEffectType = document.querySelector('#activeEffectType');
+const specialEffectsEditor = document.querySelector('#specialEffectsEditor');
+const addSpecialEffect = document.querySelector('#addSpecialEffect');
 
 function populateSkillOptions(){
   for(const [select, category] of [[specialEffectTypes,'special'],[activeEffectType,'active'],[passiveEffectType,'passive']]){
@@ -165,6 +167,7 @@ function populateSkillOptions(){
   const affiliations = [...new Set(HOLO_MEMBERS.flatMap(member => member.affiliations || []))];
   for(const select of [passiveCondition, passiveTarget]){
     select.add(new Option(select === passiveCondition ? '条件なし' : '未設定', ''));
+    if(select === passiveTarget) select.add(new Option('自身', 'self'));
     for(const [value,label] of [['cute','キュート'],['pure','ピュア'],['happy','ハッピー']]){
       select.add(new Option(`タイプ：${label}`, `type:${value}`));
     }
@@ -172,6 +175,44 @@ function populateSkillOptions(){
     select.add(new Option('その他（原文を保存）', 'text'));
   }
 }
+
+function createSpecialEffectRow(effect = {}){
+  const row = document.createElement('div');
+  row.className = 'librarySkillRow specialEffectRow';
+  row.specialEffect = effect;
+  const type = document.createElement('select');
+  type.dataset.specialEffectField = 'type';
+  SKILL_EFFECT_TYPES.special.forEach(([value, label]) => type.add(new Option(label, value)));
+  selectStoredOption(type, effect.type || '');
+  const value = document.createElement('input');
+  value.type = 'number'; value.min = '0'; value.step = '0.01';
+  value.placeholder = '値'; value.dataset.specialEffectField = 'value';
+  if(effect.value != null) value.value = effect.value;
+  const duration = document.createElement('input');
+  duration.type = 'number'; duration.min = '0'; duration.step = '0.01';
+  duration.placeholder = '秒（任意）'; duration.dataset.specialEffectField = 'duration';
+  if(effect.duration != null) duration.value = effect.duration;
+  const remove = document.createElement('button');
+  remove.type = 'button'; remove.textContent = '削除';
+  remove.addEventListener('click', () => row.remove());
+  row.append(type, value, duration, remove);
+  specialEffectsEditor.append(row);
+}
+
+function readSpecialEffects(){
+  return [...specialEffectsEditor.querySelectorAll('.specialEffectRow')].map(row => {
+    const fields = Object.fromEntries([...row.querySelectorAll('[data-special-effect-field]')]
+      .map(input => [input.dataset.specialEffectField, input]));
+    const effect = { ...row.specialEffect, type: fields.type.value };
+    if(fields.value.value !== '') effect.value = Number(fields.value.value);
+    else delete effect.value;
+    if(fields.duration.value !== '') effect.duration = Number(fields.duration.value);
+    else delete effect.duration;
+    return effect;
+  }).filter(effect => effect.type);
+}
+
+addSpecialEffect.addEventListener('click', () => createSpecialEffectRow());
 
 function selectStoredOption(select, value){
   if(value && ![...select.options].some(option => option.value === value)){
@@ -183,6 +224,8 @@ function selectStoredOption(select, value){
 function updateConditionTextVisibility(){
   document.querySelector('#passiveConditionTextLabel').hidden = passiveCondition.value !== 'text';
   document.querySelector('#passiveTargetTextLabel').hidden = passiveTarget.value !== 'text';
+  passiveTargetCount.disabled = passiveTarget.value === 'self';
+  if(passiveTarget.value === 'self') passiveTargetCount.value = 1;
 }
 passiveCondition.addEventListener('change', updateConditionTextVisibility);
 passiveTarget.addEventListener('change', updateConditionTextVisibility);
@@ -456,9 +499,11 @@ function getMemberCardFormData(){
     skills: {
 
       special: {
-        effectTypes: [...specialEffectTypes.selectedOptions].map(option => option.value),
-        boost: nullableNumber(specialSkillBoost),
-        duration: nullableNumber(specialSkillDuration),
+        ...(typeof readSpecialEffects === 'function' && readSpecialEffects().length ? { effects: readSpecialEffects() } : {
+          effectTypes: [...specialEffectTypes.selectedOptions].map(option => option.value),
+          boost: nullableNumber(specialSkillBoost),
+          duration: nullableNumber(specialSkillDuration)
+        }),
         description:
           specialSkillDescription.value.trim()
       },
@@ -492,7 +537,7 @@ function getMemberCardFormData(){
           condition: skillConditionFromKey(passiveCondition.value, passiveConditionText.value),
           conditionCount: Number(passiveConditionCount.value) || 0,
           target: skillConditionFromKey(passiveTarget.value, passiveTargetText.value),
-          targetCount: Number(passiveTargetCount.value) || 0,
+          targetCount: passiveTarget.value === 'self' ? 1 : Number(passiveTargetCount.value) || 0,
           value: Number(passiveValue.value) || 0,
           description: passiveDescription.value.trim()
         }
@@ -753,6 +798,10 @@ function renderMemberCards(){
         });
         specialSkillBoost.value = card.skills.special.boost ?? '';
         specialSkillDuration.value = card.skills.special.duration ?? '';
+        specialEffectsEditor.innerHTML = '';
+        if(Array.isArray(card.skills.special.effects)){
+          card.skills.special.effects.forEach(createSpecialEffectRow);
+        }
         selectStoredOption(activeEffectType, card.skills.active.effectType || 'score_up');
 
         // アクティブスキル
@@ -871,6 +920,7 @@ function resetMemberCardForm(){
 
   memberCardForm.reset();
   [...specialEffectTypes.options].forEach(option => option.selected = false);
+  specialEffectsEditor.innerHTML = '';
   activeEffectType.value = 'score_up';
   passiveEffectType.value = '';
   passiveCondition.value = '';

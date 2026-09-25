@@ -20,6 +20,11 @@ assert(manual.skills.passive.scoreSupport.boost===8 && getPassiveScoreSupport(ma
 const reloaded=normalizeCardV2(JSON.parse(JSON.stringify(manual)));
 assert(JSON.stringify(reloaded)===JSON.stringify(manual),'save/read lossless');
 assert(reloaded.skills.special.effectTypes.length===2 && reloaded.skills.special.boost===80 && reloaded.skills.special.duration===10,'SP shared properties');
+const newSpecial=createCardV2({skills:{special:{effects:[
+  {type:'score_support',value:50,duration:8}, {type:'life_recovery',value:300}
+]}}});
+assert(newSpecial.skills.special.effects[0].value===50 && newSpecial.skills.special.effects[0].duration===8 &&
+  newSpecial.skills.special.effects[1].value===300 && !Object.hasOwn(newSpecial.skills.special.effects[1],'duration'),'SP independent values');
 const statusCard=createCardV2({skills:{passive:{effect:{...effect,type:'performance_up'}}}},manual);
 assert(getPassiveEffect(statusCard).type==='performance_up' && getPassiveScoreSupport(statusCard)===null,'status never becomes support');
 const affiliation=skillConditionFromKey('affiliation:0期生');

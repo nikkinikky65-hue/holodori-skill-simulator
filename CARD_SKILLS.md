@@ -4,11 +4,23 @@
 
 | 分類 | 保存先 | 内容 |
 | --- | --- | --- |
-| SP | `skills.special` | `effectTypes`（複数選択）、共通の`boost`（%）、`duration`（秒）、`description` |
+| SP | `skills.special` | 新形式は`effects`（効果ごとの`type`、`value`、任意の`duration`）、`description`。旧形式の`effectTypes`、共通`boost`、`duration`も読み書き可能 |
 | A | `skills.active` | `effectType: "score_up"`を追加。既存のinterval/probability/duration/boost/descriptionを維持 |
 | P | `skills.passive.effect` | 単一の`type`、`condition`、`conditionCount`、`target`、`targetCount`、`value`（%）、`description` |
 
-SP/Pともスコアサポートの効果種別は `score_support`。単位は同じ率（%）で、発生源はspecial/passiveで区別する。SPの効果ごとの個別値や発動時刻は保存しない。空欄のSP効果値・時間はnull。
+SP/Pともスコアサポートの効果種別は `score_support`。新形式では効果ごとに値を保持する。
+
+```json
+{
+  "effects": [
+    {"type": "score_support", "value": 50, "duration": 8},
+    {"type": "life_recovery", "value": 300}
+  ],
+  "description": "ゲーム内の説明"
+}
+```
+
+`duration`不要の効果には保存しない。旧形式は共通値を各効果へ展開して読むが、一括移行はしない。
 
 Pの例：
 
@@ -24,7 +36,13 @@ Pの例：
 }
 ```
 
-条件のkindはnone/type/affiliation/text。所属は条件の参照値のみを保存し、カード自身の所属情報をコピーしない。自由記述はtextとして保存し、自動解釈しない。既存の未知の選択値も編集時に表示して保持する。
+自身を対象にする場合は `{"kind": "self", "value": ""}` とし、`targetCount` は1として保存する。既存の空の`text`対象は自動移行しない。
+
+条件のkindはnone/type/affiliation/text/self。所属は条件の参照値のみを保存し、カード自身の所属情報をコピーしない。自由記述はtextとして保存し、自動解釈しない。既存の未知の選択値も編集時に表示して保持する。
+
+## Bloom
+
+`progression.bloom` は現在段階として保持し、`getBloomEffectType(rarity, bloomLevel)` が強化対象だけを返す。★4・★5は active / all_parameters / special / passive / connect、★3は active / all_parameters / special / passive / all_parameters の順。Bloomによる値の計算、base/effective値の分離、Connect接続、Skill強化値は未実装で、既存statsも変更しない。
 
 ## 旧データとの互換性
 

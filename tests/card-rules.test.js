@@ -17,6 +17,16 @@ for(const rarity of [3,4,5]){
     assert(d.stats.total === d.stats.performance+d.stats.technique+d.stats.sense, 'stats sum');
   }
 }
+assert(getBloomEffectType(5, 1) === 'active' && getBloomEffectType(5, 5) === 'connect', 'star4/5 bloom map');
+assert(getBloomEffectType(3, 2) === 'all_parameters' && getBloomEffectType(3, 5) === 'all_parameters', 'star3 bloom map');
+assert(getBloomEffectType(3, 0) === null && getBloomEffectType(6, 1) === null, 'unsupported bloom map');
+assert(skillConditionFromKey('self').kind === 'self' && skillConditionFromKey('self').value === '', 'self target');
+assert(skillConditionKey({kind:'self',value:''}) === 'self', 'self target key');
+const compound = createCardV2({skills:{special:{effects:[
+  {type:'score_support',value:50,duration:8}, {type:'life_recovery',value:300}
+]}}});
+assert(compound.skills.special.effects[0].duration === 8 && compound.skills.special.effects[1].value === 300 &&
+  !Object.hasOwn(compound.skills.special.effects[1], 'duration'), 'independent special effects');
 const original = createCardV2({id:'keep', rarity:5, progression:{training:2,bloom:5}, extensions:{future:{x:1}}, skills:{active:{description:'keep'},passive:{scoreSupport:{boost:12}}}});
 const edited = createCardV2({cardName:'edited',skills:{active:{boost:30}}}, original);
 assert(edited.id === original.id && edited.stats.total === 22000, 'identity and stats');
