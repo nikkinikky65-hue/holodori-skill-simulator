@@ -301,6 +301,22 @@
     assert(upgraded.skills.passive.effect.type==='performance_up' && upgraded.extensions.future===42,'A save preserves new skills');
     w=await open('event.html');watch(w);
     assert(w.eval('memberCards.length')===2 && w.eval('cardToActiveMember(memberCards[0],1).boost')===75,'Event reads expanded cards');
+    w=await open('library.html');watch(w);
+    input(w,'#cardTalent','tokino_sora');input(w,'#cardName','固定行SP');
+    input(w,'#specialFixedEffects .specialFixedEffectRow:nth-child(1) input:nth-of-type(1)',55);
+    input(w,'#specialFixedEffects .specialFixedEffectRow:nth-child(1) input:nth-of-type(2)',10);
+    input(w,'#specialFixedEffects .specialFixedEffectRow:nth-child(2) input:nth-of-type(1)',400);
+    input(w,'#passiveTarget','self');w.document.querySelector('#memberCardForm').requestSubmit();
+    const fixed=read().find(card=>card.cardName==='固定行SP');
+    assert(JSON.stringify(fixed.skills.special.effects)===JSON.stringify([
+      {type:'score_support',value:55,duration:10},{type:'life_recovery',value:400}
+    ]),'fixed SP rows save independently');
+    assert(fixed.skills.passive.effect.target.kind==='self' && fixed.skills.passive.effect.targetCount===1,'fixed SP self target');
+    editNamed(w,'固定行SP');
+    assert(w.document.querySelector('#specialFixedEffects .specialFixedEffectRow:nth-child(1) input:nth-of-type(1)').value==='55' &&
+      w.document.querySelector('#specialFixedEffects .specialFixedEffectRow:nth-child(1) input:nth-of-type(2)').value==='10' &&
+      w.document.querySelector('#specialFixedEffects .specialFixedEffectRow:nth-child(2) input:nth-of-type(1)').value==='400' &&
+      w.document.querySelector('#passiveTarget').value==='self','fixed SP rows reload');
     assert(errors.length===0,errors.join('\n'));
     result.textContent='PASS: startup, timeline, save/edit/load, metadata, derived values, star3 presets, bloom independence, event v2, formations, snapshot, support rates, manual skills';
   } catch(e){ result.textContent='FAIL: '+e.stack; }
