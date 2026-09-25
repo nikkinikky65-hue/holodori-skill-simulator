@@ -338,6 +338,34 @@
   white-space:nowrap;
 }
 
+.specialFixedEffectRow{
+  display:flex;
+  flex-wrap:nowrap;
+  align-items:center;
+  gap:6px;
+  width:100%;
+}
+
+.specialFixedEffectRow .libraryLabel{
+  flex:0 0 7.5rem;
+}
+
+.specialFixedEffectRow input,
+.specialFixedEffectRow select{
+  flex:0 0 5.9rem;
+  width:5.9rem;
+}
+
+.specialFixedEffectRow button{
+  flex:0 0 auto;
+}
+
+@media(min-width:901px){
+  .librarySpecialPanel{
+    grid-column:span 2;
+  }
+}
+
 .libraryConditionExpression{
   display:grid;
   gap:8px;
@@ -472,6 +500,12 @@
   .libraryOutfitSection{
     display:grid;
     grid-template-columns:1fr 1fr;
+  }
+
+  .specialFixedEffectRow{
+    display:flex;
+    grid-template-columns:none;
+    flex-wrap:wrap;
   }
 
   .libraryConditionOperator{
