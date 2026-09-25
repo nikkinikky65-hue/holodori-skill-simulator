@@ -141,33 +141,11 @@
 <section class="libraryFormSection librarySkillPanel librarySpecialPanel">
   <h4>SPスキル</h4>
 
-  <div id="specialFixedEffects" class="librarySecondaryField">
-    <div class="librarySkillRow specialFixedEffectRow" data-special-fixed-type="score_support">
-      <span class="libraryLabel">スコアサポート</span>
-      <input data-special-fixed-field="value" type="number" min="0" step="0.01" placeholder="値">
-      <span class="libraryUnit">%</span>
-      <input data-special-fixed-field="duration" type="number" min="0" step="0.01" placeholder="時間">
-      <span class="libraryUnit">秒</span>
-    </div>
-    <div class="librarySkillRow specialFixedEffectRow" data-special-fixed-type="life_recovery">
-      <span class="libraryLabel">ライフ回復</span>
-      <input data-special-fixed-field="value" type="number" min="0" step="1" placeholder="値">
-      <span class="libraryUnit">回復</span>
-    </div>
-    <div class="librarySkillRow specialFixedEffectRow" data-special-fixed-type="skill_frequency_up">
-      <span class="libraryLabel">スキル発動率UP</span>
-      <input data-special-fixed-field="value" type="number" min="0" step="0.01" placeholder="値">
-      <span class="libraryUnit">%</span>
-      <input data-special-fixed-field="duration" type="number" min="0" step="0.01" placeholder="時間">
-      <span class="libraryUnit">秒</span>
-    </div>
-    <div class="librarySkillRow specialFixedEffectRow" data-special-fixed-type="judgment_enhancement">
-      <span class="libraryLabel">判定強化</span>
-      <input data-special-fixed-field="value" type="number" min="0" step="0.01" placeholder="値">
-      <span class="libraryUnit">値</span>
-      <input data-special-fixed-field="duration" type="number" min="0" step="0.01" placeholder="時間">
-      <span class="libraryUnit">秒</span>
-    </div>
+  <div id="specialFixedEffects" class="librarySecondaryField"></div>
+  <div class="librarySkillRow specialAddEffectRow">
+    <select id="specialEffectAddType" aria-label="追加するSP効果">
+      <option value="">＋効果を追加</option>
+    </select>
   </div>
 
   <div class="librarySkillMain librarySkillRow" hidden>
@@ -196,7 +174,7 @@
   </div>
 
   <div id="specialEffectsEditor" class="librarySecondaryField" hidden></div>
-  <button id="addSpecialEffect" type="button">その他の効果を追加</button>
+  <button id="addSpecialEffect" type="button" hidden>その他の効果を追加</button>
 
   <label class="libraryField librarySecondaryField">
     <span class="libraryLabel">効果</span>

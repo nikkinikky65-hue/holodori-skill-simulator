@@ -158,6 +158,7 @@ const specialSkillBoost = document.querySelector('#specialSkillBoost');
 const activeEffectType = document.querySelector('#activeEffectType');
 const specialEffectsEditor = document.querySelector('#specialEffectsEditor');
 const addSpecialEffect = document.querySelector('#addSpecialEffect');
+const specialEffectAddType = document.querySelector('#specialEffectAddType');
 let legacySpecialEffects = null;
 
 function populateSkillOptions(){
@@ -179,66 +180,102 @@ function populateSkillOptions(){
 
 const specialFixedEffects = document.querySelector('#specialFixedEffects');
 
+const specialEffectLabels = {
+  score_support: 'スコアサポート',
+  skill_frequency_up: '発動確率',
+  skill_activation_rate_up: '発動確率',
+  life_recovery: 'ライフ回復',
+  judgment_enhancement: '判定強化',
+  judgement_enhancement: '判定強化',
+  other: 'その他'
+};
+
+const specialAddOptions = [
+  ['skill_frequency_up', '発動確率'],
+  ['life_recovery', 'ライフ回復'],
+  ['judgment_enhancement', '判定強化'],
+  ['other', 'その他']
+];
+
+function specialEffectKey(type){
+  if(type === 'skill_activation_rate_up' || type === 'skill_frequency_up') return 'skill_frequency_up';
+  if(type === 'judgement_enhancement' || type === 'judgment_enhancement') return 'judgment_enhancement';
+  return type;
+}
+
+function effectInput(type, field, options = {}){
+  const input = document.createElement(options.select ? 'select' : 'input');
+  input.dataset.specialEffectField = field;
+  if(options.select){
+    options.select.forEach(([value, label]) => input.add(new Option(label, value)));
+  }else{
+    input.type = 'number'; input.min = '0'; input.step = options.step || '0.01';
+    input.placeholder = options.placeholder || '';
+  }
+  return input;
+}
+
+function appendUnit(row, text){
+  const unit = document.createElement('span');
+  unit.className = 'libraryUnit'; unit.textContent = text;
+  row.append(unit);
+}
+
+function createSpecialEffectRow(effect = {}, removable = true){
+  const row = document.createElement('div');
+  row.className = 'librarySkillRow specialFixedEffectRow';
+  row.specialEffect = effect;
+  row.dataset.specialFixedType = effect.type || 'score_support';
+  const type = row.dataset.specialFixedType;
+  const label = document.createElement('span');
+  label.className = 'libraryLabel'; label.textContent = specialEffectLabels[type] || `保存済み：${type}`;
+  row.append(label);
+  if(type === 'score_support'){
+    const duration = effectInput(type, 'duration', {placeholder: '時間'});
+    const value = effectInput(type, 'value', {placeholder: '値'});
+    row.append(duration); appendUnit(row, '秒'); row.append(value); appendUnit(row, '%');
+  }else if(type === 'skill_frequency_up' || type === 'skill_activation_rate_up'){
+    const value = effectInput(type, 'value', {placeholder: '値'});
+    row.append(value); appendUnit(row, '%');
+  }else if(type === 'life_recovery'){
+    const value = effectInput(type, 'value', {step: '1', placeholder: '値'});
+    row.append(value); appendUnit(row, '回復');
+  }else if(type === 'judgment_enhancement' || type === 'judgement_enhancement'){
+    const from = effectInput(type, 'from', {select: [['good', 'GOOD']]});
+    const to = effectInput(type, 'to', {select: [['perfect', 'Perfect']]});
+    row.append(from); appendUnit(row, '以上を'); row.append(to); appendUnit(row, 'に');
+  }else{
+    const value = effectInput(type, 'value', {placeholder: '値'});
+    row.append(value);
+  }
+  row.querySelectorAll('[data-special-effect-field]').forEach(input => {
+    if(effect[input.dataset.specialEffectField] != null) input.value = effect[input.dataset.specialEffectField];
+  });
+  if(removable){
+    const remove = document.createElement('button');
+    remove.type = 'button'; remove.textContent = '削除';
+    remove.addEventListener('click', () => { row.remove(); refreshSpecialAddOptions(); });
+    row.append(remove);
+  }
+  specialFixedEffects.append(row);
+  return row;
+}
+
 function readFixedSpecialEffects(){
+  const seen = new Set();
   return [...specialFixedEffects.querySelectorAll('.specialFixedEffectRow')].map(row => {
     const stored = row.specialEffect || {};
-    const fields = Object.fromEntries([...row.querySelectorAll('[data-special-fixed-field]')]
-      .map(input => [input.dataset.specialFixedField, input]));
-    const effect = { ...stored, type: row.dataset.specialFixedType };
-    if(fields.value.value !== '') effect.value = Number(fields.value.value);
-    else delete effect.value;
-    if(fields.duration){
-      if(fields.duration.value !== '') effect.duration = Number(fields.duration.value);
-      else delete effect.duration;
-    }
+    const fields = Object.fromEntries([...row.querySelectorAll('[data-special-effect-field]')]
+      .map(input => [input.dataset.specialEffectField, input]));
+    const effect = { ...stored, type: stored.type || row.dataset.specialFixedType };
+    Object.entries(fields).forEach(([field, input]) => {
+      if(input.value === '') delete effect[field];
+      else effect[field] = input.tagName === 'INPUT' ? Number(input.value) : input.value;
+    });
+    if(seen.has(effect.type)) return null;
+    seen.add(effect.type);
     return Object.keys(effect).some(key => key !== 'type') ? effect : null;
   }).filter(Boolean);
-}
-
-function setFixedSpecialEffects(effects){
-  const unknown = [];
-  [...specialFixedEffects.querySelectorAll('.specialFixedEffectRow')].forEach(row => {
-    row.specialEffect = {};
-    row.querySelectorAll('[data-special-fixed-field]').forEach(input => input.value = '');
-  });
-  (effects || []).forEach(effect => {
-    const row = [...specialFixedEffects.querySelectorAll('.specialFixedEffectRow')]
-      .find(candidate => candidate.dataset.specialFixedType === effect.type ||
-        (candidate.dataset.specialFixedType === 'skill_frequency_up' && effect.type === 'skill_activation_rate_up') ||
-        (candidate.dataset.specialFixedType === 'judgment_enhancement' && effect.type === 'judgement_enhancement'));
-    if(!row){ unknown.push(effect); return; }
-    row.specialEffect = effect;
-    row.querySelectorAll('[data-special-fixed-field]').forEach(input => {
-      const value = effect[input.dataset.specialFixedField];
-      input.value = value ?? '';
-    });
-  });
-  specialEffectsEditor.innerHTML = '';
-  specialEffectsEditor.hidden = unknown.length === 0;
-  unknown.forEach(createSpecialEffectRow);
-}
-
-function createSpecialEffectRow(effect = {}){
-  const row = document.createElement('div');
-  row.className = 'librarySkillRow specialEffectRow';
-  row.specialEffect = effect;
-  const type = document.createElement('select');
-  type.dataset.specialEffectField = 'type';
-  SKILL_EFFECT_TYPES.special.forEach(([value, label]) => type.add(new Option(label, value)));
-  selectStoredOption(type, effect.type || '');
-  const value = document.createElement('input');
-  value.type = 'number'; value.min = '0'; value.step = '0.01';
-  value.placeholder = '値'; value.dataset.specialEffectField = 'value';
-  if(effect.value != null) value.value = effect.value;
-  const duration = document.createElement('input');
-  duration.type = 'number'; duration.min = '0'; duration.step = '0.01';
-  duration.placeholder = '秒（任意）'; duration.dataset.specialEffectField = 'duration';
-  if(effect.duration != null) duration.value = effect.duration;
-  const remove = document.createElement('button');
-  remove.type = 'button'; remove.textContent = '削除';
-  remove.addEventListener('click', () => row.remove());
-  row.append(type, value, duration, remove);
-  specialEffectsEditor.append(row);
 }
 
 function readSpecialEffects(){
@@ -247,16 +284,80 @@ function readSpecialEffects(){
       .map(input => [input.dataset.specialEffectField, input]));
     const effect = { ...row.specialEffect, type: fields.type.value };
     if(fields.value.value !== '') effect.value = Number(fields.value.value);
-    else delete effect.value;
-    if(fields.duration.value !== '') effect.duration = Number(fields.duration.value);
-    else delete effect.duration;
+    if(fields.duration?.value !== '') effect.duration = Number(fields.duration.value);
     return effect;
   }).filter(effect => effect.type);
 }
 
+function createUnknownSpecialEffectRow(effect = {}){
+  const row = document.createElement('div');
+  row.className = 'librarySkillRow specialEffectRow';
+  row.specialEffect = effect;
+  const type = document.createElement('select');
+  type.dataset.specialEffectField = 'type';
+  SKILL_EFFECT_TYPES.special.forEach(([value, label]) => type.add(new Option(label, value)));
+  selectStoredOption(type, effect.type || 'other');
+  const value = effectInput('other', 'value', {placeholder: '値'});
+  const duration = effectInput('other', 'duration', {placeholder: '時間'});
+  row.append(type, value); appendUnit(row, '値'); row.append(duration); appendUnit(row, '秒');
+  row.querySelectorAll('[data-special-effect-field]').forEach(input => {
+    if(effect[input.dataset.specialEffectField] != null) input.value = effect[input.dataset.specialEffectField];
+  });
+  const remove = document.createElement('button');
+  remove.type = 'button'; remove.textContent = '削除';
+  remove.addEventListener('click', () => row.remove());
+  row.append(remove);
+  specialEffectsEditor.append(row);
+}
+
+function setFixedSpecialEffects(effects){
+  specialFixedEffects.innerHTML = '';
+  specialEffectsEditor.innerHTML = '';
+  specialEffectsEditor.hidden = true;
+  const known = new Set();
+  const score = (effects || []).find(effect => effect.type === 'score_support');
+  const scoreRow = createSpecialEffectRow(score || {type: 'score_support'}, false);
+  known.add('score_support');
+  (effects || []).forEach(effect => {
+    const fixedType = effect.type === 'skill_activation_rate_up'
+      ? 'skill_frequency_up'
+      : effect.type === 'judgement_enhancement'
+        ? 'judgment_enhancement'
+        : effect.type;
+    if(known.has(fixedType)) return;
+    if(['skill_frequency_up', 'life_recovery', 'judgment_enhancement'].includes(fixedType)){
+      const row = createSpecialEffectRow({ ...effect, type: fixedType });
+      row.specialEffect = effect;
+      known.add(fixedType);
+    }else{
+      specialEffectsEditor.hidden = false;
+      createUnknownSpecialEffectRow(effect);
+    }
+  });
+  refreshSpecialAddOptions();
+}
+
+function refreshSpecialAddOptions(){
+  const used = new Set([...specialFixedEffects.querySelectorAll('.specialFixedEffectRow')]
+    .map(row => specialEffectKey(row.specialEffect?.type || row.dataset.specialFixedType)));
+  [...specialEffectAddType.options].forEach(option => {
+    option.disabled = option.value !== '' && used.has(specialEffectKey(option.value));
+  });
+}
+
+specialAddOptions.forEach(([value, label]) => specialEffectAddType.add(new Option(label, value)));
+specialEffectAddType.addEventListener('change', () => {
+  const type = specialEffectAddType.value;
+  if(!type) return;
+  if(![...specialFixedEffects.querySelectorAll('.specialFixedEffectRow')]
+    .some(row => specialEffectKey(row.specialEffect?.type || row.dataset.specialFixedType) === specialEffectKey(type))) createSpecialEffectRow({type});
+  specialEffectAddType.value = '';
+  refreshSpecialAddOptions();
+});
+
 addSpecialEffect.addEventListener('click', () => {
   specialEffectsEditor.hidden = false;
-  createSpecialEffectRow();
+  createSpecialEffectRow({type: 'other'});
 });
 
 function selectStoredOption(select, value){
@@ -512,7 +613,14 @@ function getMemberCardFormData(){
   const nullableNumber = input => input.value === '' ? null : Number(input.value);
   const fixedEffects = typeof readFixedSpecialEffects === 'function' ? readFixedSpecialEffects() : [];
   const genericEffects = typeof readSpecialEffects === 'function' ? readSpecialEffects() : [];
-  const effects = [...fixedEffects, ...genericEffects];
+  const effects = [];
+  const effectTypes = new Set();
+  [...fixedEffects, ...genericEffects].forEach(effect => {
+    const key = specialEffectKey(effect.type);
+    if(effectTypes.has(key)) return;
+    effectTypes.add(key);
+    effects.push(effect);
+  });
   const preserveLegacySpecial = typeof legacySpecialEffects !== 'undefined' && legacySpecialEffects &&
     JSON.stringify(effects) === legacySpecialEffects;
   return createCardV2({
@@ -1005,6 +1113,7 @@ memberCardCancel.addEventListener(
 // ========================================
 
 populateSkillOptions();
+setFixedSpecialEffects([]);
 renderTalentSelect();
 updateTalentPortrait();
 updateCardLevel();
