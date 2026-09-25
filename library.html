@@ -45,165 +45,88 @@
   <!-- =========================
        基本情報
   ========================== -->
-<section class="libraryFormSection basicInfoSection">
+<section class="libraryFormSection libraryBasicSection">
   <h3>基本情報</h3>
 
-  <label>
-    メンバー
+  <div class="libraryBasicRow">
+    <label class="libraryField libraryMemberField">
+      <span class="libraryLabel">メンバー</span>
+      <select id="cardTalent" required>
+        <option value="">選択してください</option>
+      </select>
+    </label>
 
-    <select
-      id="cardTalent"
-      required
-    >
-      <option value="">
-        選択してください
-      </option>
-    </select>
-  </label>
+    <label class="libraryField libraryNameField cardNameField">
+      <span class="libraryLabel">カード名</span>
+      <input id="cardName" type="text" placeholder="未分類">
+    </label>
+  </div>
 
+  <div class="libraryMetaRow">
+    <label class="libraryField libraryTypeField">
+      <span class="libraryLabel">タイプ</span>
+      <select id="cardType">
+        <option value="" selected>未登録</option>
+        <option value="cute">キュート</option>
+        <option value="pure">ピュア</option>
+        <option value="happy">ハッピー</option>
+      </select>
+    </label>
 
-  <label>
-    タイプ
+    <label class="libraryField libraryRarityField">
+      <span class="libraryLabel">レア度</span>
+      <select id="cardRarity" required>
+        <option value="3">★3</option>
+        <option value="4">★4</option>
+        <option value="5" selected>★5</option>
+      </select>
+    </label>
 
-    <select id="cardType">
-      <option value="" selected>未登録</option>
-      <option value="cute">キュート</option>
-      <option value="pure">ピュア</option>
-      <option value="happy">ハッピー</option>
-    </select>
-  </label>
+    <label class="libraryField libraryShortField">
+      <span class="libraryLabel">Lv</span>
+      <input id="cardLevel" type="number" min="1" step="1" readonly required class="libraryShortInput">
+    </label>
 
+    <label class="libraryField libraryShortField">
+      <span class="libraryLabel">特訓</span>
+      <input id="cardTraining" type="number" min="0" max="4" step="1" value="0" required class="libraryShortInput">
+    </label>
 
-  <label>
-    レア度
-
-    <select
-      id="cardRarity"
-      required
-    >
-      <option value="3">★3</option>
-      <option value="4">★4</option>
-      <option value="5" selected>★5</option>
-    </select>
-  </label>
-
-
-  <label class="cardNameField">
-    カード名
-
-    <input
-      id="cardName"
-      type="text"
-      placeholder="未分類"
-    >
-  </label>
-
-</section>
-
-  <!-- =========================
-       育成状態
-  ========================== -->
-<section class="libraryFormSection">
-  <h3>育成状態</h3>
-
-  <label>
-    レベル
-
-    <input
-      id="cardLevel"
-      type="number"
-      min="1"
-      step="1"
-      readonly
-      required
-    >
-  </label>
-
-
-  <label>
-    特訓
-
-    <input
-      id="cardTraining"
-      type="number"
-      min="0"
-      max="4"
-      step="1"
-      value="0"
-      required
-    >
-  </label>
-
-
-  <label>
-    開花
-
-    <input
-      id="cardBloom"
-      type="number"
-      min="0"
-      max="5"
-      step="1"
-      value="0"
-      required
-    >
-  </label>
+    <label class="libraryField libraryShortField">
+      <span class="libraryLabel">開花</span>
+      <input id="cardBloom" type="number" min="0" max="5" step="1" value="0" required class="libraryShortInput">
+    </label>
+  </div>
 </section>
 
   <!-- =========================
        ステータス
   ========================== -->
-<section class="libraryFormSection">
+<section class="libraryFormSection libraryStatusSection">
   <h3>ステータス</h3>
   <p id="statPresetNote" class="sub libraryPresetNote" aria-hidden="true"></p>
 
-  <label>
-    トータル
+  <div class="libraryStatusRow">
+    <label class="libraryField libraryStatField">
+      <span class="libraryLabel">TOTAL</span>
+      <input id="cardTotal" type="number" min="0" step="1" class="libraryShortInput">
+    </label>
 
-    <input
-      id="cardTotal"
-      type="number"
-      min="0"
-      step="1"
-    >
-  </label>
+    <label class="libraryField libraryStatField">
+      <span class="libraryLabel">PERFORMANCE</span>
+      <input id="cardPerformance" type="number" min="0" step="1" class="libraryShortInput">
+    </label>
 
+    <label class="libraryField libraryStatField">
+      <span class="libraryLabel">TECHNIQUE</span>
+      <input id="cardTechnique" type="number" min="0" step="1" class="libraryShortInput">
+    </label>
 
-  <label>
-    パフォーマンス
-
-    <input
-      id="cardPerformance"
-      type="number"
-      min="0"
-      step="1"
-    >
-  </label>
-
-
-  <label>
-    テクニック
-
-    <input
-      id="cardTechnique"
-      type="number"
-      min="0"
-      step="1"
-    >
-  </label>
-
-
-  <label>
-    センス
-
-    <input
-      id="cardSense"
-      type="number"
-      min="0"
-      step="1"
-    >
-  </label>
-
+    <label class="libraryField libraryStatField">
+      <span class="libraryLabel">SENSE</span>
+      <input id="cardSense" type="number" min="0" step="1" class="libraryShortInput">
+    </label>
+  </div>
 </section>
 
   <!-- =========================
@@ -217,111 +140,162 @@
 <!-- スペシャルスキル -->
 <section class="libraryFormSection librarySkillPanel librarySpecialPanel">
   <h4>SPスキル</h4>
-  <label>効果種別（複数選択可）<select id="specialEffectTypes" multiple size="4"></select></label>
 
-  <label>
-    効果時間(s)
-    <input
-      id="specialSkillDuration"
-      type="number"
-      min="0"
-      step="0.01"
-    >
-  </label>
+  <div class="librarySkillMain librarySkillRow">
+    <div class="librarySkillBadge">SP</div>
 
-  <label>
-    効果値（%）
-    <input
-      id="specialSkillBoost"
-      type="number"
-      min="0"
-      step="0.01"
-    >
-  </label>
+    <label class="libraryField libraryFieldMulti">
+      <span class="libraryLabel">効果種別</span>
+      <select id="specialEffectTypes" multiple size="4"></select>
+    </label>
 
-  <label class="librarySecondaryField">
-    効果
-    <textarea
-      id="specialSkillDescription"
-      rows="3"
-    ></textarea>
+    <label class="libraryField libraryShortField">
+      <span class="libraryLabel">効果時間</span>
+      <div class="libraryValueWithUnit">
+        <input id="specialSkillDuration" type="number" min="0" step="0.01" class="libraryShortInput">
+        <span class="libraryUnit">秒</span>
+      </div>
+    </label>
+
+    <label class="libraryField libraryShortField">
+      <span class="libraryLabel">効果値</span>
+      <div class="libraryValueWithUnit">
+        <input id="specialSkillBoost" type="number" min="0" step="0.01" class="libraryShortInput">
+        <span class="libraryUnit">%</span>
+      </div>
+    </label>
+  </div>
+
+  <label class="libraryField librarySecondaryField">
+    <span class="libraryLabel">効果</span>
+    <textarea id="specialSkillDescription" rows="2"></textarea>
   </label>
 </section>
 
 <!-- アクティブスキル -->
 <section class="libraryFormSection librarySkillPanel libraryActivePanel">
-<h4>Aスキル</h4>
-<label>効果種別<select id="activeEffectType"></select></label>
+  <h4>Aスキル</h4>
 
+  <div class="librarySkillMain librarySkillRow">
+    <div class="librarySkillBadge">A</div>
 
-<label>
-  周期(s)
+    <label class="libraryField libraryMediumField">
+      <span class="libraryLabel">効果種別</span>
+      <select id="activeEffectType"></select>
+    </label>
 
-  <input
-    id="activeSkillInterval"
-    type="number"
-    min="0"
-    step="0.01"
-  >
-</label>
+    <label class="libraryField libraryShortField">
+      <span class="libraryLabel">周期</span>
+      <div class="libraryValueWithUnit">
+        <input id="activeSkillInterval" type="number" min="0" step="0.01" class="libraryShortInput">
+        <span class="libraryUnit">秒毎</span>
+      </div>
+    </label>
 
-<label>
-  発動確率
+    <label class="libraryField libraryShortField">
+      <span class="libraryLabel">発動確率</span>
+      <select id="activeSkillProb" class="libraryCompactSelect">
+        <option value="low">低</option>
+        <option value="mid" selected>中</option>
+        <option value="high">高</option>
+      </select>
+    </label>
 
-  <select id="activeSkillProb">
-    <option value="low">低</option>
-    <option value="mid" selected>中</option>
-    <option value="high">高</option>
-  </select>
-</label>
+    <label class="libraryField libraryShortField">
+      <span class="libraryLabel">発動時間</span>
+      <div class="libraryValueWithUnit">
+        <input id="activeSkillDuration" type="number" min="0" step="0.01" class="libraryShortInput">
+        <span class="libraryUnit">秒間</span>
+      </div>
+    </label>
 
-<label>
-  発動時間(s)
+    <label class="libraryField libraryShortField">
+      <span class="libraryLabel">効果値</span>
+      <div class="libraryValueWithUnit">
+        <input id="activeSkillBoost" type="number" min="0" step="0.01" class="libraryShortInput">
+        <span class="libraryUnit">%</span>
+      </div>
+    </label>
+  </div>
 
-  <input
-    id="activeSkillDuration"
-    type="number"
-    min="0"
-    step="0.01"
-  >
-</label>
-
-<label>
-  効果値（%）
-
-  <input
-    id="activeSkillBoost"
-    type="number"
-    min="0"
-    step="0.01"
-  >
-</label>
-
-<label class="librarySecondaryField">
-  効果
-
-  <textarea
-    id="activeSkillDescription"
-    rows="3"
-  ></textarea>
-</label>
+  <label class="libraryField librarySecondaryField">
+    <span class="libraryLabel">効果</span>
+    <textarea id="activeSkillDescription" rows="2"></textarea>
+  </label>
 </section>
 
 <!-- パッシブスキル -->
 <section class="libraryFormSection librarySkillPanel libraryPassivePanel">
   <h4>Pスキル</h4>
-  <label>効果種別<select id="passiveEffectType"></select></label>
-  <label>条件<select id="passiveCondition"></select></label>
-  <label id="passiveConditionTextLabel" hidden>条件の原文<input id="passiveConditionText" type="text"></label>
-  <label>人数（以上）<input id="passiveConditionCount" type="number" min="0" step="1" value="0"></label>
-  <label>対象条件<select id="passiveTarget"></select></label>
-  <label id="passiveTargetTextLabel" hidden>対象条件の原文<input id="passiveTargetText" type="text"></label>
-  <label>人数（指定）<input id="passiveTargetCount" type="number" min="0" step="1" value="0"></label>
-  <label>効果値（%）<input id="passiveValue" type="number" min="0" step="0.01" value="0"></label>
-  <label class="librarySecondaryField">説明<textarea id="passiveDescription" rows="3"></textarea></label>
+
+  <div class="libraryConditionExpression">
+    <div class="libraryConditionRow">
+      <label class="libraryField libraryMediumField">
+        <span class="libraryLabel">条件</span>
+        <select id="passiveCondition"></select>
+      </label>
+
+      <label class="libraryField libraryShortField">
+        <span class="libraryLabel">人数</span>
+        <div class="libraryValueWithUnit">
+          <input id="passiveConditionCount" type="number" min="0" step="1" value="0" class="libraryShortInput">
+          <span class="libraryUnit">人以上</span>
+        </div>
+      </label>
+
+      <span class="libraryConditionOperator">→</span>
+
+      <label class="libraryField libraryMediumField">
+        <span class="libraryLabel">対象</span>
+        <select id="passiveTarget"></select>
+      </label>
+
+      <label class="libraryField libraryShortField">
+        <span class="libraryLabel">人数</span>
+        <div class="libraryValueWithUnit">
+          <input id="passiveTargetCount" type="number" min="0" step="1" value="0" class="libraryShortInput">
+          <span class="libraryUnit">人</span>
+        </div>
+      </label>
+    </div>
+
+    <div class="libraryPassiveValueRow">
+      <label class="libraryField libraryMediumField">
+        <span class="libraryLabel">効果種別</span>
+        <select id="passiveEffectType"></select>
+      </label>
+
+      <label class="libraryField libraryShortField">
+        <span class="libraryLabel">効果値</span>
+        <div class="libraryValueWithUnit">
+          <input id="passiveValue" type="number" min="0" step="0.01" value="0" class="libraryShortInput">
+          <span class="libraryUnit">%</span>
+        </div>
+      </label>
+    </div>
+  </div>
+
+  <label id="passiveConditionTextLabel" hidden class="libraryField librarySecondaryField">
+    <span class="libraryLabel">条件原文</span>
+    <input id="passiveConditionText" type="text">
+  </label>
+
+  <label id="passiveTargetTextLabel" hidden class="libraryField librarySecondaryField">
+    <span class="libraryLabel">対象条件原文</span>
+    <input id="passiveTargetText" type="text">
+  </label>
+
+  <label class="libraryField librarySecondaryField">
+    <span class="libraryLabel">説明</span>
+    <textarea id="passiveDescription" rows="2"></textarea>
+  </label>
+
   <details id="legacyPassiveDetails" hidden>
     <summary>旧カードのステータス説明</summary>
-    <label>保存済みの説明（効果種別の自動推定はしません）<textarea id="passiveSkillDescription1" rows="3"></textarea></label>
+    <label class="libraryField librarySecondaryField">
+      <span class="libraryLabel">保存済みの説明（効果種別の自動推定はしません）</span>
+      <textarea id="passiveSkillDescription1" rows="3"></textarea>
+    </label>
   </details>
 </section>
 </div>
@@ -331,26 +305,17 @@
 ========================== -->
 
 <section class="libraryFormSection libraryOutfitSection">
-<h3>衣装スキル</h3>
+  <h3>衣装スキル</h3>
 
-<label>
-  スキル名
+  <label class="libraryField">
+    <span class="libraryLabel">スキル名</span>
+    <input id="outfitSkillName" type="text">
+  </label>
 
-  <input
-    id="outfitSkillName"
-    type="text"
-  >
-</label>
-
-<label>
-  効果
-
-<label class="librarySecondaryField">
-  <textarea
-    id="outfitSkillDescription"
-    rows="3"
-  ></textarea>
-</label>
+  <label class="libraryField librarySecondaryField">
+    <span class="libraryLabel">効果</span>
+    <textarea id="outfitSkillDescription" rows="2"></textarea>
+  </label>
 </section>
 
 
