@@ -177,10 +177,8 @@ const specialFixedEffects = document.querySelector('#specialFixedEffects');
 const specialEffectLabels = {
   score_support: 'スコアサポート',
   skill_frequency_up: '発動確率',
-  skill_activation_rate_up: '発動確率',
   life_recovery: 'ライフ回復',
   judgment_enhancement: '判定強化',
-  judgement_enhancement: '判定強化',
   other: 'その他'
 };
 
@@ -192,9 +190,7 @@ const specialAddOptions = [
 ];
 
 function specialEffectKey(type){
-  if(type === 'skill_activation_rate_up' || type === 'skill_frequency_up') return 'skill_frequency_up';
-  if(type === 'judgement_enhancement' || type === 'judgment_enhancement') return 'judgment_enhancement';
-  return type;
+  return normalizeSpecialEffectType(type);
 }
 
 function effectInput(type, field, options = {}){
@@ -243,13 +239,13 @@ function createSpecialEffectRow(effect = {}, removable = true){
       createSpecialField('発動時間', duration, '秒間'),
       createSpecialField('効果値', value, '%')
     );
-  }else if(type === 'skill_frequency_up' || type === 'skill_activation_rate_up'){
+  }else if(type === 'skill_frequency_up'){
     const value = effectInput(type, 'value', {placeholder: '値'});
     row.append(createSpecialField(specialEffectLabels[type], value, '%'));
   }else if(type === 'life_recovery'){
     const value = effectInput(type, 'value', {step: '1', placeholder: '値'});
     row.append(createSpecialField(specialEffectLabels[type], value, '回復'));
-  }else if(type === 'judgment_enhancement' || type === 'judgement_enhancement'){
+  }else if(type === 'judgment_enhancement'){
     const from = effectInput(type, 'from', {select: [['good', 'GOOD']]});
     const to = effectInput(type, 'to', {select: [['perfect', 'Perfect']]});
     row.append(
@@ -297,15 +293,11 @@ function setFixedSpecialEffects(effects){
   const scoreRow = createSpecialEffectRow(score || {type: 'score_support'}, false);
   known.add('score_support');
   (effects || []).forEach(effect => {
-    const fixedType = effect.type === 'skill_activation_rate_up'
-      ? 'skill_frequency_up'
-      : effect.type === 'judgement_enhancement'
-        ? 'judgment_enhancement'
-        : effect.type;
+    const fixedType = normalizeSpecialEffectType(effect.type);
     if(known.has(fixedType)) return;
     if(['skill_frequency_up', 'life_recovery', 'judgment_enhancement'].includes(fixedType)){
       const row = createSpecialEffectRow({ ...effect, type: fixedType });
-      row.specialEffect = effect;
+      row.specialEffect = { ...effect, type: fixedType };
       known.add(fixedType);
     }else{
       createSpecialEffectRow(effect);
@@ -684,6 +676,7 @@ function getMemberCardFormData(){
   delete card.skills.special.effectTypes;
   delete card.skills.special.boost;
   delete card.skills.special.duration;
+  delete card.skills.passive.scoreSupport;
   return card;
 }
 

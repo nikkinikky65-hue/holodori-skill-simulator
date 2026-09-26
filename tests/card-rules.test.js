@@ -27,6 +27,18 @@ const compound = createCardV2({skills:{special:{effects:[
 ]}}});
 assert(compound.skills.special.effects[0].duration === 8 && compound.skills.special.effects[1].value === 300 &&
   !Object.hasOwn(compound.skills.special.effects[1], 'duration'), 'independent special effects');
+const renamedSpecial = normalizeCardV2({skills:{special:{effects:[
+  {type:'skill_activation_rate_up',value:12,extra:'keep'},
+  {type:'judgement_enhancement',from:'good',to:'perfect'}
+]}}});
+assert(renamedSpecial.skills.special.effects[0].type==='skill_frequency_up' &&
+  renamedSpecial.skills.special.effects[0].value===12 && renamedSpecial.skills.special.effects[0].extra==='keep' &&
+  renamedSpecial.skills.special.effects[1].type==='judgment_enhancement','legacy SP IDs normalized without changing effect data');
+assert(getSpecialEffects({skills:{special:{effectTypes:['skill_activation_rate_up'],boost:12}}})[0].type==='skill_frequency_up',
+  'legacy shared SP IDs normalized');
+const fresh = normalizeCardV2({});
+assert(!Object.hasOwn(fresh.skills.passive, 'scoreSupport') && fresh.skills.passive.effect.type==='' &&
+  fresh.skills.passive.status.description==='', 'new Passive defaults use current effect and status fields only');
 const original = createCardV2({id:'keep', rarity:5, progression:{training:2,bloom:5}, extensions:{future:{x:1}}, skills:{active:{description:'keep'},passive:{scoreSupport:{boost:12}}}});
 const edited = createCardV2({cardName:'edited',skills:{active:{boost:30}}}, original);
 assert(edited.id === original.id && edited.stats.total === 22000, 'identity and stats');

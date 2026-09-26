@@ -10,6 +10,8 @@
 
 SP/Pともスコアサポートの効果種別は `score_support`。新形式では効果ごとに値を保持する。
 
+現行LibraryのSP type IDは `score_support`、`skill_frequency_up`、`life_recovery`、`judgment_enhancement`、`other`。任意の未知typeも保持する。旧ID `skill_activation_rate_up` と `judgement_enhancement` は読み込み時にそれぞれ `skill_frequency_up` と `judgment_enhancement` へ正規化し、Libraryで保存すると正規IDで保存する。
+
 ```json
 {
   "effects": [
@@ -46,9 +48,9 @@ Pの例：
 
 ## 旧データとの互換性
 
-`getPassiveEffect()`が旧`skills.passive.scoreSupport`を新UI向けに解釈する。boostはvalue、旧conditionType/targetTypeはtype条件へ対応する。旧ステータス説明は推測分類せず、補足欄で保持する。
+`getPassiveEffect()`が旧`skills.passive.scoreSupport`を新UI向けに解釈する。boostはvalue、旧conditionType/targetTypeはtype条件へ対応する。`skills.passive.status.description`は現行UI用に維持する。
 
-Libraryで保存すると新effectが追加される。旧scoreSupportや未知フィールドは消去しないが、新effectが存在する場合はそれが正本となる。`getPassiveScoreSupport()`が計算側へ接続し、PをステータスUPや未設定へ変更した場合に旧scoreSupportを再適用しない。旧scoreSupportへの二重書き込みはしない。
+旧scoreSupportは読み込み互換のみ。Libraryで編集保存すると`skills.passive.effect`へ移行し、旧`scoreSupport`オブジェクトは削除する。新規カードのデフォルト構造にも旧scoreSupportを生成しない。`extensions`および旧フィールド以外の未知フィールドは保持し、新effectが存在する場合はそれが正本となる。`getPassiveScoreSupport()`が計算側へ接続し、PをステータスUPや未設定へ変更した場合に旧scoreSupportを再適用しない。旧scoreSupportへの二重書き込みはしない。
 
 カード名は新規空欄なら未分類、既存編集の空欄なら既存名を維持する。このルールは`createCardV2()`に集約している。
 

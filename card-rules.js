@@ -113,6 +113,16 @@ function mergeCardFields(base, patch){
   return result;
 }
 
+// SPの現行UI分類に揃える旧IDの読み込み時移行。
+const SPECIAL_EFFECT_TYPE_ALIASES = {
+  skill_activation_rate_up: 'skill_frequency_up',
+  judgement_enhancement: 'judgment_enhancement'
+};
+
+function normalizeSpecialEffectType(type){
+  return SPECIAL_EFFECT_TYPE_ALIASES[type] || type;
+}
+
 function normalizeCardV2(card){
   const defaults = {
     id: '', talentId: '', cardName: '', type: '', rarity: 5,
@@ -123,9 +133,9 @@ function normalizeCardV2(card){
       active: { interval: 0, probability: 'mid', duration: 0, boost: 0, description: '' },
       passive: {
         status: { description: '' },
-        scoreSupport: {
-          conditionType: '', conditionCount: 0, targetType: '', targetCount: 0,
-          boost: 0, description: ''
+        effect: {
+          type: '', condition: { kind: 'none', value: '' }, conditionCount: 0,
+          target: { kind: 'none', value: '' }, targetCount: 0, value: 0, description: ''
         }
       }
     },
@@ -141,7 +151,22 @@ function normalizeCardV2(card){
     }
     return result;
   }
-  return fill(defaults, card);
+  const sourcePassive = card?.skills?.passive;
+  const hasCanonicalPassiveEffect = sourcePassive?.effect && typeof sourcePassive.effect === 'object';
+  const normalized = fill(defaults, card);
+  if(!hasCanonicalPassiveEffect && sourcePassive?.scoreSupport){
+    normalized.skills.passive.effect = getPassiveEffect({skills:{passive:{scoreSupport:sourcePassive.scoreSupport}}});
+  }
+  const special = normalized.skills.special;
+  if(Array.isArray(special.effects)){
+    special.effects = special.effects.map(effect => effect && typeof effect === 'object'
+      ? { ...effect, ...(effect.type ? { type: normalizeSpecialEffectType(effect.type) } : {}) }
+      : effect);
+  }
+  if(Array.isArray(special.effectTypes)){
+    special.effectTypes = special.effectTypes.map(normalizeSpecialEffectType);
+  }
+  return normalized;
 }
 
 function createCardV2(data, existing = {}){
@@ -184,9 +209,7 @@ function writeCardLibrary(cards){
 const SKILL_EFFECT_TYPES = {
   special: [
     ['score_support', 'スコアサポート'], ['life_recovery', 'ライフ回復'],
-    ['skill_frequency_up', 'スキル発動頻度UP'], ['judgment_enhancement', '判定強化'],
-    // 旧Card v2で使われている識別子も読み書きできるよう残す。
-    ['skill_activation_rate_up', 'スキル発動率UP（旧）'], ['judgement_enhancement', '判定強化（旧）']
+    ['skill_frequency_up', 'スキル発動頻度UP'], ['judgment_enhancement', '判定強化']
   ],
   active: [['score_up', 'スコアUP']],
   passive: [
@@ -249,9 +272,11 @@ function skillConditionFromKey(key, text = ''){
 
 function getSpecialEffects(card){
   const special = card?.skills?.special || {};
-  if(Array.isArray(special.effects)) return special.effects;
+  if(Array.isArray(special.effects)) return special.effects.map(effect => effect && typeof effect === 'object'
+    ? { ...effect, ...(effect.type ? { type: normalizeSpecialEffectType(effect.type) } : {}) }
+    : effect);
   return (special.effectTypes || []).map(type => {
-    const effect = { type, value: special.boost ?? null };
+    const effect = { type: normalizeSpecialEffectType(type), value: special.boost ?? null };
     if(special.duration != null) effect.duration = special.duration;
     return effect;
   });

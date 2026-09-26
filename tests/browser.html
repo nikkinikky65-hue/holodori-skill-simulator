@@ -254,8 +254,12 @@
     const legacyCard=w.eval(`createCardV2({id:'legacy-manual',talentId:'tokino_sora',cardName:'旧カード名',type:'cute',extensions:{future:42},skills:{
       active:{interval:35,probability:'mid',duration:8,boost:75,description:'A原文',future:1},
       special:{description:'SP原文',future:2},
-      passive:{status:{description:'旧ステータス説明'},scoreSupport:{conditionType:'cute',conditionCount:3,targetType:'pure',targetCount:2,boost:8,description:'旧P原文',future:3}}
+      passive:{status:{description:'旧ステータス説明'},future:{keep:true},scoreSupport:{conditionType:'cute',conditionCount:3,targetType:'pure',targetCount:2,boost:8,description:'旧P原文',future:3}}
     }})`);
+    legacyCard.skills.special.effects=[
+      {type:'skill_activation_rate_up',value:12,extra:'keep'},
+      {type:'judgement_enhancement',from:'good',to:'perfect'}
+    ];
     localStorage.setItem(key,JSON.stringify({version:2,cards:[legacyCard]}));
     w=await open('library.html');watch(w);
     input(w,'#cardTalent','robocosan');input(w,'#cardName','  ');
@@ -289,10 +293,17 @@
     assert(!w.document.querySelector('#legacyPassiveDetails').hidden,'legacy status description accessible');
     input(w,'#cardName','');input(w,'#passiveValue',9);w.document.querySelector('#memberCardForm').requestSubmit();
     let upgraded=read().find(c=>c.id==='legacy-manual');
-    assert(upgraded.cardName==='旧カード名' && upgraded.skills.passive.effect.value===9 && upgraded.skills.passive.scoreSupport.boost===8 && Array.isArray(upgraded.skills.special.effects) &&
+    assert(upgraded.cardName==='旧カード名' && upgraded.skills.passive.effect.value===9 && !Object.hasOwn(upgraded.skills.passive,'scoreSupport') && Array.isArray(upgraded.skills.special.effects) &&
       !Object.hasOwn(upgraded.skills.special,'effectTypes') && !Object.hasOwn(upgraded.skills.special,'boost') && !Object.hasOwn(upgraded.skills.special,'duration'),'blank edit preserves name and migrates SP');
-    assert(upgraded.extensions.future===42 && upgraded.skills.active.future===1 && upgraded.skills.special.future===2 && upgraded.skills.passive.scoreSupport.future===3,'unknown data survives editing');
+    assert(upgraded.skills.passive.status.description==='旧ステータス説明' && upgraded.skills.passive.future.keep &&
+      upgraded.extensions.future===42 && upgraded.skills.active.future===1 && upgraded.skills.special.future===2,'status description and unknown data survive while legacy Passive is removed');
+    assert(upgraded.skills.special.effects.some(effect=>effect.type==='skill_frequency_up' && effect.value===12 && effect.extra==='keep') &&
+      upgraded.skills.special.effects.some(effect=>effect.type==='judgment_enhancement' && effect.from==='good' && effect.to==='perfect') &&
+      !upgraded.skills.special.effects.some(effect=>['skill_activation_rate_up','judgement_enhancement'].includes(effect.type)),
+      'legacy SP IDs save using canonical IDs');
     w=await open('library.html');watch(w);editNamed(w,'旧カード名');
+    assert(w.document.querySelector('.specialFixedEffectRow[data-special-fixed-type="skill_frequency_up"]') &&
+      w.document.querySelector('.specialFixedEffectRow[data-special-fixed-type="judgment_enhancement"]'), 'legacy SP IDs restore in canonical UI categories');
     assert(w.document.querySelector('#passiveValue').value==='9','new P takes precedence');
     input(w,'#passiveEffectType','performance_up');input(w,'#passiveValue',8);w.document.querySelector('#memberCardForm').requestSubmit();
     w=await open('index.html');watch(w);w.alert=()=>{};
