@@ -201,18 +201,33 @@ function effectInput(type, field, options = {}){
   const input = document.createElement(options.select ? 'select' : 'input');
   input.dataset.specialEffectField = field;
   if(options.select){
+    input.className = 'libraryCompactSelect';
     options.select.forEach(([value, label]) => input.add(new Option(label, value)));
   }else{
+    input.className = 'libraryShortInput';
     input.type = 'number'; input.min = '0'; input.step = options.step || '0.01';
     input.placeholder = options.placeholder || '';
   }
   return input;
 }
 
-function appendUnit(row, text){
+function appendUnit(container, text){
   const unit = document.createElement('span');
   unit.className = 'libraryUnit'; unit.textContent = text;
-  row.append(unit);
+  container.append(unit);
+}
+
+function createSpecialField(labelText, input, unitText = ''){
+  const field = document.createElement('label');
+  field.className = 'libraryField libraryShortField';
+  const label = document.createElement('span');
+  label.className = 'libraryLabel'; label.textContent = labelText;
+  const valueWithUnit = document.createElement('div');
+  valueWithUnit.className = 'libraryValueWithUnit';
+  valueWithUnit.append(input);
+  if(unitText) appendUnit(valueWithUnit, unitText);
+  field.append(label, valueWithUnit);
+  return field;
 }
 
 function createSpecialEffectRow(effect = {}, removable = true){
@@ -221,26 +236,29 @@ function createSpecialEffectRow(effect = {}, removable = true){
   row.specialEffect = effect;
   row.dataset.specialFixedType = effect.type || 'score_support';
   const type = row.dataset.specialFixedType;
-  const label = document.createElement('span');
-  label.className = 'libraryLabel'; label.textContent = specialEffectLabels[type] || `保存済み：${type}`;
-  row.append(label);
   if(type === 'score_support'){
     const duration = effectInput(type, 'duration', {placeholder: '時間'});
     const value = effectInput(type, 'value', {placeholder: '値'});
-    row.append(duration); appendUnit(row, '秒'); row.append(value); appendUnit(row, '%');
+    row.append(
+      createSpecialField('発動時間', duration, '秒間'),
+      createSpecialField('効果値', value, '%')
+    );
   }else if(type === 'skill_frequency_up' || type === 'skill_activation_rate_up'){
     const value = effectInput(type, 'value', {placeholder: '値'});
-    row.append(value); appendUnit(row, '%');
+    row.append(createSpecialField(specialEffectLabels[type], value, '%'));
   }else if(type === 'life_recovery'){
     const value = effectInput(type, 'value', {step: '1', placeholder: '値'});
-    row.append(value); appendUnit(row, '回復');
+    row.append(createSpecialField(specialEffectLabels[type], value, '回復'));
   }else if(type === 'judgment_enhancement' || type === 'judgement_enhancement'){
     const from = effectInput(type, 'from', {select: [['good', 'GOOD']]});
     const to = effectInput(type, 'to', {select: [['perfect', 'Perfect']]});
-    row.append(from); appendUnit(row, '以上を'); row.append(to); appendUnit(row, 'に');
+    row.append(
+      createSpecialField('判定', from, '以上を'),
+      createSpecialField('変更先', to, 'に')
+    );
   }else{
     const value = effectInput(type, 'value', {placeholder: '値'});
-    row.append(value);
+    row.append(createSpecialField(specialEffectLabels[type] || `保存済み：${type}`, value));
   }
   row.querySelectorAll('[data-special-effect-field]').forEach(input => {
     if(effect[input.dataset.specialEffectField] != null) input.value = effect[input.dataset.specialEffectField];
