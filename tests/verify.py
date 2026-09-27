@@ -132,7 +132,7 @@ try{writeCardLibrary([]);}catch(e){refused=true;}
 assert(refused && localStorage.getItem(MEMBER_CARD_STORAGE_KEY)==='{bad json','invalid storage preserved');
 print('Score/segments regression and invalid-storage preservation: PASS');
 """
-for name in ['app.js','library.js','event.js','members.js','card-rules.js','formation-rules.js','formation.js','active-snapshot.js','support-rules.js']:
+for name in ['app.js','library.js','event.js','members.js','card-rules.js','formation-rules.js','formation.js','active-snapshot.js','support-rules.js','parameter-rules.js']:
     js += '\nnew Function(readFile('+repr(str(root/name))+'));'
 js += "\nprint('All JavaScript syntax: PASS');"
 with tempfile.NamedTemporaryFile(mode='w',suffix='.js') as f:
@@ -146,3 +146,5 @@ subprocess.run([jsc,'formation-rules.js','tests/formation-rules.test.js'],check=
 subprocess.run([jsc,'card-rules.js','support-rules.js','tests/support-rules.test.js'],check=True,cwd=root)
 
 subprocess.run([jsc,'card-rules.js','support-rules.js','tests/skill-data.test.js'],check=True,cwd=root)
+
+subprocess.run([jsc,'card-rules.js','parameter-rules.js','tests/parameter-rules.test.js'],check=True,cwd=root)
