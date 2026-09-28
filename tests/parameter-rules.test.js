@@ -24,6 +24,7 @@ const cards = [
 ];
 const members = cards.map((card,index)=>({
   slot:index+1,libraryCardId:card.id,
+  baseStats:{performance:card.stats.performance,technique:card.stats.technique,sense:card.stats.sense},
   board:{performance:index===0?900:0,technique:index===1?900:0,sense:index===2?900:0},
   outfitRates:index===0?{performance:1}:{}
 }));
@@ -48,12 +49,63 @@ const boardChanged = calculateUnitParameterBreakdown(changedBoard,{cards,memoryR
 assert(boardChanged.passive===result.passive && boardChanged.memory===result.memory && boardChanged.outfit===result.outfit,'Board does not change Passive, Memory or Outfit');
 assert(boardChanged.members[2].enhancement>result.members[2].enhancement,'Board contributes to member enhancement');
 
-const textTargetCard={id:'legacy-text',stats:{performance:10,technique:10,sense:10},skills:{passive:{effect:{
-  type:'performance_up',condition:{kind:'none'},conditionCount:0,
-  target:{kind:'text',value:'自身'},targetCount:1,value:50
+const textTargetCard={id:'legacy-text',stats:{performance:999,technique:999,sense:999},skills:{passive:{effect:{
+  type:'all_parameters_up',condition:{kind:'none'},conditionCount:0,
+  target:{kind:'text',value:''},targetCount:1,value:50
 }}}};
-const legacyText=calculateUnitParameterBreakdown([{slot:1,card:textTargetCard}],{memoryRate:0});
-assert(legacyText.passive===0 && legacyText.passiveResults[0].status==='unresolved-target','legacy text target is not reinterpreted');
+const legacyText=calculateUnitParameterBreakdown([{slot:1,card:textTargetCard,baseStats:{performance:10,technique:10,sense:10}}],{memoryRate:0});
+assert(legacyText.passive===15 && legacyText.passiveResults[0].targetSlots[0]===1,'narrow legacy blank-text all-parameter target maps to self');
+const otherTextTarget={...textTargetCard,skills:{passive:{effect:{
+  type:'performance_up',condition:{kind:'none'},conditionCount:0,
+  target:{kind:'text',value:''},targetCount:1,value:50
+}}}};
+const otherText=calculateUnitParameterBreakdown([{slot:1,card:otherTextTarget,baseStats:{performance:10,technique:10,sense:10}}],{memoryRate:0});
+assert(otherText.passive===0 && otherText.passiveResults[0].status==='unresolved-target','other text target remains unresolved');
+
+const caseCCards=[
+  {id:'hoshimachi_suisei',type:'cute',stats:{performance:4394,technique:3102,sense:2709},skills:{passive:{effect:{
+    type:'performance_up',condition:{kind:'none'},conditionCount:0,
+    target:{kind:'type',value:'cute'},targetCount:2,value:10
+  }}}},
+  {id:'ayunda_risu',type:'cute',stats:{performance:4210,technique:3451,sense:3354},skills:{passive:{effect:{
+    type:'performance_up',condition:{kind:'type',value:'cute'},conditionCount:2,
+    target:{kind:'type',value:'cute'},targetCount:3,value:14
+  }}}},
+  {id:'shirogane_noel',type:'cute',stats:{performance:3862,technique:3189,sense:3278},skills:{passive:{effect:{
+    type:'all_parameters_up',condition:{kind:'type',value:'cute'},conditionCount:2,
+    target:{kind:'text',value:''},targetCount:1,value:16
+  }}}},
+  {id:'hakos_baelz',type:'cute',stats:{performance:3260,technique:4283,sense:3454},skills:{passive:{effect:{
+    type:'technique_up',condition:{kind:'type',value:'cute'},conditionCount:2,
+    target:{kind:'type',value:'cute'},targetCount:3,value:14
+  }}}},
+  {id:'airani_iofifteen',type:'cute',stats:{performance:3189,technique:3278,sense:3862},skills:{passive:{effect:{
+    type:'sense_up',condition:{kind:'type',value:'cute'},conditionCount:2,
+    target:{kind:'type',value:'cute'},targetCount:3,value:7
+  }}}}
+];
+const caseCBaseStats=[
+  {performance:3415,technique:2123,sense:1730},
+  {performance:3231,technique:2472,sense:2375},
+  {performance:2883,technique:2210,sense:2299},
+  {performance:2281,technique:3304,sense:2475},
+  {performance:2210,technique:2299,sense:2883}
+];
+const caseC=calculateUnitParameterBreakdown(caseCCards.map((card,index)=>({
+  slot:index+1,libraryCardId:card.id,card,baseStats:caseCBaseStats[index],
+  board:{performance:979,technique:979,sense:979}
+})),{memoryRate:0.064,enhancementRate:0.0243});
+assert(caseCCards.map((_,index)=>caseCBaseStats[index].performance+caseCBaseStats[index].technique+caseCBaseStats[index].sense).join(',')==='7268,8078,7392,8060,7392','CASE C base totals and ranking tie');
+assert(caseC.passiveResults[0].targetSlots.join(',')==='2,4','CASE C target order is descending baseTotal');
+assert(caseC.passiveResults[1].targetSlots.join(',')==='2,4,3','CASE C Risu passive targets baseTotal top three');
+assert(caseC.passiveResults[3].targetSlots.join(',')==='2,4,3' && caseC.passiveResults[4].targetSlots.join(',')==='2,4,3','CASE C tie resolves in formation order');
+assert(caseC.passiveResults[2].targetSlots.join(',')==='3','CASE C legacy Noel passive self-target');
+assert(caseC.baseParameter===38190 && caseC.board===14685,'CASE C base and board totals');
+assert(caseC.members.map(member=>[member.passive.performance,member.passive.technique,member.passive.sense].join('/')).join(',')==='0/0/0,776/347/167,865/663/529,548/463/174,0/0/0','CASE C per-parameter ceil and combined rates');
+assert(caseC.members.map(member=>member.passive.total).join(',')==='0,1290,2057,1185,0','CASE C member Passive totals: '+caseC.members.map(member=>member.passive.total).join(','));
+assert(caseC.passive===4532 && caseC.memory===2451 && caseC.enhancement===1397 && caseC.total===61255,'CASE C all unit totals');
+assert(caseC.members.map(member=>member.memory.total).join(',')==='466,518,475,517,475','CASE C per-member Memory from baseStats');
+assert(caseC.members.map(member=>member.enhancement).join(',')==='248,300,301,297,251','CASE C per-member enhancement');
 
 const reportedCases = [
   [53522,14685,0,3433,0,1662,73302],

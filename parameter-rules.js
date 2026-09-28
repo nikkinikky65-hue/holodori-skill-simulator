@@ -13,8 +13,10 @@ function parameterNumber(value){
   return Number.isFinite(number) ? Math.max(0, number) : 0;
 }
 
-function parameterStats(member, card){
-  const stats = card?.stats || member.base || {};
+function parameterStats(member){
+  // Card v2 stats may already include the board correction from when that JSON was recorded.
+  // Only explicit baseStats are valid calculation input; never infer them from card.stats.
+  const stats = member.baseStats || {};
   return Object.fromEntries(PARAMETER_KEYS.map(key => [key, parameterNumber(stats[key])]));
 }
 
@@ -63,7 +65,13 @@ function resolvePassiveTargets(source, effect, members){
   const validTargetCount = Number.isInteger(targetCount) && targetCount >= 0;
   let candidates = [];
   let targetStatus = 'resolved';
-  const target = effect.target || { kind: 'none' };
+  let target = effect.target || { kind: 'none' };
+  // Temporary Card v2 compatibility: this verified legacy Noel Passive is self-targeted.
+  // Remove this narrow rule after Card v2 data is normalized to target.kind="self".
+  if(effect.type === 'all_parameters_up' && target.kind === 'text' &&
+     target.value === '' && targetCount === 1){
+    target = { kind: 'self' };
+  }
   if(!validTargetCount){
     targetStatus = 'unresolved-target-count';
   }else if(target.kind === 'self'){
@@ -105,12 +113,12 @@ function calculatePassiveEffects(members){
       type: effect.type, value: parameterNumber(effect.value), ...reportedResolution
     });
     if(resolution.activated !== true || resolution.status !== 'resolved') continue;
-    const rate = parameterNumber(effect.value) / 100;
-    targets.forEach(target => affectedKeys.forEach(key => { target.passiveRates[key] += rate; }));
+    const ratePercent = parameterNumber(effect.value);
+    targets.forEach(target => affectedKeys.forEach(key => { target.passiveRates[key] += ratePercent; }));
   }
   const results = prepared.map(member => {
     const values = Object.fromEntries(PARAMETER_KEYS.map(key => [
-      key, Math.ceil(member.base[key] * member.passiveRates[key])
+      key, Math.ceil(member.base[key] * member.passiveRates[key] / 100)
     ]));
     return {
       ...member,
@@ -124,15 +132,16 @@ function calculateEnhancementBonus(enhancementBase, enhancementRate = UNIT_ENHAN
   return Math.ceil(parameterNumber(enhancementBase) * parameterNumber(enhancementRate));
 }
 
-// members: {slot, libraryCardId, card?, board?, outfitRates?, type?, affiliations?}
-// cards: Card v2 library; memoryRate is the final decimal rate (e.g. 0.064).
+// members: {slot, libraryCardId, baseStats, board?, outfitRates?, type?, affiliations?}
+// baseStats is required calculation input and is never read from Card v2 stats.
+// cards: Card v2 library is consulted for skills/type only; memoryRate is the final decimal rate.
 function calculateUnitParameterBreakdown(members, {
   cards = [], memoryRate = 0, enhancementRate = UNIT_ENHANCEMENT_RATE
 } = {}){
   const cardsById = new Map(cards.map(card => [card.id, card]));
   const prepared = members.map((member, index) => {
     const card = member.card || cardsById.get(member.libraryCardId) || null;
-    const base = parameterStats(member, card);
+    const base = parameterStats(member);
     return {
       ...member, slot: member.slot ?? index + 1, card,
       type: member.type ?? card?.type ?? '',
