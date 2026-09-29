@@ -1,0 +1,411 @@
+{
+  "pocFormat": "one-card-research-poc",
+  "canonicalSchemaStatus": "not-defined",
+  "scope": {
+    "purpose": "Check which fields and referenced rows in HolodoriDB can reconstruct one publicly listed five-star hololive Dreams card.",
+    "sourceDataWasModified": false,
+    "rawRepositoryJsonCopied": false,
+    "productionSimulatorIntegrated": false,
+    "siteDisplayEnabled": false
+  },
+  "provenance": {
+    "repository": "https://github.com/HolodoriDB/holodori-db-jpn-diff",
+    "repositoryDescription": "HolodoriDB public Japanese master-database difference repository; this PoC reads the committed rows without checking out or copying the source JSON.",
+    "commitSha": "e43f062c32ff4e04567235efcd58448cd6b10f35",
+    "commitUrl": "https://github.com/HolodoriDB/holodori-db-jpn-diff/tree/e43f062c32ff4e04567235efcd58448cd6b10f35",
+    "retrievedAtUtc": "2026-09-29T09:39:12Z",
+    "publicReleaseCrossCheck": {
+      "url": "https://www.horodori.com/cards/%E3%82%B5%E3%82%AF%E3%83%A9Bloom",
+      "use": "Independent public listing used only to confirm that this card is publicly documented and to compare its displayed maximum stats/skills; not used as a HolodoriDB source for card fields."
+    }
+  },
+  "card": {
+    "id": "card-00015-5-uniq-0003-00",
+    "nameJa": "サクラBloom",
+    "character": {
+      "holodoriCharacterId": "chr-00015",
+      "nameEng": "Sakura Miko",
+      "simulatorTalentIdCandidate": "sakura_miko",
+      "simulatorTalentIdMappingStatus": "Candidate matched by character name; no shared source ID is present in the simulator master data."
+    },
+    "rarity": {
+      "raw": "CardRarity_CARD_RARITY_RARITY_5",
+      "simulatorCandidate": 5
+    },
+    "attribute": {
+      "raw": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3",
+      "simulatorCandidate": "happy",
+      "mappingEvidence": "The skill-effect target uses the same ATTRIBUTE_3 enum and its Japanese generated description labels it ハッピータイプ; no standalone enum-localization table was found in this repository."
+    },
+    "sourceReferences": {
+      "nameLangId": "la-card_name-00015-5-uniq-0003-00",
+      "cardLevelGroupId": "grp-card-level-rarity_5-06",
+      "cardLevelLimitGroupId": "rarity_5-attribute_3",
+      "cardPotentialGroupId": "card_potential_grp-rarity_5",
+      "livePassiveSkillId": "live_passive_skill-card-00015-5-uniq-0003-00",
+      "liveActiveSkillId": "live_active_skill-card-00015-5-uniq-0003-00",
+      "liveSpecialSkillId": "live_special_skill-card-00015-5-uniq-0003-00",
+      "skillTreeConnectEffectId": "skill_tree_connect_effect-skill_tree_effect_up-skill_tree_connect_effect_extent-center_area-001-rare_5"
+    }
+  },
+  "parameterSnapshot": {
+    "selectedState": {
+      "limitBreakCount": 4,
+      "cardLevel": 80,
+      "potentialUpgradeCount": 5,
+      "stateSelectionBasis": "CardLevelLimit levelLimit=80 at limitBreakCount=4; CardLevel row at level 80; CardPotential group contains five upgrade steps."
+    },
+    "cardLevel": {
+      "level": 80,
+      "parameterBaseValueRaw": "23512",
+      "expRaw": "1122650",
+      "liveDeckPowerPermyriadUpRaw": "8"
+    },
+    "parameterMultipliersPermil": {
+      "performance": 297,
+      "technique": 263,
+      "sense": 440
+    },
+    "potential": {
+      "groupId": "card_potential_grp-rarity_5",
+      "allParameterUpPermil": 100,
+      "rawEffectType": "CardPotentialEffectType_CARD_POTENTIAL_EFFECT_TYPE_ALL_PARAMETER_UP_PERMIL_UP",
+      "upgradeCount": 2
+    },
+    "reconstructionStatus": "The base parameter, three permil multipliers, level cap, and potential bonus are present. The database rows do not specify final integer rounding or the complete game stat pipeline. Do not treat computed integers as confirmed simulator stats.",
+    "candidateArithmeticOnly": {
+      "formulaHypothesis": "ceil(parameterBaseValue * parameterMultiplierPermil / 1000 * (1 + allParameterUpPermil / 1000))",
+      "formulaStatus": "Unconfirmed; included only because it matches the independent public max-stat listing for this card.",
+      "publicListingMaxStats": {
+        "total": 25865,
+        "performance": 7682,
+        "technique": 6803,
+        "sense": 11380
+      }
+    }
+  },
+  "skills": {
+    "passive": {
+      "skillId": "live_passive_skill-card-00015-5-uniq-0003-00",
+      "levels": [
+        {
+          "level": 1,
+          "effectTypeRaw": "LivePassiveSkillEffectType_LIVE_PASSIVE_SKILL_EFFECT_TYPE_LIVE_ACTIVE_SKILL_EFFECT_UP_PERMIL_UP",
+          "valuePermilRaw": "80",
+          "target": {
+            "id": "live_skill_effect_target-attribute-attribute_3-2",
+            "typeRaw": "LiveSkillEffectTargetType_LIVE_SKILL_EFFECT_TARGET_TYPE_ATTRIBUTE",
+            "attributeRaw": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3",
+            "count": 2,
+            "descriptionJa": "ハッピータイプ2人の"
+          },
+          "descriptionJa": "ハッピータイプ2人のスコアサポート効果8%"
+        },
+        {
+          "level": 2,
+          "effectTypeRaw": "LivePassiveSkillEffectType_LIVE_PASSIVE_SKILL_EFFECT_TYPE_LIVE_ACTIVE_SKILL_EFFECT_UP_PERMIL_UP",
+          "valuePermilRaw": "110",
+          "target": {
+            "id": "live_skill_effect_target-attribute-attribute_3-2",
+            "typeRaw": "LiveSkillEffectTargetType_LIVE_SKILL_EFFECT_TARGET_TYPE_ATTRIBUTE",
+            "attributeRaw": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3",
+            "count": 2,
+            "descriptionJa": "ハッピータイプ2人の"
+          },
+          "descriptionJa": "ハッピータイプ2人のスコアサポート効果11%"
+        }
+      ],
+      "conditionStatus": "No separate passive condition/trigger reference was found on the joined skill/effect rows. Do not synthesize a condition or interpret the absent field as an explicit none condition.",
+      "maximumLevelCrossCheck": "The public listing displays the level-2 description; the meaning of CardPotential value=2 as a level setting versus increment is not explicitly documented by these rows."
+    },
+    "active": {
+      "skillId": "live_active_skill-card-00015-5-uniq-0003-00",
+      "levels": [
+        {
+          "level": 1,
+          "coolTimeMillisecond": 15000,
+          "activationProbabilityPermilMultiply": 460,
+          "effectDurationMillisecond": 6000,
+          "primaryEffect": {
+            "typeRaw": "LiveActiveSkillEffectType_LIVE_ACTIVE_SKILL_EFFECT_TYPE_SCORE_UP_PERMIL_UP",
+            "valueRaw": "450"
+          },
+          "additionalTrigger": {
+            "groupId": "live_skill_trigger-combo_gte-40",
+            "typeRaw": "LiveSkillTriggerType_LIVE_SKILL_TRIGGER_TYPE_COMBO_GTE",
+            "thresholdRaw": "40",
+            "descriptionJa": "40コンボ以上で"
+          },
+          "additionalEffect": {
+            "typeRaw": "LiveActiveSkillEffectType_LIVE_ACTIVE_SKILL_EFFECT_TYPE_SCORE_UP_PERMIL_UP",
+            "valueRaw": "900"
+          },
+          "descriptionJa": "15秒毎に中確率で6秒間スコアが45%UP。40コンボ以上でスコアが90%UP。"
+        },
+        {
+          "level": 2,
+          "coolTimeMillisecond": 15000,
+          "activationProbabilityPermilMultiply": 460,
+          "effectDurationMillisecond": 6000,
+          "primaryEffect": {
+            "typeRaw": "LiveActiveSkillEffectType_LIVE_ACTIVE_SKILL_EFFECT_TYPE_SCORE_UP_PERMIL_UP",
+            "valueRaw": "550"
+          },
+          "additionalTrigger": {
+            "groupId": "live_skill_trigger-combo_gte-40",
+            "typeRaw": "LiveSkillTriggerType_LIVE_SKILL_TRIGGER_TYPE_COMBO_GTE",
+            "thresholdRaw": "40",
+            "descriptionJa": "40コンボ以上で"
+          },
+          "additionalEffect": {
+            "typeRaw": "LiveActiveSkillEffectType_LIVE_ACTIVE_SKILL_EFFECT_TYPE_SCORE_UP_PERMIL_UP",
+            "valueRaw": "1100"
+          },
+          "descriptionJa": "15秒毎に中確率で6秒間スコアが55%UP。40コンボ以上でスコアが110%UP。"
+        }
+      ],
+      "probabilityMappingStatus": "The generated Japanese description gives 中確率, which fits the simulator's qualitative mid option. The meaning of activationProbabilityPermilMultiply=460 as an actual final probability is not resolved by these rows."
+    },
+    "special": {
+      "skillId": "live_special_skill-card-00015-5-uniq-0003-00",
+      "levels": [
+        {
+          "level": 1,
+          "effectDurationMillisecond": 10000,
+          "primaryEffect": {
+            "typeRaw": "LiveActiveSkillEffectType_LIVE_ACTIVE_SKILL_EFFECT_TYPE_SCORE_UP_EFFECT_UP_PERMIL_UP",
+            "valueRaw": "1200"
+          },
+          "additionalEffect": {
+            "typeRaw": "LiveActiveSkillEffectType_LIVE_ACTIVE_SKILL_EFFECT_TYPE_LIVE_ACTIVE_SKILL_ACTIVATION_PROBABILITY_UP_PERMIL_UP",
+            "valueRaw": "400"
+          },
+          "descriptionJa": "10秒間スコアサポート効果120%。スキル発動率が40%UP。"
+        },
+        {
+          "level": 2,
+          "effectDurationMillisecond": 10000,
+          "primaryEffect": {
+            "typeRaw": "LiveActiveSkillEffectType_LIVE_ACTIVE_SKILL_EFFECT_TYPE_SCORE_UP_EFFECT_UP_PERMIL_UP",
+            "valueRaw": "1450"
+          },
+          "additionalEffect": {
+            "typeRaw": "LiveActiveSkillEffectType_LIVE_ACTIVE_SKILL_EFFECT_TYPE_LIVE_ACTIVE_SKILL_ACTIVATION_PROBABILITY_UP_PERMIL_UP",
+            "valueRaw": "500"
+          },
+          "descriptionJa": "10秒間スコアサポート効果145%。スキル発動率が50%UP。"
+        }
+      ],
+      "additionalEffectDurationStatus": "effectDurationMillisecond is stored on the skill-level row, not independently on the secondary effect; whether both effects share the full duration is not proven by this table layout."
+    }
+  },
+  "otherReferencedTables": {
+    "skillMasterRows": {
+      "passive": { "table": "LivePassiveSkill", "id": "live_passive_skill-card-00015-5-uniq-0003-00", "otherFields": "No other fields in this row." },
+      "active": { "table": "LiveActiveSkill", "id": "live_active_skill-card-00015-5-uniq-0003-00", "otherFields": "No other fields in this row." },
+      "special": { "table": "LiveSpecialSkill", "id": "live_special_skill-card-00015-5-uniq-0003-00", "otherFields": "No other fields in this row." }
+    },
+    "cardLevelLimit": {
+      "groupId": "rarity_5-attribute_3",
+      "limitBreakCount": 4,
+      "levelLimit": 80
+    },
+    "cardPotentialUpgradeCurve": [
+      {
+        "upgradeCount": 1,
+        "effectTypeRaw": "CardPotentialEffectType_CARD_POTENTIAL_EFFECT_TYPE_ACTIVE_SKILL_LEVEL_UP",
+        "valueRaw": "2"
+      },
+      {
+        "upgradeCount": 2,
+        "effectTypeRaw": "CardPotentialEffectType_CARD_POTENTIAL_EFFECT_TYPE_ALL_PARAMETER_UP_PERMIL_UP",
+        "valueRaw": "100"
+      },
+      {
+        "upgradeCount": 3,
+        "effectTypeRaw": "CardPotentialEffectType_CARD_POTENTIAL_EFFECT_TYPE_SPECIAL_SKILL_LEVEL_UP",
+        "valueRaw": "2"
+      },
+      {
+        "upgradeCount": 4,
+        "effectTypeRaw": "CardPotentialEffectType_CARD_POTENTIAL_EFFECT_TYPE_PASSIVE_SKILL_LEVEL_UP",
+        "valueRaw": "2"
+      },
+      {
+        "upgradeCount": 5,
+        "effectTypeRaw": "CardPotentialEffectType_CARD_POTENTIAL_EFFECT_TYPE_SKILL_TREE_CONNECT_EFFECT_LEVEL_UP",
+        "valueRaw": "2"
+      }
+    ],
+    "connectEffectReference": {
+      "id": "skill_tree_connect_effect-skill_tree_effect_up-skill_tree_connect_effect_extent-center_area-001-rare_5",
+      "typeRaw": "SkillTreeConnectEffectType_SKILL_TREE_CONNECT_EFFECT_TYPE_SKILL_TREE_EFFECT_UP",
+      "level1EffectPermilUpRaw": "1400",
+      "level2EffectPermilUpRaw": "1900",
+      "scopeStatus": "Card references and basic effect levels are available, but board extent and character skill-tree effects are outside this parameter/A/P/SP PoC and the current simulator model."
+    }
+  },
+  "fieldProvenance": [
+    {
+      "outputPath": "card.id",
+      "sourceTable": "Card",
+      "sourceField": "id",
+      "join": "Root record; no join.",
+      "meaning": "HolodoriDB card identifier.",
+      "simulatorFit": "The current library id is locally generated; retain this as an external source identifier, not as a replacement."
+    },
+    {
+      "outputPath": "card.nameJa",
+      "sourceTable": "Card.nameLangId -> LangCard_Jpn.id",
+      "sourceField": "LangCard_Jpn.text",
+      "join": "Card.nameLangId = LangCard_Jpn.id.",
+      "meaning": "Localized Japanese card name.",
+      "simulatorFit": "Direct candidate for cardName."
+    },
+    {
+      "outputPath": "card.character",
+      "sourceTable": "Card.characterId -> Character.id",
+      "sourceField": "Character.nameEng; Character.id",
+      "join": "Card.characterId = Character.id.",
+      "meaning": "Character association; source ID is chr-00015 and the English name is Sakura Miko.",
+      "simulatorFit": "Simulator talentId candidate sakura_miko was matched by name, not a shared ID."
+    },
+    {
+      "outputPath": "card.rarity",
+      "sourceTable": "Card",
+      "sourceField": "rarity",
+      "join": "Root record; no join.",
+      "meaning": "Encoded five-star rarity enum.",
+      "simulatorFit": "Direct candidate for rarity=5; enum labels are not localized by a table in this repository."
+    },
+    {
+      "outputPath": "card.attribute",
+      "sourceTable": "Card; LiveSkillEffectTarget; LangGeneratedLivePassiveSkillLevel_Jpn",
+      "sourceField": "Card.attributeType; LiveSkillEffectTarget.cardAttributeType; localized description text",
+      "join": "Card.attributeType = LiveSkillEffectTarget.cardAttributeType via the passive effect target reference; the Japanese generated text identifies ATTRIBUTE_3 as ハッピータイプ.",
+      "meaning": "Card attribute enum and the matching passive target attribute.",
+      "simulatorFit": "Candidate type=happy; no direct enum-localization table was found."
+    },
+    {
+      "outputPath": "parameterSnapshot.cardLevel",
+      "sourceTable": "Card.cardLevelGroupId -> CardLevel.groupId/level",
+      "sourceField": "CardLevel.parameterBaseValue; exp; liveDeckPowerPermyriadUp",
+      "join": "Card.cardLevelGroupId = CardLevel.groupId; selected CardLevel.level=80.",
+      "meaning": "Base-parameter row and level-associated progression data.",
+      "simulatorFit": "The manual stats fields can store final integers, but the simulator's progression/training fields do not directly represent limit-break count."
+    },
+    {
+      "outputPath": "parameterSnapshot.parameterMultipliersPermil",
+      "sourceTable": "Card",
+      "sourceField": "performancePermilMultiply; techniquePermilMultiply; sensePermilMultiply",
+      "join": "Root record; no join.",
+      "meaning": "Per-parameter multipliers expressed as permil by the field names.",
+      "simulatorFit": "Could be inputs to derive stats after the exact rounding/potential pipeline is confirmed."
+    },
+    {
+      "outputPath": "parameterSnapshot.potential",
+      "sourceTable": "Card.cardPotentialGroupId -> CardPotential.groupId/upgradeCount",
+      "sourceField": "CardPotential.effectType; value",
+      "join": "Card.cardPotentialGroupId = CardPotential.groupId; selected upgradeCount=2.",
+      "meaning": "Potential progression includes an all-parameter permil-up effect of 100.",
+      "simulatorFit": "No matching potential state/effect calculation is implemented in the current card model."
+    },
+    {
+      "outputPath": "skills.passive.levels[]",
+      "sourceTable": "Card.livePassiveSkillId -> LivePassiveSkill.id -> LivePassiveSkillLevel.livePassiveSkillId -> LivePassiveSkillEffect.groupId -> LiveSkillEffectTarget.id -> LangGeneratedLiveSkillEffectTarget_Jpn.id; descriptionLangId -> LangGeneratedLivePassiveSkillLevel_Jpn.id",
+      "sourceField": "LivePassiveSkillLevel.level; livePassiveSkillEffectGroupId; LivePassiveSkillEffect.type/value/liveSkillEffectTargetId; LiveSkillEffectTarget.type/targetCount/cardAttributeType/descriptionLangId; localized text",
+      "join": "Card.livePassiveSkillId = LivePassiveSkill.id = LivePassiveSkillLevel.livePassiveSkillId; LivePassiveSkillLevel.livePassiveSkillEffectGroupId = LivePassiveSkillEffect.groupId; LivePassiveSkillEffect.liveSkillEffectTargetId = LiveSkillEffectTarget.id; LiveSkillEffectTarget.descriptionLangId = LangGeneratedLiveSkillEffectTarget_Jpn.id; LivePassiveSkillLevel.descriptionLangId = LangGeneratedLivePassiveSkillLevel_Jpn.id.",
+      "meaning": "Passive effect levels, raw effect encoding/value, beneficiary target, count, and display text.",
+      "simulatorFit": "Potential candidates: type=score_support, target=happy/count 2, value=8% or 11%. No separate P condition is supplied."
+    },
+    {
+      "outputPath": "skills.active.levels[]",
+      "sourceTable": "Card.liveActiveSkillId -> LiveActiveSkill.id -> LiveActiveSkillLevel.liveActiveSkillId -> LiveActiveSkillEffect.groupId; additionalLiveSkillTriggerGroupId -> LiveSkillTrigger.groupId; descriptionLangId -> LangGeneratedLiveActiveSkillLevel_Jpn.id",
+      "sourceField": "LiveActiveSkillLevel.coolTimeMillisecond; activationProbabilityPermilMultiply; effectDurationMillisecond; liveActiveSkillEffectGroupId; additionalLiveActiveSkillEffectGroupId; additionalLiveSkillTriggerGroupId; LiveActiveSkillEffect.type/value; LiveSkillTrigger.type/threshold",
+      "join": "Card.liveActiveSkillId = LiveActiveSkill.id = LiveActiveSkillLevel.liveActiveSkillId; effect group IDs = LiveActiveSkillEffect.groupId; trigger group ID = LiveSkillTrigger.groupId; descriptionLangId = LangGeneratedLiveActiveSkillLevel_Jpn.id.",
+      "meaning": "Primary A effect, interval, qualitative chance text, duration, plus an additional combo-gated effect.",
+      "simulatorFit": "Primary interval/duration/value fit the manual A fields after unit conversion; the qualitative chance fits mid. The structured extra trigger/effect does not fit the current single-effect A model."
+    },
+    {
+      "outputPath": "skills.special.levels[]",
+      "sourceTable": "Card.liveSpecialSkillId -> LiveSpecialSkill.id -> LiveSpecialSkillLevel.liveSpecialSkillId -> LiveActiveSkillEffect.groupId; descriptionLangId -> LangGeneratedLiveSpecialSkillLevel_Jpn.id",
+      "sourceField": "LiveSpecialSkillLevel.effectDurationMillisecond; liveActiveSkillEffectGroupId; additionalLiveActiveSkillEffectGroupId; LiveActiveSkillEffect.type/value",
+      "join": "Card.liveSpecialSkillId = LiveSpecialSkill.id = LiveSpecialSkillLevel.liveSpecialSkillId; primary/additional effect group IDs = LiveActiveSkillEffect.groupId; descriptionLangId = LangGeneratedLiveSpecialSkillLevel_Jpn.id.",
+      "meaning": "SP duration and multiple effects. The reused LiveActiveSkillEffect table also stores the special-skill effects.",
+      "simulatorFit": "The current SP effects[] can represent multiple effect types; duration ownership for the secondary effect remains unresolved."
+    },
+    {
+      "outputPath": "otherReferencedTables.cardLevelLimit",
+      "sourceTable": "Card.cardLevelLimitGroupId -> CardLevelLimit.groupId/limitBreakCount",
+      "sourceField": "CardLevelLimit.limitBreakCount; levelLimit",
+      "join": "Card.cardLevelLimitGroupId = CardLevelLimit.groupId; select limitBreakCount=4.",
+      "meaning": "Maximum card level at the selected limit-break count.",
+      "simulatorFit": "No dedicated limitBreakCount field exists in the current card v2 shape."
+    },
+    {
+      "outputPath": "otherReferencedTables.cardPotentialUpgradeCurve[]",
+      "sourceTable": "Card.cardPotentialGroupId -> CardPotential.groupId/upgradeCount",
+      "sourceField": "CardPotential.upgradeCount; effectType; value",
+      "join": "Card.cardPotentialGroupId = CardPotential.groupId.",
+      "meaning": "Potential upgrades change skill-level effects, all parameters, and connect effect.",
+      "simulatorFit": "No potential progression model is present; retain as source observations only."
+    },
+    {
+      "outputPath": "otherReferencedTables.connectEffectReference",
+      "sourceTable": "Card.skillTreeConnectEffectId -> SkillTreeConnectEffect.id/level",
+      "sourceField": "connectEffectType; skillTreeConnectEffectExtentGroupId; effectPermilUp",
+      "join": "Card.skillTreeConnectEffectId = SkillTreeConnectEffect.id; rows by level=1 and 2.",
+      "meaning": "Connect skill-tree effect-strength levels; actual board extent and character tree effects require additional joins.",
+      "simulatorFit": "Current simulator documentation says Connect is not implemented; not included in parameter/A/P/SP conversion."
+    }
+  ],
+  "simulatorMappingSummary": {
+    "candidateValues": {
+      "passiveLevel2": {
+        "type": "score_support",
+        "target": { "kind": "type", "value": "happy", "count": 2 },
+        "valuePercent": 11,
+        "status": "Localized description supports this mapping; condition remains absent/unresolved."
+      },
+      "activeLevel2": {
+        "effectType": "score_up",
+        "intervalSeconds": 15,
+        "probability": "mid",
+        "durationSeconds": 6,
+        "primaryBoostPercent": 55,
+        "additionalTrigger": { "kind": "combo_gte", "threshold": 40 },
+        "additionalBoostPercent": 110,
+        "status": "Primary fields fit; secondary trigger/effect is text-only in the current A model."
+      },
+      "specialLevel2": {
+        "effects": [
+          { "type": "score_support", "valuePercent": 145 },
+          { "type": "skill_frequency_up", "valuePercent": 50 }
+        ],
+        "durationSecondsOnSkillLevel": 10,
+        "status": "Effect types/values are supported by localized text; duration assignment to the secondary effect is unresolved."
+      }
+    },
+    "directOrStrongCandidates": [
+      "cardName <- Card.nameLangId -> LangCard_Jpn.text",
+      "rarity <- Card.rarity enum",
+      "type <- Card.attributeType enum (happy mapping supported by matching target/localized description)",
+      "skills.active.interval <- coolTimeMillisecond / 1000",
+      "skills.active.probability <- mid from generated Japanese 中確率 text",
+      "skills.active.duration <- effectDurationMillisecond / 1000",
+      "skills.active.boost <- primary score-up effect; localized description confirms percent",
+      "skills.passive.effect.target <- LiveSkillEffectTarget attribute/count",
+      "skills.special.effects[] <- primary and additional effect types/values"
+    ],
+    "notRepresentedOrUnresolved": [
+      "Stable external Card.id storage without replacing the simulator's local library id",
+      "Exact final parameter rounding and full potential/stat pipeline",
+      "Limit-break count and potential state in current simulator progression",
+      "Passive condition/trigger when no separate source field is present",
+      "Active combo-gated secondary effect as a structured calculation input",
+      "Numeric interpretation of activationProbabilityPermilMultiply beyond the localized qualitative probability",
+      "Whether the SP secondary effect shares the skill-level duration",
+      "Connect/skill-tree calculation"
+    ]
+  }
+}

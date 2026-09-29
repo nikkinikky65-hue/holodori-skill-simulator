@@ -1,0 +1,462 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/holodori/canonical-card-schema-proposal-v1.schema.json",
+  "title": "Hololive Dreams Canonical Card Schema Proposal",
+  "description": "PROPOSAL ONLY. A lossless domain model plus separately addressable source evidence. Not used to convert the 185-card survey or connected to the application.",
+  "type": "object",
+  "required": ["proposalStatus", "sourceDataset", "cards", "sourceRecords", "joins"],
+  "properties": {
+    "proposalStatus": { "const": "proposal-not-implemented" },
+    "schemaVersion": { "const": "proposal-v1" },
+    "sourceDataset": { "$ref": "#/$defs/sourceDataset" },
+    "cards": { "type": "array", "items": { "$ref": "#/$defs/card" } },
+    "sourceRecords": {
+      "description": "Deduplicated row evidence, separate from domain concepts. All source fields and wrapper keys are retained without conversion.",
+      "type": "array",
+      "items": { "$ref": "#/$defs/sourceRecord" }
+    },
+    "joins": {
+      "description": "Observed source-graph edges. These describe database joins, not game semantics.",
+      "type": "array",
+      "items": { "$ref": "#/$defs/join" }
+    },
+    "unresolvedReferences": { "type": "array", "items": { "$ref": "#/$defs/unresolvedReference" } },
+    "notes": { "type": "array", "items": { "type": "string" } },
+    "conversionEvidence": { "$ref": "#/$defs/conversionEvidence" }
+  },
+  "$defs": {
+    "sourceDataset": {
+      "type": "object",
+      "required": ["repository", "commitSha", "retrievedAtUtc"],
+      "properties": {
+        "repository": { "type": "string", "format": "uri" },
+        "commitSha": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "commitUrl": { "type": "string", "format": "uri" },
+        "retrievedAtUtc": { "type": "string", "format": "date-time" },
+        "sourceLanguage": { "type": "string" },
+        "scopeDescription": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "conversionEvidence": {
+      "description": "Audit-only conversion metadata. It does not add meaning to canonical card fields.",
+      "type": "object",
+      "required": ["inputArtifact", "preservedSections", "unresolvedItems"],
+      "properties": {
+        "inputArtifact": {
+          "type": "object",
+          "required": ["path", "sha256"],
+          "properties": {
+            "path": { "type": "string" },
+            "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+          },
+          "additionalProperties": false
+        },
+        "preservedSections": { "type": "array", "items": { "type": "string" } },
+        "unresolvedItems": { "type": "array", "items": { "type": "string" } },
+        "verification": { "type": "array", "items": { "type": "string" } },
+        "evidenceOnlyFacts": {
+          "description": "PoC observations retained for audit but deliberately not promoted into canonical gameplay fields.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["inputPath", "rawValue", "status"],
+            "properties": {
+              "inputPath": { "type": "string" },
+              "rawValue": {},
+              "status": { "enum": ["unknown", "candidate", "cross-check", "out-of-scope"] },
+              "note": { "type": "string" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "sourceFieldMappings": {
+          "description": "Verbatim mapping observations from the converted one-card PoC, linked to source field/table/join and existing simulator field candidates.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["outputPath", "sourceTable", "sourceField", "join", "meaning", "simulatorFit"],
+            "properties": {
+              "outputPath": { "type": "string" },
+              "sourceTable": { "type": "string" },
+              "sourceField": { "type": "string" },
+              "join": { "type": "string" },
+              "meaning": { "type": "string" },
+              "simulatorFit": { "type": "string" }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "sourceRef": {
+      "type": "object",
+      "required": ["table", "sourceId"],
+      "properties": {
+        "table": { "type": "string", "minLength": 1 },
+        "sourceId": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "fact": {
+      "description": "One observed source field. rawValue retains the source JSON value and type; no unit, enum, percent, or semantic conversion is implied.",
+      "type": "object",
+      "required": ["source", "sourceField", "rawValue"],
+      "properties": {
+        "source": { "$ref": "#/$defs/sourceRef" },
+        "sourceField": { "type": "string", "minLength": 1 },
+        "rawValue": {},
+        "semanticCandidate": { "$ref": "#/$defs/semanticCandidate" },
+        "annotations": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    },
+    "semanticCandidate": {
+      "type": "object",
+      "required": ["value", "status"],
+      "properties": {
+        "value": {},
+        "status": { "enum": ["candidate", "confirmed-by-source", "unresolved", "rejected"] },
+        "basis": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "sourceRecord": {
+      "type": "object",
+      "required": ["table", "sourceId", "fields"],
+      "properties": {
+        "table": { "type": "string", "minLength": 1 },
+        "sourceId": { "type": "string", "minLength": 1 },
+        "sourceWrapper": { "type": "object", "additionalProperties": true },
+        "fields": {
+          "description": "The source row's data fields preserved as received. Missing keys remain missing; no defaults are added.",
+          "type": "object",
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "join": {
+      "type": "object",
+      "required": ["from", "to", "sourceField", "rawJoinValue"],
+      "properties": {
+        "from": { "$ref": "#/$defs/sourceRef" },
+        "to": { "$ref": "#/$defs/sourceRef" },
+        "sourceField": { "type": "string" },
+        "targetField": { "type": "string" },
+        "rawJoinValue": {},
+        "relationshipLabel": { "type": "string", "description": "Structural label only; avoid game-semantic inference." }
+      },
+      "additionalProperties": false
+    },
+    "unresolvedReference": {
+      "type": "object",
+      "required": ["from", "sourceField", "rawJoinValue", "expectedTable"],
+      "properties": {
+        "from": { "$ref": "#/$defs/sourceRef" },
+        "sourceField": { "type": "string" },
+        "rawJoinValue": {},
+        "expectedTable": { "type": "string" },
+        "status": { "const": "unresolved" },
+        "note": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "localizedValue": {
+      "type": "object",
+      "required": ["locale", "textFact"],
+      "properties": {
+        "locale": { "type": "string" },
+        "textFact": { "$ref": "#/$defs/fact" }
+      },
+      "additionalProperties": false
+    },
+    "card": {
+      "type": "object",
+      "required": ["sourceCard", "identity", "classification", "progression", "skills", "sourceFieldFacts"],
+      "properties": {
+        "sourceCard": { "$ref": "#/$defs/sourceRef" },
+        "identity": {
+          "type": "object",
+          "required": ["sourceIdFact", "names"],
+          "properties": {
+            "sourceIdFact": { "$ref": "#/$defs/fact" },
+            "names": { "type": "array", "items": { "$ref": "#/$defs/localizedValue" } },
+            "memberFacts": { "type": "array", "items": { "$ref": "#/$defs/fact" } },
+            "memberSourceRefs": { "type": "array", "items": { "$ref": "#/$defs/sourceRef" } }
+          },
+          "additionalProperties": true
+        },
+        "classification": {
+          "description": "Raw rarity/attribute enums with optional, explicitly status-marked interpretations.",
+          "type": "array",
+          "items": { "$ref": "#/$defs/fact" }
+        },
+        "progression": {
+          "type": "object",
+          "required": ["levelRows", "trainingStages", "bloomSteps"],
+          "properties": {
+            "levelRows": { "type": "array", "items": { "$ref": "#/$defs/progressionRow" } },
+            "trainingStages": { "type": "array", "items": { "$ref": "#/$defs/trainingStage" } },
+            "bloomSteps": { "type": "array", "items": { "$ref": "#/$defs/bloomStep" } },
+            "parameterInputFacts": { "type": "array", "items": { "$ref": "#/$defs/fact" } }
+          },
+          "additionalProperties": false
+        },
+        "skills": {
+          "type": "object",
+          "required": ["passive", "active", "special"],
+          "properties": {
+            "passive": { "$ref": "#/$defs/skillTrack" },
+            "active": { "$ref": "#/$defs/skillTrack" },
+            "special": { "$ref": "#/$defs/skillTrack" }
+          },
+          "additionalProperties": true
+        },
+        "otherSourceRefs": { "type": "array", "items": { "$ref": "#/$defs/sourceRef" } },
+        "sourceFieldFacts": {
+          "description": "Every observed Card field, including fields not given a domain interpretation by this proposal. This prevents additions/optional fields being silently discarded.",
+          "type": "array",
+          "items": { "$ref": "#/$defs/fact" }
+        },
+        "annotations": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    },
+    "progressionRow": {
+      "type": "object",
+      "required": ["source", "facts"],
+      "properties": {
+        "source": { "$ref": "#/$defs/sourceRef" },
+        "facts": { "type": "array", "items": { "$ref": "#/$defs/fact" } }
+      },
+      "additionalProperties": false
+    },
+    "skillTrack": {
+      "type": "object",
+      "oneOf": [
+        { "$ref": "#/$defs/passiveTrack" },
+        { "$ref": "#/$defs/activeTrack" },
+        { "$ref": "#/$defs/specialTrack" }
+      ]
+    },
+    "skillTrackBase": {
+      "type": "object",
+      "required": ["skillSource", "levels"],
+      "properties": {
+        "skillSource": { "$ref": "#/$defs/sourceRef" },
+        "levels": { "type": "array" },
+        "otherSourceRefs": { "type": "array", "items": { "$ref": "#/$defs/sourceRef" } },
+        "annotations": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": true
+    },
+    "passiveTrack": {
+      "allOf": [
+        { "$ref": "#/$defs/skillTrackBase" },
+        {
+          "type": "object",
+          "required": ["skillKind"],
+          "properties": {
+            "skillKind": { "const": "passive" },
+            "levels": { "type": "array", "items": { "$ref": "#/$defs/passiveLevel" } }
+          }
+        }
+      ]
+    },
+    "activeTrack": {
+      "allOf": [
+        { "$ref": "#/$defs/skillTrackBase" },
+        {
+          "type": "object",
+          "required": ["skillKind"],
+          "properties": {
+            "skillKind": { "const": "active" },
+            "levels": { "type": "array", "items": { "$ref": "#/$defs/activeLevel" } }
+          }
+        }
+      ]
+    },
+    "specialTrack": {
+      "allOf": [
+        { "$ref": "#/$defs/skillTrackBase" },
+        {
+          "type": "object",
+          "required": ["skillKind"],
+          "properties": {
+            "skillKind": { "const": "special" },
+            "levels": { "type": "array", "items": { "$ref": "#/$defs/specialLevel" } }
+          }
+        }
+      ]
+    },
+    "levelBase": {
+      "type": "object",
+      "required": ["source", "levelFact", "facts", "sourceReferences"],
+      "properties": {
+        "source": { "$ref": "#/$defs/sourceRef" },
+        "levelFact": { "$ref": "#/$defs/fact" },
+        "facts": { "type": "array", "items": { "$ref": "#/$defs/fact" }, "description": "All other source level-row fields, preserving optional and unknown fields." },
+        "sourceReferences": { "$ref": "#/$defs/sourceReferences" },
+        "annotations": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": true
+    },
+    "sourceReferences": {
+      "type": "array",
+      "description": "Observed source group/foreign-key edges, not inferred runtime behavior.",
+      "items": {
+        "type": "object",
+        "required": ["sourceField", "rawJoinValue", "target"],
+        "properties": {
+          "sourceField": { "type": "string" },
+          "rawJoinValue": {},
+          "target": { "$ref": "#/$defs/sourceRef" },
+          "referenceRole": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "passiveLevel": {
+      "allOf": [
+        { "$ref": "#/$defs/levelBase" },
+        {
+          "type": "object",
+          "required": ["effect"],
+          "properties": { "effect": { "$ref": "#/$defs/passiveEffect" } }
+        }
+      ]
+    },
+    "activeLevel": {
+      "allOf": [
+        { "$ref": "#/$defs/levelBase" },
+        {
+          "type": "object",
+          "required": ["baseEffect", "conditionalOverrides"],
+          "properties": {
+            "baseEffect": { "$ref": "#/$defs/effect" },
+            "conditionalOverrides": { "type": "array", "items": { "$ref": "#/$defs/conditionalOverride" } },
+            "evaluationScope": { "const": "one-active-effect-select-base-or-matching-override" }
+          }
+        }
+      ]
+    },
+    "specialLevel": {
+      "allOf": [
+        { "$ref": "#/$defs/levelBase" },
+        {
+          "type": "object",
+          "required": ["effects"],
+          "properties": {
+            "effects": { "type": "array", "items": { "$ref": "#/$defs/independentSpecialEffect" } },
+            "effectCombination": { "const": "independent-effects" }
+          }
+        }
+      ]
+    },
+    "effect": {
+      "type": "object",
+      "required": ["source", "facts"],
+      "properties": {
+        "source": { "$ref": "#/$defs/sourceRef" },
+        "groupFact": { "$ref": "#/$defs/fact" },
+        "facts": { "type": "array", "items": { "$ref": "#/$defs/fact" }, "description": "Raw type/value/number/description ID fields and any future fields." },
+        "annotations": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    },
+    "passiveEffect": {
+      "type": "object",
+      "required": ["effect", "target"],
+      "properties": {
+        "effect": { "$ref": "#/$defs/effect" },
+        "target": { "$ref": "#/$defs/target" },
+        "condition": { "$ref": "#/$defs/condition" },
+        "annotations": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    },
+    "conditionalOverride": {
+      "type": "object",
+      "required": ["condition", "replacementEffect"],
+      "properties": {
+        "condition": { "$ref": "#/$defs/condition" },
+        "replacementEffect": { "$ref": "#/$defs/effect" },
+        "sourceReferences": { "$ref": "#/$defs/sourceReferences" },
+        "annotations": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    },
+    "independentSpecialEffect": {
+      "type": "object",
+      "required": ["effect"],
+      "properties": {
+        "effect": { "$ref": "#/$defs/effect" },
+        "condition": { "$ref": "#/$defs/condition" },
+        "sourceReferences": { "$ref": "#/$defs/sourceReferences" },
+        "annotations": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    },
+    "condition": {
+      "type": "object",
+      "required": ["sourceFacts", "evaluationMode"],
+      "properties": {
+        "sourceFacts": { "type": "array", "items": { "$ref": "#/$defs/fact" } },
+        "sourceReferences": { "$ref": "#/$defs/sourceReferences" },
+        "resolutionClass": { "enum": ["formation-dependent", "player-state-dependent", "unresolved"] },
+        "evaluationMode": { "enum": ["resolve-from-formation", "preserve-without-dynamic-simulation", "unresolved"] },
+        "annotations": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    },
+    "target": {
+      "type": "object",
+      "required": ["sourceRefs"],
+      "properties": {
+        "sourceRefs": { "type": "array", "items": { "$ref": "#/$defs/sourceRef" } },
+        "sourceFacts": { "type": "array", "items": { "$ref": "#/$defs/fact" } },
+        "annotations": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    },
+    "trainingStage": {
+      "type": "object",
+      "required": ["source", "trainingCountFact", "levelLimitFact", "facts"],
+      "properties": {
+        "source": { "$ref": "#/$defs/sourceRef" },
+        "trainingCountFact": { "$ref": "#/$defs/fact" },
+        "levelLimitFact": { "$ref": "#/$defs/fact" },
+        "facts": { "type": "array", "items": { "$ref": "#/$defs/fact" } },
+        "annotations": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    },
+    "bloomStep": {
+      "type": "object",
+      "required": ["source", "bloomStepFact", "effectTypeFact", "valueFact", "facts"],
+      "properties": {
+        "source": { "$ref": "#/$defs/sourceRef" },
+        "bloomStepFact": { "$ref": "#/$defs/fact" },
+        "effectTypeFact": { "$ref": "#/$defs/fact" },
+        "valueFact": { "$ref": "#/$defs/fact" },
+        "facts": { "type": "array", "items": { "$ref": "#/$defs/fact" } },
+        "annotations": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    },
+    "trigger": {
+      "type": "object",
+      "required": ["source", "groupFact", "facts"],
+      "properties": {
+        "source": { "$ref": "#/$defs/sourceRef" },
+        "groupFact": { "$ref": "#/$defs/fact" },
+        "facts": { "type": "array", "items": { "$ref": "#/$defs/fact" }, "description": "Raw type, threshold, target selectors and any future fields." },
+        "annotations": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

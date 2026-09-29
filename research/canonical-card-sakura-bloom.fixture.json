@@ -1,0 +1,925 @@
+{
+  "proposalStatus": "proposal-not-implemented",
+  "schemaVersion": "proposal-v1",
+  "sourceDataset": {
+    "repository": "https://github.com/HolodoriDB/holodori-db-jpn-diff",
+    "commitSha": "e43f062c32ff4e04567235efcd58448cd6b10f35",
+    "commitUrl": "https://github.com/HolodoriDB/holodori-db-jpn-diff/tree/e43f062c32ff4e04567235efcd58448cd6b10f35",
+    "retrievedAtUtc": "2026-09-29T09:39:12Z",
+    "sourceLanguage": "ja-JP",
+    "scopeDescription": "Single-card Canonical fixture converted from the existing published-card Sakura Bloom PoC. No runtime/Library/rules integration."
+  },
+  "cards": [
+    {
+      "sourceCard": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" },
+      "identity": {
+        "sourceIdFact": {
+          "source": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" },
+          "sourceField": "id",
+          "rawValue": "card-00015-5-uniq-0003-00"
+        },
+        "names": [
+          {
+            "locale": "ja-JP",
+            "textFact": {
+              "source": { "table": "LangCard_Jpn", "sourceId": "la-card_name-00015-5-uniq-0003-00" },
+              "sourceField": "text",
+              "rawValue": "サクラBloom"
+            }
+          }
+        ],
+        "memberFacts": [
+          {
+            "source": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" },
+            "sourceField": "characterId",
+            "rawValue": "chr-00015"
+          },
+          {
+            "source": { "table": "Character", "sourceId": "chr-00015" },
+            "sourceField": "nameEng",
+            "rawValue": "Sakura Miko",
+            "semanticCandidate": {
+              "value": "sakura_miko",
+              "status": "candidate",
+              "basis": "Name-based candidate recorded by the input PoC; not a shared identifier mapping."
+            }
+          }
+        ],
+        "memberSourceRefs": [{ "table": "Character", "sourceId": "chr-00015" }]
+      },
+      "classification": [
+        {
+          "source": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" },
+          "sourceField": "rarity",
+          "rawValue": "CardRarity_CARD_RARITY_RARITY_5",
+          "semanticCandidate": { "value": 5, "status": "candidate", "basis": "Enum suffix and the existing PoC candidate; raw enum remains authoritative evidence." }
+        },
+        {
+          "source": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" },
+          "sourceField": "attributeType",
+          "rawValue": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3",
+          "semanticCandidate": { "value": "happy", "status": "candidate", "basis": "Existing PoC linked ATTRIBUTE_3 to Japanese target/description text identifying ハッピータイプ; no global enum map is asserted." }
+        }
+      ],
+      "progression": {
+        "levelRows": [
+          {
+            "source": { "table": "CardLevel", "sourceId": "group_id=grp-card-level-rarity_5-06;level=80" },
+            "facts": [
+              { "source": { "table": "CardLevel", "sourceId": "group_id=grp-card-level-rarity_5-06;level=80" }, "sourceField": "groupId", "rawValue": "grp-card-level-rarity_5-06" },
+              { "source": { "table": "CardLevel", "sourceId": "group_id=grp-card-level-rarity_5-06;level=80" }, "sourceField": "level", "rawValue": 80 },
+              { "source": { "table": "CardLevel", "sourceId": "group_id=grp-card-level-rarity_5-06;level=80" }, "sourceField": "parameterBaseValue", "rawValue": "23512" },
+              { "source": { "table": "CardLevel", "sourceId": "group_id=grp-card-level-rarity_5-06;level=80" }, "sourceField": "exp", "rawValue": "1122650" },
+              { "source": { "table": "CardLevel", "sourceId": "group_id=grp-card-level-rarity_5-06;level=80" }, "sourceField": "liveDeckPowerPermyriadUp", "rawValue": "8" }
+            ]
+          }
+        ],
+        "trainingStages": [
+          {
+            "source": { "table": "CardLevelLimit", "sourceId": "group_id=rarity_5-attribute_3;limit_break_count=4" },
+            "trainingCountFact": { "source": { "table": "CardLevelLimit", "sourceId": "group_id=rarity_5-attribute_3;limit_break_count=4" }, "sourceField": "limit_break_count", "rawValue": 4, "annotations": ["Field is from the source row wrapper, not the nested data object."] },
+            "levelLimitFact": { "source": { "table": "CardLevelLimit", "sourceId": "group_id=rarity_5-attribute_3;limit_break_count=4" }, "sourceField": "levelLimit", "rawValue": 80 },
+            "facts": [
+              { "source": { "table": "CardLevelLimit", "sourceId": "group_id=rarity_5-attribute_3;limit_break_count=4" }, "sourceField": "groupId", "rawValue": "rarity_5-attribute_3" },
+              { "source": { "table": "CardLevelLimit", "sourceId": "group_id=rarity_5-attribute_3;limit_break_count=4" }, "sourceField": "limitBreakCount", "rawValue": 4 },
+              { "source": { "table": "CardLevelLimit", "sourceId": "group_id=rarity_5-attribute_3;limit_break_count=4" }, "sourceField": "consumptions", "rawValue": [
+                { "resourceType": "ResourceType_RESOURCE_TYPE_ITEM", "resourceId": "item-card_limit_break-attribute_3-2", "quantity": "1200" },
+                { "resourceType": "ResourceType_RESOURCE_TYPE_ITEM", "resourceId": "item-card_limit_break-cmn-sr", "quantity": "3" },
+                { "resourceType": "ResourceType_RESOURCE_TYPE_ITEM", "resourceId": "item-gold", "quantity": "750000" }
+              ] }
+            ]
+          }
+        ],
+        "bloomSteps": [
+          {
+            "source": { "table": "CardPotential", "sourceId": "effect_type=1;group_id=card_potential_grp-rarity_5;upgrade_count=1" },
+            "bloomStepFact": { "source": { "table": "CardPotential", "sourceId": "effect_type=1;group_id=card_potential_grp-rarity_5;upgrade_count=1" }, "sourceField": "upgradeCount", "rawValue": 1 },
+            "effectTypeFact": { "source": { "table": "CardPotential", "sourceId": "effect_type=1;group_id=card_potential_grp-rarity_5;upgrade_count=1" }, "sourceField": "effectType", "rawValue": "CardPotentialEffectType_CARD_POTENTIAL_EFFECT_TYPE_ACTIVE_SKILL_LEVEL_UP" },
+            "valueFact": { "source": { "table": "CardPotential", "sourceId": "effect_type=1;group_id=card_potential_grp-rarity_5;upgrade_count=1" }, "sourceField": "value", "rawValue": "2" },
+            "facts": [{ "source": { "table": "CardPotential", "sourceId": "effect_type=1;group_id=card_potential_grp-rarity_5;upgrade_count=1" }, "sourceField": "groupId", "rawValue": "card_potential_grp-rarity_5" }]
+          },
+          {
+            "source": { "table": "CardPotential", "sourceId": "effect_type=4;group_id=card_potential_grp-rarity_5;upgrade_count=2" },
+            "bloomStepFact": { "source": { "table": "CardPotential", "sourceId": "effect_type=4;group_id=card_potential_grp-rarity_5;upgrade_count=2" }, "sourceField": "upgradeCount", "rawValue": 2 },
+            "effectTypeFact": { "source": { "table": "CardPotential", "sourceId": "effect_type=4;group_id=card_potential_grp-rarity_5;upgrade_count=2" }, "sourceField": "effectType", "rawValue": "CardPotentialEffectType_CARD_POTENTIAL_EFFECT_TYPE_ALL_PARAMETER_UP_PERMIL_UP" },
+            "valueFact": { "source": { "table": "CardPotential", "sourceId": "effect_type=4;group_id=card_potential_grp-rarity_5;upgrade_count=2" }, "sourceField": "value", "rawValue": "100" },
+            "facts": [{ "source": { "table": "CardPotential", "sourceId": "effect_type=4;group_id=card_potential_grp-rarity_5;upgrade_count=2" }, "sourceField": "groupId", "rawValue": "card_potential_grp-rarity_5" }]
+          },
+          {
+            "source": { "table": "CardPotential", "sourceId": "effect_type=3;group_id=card_potential_grp-rarity_5;upgrade_count=3" },
+            "bloomStepFact": { "source": { "table": "CardPotential", "sourceId": "effect_type=3;group_id=card_potential_grp-rarity_5;upgrade_count=3" }, "sourceField": "upgradeCount", "rawValue": 3 },
+            "effectTypeFact": { "source": { "table": "CardPotential", "sourceId": "effect_type=3;group_id=card_potential_grp-rarity_5;upgrade_count=3" }, "sourceField": "effectType", "rawValue": "CardPotentialEffectType_CARD_POTENTIAL_EFFECT_TYPE_SPECIAL_SKILL_LEVEL_UP" },
+            "valueFact": { "source": { "table": "CardPotential", "sourceId": "effect_type=3;group_id=card_potential_grp-rarity_5;upgrade_count=3" }, "sourceField": "value", "rawValue": "2" },
+            "facts": [{ "source": { "table": "CardPotential", "sourceId": "effect_type=3;group_id=card_potential_grp-rarity_5;upgrade_count=3" }, "sourceField": "groupId", "rawValue": "card_potential_grp-rarity_5" }]
+          },
+          {
+            "source": { "table": "CardPotential", "sourceId": "effect_type=2;group_id=card_potential_grp-rarity_5;upgrade_count=4" },
+            "bloomStepFact": { "source": { "table": "CardPotential", "sourceId": "effect_type=2;group_id=card_potential_grp-rarity_5;upgrade_count=4" }, "sourceField": "upgradeCount", "rawValue": 4 },
+            "effectTypeFact": { "source": { "table": "CardPotential", "sourceId": "effect_type=2;group_id=card_potential_grp-rarity_5;upgrade_count=4" }, "sourceField": "effectType", "rawValue": "CardPotentialEffectType_CARD_POTENTIAL_EFFECT_TYPE_PASSIVE_SKILL_LEVEL_UP" },
+            "valueFact": { "source": { "table": "CardPotential", "sourceId": "effect_type=2;group_id=card_potential_grp-rarity_5;upgrade_count=4" }, "sourceField": "value", "rawValue": "2" },
+            "facts": [{ "source": { "table": "CardPotential", "sourceId": "effect_type=2;group_id=card_potential_grp-rarity_5;upgrade_count=4" }, "sourceField": "groupId", "rawValue": "card_potential_grp-rarity_5" }]
+          },
+          {
+            "source": { "table": "CardPotential", "sourceId": "effect_type=5;group_id=card_potential_grp-rarity_5;upgrade_count=5" },
+            "bloomStepFact": { "source": { "table": "CardPotential", "sourceId": "effect_type=5;group_id=card_potential_grp-rarity_5;upgrade_count=5" }, "sourceField": "upgradeCount", "rawValue": 5 },
+            "effectTypeFact": { "source": { "table": "CardPotential", "sourceId": "effect_type=5;group_id=card_potential_grp-rarity_5;upgrade_count=5" }, "sourceField": "effectType", "rawValue": "CardPotentialEffectType_CARD_POTENTIAL_EFFECT_TYPE_SKILL_TREE_CONNECT_EFFECT_LEVEL_UP" },
+            "valueFact": { "source": { "table": "CardPotential", "sourceId": "effect_type=5;group_id=card_potential_grp-rarity_5;upgrade_count=5" }, "sourceField": "value", "rawValue": "2" },
+            "facts": [{ "source": { "table": "CardPotential", "sourceId": "effect_type=5;group_id=card_potential_grp-rarity_5;upgrade_count=5" }, "sourceField": "groupId", "rawValue": "card_potential_grp-rarity_5" }],
+            "annotations": ["Raw bloom potential row preserved as evidence; Connect/board effects are excluded from this runtime fixture and are not evaluated."]
+          }
+        ],
+        "parameterInputFacts": [
+          { "source": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" }, "sourceField": "performancePermilMultiply", "rawValue": 297 },
+          { "source": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" }, "sourceField": "techniquePermilMultiply", "rawValue": 263 },
+          { "source": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" }, "sourceField": "sensePermilMultiply", "rawValue": 440 }
+        ]
+      },
+      "skills": {
+        "passive": {
+          "skillKind": "passive",
+          "skillSource": { "table": "LivePassiveSkill", "sourceId": "live_passive_skill-card-00015-5-uniq-0003-00" },
+          "levels": [
+            {
+              "source": { "table": "LivePassiveSkillLevel", "sourceId": "level=1;live_passive_skill_id=live_passive_skill-card-00015-5-uniq-0003-00" },
+              "levelFact": { "source": { "table": "LivePassiveSkillLevel", "sourceId": "level=1;live_passive_skill_id=live_passive_skill-card-00015-5-uniq-0003-00" }, "sourceField": "level", "rawValue": 1 },
+              "facts": [
+                { "source": { "table": "LivePassiveSkillLevel", "sourceId": "level=1;live_passive_skill_id=live_passive_skill-card-00015-5-uniq-0003-00" }, "sourceField": "livePassiveSkillId", "rawValue": "live_passive_skill-card-00015-5-uniq-0003-00" },
+                { "source": { "table": "LivePassiveSkillLevel", "sourceId": "level=1;live_passive_skill_id=live_passive_skill-card-00015-5-uniq-0003-00" }, "sourceField": "descriptionLangId", "rawValue": "la-generated-live_passive_skill-card-00015-5-uniq-0003-00.1-description" },
+                { "source": { "table": "LangGeneratedLivePassiveSkillLevel_Jpn", "sourceId": "la-generated-live_passive_skill-card-00015-5-uniq-0003-00.1-description" }, "sourceField": "text", "rawValue": "[attribute=happy]ハッピータイプ[/attribute]2人のスコアサポート効果8%" }
+              ],
+              "sourceReferences": [
+                { "sourceField": "livePassiveSkillEffectGroupId", "rawJoinValue": "live_passive_skill_effect-live_active_skill_effect_up_permil_up-80-live_skill_effect_target-attribute-attribute_3-2", "target": { "table": "LivePassiveSkillEffect", "sourceId": "group_id=live_passive_skill_effect-live_active_skill_effect_up_permil_up-80-live_skill_effect_target-attribute-attribute_3-2;number=1" }, "referenceRole": "source-primary-group" }
+              ],
+              "effect": {
+                "effect": {
+                  "source": { "table": "LivePassiveSkillEffect", "sourceId": "group_id=live_passive_skill_effect-live_active_skill_effect_up_permil_up-80-live_skill_effect_target-attribute-attribute_3-2;number=1" },
+                  "groupFact": { "source": { "table": "LivePassiveSkillLevel", "sourceId": "level=1;live_passive_skill_id=live_passive_skill-card-00015-5-uniq-0003-00" }, "sourceField": "livePassiveSkillEffectGroupId", "rawValue": "live_passive_skill_effect-live_active_skill_effect_up_permil_up-80-live_skill_effect_target-attribute-attribute_3-2" },
+                  "facts": [
+                    { "source": { "table": "LivePassiveSkillEffect", "sourceId": "group_id=live_passive_skill_effect-live_active_skill_effect_up_permil_up-80-live_skill_effect_target-attribute-attribute_3-2;number=1" }, "sourceField": "type", "rawValue": "LivePassiveSkillEffectType_LIVE_PASSIVE_SKILL_EFFECT_TYPE_LIVE_ACTIVE_SKILL_EFFECT_UP_PERMIL_UP" },
+                    { "source": { "table": "LivePassiveSkillEffect", "sourceId": "group_id=live_passive_skill_effect-live_active_skill_effect_up_permil_up-80-live_skill_effect_target-attribute-attribute_3-2;number=1" }, "sourceField": "value", "rawValue": "80" },
+                    { "source": { "table": "LivePassiveSkillEffect", "sourceId": "group_id=live_passive_skill_effect-live_active_skill_effect_up_permil_up-80-live_skill_effect_target-attribute-attribute_3-2;number=1" }, "sourceField": "number", "rawValue": 1 },
+                    { "source": { "table": "LivePassiveSkillEffect", "sourceId": "group_id=live_passive_skill_effect-live_active_skill_effect_up_permil_up-80-live_skill_effect_target-attribute-attribute_3-2;number=1" }, "sourceField": "descriptionLangId", "rawValue": "la-generated-live_passive_skill_effect-live_active_skill_effect_up_permil_up-80-live_skill_effect_target-attribute-attribute_3-2.1-description" }
+                  ]
+                },
+                "target": {
+                  "sourceRefs": [{ "table": "LiveSkillEffectTarget", "sourceId": "live_skill_effect_target-attribute-attribute_3-2" }],
+                  "sourceFacts": [
+                    { "source": { "table": "LiveSkillEffectTarget", "sourceId": "live_skill_effect_target-attribute-attribute_3-2" }, "sourceField": "type", "rawValue": "LiveSkillEffectTargetType_LIVE_SKILL_EFFECT_TARGET_TYPE_ATTRIBUTE" },
+                    { "source": { "table": "LiveSkillEffectTarget", "sourceId": "live_skill_effect_target-attribute-attribute_3-2" }, "sourceField": "targetCount", "rawValue": 2 },
+                    { "source": { "table": "LiveSkillEffectTarget", "sourceId": "live_skill_effect_target-attribute-attribute_3-2" }, "sourceField": "cardAttributeType", "rawValue": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3", "semanticCandidate": { "value": "happy", "status": "candidate", "basis": "Existing PoC localized target text only; raw enum is retained." } },
+                    { "source": { "table": "LangGeneratedLiveSkillEffectTarget_Jpn", "sourceId": "la-generated-live_skill_effect_target-attribute-attribute_3-2-description" }, "sourceField": "text", "rawValue": "[attribute=happy]ハッピータイプ[/attribute]2人の" }
+                  ],
+                  "annotations": ["Condition field was not observed in the input PoC; absence is not converted into an explicit none condition."]
+                }
+              },
+              "annotations": ["P is represented as one effect and one target. No condition is asserted from the absent trigger reference."]
+            },
+            {
+              "source": { "table": "LivePassiveSkillLevel", "sourceId": "level=2;live_passive_skill_id=live_passive_skill-card-00015-5-uniq-0003-00" },
+              "levelFact": { "source": { "table": "LivePassiveSkillLevel", "sourceId": "level=2;live_passive_skill_id=live_passive_skill-card-00015-5-uniq-0003-00" }, "sourceField": "level", "rawValue": 2 },
+              "facts": [
+                { "source": { "table": "LivePassiveSkillLevel", "sourceId": "level=2;live_passive_skill_id=live_passive_skill-card-00015-5-uniq-0003-00" }, "sourceField": "livePassiveSkillId", "rawValue": "live_passive_skill-card-00015-5-uniq-0003-00" },
+                { "source": { "table": "LivePassiveSkillLevel", "sourceId": "level=2;live_passive_skill_id=live_passive_skill-card-00015-5-uniq-0003-00" }, "sourceField": "descriptionLangId", "rawValue": "la-generated-live_passive_skill-card-00015-5-uniq-0003-00.2-description" },
+                { "source": { "table": "LangGeneratedLivePassiveSkillLevel_Jpn", "sourceId": "la-generated-live_passive_skill-card-00015-5-uniq-0003-00.2-description" }, "sourceField": "text", "rawValue": "[attribute=happy]ハッピータイプ[/attribute]2人のスコアサポート効果[highlight]11[/highlight]%" }
+              ],
+              "sourceReferences": [
+                { "sourceField": "livePassiveSkillEffectGroupId", "rawJoinValue": "live_passive_skill_effect-live_active_skill_effect_up_permil_up-110-live_skill_effect_target-attribute-attribute_3-2", "target": { "table": "LivePassiveSkillEffect", "sourceId": "group_id=live_passive_skill_effect-live_active_skill_effect_up_permil_up-110-live_skill_effect_target-attribute-attribute_3-2;number=1" }, "referenceRole": "source-primary-group" }
+              ],
+              "effect": {
+                "effect": {
+                  "source": { "table": "LivePassiveSkillEffect", "sourceId": "group_id=live_passive_skill_effect-live_active_skill_effect_up_permil_up-110-live_skill_effect_target-attribute-attribute_3-2;number=1" },
+                  "groupFact": { "source": { "table": "LivePassiveSkillLevel", "sourceId": "level=2;live_passive_skill_id=live_passive_skill-card-00015-5-uniq-0003-00" }, "sourceField": "livePassiveSkillEffectGroupId", "rawValue": "live_passive_skill_effect-live_active_skill_effect_up_permil_up-110-live_skill_effect_target-attribute-attribute_3-2" },
+                  "facts": [
+                    { "source": { "table": "LivePassiveSkillEffect", "sourceId": "group_id=live_passive_skill_effect-live_active_skill_effect_up_permil_up-110-live_skill_effect_target-attribute-attribute_3-2;number=1" }, "sourceField": "type", "rawValue": "LivePassiveSkillEffectType_LIVE_PASSIVE_SKILL_EFFECT_TYPE_LIVE_ACTIVE_SKILL_EFFECT_UP_PERMIL_UP" },
+                    { "source": { "table": "LivePassiveSkillEffect", "sourceId": "group_id=live_passive_skill_effect-live_active_skill_effect_up_permil_up-110-live_skill_effect_target-attribute-attribute_3-2;number=1" }, "sourceField": "value", "rawValue": "110" },
+                    { "source": { "table": "LivePassiveSkillEffect", "sourceId": "group_id=live_passive_skill_effect-live_active_skill_effect_up_permil_up-110-live_skill_effect_target-attribute-attribute_3-2;number=1" }, "sourceField": "number", "rawValue": 1 },
+                    { "source": { "table": "LivePassiveSkillEffect", "sourceId": "group_id=live_passive_skill_effect-live_active_skill_effect_up_permil_up-110-live_skill_effect_target-attribute-attribute_3-2;number=1" }, "sourceField": "descriptionLangId", "rawValue": "la-generated-live_passive_skill_effect-live_active_skill_effect_up_permil_up-110-live_skill_effect_target-attribute-attribute_3-2.1-description" }
+                  ]
+                },
+                "target": {
+                  "sourceRefs": [{ "table": "LiveSkillEffectTarget", "sourceId": "live_skill_effect_target-attribute-attribute_3-2" }],
+                  "sourceFacts": [
+                    { "source": { "table": "LiveSkillEffectTarget", "sourceId": "live_skill_effect_target-attribute-attribute_3-2" }, "sourceField": "type", "rawValue": "LiveSkillEffectTargetType_LIVE_SKILL_EFFECT_TARGET_TYPE_ATTRIBUTE" },
+                    { "source": { "table": "LiveSkillEffectTarget", "sourceId": "live_skill_effect_target-attribute-attribute_3-2" }, "sourceField": "targetCount", "rawValue": 2 },
+                    { "source": { "table": "LiveSkillEffectTarget", "sourceId": "live_skill_effect_target-attribute-attribute_3-2" }, "sourceField": "cardAttributeType", "rawValue": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3", "semanticCandidate": { "value": "happy", "status": "candidate", "basis": "Existing PoC localized target text only; raw enum is retained." } },
+                    { "source": { "table": "LangGeneratedLiveSkillEffectTarget_Jpn", "sourceId": "la-generated-live_skill_effect_target-attribute-attribute_3-2-description" }, "sourceField": "text", "rawValue": "[attribute=happy]ハッピータイプ[/attribute]2人の" }
+                  ],
+                  "annotations": ["Condition field was not observed in the input PoC; absence is not converted into an explicit none condition."]
+                }
+              }
+            }
+          ],
+          "annotations": ["Input PoC reports no separate Passive trigger/condition reference for this card."]
+        },
+        "active": {
+          "skillKind": "active",
+          "skillSource": { "table": "LiveActiveSkill", "sourceId": "live_active_skill-card-00015-5-uniq-0003-00" },
+          "levels": [
+            {
+              "source": { "table": "LiveActiveSkillLevel", "sourceId": "level=1;live_active_skill_id=live_active_skill-card-00015-5-uniq-0003-00" },
+              "levelFact": { "source": { "table": "LiveActiveSkillLevel", "sourceId": "level=1;live_active_skill_id=live_active_skill-card-00015-5-uniq-0003-00" }, "sourceField": "level", "rawValue": 1 },
+              "facts": [
+                { "source": { "table": "LiveActiveSkillLevel", "sourceId": "level=1;live_active_skill_id=live_active_skill-card-00015-5-uniq-0003-00" }, "sourceField": "coolTimeMillisecond", "rawValue": 15000 },
+                { "source": { "table": "LiveActiveSkillLevel", "sourceId": "level=1;live_active_skill_id=live_active_skill-card-00015-5-uniq-0003-00" }, "sourceField": "activationProbabilityPermilMultiply", "rawValue": 460, "annotations": ["Meaning as a final probability is unresolved; Japanese display says 中確率, kept separately as source text."] },
+                { "source": { "table": "LiveActiveSkillLevel", "sourceId": "level=1;live_active_skill_id=live_active_skill-card-00015-5-uniq-0003-00" }, "sourceField": "effectDurationMillisecond", "rawValue": 6000 },
+                { "source": { "table": "LiveActiveSkillLevel", "sourceId": "level=1;live_active_skill_id=live_active_skill-card-00015-5-uniq-0003-00" }, "sourceField": "descriptionLangId", "rawValue": "la-generated-live_active_skill-card-00015-5-uniq-0003-00.1-description" },
+                { "source": { "table": "LangGeneratedLiveActiveSkillLevel_Jpn", "sourceId": "la-generated-live_active_skill-card-00015-5-uniq-0003-00.1-description" }, "sourceField": "text", "rawValue": " 15秒毎に中確率で6秒間スコアが45%UP\n40コンボ以上でスコアが90%UP" }
+              ],
+              "sourceReferences": [
+                { "sourceField": "liveActiveSkillEffectGroupId", "rawJoinValue": "live_active_skill_effect-score_up_permil_up-450", "target": { "table": "LiveActiveSkillEffect", "sourceId": "group_id=live_active_skill_effect-score_up_permil_up-450;number=1" }, "referenceRole": "source-base-effect-group" },
+                { "sourceField": "additionalLiveSkillTriggerGroupId", "rawJoinValue": "live_skill_trigger-combo_gte-40", "target": { "table": "LiveSkillTrigger", "sourceId": "group_id=live_skill_trigger-combo_gte-40;number=1" }, "referenceRole": "source-conditional-trigger-group" },
+                { "sourceField": "additionalLiveActiveSkillEffectGroupId", "rawJoinValue": "live_active_skill_effect-score_up_permil_up-900", "target": { "table": "LiveActiveSkillEffect", "sourceId": "group_id=live_active_skill_effect-score_up_permil_up-900;number=1" }, "referenceRole": "source-conditional-effect-group" }
+              ],
+              "baseEffect": {
+                "source": { "table": "LiveActiveSkillEffect", "sourceId": "group_id=live_active_skill_effect-score_up_permil_up-450;number=1" },
+                "groupFact": { "source": { "table": "LiveActiveSkillLevel", "sourceId": "level=1;live_active_skill_id=live_active_skill-card-00015-5-uniq-0003-00" }, "sourceField": "liveActiveSkillEffectGroupId", "rawValue": "live_active_skill_effect-score_up_permil_up-450" },
+                "facts": [
+                  { "source": { "table": "LiveActiveSkillEffect", "sourceId": "group_id=live_active_skill_effect-score_up_permil_up-450;number=1" }, "sourceField": "type", "rawValue": "LiveActiveSkillEffectType_LIVE_ACTIVE_SKILL_EFFECT_TYPE_SCORE_UP_PERMIL_UP" },
+                  { "source": { "table": "LiveActiveSkillEffect", "sourceId": "group_id=live_active_skill_effect-score_up_permil_up-450;number=1" }, "sourceField": "value", "rawValue": "450" },
+                  { "source": { "table": "LiveActiveSkillEffect", "sourceId": "group_id=live_active_skill_effect-score_up_permil_up-450;number=1" }, "sourceField": "number", "rawValue": 1 }
+                ]
+              },
+              "conditionalOverrides": [
+                {
+                  "condition": {
+                    "sourceFacts": [
+                      { "source": { "table": "LiveSkillTrigger", "sourceId": "group_id=live_skill_trigger-combo_gte-40;number=1" }, "sourceField": "type", "rawValue": "LiveSkillTriggerType_LIVE_SKILL_TRIGGER_TYPE_COMBO_GTE" },
+                      { "source": { "table": "LiveSkillTrigger", "sourceId": "group_id=live_skill_trigger-combo_gte-40;number=1" }, "sourceField": "threshold", "rawValue": "40" },
+                      { "source": { "table": "LangGeneratedLiveSkillTrigger_Jpn", "sourceId": "la-generated-live_skill_trigger-combo_gte-40.1-description" }, "sourceField": "text", "rawValue": "40コンボ以上で" }
+                    ],
+                    "sourceReferences": [
+                      { "sourceField": "descriptionLangId", "rawJoinValue": "la-generated-live_skill_trigger-combo_gte-40.1-description", "target": { "table": "LangGeneratedLiveSkillTrigger_Jpn", "sourceId": "la-generated-live_skill_trigger-combo_gte-40.1-description" } }
+                    ],
+                    "resolutionClass": "player-state-dependent",
+                    "evaluationMode": "preserve-without-dynamic-simulation",
+                    "annotations": ["Combo condition and its threshold are preserved; dynamic Combo simulation is out of scope."]
+                  },
+                  "replacementEffect": {
+                    "source": { "table": "LiveActiveSkillEffect", "sourceId": "group_id=live_active_skill_effect-score_up_permil_up-900;number=1" },
+                    "groupFact": { "source": { "table": "LiveActiveSkillLevel", "sourceId": "level=1;live_active_skill_id=live_active_skill-card-00015-5-uniq-0003-00" }, "sourceField": "additionalLiveActiveSkillEffectGroupId", "rawValue": "live_active_skill_effect-score_up_permil_up-900" },
+                    "facts": [
+                      { "source": { "table": "LiveActiveSkillEffect", "sourceId": "group_id=live_active_skill_effect-score_up_permil_up-900;number=1" }, "sourceField": "type", "rawValue": "LiveActiveSkillEffectType_LIVE_ACTIVE_SKILL_EFFECT_TYPE_SCORE_UP_PERMIL_UP" },
+                      { "source": { "table": "LiveActiveSkillEffect", "sourceId": "group_id=live_active_skill_effect-score_up_permil_up-900;number=1" }, "sourceField": "value", "rawValue": "900" }
+                    ]
+                  },
+                  "sourceReferences": [
+                    { "sourceField": "additionalLiveSkillTriggerGroupId", "rawJoinValue": "live_skill_trigger-combo_gte-40", "target": { "table": "LiveSkillTrigger", "sourceId": "group_id=live_skill_trigger-combo_gte-40;number=1" } },
+                    { "sourceField": "additionalLiveActiveSkillEffectGroupId", "rawJoinValue": "live_active_skill_effect-score_up_permil_up-900", "target": { "table": "LiveActiveSkillEffect", "sourceId": "group_id=live_active_skill_effect-score_up_permil_up-900;number=1" } }
+                  ],
+                  "annotations": ["Conditional effect is represented as a replacement of the base effect, per clarified game behavior; it is not additive."]
+                }
+              ],
+              "evaluationScope": "one-active-effect-select-base-or-matching-override",
+              "annotations": ["Selected PoC field `additionalLiveSkillTriggerGroupId` is Combo (player-state-dependent), so the condition/value pair is preserved and not dynamically evaluated."]
+            },
+            {
+              "source": { "table": "LiveActiveSkillLevel", "sourceId": "level=2;live_active_skill_id=live_active_skill-card-00015-5-uniq-0003-00" },
+              "levelFact": { "source": { "table": "LiveActiveSkillLevel", "sourceId": "level=2;live_active_skill_id=live_active_skill-card-00015-5-uniq-0003-00" }, "sourceField": "level", "rawValue": 2 },
+              "facts": [
+                { "source": { "table": "LiveActiveSkillLevel", "sourceId": "level=2;live_active_skill_id=live_active_skill-card-00015-5-uniq-0003-00" }, "sourceField": "coolTimeMillisecond", "rawValue": 15000 },
+                { "source": { "table": "LiveActiveSkillLevel", "sourceId": "level=2;live_active_skill_id=live_active_skill-card-00015-5-uniq-0003-00" }, "sourceField": "activationProbabilityPermilMultiply", "rawValue": 460, "annotations": ["Meaning as a final probability is unresolved."] },
+                { "source": { "table": "LiveActiveSkillLevel", "sourceId": "level=2;live_active_skill_id=live_active_skill-card-00015-5-uniq-0003-00" }, "sourceField": "effectDurationMillisecond", "rawValue": 6000 },
+                { "source": { "table": "LiveActiveSkillLevel", "sourceId": "level=2;live_active_skill_id=live_active_skill-card-00015-5-uniq-0003-00" }, "sourceField": "descriptionLangId", "rawValue": "la-generated-live_active_skill-card-00015-5-uniq-0003-00.2-description" },
+                { "source": { "table": "LangGeneratedLiveActiveSkillLevel_Jpn", "sourceId": "la-generated-live_active_skill-card-00015-5-uniq-0003-00.2-description" }, "sourceField": "text", "rawValue": " 15秒毎に中確率で6秒間スコアが[highlight]55[/highlight]%UP\n40コンボ以上でスコアが[highlight]110[/highlight]%UP" }
+              ],
+              "sourceReferences": [
+                { "sourceField": "liveActiveSkillEffectGroupId", "rawJoinValue": "live_active_skill_effect-score_up_permil_up-550", "target": { "table": "LiveActiveSkillEffect", "sourceId": "group_id=live_active_skill_effect-score_up_permil_up-550;number=1" }, "referenceRole": "source-base-effect-group" },
+                { "sourceField": "additionalLiveSkillTriggerGroupId", "rawJoinValue": "live_skill_trigger-combo_gte-40", "target": { "table": "LiveSkillTrigger", "sourceId": "group_id=live_skill_trigger-combo_gte-40;number=1" }, "referenceRole": "source-conditional-trigger-group" },
+                { "sourceField": "additionalLiveActiveSkillEffectGroupId", "rawJoinValue": "live_active_skill_effect-score_up_permil_up-1100", "target": { "table": "LiveActiveSkillEffect", "sourceId": "group_id=live_active_skill_effect-score_up_permil_up-1100;number=1" }, "referenceRole": "source-conditional-effect-group" }
+              ],
+              "baseEffect": {
+                "source": { "table": "LiveActiveSkillEffect", "sourceId": "group_id=live_active_skill_effect-score_up_permil_up-550;number=1" },
+                "groupFact": { "source": { "table": "LiveActiveSkillLevel", "sourceId": "level=2;live_active_skill_id=live_active_skill-card-00015-5-uniq-0003-00" }, "sourceField": "liveActiveSkillEffectGroupId", "rawValue": "live_active_skill_effect-score_up_permil_up-550" },
+                "facts": [
+                  { "source": { "table": "LiveActiveSkillEffect", "sourceId": "group_id=live_active_skill_effect-score_up_permil_up-550;number=1" }, "sourceField": "type", "rawValue": "LiveActiveSkillEffectType_LIVE_ACTIVE_SKILL_EFFECT_TYPE_SCORE_UP_PERMIL_UP" },
+                  { "source": { "table": "LiveActiveSkillEffect", "sourceId": "group_id=live_active_skill_effect-score_up_permil_up-550;number=1" }, "sourceField": "value", "rawValue": "550" },
+                  { "source": { "table": "LiveActiveSkillEffect", "sourceId": "group_id=live_active_skill_effect-score_up_permil_up-550;number=1" }, "sourceField": "number", "rawValue": 1 }
+                ]
+              },
+              "conditionalOverrides": [
+                {
+                  "condition": {
+                    "sourceFacts": [
+                      { "source": { "table": "LiveSkillTrigger", "sourceId": "group_id=live_skill_trigger-combo_gte-40;number=1" }, "sourceField": "type", "rawValue": "LiveSkillTriggerType_LIVE_SKILL_TRIGGER_TYPE_COMBO_GTE" },
+                      { "source": { "table": "LiveSkillTrigger", "sourceId": "group_id=live_skill_trigger-combo_gte-40;number=1" }, "sourceField": "threshold", "rawValue": "40" }
+                    ],
+                    "resolutionClass": "player-state-dependent",
+                    "evaluationMode": "preserve-without-dynamic-simulation",
+                    "annotations": ["Combo condition retained as evidence; runtime evaluation is out of scope."]
+                  },
+                  "replacementEffect": {
+                    "source": { "table": "LiveActiveSkillEffect", "sourceId": "group_id=live_active_skill_effect-score_up_permil_up-1100;number=1" },
+                    "groupFact": { "source": { "table": "LiveActiveSkillLevel", "sourceId": "level=2;live_active_skill_id=live_active_skill-card-00015-5-uniq-0003-00" }, "sourceField": "additionalLiveActiveSkillEffectGroupId", "rawValue": "live_active_skill_effect-score_up_permil_up-1100" },
+                    "facts": [
+                      { "source": { "table": "LiveActiveSkillEffect", "sourceId": "group_id=live_active_skill_effect-score_up_permil_up-1100;number=1" }, "sourceField": "type", "rawValue": "LiveActiveSkillEffectType_LIVE_ACTIVE_SKILL_EFFECT_TYPE_SCORE_UP_PERMIL_UP" },
+                      { "source": { "table": "LiveActiveSkillEffect", "sourceId": "group_id=live_active_skill_effect-score_up_permil_up-1100;number=1" }, "sourceField": "value", "rawValue": "1100" }
+                    ]
+                  },
+                  "sourceReferences": [
+                    { "sourceField": "additionalLiveSkillTriggerGroupId", "rawJoinValue": "live_skill_trigger-combo_gte-40", "target": { "table": "LiveSkillTrigger", "sourceId": "group_id=live_skill_trigger-combo_gte-40;number=1" } },
+                    { "sourceField": "additionalLiveActiveSkillEffectGroupId", "rawJoinValue": "live_active_skill_effect-score_up_permil_up-1100", "target": { "table": "LiveActiveSkillEffect", "sourceId": "group_id=live_active_skill_effect-score_up_permil_up-1100;number=1" } }
+                  ],
+                  "annotations": ["This is the replacement upper value for the stated Combo condition, not an additive value."]
+                }
+              ],
+              "evaluationScope": "one-active-effect-select-base-or-matching-override"
+            }
+          ],
+          "annotations": ["Combo conditions are preserved, not dynamically simulated."]
+        },
+        "special": {
+          "skillKind": "special",
+          "skillSource": { "table": "LiveSpecialSkill", "sourceId": "live_special_skill-card-00015-5-uniq-0003-00" },
+          "levels": [
+            {
+              "source": { "table": "LiveSpecialSkillLevel", "sourceId": "level=1;live_special_skill_id=live_special_skill-card-00015-5-uniq-0003-00" },
+              "levelFact": { "source": { "table": "LiveSpecialSkillLevel", "sourceId": "level=1;live_special_skill_id=live_special_skill-card-00015-5-uniq-0003-00" }, "sourceField": "level", "rawValue": 1 },
+              "facts": [
+                { "source": { "table": "LiveSpecialSkillLevel", "sourceId": "level=1;live_special_skill_id=live_special_skill-card-00015-5-uniq-0003-00" }, "sourceField": "liveSpecialSkillId", "rawValue": "live_special_skill-card-00015-5-uniq-0003-00" },
+                { "source": { "table": "LiveSpecialSkillLevel", "sourceId": "level=1;live_special_skill_id=live_special_skill-card-00015-5-uniq-0003-00" }, "sourceField": "effectDurationMillisecond", "rawValue": 10000 },
+                { "source": { "table": "LiveSpecialSkillLevel", "sourceId": "level=1;live_special_skill_id=live_special_skill-card-00015-5-uniq-0003-00" }, "sourceField": "descriptionLangId", "rawValue": "la-generated-live_special_skill-card-00015-5-uniq-0003-00.1-description" },
+                { "source": { "table": "LangGeneratedLiveSpecialSkillLevel_Jpn", "sourceId": "la-generated-live_special_skill-card-00015-5-uniq-0003-00.1-description" }, "sourceField": "text", "rawValue": "10秒間スコアサポート効果120%\nスキル発動率が40%UP" }
+              ],
+              "sourceReferences": [
+                { "sourceField": "liveActiveSkillEffectGroupId", "rawJoinValue": "live_special_skill_effect-score_up_effect_up_permil_up-1200", "target": { "table": "LiveActiveSkillEffect", "sourceId": "group_id=live_special_skill_effect-score_up_effect_up_permil_up-1200;number=1" }, "referenceRole": "source-primary-effect" },
+                { "sourceField": "additionalLiveActiveSkillEffectGroupId", "rawJoinValue": "live_special_skill_effect-live_active_skill_activation_probability_up_permil_up-400", "target": { "table": "LiveActiveSkillEffect", "sourceId": "group_id=live_special_skill_effect-live_active_skill_activation_probability_up_permil_up-400;number=1" }, "referenceRole": "source-additional-independent-effect" }
+              ],
+              "effects": [
+                {
+                  "effect": {
+                    "source": { "table": "LiveActiveSkillEffect", "sourceId": "group_id=live_special_skill_effect-score_up_effect_up_permil_up-1200;number=1" },
+                    "groupFact": { "source": { "table": "LiveSpecialSkillLevel", "sourceId": "level=1;live_special_skill_id=live_special_skill-card-00015-5-uniq-0003-00" }, "sourceField": "liveActiveSkillEffectGroupId", "rawValue": "live_special_skill_effect-score_up_effect_up_permil_up-1200" },
+                    "facts": [
+                      { "source": { "table": "LiveActiveSkillEffect", "sourceId": "group_id=live_special_skill_effect-score_up_effect_up_permil_up-1200;number=1" }, "sourceField": "type", "rawValue": "LiveActiveSkillEffectType_LIVE_ACTIVE_SKILL_EFFECT_TYPE_SCORE_UP_EFFECT_UP_PERMIL_UP" },
+                      { "source": { "table": "LiveActiveSkillEffect", "sourceId": "group_id=live_special_skill_effect-score_up_effect_up_permil_up-1200;number=1" }, "sourceField": "value", "rawValue": "1200" },
+                      { "source": { "table": "LiveActiveSkillEffect", "sourceId": "group_id=live_special_skill_effect-score_up_effect_up_permil_up-1200;number=1" }, "sourceField": "descriptionLangId", "rawValue": "la-generated-live_special_skill_effect-score_up_effect_up_permil_up-1200.1-description" }
+                    ]
+                  },
+                  "sourceReferences": [],
+                  "annotations": ["Level-row duration is recorded separately. Its exact scope per Special effect is unresolved; no per-effect duration was inferred."]
+                },
+                {
+                  "effect": {
+                    "source": { "table": "LiveActiveSkillEffect", "sourceId": "group_id=live_special_skill_effect-live_active_skill_activation_probability_up_permil_up-400;number=1" },
+                    "groupFact": { "source": { "table": "LiveSpecialSkillLevel", "sourceId": "level=1;live_special_skill_id=live_special_skill-card-00015-5-uniq-0003-00" }, "sourceField": "additionalLiveActiveSkillEffectGroupId", "rawValue": "live_special_skill_effect-live_active_skill_activation_probability_up_permil_up-400" },
+                    "facts": [
+                      { "source": { "table": "LiveActiveSkillEffect", "sourceId": "group_id=live_special_skill_effect-live_active_skill_activation_probability_up_permil_up-400;number=1" }, "sourceField": "type", "rawValue": "LiveActiveSkillEffectType_LIVE_ACTIVE_SKILL_EFFECT_TYPE_LIVE_ACTIVE_SKILL_ACTIVATION_PROBABILITY_UP_PERMIL_UP" },
+                      { "source": { "table": "LiveActiveSkillEffect", "sourceId": "group_id=live_special_skill_effect-live_active_skill_activation_probability_up_permil_up-400;number=1" }, "sourceField": "value", "rawValue": "400" },
+                      { "source": { "table": "LiveActiveSkillEffect", "sourceId": "group_id=live_special_skill_effect-live_active_skill_activation_probability_up_permil_up-400;number=1" }, "sourceField": "descriptionLangId", "rawValue": "la-generated-live_special_skill_effect-live_active_skill_activation_probability_up_permil_up-400.1-description" }
+                    ]
+                  },
+                  "sourceReferences": [],
+                  "annotations": ["Independent second Special effect. No per-effect condition was observed for this PoC; absence is not expanded into a synthetic condition."]
+                }
+              ],
+              "effectCombination": "independent-effects"
+            },
+            {
+              "source": { "table": "LiveSpecialSkillLevel", "sourceId": "level=2;live_special_skill_id=live_special_skill-card-00015-5-uniq-0003-00" },
+              "levelFact": { "source": { "table": "LiveSpecialSkillLevel", "sourceId": "level=2;live_special_skill_id=live_special_skill-card-00015-5-uniq-0003-00" }, "sourceField": "level", "rawValue": 2 },
+              "facts": [
+                { "source": { "table": "LiveSpecialSkillLevel", "sourceId": "level=2;live_special_skill_id=live_special_skill-card-00015-5-uniq-0003-00" }, "sourceField": "liveSpecialSkillId", "rawValue": "live_special_skill-card-00015-5-uniq-0003-00" },
+                { "source": { "table": "LiveSpecialSkillLevel", "sourceId": "level=2;live_special_skill_id=live_special_skill-card-00015-5-uniq-0003-00" }, "sourceField": "effectDurationMillisecond", "rawValue": 10000 },
+                { "source": { "table": "LiveSpecialSkillLevel", "sourceId": "level=2;live_special_skill_id=live_special_skill-card-00015-5-uniq-0003-00" }, "sourceField": "descriptionLangId", "rawValue": "la-generated-live_special_skill-card-00015-5-uniq-0003-00.2-description" },
+                { "source": { "table": "LangGeneratedLiveSpecialSkillLevel_Jpn", "sourceId": "la-generated-live_special_skill-card-00015-5-uniq-0003-00.2-description" }, "sourceField": "text", "rawValue": "10秒間スコアサポート効果[highlight]145[/highlight]%\nスキル発動率が[highlight]50[/highlight]%UP" }
+              ],
+              "sourceReferences": [
+                { "sourceField": "liveActiveSkillEffectGroupId", "rawJoinValue": "live_special_skill_effect-score_up_effect_up_permil_up-1450", "target": { "table": "LiveActiveSkillEffect", "sourceId": "group_id=live_special_skill_effect-score_up_effect_up_permil_up-1450;number=1" }, "referenceRole": "source-primary-effect" },
+                { "sourceField": "additionalLiveActiveSkillEffectGroupId", "rawJoinValue": "live_special_skill_effect-live_active_skill_activation_probability_up_permil_up-500", "target": { "table": "LiveActiveSkillEffect", "sourceId": "group_id=live_special_skill_effect-live_active_skill_activation_probability_up_permil_up-500;number=1" }, "referenceRole": "source-additional-independent-effect" }
+              ],
+              "effects": [
+                {
+                  "effect": {
+                    "source": { "table": "LiveActiveSkillEffect", "sourceId": "group_id=live_special_skill_effect-score_up_effect_up_permil_up-1450;number=1" },
+                    "groupFact": { "source": { "table": "LiveSpecialSkillLevel", "sourceId": "level=2;live_special_skill_id=live_special_skill-card-00015-5-uniq-0003-00" }, "sourceField": "liveActiveSkillEffectGroupId", "rawValue": "live_special_skill_effect-score_up_effect_up_permil_up-1450" },
+                    "facts": [
+                      { "source": { "table": "LiveActiveSkillEffect", "sourceId": "group_id=live_special_skill_effect-score_up_effect_up_permil_up-1450;number=1" }, "sourceField": "type", "rawValue": "LiveActiveSkillEffectType_LIVE_ACTIVE_SKILL_EFFECT_TYPE_SCORE_UP_EFFECT_UP_PERMIL_UP" },
+                      { "source": { "table": "LiveActiveSkillEffect", "sourceId": "group_id=live_special_skill_effect-score_up_effect_up_permil_up-1450;number=1" }, "sourceField": "value", "rawValue": "1450" }
+                    ]
+                  },
+                  "sourceReferences": [],
+                  "annotations": ["No per-effect duration was inferred; effectDurationMillisecond is retained on the level row."]
+                },
+                {
+                  "effect": {
+                    "source": { "table": "LiveActiveSkillEffect", "sourceId": "group_id=live_special_skill_effect-live_active_skill_activation_probability_up_permil_up-500;number=1" },
+                    "groupFact": { "source": { "table": "LiveSpecialSkillLevel", "sourceId": "level=2;live_special_skill_id=live_special_skill-card-00015-5-uniq-0003-00" }, "sourceField": "additionalLiveActiveSkillEffectGroupId", "rawValue": "live_special_skill_effect-live_active_skill_activation_probability_up_permil_up-500" },
+                    "facts": [
+                      { "source": { "table": "LiveActiveSkillEffect", "sourceId": "group_id=live_special_skill_effect-live_active_skill_activation_probability_up_permil_up-500;number=1" }, "sourceField": "type", "rawValue": "LiveActiveSkillEffectType_LIVE_ACTIVE_SKILL_EFFECT_TYPE_LIVE_ACTIVE_SKILL_ACTIVATION_PROBABILITY_UP_PERMIL_UP" },
+                      { "source": { "table": "LiveActiveSkillEffect", "sourceId": "group_id=live_special_skill_effect-live_active_skill_activation_probability_up_permil_up-500;number=1" }, "sourceField": "value", "rawValue": "500" }
+                    ]
+                  },
+                  "sourceReferences": [],
+                  "annotations": ["Independent second Special effect; no additive/replacement relationship is implied."]
+                }
+              ],
+              "effectCombination": "independent-effects",
+              "annotations": ["The input PoC states that whether the skill-level duration applies to the second effect is unresolved."]
+            }
+          ]
+        }
+      },
+      "otherSourceRefs": [
+        { "table": "CardLevel", "sourceId": "group_id=grp-card-level-rarity_5-06;level=80" },
+        { "table": "CardLevelLimit", "sourceId": "group_id=rarity_5-attribute_3;limit_break_count=4" },
+        { "table": "CardPotential", "sourceId": "effect_type=1;group_id=card_potential_grp-rarity_5;upgrade_count=1" },
+        { "table": "CardPotential", "sourceId": "effect_type=4;group_id=card_potential_grp-rarity_5;upgrade_count=2" },
+        { "table": "CardPotential", "sourceId": "effect_type=3;group_id=card_potential_grp-rarity_5;upgrade_count=3" },
+        { "table": "CardPotential", "sourceId": "effect_type=2;group_id=card_potential_grp-rarity_5;upgrade_count=4" },
+        { "table": "CardPotential", "sourceId": "effect_type=5;group_id=card_potential_grp-rarity_5;upgrade_count=5" },
+        { "table": "SkillTreeConnectEffect", "sourceId": "skill_tree_connect_effect-skill_tree_effect_up-skill_tree_connect_effect_extent-center_area-001-rare_5" }
+      ],
+      "sourceFieldFacts": [
+        { "source": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" }, "sourceField": "id", "rawValue": "card-00015-5-uniq-0003-00" },
+        { "source": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" }, "sourceField": "characterId", "rawValue": "chr-00015" },
+        { "source": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" }, "sourceField": "nameLangId", "rawValue": "la-card_name-00015-5-uniq-0003-00" },
+        { "source": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" }, "sourceField": "rarity", "rawValue": "CardRarity_CARD_RARITY_RARITY_5" },
+        { "source": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" }, "sourceField": "attributeType", "rawValue": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3" },
+        { "source": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" }, "sourceField": "cardLevelGroupId", "rawValue": "grp-card-level-rarity_5-06" },
+        { "source": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" }, "sourceField": "performancePermilMultiply", "rawValue": 297 },
+        { "source": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" }, "sourceField": "techniquePermilMultiply", "rawValue": 263 },
+        { "source": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" }, "sourceField": "sensePermilMultiply", "rawValue": 440 },
+        { "source": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" }, "sourceField": "cardLevelLimitGroupId", "rawValue": "rarity_5-attribute_3" },
+        { "source": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" }, "sourceField": "cardPotentialGroupId", "rawValue": "card_potential_grp-rarity_5" },
+        { "source": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" }, "sourceField": "livePassiveSkillId", "rawValue": "live_passive_skill-card-00015-5-uniq-0003-00" },
+        { "source": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" }, "sourceField": "liveActiveSkillId", "rawValue": "live_active_skill-card-00015-5-uniq-0003-00" },
+        { "source": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" }, "sourceField": "liveSpecialSkillId", "rawValue": "live_special_skill-card-00015-5-uniq-0003-00" },
+        { "source": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" }, "sourceField": "skillTreeConnectEffectId", "rawValue": "skill_tree_connect_effect-skill_tree_effect_up-skill_tree_connect_effect_extent-center_area-001-rare_5", "annotations": ["Connect/board implementation is out of scope; preserve the source reference only."] },
+        { "source": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" }, "sourceField": "assetId", "rawValue": "00015-5-uniq-0003-00" },
+        { "source": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" }, "sourceField": "liveSkillCharacterVoiceId", "rawValue": "cv-live_cmn_chr-00015_00015-5-uniq-0003-00_skill-card" },
+        { "source": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" }, "sourceField": "rewardCostumeId", "rawValue": "cos-00015-uniq-0003-00" },
+        { "source": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" }, "sourceField": "rewardSdCostumeId", "rawValue": "sdcos-00015-uniq-0003-00" },
+        { "source": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" }, "sourceField": "assetType", "rawValue": "CardAssetType_CARD_ASSET_TYPE_IMAGE_AND_MOVIE" },
+        { "source": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" }, "sourceField": "verticalAnchorType", "rawValue": "CardVerticalAnchorType_CARD_VERTICAL_ANCHOR_TYPE_TOP" },
+        { "source": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" }, "sourceField": "horizontalAnchorType", "rawValue": "CardHorizontalAnchorType_CARD_HORIZONTAL_ANCHOR_TYPE_RIGHT" },
+        { "source": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" }, "sourceField": "gachaAnimationCharacterVoiceId", "rawValue": "cv-cmn_chr-00015_00015-5-uniq-0003-00_card-get" },
+        { "source": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" }, "sourceField": "cardDetailCharacterVoiceId", "rawValue": "cv-cmn_chr-00015_00015-5-uniq-0003-00_card-detail" },
+        { "source": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" }, "sourceField": "potentialUpgrade1CharacterVoiceId", "rawValue": "cv-cmn_chr-00015_00015-5-uniq-0003-00_card-potential-01" },
+        { "source": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" }, "sourceField": "potentialUpgrade2CharacterVoiceId", "rawValue": "cv-cmn_chr-00015_00015-5-uniq-0003-00_card-potential-02" },
+        { "source": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" }, "sourceField": "potentialUpgrade3CharacterVoiceId", "rawValue": "cv-cmn_chr-00015_00015-5-uniq-0003-00_card-potential-03" },
+        { "source": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" }, "sourceField": "potentialUpgrade4CharacterVoiceId", "rawValue": "cv-cmn_chr-00015_00015-5-uniq-0003-00_card-potential-04" },
+        { "source": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" }, "sourceField": "potentialUpgrade5CharacterVoiceId", "rawValue": "cv-cmn_chr-00015_00015-5-uniq-0003-00_card-potential-05" },
+        { "source": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" }, "sourceField": "order", "rawValue": 112 },
+        { "source": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" }, "sourceField": "potentialAlternativeReward", "rawValue": { "resourceType": "ResourceType_RESOURCE_TYPE_ITEM", "resourceId": "item-gacha-sp_sticker-01", "quantity": "100" } },
+        { "source": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" }, "sourceField": "acquireReward", "rawValue": { "resourceType": "ResourceType_RESOURCE_TYPE_ITEM", "resourceId": "item-gacha-sp_sticker-01", "quantity": "30" } }
+      ],
+      "annotations": [
+        "Input PoC source preserved by hash in conversionEvidence.",
+        "The input PoC selected limitBreakCount=4 and level=80. Its selectedState says potentialUpgradeCount=5 while its parameterSnapshot references CardPotential upgradeCount=2; this discrepancy is retained as unresolved evidence, not reconciled.",
+        "Input PoC candidate arithmetic formula and public max stats are not canonical computed stats. The formula was unconfirmed and the external listing values are preserved in the referenced PoC artifact.",
+        "Simulator talentId candidate sakura_miko, raw simulator mapping summary, and all 14 fieldProvenance entries remain available in the referenced input PoC; no runtime fields are assigned from them."
+      ]
+    }
+  ],
+  "sourceRecords": [
+    {
+      "table": "Card",
+      "sourceId": "card-00015-5-uniq-0003-00",
+      "sourceWrapper": { "id": "card-00015-5-uniq-0003-00" },
+      "fields": {
+        "id": "card-00015-5-uniq-0003-00",
+        "characterId": "chr-00015",
+        "nameLangId": "la-card_name-00015-5-uniq-0003-00",
+        "rarity": "CardRarity_CARD_RARITY_RARITY_5",
+        "attributeType": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3",
+        "cardLevelGroupId": "grp-card-level-rarity_5-06",
+        "performancePermilMultiply": 297,
+        "techniquePermilMultiply": 263,
+        "sensePermilMultiply": 440,
+        "cardLevelLimitGroupId": "rarity_5-attribute_3",
+        "livePassiveSkillId": "live_passive_skill-card-00015-5-uniq-0003-00",
+        "liveActiveSkillId": "live_active_skill-card-00015-5-uniq-0003-00",
+        "liveSpecialSkillId": "live_special_skill-card-00015-5-uniq-0003-00",
+        "cardPotentialGroupId": "card_potential_grp-rarity_5",
+        "assetId": "00015-5-uniq-0003-00",
+        "liveSkillCharacterVoiceId": "cv-live_cmn_chr-00015_00015-5-uniq-0003-00_skill-card",
+        "skillTreeConnectEffectId": "skill_tree_connect_effect-skill_tree_effect_up-skill_tree_connect_effect_extent-center_area-001-rare_5",
+        "rewardCostumeId": "cos-00015-uniq-0003-00",
+        "rewardSdCostumeId": "sdcos-00015-uniq-0003-00",
+        "assetType": "CardAssetType_CARD_ASSET_TYPE_IMAGE_AND_MOVIE",
+        "verticalAnchorType": "CardVerticalAnchorType_CARD_VERTICAL_ANCHOR_TYPE_TOP",
+        "horizontalAnchorType": "CardHorizontalAnchorType_CARD_HORIZONTAL_ANCHOR_TYPE_RIGHT",
+        "gachaAnimationCharacterVoiceId": "cv-cmn_chr-00015_00015-5-uniq-0003-00_card-get",
+        "cardDetailCharacterVoiceId": "cv-cmn_chr-00015_00015-5-uniq-0003-00_card-detail",
+        "potentialUpgrade1CharacterVoiceId": "cv-cmn_chr-00015_00015-5-uniq-0003-00_card-potential-01",
+        "potentialUpgrade2CharacterVoiceId": "cv-cmn_chr-00015_00015-5-uniq-0003-00_card-potential-02",
+        "potentialUpgrade3CharacterVoiceId": "cv-cmn_chr-00015_00015-5-uniq-0003-00_card-potential-03",
+        "potentialUpgrade4CharacterVoiceId": "cv-cmn_chr-00015_00015-5-uniq-0003-00_card-potential-04",
+        "potentialUpgrade5CharacterVoiceId": "cv-cmn_chr-00015_00015-5-uniq-0003-00_card-potential-05",
+        "order": 112,
+        "potentialAlternativeReward": { "resourceType": "ResourceType_RESOURCE_TYPE_ITEM", "resourceId": "item-gacha-sp_sticker-01", "quantity": "100" },
+        "acquireReward": { "resourceType": "ResourceType_RESOURCE_TYPE_ITEM", "resourceId": "item-gacha-sp_sticker-01", "quantity": "30" }
+      }
+    }
+  ],
+  "joins": [
+    {
+      "from": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" },
+      "to": { "table": "LangCard_Jpn", "sourceId": "la-card_name-00015-5-uniq-0003-00" },
+      "sourceField": "nameLangId",
+      "targetField": "id",
+      "rawJoinValue": "la-card_name-00015-5-uniq-0003-00",
+      "relationshipLabel": "localized-card-name-reference"
+    },
+    {
+      "from": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" },
+      "to": { "table": "Character", "sourceId": "chr-00015" },
+      "sourceField": "characterId",
+      "targetField": "id",
+      "rawJoinValue": "chr-00015",
+      "relationshipLabel": "card-character-reference"
+    },
+    {
+      "from": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" },
+      "to": { "table": "CardLevel", "sourceId": "group_id=grp-card-level-rarity_5-06;level=80" },
+      "sourceField": "cardLevelGroupId",
+      "targetField": "group_id",
+      "rawJoinValue": "grp-card-level-rarity_5-06",
+      "relationshipLabel": "card-level-group"
+    },
+    {
+      "from": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" },
+      "to": { "table": "CardLevelLimit", "sourceId": "group_id=rarity_5-attribute_3;limit_break_count=4" },
+      "sourceField": "cardLevelLimitGroupId",
+      "targetField": "group_id",
+      "rawJoinValue": "rarity_5-attribute_3",
+      "relationshipLabel": "training-limit-group"
+    },
+    {
+      "from": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" },
+      "to": { "table": "CardPotential", "sourceId": "effect_type=4;group_id=card_potential_grp-rarity_5;upgrade_count=2" },
+      "sourceField": "cardPotentialGroupId",
+      "targetField": "group_id",
+      "rawJoinValue": "card_potential_grp-rarity_5",
+      "relationshipLabel": "bloom-step-group"
+    },
+    {
+      "from": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" },
+      "to": { "table": "LivePassiveSkill", "sourceId": "live_passive_skill-card-00015-5-uniq-0003-00" },
+      "sourceField": "livePassiveSkillId",
+      "targetField": "id",
+      "rawJoinValue": "live_passive_skill-card-00015-5-uniq-0003-00",
+      "relationshipLabel": "passive-skill-reference"
+    },
+    {
+      "from": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" },
+      "to": { "table": "LiveActiveSkill", "sourceId": "live_active_skill-card-00015-5-uniq-0003-00" },
+      "sourceField": "liveActiveSkillId",
+      "targetField": "id",
+      "rawJoinValue": "live_active_skill-card-00015-5-uniq-0003-00",
+      "relationshipLabel": "active-skill-reference"
+    },
+    {
+      "from": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" },
+      "to": { "table": "LiveSpecialSkill", "sourceId": "live_special_skill-card-00015-5-uniq-0003-00" },
+      "sourceField": "liveSpecialSkillId",
+      "targetField": "id",
+      "rawJoinValue": "live_special_skill-card-00015-5-uniq-0003-00",
+      "relationshipLabel": "special-skill-reference"
+    },
+    {
+      "from": { "table": "Card", "sourceId": "card-00015-5-uniq-0003-00" },
+      "to": { "table": "SkillTreeConnectEffect", "sourceId": "skill_tree_connect_effect-skill_tree_effect_up-skill_tree_connect_effect_extent-center_area-001-rare_5" },
+      "sourceField": "skillTreeConnectEffectId",
+      "targetField": "id",
+      "rawJoinValue": "skill_tree_connect_effect-skill_tree_effect_up-skill_tree_connect_effect_extent-center_area-001-rare_5",
+      "relationshipLabel": "connect-source-reference-out-of-scope"
+    }
+  ],
+  "unresolvedReferences": [],
+  "notes": [
+    "Only the existing Sakura Bloom one-card PoC is converted. No other card records are in this fixture.",
+    "This fixture is research data only; it is not imported into runtime, Card Library, rules, or Event.",
+    "Connect/board values are retained as source references/raw Card and bloom facts only; no Connect runtime model or calculations are included.",
+    "Unknown items include final stat rounding/formula, the PoC potential-state discrepancy, Active activationProbabilityPermilMultiply meaning, the Special duration scope across independent effects, and absent Passive condition evidence.",
+    "The original PoC remains the auditable evidence source for its 14 field provenance records, full simulator mapping summary, public listing cross-check, and unconfirmed candidate arithmetic."
+  ],
+  "conversionEvidence": {
+    "inputArtifact": {
+      "path": "research/holodoridb-card-poc.json",
+      "sha256": "dc5b549a85fc766634447bfaec9ec9b5cc0e32ef33730aa60dd3721b3cd490ab"
+    },
+    "preservedSections": [
+      "provenance",
+      "card",
+      "parameterSnapshot",
+      "skills.passive",
+      "skills.active",
+      "skills.special",
+      "otherReferencedTables",
+      "fieldProvenance[14]",
+      "simulatorMappingSummary"
+    ],
+    "unresolvedItems": [
+      "Do not reconcile selectedState.potentialUpgradeCount=5 with parameterSnapshot.potential.upgradeCount=2; preserve both as input evidence.",
+      "Do not promote candidate stat formula or public max stat values to canonical computed stats.",
+      "Do not interpret activationProbabilityPermilMultiply=460 as an actual probability.",
+      "Do not assign the Special level duration to each independent effect.",
+      "No separate Passive condition was observed; do not synthesize a none condition."
+    ],
+    "evidenceOnlyFacts": [
+      {
+        "inputPath": "pocFormat",
+        "rawValue": "one-card-research-poc",
+        "status": "cross-check"
+      },
+      {
+        "inputPath": "canonicalSchemaStatus",
+        "rawValue": "not-defined",
+        "status": "cross-check",
+        "note": "This new artifact uses the current proposal schema as a fixture but does not mark it as an implemented or finalized runtime schema."
+      },
+      {
+        "inputPath": "scope",
+        "rawValue": {
+          "purpose": "Check which fields and referenced rows in HolodoriDB can reconstruct one publicly listed five-star hololive Dreams card.",
+          "sourceDataWasModified": false,
+          "rawRepositoryJsonCopied": false,
+          "productionSimulatorIntegrated": false,
+          "siteDisplayEnabled": false
+        },
+        "status": "cross-check"
+      },
+      {
+        "inputPath": "provenance.repositoryDescription",
+        "rawValue": "HolodoriDB public Japanese master-database difference repository; this PoC reads the committed rows without checking out or copying the source JSON.",
+        "status": "cross-check"
+      },
+      {
+        "inputPath": "parameterSnapshot.selectedState.potentialUpgradeCount",
+        "rawValue": 5,
+        "status": "unknown",
+        "note": "The same PoC parameterSnapshot.potential refers to upgradeCount=2. The two observations are kept unreconciled."
+      },
+      {
+        "inputPath": "parameterSnapshot.selectedState.stateSelectionBasis",
+        "rawValue": "CardLevelLimit levelLimit=80 at limitBreakCount=4; CardLevel row at level 80; CardPotential group contains five upgrade steps.",
+        "status": "unknown",
+        "note": "Original PoC state-selection wording; not treated as proof that all potential effects are applied to the selected snapshot."
+      },
+      {
+        "inputPath": "parameterSnapshot.reconstructionStatus",
+        "rawValue": "The base parameter, three permil multipliers, level cap, and potential bonus are present. The database rows do not specify final integer rounding or the complete game stat pipeline. Do not treat computed integers as confirmed simulator stats.",
+        "status": "unknown"
+      },
+      {
+        "inputPath": "parameterSnapshot.candidateArithmeticOnly.formulaHypothesis",
+        "rawValue": "ceil(parameterBaseValue * parameterMultiplierPermil / 1000 * (1 + allParameterUpPermil / 1000))",
+        "status": "candidate",
+        "note": "Not promoted to a canonical stat formula."
+      },
+      {
+        "inputPath": "parameterSnapshot.candidateArithmeticOnly.formulaStatus",
+        "rawValue": "Unconfirmed; included only because it matches the independent public max-stat listing for this card.",
+        "status": "candidate"
+      },
+      {
+        "inputPath": "parameterSnapshot.candidateArithmeticOnly.publicListingMaxStats",
+        "rawValue": { "total": 25865, "performance": 7682, "technique": 6803, "sense": 11380 },
+        "status": "cross-check",
+        "note": "Independent public listing values; not canonical Card source stats."
+      },
+      {
+        "inputPath": "skills.passive.conditionStatus",
+        "rawValue": "No separate passive condition/trigger reference was found on the joined skill/effect rows. Do not synthesize a condition or interpret the absent field as an explicit none condition.",
+        "status": "unknown"
+      },
+      {
+        "inputPath": "skills.passive.maximumLevelCrossCheck",
+        "rawValue": "The public listing displays the level-2 description; the meaning of CardPotential value=2 as a level setting versus increment is not explicitly documented by these rows.",
+        "status": "unknown"
+      },
+      {
+        "inputPath": "skills.active.probabilityMappingStatus",
+        "rawValue": "The generated Japanese description gives 中確率, which fits the simulator's qualitative mid option. The meaning of activationProbabilityPermilMultiply=460 as an actual final probability is not resolved by these rows.",
+        "status": "unknown"
+      },
+      {
+        "inputPath": "skills.special.additionalEffectDurationStatus",
+        "rawValue": "effectDurationMillisecond is stored on the skill-level row, not independently on the secondary effect; whether both effects share the full duration is not proven by this table layout.",
+        "status": "unknown"
+      },
+      {
+        "inputPath": "skills.passive.levels[].descriptionJa",
+        "rawValue": [
+          "ハッピータイプ2人のスコアサポート効果8%",
+          "ハッピータイプ2人のスコアサポート効果11%"
+        ],
+        "status": "candidate",
+        "note": "Existing PoC display strings are retained in addition to raw Japanese localization facts, which preserve source tags and highlight markup."
+      },
+      {
+        "inputPath": "skills.active.levels[].descriptionJa",
+        "rawValue": [
+          "15秒毎に中確率で6秒間スコアが45%UP。40コンボ以上でスコアが90%UP。",
+          "15秒毎に中確率で6秒間スコアが55%UP。40コンボ以上でスコアが110%UP。"
+        ],
+        "status": "candidate",
+        "note": "Normalized PoC strings are retained separately from source localization text and its original whitespace/newline/highlight markup."
+      },
+      {
+        "inputPath": "skills.special.levels[].descriptionJa",
+        "rawValue": [
+          "10秒間スコアサポート効果120%。スキル発動率が40%UP。",
+          "10秒間スコアサポート効果145%。スキル発動率が50%UP。"
+        ],
+        "status": "candidate",
+        "note": "Normalized PoC strings are retained separately from raw localized text."
+      },
+      {
+        "inputPath": "skills.passive.levels[].target.descriptionJa",
+        "rawValue": "ハッピータイプ2人の",
+        "status": "candidate",
+        "note": "The original PoC's simplified target text is retained; raw target localization with tags is stored as a source fact."
+      },
+      {
+        "inputPath": "otherReferencedTables.connectEffectReference",
+        "rawValue": {
+          "id": "skill_tree_connect_effect-skill_tree_effect_up-skill_tree_connect_effect_extent-center_area-001-rare_5",
+          "typeRaw": "SkillTreeConnectEffectType_SKILL_TREE_CONNECT_EFFECT_TYPE_SKILL_TREE_EFFECT_UP",
+          "level1EffectPermilUpRaw": "1400",
+          "level2EffectPermilUpRaw": "1900"
+        },
+        "status": "out-of-scope",
+        "note": "Preserved from PoC evidence only; Connect/board is excluded from the runtime portion of the fixture."
+      },
+      {
+        "inputPath": "otherReferencedTables.connectEffectReference.scopeStatus",
+        "rawValue": "Card references and basic effect levels are available, but board extent and character skill-tree effects are outside this parameter/A/P/SP PoC and the current simulator model.",
+        "status": "out-of-scope"
+      },
+      {
+        "inputPath": "provenance.publicReleaseCrossCheck",
+        "rawValue": {
+          "url": "https://www.horodori.com/cards/%E3%82%B5%E3%82%AF%E3%83%A9Bloom",
+          "use": "Independent public listing used only to confirm that this card is publicly documented and to compare its displayed maximum stats/skills; not used as a HolodoriDB source for card fields."
+        },
+        "status": "cross-check"
+      },
+      {
+        "inputPath": "card.character.simulatorTalentIdMappingStatus",
+        "rawValue": "Candidate matched by character name; no shared source ID is present in the simulator master data.",
+        "status": "unknown"
+      },
+      {
+        "inputPath": "card.attribute.mappingEvidence",
+        "rawValue": "The skill-effect target uses the same ATTRIBUTE_3 enum and its Japanese generated description labels it ハッピータイプ; no standalone enum-localization table was found in this repository.",
+        "status": "candidate"
+      },
+      {
+        "inputPath": "simulatorMappingSummary",
+        "rawValue": {
+          "candidateValues": {
+            "passiveLevel2": { "type": "score_support", "target": { "kind": "type", "value": "happy", "count": 2 }, "valuePercent": 11, "status": "Localized description supports this mapping; condition remains absent/unresolved." },
+            "activeLevel2": { "effectType": "score_up", "intervalSeconds": 15, "probability": "mid", "durationSeconds": 6, "primaryBoostPercent": 55, "additionalTrigger": { "kind": "combo_gte", "threshold": 40 }, "additionalBoostPercent": 110, "status": "Primary fields fit; secondary trigger/effect is text-only in the current A model." },
+            "specialLevel2": { "effects": [{ "type": "score_support", "valuePercent": 145 }, { "type": "skill_frequency_up", "valuePercent": 50 }], "durationSecondsOnSkillLevel": 10, "status": "Effect types/values are supported by localized text; duration assignment to the secondary effect is unresolved." }
+          },
+          "directOrStrongCandidates": [
+            "cardName <- Card.nameLangId -> LangCard_Jpn.text",
+            "rarity <- Card.rarity enum",
+            "type <- Card.attributeType enum (happy mapping supported by matching target/localized description)",
+            "skills.active.interval <- coolTimeMillisecond / 1000",
+            "skills.active.probability <- mid from generated Japanese 中確率 text",
+            "skills.active.duration <- effectDurationMillisecond / 1000",
+            "skills.active.boost <- primary score-up effect; localized description confirms percent",
+            "skills.passive.effect.target <- LiveSkillEffectTarget attribute/count",
+            "skills.special.effects[] <- primary and additional effect types/values"
+          ],
+          "notRepresentedOrUnresolved": [
+            "Stable external Card.id storage without replacing the simulator's local library id",
+            "Exact final parameter rounding and full potential/stat pipeline",
+            "Limit-break count and potential state in current simulator progression",
+            "Passive condition/trigger when no separate source field is present",
+            "Active combo-gated secondary effect as a structured calculation input",
+            "Numeric interpretation of activationProbabilityPermilMultiply beyond the localized qualitative probability",
+            "Whether the SP secondary effect shares the skill-level duration",
+            "Connect/skill-tree calculation"
+          ]
+        },
+        "status": "candidate",
+        "note": "Exact prior mapping observations are retained for audit only; none are promoted to runtime values by this fixture."
+      }
+    ],
+    "verification": [
+      "All seven source POC root data sections used for card identity/progression/skills/source mappings are retained as facts, raw source references, candidate annotations, or the checksummed linked artifact.",
+      "All six P/A/SP level descriptions and each listed raw effect/trigger/target value are represented without dropping localized template tags.",
+      "All five CardPotential steps from the source PoC are represented; connect step is evidence only and excluded from runtime scope.",
+      "The selected CardLevelLimit stage and CardLevel snapshot are represented with exact source field/value types.",
+      "The fixture contains exactly one card; the full 185-card survey is not transformed."
+    ],
+    "sourceFieldMappings": [
+      {
+        "outputPath": "card.id",
+        "sourceTable": "Card",
+        "sourceField": "id",
+        "join": "Root record; no join.",
+        "meaning": "HolodoriDB card identifier.",
+        "simulatorFit": "The current library id is locally generated; retain this as an external source identifier, not as a replacement."
+      },
+      {
+        "outputPath": "card.nameJa",
+        "sourceTable": "Card.nameLangId -> LangCard_Jpn.id",
+        "sourceField": "LangCard_Jpn.text",
+        "join": "Card.nameLangId = LangCard_Jpn.id.",
+        "meaning": "Localized Japanese card name.",
+        "simulatorFit": "Direct candidate for cardName."
+      },
+      {
+        "outputPath": "card.character",
+        "sourceTable": "Card.characterId -> Character.id",
+        "sourceField": "Character.nameEng; Character.id",
+        "join": "Card.characterId = Character.id.",
+        "meaning": "Character association; source ID is chr-00015 and the English name is Sakura Miko.",
+        "simulatorFit": "Simulator talentId candidate sakura_miko was matched by name, not a shared ID."
+      },
+      {
+        "outputPath": "card.rarity",
+        "sourceTable": "Card",
+        "sourceField": "rarity",
+        "join": "Root record; no join.",
+        "meaning": "Encoded five-star rarity enum.",
+        "simulatorFit": "Direct candidate for rarity=5; enum labels are not localized by a table in this repository."
+      },
+      {
+        "outputPath": "card.attribute",
+        "sourceTable": "Card; LiveSkillEffectTarget; LangGeneratedLivePassiveSkillLevel_Jpn",
+        "sourceField": "Card.attributeType; LiveSkillEffectTarget.cardAttributeType; localized description text",
+        "join": "Card.attributeType = LiveSkillEffectTarget.cardAttributeType via the passive effect target reference; the Japanese generated text identifies ATTRIBUTE_3 as ハッピータイプ.",
+        "meaning": "Card attribute enum and the matching passive target attribute.",
+        "simulatorFit": "Candidate type=happy; no direct enum-localization table was found."
+      },
+      {
+        "outputPath": "parameterSnapshot.cardLevel",
+        "sourceTable": "Card.cardLevelGroupId -> CardLevel.groupId/level",
+        "sourceField": "CardLevel.parameterBaseValue; exp; liveDeckPowerPermyriadUp",
+        "join": "Card.cardLevelGroupId = CardLevel.groupId; selected CardLevel.level=80.",
+        "meaning": "Base-parameter row and level-associated progression data.",
+        "simulatorFit": "The manual stats fields can store final integers, but the simulator's progression/training fields do not directly represent limit-break count."
+      },
+      {
+        "outputPath": "parameterSnapshot.parameterMultipliersPermil",
+        "sourceTable": "Card",
+        "sourceField": "performancePermilMultiply; techniquePermilMultiply; sensePermilMultiply",
+        "join": "Root record; no join.",
+        "meaning": "Per-parameter multipliers expressed as permil by the field names.",
+        "simulatorFit": "Could be inputs to derive stats after the exact rounding/potential pipeline is confirmed."
+      },
+      {
+        "outputPath": "parameterSnapshot.potential",
+        "sourceTable": "Card.cardPotentialGroupId -> CardPotential.groupId/upgradeCount",
+        "sourceField": "CardPotential.effectType; value",
+        "join": "Card.cardPotentialGroupId = CardPotential.groupId; selected upgradeCount=2.",
+        "meaning": "Potential progression includes an all-parameter permil-up effect of 100.",
+        "simulatorFit": "No matching potential state/effect calculation is implemented in the current card model."
+      },
+      {
+        "outputPath": "skills.passive.levels[]",
+        "sourceTable": "Card.livePassiveSkillId -> LivePassiveSkill.id -> LivePassiveSkillLevel.livePassiveSkillId -> LivePassiveSkillEffect.groupId -> LiveSkillEffectTarget.id -> LangGeneratedLiveSkillEffectTarget_Jpn.id; descriptionLangId -> LangGeneratedLivePassiveSkillLevel_Jpn.id",
+        "sourceField": "LivePassiveSkillLevel.level; livePassiveSkillEffectGroupId; LivePassiveSkillEffect.type/value/liveSkillEffectTargetId; LiveSkillEffectTarget.type/targetCount/cardAttributeType/descriptionLangId; localized text",
+        "join": "Card.livePassiveSkillId = LivePassiveSkill.id = LivePassiveSkillLevel.livePassiveSkillId; LivePassiveSkillLevel.livePassiveSkillEffectGroupId = LivePassiveSkillEffect.groupId; LivePassiveSkillEffect.liveSkillEffectTargetId = LiveSkillEffectTarget.id; LiveSkillEffectTarget.descriptionLangId = LangGeneratedLiveSkillEffectTarget_Jpn.id; LivePassiveSkillLevel.descriptionLangId = LangGeneratedLivePassiveSkillLevel_Jpn.id.",
+        "meaning": "Passive effect levels, raw effect encoding/value, beneficiary target, count, and display text.",
+        "simulatorFit": "Potential candidates: type=score_support, target=happy/count 2, value=8% or 11%. No separate P condition is supplied."
+      },
+      {
+        "outputPath": "skills.active.levels[]",
+        "sourceTable": "Card.liveActiveSkillId -> LiveActiveSkill.id -> LiveActiveSkillLevel.liveActiveSkillId -> LiveActiveSkillEffect.groupId; additionalLiveSkillTriggerGroupId -> LiveSkillTrigger.groupId; descriptionLangId -> LangGeneratedLiveActiveSkillLevel_Jpn.id",
+        "sourceField": "LiveActiveSkillLevel.coolTimeMillisecond; activationProbabilityPermilMultiply; effectDurationMillisecond; liveActiveSkillEffectGroupId; additionalLiveActiveSkillEffectGroupId; additionalLiveSkillTriggerGroupId; LiveActiveSkillEffect.type/value; LiveSkillTrigger.type/threshold",
+        "join": "Card.liveActiveSkillId = LiveActiveSkill.id = LiveActiveSkillLevel.liveActiveSkillId; effect group IDs = LiveActiveSkillEffect.groupId; trigger group ID = LiveSkillTrigger.groupId; descriptionLangId = LangGeneratedLiveActiveSkillLevel_Jpn.id.",
+        "meaning": "Primary A effect, interval, qualitative chance text, duration, plus an additional combo-gated effect.",
+        "simulatorFit": "Primary interval/duration/value fit the manual A fields after unit conversion; the qualitative chance fits mid. The structured extra trigger/effect does not fit the current single-effect A model."
+      },
+      {
+        "outputPath": "skills.special.levels[]",
+        "sourceTable": "Card.liveSpecialSkillId -> LiveSpecialSkill.id -> LiveSpecialSkillLevel.liveSpecialSkillId -> LiveActiveSkillEffect.groupId; descriptionLangId -> LangGeneratedLiveSpecialSkillLevel_Jpn.id",
+        "sourceField": "LiveSpecialSkillLevel.effectDurationMillisecond; liveActiveSkillEffectGroupId; additionalLiveActiveSkillEffectGroupId; LiveActiveSkillEffect.type/value",
+        "join": "Card.liveSpecialSkillId = LiveSpecialSkill.id = LiveSpecialSkillLevel.liveSpecialSkillId; primary/additional effect group IDs = LiveActiveSkillEffect.groupId; descriptionLangId = LangGeneratedLiveSpecialSkillLevel_Jpn.id.",
+        "meaning": "SP duration and multiple effects. The reused LiveActiveSkillEffect table also stores the special-skill effects.",
+        "simulatorFit": "The current SP effects[] can represent multiple effect types; duration ownership for the secondary effect remains unresolved."
+      },
+      {
+        "outputPath": "otherReferencedTables.cardLevelLimit",
+        "sourceTable": "Card.cardLevelLimitGroupId -> CardLevelLimit.groupId/limitBreakCount",
+        "sourceField": "CardLevelLimit.limitBreakCount; levelLimit",
+        "join": "Card.cardLevelLimitGroupId = CardLevelLimit.groupId; select limitBreakCount=4.",
+        "meaning": "Maximum card level at the selected limit-break count.",
+        "simulatorFit": "No dedicated limitBreakCount field exists in the current card v2 shape."
+      },
+      {
+        "outputPath": "otherReferencedTables.cardPotentialUpgradeCurve[]",
+        "sourceTable": "Card.cardPotentialGroupId -> CardPotential.groupId/upgradeCount",
+        "sourceField": "CardPotential.upgradeCount; effectType; value",
+        "join": "Card.cardPotentialGroupId = CardPotential.groupId.",
+        "meaning": "Potential upgrades change skill-level effects, all parameters, and connect effect.",
+        "simulatorFit": "No potential progression model is present; retain as source observations only."
+      },
+      {
+        "outputPath": "otherReferencedTables.connectEffectReference",
+        "sourceTable": "Card.skillTreeConnectEffectId -> SkillTreeConnectEffect.id/level",
+        "sourceField": "connectEffectType; skillTreeConnectEffectExtentGroupId; effectPermilUp",
+        "join": "Card.skillTreeConnectEffectId = SkillTreeConnectEffect.id; rows by level=1 and 2.",
+        "meaning": "Connect skill-tree effect-strength levels; actual board extent and character tree effects require additional joins.",
+        "simulatorFit": "Current simulator documentation says Connect is not implemented; not included in parameter/A/P/SP conversion."
+      }
+    ]
+  }
+}
