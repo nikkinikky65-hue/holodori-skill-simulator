@@ -44,8 +44,10 @@ function saveCurrentFormation(){
 
 function clearFormationMemberSlot(index){
   const slot = document.querySelectorAll('.card')[index];
+  slot.canonicalExpansion = null;
+  showCanonicalExpansion(slot.querySelector('.canonicalSlotStatus'), null);
   // 曲時間・発動頻度UPは編成データに含めず、現在の設定を維持する。
-  const empty = { libraryCardId: '', memberId: '', costume: '未分類', interval: '', prob: 'mid', duration: '', boost: '' };
+  const empty = { canonicalCardId: '', libraryCardId: '', memberId: '', costume: '未分類', interval: '', prob: 'mid', duration: '', boost: '' };
   for(const [key, value] of Object.entries(empty)){
     slot.querySelector(`[data-k="${key}"]`).value = value;
   }

@@ -921,3 +921,4 @@
     grid-column:1;
   }
 }
+.canonicalSlotStatus { white-space: pre-line; overflow-wrap: anywhere; }

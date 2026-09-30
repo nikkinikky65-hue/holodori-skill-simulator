@@ -253,20 +253,20 @@ function renderRequiredSlots(){
     );
 
     cardSelect.addEventListener('change', () => {
-      if(!cardSelect.value.startsWith('canonical:')) canonicalStatus.textContent = '';
+      showCanonicalExpansion(canonicalStatus, canonicalEventCards.get(cardSelect.value)?.canonicalExpansion);
     });
 
     canonicalButton.addEventListener('click', () => {
       openCanonicalCardPicker({
         targetText: `呼出先：B面 必須枠${i + 1}`,
-        apply: (canonicalCard, level) => {
-          const adapted = adaptCanonicalCardToEventCard(canonicalCard, level);
+        apply: (canonicalCard, level, expansion) => {
+          const adapted = adaptCanonicalCardToEventCard(canonicalCard, level, expansion);
           canonicalEventCards.set(adapted.id, adapted);
           memberSelect.value = adapted.talentId;
           renderCardOptions(memberSelect, cardSelect);
           addCanonicalCardOption(cardSelect, adapted);
           cardSelect.value = adapted.id;
-          canonicalStatus.textContent = `Canonical fixture / Lv.${level} を必須カード条件に設定しました。${adapted.canonicalWarnings.join(' ')}`;
+          showCanonicalExpansion(canonicalStatus, expansion);
           saveEventSearchState();
         }
       });
@@ -343,18 +343,22 @@ function addCanonicalCardOption(cardSelect, card){
   if([...cardSelect.options].some(option => option.value === card.id)) return;
   const option = document.createElement('option');
   option.value = card.id;
-  option.textContent = `${card.cardName} / Lv.${card.id.split(':lv').pop()}（Canonical PoC）`;
+  option.textContent = card.canonicalExpansion
+    ? `${card.cardName} / P${card.canonicalExpansion.levels.passive}・A${card.canonicalExpansion.levels.active}・SP${card.canonicalExpansion.levels.special}（Canonical PoC）`
+    : `${card.cardName} / A Lv.${card.id.split(':lv').pop()}（Canonical PoC）`;
   cardSelect.append(option);
 }
 
 async function restoreCanonicalEventCard(cardId){
-  const match = /^canonical:(.+):lv(\d+)$/.exec(cardId || '');
+  const match = /^canonical:(.+):lv(\d+)(?::p(\d+):s(\d+))?$/.exec(cardId || '');
   if(!match) return null;
-  const [, sourceId, level] = match;
+  const [, sourceId, level, passive, special] = match;
   const fixture = await loadCanonicalCardFixture();
   const card = fixture.cards.find(item => item.sourceCard?.sourceId === sourceId);
   if(!card) return null;
-  const adapted = adaptCanonicalCardToEventCard(card, Number(level));
+  const expansion = expandCanonicalCard(card, { active: Number(level), passive: Number(passive || 1), special: Number(special || 1) }, fixture.sourceDataset);
+  const adapted = adaptCanonicalCardToEventCard(card, Number(level), passive ? expansion : null);
+  adapted.canonicalExpansion = expansion;
   canonicalEventCards.set(adapted.id, adapted);
   return adapted;
 }
@@ -445,6 +449,7 @@ async function loadEventSearchState(){
             const canonicalCard = await restoreCanonicalEventCard(condition.cardId);
             if(canonicalCard && canonicalCard.talentId === condition.memberId){
               addCanonicalCardOption(cardSelect, canonicalCard);
+              showCanonicalExpansion(slot.querySelector('.canonicalSlotStatus'), canonicalCard.canonicalExpansion);
             }
           }catch(error){
             console.warn('Canonical fixture selection could not be restored.', error);

@@ -57,6 +57,7 @@ function adaptCanonicalCardToActiveInput(card, levelNumber){
   // Explicit adapter mapping already documented by the one-card PoC: the source
   // permil-up effect's localized displayed percentage is the manual boost value.
   const boost = effectType === 'LiveActiveSkillEffectType_LIVE_ACTIVE_SKILL_EFFECT_TYPE_SCORE_UP_PERMIL_UP'
+    && canonicalNumber(rawValue) !== null
     ? canonicalNumber(rawValue) / 10
     : null;
 
@@ -83,10 +84,56 @@ function adaptCanonicalCardToActiveInput(card, levelNumber){
   };
 }
 
-function adaptCanonicalCardToEventCard(card, levelNumber){
+// Runtime view only: raw selected levels and provenance remain separate from
+// the only executable projection (Active base effect). Never normalize to Card v2.
+function expandCanonicalCard(card, levels, dataset = null){
+  const copy = value => JSON.parse(JSON.stringify(value));
+  const selected = {};
+  for(const kind of ['passive', 'active', 'special']){
+    const level = card.skills?.[kind]?.levels?.find(item => Number(item.levelFact.rawValue) === Number(levels[kind]));
+    if(!level) throw new Error(`${kind}のレベルを選択してください。`);
+    selected[kind] = copy(level);
+  }
+  return {
+    source: { card: copy(card.sourceCard), dataset: dataset ? copy(dataset) : null },
+    basic: { identity: copy(card.identity), classification: copy(card.classification) },
+    levels: Object.fromEntries(Object.entries(selected).map(([kind, level]) => [kind, Number(level.levelFact.rawValue)])),
+    passive: { data: selected.passive, conditionStatus: 'unresolved', calculationStatus: 'deferred' },
+    active: { data: selected.active, calculationStatus: 'base-only' },
+    special: { data: selected.special, durationMilliseconds: canonicalRawFact(selected.special.facts, 'effectDurationMillisecond'), durationScope: 'unresolved-per-effect', calculationStatus: 'display-only' },
+    activeInput: adaptCanonicalCardToActiveInput(card, levels.active),
+    unresolved: [
+      'Passive：条件未確認。条件なしとは扱わず、計算適用を保留します。',
+      'Special：複数効果とスキル全体の時間を保持。効果ごとの時間適用は未確認です。発動頻度UP・常時Score Supportには適用しません。',
+      'メンバー・属性・レア度のruntime対応は既存PoCの候補です。育成状態や最終ステータスは推定しません。'
+    ]
+  };
+}
+
+function canonicalExpansionText(expansion){
+  const text = level => (level.facts || []).filter(fact => fact.sourceField === 'text').map(fact => String(fact.rawValue).replace(/\[[^\]]+\]/g, '')).join('\n');
+  return [
+    `${expansion.activeInput.costume} / P Lv.${expansion.levels.passive}・A Lv.${expansion.levels.active}・SP Lv.${expansion.levels.special}`,
+    `メンバー候補：${expansion.activeInput.memberId} / 属性・レア度候補：${expansion.basic.classification.map(fact => fact.semanticCandidate?.value ?? fact.rawValue).join(' / ')}`,
+    `Passive：${text(expansion.passive.data)}`,
+    `Active：${text(expansion.active.data)}`,
+    `Special：${text(expansion.special.data)}`,
+    `Special持続時間（スキルレベル行）：${expansion.special.durationMilliseconds / 1000}秒。個別効果への割当は未確認。`,
+    ...expansion.activeInput.warnings, ...expansion.unresolved,
+    '呼出元の情報です。Active手入力の変更はこの表示に反映しません。',
+    `出典：${expansion.source.card.sourceId} / ${expansion.source.dataset?.repository || ''} / ${expansion.source.dataset?.commitSha || ''}`
+  ].join('\n');
+}
+
+function showCanonicalExpansion(target, expansion){
+  if(target) target.textContent = expansion ? canonicalExpansionText(expansion) : '';
+}
+
+function adaptCanonicalCardToEventCard(card, levelNumber, expansion = null){
   const active = adaptCanonicalCardToActiveInput(card, levelNumber);
   return {
-    id: `canonical:${active.canonicalCardId}:lv${active.level}`,
+    id: `canonical:${active.canonicalCardId}:lv${active.level}` + (expansion ? `:p${expansion.levels.passive}:s${expansion.levels.special}` : ''),
+    canonicalExpansion: expansion,
     sourceCardId: active.canonicalCardId,
     sourceKind: 'canonical-fixture',
     talentId: active.memberId,
@@ -130,33 +177,45 @@ async function openCanonicalCardPicker({targetText, apply}){
       source.textContent = `${card.sourceCard.sourceId} / Library未登録・fixture 1枚のみ`;
       const controls = document.createElement('div');
       controls.className = 'canonicalCardChoiceControls';
-      const levelLabel = document.createElement('label');
-      levelLabel.textContent = 'Activeレベル';
-      const levelSelect = document.createElement('select');
-      levelSelect.dataset.canonicalLevel = '';
-      (card.skills?.active?.levels || []).forEach(level => {
-        const option = document.createElement('option');
-        option.value = String(level.levelFact.rawValue);
-        option.textContent = `Lv.${level.levelFact.rawValue}`;
-        levelSelect.append(option);
-      });
+      const selectors = {};
+      const preview = document.createElement('p');
+      preview.className = 'canonicalSlotStatus';
+      const expand = () => expandCanonicalCard(card, Object.fromEntries(Object.entries(selectors).map(([kind, select]) => [kind, Number(select.value)])), fixture.sourceDataset);
+      for(const [kind, label] of [['passive', 'Passive'], ['active', 'Active'], ['special', 'Special']]){
+        const levelLabel = document.createElement('label');
+        levelLabel.textContent = `${label}レベル（個別指定）`;
+        const select = document.createElement('select');
+        select.dataset.canonicalSkill = kind;
+        if(kind === 'active') select.dataset.canonicalLevel = '';
+        for(const level of card.skills[kind].levels){
+          const option = document.createElement('option');
+          option.value = String(level.levelFact.rawValue);
+          option.textContent = `Lv.${level.levelFact.rawValue}`;
+          select.append(option);
+        }
+        selectors[kind] = select;
+        select.addEventListener('change', () => showCanonicalExpansion(preview, expand()));
+        levelLabel.append(select);
+        controls.append(levelLabel);
+      }
+      showCanonicalExpansion(preview, expand());
       const button = document.createElement('button');
       button.type = 'button';
       button.textContent = 'このカードを呼び出す';
       button.addEventListener('click', () => {
         try{
-          apply(card, Number(levelSelect.value));
+          const expansion = expand();
+          apply(card, expansion.levels.active, expansion);
           closeCanonicalCardPicker();
         }catch(error){
           status.textContent = `呼び出せませんでした: ${error.message}`;
         }
       });
-      levelLabel.append(levelSelect);
-      controls.append(levelLabel, button);
+      controls.append(button);
       const warning = document.createElement('p');
       warning.className = 'sub canonicalCardWarning';
       warning.textContent = '条件付きActive上位値は現在の入力欄で表現・計算しません。呼出後は表示される注意を確認してください。';
-      row.append(title, source, controls, warning);
+      row.append(title, source, controls, preview, warning);
       cardList.append(row);
     });
   }catch(error){

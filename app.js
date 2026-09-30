@@ -609,7 +609,7 @@ document.addEventListener('click', event => {
     const slotIndex = Number(canonicalButton.dataset.loadCanonical);
     openCanonicalCardPicker({
       targetText: `呼出先：A面 枠${slotIndex + 1}`,
-      apply: (canonicalCard, level) => {
+      apply: (canonicalCard, level, expansion) => {
         const adapted = adaptCanonicalCardToActiveInput(canonicalCard, level);
         const slot = document.querySelectorAll('.card')[slotIndex];
         if(!slot) return;
@@ -628,7 +628,8 @@ document.addEventListener('click', event => {
         set('libraryCardId', '');
         set('canonicalCardId', `${adapted.canonicalCardId}:lv${adapted.level}`);
         const status = slot.querySelector(`[data-canonical-status="${slotIndex}"]`);
-        if(status) status.textContent = `Canonical fixture / Lv.${adapted.level} を展開しました。${adapted.warnings.join(' ')}`;
+        slot.canonicalExpansion = expansion;
+        showCanonicalExpansion(status, expansion);
         saveState();
         updateOptimizeNames();
         render();
@@ -704,6 +705,7 @@ function loadLibraryCardIntoSlot(
   );
 
   set('canonicalCardId', '');
+  card.canonicalExpansion = null;
   const canonicalStatus = card.querySelector('.canonicalSlotStatus');
   if(canonicalStatus) canonicalStatus.textContent = '';
 
@@ -1432,6 +1434,7 @@ function saveState(){
       return {
         libraryCardId: get('libraryCardId'),
         canonicalCardId: get('canonicalCardId'),
+        canonicalExpansion: get('canonicalCardId') ? card.canonicalExpansion || null : null,
         memberId: get('memberId'),
         costume: get('costume'),
         interval: get('interval'),
@@ -1464,6 +1467,8 @@ function loadState(){
         const card = cards[i];
         if(!card) return;
 
+        card.canonicalExpansion = member.canonicalCardId ? member.canonicalExpansion || null : null;
+        showCanonicalExpansion(card.querySelector('.canonicalSlotStatus'), card.canonicalExpansion);
         Object.entries(member).forEach(([key, value]) => {
           const input = card.querySelector(`[data-k="${key}"]`);
           if(input) input.value = value;
@@ -1483,6 +1488,7 @@ document.addEventListener('input', e => {
       const slot = e.target.closest('.card');
       slot.querySelector('[data-k=libraryCardId]').value = '';
       slot.querySelector('[data-k=canonicalCardId]').value = '';
+      slot.canonicalExpansion = null;
       const status = slot.querySelector('.canonicalSlotStatus');
       if(status) status.textContent = '';
     }
@@ -1498,6 +1504,7 @@ document.addEventListener('change', e => {
       const slot = e.target.closest('.card');
       slot.querySelector('[data-k=libraryCardId]').value = '';
       slot.querySelector('[data-k=canonicalCardId]').value = '';
+      slot.canonicalExpansion = null;
       const status = slot.querySelector('.canonicalSlotStatus');
       if(status) status.textContent = '';
     }

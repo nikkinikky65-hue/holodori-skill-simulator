@@ -148,3 +148,12 @@ subprocess.run([jsc,'card-rules.js','support-rules.js','tests/support-rules.test
 subprocess.run([jsc,'card-rules.js','support-rules.js','tests/skill-data.test.js'],check=True,cwd=root)
 
 subprocess.run([jsc,'card-rules.js','parameter-rules.js','tests/parameter-rules.test.js'],check=True,cwd=root)
+
+# Adapter runtime view: use JavaScriptCore without browser or network dependencies.
+canonical_js = "const URL = function(path, base){return path;}; const document = {baseURI:'http://localhost/',addEventListener:()=>{}};\n"
+canonical_js += (root/'canonical-card-adapter.js').read_text()
+canonical_js += '\nconst canonicalTestFixture = ' + (root/'research/canonical-card-sakura-bloom.fixture.json').read_text() + ';\n'
+canonical_js += (root/'tests/canonical-card-adapter.test.js').read_text()
+with tempfile.NamedTemporaryFile(mode='w', suffix='.js') as f:
+    f.write(canonical_js); f.flush()
+    subprocess.run([jsc, f.name], check=True, cwd=root)
