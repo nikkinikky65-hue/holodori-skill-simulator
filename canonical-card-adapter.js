@@ -88,22 +88,22 @@ function expandCanonicalCard(card, levels, dataset){
 // Baseline and target-level semantics are the confirmed game rule. Stage positions
 // and target values come from source Bloom rows, never rarity or a second table.
 function canonicalBloomLevels(card, bloom){
-  if(!Number.isInteger(bloom) || bloom < 0 || bloom > 5) throw new Error('Bloomは0〜5で指定してください。');
+  if(!Number.isInteger(bloom) || bloom < 0 || bloom > 5) throw new Error('開花は0〜5で指定してください。');
   const levels = {passive: 1, active: 1, special: 1};
   const prefix = 'CardPotentialEffectType_CARD_POTENTIAL_EFFECT_TYPE_';
   const kinds = {[prefix + 'ACTIVE_SKILL_LEVEL_UP']: 'active', [prefix + 'SPECIAL_SKILL_LEVEL_UP']: 'special', [prefix + 'PASSIVE_SKILL_LEVEL_UP']: 'passive'};
   const steps = card.progression.bloomSteps;
   if(!Array.isArray(steps) || steps.length !== 5 || new Set(steps.map(row => row.step)).size !== 5 ||
-     steps.some(row => !Number.isInteger(row.step) || row.step < 1 || row.step > 5)) throw new Error('Bloom情報が未確認です。');
+     steps.some(row => !Number.isInteger(row.step) || row.step < 1 || row.step > 5)) throw new Error('開花情報が未確認です。');
   for(const row of [...steps].sort((a,b) => a.step - b.step)){
     if(row.step > bloom) continue;
     const kind = kinds[row.effectType];
     if(kind){
       const level = canonicalNumber(row.value);
-      if(!Number.isInteger(level) || !card.skills[kind].levels.some(item => item.level === level)) throw new Error('BloomのスキルLvが未確認です。');
+      if(!Number.isInteger(level) || !card.skills[kind].levels.some(item => item.level === level)) throw new Error('開花のスキル情報が未確認です。');
       levels[kind] = level;
     }else if(![prefix + 'ALL_PARAMETER_UP_PERMIL_UP', prefix + 'SKILL_TREE_CONNECT_EFFECT_LEVEL_UP'].includes(row.effectType)){
-      throw new Error('未対応のBloom効果です。');
+      throw new Error('未対応の開花効果です。');
     }
   }
   return levels;
@@ -120,22 +120,26 @@ function canonicalTrainingStats(card, training){
     limitSource: stages[0].source, snapshot: JSON.parse(JSON.stringify(snapshots[0]))};
 }
 function canonicalTrainingText(stats){
-  return `特訓 ${stats.training} / Lv${stats.level}（上限） / 基礎パラメータ ${stats.parameterBaseValue}`;
+  return `P — / T — / S — / TOTAL ${stats.parameterBaseValue}`;
 }
 function expandCanonicalBloom(card, bloom, dataset, training = 0){
   return {...expandCanonicalCard(card, canonicalBloomLevels(card, bloom), dataset), bloom,
     training, trainingStats: canonicalTrainingStats(card, training)};
 }
 function canonicalTypeName(type){ return {cute:'キュート', happy:'ハッピー', pure:'ピュア'}[type] || 'タイプ未確認'; }
-function canonicalExpansionText(expansion){
+function canonicalBasicText(expansion){
+  return `${expansion.basic.name}\n${expansion.basic.member.name} / ★${expansion.basic.classification.rarity?.mapping?.value ?? '?'} / ${canonicalTypeName(expansion.basic.classification.attributeType?.mapping?.value)}`;
+}
+function canonicalEffectsText(expansion){
   const text = level => (level.description || '説明未確認').replace(/\[[^\]]+\]/g, '');
   return [
-    expansion.basic.name,
-    `${expansion.basic.member.name} / ★${expansion.basic.classification.rarity?.mapping?.value ?? '?'} / ${canonicalTypeName(expansion.basic.classification.attributeType?.mapping?.value)} / ${Number.isInteger(expansion.bloom) ? 'Bloom ' + expansion.bloom : 'Bloom未指定（旧保存）'}`,
-    ...(expansion.trainingStats ? [canonicalTrainingText(expansion.trainingStats)] : []),
+    expansion.trainingStats ? canonicalTrainingText(expansion.trainingStats) : 'P — / T — / S — / TOTAL —',
     '',
-    ...[['special','SP'],['passive','P'],['active','A']].map(([kind,label]) => `${label} Lv.${expansion.levels[kind]}：${text(expansion[kind].data)}`)
+    ...[['special','SP'],['passive','P'],['active','A']].map(([kind,label]) => `${label}：${text(expansion[kind].data)}`)
   ].join('\n');
+}
+function canonicalExpansionText(expansion){
+  return canonicalBasicText(expansion) + '\n' + canonicalEffectsText(expansion);
 }
 function showCanonicalExpansion(target, expansion){
   if(target) target.textContent = expansion ? canonicalExpansionText(expansion) : '';
@@ -231,30 +235,33 @@ async function openCanonicalCardPicker({targetText, apply, selection = null}){
       const controls = document.createElement('div');
       controls.className = 'canonicalCardChoiceControls';
       const bloomLabel = document.createElement('label');
-      bloomLabel.textContent = 'Bloom段階';
+      bloomLabel.textContent = '開花';
       const bloomSelect = document.createElement('select');
       bloomSelect.dataset.canonicalBloom = '';
       const legacy = selection?.cardId === card.id && selection.version === 1;
       if(legacy){
-        const option = document.createElement('option'); option.value = ''; option.textContent = '未指定（旧保存のLvを保持）'; bloomSelect.append(option);
+        const option = document.createElement('option'); option.value = ''; option.textContent = '未指定（旧保存を保持）'; bloomSelect.append(option);
       }
       for(let bloom = 0; bloom <= 5; bloom++){
-        const option = document.createElement('option'); option.value = String(bloom); option.textContent = `Bloom ${bloom}`; bloomSelect.append(option);
+        const option = document.createElement('option'); option.value = String(bloom); option.textContent = String(bloom); bloomSelect.append(option);
       }
       if(selection?.cardId === card.id && selection.version === 2) bloomSelect.value = String(selection.bloom);
       bloomLabel.append(bloomSelect);
-      controls.append(bloomLabel);
+
       const trainingLabel = document.createElement('label');
-      trainingLabel.textContent = '特訓（限界突破）';
+      trainingLabel.textContent = '特訓';
       const trainingSelect = document.createElement('select');
       trainingSelect.dataset.canonicalTraining = '';
       for(const row of card.progression.trainingStages){
         const option = document.createElement('option');
-        option.value = String(row.stage); option.textContent = `特訓 ${row.stage} / Lv${row.levelCap}`;
+        option.value = String(row.stage); option.textContent = String(row.stage);
         trainingSelect.append(option);
       }
       if(selection?.cardId === card.id && selection.training !== undefined) trainingSelect.value = String(selection.training);
-      trainingLabel.append(trainingSelect); controls.append(trainingLabel);
+      trainingLabel.append(trainingSelect);
+      const growth = document.createElement('div'); growth.className = 'canonicalGrowth';
+      growth.append(trainingLabel, bloomLabel); controls.append(growth);
+      const basic = document.createElement('p'); basic.className = 'canonicalSlotStatus';
       const preview = document.createElement('p');
       preview.className = 'canonicalSlotStatus';
       const applyButton = document.createElement('button');
@@ -263,7 +270,9 @@ async function openCanonicalCardPicker({targetText, apply, selection = null}){
       const expand = () => bloomSelect.value === '' ? {...expandCanonicalCard(card, selection.levels, dataset.dataset), training: Number(trainingSelect.value), trainingStats: canonicalTrainingStats(card, Number(trainingSelect.value))} : expandCanonicalBloom(card, Number(bloomSelect.value), dataset.dataset, Number(trainingSelect.value));
       const refresh = () => {
         try{
-          showCanonicalExpansion(preview, expand());
+          const expansion = expand();
+          basic.textContent = canonicalBasicText(expansion);
+          preview.textContent = canonicalEffectsText(expansion);
           applyButton.disabled = false;
         }catch(error){
           preview.textContent = `現在の入力欄へ展開できません：${error.message}`;
@@ -279,8 +288,8 @@ async function openCanonicalCardPicker({targetText, apply, selection = null}){
           closeCanonicalCardPicker();
         }catch(error){ status.textContent = `呼び出せませんでした：${error.message}`; }
       });
-      controls.append(applyButton);
-      selectedPanel.append(controls, preview);
+      controls.append(preview, applyButton);
+      selectedPanel.append(basic, controls);
       refresh();
     };
     const filter = () => {

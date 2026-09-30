@@ -345,8 +345,8 @@ function addCanonicalCardOption(cardSelect, card){
   const option = document.createElement('option');
   option.value = card.id;
   option.textContent = card.canonicalExpansion
-    ? `${card.cardName} / ${Number.isInteger(card.canonicalExpansion.bloom) ? 'Bloom ' + card.canonicalExpansion.bloom : 'Bloom未指定（旧保存）'}`
-    : `${card.cardName} / A Lv.${card.id.split(':lv').pop()} / Bloom未指定（旧保存）`;
+    ? `${card.cardName} / ${Number.isInteger(card.canonicalExpansion.bloom) ? '開花 ' + card.canonicalExpansion.bloom : '開花未指定（旧保存）'}`
+    : `${card.cardName} / 開花未指定（旧保存）`;
   cardSelect.append(option);
 }
 

@@ -415,7 +415,7 @@
     assert(legacyExpansion.bloom===undefined && legacyExpansion.levels.passive===2 && legacyExpansion.levels.active===1 && legacyExpansion.levels.special===2,'A old independent levels not converted to Bloom');
     assert(w.document.querySelector('[data-k=boost]').value==='61','legacy metadata restoration preserves manual Active');
     click(w,'[data-load-canonical="0"]');await new Promise(resolve=>w.setTimeout(resolve,0));
-    assert(w.document.querySelector('[data-canonical-bloom]').value==='' && w.document.querySelector('.canonicalCardChoice .canonicalSlotStatus').textContent.includes('Bloom未指定'),'legacy picker has no guessed Bloom');
+    assert(w.document.querySelector('[data-canonical-bloom]').value==='','legacy picker has no guessed Bloom');
     click(w,'[data-close-canonical-card-modal]');
 
     // Keep a second Canonical selection to verify reset isolation, including metadata.
@@ -524,12 +524,12 @@
     const canonicalEventId='canonical:card-00015-5-uniq-0003-00:bloom3';
     assert(w.document.querySelector('.requiredSlot [data-role=member]').value==='sakura_miko','Event Canonical member condition');
     assert(w.document.querySelector('.requiredSlot [data-role=card]').value===canonicalEventId,'Event Canonical card condition');
-    assert(w.document.querySelector('.requiredSlot .canonicalSlotStatus').textContent.includes('Bloom 3'),'Event compact Bloom display');
+    assert(w.document.querySelector('.requiredSlot .canonicalSlotStatus').textContent.includes('SP：'),'Event compact skill display');
     assert(localStorage.getItem(key)===eventLibraryBefore,'Event Canonical call leaves Library unchanged');
     w=await open('event.html');watch(w);w.alert=()=>{};
     await w.loadEventSearchState();
     assert(w.document.querySelector('.requiredSlot [data-role=card]').value===canonicalEventId,'Event Canonical choice restored');
-    assert(w.document.querySelector('.requiredSlot .canonicalSlotStatus').textContent.includes('SP Lv.2'),'Event SP selection restored');
+    assert(w.document.querySelector('.requiredSlot .canonicalSlotStatus').textContent.includes('145'),'Event SP effect restored');
     click(w,'#searchFormation');
     await new Promise(resolve=>w.setTimeout(resolve,50));
     assert(w.document.querySelector('#searchStatus').textContent.includes('編成'),'Event search accepts transient Canonical card');
@@ -553,39 +553,47 @@
     assert(!oldActiveOnly.canonicalExpansion && oldActiveOnly.skills.active.boost===55,'B Active-only legacy does not infer P/SP');
     const storageBeforeCatalog=JSON.stringify(Object.keys(localStorage).sort().map(k=>[k,localStorage.getItem(k)]));
     w=await open('card-catalog.html');watch(w);await w.eval('cardCatalogReady');
-    assert(w.document.querySelectorAll('.catalogCard').length===185,'library shows all Runtime cards');
+    assert(w.document.querySelectorAll('.catalogCard').length===77 && w.document.querySelector('[data-catalog-rarity="5"]').getAttribute('aria-pressed')==='true','library defaults to star 5');
     input(w,'#catalogSearch','星街すいせい');
     assert(w.document.querySelectorAll('.catalogCard').length>1,'library member search');
-    input(w,'#catalogSearch','');input(w,'#catalogRarity','5');input(w,'#catalogType','pure');
+    input(w,'#catalogSearch','');click(w,'[data-catalog-rarity="5"]');input(w,'#catalogType','pure');
     const catalog=await w.loadRuntimeCardCatalog();
     const matching=catalog.cards.filter(c=>c.classification.rarity.mapping.value===5 && c.classification.attributeType.mapping.value==='pure');
     assert(w.document.querySelectorAll('.catalogCard').length===matching.length,'combined rarity/type filters');
-    input(w,'#catalogRarity','');input(w,'#catalogType','');input(w,'#catalogSearch','サクラBloom');
+    click(w,'[data-catalog-rarity="5"]');input(w,'#catalogType','');input(w,'#catalogSearch','サクラBloom');
     assert(w.document.querySelectorAll('.catalogCard').length===1,'library card name search');
     for(let bloom=0;bloom<=5;bloom++){
       input(w,'[data-catalog-bloom]',String(bloom));
       const card=catalog.cards.find(c=>c.name==='サクラBloom');
-      assert(w.document.querySelector('.catalogCard .canonicalSlotStatus').textContent===w.canonicalExpansionText(w.expandCanonicalBloom(card,bloom,catalog.dataset)),'library uses common Bloom/display');
+      assert(w.document.querySelector('.catalogCard .canonicalSlotStatus:last-child').textContent===w.canonicalEffectsText(w.expandCanonicalBloom(card,bloom,catalog.dataset)),'library uses common Bloom/display');
     }
+    assert([...w.document.querySelectorAll('[data-catalog-rarity]')].map(b=>b.textContent).join()==='★5,★4,★3','rarity category order');
+    let visitedCards=0;
     // Every rarity and training stage changes the displayed source base value.
     for(const rarity of [3,4,5]){
-      input(w,'#catalogSearch','');input(w,'#catalogRarity',String(rarity));
+      input(w,'#catalogSearch','');click(w,`[data-catalog-rarity="${rarity}"]`);
+      visitedCards+=w.document.querySelectorAll('.catalogCard').length;
       const panel=w.document.querySelector('.catalogCard');
+      assert(!/Lv|Bloom|特訓/.test(panel.querySelector('.canonicalSlotStatus').textContent.replace('Bloom','')), 'basic info has no growth metadata');
+      const labels=panel.querySelectorAll('.canonicalGrowth label');
+      assert(labels[0].textContent.startsWith('特訓') && labels[1].textContent.startsWith('開花'),'training then bloom');
+      assert(Math.abs(labels[0].getBoundingClientRect().top-labels[1].getBoundingClientRect().top)<2,'growth controls share row');
       const card=catalog.cards.find(c=>c.id===panel.dataset.cardId);
       const trainingSelect=panel.querySelector('[data-catalog-training]');
       const bloomSelect=panel.querySelector('[data-catalog-bloom]');
       for(const row of card.progression.trainingStages){
         trainingSelect.value=String(row.stage);trainingSelect.dispatchEvent(new w.Event('change'));
         const value=card.progression.statSnapshots.find(s=>s.level===row.levelCap).raw.parameterBaseValue;
-        const expected=`特訓 ${row.stage} / Lv${row.levelCap}（上限） / 基礎パラメータ ${value}`;
-        assert(panel.querySelector('.canonicalSlotStatus').textContent.includes(expected),'training stats UI ★'+rarity+' stage '+row.stage);
+        const expected=`P — / T — / S — / TOTAL ${value}`;
+        assert(panel.querySelector('.canonicalSlotStatus:last-child').textContent.includes(expected),'training stats UI ★'+rarity+' stage '+row.stage);
         for(const bloom of [0,2,5]){
           bloomSelect.value=String(bloom);bloomSelect.dispatchEvent(new w.Event('change'));
-          assert(panel.querySelector('.canonicalSlotStatus').textContent.includes(expected),'Bloom leaves displayed base unchanged');
+          assert(panel.querySelector('.canonicalSlotStatus:last-child').textContent.includes(expected),'Bloom leaves displayed base unchanged');
         }
       }
     }
-    input(w,'#catalogRarity','');
+    click(w,'[data-catalog-rarity="5"]');
+    assert(visitedCards===185,'all 185 cards reachable by categories');
     input(w,'#catalogSearch','存在しないカード');assert(w.document.querySelectorAll('.catalogCard').length===0,'empty search');
     input(w,'#catalogSearch','サクラBloom');assert(w.document.querySelector('[data-catalog-bloom]').value==='5','filter retains view Bloom');
     assert(JSON.stringify(Object.keys(localStorage).sort().map(k=>[k,localStorage.getItem(k)]))===storageBeforeCatalog,'card library never writes storage');
@@ -593,7 +601,7 @@
     w=await open('index.html');watch(w);await w.waitForCanonicalRestore();await w.loadRuntimeCardCatalog();
     click(w,'[data-load-canonical="0"]');await new Promise(resolve=>w.setTimeout(resolve,0));
     input(w,'[data-canonical-search]','サクラBloom');input(w,'[data-canonical-bloom]','3');input(w,'[data-canonical-training]','4');
-    assert(w.document.querySelector('.canonicalCardChoice .canonicalSlotStatus').textContent.includes('Lv80（上限）'),'A picker training preview');
+    assert(w.document.querySelector('.canonicalCardChoiceControls .canonicalSlotStatus').textContent.includes('TOTAL '),'A picker training preview');
     click(w,'#canonicalCardModal .canonicalCardChoiceControls button');
     w=await open('index.html');watch(w);await w.waitForCanonicalRestore();
     assert(w.document.querySelector('.card').canonicalExpansion.trainingStats.level===80,'A training restored');
@@ -603,7 +611,7 @@
     click(w,'.requiredSlot [data-load-canonical-slot="0"]');await new Promise(resolve=>w.setTimeout(resolve,0));
     input(w,'[data-canonical-training]','4');click(w,'#canonicalCardModal .canonicalCardChoiceControls button');
     w=await open('event.html');watch(w);await w.loadEventSearchState();
-    assert(w.document.querySelector('.requiredSlot .canonicalSlotStatus').textContent.includes('Lv80（上限）'),'B training restored');
+    assert(w.document.querySelector('.requiredSlot .canonicalSlotStatus').textContent.includes('TOTAL '),'B training restored');
     assert(errors.length===0,errors.join('\n'));
     result.textContent='PASS: startup, timeline, save/edit/load, metadata, derived values, star3 presets, bloom independence, event v2, formations, snapshot, support rates, manual skills, Bloom 0–5 A/B persistence/reset, card catalog search/filter/isolation';
   } catch(e){ result.textContent='FAIL: '+e.stack; }

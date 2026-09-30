@@ -18,7 +18,8 @@ for(const card of canonicalTestFixture.cards){
     assertCanonical(JSON.stringify(expansion)===JSON.stringify(restored),'Bloom expansion roundtrip');
     assertCanonical(adaptCanonicalCardToEventCard(card,expansion.levels.active,expansion).id===`canonical:${card.id}:bloom${bloom}`, 'B Bloom identity');
     const text=canonicalExpansionText(expansion);
-    assertCanonical(text.indexOf('SP Lv.')<text.indexOf('P Lv.',text.indexOf('SP Lv.')+1) && text.indexOf('P Lv.',text.indexOf('SP Lv.')+1)<text.indexOf('A Lv.'),'SP/P/A display order');
+    assertCanonical(!/Lv|Bloom|特訓/.test(text.replace(expansion.basic.name,'')), 'no redundant growth labels');
+    assertCanonical(text.indexOf('SP：')<text.indexOf('\nP：') && text.indexOf('\nP：')<text.indexOf('\nA：'),'SP/P/A display order');
     assertCanonical(!text.includes('出典：') && !text.includes('candidate') && !text.includes('原文と照合') && !text.includes('Library'), 'compact display');
     for(const kind of ['passive','active','special']) assertCanonical(JSON.stringify(expansion[kind].data)===JSON.stringify(card.skills[kind].levels.find(l=>l.level===bloomExpected[bloom][kind])), 'all selected raw conditions/effects retained');
   }

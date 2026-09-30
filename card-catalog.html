@@ -13,7 +13,11 @@
   <nav class="libraryNav"><a href="index.html">Active Timeline</a> / <a href="event.html">編成探索</a> / <a href="library.html">メンバーライブラリ</a></nav>
   <div class="catalogFilters">
     <label>カード名・メンバー名<input id="catalogSearch" type="search"></label>
-    <label>レア度<select id="catalogRarity"><option value="">すべて</option><option value="3">★3</option><option value="4">★4</option><option value="5">★5</option></select></label>
+    <div class="catalogRarity" role="group" aria-label="レア度">
+      <button type="button" data-catalog-rarity="5" aria-pressed="true">★5</button>
+      <button type="button" data-catalog-rarity="4" aria-pressed="false">★4</button>
+      <button type="button" data-catalog-rarity="3" aria-pressed="false">★3</button>
+    </div>
     <label>タイプ<select id="catalogType"><option value="">すべて</option><option value="cute">キュート</option><option value="happy">ハッピー</option><option value="pure">ピュア</option></select></label>
   </div>
   <p id="catalogStatus" role="status">カードデータを読み込み中…</p>
@@ -21,7 +25,7 @@
 <div id="catalogCards" class="catalogCards"></div>
 <section class="panel" aria-label="データについて">
   <h2>データについて</h2>
-  <p class="sub">基礎パラメータは特訓上限Lvの収録値です。Bloom補正は含まず、能力別の値・合計値への換算は未確定です。</p>
+  <p class="sub">TOTALは特訓段階に対応する基礎値の暫定表示です。開花補正は含みません。P/T/Sの分離と丸め方は検証中のため「—」で表示します。</p>
   <p class="sub">現在の計算反映はActive Skill基本効果のみです。条件付き効果・Passive・Special・Connect・ステータスは計算に反映しません。</p>
 </section>
 </main>
