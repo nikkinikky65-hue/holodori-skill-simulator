@@ -108,8 +108,9 @@ init.forEach((d,i)=>{
       >
         呼出
       </button>
+      <button type="button" data-reset-slot="${i}">枠リセット</button>
     </div>
-    <p class="sub canonicalSlotStatus" data-canonical-status="${i}" role="status" aria-live="polite"></p>
+
   `;
 
   el.querySelector('[data-k=prob]').value=d[3];
@@ -600,7 +601,29 @@ function openCardLoadModal(slotIndex){
 }
 
 
+// Reset only this slot; Library cards and the source dataset remain untouched.
+function resetCardSlot(slotIndex){
+  const slot = document.querySelectorAll('.card')[slotIndex];
+  if(!slot) return;
+  const defaults = {libraryCardId: '', canonicalCardId: '', memberId: '', costume: '未分類', interval: '', prob: 'mid', duration: '', boost: '', short: '0'};
+  for(const [key, value] of Object.entries(defaults)) slot.querySelector(`[data-k="${key}"]`).value = value;
+  delete slot.canonicalExpansion;
+  delete slot.canonicalSelection;
+  delete slot.canonicalRestoreStatus;
+  const limit = document.querySelector(`[data-limit="${slotIndex}"]`);
+  if(limit) limit.value = '12';
+  // Discard any open chooser/save callback that could reapply an old selection.
+  closeCanonicalCardPicker();
+  closeCardLoadModal();
+  closeCardSaveModal();
+  saveState();
+  updateOptimizeNames();
+  render();
+}
+
 document.addEventListener('click', event => {
+  const reset = event.target.closest('[data-reset-slot]');
+  if(reset) resetCardSlot(Number(reset.dataset.resetSlot));
   const button = event.target.closest('[data-load-library]');
   if(button) openCardLoadModal(Number(button.dataset.loadLibrary));
   if(event.target.closest('[data-close-card-modal]')) closeCardLoadModal();
@@ -614,7 +637,7 @@ document.addEventListener('click', event => {
         const slot = document.querySelectorAll('.card')[slotIndex];
         if(!slot) return;
         const member = getMasterMember(adapted.memberId);
-        if(!member) throw new Error('fixtureのメンバーID候補をmembers.jsで解決できません。');
+        if(!member) throw new Error('カードのメンバーを解決できません。');
         const set = (key, value) => {
           const input = slot.querySelector(`[data-k="${key}"]`);
           if(input) input.value = value;
@@ -627,9 +650,8 @@ document.addEventListener('click', event => {
         set('boost', adapted.boost);
         set('libraryCardId', '');
         set('canonicalCardId', `${adapted.canonicalCardId}:lv${adapted.level}`);
-        const status = slot.querySelector(`[data-canonical-status="${slotIndex}"]`);
         slot.canonicalExpansion = expansion;
-        showCanonicalExpansion(status, expansion);
+        slot.canonicalSelection = canonicalSelection(expansion);
         saveState();
         updateOptimizeNames();
         render();
@@ -706,6 +728,7 @@ function loadLibraryCardIntoSlot(
 
   set('canonicalCardId', '');
   card.canonicalExpansion = null;
+  card.canonicalSelection = null;
   const canonicalStatus = card.querySelector('.canonicalSlotStatus');
   if(canonicalStatus) canonicalStatus.textContent = '';
 
@@ -1434,7 +1457,7 @@ function saveState(){
       return {
         libraryCardId: get('libraryCardId'),
         canonicalCardId: get('canonicalCardId'),
-        canonicalExpansion: get('canonicalCardId') ? card.canonicalExpansion || null : null,
+        canonicalSelection: get('canonicalCardId') ? card.canonicalSelection || null : null,
         memberId: get('memberId'),
         costume: get('costume'),
         interval: get('interval'),
@@ -1447,6 +1470,34 @@ function saveState(){
   };
 
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+
+let canonicalRestorePromise = Promise.resolve();
+function waitForCanonicalRestore(){ return canonicalRestorePromise; }
+async function restoreCanonicalSlot(slot){
+  const selection = slot.canonicalSelection;
+  if(!selection) return;
+  const originalId = slot.querySelector('[data-k=canonicalCardId]').value;
+  const stillSelected = () => slot.canonicalSelection === selection && slot.querySelector('[data-k=canonicalCardId]').value === originalId;
+  try{
+    const catalog = await loadRuntimeCardCatalog();
+    if(!stillSelected()) return; // reset / Library / manual member change won the race
+    if(selection.datasetVersion && selection.datasetVersion !== catalog.dataset.version ||
+       selection.legacySourceCommit && selection.legacySourceCommit !== catalog.dataset.sourceDataset.commitSha){
+      slot.canonicalRestoreStatus = 'dataset-mismatch';
+      return;
+    }
+    const card = catalog.cards.find(card => card.id === selection.cardId);
+    if(!card) throw new Error('カードが見つかりません。');
+    // Missing P/SP levels in old Active-only saves remain unresolved, not Lv.1.
+    slot.canonicalExpansion = expandCanonicalCard(card, selection.levels, catalog.dataset);
+    slot.canonicalSelection = canonicalSelection(slot.canonicalExpansion);
+    slot.canonicalRestoreStatus = 'restored';
+    // Preserve all manually edited input values; only metadata is refreshed.
+    saveState();
+  }catch(error){
+    if(stillSelected()) slot.canonicalRestoreStatus = 'unresolved';
+  }
 }
 
 function loadState(){
@@ -1467,13 +1518,16 @@ function loadState(){
         const card = cards[i];
         if(!card) return;
 
-        card.canonicalExpansion = member.canonicalCardId ? member.canonicalExpansion || null : null;
-        showCanonicalExpansion(card.querySelector('.canonicalSlotStatus'), card.canonicalExpansion);
+        card.canonicalExpansion = null;
+        card.canonicalSelection = readCanonicalSelection(member.canonicalCardId, member.canonicalSelection, member.canonicalExpansion);
         Object.entries(member).forEach(([key, value]) => {
           const input = card.querySelector(`[data-k="${key}"]`);
           if(input) input.value = value;
         });
       });
+      // Drop legacy raw expansions immediately, even if the catalog is offline.
+      saveState();
+      canonicalRestorePromise = Promise.all(cards.map(restoreCanonicalSlot));
     }
   }catch(error){
     console.warn('保存データを読み込めませんでした', error);
@@ -1489,6 +1543,7 @@ document.addEventListener('input', e => {
       slot.querySelector('[data-k=libraryCardId]').value = '';
       slot.querySelector('[data-k=canonicalCardId]').value = '';
       slot.canonicalExpansion = null;
+      slot.canonicalSelection = null;
       const status = slot.querySelector('.canonicalSlotStatus');
       if(status) status.textContent = '';
     }
@@ -1505,6 +1560,7 @@ document.addEventListener('change', e => {
       slot.querySelector('[data-k=libraryCardId]').value = '';
       slot.querySelector('[data-k=canonicalCardId]').value = '';
       slot.canonicalExpansion = null;
+      slot.canonicalSelection = null;
       const status = slot.querySelector('.canonicalSlotStatus');
       if(status) status.textContent = '';
     }

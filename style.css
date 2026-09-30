@@ -922,3 +922,7 @@
   }
 }
 .canonicalSlotStatus { white-space: pre-line; overflow-wrap: anywhere; }
+
+.canonicalCardList > label { display: grid; gap: 6px; }
+.canonicalCardList select[data-canonical-card] { width: 100%; min-height: 160px; }
+.canonicalCardChoice details { margin-top: 12px; }

@@ -83,7 +83,7 @@ function loadMemberCards(){
 const memberCards =
   loadMemberCards();
 
-// Canonical PoC cards are transient event-condition choices, never Library records.
+// Canonical cards are transient event-condition choices, never Library records.
 const canonicalEventCards = new Map();
 
 
@@ -344,8 +344,8 @@ function addCanonicalCardOption(cardSelect, card){
   const option = document.createElement('option');
   option.value = card.id;
   option.textContent = card.canonicalExpansion
-    ? `${card.cardName} / P${card.canonicalExpansion.levels.passive}・A${card.canonicalExpansion.levels.active}・SP${card.canonicalExpansion.levels.special}（Canonical PoC）`
-    : `${card.cardName} / A Lv.${card.id.split(':lv').pop()}（Canonical PoC）`;
+    ? `${card.cardName} / P${card.canonicalExpansion.levels.passive}・A${card.canonicalExpansion.levels.active}・SP${card.canonicalExpansion.levels.special}（Canonical）`
+    : `${card.cardName} / A Lv.${card.id.split(':lv').pop()}（Canonical）`;
   cardSelect.append(option);
 }
 
@@ -353,10 +353,10 @@ async function restoreCanonicalEventCard(cardId){
   const match = /^canonical:(.+):lv(\d+)(?::p(\d+):s(\d+))?$/.exec(cardId || '');
   if(!match) return null;
   const [, sourceId, level, passive, special] = match;
-  const fixture = await loadCanonicalCardFixture();
-  const card = fixture.cards.find(item => item.sourceCard?.sourceId === sourceId);
+  const fixture = await loadRuntimeCardCatalog();
+  const card = fixture.cards.find(item => item.id === sourceId);
   if(!card) return null;
-  const expansion = expandCanonicalCard(card, { active: Number(level), passive: Number(passive || 1), special: Number(special || 1) }, fixture.sourceDataset);
+  const expansion = expandCanonicalCard(card, { active: Number(level), passive: Number(passive || 1), special: Number(special || 1) }, fixture.dataset);
   const adapted = adaptCanonicalCardToEventCard(card, Number(level), passive ? expansion : null);
   adapted.canonicalExpansion = expansion;
   canonicalEventCards.set(adapted.id, adapted);
@@ -452,7 +452,7 @@ async function loadEventSearchState(){
               showCanonicalExpansion(slot.querySelector('.canonicalSlotStatus'), canonicalCard.canonicalExpansion);
             }
           }catch(error){
-            console.warn('Canonical fixture selection could not be restored.', error);
+            console.warn('Canonical card selection could not be restored.', error);
           }
         }
 

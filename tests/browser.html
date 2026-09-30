@@ -51,6 +51,7 @@
     assert(card.extensions.future===42 && card.skills.active.extra==='keep','unknown fields survive');
     assert(Number(w.document.querySelector('#cardLevel').value)===40,'reset derived');
     w=await open('index.html');watch(w);w.alert=()=>{};
+    await w.waitForCanonicalRestore();
     click(w,'[data-load-library="0"]');
     assert(!w.document.querySelector('#cardLoadModal').hidden,'load button wired');
     click(w,'.cardLoadItem');
@@ -76,6 +77,7 @@
     assert(star3.id && star3.progression.level===60 && star3.stats.total===20000 && star3.progression.bloom===5,'Library new star3 card');
     // New A-side ★3 uses exactly the same domain presets.
     w=await open('index.html');watch(w);w.alert=()=>{};
+    await w.waitForCanonicalRestore();
     input(w,'[data-k=memberId]','robocosan');
     click(w,'[data-save-library="0"]');
     input(w,'#cardSaveName','A面★3');input(w,'#cardSaveRarity',3);input(w,'#cardSaveTraining',2);
@@ -96,6 +98,7 @@
     assert(w.document.querySelector('#cardName').value==='未分類','Library reads default');
     input(w,'#cardName','正式カード名');w.document.querySelector('#memberCardForm').requestSubmit();
     w=await open('index.html');watch(w);w.alert=()=>{};
+    await w.waitForCanonicalRestore();
     click(w,'[data-load-library="0"]');
     [...w.document.querySelectorAll('.cardLoadItem')].find(el=>el.textContent.includes('正式カード名')).click();
     assert(w.document.querySelector('[data-k=costume]').value==='正式カード名','renamed recall');
@@ -114,6 +117,7 @@
     localStorage.setItem(key,JSON.stringify({version:2,cards:six}));
     const cardSnapshot=localStorage.getItem(key);
     w=await open('index.html');watch(w);w.alert=()=>{};
+    await w.waitForCanonicalRestore();
     six.slice(1).forEach((card,i)=>w.loadLibraryCardIntoSlot(card,i));
     const score=w.document.querySelector('#max').textContent;
     const timeline=w.document.querySelector('#timeline').innerHTML;
@@ -127,6 +131,7 @@
     assert(localStorage.getItem(key)===cardSnapshot,'formation save leaves cards unchanged');
     assert(w.document.querySelector('#timeline').innerHTML===timeline,'save leaves timeline unchanged');
     w=await open('index.html');watch(w);w.alert=()=>{};
+    await w.waitForCanonicalRestore();
     input(w,'#formationSelect',f.id);click(w,'#formationLoad');
     assert(w.document.querySelector('#formationLeader').value==='six-0','restore leader');
     const slots=[...w.document.querySelectorAll('.card')];
@@ -185,6 +190,7 @@
     assert(!w.document.querySelector('#activeSnapshotFallback').hidden && JSON.parse(w.document.querySelector('#activeSnapshotText').value).activeTimeline.length===5,'clipboard fallback');
     // Score Support rates remain available only through the internal API.
     w=await open('index.html');watch(w);w.alert=()=>{};
+    await w.waitForCanonicalRestore();
     const supportCards=w.eval(`HOLO_MEMBERS.slice(0,5).map((talent,i)=>createCardV2({
       id:'support-'+i,talentId:talent.id,cardName:'Support検証'+i,type:i<2?'cute':'pure',
       skills:{active:{interval:20+i,duration:5,boost:i===0?75:i===1?85:65},
@@ -205,12 +211,14 @@
     click(w,'[data-save-library="0"]');click(w,'#cardSaveConfirm');
     assert(!JSON.stringify(read()).includes('scoreSupportRate'),'normal rate not saved to Card v2');
     w=await open('index.html');watch(w);w.alert=()=>{};
+    await w.waitForCanonicalRestore();
     const inputKey='holodori-active-input-v1';
     assert(JSON.parse(localStorage.getItem(inputKey)).members.every(member=>!Object.hasOwn(member,'scoreSupportRate')),'rate not saved in input state');
     const legacyState=JSON.parse(localStorage.getItem(inputKey));
     legacyState.members.forEach(member=>member.scoreSupportRate=135);
     localStorage.setItem(inputKey,JSON.stringify(legacyState));
     w=await open('index.html');watch(w);w.alert=()=>{};
+    await w.waitForCanonicalRestore();
     assert(w.createActiveTimelineSnapshot().activeTimeline.every(member=>member.scoreSupportRate===0),'legacy rate ignored');
     input(w,'#song',120);
     assert(JSON.parse(localStorage.getItem(inputKey)).members.every(member=>!Object.hasOwn(member,'scoreSupportRate')),'next save drops obsolete rate');
@@ -244,6 +252,7 @@
     assert(Number(w.document.querySelector('#passiveValue').value)===8,'legacy passive boost retained');
     input(w,'#passiveTargetCount',1);w.document.querySelector('#memberCardForm').requestSubmit();
     w=await open('index.html');watch(w);w.alert=()=>{};
+    await w.waitForCanonicalRestore();
     supportSnapshot=w.createActiveTimelineSnapshot();
     assert(supportSnapshot.activeTimeline[0].effectiveBoost===75 && supportSnapshot.activeTimeline[0].passiveAdditionalSupportRate===0,'ambiguous targets excluded');
     assert(supportSnapshot.supportEvaluation.status==='partial' && supportSnapshot.supportEvaluation.passiveResults[0].candidateCount===2,'ambiguity exported');
@@ -307,6 +316,7 @@
     assert(w.document.querySelector('#passiveValue').value==='9','new P takes precedence');
     input(w,'#passiveEffectType','performance_up');input(w,'#passiveValue',8);w.document.querySelector('#memberCardForm').requestSubmit();
     w=await open('index.html');watch(w);w.alert=()=>{};
+    await w.waitForCanonicalRestore();
     click(w,'[data-load-library="0"]');
     [...w.document.querySelectorAll('.cardLoadItem')].find(el=>el.textContent.includes('旧カード名')).click();
     assert(w.document.querySelector('[data-k=boost]').value==='75' && w.document.querySelector('[data-k=interval]').value==='35','manual card A recall');
@@ -343,13 +353,17 @@
     w.document.querySelector('#memberCardForm').requestSubmit();
     const judgment=read().find(card=>card.cardName==='固定行SP');
     assert(judgment.skills.special.effects.some(effect=>effect.type==='judgment_enhancement' && effect.from==='good' && effect.to==='perfect'),'judgment effect saved');
-    // Canonical one-card fixture call-in is transient; A-side inputs remain editable.
+    // Canonical dataset call-in is transient; A-side inputs remain editable.
     const canonicalLibraryBefore=localStorage.getItem(key);
     w=await open('index.html');watch(w);w.alert=()=>{};
-    await w.loadCanonicalCardFixture();
+    await w.waitForCanonicalRestore();
+    await w.loadRuntimeCardCatalog();
     click(w,'[data-load-canonical="0"]');
     assert(!w.document.querySelector('#canonicalCardModal').hidden,'Canonical picker opens from A slot');
     await new Promise(resolve=>w.setTimeout(resolve,0));
+    assert(w.document.querySelector('[data-canonical-card]').options.length===185,'all cards selectable');
+    input(w,'[data-canonical-search]','サクラBloom');
+    assert(w.document.querySelector('[data-canonical-card]').options.length===1,'card name filtering');
     input(w,'#canonicalCardModal [data-canonical-level]','2');
     input(w,'#canonicalCardModal [data-canonical-skill=special]','2');
     assert(w.document.querySelector('[data-canonical-skill=passive]').value==='1','P level independent of A/SP');
@@ -360,26 +374,101 @@
     assert(w.document.querySelector('[data-k=prob]').value==='mid','Canonical adapter localized probability');
     assert(w.document.querySelector('[data-k=boost]').readOnly===false,'A manual input remains editable');
     assert(w.document.querySelector('[data-k=libraryCardId]').value==='' && w.document.querySelector('[data-k=canonicalCardId]').value==='card-00015-5-uniq-0003-00:lv2','Canonical source stays out of Library linkage');
-    assert(w.document.querySelector('[data-canonical-status="0"]').textContent.includes('上位効果') && w.document.querySelector('[data-canonical-status="0"]').textContent.includes('base effectのみ'),'conditional override warning');
+    assert(!w.document.querySelector('.card .canonicalSlotStatus'),'no details below A slot');
     assert(localStorage.getItem(key)===canonicalLibraryBefore,'A-side Canonical call leaves Library unchanged');
+    const storedRuntime=JSON.parse(localStorage.getItem('holodori-active-input-v1')).members[0];
+    assert(storedRuntime.canonicalSelection.levels.special===2 && !('canonicalExpansion' in storedRuntime),'only reference and independent levels stored');
+    assert(JSON.stringify(storedRuntime.canonicalSelection).length<300,'small persisted reference');
     const expansion=w.document.querySelector('.card').canonicalExpansion;
     assert(expansion.levels.passive===1 && expansion.levels.active===2 && expansion.levels.special===2,'independent selected levels retained');
-    assert(expansion.passive.conditionStatus==='unresolved' && !('condition' in expansion.passive.data.effect),'P condition remains unobserved');
+    assert(expansion.passive.conditionStatus==='unresolved' && expansion.passive.data.condition.state==='unobserved','P condition remains unobserved');
     assert(expansion.special.data.effects.length===2 && expansion.special.durationMilliseconds===10000,'SP independent effects and level duration retained');
-    assert(w.document.querySelector('.canonicalSlotStatus').textContent.includes('145'),'SP displayed');
+    assert(w.canonicalExpansionText(expansion).includes('145'),'SP retained internally');
     assert(w.createActiveTimelineSnapshot().activeTimeline[0].passiveAdditionalSupportRate===0 && w.createActiveTimelineSnapshot().activeTimeline[0].scoreSupportRate===0,'P/SP excluded from calculation');
     input(w,'[data-k=boost]','61');
     assert(Number(w.document.querySelector('[data-k=boost]').value)===61,'manual edit after Canonical call');
+    // Migrate legacy raw expansions without reloading the research dataset.
+    const legacyInput=JSON.parse(localStorage.getItem('holodori-active-input-v1'));
+    delete legacyInput.members[0].canonicalSelection;
+    legacyInput.members[0].canonicalExpansion={
+      levels:{passive:1,active:2,special:2},
+      source:{dataset:{commitSha:expansion.source.dataset.sourceDataset.commitSha}},
+      passive:{data:{facts:Array(100).fill({sourceField:'legacy-raw',rawValue:'retained in Canonical'})}}
+    };
+    localStorage.setItem('holodori-active-input-v1',JSON.stringify(legacyInput));
+
     w=await open('index.html');watch(w);w.alert=()=>{};
+    await w.waitForCanonicalRestore();
     assert(w.document.querySelector('[data-k=canonicalCardId]').value==='card-00015-5-uniq-0003-00:lv2' && Number(w.document.querySelector('[data-k=boost]').value)===61,'A-side call-in input persists and remains editable');
     assert(localStorage.getItem(key)===canonicalLibraryBefore,'A-side persistence does not register fixture in Library');
 
-    assert(w.document.querySelector('.card').canonicalExpansion.levels.special===2 && w.document.querySelector('.canonicalSlotStatus').textContent.includes('条件未確認'),'A expansion and warning restored');
+    assert(w.document.querySelector('.card').canonicalExpansion.levels.special===2 && w.document.querySelector('.card').canonicalExpansion.passive.conditionStatus==='unresolved','A internal expansion restored without detail display');
+    assert(!localStorage.getItem('holodori-active-input-v1').includes('legacy-raw') && !JSON.parse(localStorage.getItem('holodori-active-input-v1')).members[0].canonicalExpansion,'legacy raw removed during migration');
 
-    w.clearFormationMemberSlot(0);
-    assert(!w.document.querySelector('.card').canonicalExpansion, 'cleared expansion');
-    assert(w.document.querySelector('[data-k=canonicalCardId]').value==='', 'cleared source ID');
-    assert(w.document.querySelector('.card .canonicalSlotStatus').textContent==='', 'cleared slot details');
+    // Keep a second Canonical selection to verify reset isolation, including metadata.
+    await w.loadRuntimeCardCatalog();
+    click(w,'[data-load-canonical="1"]');
+    await new Promise(resolve=>w.setTimeout(resolve,0));
+    input(w,'[data-canonical-search]','ときのそら');
+    input(w,'[data-canonical-skill=passive]','2');
+    input(w,'[data-canonical-skill=special]','2');
+    input(w,'[data-canonical-search]','ときの');
+    assert(w.document.querySelector('[data-canonical-skill=passive]').value==='2','filter keeps same-card skill selection');
+    click(w,'#canonicalCardModal .canonicalCardChoiceControls button');
+    const secondExpansion=JSON.stringify(w.document.querySelectorAll('.card')[1].canonicalExpansion);
+    // Reset wipes only one slot, including selected skill levels and source refs.
+    input(w,'[data-k=short]','8');
+    input(w,'[data-limit="0"]','4');
+    const savedFormations=localStorage.getItem('holodori-formation-library-v1');
+    const otherSlots=JSON.parse(localStorage.getItem('holodori-active-input-v1')).members.slice(1);
+    const sourceBefore=JSON.stringify((await w.loadRuntimeCardCatalog()).cards);
+    click(w,'[data-reset-slot="0"]');
+    const expectedReset={libraryCardId:'',canonicalCardId:'',canonicalSelection:null,memberId:'',costume:'未分類',interval:'',prob:'mid',duration:'',boost:'',short:'0'};
+    const resetState=JSON.parse(localStorage.getItem('holodori-active-input-v1'));
+    assert(JSON.stringify(resetState.members[0])===JSON.stringify(expectedReset),'reset all slot state');
+    assert(JSON.stringify(resetState.members.slice(1))===JSON.stringify(otherSlots),'other slots unchanged');
+    assert(localStorage.getItem(key)===canonicalLibraryBefore && localStorage.getItem('holodori-formation-library-v1')===savedFormations,'reset leaves Library and formations unchanged');
+    assert(JSON.stringify((await w.loadRuntimeCardCatalog()).cards)===sourceBefore,'reset leaves Canonical unchanged');
+    assert(w.document.querySelector('[data-limit="0"]').value==='12','slot optimization limit reset');
+    w=await open('index.html');watch(w);w.alert=()=>{};
+    await w.waitForCanonicalRestore();
+    assert(!w.document.querySelector('.card').canonicalExpansion && w.document.querySelector('[data-k=canonicalCardId]').value==='' && w.document.querySelector('[data-k=short]').value==='0','no source or levels resurrect after reload');
+    assert(!w.document.querySelector('.card .canonicalSlotStatus'),'no A details after reload');
+    assert(JSON.stringify(w.document.querySelectorAll('.card')[1].canonicalExpansion)===secondExpansion,'other Canonical selection survives reset and reload');
+    // Call another card, then reset a Library-linked card without deleting it.
+    await w.loadRuntimeCardCatalog();
+    click(w,'[data-load-canonical="0"]');
+    await new Promise(resolve=>w.setTimeout(resolve,0));
+    input(w,'[data-canonical-search]','ときのそら');
+    assert(w.document.querySelector('[data-canonical-card]').options.length>1,'member filtering');
+    click(w,'#canonicalCardModal .canonicalCardChoiceControls button');
+    assert(w.document.querySelector('[data-k=memberId]').value==='tokino_sora','non-PoC card applies');
+    assert(w.document.querySelector('.card').canonicalExpansion.passive.data.condition.state==='observed','source P condition retained');
+    w.loadLibraryCardIntoSlot(read()[0],0);
+    click(w,'[data-reset-slot="0"]');
+    assert(localStorage.getItem(key)===canonicalLibraryBefore,'reset Library selection does not delete card');
+    input(w,'[data-k=boost]','37');
+    click(w,'[data-reset-slot="0"]');
+    assert(w.document.querySelector('[data-k=boost]').value==='','manual-only reset');
+    // Slow metadata restore must not resurrect a slot reset while fetch is pending.
+    const currentCatalog=await w.loadRuntimeCardCatalog();
+    const actualLoader=w.loadRuntimeCardCatalog;
+    let releaseCatalog;
+    w.loadRuntimeCardCatalog=()=>new Promise(resolve=>{releaseCatalog=resolve;});
+    const raceState=JSON.parse(localStorage.getItem('holodori-active-input-v1'));
+    raceState.members[0]={...storedRuntime};
+    // One shared Promise for all selected slots, just like the production loader.
+    const pendingCatalog=new Promise(resolve=>{releaseCatalog=resolve;});
+    w.loadRuntimeCardCatalog=()=>pendingCatalog;
+    localStorage.setItem('holodori-active-input-v1',JSON.stringify(raceState));
+    w.loadState();
+    click(w,'[data-reset-slot="0"]');
+    releaseCatalog(currentCatalog);
+    await w.waitForCanonicalRestore();
+    w.loadRuntimeCardCatalog=actualLoader;
+    assert(!w.document.querySelector('.card').canonicalExpansion && !w.document.querySelector('.card').canonicalSelection && w.document.querySelector('[data-k=canonicalCardId]').value==='','pending restore cannot resurrect reset');
+    assert(JSON.parse(localStorage.getItem('holodori-active-input-v1')).members[0].canonicalSelection===null,'race leaves persisted slot reset');
+
 
     // B-side Event card condition can select and restore the same transient fixture.
     const eventCards=w.eval(`HOLO_MEMBERS.filter(m=>m.id!=='sakura_miko').slice(0,4).map((m,i)=>createCardV2({
@@ -389,9 +478,12 @@
     localStorage.setItem(key,JSON.stringify({version:2,cards:eventCards}));
     const eventLibraryBefore=localStorage.getItem(key);
     w=await open('event.html');watch(w);w.alert=()=>{};
-    await w.loadCanonicalCardFixture();
+    await w.loadRuntimeCardCatalog();
     click(w,'.requiredSlot [data-load-canonical-slot="0"]');
     await new Promise(resolve=>w.setTimeout(resolve,0));
+    assert(w.document.querySelector('[data-canonical-card]').options.length===185,'all cards selectable');
+    input(w,'[data-canonical-search]','サクラBloom');
+    assert(w.document.querySelector('[data-canonical-card]').options.length===1,'card name filtering');
     input(w,'#canonicalCardModal [data-canonical-level]','2');
     input(w,'#canonicalCardModal [data-canonical-skill=special]','2');
     assert(w.document.querySelector('[data-canonical-skill=passive]').value==='1','P level independent of A/SP');
@@ -410,6 +502,8 @@
     assert(w.document.querySelector('#searchStatus').textContent.includes('編成'),'Event search accepts transient Canonical card');
     assert(w.document.querySelector('#formationResults').textContent.includes('サクラBloom'),'Event result includes fixture card');
     assert(localStorage.getItem(key)===eventLibraryBefore,'Event search does not register Canonical fixture');
+    assert(!w.performance.getEntriesByType('resource').some(r=>r.name.includes('/research/')),'browser fetched no complete Canonical or Source');
+    assert(w.performance.getEntriesByType('resource').some(r=>r.name.includes('/data/runtime-cards.json')),'browser uses Runtime Catalog');
     assert(errors.length===0,errors.join('\n'));
     result.textContent='PASS: startup, timeline, save/edit/load, metadata, derived values, star3 presets, bloom independence, event v2, formations, snapshot, support rates, manual skills';
   } catch(e){ result.textContent='FAIL: '+e.stack; }

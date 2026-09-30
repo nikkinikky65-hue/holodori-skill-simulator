@@ -1,0 +1,67 @@
+# Source → 完全Canonical → Runtime Catalog
+
+## 原本の保存状況
+
+完全Canonicalの直接入力は `research/holodoridb-all-card-survey.json`（4,040,633 bytes）。ローカルGitで追跡されており、追加commitは `d568abf`。これは上流の全JSONを未加工で保存したアーカイブではなく、JOIN到達行のfields/wrapperと調査メタデータを保持したスナップショットである。`build_canonical_cards.py --check`で、これだけから既存の完全Canonicalを再生成できることを確認する。
+
+- 取得元：`https://github.com/HolodoriDB/holodori-db-jpn-diff`
+- 固定commit：`e43f062c32ff4e04567235efcd58448cd6b10f35`
+- 調査取得日時：`2026-09-29T10:47:09Z`
+- 調査JSON SHA-256：`dcce8ef7057e5053d9ebea7a4a93c000785a28cd6451f31bdceb68222e69bb2a`
+- 取得スクリプト `research/holodoridb_all_card_survey.py` もGit追跡済み。今回は上流の再取得、原本の上書き・加工・新規公開、git add/commit/pushを行わない。
+
+`research/canonical-cards.json`（32,055,758 bytes）は完全Canonicalの正本。SHA-256は `306a0d43a4785983ddb200e0ace01d0f9d84a887d3ee6cab5fa44935dd9f8ef1`。全13,180レベル行参照、全P/A/SP、原行・JOIN・出典・未解決事項を保持し、今回変更しない。既存Canonical schemaも変更しない。
+
+## Runtimeの生成
+
+```sh
+python3 -B research/build_runtime_catalog.py
+python3 -B research/build_runtime_catalog.py --check
+python3 -B tests/runtime-catalog.test.py
+python3 -B tests/verify.py
+```
+
+生成処理の入力は完全Canonicalと、runtime member ID対応に使用する既存 `members.js` のみ。出力は `data/runtime-cards.json`。日時や乱数を使わず、UTF-8のcompact JSONとして再現可能に生成する。`--check`はファイルを書かず、再生成バイトと比較する。手作業でカード値を編集しない。
+
+現Runtimeは185カード、1,473,435 bytes。完全Canonicalより95.4035%小さい。ブラウザーはRuntimeだけを取得し、完全Canonical・原本・成長曲線全量をfetchしない。
+
+## Runtime v1の構造
+
+- `format`: `holodori-runtime-catalog-v1`
+- `dataset`: 完全Canonicalのパス・SHA-256・schema version、元データのrepository/commit/取得日時・inputArtifact hash、members.js hash、未解決事項。
+- `dataset.version`: このフィールドを追加する前のCatalog全体のcompact JSON SHA-256。Canonicalだけでなく、projection・member mappingの変更も識別する。
+- `cards[]`: `id`（外部カードID）、`name`、`member`、`classification`、`skills`、`progression`、`source`。
+- `source`: 固定ハッシュの完全Canonical内を指すJSON Pointer。カード、スキルレベル、効果、条件、成長スナップショットごとに追跡可能。巨大なsourceRecords/joinsや各factのtable/sourceId反復を配信しない。
+- `member.mapping`: 日本語名が既存マスターに一意に完全一致する場合のみ `candidate` と対応IDを付ける。曖昧・欠落は `unresolved`。ブラウザーでも対応IDと名前の一致を検査する。
+- `classification`: raw enumと、Canonicalに既に存在するsemanticCandidateを`mapping`として保持。候補の根拠・statusも残す。
+- スキル共通：独立した `levels[]`、`level`、`source`、タグを含む原文 `description`、ゲーム上の原値を型のまま保つ `raw`。ID・group参照等は意味を再解釈せず、Canonical pointerに委ねる。
+- Passive：`effect`、`target.selectors`、`condition`、`calculationStatus: deferred`。
+- Active：`baseEffect`、`conditionalOverrides[]`（condition/replacementEffect）、`qualitativeProbability`、`calculationStatus: base-only`。周期・時間・確率係数はrawに保持。定性的確率は原文から得た候補で、確率係数を数値確率に変換しない。
+- Special：独立した `effects[]`（effect/condition）、レベル行rawの持続時間、`durationScope: unresolved-per-effect`、`calculationStatus: display-only`。
+- condition：未観測は `state: unobserved / evaluationStatus: unresolved`。観測ありは `observed / not-evaluated`でraw clauses・原文・resolutionClass・evaluationModeを保持。明示的nullや明示的オブジェクトも別stateで保持し、noneを合成しない。
+
+## 成長データ
+
+`progression.trainingStages[]`の`stage`と`levelCap`はCanonicalのfactそのもの。レア度から上限を推測しない。
+
+`statSnapshots[]`はLv1と各実在の特訓上限Lvの和集合のみ。185カード合計1,110行。中間の12,070行参照はRuntimeに入れず、完全Canonicalに残す。`parameterInputs`はCanonicalの基礎パラメータ係数を型のまま保持する。
+
+これは最終ステータスの計算値ではなく、原本の`parameterBaseValue`・係数等の入力値。`statStatus: raw-inputs-only-formula-unresolved`として扱い、端数処理や補正の計算を追加しない。
+
+## A面/B面・保存
+
+A面/B面の選択UIはRuntimeを読む。P/A/SPレベルは個別指定のまま。A面枠下の詳細表示は追加しない。計算へ渡すのはActive基本効果だけで、P/SPや条件付き置換、Connect/boardは実行しない。
+
+A面のメモリー上の`slot.canonicalExpansion`には選択したRuntimeレベルの小さな構造を保持する。localStorageには手入力値とは別に、`canonicalSelection: {version,cardId,levels,datasetVersion}`のみを保存し、展開データをコピーしない。
+
+旧`canonicalExpansion`保存は、IDと選択レベル・元commitだけを抽出して小さな参照へ移行し、カタログから非同期で内部情報を復元する。手編集済みActive値は上書きしない。旧データにP/SPレベルがなければ推測せず未解決とする。データセット不一致や取得失敗でも入力値・参照は保持し、内部状態に復元未解決を記録する。
+
+復元待ち中に枠リセット・Library呼び出し・メンバー変更が起きた場合、古い参照に対する復元結果を捨てる。リセットでCanonical参照が復活しない。B面は従来の`canonical:外部ID:lvA:pP:sSP`を維持し、保存された選択からRuntimeを再展開する。旧B面のActive-only IDは従来の復元互換としてP/SP Lv1を使用する（Bloomとは連動しない）。
+
+Library・保存済み編成には書き込まない。明示的な手入力保存操作は従来どおり。
+
+## 検証
+
+`runtime-catalog.test.py`は保護対象4ファイルのSHA-256、185 IDの1:1対応、P/A/SP各370レベル、142置換、544個のSP効果、raw値・型・条件の保持、成長スナップショット、除外した中間Lvの原本保持、JSON Pointerの解決、再生成一致を検証する。
+
+`verify.py`は既存回帰と全185カード/54メンバー/370 Activeの完全Canonicalとの倍率・時間一致を検証する。`tests/browser.html`は専用プロファイルで検索・呼び出し・独立Lv・手入力・保存復元・旧raw移行・リセット競合・他枠/Library/編成保全・Runtimeだけのfetchを確認する。
