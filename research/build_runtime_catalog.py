@@ -105,13 +105,14 @@ def project(canonical, canonical_bytes, members_bytes):
         candidates = [id for id, label in members if label == name]
         mapping = {'status': 'candidate', 'id': candidates[0], 'basis': 'unique-exact-ja-name'} if len(candidates) == 1 else {'status': 'unresolved'}
         classification = {}
-        for f in card['classification']:
+        for j, f in enumerate(card['classification']):
             classification[f['sourceField']] = {'raw': f['rawValue']}
             if 'semanticCandidate' in f:
-                classification[f['sourceField']]['mapping'] = f['semanticCandidate']
+                classification[f['sourceField']]['mapping'] = {k: v for k, v in f['semanticCandidate'].items() if k != 'basis'}
+                classification[f['sourceField']]['source'] = path + f'/classification/{j}'
         progression = card['progression']
         stages = [{'stage': s['trainingCountFact']['rawValue'], 'levelCap': s['levelLimitFact']['rawValue'], 'source': path + f'/progression/trainingStages/{j}'} for j, s in enumerate(progression['trainingStages'])]
-        keep = {1, *(s['levelCap'] for s in stages)}
+        keep = {s['levelCap'] for s in stages}
         snapshots = []
         for j, row in enumerate(progression['levelRows']):
             raw = values(row['facts'], row['source'])
@@ -121,7 +122,12 @@ def project(canonical, canonical_bytes, members_bytes):
         cards.append({'id': card['sourceCard']['sourceId'], 'source': path, 'name': names[0], 'member': {'name': name, 'mapping': mapping},
                       'classification': classification,
                       'skills': {kind: {'levels': [project_level(l, kind, path + f'/skills/{kind}/levels/{j}') for j, l in enumerate(card['skills'][kind]['levels'])]} for kind in ('passive', 'active', 'special')},
-                      'progression': {'trainingStages': stages, 'statSnapshots': snapshots,
+                      'progression': {'bloomSteps': [{'step': b['bloomStepFact']['rawValue'],
+                                                        'effectType': b['effectTypeFact']['rawValue'],
+                                                        'value': b['valueFact']['rawValue'],
+                                                        'source': path + f'/progression/bloomSteps/{j}'}
+                                                       for j, b in enumerate(progression['bloomSteps'])],
+                                      'trainingStages': stages, 'statSnapshots': snapshots,
                                       'parameterInputs': {f['sourceField']: f['rawValue'] for f in progression['parameterInputFacts']},
                                       'statStatus': 'raw-inputs-only-formula-unresolved'}})
     result = {'format': 'holodori-runtime-catalog-v1',

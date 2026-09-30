@@ -8,6 +8,7 @@
 </head>
 <body>
 <main class="wrap">
+<nav class="libraryNav"><a href="card-catalog.html">カードライブラリ</a></nav>
  <div class="panel">
   <div class="pageHeader">
     <div>
@@ -74,7 +75,7 @@
   <div class="cardLoadBackdrop" data-close-canonical-card-modal></div>
   <div class="cardLoadDialog" role="dialog" aria-modal="true" aria-labelledby="canonicalCardTitle">
     <div class="cardLoadHeader">
-      <strong id="canonicalCardTitle">Canonical Card呼び出し</strong>
+      <strong id="canonicalCardTitle">カード呼び出し</strong>
       <button type="button" data-close-canonical-card-modal>閉じる</button>
     </div>
     <div id="canonicalCardTarget" class="sub"></div>
@@ -204,6 +205,11 @@
 
   </div>
 </div>
+<section class="panel" aria-label="データについて">
+  <h2>データについて</h2>
+  <p class="sub">基礎パラメータは特訓上限Lvの収録値です。Bloom補正は含まず、能力別の値・合計値への換算は未確定です。</p>
+  <p class="sub">現在の計算反映はActive Skill基本効果のみです。条件付き効果・Passive・Special・Connect・ステータスは計算に反映しません。</p>
+</section>
 </main>
 <script src="members.js"></script>
 <script src="card-rules.js"></script>

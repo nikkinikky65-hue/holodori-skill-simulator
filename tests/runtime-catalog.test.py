@@ -112,13 +112,28 @@ for src, dst in zip(canonical['cards'], runtime['cards']):
                     check_entity(a['effect'], b['effect'])
                     check_condition(a, b['condition'])
                     assert 'duration' not in b and 'effectDurationMillisecond' not in b['effect']['raw']
-    expected_levels = {1}
+    assert len(src['progression']['bloomSteps']) == len(dst['progression']['bloomSteps']) == 5
+    for original, projected in zip(src['progression']['bloomSteps'], dst['progression']['bloomSteps']):
+        same(resolve(projected['source']), original)
+        same(projected['step'], original['bloomStepFact']['rawValue'])
+        same(projected['effectType'], original['effectTypeFact']['rawValue'])
+        same(projected['value'], original['valueFact']['rawValue'])
+    for original in src['classification']:
+        projected = dst['classification'][original['sourceField']]
+        same(projected['raw'], original['rawValue'])
+        if 'semanticCandidate' in original:
+            same(resolve(projected['source']), original)
+            same(projected['mapping'], {k:v for k,v in original['semanticCandidate'].items() if k != 'basis'})
+            assert original['semanticCandidate']['basis']  # Prose retained in complete Canonical.
+    expected_levels = set()
     for stage, projected in zip(src['progression']['trainingStages'], dst['progression']['trainingStages']):
         same(projected['stage'], stage['trainingCountFact']['rawValue'])
         same(projected['levelCap'], stage['levelLimitFact']['rawValue'])
         expected_levels.add(stage['levelLimitFact']['rawValue'])
     assert len(dst['progression']['trainingStages']) == len(src['progression']['trainingStages'])
     snapshots = dst['progression']['statSnapshots']
+    assert all(row['level'] != 1 for row in snapshots)
+    assert any(native(row)['level'] == 1 for row in src['progression']['levelRows'])
     assert {s['level'] for s in snapshots} == expected_levels and len(snapshots) == len(expected_levels)
     full_levels = {native(row)['level']: row for row in src['progression']['levelRows']}
     assert len(full_levels) > len(expected_levels)

@@ -12,7 +12,7 @@ for(const passive of [1,2]) for(const active of [1,2]) for(const special of [1,2
   const eventCard = adaptCanonicalCardToEventCard(canonicalTestCard, active, expanded);
   assertCanonical(Object.keys(eventCard.skills).join()==='active' && !('short' in eventCard) && !('scoreSupportRate' in eventCard), 'only Active enters runtime');
   assertCanonical(eventCard.id.endsWith(`:p${passive}:s${special}`), 'independent Event identity');
-  assertCanonical(canonicalExpansionText(expanded).includes('条件未確認'), 'unresolved state visible');
+  assertCanonical(!canonicalExpansionText(expanded).includes('条件未確認') && expanded.unresolved.length > 0, 'research notes stay internal');
   expanded.passive.data.effect.raw.value='test mutation';
 }
 assertCanonical(JSON.stringify(canonicalTestFixture)===originalCanonical, 'fixture is immutable');

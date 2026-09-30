@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ホロドリ カードライブラリ</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="wrap">
+<section class="panel">
+  <h1>カードライブラリ</h1>
+  <nav class="libraryNav"><a href="index.html">Active Timeline</a> / <a href="event.html">編成探索</a> / <a href="library.html">メンバーライブラリ</a></nav>
+  <div class="catalogFilters">
+    <label>カード名・メンバー名<input id="catalogSearch" type="search"></label>
+    <label>レア度<select id="catalogRarity"><option value="">すべて</option><option value="3">★3</option><option value="4">★4</option><option value="5">★5</option></select></label>
+    <label>タイプ<select id="catalogType"><option value="">すべて</option><option value="cute">キュート</option><option value="happy">ハッピー</option><option value="pure">ピュア</option></select></label>
+  </div>
+  <p id="catalogStatus" role="status">カードデータを読み込み中…</p>
+</section>
+<div id="catalogCards" class="catalogCards"></div>
+<section class="panel" aria-label="データについて">
+  <h2>データについて</h2>
+  <p class="sub">基礎パラメータは特訓上限Lvの収録値です。Bloom補正は含まず、能力別の値・合計値への換算は未確定です。</p>
+  <p class="sub">現在の計算反映はActive Skill基本効果のみです。条件付き効果・Passive・Special・Connect・ステータスは計算に反映しません。</p>
+</section>
+</main>
+<script src="members.js"></script>
+<script src="canonical-card-adapter.js"></script>
+<script src="card-catalog.js"></script>
+</body>
+</html>

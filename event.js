@@ -258,6 +258,7 @@ function renderRequiredSlots(){
 
     canonicalButton.addEventListener('click', () => {
       openCanonicalCardPicker({
+        selection: canonicalEventSelection(cardSelect.value),
         targetText: `呼出先：B面 必須枠${i + 1}`,
         apply: (canonicalCard, level, expansion) => {
           const adapted = adaptCanonicalCardToEventCard(canonicalCard, level, expansion);
@@ -344,21 +345,33 @@ function addCanonicalCardOption(cardSelect, card){
   const option = document.createElement('option');
   option.value = card.id;
   option.textContent = card.canonicalExpansion
-    ? `${card.cardName} / P${card.canonicalExpansion.levels.passive}・A${card.canonicalExpansion.levels.active}・SP${card.canonicalExpansion.levels.special}（Canonical）`
-    : `${card.cardName} / A Lv.${card.id.split(':lv').pop()}（Canonical）`;
+    ? `${card.cardName} / ${Number.isInteger(card.canonicalExpansion.bloom) ? 'Bloom ' + card.canonicalExpansion.bloom : 'Bloom未指定（旧保存）'}`
+    : `${card.cardName} / A Lv.${card.id.split(':lv').pop()} / Bloom未指定（旧保存）`;
   cardSelect.append(option);
 }
 
+function canonicalEventSelection(cardId){
+  const card = canonicalEventCards.get(cardId);
+  if(card?.canonicalExpansion) return canonicalSelection(card.canonicalExpansion);
+  const match = /^canonical:(.+):lv(\d+)$/.exec(cardId || '');
+  return match ? {version: 1, cardId: match[1], levels: {active: Number(match[2])}} : null;
+}
+
 async function restoreCanonicalEventCard(cardId){
-  const match = /^canonical:(.+):lv(\d+)(?::p(\d+):s(\d+))?$/.exec(cardId || '');
-  if(!match) return null;
-  const [, sourceId, level, passive, special] = match;
+  const bloomMatch = /^canonical:(.+):bloom([0-5])(?::training(\d+))?$/.exec(cardId || '');
+  const match = /^canonical:(.+):lv(\d+)(?::p(\d+):s(\d+))?(?::training(\d+))?$/.exec(cardId || '');
+  if(!bloomMatch && !match) return null;
   const fixture = await loadRuntimeCardCatalog();
-  const card = fixture.cards.find(item => item.id === sourceId);
+  const card = fixture.cards.find(item => item.id === (bloomMatch || match)[1]);
   if(!card) return null;
-  const expansion = expandCanonicalCard(card, { active: Number(level), passive: Number(passive || 1), special: Number(special || 1) }, fixture.dataset);
-  const adapted = adaptCanonicalCardToEventCard(card, Number(level), passive ? expansion : null);
-  adapted.canonicalExpansion = expansion;
+  // Active-only legacy IDs do not establish P/SP levels or a Bloom stage.
+  const expansion = bloomMatch ? expandCanonicalBloom(card, Number(bloomMatch[2]), fixture.dataset, Number(bloomMatch[3] ?? 0)) :
+    match[3] ? expandCanonicalCard(card, {active:Number(match[2]), passive:Number(match[3]), special:Number(match[4])}, fixture.dataset) : null;
+  if(!bloomMatch && expansion && match[5] !== undefined){
+    expansion.training = Number(match[5]);
+    expansion.trainingStats = canonicalTrainingStats(card, expansion.training);
+  }
+  const adapted = adaptCanonicalCardToEventCard(card, expansion ? expansion.levels.active : Number(match[2]), expansion);
   canonicalEventCards.set(adapted.id, adapted);
   return adapted;
 }

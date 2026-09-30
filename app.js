@@ -631,6 +631,7 @@ document.addEventListener('click', event => {
   if(canonicalButton){
     const slotIndex = Number(canonicalButton.dataset.loadCanonical);
     openCanonicalCardPicker({
+      selection: document.querySelectorAll('.card')[slotIndex].canonicalSelection,
       targetText: `呼出先：A面 枠${slotIndex + 1}`,
       apply: (canonicalCard, level, expansion) => {
         const adapted = adaptCanonicalCardToActiveInput(canonicalCard, level);
@@ -649,7 +650,7 @@ document.addEventListener('click', event => {
         set('duration', adapted.duration);
         set('boost', adapted.boost);
         set('libraryCardId', '');
-        set('canonicalCardId', `${adapted.canonicalCardId}:lv${adapted.level}`);
+        set('canonicalCardId', Number.isInteger(expansion.bloom) ? `${adapted.canonicalCardId}:bloom${expansion.bloom}` : `${adapted.canonicalCardId}:lv${adapted.level}`);
         slot.canonicalExpansion = expansion;
         slot.canonicalSelection = canonicalSelection(expansion);
         saveState();
@@ -1482,15 +1483,18 @@ async function restoreCanonicalSlot(slot){
   try{
     const catalog = await loadRuntimeCardCatalog();
     if(!stillSelected()) return; // reset / Library / manual member change won the race
-    if(selection.datasetVersion && selection.datasetVersion !== catalog.dataset.version ||
-       selection.legacySourceCommit && selection.legacySourceCommit !== catalog.dataset.sourceDataset.commitSha){
+    if(!canonicalDatasetMatches(selection, catalog.dataset)){
       slot.canonicalRestoreStatus = 'dataset-mismatch';
       return;
     }
     const card = catalog.cards.find(card => card.id === selection.cardId);
     if(!card) throw new Error('カードが見つかりません。');
     // Missing P/SP levels in old Active-only saves remain unresolved, not Lv.1.
-    slot.canonicalExpansion = expandCanonicalCard(card, selection.levels, catalog.dataset);
+    slot.canonicalExpansion = selection.version === 2 ? expandCanonicalBloom(card, selection.bloom, catalog.dataset, selection.training ?? 0) : expandCanonicalCard(card, selection.levels, catalog.dataset);
+    if(selection.version === 1 && selection.training !== undefined){
+      slot.canonicalExpansion.training = selection.training;
+      slot.canonicalExpansion.trainingStats = canonicalTrainingStats(card, selection.training);
+    }
     slot.canonicalSelection = canonicalSelection(slot.canonicalExpansion);
     slot.canonicalRestoreStatus = 'restored';
     // Preserve all manually edited input values; only metadata is refreshed.

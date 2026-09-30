@@ -23,7 +23,7 @@ python3 -B tests/verify.py
 
 生成処理の入力は完全Canonicalと、runtime member ID対応に使用する既存 `members.js` のみ。出力は `data/runtime-cards.json`。日時や乱数を使わず、UTF-8のcompact JSONとして再現可能に生成する。`--check`はファイルを書かず、再生成バイトと比較する。手作業でカード値を編集しない。
 
-現Runtimeは185カード、1,473,435 bytes。完全Canonicalより95.4035%小さい。ブラウザーはRuntimeだけを取得し、完全Canonical・原本・成長曲線全量をfetchしない。
+現Runtimeは185カード、1,579,142 bytes。完全Canonicalより95.0738%小さい。ブラウザーはRuntimeだけを取得し、完全Canonical・原本・成長曲線全量をfetchしない。
 
 ## Runtime v1の構造
 
@@ -33,7 +33,7 @@ python3 -B tests/verify.py
 - `cards[]`: `id`（外部カードID）、`name`、`member`、`classification`、`skills`、`progression`、`source`。
 - `source`: 固定ハッシュの完全Canonical内を指すJSON Pointer。カード、スキルレベル、効果、条件、成長スナップショットごとに追跡可能。巨大なsourceRecords/joinsや各factのtable/sourceId反復を配信しない。
 - `member.mapping`: 日本語名が既存マスターに一意に完全一致する場合のみ `candidate` と対応IDを付ける。曖昧・欠落は `unresolved`。ブラウザーでも対応IDと名前の一致を検査する。
-- `classification`: raw enumと、Canonicalに既に存在するsemanticCandidateを`mapping`として保持。候補の根拠・statusも残す。
+- `classification`: raw enumと、Canonicalに既に存在するsemanticCandidateを`mapping`として保持。候補のstatusは保持する。繰り返しの長文`mapping.basis`は配信せず、`source` pointerから完全Canonicalの根拠を追跡できる。
 - スキル共通：独立した `levels[]`、`level`、`source`、タグを含む原文 `description`、ゲーム上の原値を型のまま保つ `raw`。ID・group参照等は意味を再解釈せず、Canonical pointerに委ねる。
 - Passive：`effect`、`target.selectors`、`condition`、`calculationStatus: deferred`。
 - Active：`baseEffect`、`conditionalOverrides[]`（condition/replacementEffect）、`qualitativeProbability`、`calculationStatus: base-only`。周期・時間・確率係数はrawに保持。定性的確率は原文から得た候補で、確率係数を数値確率に変換しない。
@@ -44,19 +44,33 @@ python3 -B tests/verify.py
 
 `progression.trainingStages[]`の`stage`と`levelCap`はCanonicalのfactそのもの。レア度から上限を推測しない。
 
-`statSnapshots[]`はLv1と各実在の特訓上限Lvの和集合のみ。185カード合計1,110行。中間の12,070行参照はRuntimeに入れず、完全Canonicalに残す。`parameterInputs`はCanonicalの基礎パラメータ係数を型のまま保持する。
+`statSnapshots[]`は各実在の特訓上限Lvのみ。185カード合計925行。実行時のLv1参照が存在しないことを確認し、Lv1の185行をRuntimeから除外した。Lv1を含む除外12,255行参照は完全Canonicalに残す。`parameterInputs`はCanonicalの基礎パラメータ係数を型のまま保持する。
 
 これは最終ステータスの計算値ではなく、原本の`parameterBaseValue`・係数等の入力値。`statStatus: raw-inputs-only-formula-unresolved`として扱い、端数処理や補正の計算を追加しない。
 
+## Bloom導出・カード表示
+
+`progression.bloomSteps[]`へCanonicalの段階・effectType・value・source pointerを抽出する。共通`canonicalBloomLevels()`がLv1を起点として、選択Bloom以下のA/SP/Pレベル変更行のvalueを到達Lvとして適用する。段階位置は固定表やレア度から推測しない。valueを加算量でなく到達Lvとする点とLv1の初期状態は、今回提示されたゲーム仕様に基づく。Canonicalの研究記述は書き換えない。
+
+全185枚でBloom 1→A2、3→SP2、4→P2。Bloom 2および5のparameter/Connect行もRuntimeに残すが、この処理では計算しない。★3/4/5ともBloom 5ではP/A/SPが変化しない。
+
+A/Bの呼び出しUIはBloom選択に統一。通常表示はカード名、メンバー・★・タイプ・Bloom、SP→P→Aの原文説明（装飾タグのみ除去）。研究注意書き・source ID/URL/SHAは表示しない。Active基本効果のみという制限は画面共通の「データについて」に表示する。A面枠下の詳細は復活させない。
+
+`card-catalog.html`は同じRuntimeとadapterを使用する閲覧専用画面。カード名・メンバー検索とレア度・タイプのAND絞り込み、カードごとのBloom切替ができる。閲覧状態はメモリーのみで、localStorageや既存メンバーLibraryへ書き込まない。
+
+Runtimeから除いたのは属性・レア度の反復する検証説明`mapping.basis`のみ。原enum、candidate status、source pointerは保持する。datasetの未解決事項、全スキルLvのraw・条件・置換・複数効果・説明は保持する。adapterが作る検証注意書きも内部に残るが通常表示から外す。元のbasisとraw/source facts・provenance・unresolved・conversion evidence・source referencesは完全Canonicalにすべて残す。
+
 ## A面/B面・保存
 
-A面/B面の選択UIはRuntimeを読む。P/A/SPレベルは個別指定のまま。A面枠下の詳細表示は追加しない。計算へ渡すのはActive基本効果だけで、P/SPや条件付き置換、Connect/boardは実行しない。
+A面/B面の選択UIはRuntimeを読む。新規選択はカードID＋Bloom段階を基準とする。A面枠下の詳細表示は追加しない。計算へ渡すのはActive基本効果だけで、P/SPや条件付き置換、Connect/boardは実行しない。
 
-A面のメモリー上の`slot.canonicalExpansion`には選択したRuntimeレベルの小さな構造を保持する。localStorageには手入力値とは別に、`canonicalSelection: {version,cardId,levels,datasetVersion}`のみを保存し、展開データをコピーしない。
+A面のメモリー上の`slot.canonicalExpansion`には選択したRuntimeレベルの小さな構造を保持する。localStorageには手入力値とは別に、`canonicalSelection: {version:2,cardId,bloom,training,canonicalSha256}`のみを保存し、展開データをコピーしない。
 
 旧`canonicalExpansion`保存は、IDと選択レベル・元commitだけを抽出して小さな参照へ移行し、カタログから非同期で内部情報を復元する。手編集済みActive値は上書きしない。旧データにP/SPレベルがなければ推測せず未解決とする。データセット不一致や取得失敗でも入力値・参照は保持し、内部状態に復元未解決を記録する。
 
-復元待ち中に枠リセット・Library呼び出し・メンバー変更が起きた場合、古い参照に対する復元結果を捨てる。リセットでCanonical参照が復活しない。B面は従来の`canonical:外部ID:lvA:pP:sSP`を維持し、保存された選択からRuntimeを再展開する。旧B面のActive-only IDは従来の復元互換としてP/SP Lv1を使用する（Bloomとは連動しない）。
+復元待ち中に枠リセット・Library呼び出し・メンバー変更が起きた場合、古い参照に対する復元結果を捨てる。リセットでCanonical参照が復活しない。B面の新規IDは`canonical:外部ID:bloomN`で、保存されたBloomからRuntimeを再展開する。旧`canonical:外部ID:lvA:pP:sSP`は独立Lvのまま保持し、Bloomへ推測変換しない。旧B面のActive-only IDはActiveだけを復元し、P/SP Lv1を補わない。
+
+A面旧version 1の個別Lvも、到達不能な組合せを含め保持する。旧保存のピッカーは「未指定（旧保存のLvを保持）」から始まり、利用者がBloomを明示選択するまで変換しない。新旧どちらも展開構造を保存しない。既知の旧Runtime version `a762a8bf08ea38ff73aba1387e681b9fe0c0fc3f151f2e792fce2d7ed7f514d4`は完全CanonicalのSHA一致を条件に移行を許可する。復元後はCanonical SHAも保存し、同じ正本からのRuntime再生成で復元が途切れないようにする。未知のdataset不一致は自動移行しない。
 
 Library・保存済み編成には書き込まない。明示的な手入力保存操作は従来どおり。
 
@@ -64,4 +78,14 @@ Library・保存済み編成には書き込まない。明示的な手入力保�
 
 `runtime-catalog.test.py`は保護対象4ファイルのSHA-256、185 IDの1:1対応、P/A/SP各370レベル、142置換、544個のSP効果、raw値・型・条件の保持、成長スナップショット、除外した中間Lvの原本保持、JSON Pointerの解決、再生成一致を検証する。
 
-`verify.py`は既存回帰と全185カード/54メンバー/370 Activeの完全Canonicalとの倍率・時間一致を検証する。`tests/browser.html`は専用プロファイルで検索・呼び出し・独立Lv・手入力・保存復元・旧raw移行・リセット競合・他枠/Library/編成保全・Runtimeだけのfetchを確認する。
+`verify.py`は既存回帰と全185カード/54メンバー/370 Activeの完全Canonicalとの倍率・時間一致を検証する。`tests/browser.html`は専用プロファイルで検索・呼び出し・Bloom 0〜5・旧独立Lv・手入力・保存復元・旧raw移行・リセット競合・他枠/Library/編成保全・Runtimeだけのfetch、新カードライブラリの検索・複合絞り込み・共通Bloom表示・保存データ非干渉を確認する。
+
+`canonical-bloom.test.js`は185枚×6段階の期待Lv、★3/4/5、source段階変更に追従する導出、条件等の保持、保存復元、旧データ非推測を検証する。
+
+## 特訓上限Lvの基礎表示
+
+`canonicalTrainingStats(card, training)`はtrainingStagesのstage一致行からlevelCapを取得し、statSnapshotsのlevel一致行を選ぶ。レア度別の上限表は使用しない。該当行がない場合はエラーにし、Lv1への代替をしない。
+
+カード呼び出しUIと閲覧用カードライブラリに特訓選択を追加。上限Lvとその行の`parameterBaseValue`を「基礎パラメータ」として表示する。能力別の丸めや合計への換算は未確定のため、計算値を捏造しない。Bloom・board補正は適用せず、P/A/SP Lvとも独立する。
+
+A面は小さな選択参照にtrainingを保存する。B面は特訓0以外のIDに`:trainingN`を付けて復元する。特訓未保存の新Bloom参照は初期表示の特訓0を使用する。既存の手入力値・メンバーLibraryの仮ステータス処理は変更しない。

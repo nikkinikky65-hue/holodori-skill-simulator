@@ -926,3 +926,11 @@
 .canonicalCardList > label { display: grid; gap: 6px; }
 .canonicalCardList select[data-canonical-card] { width: 100%; min-height: 160px; }
 .canonicalCardChoice details { margin-top: 12px; }
+
+/* Runtime card library; distinct from editable member Library. */
+.catalogFilters { display: flex; flex-wrap: wrap; gap: 1rem; }
+.catalogFilters label { display: grid; gap: .4rem; }
+.catalogCards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 1rem; }
+.catalogCard { min-width: 0; }
+.catalogCard .canonicalSlotStatus { line-height: 1.8; }
+.canonicalCardChoiceControls label { display: grid; gap: .4rem; }

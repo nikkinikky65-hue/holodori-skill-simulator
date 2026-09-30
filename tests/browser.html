@@ -364,20 +364,19 @@
     assert(w.document.querySelector('[data-canonical-card]').options.length===185,'all cards selectable');
     input(w,'[data-canonical-search]','サクラBloom');
     assert(w.document.querySelector('[data-canonical-card]').options.length===1,'card name filtering');
-    input(w,'#canonicalCardModal [data-canonical-level]','2');
-    input(w,'#canonicalCardModal [data-canonical-skill=special]','2');
-    assert(w.document.querySelector('[data-canonical-skill=passive]').value==='1','P level independent of A/SP');
+    input(w,'#canonicalCardModal [data-canonical-bloom]','3');
+    assert(!w.document.querySelector('[data-canonical-skill]'),'independent skill selectors removed');
     click(w,'#canonicalCardModal .canonicalCardChoiceControls button');
     assert(w.document.querySelector('[data-k=memberId]').value==='sakura_miko','Canonical adapter member candidate');
     assert(w.document.querySelector('[data-k=costume]').value==='サクラBloom','Canonical adapter card name');
     assert(Number(w.document.querySelector('[data-k=interval]').value)===15 && Number(w.document.querySelector('[data-k=duration]').value)===6 && Number(w.document.querySelector('[data-k=boost]').value)===55,'Canonical adapter Active level 2 base values');
     assert(w.document.querySelector('[data-k=prob]').value==='mid','Canonical adapter localized probability');
     assert(w.document.querySelector('[data-k=boost]').readOnly===false,'A manual input remains editable');
-    assert(w.document.querySelector('[data-k=libraryCardId]').value==='' && w.document.querySelector('[data-k=canonicalCardId]').value==='card-00015-5-uniq-0003-00:lv2','Canonical source stays out of Library linkage');
+    assert(w.document.querySelector('[data-k=libraryCardId]').value==='' && w.document.querySelector('[data-k=canonicalCardId]').value==='card-00015-5-uniq-0003-00:bloom3','Canonical source stays out of Library linkage');
     assert(!w.document.querySelector('.card .canonicalSlotStatus'),'no details below A slot');
     assert(localStorage.getItem(key)===canonicalLibraryBefore,'A-side Canonical call leaves Library unchanged');
     const storedRuntime=JSON.parse(localStorage.getItem('holodori-active-input-v1')).members[0];
-    assert(storedRuntime.canonicalSelection.levels.special===2 && !('canonicalExpansion' in storedRuntime),'only reference and independent levels stored');
+    assert(storedRuntime.canonicalSelection.bloom===3 && !storedRuntime.canonicalSelection.levels && !('canonicalExpansion' in storedRuntime),'only reference and Bloom stored');
     assert(JSON.stringify(storedRuntime.canonicalSelection).length<300,'small persisted reference');
     const expansion=w.document.querySelector('.card').canonicalExpansion;
     assert(expansion.levels.passive===1 && expansion.levels.active===2 && expansion.levels.special===2,'independent selected levels retained');
@@ -390,6 +389,7 @@
     // Migrate legacy raw expansions without reloading the research dataset.
     const legacyInput=JSON.parse(localStorage.getItem('holodori-active-input-v1'));
     delete legacyInput.members[0].canonicalSelection;
+    legacyInput.members[0].canonicalCardId='card-00015-5-uniq-0003-00:lv2';
     legacyInput.members[0].canonicalExpansion={
       levels:{passive:1,active:2,special:2},
       source:{dataset:{commitSha:expansion.source.dataset.sourceDataset.commitSha}},
@@ -405,15 +405,27 @@
     assert(w.document.querySelector('.card').canonicalExpansion.levels.special===2 && w.document.querySelector('.card').canonicalExpansion.passive.conditionStatus==='unresolved','A internal expansion restored without detail display');
     assert(!localStorage.getItem('holodori-active-input-v1').includes('legacy-raw') && !JSON.parse(localStorage.getItem('holodori-active-input-v1')).members[0].canonicalExpansion,'legacy raw removed during migration');
 
+    // An old independent combination may be unreachable through Bloom.
+    const legacyLevelsState=JSON.parse(localStorage.getItem('holodori-active-input-v1'));
+    legacyLevelsState.members[0].canonicalCardId='card-00015-5-uniq-0003-00:lv1';
+    legacyLevelsState.members[0].canonicalSelection={version:1,cardId:'card-00015-5-uniq-0003-00',levels:{passive:2,active:1,special:2},datasetVersion:'a762a8bf08ea38ff73aba1387e681b9fe0c0fc3f151f2e792fce2d7ed7f514d4'};
+    localStorage.setItem('holodori-active-input-v1',JSON.stringify(legacyLevelsState));
+    w=await open('index.html');watch(w);w.alert=()=>{};await w.waitForCanonicalRestore();
+    const legacyExpansion=w.document.querySelector('.card').canonicalExpansion;
+    assert(legacyExpansion.bloom===undefined && legacyExpansion.levels.passive===2 && legacyExpansion.levels.active===1 && legacyExpansion.levels.special===2,'A old independent levels not converted to Bloom');
+    assert(w.document.querySelector('[data-k=boost]').value==='61','legacy metadata restoration preserves manual Active');
+    click(w,'[data-load-canonical="0"]');await new Promise(resolve=>w.setTimeout(resolve,0));
+    assert(w.document.querySelector('[data-canonical-bloom]').value==='' && w.document.querySelector('.canonicalCardChoice .canonicalSlotStatus').textContent.includes('Bloom未指定'),'legacy picker has no guessed Bloom');
+    click(w,'[data-close-canonical-card-modal]');
+
     // Keep a second Canonical selection to verify reset isolation, including metadata.
     await w.loadRuntimeCardCatalog();
     click(w,'[data-load-canonical="1"]');
     await new Promise(resolve=>w.setTimeout(resolve,0));
     input(w,'[data-canonical-search]','ときのそら');
-    input(w,'[data-canonical-skill=passive]','2');
-    input(w,'[data-canonical-skill=special]','2');
+    input(w,'[data-canonical-bloom]','4');
     input(w,'[data-canonical-search]','ときの');
-    assert(w.document.querySelector('[data-canonical-skill=passive]').value==='2','filter keeps same-card skill selection');
+    assert(w.document.querySelector('[data-canonical-bloom]').value==='4','filter keeps same-card Bloom selection');
     click(w,'#canonicalCardModal .canonicalCardChoiceControls button');
     const secondExpansion=JSON.stringify(w.document.querySelectorAll('.card')[1].canonicalExpansion);
     // Reset wipes only one slot, including selected skill levels and source refs.
@@ -435,6 +447,28 @@
     assert(!w.document.querySelector('.card').canonicalExpansion && w.document.querySelector('[data-k=canonicalCardId]').value==='' && w.document.querySelector('[data-k=short]').value==='0','no source or levels resurrect after reload');
     assert(!w.document.querySelector('.card .canonicalSlotStatus'),'no A details after reload');
     assert(JSON.stringify(w.document.querySelectorAll('.card')[1].canonicalExpansion)===secondExpansion,'other Canonical selection survives reset and reload');
+    const levelsByBloom=[[1,1,1],[1,2,1],[1,2,1],[1,2,2],[2,2,2],[2,2,2]];
+    for(let bloom=0;bloom<=5;bloom++){
+      await w.loadRuntimeCardCatalog();
+      click(w,'[data-load-canonical="0"]');
+      await new Promise(resolve=>w.setTimeout(resolve,0));
+      input(w,'[data-canonical-search]','サクラBloom');
+      input(w,'[data-canonical-bloom]',String(bloom));
+      click(w,'#canonicalCardModal .canonicalCardChoiceControls button');
+      w=await open('index.html');watch(w);w.alert=()=>{};
+      await w.waitForCanonicalRestore();
+      const e=w.document.querySelector('.card').canonicalExpansion;
+      assert(e.bloom===bloom && JSON.stringify([e.levels.passive,e.levels.active,e.levels.special])===JSON.stringify(levelsByBloom[bloom]),'A Bloom '+bloom+' reload levels');
+      assert(Number(w.document.querySelector('[data-k=boost]').value)===(bloom===0?45:55),'A Bloom base calculation input');
+      click(w,'[data-load-canonical="0"]');await new Promise(resolve=>w.setTimeout(resolve,0));
+      assert(w.document.querySelector('[data-canonical-bloom]').value===String(bloom),'picker reopens at saved Bloom');
+      click(w,'[data-close-canonical-card-modal]');
+      assert(JSON.stringify(w.document.querySelectorAll('.card')[1].canonicalExpansion)===secondExpansion,'Bloom does not touch other slot');
+      assert(localStorage.getItem(key)===canonicalLibraryBefore && localStorage.getItem('holodori-formation-library-v1')===savedFormations,'Bloom does not touch libraries');
+    }
+    click(w,'[data-reset-slot="0"]');
+    w=await open('index.html');watch(w);w.alert=()=>{};await w.waitForCanonicalRestore();
+    assert(!w.document.querySelector('.card').canonicalExpansion && !w.document.querySelector('.card').canonicalSelection,'Bloom reset survives reload');
     // Call another card, then reset a Library-linked card without deleting it.
     await w.loadRuntimeCardCatalog();
     click(w,'[data-load-canonical="0"]');
@@ -484,14 +518,13 @@
     assert(w.document.querySelector('[data-canonical-card]').options.length===185,'all cards selectable');
     input(w,'[data-canonical-search]','サクラBloom');
     assert(w.document.querySelector('[data-canonical-card]').options.length===1,'card name filtering');
-    input(w,'#canonicalCardModal [data-canonical-level]','2');
-    input(w,'#canonicalCardModal [data-canonical-skill=special]','2');
-    assert(w.document.querySelector('[data-canonical-skill=passive]').value==='1','P level independent of A/SP');
+    input(w,'#canonicalCardModal [data-canonical-bloom]','3');
+    assert(!w.document.querySelector('[data-canonical-skill]'),'independent skill selectors removed');
     click(w,'#canonicalCardModal .canonicalCardChoiceControls button');
-    const canonicalEventId='canonical:card-00015-5-uniq-0003-00:lv2:p1:s2';
+    const canonicalEventId='canonical:card-00015-5-uniq-0003-00:bloom3';
     assert(w.document.querySelector('.requiredSlot [data-role=member]').value==='sakura_miko','Event Canonical member condition');
     assert(w.document.querySelector('.requiredSlot [data-role=card]').value===canonicalEventId,'Event Canonical card condition');
-    assert(w.document.querySelector('.requiredSlot .canonicalSlotStatus').textContent.includes('上位効果'),'Event conditional override warning');
+    assert(w.document.querySelector('.requiredSlot .canonicalSlotStatus').textContent.includes('Bloom 3'),'Event compact Bloom display');
     assert(localStorage.getItem(key)===eventLibraryBefore,'Event Canonical call leaves Library unchanged');
     w=await open('event.html');watch(w);w.alert=()=>{};
     await w.loadEventSearchState();
@@ -504,8 +537,75 @@
     assert(localStorage.getItem(key)===eventLibraryBefore,'Event search does not register Canonical fixture');
     assert(!w.performance.getEntriesByType('resource').some(r=>r.name.includes('/research/')),'browser fetched no complete Canonical or Source');
     assert(w.performance.getEntriesByType('resource').some(r=>r.name.includes('/data/runtime-cards.json')),'browser uses Runtime Catalog');
+    for(let bloom=0;bloom<=5;bloom++){
+      click(w,'.requiredSlot [data-load-canonical-slot="0"]');
+      await new Promise(resolve=>w.setTimeout(resolve,0));
+      input(w,'[data-canonical-bloom]',String(bloom));
+      click(w,'#canonicalCardModal .canonicalCardChoiceControls button');
+      w=await open('event.html');watch(w);w.alert=()=>{};await w.loadEventSearchState();
+      assert(w.document.querySelector('.requiredSlot [data-role=card]').value===`canonical:card-00015-5-uniq-0003-00:bloom${bloom}`,'B Bloom '+bloom+' restored');
+      const e=(await w.restoreCanonicalEventCard(`canonical:card-00015-5-uniq-0003-00:bloom${bloom}`)).canonicalExpansion;
+      assert(JSON.stringify([e.levels.passive,e.levels.active,e.levels.special])===JSON.stringify(levelsByBloom[bloom]),'B restored skill levels');
+    }
+    const oldEvent=await w.restoreCanonicalEventCard('canonical:card-00015-5-uniq-0003-00:lv1:p2:s2');
+    assert(oldEvent.canonicalExpansion.bloom===undefined && oldEvent.canonicalExpansion.levels.passive===2 && oldEvent.canonicalExpansion.levels.active===1,'B legacy levels retained without Bloom inference');
+    const oldActiveOnly=await w.restoreCanonicalEventCard('canonical:card-00015-5-uniq-0003-00:lv2');
+    assert(!oldActiveOnly.canonicalExpansion && oldActiveOnly.skills.active.boost===55,'B Active-only legacy does not infer P/SP');
+    const storageBeforeCatalog=JSON.stringify(Object.keys(localStorage).sort().map(k=>[k,localStorage.getItem(k)]));
+    w=await open('card-catalog.html');watch(w);await w.eval('cardCatalogReady');
+    assert(w.document.querySelectorAll('.catalogCard').length===185,'library shows all Runtime cards');
+    input(w,'#catalogSearch','星街すいせい');
+    assert(w.document.querySelectorAll('.catalogCard').length>1,'library member search');
+    input(w,'#catalogSearch','');input(w,'#catalogRarity','5');input(w,'#catalogType','pure');
+    const catalog=await w.loadRuntimeCardCatalog();
+    const matching=catalog.cards.filter(c=>c.classification.rarity.mapping.value===5 && c.classification.attributeType.mapping.value==='pure');
+    assert(w.document.querySelectorAll('.catalogCard').length===matching.length,'combined rarity/type filters');
+    input(w,'#catalogRarity','');input(w,'#catalogType','');input(w,'#catalogSearch','サクラBloom');
+    assert(w.document.querySelectorAll('.catalogCard').length===1,'library card name search');
+    for(let bloom=0;bloom<=5;bloom++){
+      input(w,'[data-catalog-bloom]',String(bloom));
+      const card=catalog.cards.find(c=>c.name==='サクラBloom');
+      assert(w.document.querySelector('.catalogCard .canonicalSlotStatus').textContent===w.canonicalExpansionText(w.expandCanonicalBloom(card,bloom,catalog.dataset)),'library uses common Bloom/display');
+    }
+    // Every rarity and training stage changes the displayed source base value.
+    for(const rarity of [3,4,5]){
+      input(w,'#catalogSearch','');input(w,'#catalogRarity',String(rarity));
+      const panel=w.document.querySelector('.catalogCard');
+      const card=catalog.cards.find(c=>c.id===panel.dataset.cardId);
+      const trainingSelect=panel.querySelector('[data-catalog-training]');
+      const bloomSelect=panel.querySelector('[data-catalog-bloom]');
+      for(const row of card.progression.trainingStages){
+        trainingSelect.value=String(row.stage);trainingSelect.dispatchEvent(new w.Event('change'));
+        const value=card.progression.statSnapshots.find(s=>s.level===row.levelCap).raw.parameterBaseValue;
+        const expected=`特訓 ${row.stage} / Lv${row.levelCap}（上限） / 基礎パラメータ ${value}`;
+        assert(panel.querySelector('.canonicalSlotStatus').textContent.includes(expected),'training stats UI ★'+rarity+' stage '+row.stage);
+        for(const bloom of [0,2,5]){
+          bloomSelect.value=String(bloom);bloomSelect.dispatchEvent(new w.Event('change'));
+          assert(panel.querySelector('.canonicalSlotStatus').textContent.includes(expected),'Bloom leaves displayed base unchanged');
+        }
+      }
+    }
+    input(w,'#catalogRarity','');
+    input(w,'#catalogSearch','存在しないカード');assert(w.document.querySelectorAll('.catalogCard').length===0,'empty search');
+    input(w,'#catalogSearch','サクラBloom');assert(w.document.querySelector('[data-catalog-bloom]').value==='5','filter retains view Bloom');
+    assert(JSON.stringify(Object.keys(localStorage).sort().map(k=>[k,localStorage.getItem(k)]))===storageBeforeCatalog,'card library never writes storage');
+    assert(!w.performance.getEntriesByType('resource').some(r=>r.name.includes('/research/')),'card library loads no complete Canonical');
+    w=await open('index.html');watch(w);await w.waitForCanonicalRestore();await w.loadRuntimeCardCatalog();
+    click(w,'[data-load-canonical="0"]');await new Promise(resolve=>w.setTimeout(resolve,0));
+    input(w,'[data-canonical-search]','サクラBloom');input(w,'[data-canonical-bloom]','3');input(w,'[data-canonical-training]','4');
+    assert(w.document.querySelector('.canonicalCardChoice .canonicalSlotStatus').textContent.includes('Lv80（上限）'),'A picker training preview');
+    click(w,'#canonicalCardModal .canonicalCardChoiceControls button');
+    w=await open('index.html');watch(w);await w.waitForCanonicalRestore();
+    assert(w.document.querySelector('.card').canonicalExpansion.trainingStats.level===80,'A training restored');
+    click(w,'[data-reset-slot="0"]');w=await open('index.html');watch(w);await w.waitForCanonicalRestore();
+    assert(!w.document.querySelector('.card').canonicalSelection,'training reset persists');
+    w=await open('event.html');watch(w);await w.loadEventSearchState();
+    click(w,'.requiredSlot [data-load-canonical-slot="0"]');await new Promise(resolve=>w.setTimeout(resolve,0));
+    input(w,'[data-canonical-training]','4');click(w,'#canonicalCardModal .canonicalCardChoiceControls button');
+    w=await open('event.html');watch(w);await w.loadEventSearchState();
+    assert(w.document.querySelector('.requiredSlot .canonicalSlotStatus').textContent.includes('Lv80（上限）'),'B training restored');
     assert(errors.length===0,errors.join('\n'));
-    result.textContent='PASS: startup, timeline, save/edit/load, metadata, derived values, star3 presets, bloom independence, event v2, formations, snapshot, support rates, manual skills';
+    result.textContent='PASS: startup, timeline, save/edit/load, metadata, derived values, star3 presets, bloom independence, event v2, formations, snapshot, support rates, manual skills, Bloom 0–5 A/B persistence/reset, card catalog search/filter/isolation';
   } catch(e){ result.textContent='FAIL: '+e.stack; }
   finally {
     localStorage.clear(); for(const [k,v] of backup) localStorage.setItem(k,v);

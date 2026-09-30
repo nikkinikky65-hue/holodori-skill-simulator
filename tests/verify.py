@@ -132,7 +132,7 @@ try{writeCardLibrary([]);}catch(e){refused=true;}
 assert(refused && localStorage.getItem(MEMBER_CARD_STORAGE_KEY)==='{bad json','invalid storage preserved');
 print('Score/segments regression and invalid-storage preservation: PASS');
 """
-for name in ['app.js','library.js','event.js','members.js','card-rules.js','formation-rules.js','formation.js','active-snapshot.js','support-rules.js','parameter-rules.js']:
+for name in ['app.js','library.js','event.js','members.js','card-rules.js','formation-rules.js','formation.js','active-snapshot.js','support-rules.js','parameter-rules.js','canonical-card-adapter.js','card-catalog.js']:
     js += '\nnew Function(readFile('+repr(str(root/name))+'));'
 js += "\nprint('All JavaScript syntax: PASS');"
 with tempfile.NamedTemporaryFile(mode='w',suffix='.js') as f:
@@ -156,6 +156,7 @@ canonical_js += (root/'canonical-card-adapter.js').read_text()
 canonical_js += '\nconst canonicalTestFixture = JSON.parse(readFile(\"data/runtime-cards.json\"));\n'
 canonical_js += (root/'tests/canonical-card-adapter.test.js').read_text()
 canonical_js += (root/'tests/canonical-all-cards.test.js').read_text()
+canonical_js += (root/'tests/canonical-bloom.test.js').read_text()
 with tempfile.NamedTemporaryFile(mode='w', suffix='.js') as f:
     f.write(canonical_js); f.flush()
     subprocess.run([jsc, f.name], check=True, cwd=root)
