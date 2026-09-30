@@ -2,15 +2,28 @@
 // Bloom choices are view state only; member Library and saved formations are untouched.
 async function renderCardCatalog(){
   const status = document.querySelector('#catalogStatus');
-  const container = document.querySelector('#catalogCards');
-  const search = document.querySelector('#catalogSearch');
-  const rarityButtons = [...document.querySelectorAll('[data-catalog-rarity]')];
-  let rarity = '5';
-  const type = document.querySelector('#catalogType');
-  const blooms = new Map();
-  const trainings = new Map();
+  if(!status) throw new Error('カードライブラリUIの必須要素がありません：#catalogStatus');
+  let catalog;
   try{
-    const catalog = await loadRuntimeCardCatalog();
+    catalog = await loadRuntimeCardCatalog();
+  }catch(error){
+    status.dataset.errorKind = 'data';
+    status.textContent = `カードデータを読み込めませんでした：${error.message}`;
+    return;
+  }
+  try{
+    const container = document.querySelector('#catalogCards');
+    const search = document.querySelector('#catalogSearch');
+    const rarityButtons = [...document.querySelectorAll('[data-catalog-rarity]')];
+    let rarity = '5';
+    const type = document.querySelector('#catalogType');
+    const blooms = new Map();
+    const trainings = new Map();
+    for(const [selector, element] of [['#catalogCards',container], ['#catalogSearch',search], ['#catalogType',type]]){
+      if(!element) throw new Error(`必須要素がありません：${selector}`);
+    }
+    if(rarityButtons.map(button => button.dataset.catalogRarity).join(',') !== '5,4,3') throw new Error('レア度ボタン（★5・★4・★3）が不足、または順序が不正です。');
+    delete status.dataset.errorKind;
     const render = () => {
       const query = search.value.trim().toLocaleLowerCase();
       const cards = catalog.cards.filter(card =>
@@ -75,6 +88,9 @@ async function renderCardCatalog(){
     });
     type.addEventListener('change', render);
     render();
-  }catch(error){ status.textContent = `カードデータを読み込めませんでした：${error.message}`; }
+  }catch(error){
+    status.dataset.errorKind = 'ui';
+    status.textContent = `カードライブラリのUIを初期化できませんでした：${error.message}`;
+  }
 }
 const cardCatalogReady = renderCardCatalog();

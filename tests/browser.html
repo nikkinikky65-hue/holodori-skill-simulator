@@ -553,6 +553,35 @@
     assert(!oldActiveOnly.canonicalExpansion && oldActiveOnly.skills.active.boost===55,'B Active-only legacy does not infer P/SP');
     const storageBeforeCatalog=JSON.stringify(Object.keys(localStorage).sort().map(k=>[k,localStorage.getItem(k)]));
     w=await open('card-catalog.html');watch(w);await w.eval('cardCatalogReady');
+    const catalogRuntimeErrors=[];
+    w.addEventListener('error',e=>catalogRuntimeErrors.push(e.message));
+    w.addEventListener('unhandledrejection',e=>catalogRuntimeErrors.push(String(e.reason)));
+    const originalConsoleError=w.console.error;
+    w.console.error=(...args)=>{catalogRuntimeErrors.push(args.join(' '));originalConsoleError.apply(w.console,args);};
+    assert(!w.document.querySelector('#catalogStatus').dataset.errorKind,'catalog initialization succeeds');
+    // Requested sequence, including handlers that previously targeted the removed select.
+    assert(w.document.querySelectorAll('.catalogCard').length===77,'initial star5');
+    click(w,'[data-catalog-rarity="4"]');assert(w.document.querySelectorAll('.catalogCard').length===54,'star4 handler');
+    click(w,'[data-catalog-rarity="3"]');assert(w.document.querySelectorAll('.catalogCard').length===54,'star3 handler');
+    input(w,'#catalogSearch','ときのそら');
+    assert(w.document.querySelectorAll('.catalogCard').length===1,'star3 search');
+    input(w,'[data-catalog-training]','4');
+    const totalBefore=w.document.querySelector('.catalogCard .canonicalSlotStatus:last-child').textContent.split('\n')[0];
+    input(w,'[data-catalog-bloom]','4');
+    assert(w.document.querySelector('.catalogCard .canonicalSlotStatus:last-child').textContent.split('\n')[0]===totalBefore,'bloom preserves training total');
+    assert(catalogRuntimeErrors.length===0,'no catalog console errors: '+catalogRuntimeErrors.join());
+    // Successful JSON load plus a missing required control is a UI failure, not data failure.
+    const catalogLoader=w.loadRuntimeCardCatalog;
+    let successfulLoads=0;
+    w.loadRuntimeCardCatalog=async()=>{successfulLoads++;return catalogLoader();};
+    w.document.querySelector('#catalogType').remove();
+    await w.renderCardCatalog();
+    assert(successfulLoads===1 && w.document.querySelector('#catalogStatus').dataset.errorKind==='ui','successful JSON / missing DOM classified UI');
+    assert(w.document.querySelector('#catalogStatus').textContent.includes('#catalogType'),'missing required element is identified');
+    w.loadRuntimeCardCatalog=async()=>{throw Error('test network failure');};
+    await w.renderCardCatalog();
+    assert(w.document.querySelector('#catalogStatus').dataset.errorKind==='data','network failure classified data');
+    w=await open('card-catalog.html');watch(w);await w.eval('cardCatalogReady');
     assert(w.document.querySelectorAll('.catalogCard').length===77 && w.document.querySelector('[data-catalog-rarity="5"]').getAttribute('aria-pressed')==='true','library defaults to star 5');
     input(w,'#catalogSearch','星街すいせい');
     assert(w.document.querySelectorAll('.catalogCard').length>1,'library member search');

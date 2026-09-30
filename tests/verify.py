@@ -160,3 +160,17 @@ canonical_js += (root/'tests/canonical-bloom.test.js').read_text()
 with tempfile.NamedTemporaryFile(mode='w', suffix='.js') as f:
     f.write(canonical_js); f.flush()
     subprocess.run([jsc, f.name], check=True, cwd=root)
+
+# Catalog has no card-rules dependency. Check its actual queried HTML controls.
+catalog_html=(root/'card-catalog.html').read_text()
+catalog_script=(root/'card-catalog.js').read_text()
+ids=set(re.findall(r'id="([\w-]+)"', catalog_html))
+references=set(re.findall(r"querySelector\(\s*['\"]#([\w-]+)['\"]", catalog_script))
+assert references <= ids, ('Catalog missing DOM', references-ids)
+assert re.findall(r'data-catalog-rarity="(\d)"',catalog_html)==['5','4','3']
+assert '#catalogRarity' not in catalog_script
+import hashlib
+for name in ['card-catalog.js','canonical-card-adapter.js']:
+    digest=hashlib.sha256((root/name).read_bytes()).hexdigest()[:12]
+    assert f'src="{name}?v={digest}"' in catalog_html, 'Update catalog script revision: '+name
+print('Catalog DOM references, rarity buttons and script revisions: PASS')
