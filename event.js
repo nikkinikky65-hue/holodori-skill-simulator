@@ -83,6 +83,9 @@ function loadMemberCards(){
 const memberCards =
   loadMemberCards();
 
+// Canonical PoC cards are transient event-condition choices, never Library records.
+const canonicalEventCards = new Map();
+
 
 // ========================================
 // DOM
@@ -162,11 +165,8 @@ function renderRequiredSlots(){
       'requiredSlot';
 
 
-    const title =
-      document.createElement('strong');
-
-    title.textContent =
-      `必須枠 ${i + 1}`;
+    const title = document.createElement('strong');
+    title.textContent = `必須枠 ${i + 1}`;
 
 
     // ----------------------------
@@ -228,10 +228,22 @@ function renderRequiredSlots(){
     cardSelect.innerHTML =
       '<option value="">指定なし</option>';
 
+    const canonicalButton = document.createElement('button');
+    canonicalButton.type = 'button';
+    canonicalButton.className = 'canonicalSlotButton';
+    canonicalButton.dataset.loadCanonicalSlot = String(i);
+    canonicalButton.textContent = 'カード呼び出し';
+
+    const canonicalStatus = document.createElement('p');
+    canonicalStatus.className = 'sub canonicalSlotStatus';
+    canonicalStatus.setAttribute('role', 'status');
+    canonicalStatus.setAttribute('aria-live', 'polite');
+
 
     memberSelect.addEventListener(
       'change',
       () => {
+        canonicalStatus.textContent = '';
 
         renderCardOptions(
           memberSelect,
@@ -240,13 +252,35 @@ function renderRequiredSlots(){
       }
     );
 
+    cardSelect.addEventListener('change', () => {
+      if(!cardSelect.value.startsWith('canonical:')) canonicalStatus.textContent = '';
+    });
+
+    canonicalButton.addEventListener('click', () => {
+      openCanonicalCardPicker({
+        targetText: `呼出先：B面 必須枠${i + 1}`,
+        apply: (canonicalCard, level) => {
+          const adapted = adaptCanonicalCardToEventCard(canonicalCard, level);
+          canonicalEventCards.set(adapted.id, adapted);
+          memberSelect.value = adapted.talentId;
+          renderCardOptions(memberSelect, cardSelect);
+          addCanonicalCardOption(cardSelect, adapted);
+          cardSelect.value = adapted.id;
+          canonicalStatus.textContent = `Canonical fixture / Lv.${level} を必須カード条件に設定しました。${adapted.canonicalWarnings.join(' ')}`;
+          saveEventSearchState();
+        }
+      });
+    });
+
 
     slot.append(
       title,
       memberLabel,
       memberSelect,
       cardLabel,
-      cardSelect
+      cardSelect,
+      canonicalButton,
+      canonicalStatus
     );
 
     requiredSlots.append(slot);
@@ -305,6 +339,26 @@ function renderCardOptions(
     false;
 }
 
+function addCanonicalCardOption(cardSelect, card){
+  if([...cardSelect.options].some(option => option.value === card.id)) return;
+  const option = document.createElement('option');
+  option.value = card.id;
+  option.textContent = `${card.cardName} / Lv.${card.id.split(':lv').pop()}（Canonical PoC）`;
+  cardSelect.append(option);
+}
+
+async function restoreCanonicalEventCard(cardId){
+  const match = /^canonical:(.+):lv(\d+)$/.exec(cardId || '');
+  if(!match) return null;
+  const [, sourceId, level] = match;
+  const fixture = await loadCanonicalCardFixture();
+  const card = fixture.cards.find(item => item.sourceCard?.sourceId === sourceId);
+  if(!card) return null;
+  const adapted = adaptCanonicalCardToEventCard(card, Number(level));
+  canonicalEventCards.set(adapted.id, adapted);
+  return adapted;
+}
+
 // ========================================
 // イベント探索条件の保存・復元
 // ========================================
@@ -336,7 +390,7 @@ function saveEventSearchState(){
 }
 
 
-function loadEventSearchState(){
+async function loadEventSearchState(){
 
   const saved =
     localStorage.getItem(
@@ -362,15 +416,11 @@ function loadEventSearchState(){
       [...document.querySelectorAll('.requiredSlot')];
 
 
-    state.conditions.forEach(
-      (condition, index) => {
+    for(const [index, condition] of state.conditions.entries()){
 
-        const slot =
-          slots[index];
+        const slot = slots[index];
 
-        if(!slot){
-          return;
-        }
+        if(!slot) continue;
 
 
         const memberSelect =
@@ -388,16 +438,23 @@ function loadEventSearchState(){
           condition.memberId || '';
 
 
-        renderCardOptions(
-          memberSelect,
-          cardSelect
-        );
+        renderCardOptions(memberSelect, cardSelect);
+
+        if(typeof condition.cardId === 'string' && condition.cardId.startsWith('canonical:')){
+          try{
+            const canonicalCard = await restoreCanonicalEventCard(condition.cardId);
+            if(canonicalCard && canonicalCard.talentId === condition.memberId){
+              addCanonicalCardOption(cardSelect, canonicalCard);
+            }
+          }catch(error){
+            console.warn('Canonical fixture selection could not be restored.', error);
+          }
+        }
 
 
         cardSelect.value =
           condition.cardId || '';
-      }
-    );
+    }
 
   }catch(error){
 
@@ -464,6 +521,10 @@ function getRequiredConditions(){
     );
 }
 
+function findEventCard(cardId){
+  return memberCards.find(card => card.id === cardId) || canonicalEventCards.get(cardId) || null;
+}
+
 
 // ========================================
 // 条件検証
@@ -512,11 +573,7 @@ function buildRequiredCardGroups(
       if(condition.cardId){
 
         const card =
-          memberCards.find(
-            card =>
-              card.id ===
-              condition.cardId
-          );
+          findEventCard(condition.cardId);
 
         return card && card.talentId === condition.memberId
           ? [card]
@@ -1398,10 +1455,12 @@ searchFormationButton.addEventListener(
     }
 
 
-    if(
-      memberCards.length <
-      FORMATION_SIZE
-    ){
+    const availableMemberIds = new Set([
+      ...memberCards.map(card => card.talentId),
+      ...conditions.map(condition => canonicalEventCards.get(condition.cardId)?.talentId).filter(Boolean)
+    ]);
+
+    if(availableMemberIds.size < FORMATION_SIZE){
 
       alert(
         'ライブラリに5枚以上のカードを登録してください'

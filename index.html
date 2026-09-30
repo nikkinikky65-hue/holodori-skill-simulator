@@ -70,6 +70,18 @@
     <div id="cardLoadList" class="cardLoadList"></div>
   </div>
 </div>
+<div id="canonicalCardModal" class="cardLoadModal" hidden>
+  <div class="cardLoadBackdrop" data-close-canonical-card-modal></div>
+  <div class="cardLoadDialog" role="dialog" aria-modal="true" aria-labelledby="canonicalCardTitle">
+    <div class="cardLoadHeader">
+      <strong id="canonicalCardTitle">Canonical Card呼び出し</strong>
+      <button type="button" data-close-canonical-card-modal>閉じる</button>
+    </div>
+    <div id="canonicalCardTarget" class="sub"></div>
+    <p id="canonicalCardStatus" class="sub" role="status" aria-live="polite"></p>
+    <div id="canonicalCardList" class="canonicalCardList"></div>
+  </div>
+</div>
 <div id="cardSaveModal" class="modal" hidden>
   <div class="modalPanel">
 
@@ -197,6 +209,7 @@
 <script src="card-rules.js"></script>
 <script src="support-rules.js"></script>
 <script src="parameter-rules.js"></script>
+<script src="canonical-card-adapter.js"></script>
 <script src="app.js"></script>
 <script src="formation-rules.js"></script>
 <script src="formation.js"></script>

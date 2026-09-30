@@ -16,6 +16,7 @@ init.forEach((d,i)=>{
     type="hidden"
     value=""
   >
+  <input data-k="canonicalCardId" type="hidden" value="">
     <label>
       <span class="slot">${i+1}</span>
       キャラ
@@ -89,6 +90,13 @@ init.forEach((d,i)=>{
     <div class="cardLibraryActions">
       <button
         type="button"
+        data-load-canonical="${i}"
+      >
+        カード呼び出し
+      </button>
+
+      <button
+        type="button"
         data-save-library="${i}"
       >
         保存
@@ -101,6 +109,7 @@ init.forEach((d,i)=>{
         呼出
       </button>
     </div>
+    <p class="sub canonicalSlotStatus" data-canonical-status="${i}" role="status" aria-live="polite"></p>
   `;
 
   el.querySelector('[data-k=prob]').value=d[3];
@@ -595,6 +604,37 @@ document.addEventListener('click', event => {
   const button = event.target.closest('[data-load-library]');
   if(button) openCardLoadModal(Number(button.dataset.loadLibrary));
   if(event.target.closest('[data-close-card-modal]')) closeCardLoadModal();
+  const canonicalButton = event.target.closest('[data-load-canonical]');
+  if(canonicalButton){
+    const slotIndex = Number(canonicalButton.dataset.loadCanonical);
+    openCanonicalCardPicker({
+      targetText: `呼出先：A面 枠${slotIndex + 1}`,
+      apply: (canonicalCard, level) => {
+        const adapted = adaptCanonicalCardToActiveInput(canonicalCard, level);
+        const slot = document.querySelectorAll('.card')[slotIndex];
+        if(!slot) return;
+        const member = getMasterMember(adapted.memberId);
+        if(!member) throw new Error('fixtureのメンバーID候補をmembers.jsで解決できません。');
+        const set = (key, value) => {
+          const input = slot.querySelector(`[data-k="${key}"]`);
+          if(input) input.value = value;
+        };
+        set('memberId', adapted.memberId);
+        set('costume', adapted.costume);
+        set('interval', adapted.interval);
+        set('prob', adapted.probability);
+        set('duration', adapted.duration);
+        set('boost', adapted.boost);
+        set('libraryCardId', '');
+        set('canonicalCardId', `${adapted.canonicalCardId}:lv${adapted.level}`);
+        const status = slot.querySelector(`[data-canonical-status="${slotIndex}"]`);
+        if(status) status.textContent = `Canonical fixture / Lv.${adapted.level} を展開しました。${adapted.warnings.join(' ')}`;
+        saveState();
+        updateOptimizeNames();
+        render();
+      }
+    });
+  }
 });
 
 function closeCardLoadModal(){
@@ -662,6 +702,10 @@ function loadLibraryCardIntoSlot(
     'libraryCardId',
     libraryCard.id
   );
+
+  set('canonicalCardId', '');
+  const canonicalStatus = card.querySelector('.canonicalSlotStatus');
+  if(canonicalStatus) canonicalStatus.textContent = '';
 
   set(
     'memberId',
@@ -1387,6 +1431,7 @@ function saveState(){
 
       return {
         libraryCardId: get('libraryCardId'),
+        canonicalCardId: get('canonicalCardId'),
         memberId: get('memberId'),
         costume: get('costume'),
         interval: get('interval'),
@@ -1435,7 +1480,11 @@ function loadState(){
 document.addEventListener('input', e => {
   if(e.target.closest('#cards, #song')){
     if(e.target.matches('[data-k=memberId]')){
-      e.target.closest('.card').querySelector('[data-k=libraryCardId]').value = '';
+      const slot = e.target.closest('.card');
+      slot.querySelector('[data-k=libraryCardId]').value = '';
+      slot.querySelector('[data-k=canonicalCardId]').value = '';
+      const status = slot.querySelector('.canonicalSlotStatus');
+      if(status) status.textContent = '';
     }
     updateOptimizeNames();
     saveState();
@@ -1446,7 +1495,11 @@ document.addEventListener('input', e => {
 document.addEventListener('change', e => {
   if(e.target.closest('#cards, #song')){
     if(e.target.matches('[data-k=memberId]')){
-      e.target.closest('.card').querySelector('[data-k=libraryCardId]').value = '';
+      const slot = e.target.closest('.card');
+      slot.querySelector('[data-k=libraryCardId]').value = '';
+      slot.querySelector('[data-k=canonicalCardId]').value = '';
+      const status = slot.querySelector('.canonicalSlotStatus');
+      if(status) status.textContent = '';
     }
     updateOptimizeNames();
     saveState();

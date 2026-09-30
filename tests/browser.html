@@ -343,6 +343,55 @@
     w.document.querySelector('#memberCardForm').requestSubmit();
     const judgment=read().find(card=>card.cardName==='固定行SP');
     assert(judgment.skills.special.effects.some(effect=>effect.type==='judgment_enhancement' && effect.from==='good' && effect.to==='perfect'),'judgment effect saved');
+    // Canonical one-card fixture call-in is transient; A-side inputs remain editable.
+    const canonicalLibraryBefore=localStorage.getItem(key);
+    w=await open('index.html');watch(w);w.alert=()=>{};
+    await w.loadCanonicalCardFixture();
+    click(w,'[data-load-canonical="0"]');
+    assert(!w.document.querySelector('#canonicalCardModal').hidden,'Canonical picker opens from A slot');
+    await new Promise(resolve=>w.setTimeout(resolve,0));
+    input(w,'#canonicalCardModal [data-canonical-level]','2');
+    click(w,'#canonicalCardModal .canonicalCardChoiceControls button');
+    assert(w.document.querySelector('[data-k=memberId]').value==='sakura_miko','Canonical adapter member candidate');
+    assert(w.document.querySelector('[data-k=costume]').value==='サクラBloom','Canonical adapter card name');
+    assert(Number(w.document.querySelector('[data-k=interval]').value)===15 && Number(w.document.querySelector('[data-k=duration]').value)===6 && Number(w.document.querySelector('[data-k=boost]').value)===55,'Canonical adapter Active level 2 base values');
+    assert(w.document.querySelector('[data-k=prob]').value==='mid','Canonical adapter localized probability');
+    assert(w.document.querySelector('[data-k=boost]').readOnly===false,'A manual input remains editable');
+    assert(w.document.querySelector('[data-k=libraryCardId]').value==='' && w.document.querySelector('[data-k=canonicalCardId]').value==='card-00015-5-uniq-0003-00:lv2','Canonical source stays out of Library linkage');
+    assert(w.document.querySelector('[data-canonical-status="0"]').textContent.includes('上位効果') && w.document.querySelector('[data-canonical-status="0"]').textContent.includes('base effectのみ'),'conditional override warning');
+    assert(localStorage.getItem(key)===canonicalLibraryBefore,'A-side Canonical call leaves Library unchanged');
+    input(w,'[data-k=boost]','61');
+    assert(Number(w.document.querySelector('[data-k=boost]').value)===61,'manual edit after Canonical call');
+    w=await open('index.html');watch(w);w.alert=()=>{};
+    assert(w.document.querySelector('[data-k=canonicalCardId]').value==='card-00015-5-uniq-0003-00:lv2' && Number(w.document.querySelector('[data-k=boost]').value)===61,'A-side call-in input persists and remains editable');
+    assert(localStorage.getItem(key)===canonicalLibraryBefore,'A-side persistence does not register fixture in Library');
+
+    // B-side Event card condition can select and restore the same transient fixture.
+    const eventCards=w.eval(`HOLO_MEMBERS.filter(m=>m.id!=='sakura_miko').slice(0,4).map((m,i)=>createCardV2({
+      id:'event-fixture-'+i,talentId:m.id,cardName:'Event候補'+i,
+      skills:{active:{interval:20+i,probability:'mid',duration:5,boost:20+i}}
+    }))`);
+    localStorage.setItem(key,JSON.stringify({version:2,cards:eventCards}));
+    const eventLibraryBefore=localStorage.getItem(key);
+    w=await open('event.html');watch(w);w.alert=()=>{};
+    await w.loadCanonicalCardFixture();
+    click(w,'.requiredSlot [data-load-canonical-slot="0"]');
+    await new Promise(resolve=>w.setTimeout(resolve,0));
+    input(w,'#canonicalCardModal [data-canonical-level]','2');
+    click(w,'#canonicalCardModal .canonicalCardChoiceControls button');
+    const canonicalEventId='canonical:card-00015-5-uniq-0003-00:lv2';
+    assert(w.document.querySelector('.requiredSlot [data-role=member]').value==='sakura_miko','Event Canonical member condition');
+    assert(w.document.querySelector('.requiredSlot [data-role=card]').value===canonicalEventId,'Event Canonical card condition');
+    assert(w.document.querySelector('.requiredSlot .canonicalSlotStatus').textContent.includes('上位効果'),'Event conditional override warning');
+    assert(localStorage.getItem(key)===eventLibraryBefore,'Event Canonical call leaves Library unchanged');
+    w=await open('event.html');watch(w);w.alert=()=>{};
+    await w.loadEventSearchState();
+    assert(w.document.querySelector('.requiredSlot [data-role=card]').value===canonicalEventId,'Event Canonical choice restored');
+    click(w,'#searchFormation');
+    await new Promise(resolve=>w.setTimeout(resolve,50));
+    assert(w.document.querySelector('#searchStatus').textContent.includes('編成'),'Event search accepts transient Canonical card');
+    assert(w.document.querySelector('#formationResults').textContent.includes('サクラBloom'),'Event result includes fixture card');
+    assert(localStorage.getItem(key)===eventLibraryBefore,'Event search does not register Canonical fixture');
     assert(errors.length===0,errors.join('\n'));
     result.textContent='PASS: startup, timeline, save/edit/load, metadata, derived values, star3 presets, bloom independence, event v2, formations, snapshot, support rates, manual skills';
   } catch(e){ result.textContent='FAIL: '+e.stack; }
