@@ -19,6 +19,8 @@ async function renderCardCatalog(){
     const type = document.querySelector('#catalogType');
     const blooms = new Map();
     const trainings = new Map();
+    // Same source order as library.js renderTalentSelect(); no separate roster.
+    const memberOrder = new Map(HOLO_MEMBERS.map((member, index) => [member.id, index]));
     for(const [selector, element] of [['#catalogCards',container], ['#catalogSearch',search], ['#catalogType',type]]){
       if(!element) throw new Error(`必須要素がありません：${selector}`);
     }
@@ -29,7 +31,11 @@ async function renderCardCatalog(){
       const cards = catalog.cards.filter(card =>
         `${card.name} ${canonicalMemberName(card)}`.toLocaleLowerCase().includes(query) &&
         String(card.classification.rarity.mapping.value) === rarity &&
-        (!type.value || card.classification.attributeType.mapping.value === type.value));
+        (!type.value || card.classification.attributeType.mapping.value === type.value))
+        .sort((a, b) =>
+          (memberOrder.get(canonicalMemberId(a)) ?? Number.MAX_SAFE_INTEGER) -
+          (memberOrder.get(canonicalMemberId(b)) ?? Number.MAX_SAFE_INTEGER) ||
+          b.classification.rarity.mapping.value - a.classification.rarity.mapping.value);
       container.replaceChildren();
       for(const card of cards){
         const panel = document.createElement('article');
@@ -70,7 +76,9 @@ async function renderCardCatalog(){
             const expansion = expandCanonicalBloom(card, bloom, catalog.dataset, Number(training.value));
             basic.textContent = canonicalBasicText(expansion);
             // Layout only: retain the shared adapter's computed values and skills.
-            const [parameters, ...skills] = canonicalEffectsText(expansion).split('\n');
+            const [parameters, ...skills] = canonicalEffectsText(expansion)
+              .replace(/\n(SP：[\s\S]*?)\n(P：[\s\S]*?)\n(A：[\s\S]*)$/, '\n$1\n$3\n$2')
+              .split('\n');
             const [pts, total] = parameters.split(' / TOTAL ');
             const ptsLine = document.createElement('span');
             ptsLine.className = 'catalogParameters';

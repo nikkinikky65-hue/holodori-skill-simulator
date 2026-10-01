@@ -551,6 +551,8 @@
     assert(oldEvent.canonicalExpansion.bloom===undefined && oldEvent.canonicalExpansion.levels.passive===2 && oldEvent.canonicalExpansion.levels.active===1,'B legacy levels retained without Bloom inference');
     const oldActiveOnly=await w.restoreCanonicalEventCard('canonical:card-00015-5-uniq-0003-00:lv2');
     assert(!oldActiveOnly.canonicalExpansion && oldActiveOnly.skills.active.boost===55,'B Active-only legacy does not infer P/SP');
+    w=await open('library.html');watch(w);
+    const registrationMemberOrder=[...w.document.querySelector('#cardTalent').options].map(option=>option.value).filter(Boolean);
     const storageBeforeCatalog=JSON.stringify(Object.keys(localStorage).sort().map(k=>[k,localStorage.getItem(k)]));
     w=await open('card-catalog.html');watch(w);await w.eval('cardCatalogReady');
     const catalogRuntimeErrors=[];
@@ -594,7 +596,7 @@
     for(let bloom=0;bloom<=5;bloom++){
       input(w,'[data-catalog-bloom]',String(bloom));
       const card=catalog.cards.find(c=>c.name==='サクラBloom');
-      assert(w.document.querySelector('.catalogCard .canonicalSlotStatus:last-child').textContent.replace('\nTOTAL ', ' / TOTAL ')===w.canonicalEffectsText(w.expandCanonicalBloom(card,bloom,catalog.dataset)),'library uses common Bloom/display');
+      assert(w.document.querySelector('.catalogCard .canonicalSlotStatus:last-child').textContent.replace('\nTOTAL ', ' / TOTAL ')===w.canonicalEffectsText(w.expandCanonicalBloom(card,bloom,catalog.dataset)).replace(/\n(SP：[\s\S]*?)\n(P：[\s\S]*?)\n(A：[\s\S]*)$/, '\n$1\n$3\n$2'),'library uses common Bloom/display');
     }
     assert([...w.document.querySelectorAll('[data-catalog-rarity]')].map(b=>b.textContent).join()==='★5,★4,★3','rarity category order');
     let visitedCards=0;
@@ -602,6 +604,19 @@
     for(const rarity of [3,4,5]){
       input(w,'#catalogSearch','');click(w,`[data-catalog-rarity="${rarity}"]`);
       visitedCards+=w.document.querySelectorAll('.catalogCard').length;
+      const displayed=[...w.document.querySelectorAll('.catalogCard')];
+      const displayedCards=displayed.map(panel=>catalog.cards.find(card=>card.id===panel.dataset.cardId));
+      const memberIds=displayedCards.map(card=>w.canonicalMemberId(card));
+      assert(memberIds.every((id,i)=>registrationMemberOrder.includes(id) && (i===0 || registrationMemberOrder.indexOf(memberIds[i-1])<=registrationMemberOrder.indexOf(id))),'matches actual registration member order');
+      assert(new Set(memberIds).size===memberIds.filter((id,i)=>i===0 || id!==memberIds[i-1]).length,'same member contiguous');
+      for(const panel of displayed){
+        const text=panel.querySelector('.canonicalSlotStatus:last-child').textContent;
+        assert(text.indexOf('\nSP：')<text.indexOf('\nA：') && text.indexOf('\nA：')<text.indexOf('\nP：'),'every card displays SP/A/P');
+      }
+      for(const id of new Set(memberIds)){
+        const original=catalog.cards.filter(card=>card.classification.rarity.mapping.value===rarity && w.canonicalMemberId(card)===id).map(card=>card.id);
+        assert(JSON.stringify(displayedCards.filter(card=>w.canonicalMemberId(card)===id).map(card=>card.id))===JSON.stringify(original),'same member/rarity retains original card order');
+      }
       const panel=w.document.querySelector('.catalogCard');
       assert(!/Lv|Bloom|特訓/.test(panel.querySelector('.canonicalSlotStatus').textContent.replace('Bloom','')), 'basic info has no growth metadata');
       const labels=panel.querySelectorAll('.canonicalGrowth label');
