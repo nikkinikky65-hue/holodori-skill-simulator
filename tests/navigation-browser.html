@@ -56,6 +56,24 @@
           assert(amounts.every((v,i)=>!i||amounts[i-1]>=v),'amounts descending');
         }
       }
+      assert(w.document.querySelectorAll('[data-category="複合効果"] .leaderEntry').length===16,'all compound leaders');
+      assert(w.document.querySelectorAll('#leaderCommon .leaderSkill').length===54,'common effects unchanged');
+      for(const amount of w.document.querySelectorAll('.leaderAmount')){
+        const summary=amount.querySelector(':scope > summary');
+        const members=[...amount.querySelectorAll('.leaderEntry')];
+        const child=members[0].querySelector('details');
+        assert(amount.tagName==='DETAILS' && amount.open,'amount initially open');
+        assert(members.every(member=>member.checkVisibility()),'all members visible');
+        child.querySelector('summary').click();
+        assert(child.open && amount.open,'inner disclosure independent');
+        summary.click();
+        assert(!amount.open && members.every(member=>!member.checkVisibility()),'whole amount hidden');
+        summary.click();
+        assert(amount.open && members.every(member=>member.checkVisibility()),'all members restored');
+        assert(child.open && child.querySelector('.leaderDescription').getBoundingClientRect().height>0,'inner state retained');
+        child.querySelector('summary').click();
+        assert(!child.open && amount.open,'inner closes independently');
+      }
       const details=w.document.querySelector('.leaderEntry details'); details.querySelector('summary').click();
       assert(details.open && details.querySelector('.leaderDescription').getBoundingClientRect().height>0,'original text opens');
       assert(w.document.documentElement.scrollWidth<=width,'expanded description fits');

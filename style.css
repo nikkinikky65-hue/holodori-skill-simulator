@@ -969,7 +969,9 @@
 
 /* Leader comparison only. */
 .leaderAmount { margin-top: 16px; }
-.leaderAmount h3 { margin: 0 0 8px; overflow-wrap: anywhere; }
+.leaderAmount > summary { padding: 8px 0; cursor: pointer; font-weight: 700; overflow-wrap: anywhere; }
+.leaderAmount > summary > h3 { display: inline; margin: 0; font-size: 1.05em; }
+.leaderAmount > .leaderEntry { margin-inline-start: 16px; }
 .leaderEntry { padding: 10px 0; border-top: 1px solid var(--border, #ddd); min-width: 0; overflow-wrap: anywhere; }
 .leaderIdentity { margin: 0 0 6px; }
 .leaderEntry summary { font-size: .85em; cursor: pointer; }

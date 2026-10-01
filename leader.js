@@ -78,9 +78,10 @@ async function renderLeaderCatalog(){
           (b.effects[0]?.amountPercent ?? 0) - (a.effects[0]?.amountPercent ?? 0) || labelA.localeCompare(labelB, 'ja');
       });
       for(const [label, group] of sorted){
-        const block = document.createElement('section'); block.className = 'leaderAmount';
+        const block = document.createElement('details'); block.className = 'leaderAmount'; block.open = true;
+        const summary = document.createElement('summary');
         const title = document.createElement('h3'); title.textContent = label;
-        block.append(title, ...group.nodes); section.append(block);
+        summary.append(title); block.append(summary, ...group.nodes); section.append(block);
       }
       groupNodes.push(section);
     }
