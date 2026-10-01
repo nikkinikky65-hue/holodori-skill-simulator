@@ -1,5 +1,7 @@
 # Source → 完全Canonical → Runtime Catalog
 
+最新の実測報告との照合・確定度・参照Lvとボードの表示範囲は [パラメータ・スコア検証記録](parameter-score-validation.md) を参照。本文の過去時点の研究記述は履歴として保持する。
+
 ## 原本の保存状況
 
 完全Canonicalの直接入力は `research/holodoridb-all-card-survey.json`（4,040,633 bytes）。ローカルGitで追跡されており、追加commitは `d568abf`。これは上流の全JSONを未加工で保存したアーカイブではなく、JOIN到達行のfields/wrapperと調査メタデータを保持したスナップショットである。`build_canonical_cards.py --check`で、これだけから既存の完全Canonicalを再生成できることを確認する。

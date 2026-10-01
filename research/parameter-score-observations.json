@@ -1,0 +1,48 @@
+{
+  "format": "holodori-user-observations-v1",
+  "recordedDate": "2026-10-01",
+  "source": "User report in this task; no screenshots, raw game logs or independent new game measurements supplied",
+  "sourceDatasetCommit": "e43f062c32ff4e04567235efcd58448cd6b10f35",
+  "cardParameters": {
+    "status": "reported-measured-match",
+    "baseRule": "ceil(parameterBaseValue * eachPermil / 1000), independently per P/T/S",
+    "openingRule": "ceil(integerBaseStat * (1000 + additiveOpeningPermil) / 1000), independently per P/T/S",
+    "baseTotalRule": "sum(integerBaseP, integerBaseT, integerBaseS)",
+    "rarity4And5": {"multipleCardsReported": true, "individualObservations": null},
+    "noelRarity3": {
+      "base": [2745, 2104, 2189],
+      "opening4": [2883, 2210, 2299],
+      "opening5": [3157, 2420, 2518],
+      "reportedCurrentLevel": null,
+      "reportedTraining": null,
+      "datasetAssociation": {
+        "method": "unique rarity3 Noel card and matching base tuple; inferred from stored DB, not user-reported ID/level",
+        "cardId": "card-00022-3-nrml-0018-00",
+        "matchingLevel": 20,
+        "parameterBaseValue": "7036",
+        "weights": [390, 299, 311]
+      }
+    }
+  },
+  "training": {"reportedRule": "changes level cap, not an extra parameter multiplier; use actual current CardLevel", "extraMultiplierObserved": false},
+  "board": {"commonPerParameter": 1003, "parametersPerMember": 3, "memberCount": 5, "reportedUnitBoardTotal": 15045, "individualBoardValues": null},
+  "unitPower": {"status": "reported-breakdown-closure", "multipleFormationsReported": true, "rawBreakdownRows": null, "internalMemoryEnhancementPassiveRules": "not established by this report"},
+  "firstNote": {
+    "reportedControls": ["same song", "same difficulty", "AUTO", "first note before skill intervention"],
+    "song": null,
+    "difficulty": null,
+    "noteType": null,
+    "observations": [
+      {"totalPower": 75956, "score": 1210},
+      {"totalPower": 86581, "score": 1379},
+      {"totalPower": 97785, "score": 1557},
+      {"totalPower": 109636, "score": 1746},
+      {"totalPower": 143870, "score": 2291},
+      {"totalPower": 183131, "score": 2916},
+      {"totalPower": 206842, "score": 3294}
+    ],
+    "difficultyChange": {"fixedTotalPower": 206842, "scoreChangedSubstantially": true, "newDifficulty": null, "newScore": null},
+    "hypothesis": "baseNoteScore approximately totalPower * chartCoefficient",
+    "unresolved": ["chartCoefficient factors", "rounding", "skill score correction", "Active/Special final score application", "note count relation"]
+  }
+}
