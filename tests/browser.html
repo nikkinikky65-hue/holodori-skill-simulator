@@ -568,7 +568,7 @@
     input(w,'[data-catalog-training]','4');
     const totalBefore=w.document.querySelector('.catalogCard .canonicalSlotStatus:last-child').textContent.split('\n')[0];
     input(w,'[data-catalog-bloom]','4');
-    assert(w.document.querySelector('.catalogCard .canonicalSlotStatus:last-child').textContent.split('\n')[0]===totalBefore,'bloom preserves training total');
+    assert(w.document.querySelector('.catalogCard .canonicalSlotStatus:last-child').textContent.split('\n')[0]!==totalBefore,'bloom updates card parameters');
     assert(catalogRuntimeErrors.length===0,'no catalog console errors: '+catalogRuntimeErrors.join());
     // Successful JSON load plus a missing required control is a UI failure, not data failure.
     const catalogLoader=w.loadRuntimeCardCatalog;
@@ -613,11 +613,11 @@
       for(const row of card.progression.trainingStages){
         trainingSelect.value=String(row.stage);trainingSelect.dispatchEvent(new w.Event('change'));
         const value=card.progression.statSnapshots.find(s=>s.level===row.levelCap).raw.parameterBaseValue;
-        const expected=`P — / T — / S — / TOTAL ${value}`;
+        const expected=w.canonicalParameterText(w.calculateCardParameters(card,row.stage,Number(bloomSelect.value)));
         assert(panel.querySelector('.canonicalSlotStatus:last-child').textContent.includes(expected),'training stats UI ★'+rarity+' stage '+row.stage);
         for(const bloom of [0,2,5]){
           bloomSelect.value=String(bloom);bloomSelect.dispatchEvent(new w.Event('change'));
-          assert(panel.querySelector('.canonicalSlotStatus:last-child').textContent.includes(expected),'Bloom leaves displayed base unchanged');
+          assert(panel.querySelector('.canonicalSlotStatus:last-child').textContent.includes(w.canonicalParameterText(w.calculateCardParameters(card,row.stage,bloom))),'Bloom updates displayed parameters');
         }
       }
     }
@@ -627,10 +627,12 @@
     input(w,'#catalogSearch','サクラBloom');assert(w.document.querySelector('[data-catalog-bloom]').value==='5','filter retains view Bloom');
     assert(JSON.stringify(Object.keys(localStorage).sort().map(k=>[k,localStorage.getItem(k)]))===storageBeforeCatalog,'card library never writes storage');
     assert(!w.performance.getEntriesByType('resource').some(r=>r.name.includes('/research/')),'card library loads no complete Canonical');
+    input(w,'[data-catalog-training]','4');input(w,'[data-catalog-bloom]','3');
+    const sharedParameterText=w.document.querySelector('.catalogCard .canonicalSlotStatus:last-child').textContent.split('\n')[0];
     w=await open('index.html');watch(w);await w.waitForCanonicalRestore();await w.loadRuntimeCardCatalog();
     click(w,'[data-load-canonical="0"]');await new Promise(resolve=>w.setTimeout(resolve,0));
     input(w,'[data-canonical-search]','サクラBloom');input(w,'[data-canonical-bloom]','3');input(w,'[data-canonical-training]','4');
-    assert(w.document.querySelector('.canonicalCardChoiceControls .canonicalSlotStatus').textContent.includes('TOTAL '),'A picker training preview');
+    assert(w.document.querySelector('.canonicalCardChoiceControls .canonicalSlotStatus').textContent.split('\n')[0]===sharedParameterText,'A equals card library parameters');
     click(w,'#canonicalCardModal .canonicalCardChoiceControls button');
     w=await open('index.html');watch(w);await w.waitForCanonicalRestore();
     assert(w.document.querySelector('.card').canonicalExpansion.trainingStats.level===80,'A training restored');
@@ -638,9 +640,9 @@
     assert(!w.document.querySelector('.card').canonicalSelection,'training reset persists');
     w=await open('event.html');watch(w);await w.loadEventSearchState();
     click(w,'.requiredSlot [data-load-canonical-slot="0"]');await new Promise(resolve=>w.setTimeout(resolve,0));
-    input(w,'[data-canonical-training]','4');click(w,'#canonicalCardModal .canonicalCardChoiceControls button');
+    input(w,'[data-canonical-training]','4');input(w,'[data-canonical-bloom]','3');click(w,'#canonicalCardModal .canonicalCardChoiceControls button');
     w=await open('event.html');watch(w);await w.loadEventSearchState();
-    assert(w.document.querySelector('.requiredSlot .canonicalSlotStatus').textContent.includes('TOTAL '),'B training restored');
+    assert(w.document.querySelector('.requiredSlot .canonicalSlotStatus').textContent.includes(sharedParameterText),'B restored parameters equal card library and A');
     assert(errors.length===0,errors.join('\n'));
     result.textContent='PASS: startup, timeline, save/edit/load, metadata, derived values, star3 presets, bloom independence, event v2, formations, snapshot, support rates, manual skills, Bloom 0–5 A/B persistence/reset, card catalog search/filter/isolation';
   } catch(e){ result.textContent='FAIL: '+e.stack; }

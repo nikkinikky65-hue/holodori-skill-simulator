@@ -97,3 +97,15 @@ A面は小さな選択参照にtrainingを保存する。B面は特訓0以外の
 カードライブラリのレア度は★5→★4→★3のカテゴリボタン、初期★5。特訓・開花はこれまで通りカード別の閲覧状態を保持する。データセット変更はない。
 
 P/T/S配分式は研究のみ。`pts-investigation.md`と書込みなしの`check_pts_hypotheses.py`に確定事実・強い仮説・未解決事項・必要な実測を記録する。ゲーム内整数値の再現は未確認であり、計算接続はしない。
+
+## カード単体P/T/S計算の採用（2026-10-01）
+
+先のP/T/S研究後、ユーザーからゲーム実測との照合に基づく仕様が提示されたため、共通adapterの`calculateCardParameters(card, training, bloom)`に実装した。こちらで新たなゲーム実測を行ったという意味ではない。過去の「未計算・TOTAL暫定表示」はこの追記で更新される。
+
+特訓上限のCardLevel.parameterBaseValueを3つのpermilで分配し、各項をceilする。その整数基礎値へ、選択開花までのALL_PARAMETER_UP_PERMIL_UP行のvalue合計を加算倍率として適用し、再度各項をceilする。3項目の和をTOTALとする。★3開花5は50+100=150 permil、★4/5開花2以降は100 permilとなる。特訓倍率はない。整数の積を1000で割る方式により、1.1等の二進浮動小数点表現による余計なceilを避ける。
+
+結果は`canonicalExpansion.cardParameters`に保持し、カードライブラリとA/B呼出・復元は同じ関数・表示を使用する。localStorageの保存形式は変えず、既存のID・特訓・開花から再計算する。旧保存で開花未指定の場合はスキルLvから推定せず、最終パラメータは未表示とする。
+
+Runtime・完全Canonical・schema・原本は変更していない。既存raw trainingStatsも変更しない。ボード、メモリー、強化、Passive、衣装、リーダー等は加えず、Active計算への接続も変更しない。
+
+`tests/card-parameters.test.js`で185枚×5特訓×6開花の5,550状態、既知数値例、2回のceilをまとめられない例、整数境界、係数不正、旧保存非推測を検証する。browserテストは開花変更時の値更新と、同じカード・特訓・開花におけるLibrary/A/Bの同値を確認する。

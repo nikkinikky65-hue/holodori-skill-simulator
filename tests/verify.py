@@ -157,6 +157,7 @@ canonical_js += '\nconst canonicalTestFixture = JSON.parse(readFile(\"data/runti
 canonical_js += (root/'tests/canonical-card-adapter.test.js').read_text()
 canonical_js += (root/'tests/canonical-all-cards.test.js').read_text()
 canonical_js += (root/'tests/canonical-bloom.test.js').read_text()
+canonical_js += (root/'tests/card-parameters.test.js').read_text()
 with tempfile.NamedTemporaryFile(mode='w', suffix='.js') as f:
     f.write(canonical_js); f.flush()
     subprocess.run([jsc, f.name], check=True, cwd=root)

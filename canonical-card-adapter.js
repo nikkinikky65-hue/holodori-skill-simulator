@@ -119,12 +119,42 @@ function canonicalTrainingStats(card, training){
   return {training, level: stages[0].levelCap, parameterBaseValue: snapshots[0].raw.parameterBaseValue,
     limitSource: stages[0].source, snapshot: JSON.parse(JSON.stringify(snapshots[0]))};
 }
-function canonicalTrainingText(stats){
-  return `P — / T — / S — / TOTAL ${stats.parameterBaseValue}`;
+// Card-only parameters. Keep both ceiling steps and additive Bloom permil
+// explicit; integer numerators avoid 1.10 binary-float rounding artifacts.
+function calculateCardParameters(card, training, bloom){
+  canonicalBloomLevels(card, bloom); // Validate the same source progression.
+  const stats = canonicalTrainingStats(card, training);
+  const baseValue = canonicalNumber(stats.parameterBaseValue);
+  const kinds = ['performance', 'technique', 'sense'];
+  const weights = kinds.map(kind => canonicalNumber(card.progression.parameterInputs[kind + 'PermilMultiply']));
+  if(!Number.isSafeInteger(baseValue) || baseValue < 0 ||
+     weights.some(weight => !Number.isSafeInteger(weight) || weight < 0) ||
+     weights.reduce((sum, weight) => sum + weight, 0) !== 1000){
+    throw new Error('基礎値またはP/T/S配分係数が不正です。');
+  }
+  let bloomPermil = 0;
+  for(const row of card.progression.bloomSteps){
+    if(row.step <= bloom && row.effectType === 'CardPotentialEffectType_CARD_POTENTIAL_EFFECT_TYPE_ALL_PARAMETER_UP_PERMIL_UP'){
+      const value = canonicalNumber(row.value);
+      if(!Number.isSafeInteger(value) || value < 0) throw new Error('開花のパラメータ補正が不正です。');
+      bloomPermil += value;
+    }
+  }
+  const ceilPermil = (value, multiplier) => {
+    const numerator = value * multiplier;
+    if(!Number.isSafeInteger(numerator)) throw new Error('パラメータ計算の範囲を超えています。');
+    return Math.ceil(numerator / 1000);
+  };
+  const base = Object.fromEntries(kinds.map((kind, i) => [kind, ceilPermil(baseValue, weights[i])]));
+  const result = Object.fromEntries(kinds.map(kind => [kind, ceilPermil(base[kind], 1000 + bloomPermil)]));
+  return {...result, total: kinds.reduce((sum, kind) => sum + result[kind], 0), base, bloomPermil, level: stats.level};
+}
+function canonicalParameterText(parameters){
+  return parameters ? `P ${parameters.performance} / T ${parameters.technique} / S ${parameters.sense} / TOTAL ${parameters.total}` : 'P — / T — / S — / TOTAL —';
 }
 function expandCanonicalBloom(card, bloom, dataset, training = 0){
   return {...expandCanonicalCard(card, canonicalBloomLevels(card, bloom), dataset), bloom,
-    training, trainingStats: canonicalTrainingStats(card, training)};
+    training, trainingStats: canonicalTrainingStats(card, training), cardParameters: calculateCardParameters(card, training, bloom)};
 }
 function canonicalTypeName(type){ return {cute:'キュート', happy:'ハッピー', pure:'ピュア'}[type] || 'タイプ未確認'; }
 function canonicalBasicText(expansion){
@@ -133,7 +163,7 @@ function canonicalBasicText(expansion){
 function canonicalEffectsText(expansion){
   const text = level => (level.description || '説明未確認').replace(/\[[^\]]+\]/g, '');
   return [
-    expansion.trainingStats ? canonicalTrainingText(expansion.trainingStats) : 'P — / T — / S — / TOTAL —',
+    canonicalParameterText(expansion.cardParameters),
     '',
     ...[['special','SP'],['passive','P'],['active','A']].map(([kind,label]) => `${label}：${text(expansion[kind].data)}`)
   ].join('\n');
