@@ -35,17 +35,6 @@ async function renderCardCatalog(){
         const panel = document.createElement('article');
         panel.className = 'panel catalogCard';
         panel.dataset.cardId = card.id;
-        const label = document.createElement('label');
-        label.textContent = '開花';
-        const select = document.createElement('select');
-        select.dataset.catalogBloom = '';
-        select.setAttribute('aria-label', `${card.name}の開花段階`);
-        for(let bloom = 0; bloom <= 5; bloom++){
-          const option = document.createElement('option');
-          option.value = String(bloom); option.textContent = String(bloom);
-          select.append(option);
-        }
-        select.value = String(blooms.get(card.id) ?? 0);
         const trainingLabel = document.createElement('label');
         trainingLabel.textContent = '特訓';
         const training = document.createElement('select');
@@ -58,6 +47,17 @@ async function renderCardCatalog(){
         }
         training.value = String(trainings.get(card.id) ?? 0);
         trainingLabel.append(training);
+        const label = document.createElement('label');
+        label.textContent = '開花';
+        const select = document.createElement('select');
+        select.dataset.catalogBloom = '';
+        select.setAttribute('aria-label', `${card.name}の開花段階`);
+        for(let bloom = 0; bloom <= 5; bloom++){
+          const option = document.createElement('option');
+          option.value = String(bloom); option.textContent = String(bloom);
+          select.append(option);
+        }
+        select.value = String(blooms.get(card.id) ?? 0);
         const basic = document.createElement('p'); basic.className = 'canonicalSlotStatus';
         const growth = document.createElement('div'); growth.className = 'canonicalGrowth';
         const preview = document.createElement('p');
@@ -69,7 +69,17 @@ async function renderCardCatalog(){
           try{
             const expansion = expandCanonicalBloom(card, bloom, catalog.dataset, Number(training.value));
             basic.textContent = canonicalBasicText(expansion);
-            preview.textContent = canonicalEffectsText(expansion);
+            // Layout only: retain the shared adapter's computed values and skills.
+            const [parameters, ...skills] = canonicalEffectsText(expansion).split('\n');
+            const [pts, total] = parameters.split(' / TOTAL ');
+            const ptsLine = document.createElement('span');
+            ptsLine.className = 'catalogParameters';
+            ptsLine.textContent = pts;
+            const totalLine = document.createElement('span');
+            totalLine.className = 'catalogTotal';
+            totalLine.textContent = `TOTAL ${total}`;
+            preview.replaceChildren(ptsLine, document.createTextNode('\n'), totalLine,
+              document.createTextNode('\n' + skills.join('\n')));
           }
           catch(error){ preview.textContent = `表示できません：${error.message}`; }
         };

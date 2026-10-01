@@ -594,7 +594,7 @@
     for(let bloom=0;bloom<=5;bloom++){
       input(w,'[data-catalog-bloom]',String(bloom));
       const card=catalog.cards.find(c=>c.name==='サクラBloom');
-      assert(w.document.querySelector('.catalogCard .canonicalSlotStatus:last-child').textContent===w.canonicalEffectsText(w.expandCanonicalBloom(card,bloom,catalog.dataset)),'library uses common Bloom/display');
+      assert(w.document.querySelector('.catalogCard .canonicalSlotStatus:last-child').textContent.replace('\nTOTAL ', ' / TOTAL ')===w.canonicalEffectsText(w.expandCanonicalBloom(card,bloom,catalog.dataset)),'library uses common Bloom/display');
     }
     assert([...w.document.querySelectorAll('[data-catalog-rarity]')].map(b=>b.textContent).join()==='★5,★4,★3','rarity category order');
     let visitedCards=0;
@@ -607,6 +607,12 @@
       const labels=panel.querySelectorAll('.canonicalGrowth label');
       assert(labels[0].textContent.startsWith('特訓') && labels[1].textContent.startsWith('開花'),'training then bloom');
       assert(Math.abs(labels[0].getBoundingClientRect().top-labels[1].getBoundingClientRect().top)<2,'growth controls share row');
+      const ptsLine=panel.querySelector('.catalogParameters');
+      const totalLine=panel.querySelector('.catalogTotal');
+      assert(/^P \d+ \/ T \d+ \/ S \d+$/.test(ptsLine.textContent),'PTS in one text row');
+      assert(ptsLine.getClientRects().length===1,'PTS occupies one rendered line');
+      assert(totalLine.getBoundingClientRect().top>=ptsLine.getBoundingClientRect().bottom,'TOTAL below PTS');
+      assert(labels[0].getBoundingClientRect().left<labels[1].getBoundingClientRect().left,'training visually before bloom');
       const card=catalog.cards.find(c=>c.id===panel.dataset.cardId);
       const trainingSelect=panel.querySelector('[data-catalog-training]');
       const bloomSelect=panel.querySelector('[data-catalog-bloom]');
@@ -614,10 +620,10 @@
         trainingSelect.value=String(row.stage);trainingSelect.dispatchEvent(new w.Event('change'));
         const value=card.progression.statSnapshots.find(s=>s.level===row.levelCap).raw.parameterBaseValue;
         const expected=w.canonicalParameterText(w.calculateCardParameters(card,row.stage,Number(bloomSelect.value)));
-        assert(panel.querySelector('.canonicalSlotStatus:last-child').textContent.includes(expected),'training stats UI ★'+rarity+' stage '+row.stage);
+        assert(panel.querySelector('.canonicalSlotStatus:last-child').textContent.replace('\nTOTAL ', ' / TOTAL ').includes(expected),'training stats UI ★'+rarity+' stage '+row.stage);
         for(const bloom of [0,2,5]){
           bloomSelect.value=String(bloom);bloomSelect.dispatchEvent(new w.Event('change'));
-          assert(panel.querySelector('.canonicalSlotStatus:last-child').textContent.includes(w.canonicalParameterText(w.calculateCardParameters(card,row.stage,bloom))),'Bloom updates displayed parameters');
+          assert(panel.querySelector('.canonicalSlotStatus:last-child').textContent.replace('\nTOTAL ', ' / TOTAL ').includes(w.canonicalParameterText(w.calculateCardParameters(card,row.stage,bloom))),'Bloom updates displayed parameters');
         }
       }
     }
@@ -628,7 +634,7 @@
     assert(JSON.stringify(Object.keys(localStorage).sort().map(k=>[k,localStorage.getItem(k)]))===storageBeforeCatalog,'card library never writes storage');
     assert(!w.performance.getEntriesByType('resource').some(r=>r.name.includes('/research/')),'card library loads no complete Canonical');
     input(w,'[data-catalog-training]','4');input(w,'[data-catalog-bloom]','3');
-    const sharedParameterText=w.document.querySelector('.catalogCard .canonicalSlotStatus:last-child').textContent.split('\n')[0];
+    const sharedParameterText=w.document.querySelector('.catalogCard .canonicalSlotStatus:last-child').textContent.replace('\nTOTAL ', ' / TOTAL ').split('\n')[0];
     w=await open('index.html');watch(w);await w.waitForCanonicalRestore();await w.loadRuntimeCardCatalog();
     click(w,'[data-load-canonical="0"]');await new Promise(resolve=>w.setTimeout(resolve,0));
     input(w,'[data-canonical-search]','サクラBloom');input(w,'[data-canonical-bloom]','3');input(w,'[data-canonical-training]','4');
