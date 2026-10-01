@@ -31,6 +31,19 @@
     if(page==='index.html') assert(w.document.querySelectorAll('#cards .card').length===5,'A starts');
     if(page==='library.html') assert(w.document.querySelector('#cardTalent').options.length>50,'registration starts');
     if(page==='card-catalog.html') assert(w.document.querySelectorAll('.catalogCard').length===77 && !w.document.querySelector('#catalogStatus').dataset.errorKind,'catalog starts');
+    if(page==='card-catalog.html'){
+      const panel=w.document.querySelector('.catalogCard');
+      for(const button of panel.querySelectorAll('.catalogStepper button')){
+        const box=button.getBoundingClientRect(), card=panel.getBoundingClientRect();
+        assert(box.width===28 && box.height===31,'compact stepper dimensions');
+        assert(box.left>=card.left && box.right<=card.right,'stepper stays inside card');
+      }
+      const output=panel.querySelector('[data-catalog-training]');
+      const plus=output.closest('.catalogStepper').querySelector('[data-step="1"]');
+      plus.click();assert(output.value==='1','responsive stepper works');
+      output.closest('.catalogStepper').querySelector('[data-step="-1"]').click();
+      assert(output.value==='0','responsive stepper restores');
+    }
     if(page==='event.html') assert(w.document.querySelector('#searchFormation') && w.document.querySelector('.requiredSlot'),'event starts');
   }
   try{

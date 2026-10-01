@@ -680,7 +680,7 @@
       assert(minus.disabled && !plus.disabled,'minimum disables minus');minus.click();assert(output.value==='0','no underflow');
       input(w,selector,String(max));
       assert(plus.disabled && !minus.disabled,'maximum disables plus');plus.click();assert(output.value===String(max),'no overflow');
-      assert(plus.getBoundingClientRect().width>=40 && plus.getBoundingClientRect().height>=44,'touch target size');
+      assert(plus.getBoundingClientRect().width===28 && plus.getBoundingClientRect().height===31,'compact stepper button size');
     }
     const ownedCard=catalog.cards.find(card=>card.id===ownedId);
     const ownedExpansion=w.expandCanonicalBloom(ownedCard,5,catalog.dataset,4);
