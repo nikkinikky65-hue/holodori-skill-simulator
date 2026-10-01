@@ -132,7 +132,7 @@ try{writeCardLibrary([]);}catch(e){refused=true;}
 assert(refused && localStorage.getItem(MEMBER_CARD_STORAGE_KEY)==='{bad json','invalid storage preserved');
 print('Score/segments regression and invalid-storage preservation: PASS');
 """
-for name in ['app.js','library.js','event.js','members.js','card-rules.js','formation-rules.js','formation.js','active-snapshot.js','support-rules.js','parameter-rules.js','canonical-card-adapter.js','card-catalog.js']:
+for name in ['app.js','library.js','event.js','members.js','card-rules.js','formation-rules.js','formation.js','active-snapshot.js','support-rules.js','parameter-rules.js','canonical-card-adapter.js','card-catalog.js','leader.js','site-navigation.js']:
     js += '\nnew Function(readFile('+repr(str(root/name))+'));'
 for page in ['tests/browser.html','tests/navigation-browser.html']:
     for script in re.findall(r'<script>([\s\S]*?)</script>',(root/page).read_text()):

@@ -710,6 +710,18 @@
     input(w,'[data-canonical-training]','4');input(w,'[data-canonical-bloom]','3');click(w,'#canonicalCardModal .canonicalCardChoiceControls button');
     w=await open('event.html');watch(w);await w.loadEventSearchState();
     assert(w.document.querySelector('.requiredSlot .canonicalSlotStatus').textContent.includes(sharedParameterText),'B restored parameters equal card library and A');
+    const beforeLeader=JSON.stringify(Object.keys(localStorage).sort().map(key=>[key,localStorage.getItem(key)]));
+    w=await open('leader.html');watch(w);await w.eval('leaderCatalogReady');
+    const leaderData=await (await w.fetch('data/runtime-leader-skills.json')).json();
+    assert(w.document.querySelectorAll('#leaderCards .leaderSkill').length===131,'all card leader rows');
+    assert(w.document.querySelectorAll('#leaderCommon .leaderSkill').length===54,'common effects separate');
+    for(const row of leaderData.cardSkills){
+      const article=w.document.querySelector(`#leaderCards [data-card-id="${row.cardId}"]`);
+      assert(article && article.querySelector('.leaderDescription').textContent===row.description.replace(/\[[^\]]+\]/g,''),'leader original description preserved');
+    }
+    assert(!w.document.querySelector('#leaderCards').textContent.includes('全員の全パラメータが15%UP'),'default effect not auto assigned');
+    assert(!w.performance.getEntriesByType('resource').some(r=>r.name.includes('/research/')),'leader loads only derived data');
+    assert(JSON.stringify(Object.keys(localStorage).sort().map(key=>[key,localStorage.getItem(key)]))===beforeLeader,'leader page does not write storage');
     assert(errors.length===0,errors.join('\n'));
     result.textContent='PASS: startup, timeline, save/edit/load, metadata, derived values, star3 presets, bloom independence, event v2, formations, snapshot, support rates, manual skills, Bloom 0–5 A/B persistence/reset, card catalog search/filter/isolation';
   } catch(e){ result.textContent='FAIL: '+e.stack; }

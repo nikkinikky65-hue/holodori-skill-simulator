@@ -4,18 +4,19 @@
 (async()=>{
   const result=document.querySelector('#result'),frame=document.querySelector('#page');
   const assert=(ok,message)=>{if(!ok)throw Error(message);};
-  const pages=['index.html','library.html','card-catalog.html','event.html'];
-  const labels=['A','ライブラリ','カード','イベント編成探索'];
+  const pages=['index.html','library.html','card-catalog.html','leader.html','event.html'];
+  const labels=['A','ライブラリ','カード','リーダー','イベント編成探索'];
   const backup=new Map(Object.keys(localStorage).map(key=>[key,localStorage.getItem(key)]));
   const open=path=>new Promise(resolve=>{frame.onload=()=>resolve(frame.contentWindow);frame.src='../'+path;});
   const follow=link=>new Promise(resolve=>{frame.onload=()=>resolve(frame.contentWindow);link.click();});
   async function inspect(w,page,width){
     if(page==='card-catalog.html') await w.eval('cardCatalogReady');
+    if(page==='leader.html') await w.eval('leaderCatalogReady');
     if(page==='index.html') await w.waitForCanonicalRestore();
     const nav=w.document.querySelector('.globalNav');
     const links=[...nav.querySelectorAll('a')];
-    assert(JSON.stringify(links.map(a=>a.textContent))===JSON.stringify(labels),'four labels');
-    assert(JSON.stringify(links.map(a=>new URL(a.href).pathname.split('/').pop()))===JSON.stringify(pages),'four targets');
+    assert(JSON.stringify(links.map(a=>a.textContent))===JSON.stringify(labels),'five labels');
+    assert(JSON.stringify(links.map(a=>new URL(a.href).pathname.split('/').pop()))===JSON.stringify(pages),'five targets');
     assert(links.filter(a=>a.getAttribute('aria-current')==='page').length===1,'one active tab');
     assert(new URL(nav.querySelector('[aria-current]').href).pathname.endsWith(page),'active page correct');
     assert(!w.document.querySelector('main .globalNav'),'navigation outside feature UI');
@@ -44,6 +45,7 @@
       output.closest('.catalogStepper').querySelector('[data-step="-1"]').click();
       assert(output.value==='0','responsive stepper restores');
     }
+    if(page==='leader.html') assert(w.document.querySelectorAll('#leaderCards .leaderSkill').length===131 && !w.document.querySelector('#leaderStatus').dataset.error,'leader starts');
     if(page==='event.html') assert(w.document.querySelector('#searchFormation') && w.document.querySelector('.requiredSlot'),'event starts');
   }
   try{
@@ -58,7 +60,7 @@
       }
     }
     const w=await open('./');await inspect(w,'index.html',360);
-    result.textContent='PASS: four routes, all tabs, active state, desktop/mobile geometry, active visibility, feature startup and root alias';
+    result.textContent='PASS: five routes, all tabs, active state, desktop/mobile geometry, active visibility, feature startup and root alias';
   }catch(error){result.textContent='FAIL: '+error.stack;}
   finally{localStorage.clear();for(const [key,value] of backup)localStorage.setItem(key,value);}
 })();

@@ -5,6 +5,7 @@
     {label: 'A', file: 'index.html'},
     {label: 'ライブラリ', file: 'library.html'},
     {label: 'カード', file: 'card-catalog.html'},
+    {label: 'リーダー', file: 'leader.html'},
     {label: 'イベント編成探索', file: 'event.html'}
   ];
   const currentPath = location.pathname.endsWith('/')
