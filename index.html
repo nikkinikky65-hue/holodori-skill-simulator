@@ -53,6 +53,16 @@
   </label>
  </section>
  <div class="panel"><h2>Activeタイムライン</h2><div class="timeline-scroll"><div id="timeline" class="timeline"></div></div><div id="detail">バーを選ぶと詳細を表示します。</div></div>
+ <section class="panel" id="randomSimulation">
+  <h2>発動率・スコア分散：乱数シミュレーション</h2>
+  <p class="sub">現在はユニットスコアをXとして扱い、Activeによる時間区間ごとのスコア倍率のみを反映した暫定シミュレーションです。Xは数値化せず、結果は Σ（秒数 × 倍率）X で表します。</p>
+  <p class="sub">Active基本効果のみ。Support・Passive・Special・Leader・Board・条件付き効果・ノーツ密度は含みません。各発動判定は独立に抽選します。</p>
+  <p class="randomProbability sub"></p>
+  <label>試行回数<select><option value="100">100</option><option value="1000" selected>1,000</option><option value="10000">10,000</option></select></label>
+  <button type="button">シミュレーション実行</button>
+  <p role="status" aria-live="polite">現在の5枠を対象に実行します。</p>
+  <div class="randomResults"></div>
+ </section>
  <div id="cardLoadModal" class="cardLoadModal" hidden>
   <div class="cardLoadBackdrop" data-close-card-modal></div>
 
@@ -212,7 +222,10 @@
 <script src="support-rules.js"></script>
 <script src="parameter-rules.js"></script>
 <script src="canonical-card-adapter.js?v=b4659e28157c"></script>
+<script src="activation-probability-rules.js"></script>
 <script src="app.js"></script>
+<script src="active-random-simulation.js"></script>
+<script src="active-random-ui.js"></script>
 <script src="formation-rules.js"></script>
 <script src="formation.js"></script>
 <script src="active-snapshot.js"></script>

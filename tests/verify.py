@@ -180,3 +180,13 @@ for name in ['card-catalog.js','canonical-card-adapter.js']:
 print('Catalog DOM references, rarity buttons and script revisions: PASS')
 
 subprocess.run([jsc,'user-card-state.js','tests/user-card-state.test.js'],check=True,cwd=root)
+
+# Reuse the actual A Timeline functions in reproducible random-simulation tests.
+random_js = (root/'activation-probability-rules.js').read_text() + '\n' + (root/'active-random-simulation.js').read_text()
+random_js += '\n' + app[app.index('function adjustedInterval('):app.index('// ===== 発動頻度UP最適化')]
+random_js += '\n' + app[app.index('function maxSegments('):app.index('function render(){')]
+random_js += '\n' + (root/'tests/active-random.test.js').read_text()
+random_js += '\nnew Function(readFile("active-random-ui.js"));'
+with tempfile.NamedTemporaryFile(mode='w',suffix='.js') as f:
+    f.write(random_js); f.flush()
+    subprocess.run([jsc,f.name],check=True,cwd=root)

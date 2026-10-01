@@ -30,6 +30,13 @@
       assert(active.left>=box.left-1 && active.right<=box.right+1,'active tab visible on mobile');
     }else assert(nav.scrollWidth===nav.clientWidth,'desktop tabs fit');
     if(page==='index.html') assert(w.document.querySelectorAll('#cards .card').length===5,'A starts');
+    if(page==='index.html'){
+      const panel=w.document.querySelector('#randomSimulation');
+      panel.querySelector('select').value='100';panel.querySelector('button').click();
+      assert(panel.querySelectorAll('[data-random-metric]').length===7,'random simulation starts');
+      const box=panel.getBoundingClientRect();
+      assert(box.width<=width && panel.scrollWidth<=panel.clientWidth,'random panel fits');
+    }
     if(page==='library.html') assert(w.document.querySelector('#cardTalent').options.length>50,'registration starts');
     if(page==='card-catalog.html') assert(w.document.querySelectorAll('.catalogCard').length===77 && !w.document.querySelector('#catalogStatus').dataset.errorKind,'catalog starts');
     if(page==='card-catalog.html'){

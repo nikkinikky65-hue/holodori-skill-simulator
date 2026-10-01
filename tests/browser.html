@@ -710,6 +710,24 @@
     input(w,'[data-canonical-training]','4');input(w,'[data-canonical-bloom]','3');click(w,'#canonicalCardModal .canonicalCardChoiceControls button');
     w=await open('event.html');watch(w);await w.loadEventSearchState();
     assert(w.document.querySelector('.requiredSlot .canonicalSlotStatus').textContent.includes(sharedParameterText),'B restored parameters equal card library and A');
+    w=await open('index.html');watch(w);await w.waitForCanonicalRestore();
+    const randomPanel=w.document.querySelector('#randomSimulation');
+    const stateBeforeRandom=JSON.stringify(Object.keys(localStorage).sort().map(k=>[k,localStorage.getItem(k)]));
+    const timelineBeforeRandom=w.document.querySelector('#timeline').innerHTML;
+    const current=w.getMembers();
+    const duration=Math.max(.01,w.num(w.document.querySelector('#song').value,120));
+    const expected=w.eval('ActiveRandomSimulation').run(
+      w.eval('ActiveRandomSimulation').prepare(current,duration,w.events,q=>w.eval('ActivationProbabilityRules').probability(q)),
+      100,w.maxSegments,()=>0);
+    randomPanel.querySelector('select').value='100';
+    const originalRandom=w.Math.random;w.Math.random=()=>0;
+    randomPanel.querySelector('button').click();w.Math.random=originalRandom;
+    assert(randomPanel.querySelector('[data-random-metric=mean]').textContent===expected.statistics.mean.toFixed(2)+'X','random uses current A base inputs');
+    assert(randomPanel.querySelector('[data-random-metric=count]').textContent==='100回','random count');
+    assert(w.document.querySelector('#timeline').innerHTML===timelineBeforeRandom,'random does not modify deterministic timeline');
+    assert(JSON.stringify(Object.keys(localStorage).sort().map(k=>[k,localStorage.getItem(k)]))===stateBeforeRandom,'random does not save');
+    input(w,'#cards .card [data-k=boost]','0');
+    assert(!randomPanel.querySelector('[data-random-metric]'),'changed inputs invalidate result');
     const beforeLeader=JSON.stringify(Object.keys(localStorage).sort().map(key=>[key,localStorage.getItem(key)]));
     w=await open('leader.html');watch(w);await w.eval('leaderCatalogReady');
     const leaderData=await (await w.fetch('data/runtime-leader-skills.json')).json();

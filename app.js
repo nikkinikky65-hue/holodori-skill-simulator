@@ -2,7 +2,7 @@
 let currentActiveTimelineData = null;
 
 const init=Array.from({length:5},()=>['','', '', 'mid', '', '', 0]);
-const probs={low:35,mid:45,high:55};
+const probs=ActivationProbabilityRules.percent;
 const cards=document.querySelector('#cards');
 init.forEach((d,i)=>{
   const el=document.createElement('div');

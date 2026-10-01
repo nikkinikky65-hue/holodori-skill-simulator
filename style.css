@@ -976,3 +976,12 @@
 .leaderIdentity { margin: 0 0 6px; }
 .leaderEntry summary { font-size: .85em; cursor: pointer; }
 .leaderEffectCondition { margin: 4px 0; }
+
+.randomMetrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 12px; }
+.randomMetrics dd { margin: 4px 0 0; font-weight: bold; }
+#randomSimulation { overflow-wrap: anywhere; }
+
+.randomHistogram { display: flex; align-items: end; gap: 8px; overflow-x: auto; padding-bottom: 8px; }
+.randomBin { flex: 1 0 65px; text-align: center; font-size: 12px; }
+.randomBar { background: #647bd4; min-height: 1px; margin: 3px 0; }
+.randomBin small { display: block; }
