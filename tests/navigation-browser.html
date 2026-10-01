@@ -1,0 +1,52 @@
+<!doctype html><meta charset="utf-8"><title>Global navigation regression</title>
+<pre id="result">RUNNING</pre><iframe id="page" style="height:750px;border:0"></iframe>
+<script>
+(async()=>{
+  const result=document.querySelector('#result'),frame=document.querySelector('#page');
+  const assert=(ok,message)=>{if(!ok)throw Error(message);};
+  const pages=['index.html','library.html','card-catalog.html','event.html'];
+  const labels=['A','ライブラリ','カード','イベント編成探索'];
+  const backup=new Map(Object.keys(localStorage).map(key=>[key,localStorage.getItem(key)]));
+  const open=path=>new Promise(resolve=>{frame.onload=()=>resolve(frame.contentWindow);frame.src='../'+path;});
+  const follow=link=>new Promise(resolve=>{frame.onload=()=>resolve(frame.contentWindow);link.click();});
+  async function inspect(w,page,width){
+    if(page==='card-catalog.html') await w.eval('cardCatalogReady');
+    if(page==='index.html') await w.waitForCanonicalRestore();
+    const nav=w.document.querySelector('.globalNav');
+    const links=[...nav.querySelectorAll('a')];
+    assert(JSON.stringify(links.map(a=>a.textContent))===JSON.stringify(labels),'four labels');
+    assert(JSON.stringify(links.map(a=>new URL(a.href).pathname.split('/').pop()))===JSON.stringify(pages),'four targets');
+    assert(links.filter(a=>a.getAttribute('aria-current')==='page').length===1,'one active tab');
+    assert(new URL(nav.querySelector('[aria-current]').href).pathname.endsWith(page),'active page correct');
+    assert(!w.document.querySelector('main .globalNav'),'navigation outside feature UI');
+    assert(w.getComputedStyle(nav).overflowX==='auto','horizontal scrolling');
+    assert(links.every(a=>w.getComputedStyle(a).whiteSpace==='nowrap'),'labels do not wrap');
+    assert(links.every(a=>Math.abs(a.getBoundingClientRect().top-links[0].getBoundingClientRect().top)<1),'tabs in one row');
+    assert(w.document.querySelector('.siteHeader').getBoundingClientRect().width<=width+1,'header fits viewport');
+    if(width===360){
+      assert(nav.scrollWidth>nav.clientWidth,'narrow tabs scroll');
+      const active=nav.querySelector('[aria-current]').getBoundingClientRect(),box=nav.getBoundingClientRect();
+      assert(active.left>=box.left-1 && active.right<=box.right+1,'active tab visible on mobile');
+    }else assert(nav.scrollWidth===nav.clientWidth,'desktop tabs fit');
+    if(page==='index.html') assert(w.document.querySelectorAll('#cards .card').length===5,'A starts');
+    if(page==='library.html') assert(w.document.querySelector('#cardTalent').options.length>50,'registration starts');
+    if(page==='card-catalog.html') assert(w.document.querySelectorAll('.catalogCard').length===77 && !w.document.querySelector('#catalogStatus').dataset.errorKind,'catalog starts');
+    if(page==='event.html') assert(w.document.querySelector('#searchFormation') && w.document.querySelector('.requiredSlot'),'event starts');
+  }
+  try{
+    for(const width of [1100,360]){
+      frame.style.width=width+'px';
+      for(const source of pages){
+        let w=await open(source);await inspect(w,source,width);
+        for(const target of pages){
+          w=await follow([...w.document.querySelectorAll('.globalNav a')].find(a=>new URL(a.href).pathname.endsWith(target)));
+          await inspect(w,target,width);
+        }
+      }
+    }
+    const w=await open('./');await inspect(w,'index.html',360);
+    result.textContent='PASS: four routes, all tabs, active state, desktop/mobile geometry, active visibility, feature startup and root alias';
+  }catch(error){result.textContent='FAIL: '+error.stack;}
+  finally{localStorage.clear();for(const [key,value] of backup)localStorage.setItem(key,value);}
+})();
+</script>
