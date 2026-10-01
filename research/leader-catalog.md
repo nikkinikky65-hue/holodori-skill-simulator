@@ -28,7 +28,7 @@ LiveLeaderSkillは185件。今回の固定版ではnameLangIdがなく、LangLiv
 
 ## 派生データと実行時境界
 
-`build_leader_catalog.py`は完全Canonical・既存Runtime・追加原本から `data/runtime-leader-skills.json` を決定的に生成する。カード本文の第二DBを手入力で作らない。補助カタログは91,673 bytes。カード用Runtime/schemaには項目を追加しない。
+`build_leader_catalog.py`は完全Canonical・既存Runtime・追加原本から `data/runtime-leader-skills.json` を決定的に生成する。カード本文の第二DBを手入力で作らない。補助カタログは129,561 bytes（表示分類追加後）。カード用Runtime/schemaには項目を追加しない。
 
 leader.htmlは既存カードRuntimeと補助カタログだけを読み込み、Canonical SHA一致を確認してカードIDで結合する。完全Canonicalや研究原本をブラウザーへ配信しない。commonEffectsは拡張用の別枠であり、自動適用・設定登録機能はない。
 
@@ -45,3 +45,11 @@ python3 -B tests/verify.py
 ```
 
 Chromeのtests/browser.htmlで全主一覧の効果原文、共通効果分離、保存非干渉、研究データ未fetchを検証する。tests/navigation-browser.htmlは5面の遷移とPC/スマホ幅を検証する。
+
+## 効果別比較表示
+
+生成時に原文から表示専用 `presentation` を派生する。計算用の効果・条件定義とは区別し、原文descriptionと出典は維持する。各行を `effects[]` に保持し、効果名・%・条件文・対象「全員」・原文行を保存する。未知の文型は推測せず「未分類」で原文を表示する。
+
+主131件を、センスUP 21件、テクニックUP 20件、パフォーマンスUP 22件、全パラメータUP 42件、スコアサポート10件、複合効果16件へ分類する。単一効果は%降順、複合は効果の組合せと両方の%でまとめる。同一カードは1回だけ掲載する。条件はタレント名の横へ表示し、異なる条件の複合は各効果に条件を添える。
+
+原文・レア度・衣装名・未収録のスキル名は各カードの詳細で確認できる。共通54件は分類へ混ぜず従来の別枠で保持する。Canonical・カードRuntime・原本・保存形式・計算ロジックには変更しない。

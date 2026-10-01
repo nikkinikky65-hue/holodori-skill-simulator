@@ -2,8 +2,25 @@
 import argparse
 import hashlib
 import json
+import re
 from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
+
+def presentation(description):
+    """Literal display projection only; not executable effect/condition semantics."""
+    effects = []
+    for raw_line in description.splitlines():
+        line = re.sub(r'\[[^\]]+\]', '', raw_line)
+        match = re.fullmatch(r'(?:(.+)で)?全員の(センスが|テクニックが|パフォーマンスが|全パラメータが|スコアサポート効果)([0-9]+)%(UP)?', line)
+        if not match:
+            return {'status': 'unclassified', 'category': '未分類', 'effects': [], 'reason': 'Unrecognized description; display original'}
+        condition, target, amount, suffix = match.groups()
+        if (target == 'スコアサポート効果') != (suffix is None):
+            return {'status': 'unclassified', 'category': '未分類', 'effects': [], 'reason': 'Unrecognized suffix; display original'}
+        label = 'スコアサポート' if target == 'スコアサポート効果' else target[:-1] + 'UP'
+        effects.append({'label': label, 'amountPercent': int(amount), 'conditionText': condition,
+                        'targetText': '全員', 'description': raw_line})
+    return {'status': 'classified', 'category': '複合効果' if len(effects) > 1 else effects[0]['label'], 'effects': effects}
 
 def project(canonical, runtime, source, source_bytes):
     assert source['provenance']['commitSha'] == canonical['sourceDataset']['commitSha'] == runtime['dataset']['sourceDataset']['commitSha']
@@ -39,6 +56,7 @@ def project(canonical, runtime, source, source_bytes):
         assert costume['characterId'] == character_id
         used_costumes.add(costume['id'])
         row = entry(costume)
+        row['presentation'] = presentation(row['description'])
         row.update(cardId=rc['id'])
         row['source']['card'] = f'/cards/{i}'
         card_skills.append(row)

@@ -718,6 +718,15 @@
     for(const row of leaderData.cardSkills){
       const article=w.document.querySelector(`#leaderCards [data-card-id="${row.cardId}"]`);
       assert(article && article.querySelector('.leaderDescription').textContent===row.description.replace(/\[[^\]]+\]/g,''),'leader original description preserved');
+      assert(w.document.querySelectorAll(`#leaderCards [data-card-id="${row.cardId}"]`).length===1,'each card exactly once');
+      assert(article.closest('.leaderCategory').dataset.category===row.presentation.category,'effect category matches');
+      const heading=article.closest('.leaderAmount').querySelector('h3').textContent;
+      for(const effect of row.presentation.effects){
+        assert(heading.includes(`${effect.amountPercent}%`),'every effect amount visible');
+        if(row.presentation.effects.length>1) assert(heading.includes(effect.label),'both compound labels visible');
+        if(effect.conditionText) assert(article.querySelector('.leaderIdentity').textContent.includes(effect.conditionText),'condition visible outside details');
+      }
+
     }
     assert(!w.document.querySelector('#leaderCards').textContent.includes('全員の全パラメータが15%UP'),'default effect not auto assigned');
     assert(!w.performance.getEntriesByType('resource').some(r=>r.name.includes('/research/')),'leader loads only derived data');

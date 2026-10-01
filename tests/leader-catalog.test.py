@@ -5,7 +5,7 @@ import sys
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent.parent
 sys.path.insert(0,str(ROOT/'research'))
-from build_leader_catalog import project
+from build_leader_catalog import project, presentation
 source_bytes=(ROOT/'research/holodoridb-leader-source.json').read_bytes()
 source=json.loads(source_bytes)
 canonical=json.loads((ROOT/'research/canonical-cards.json').read_bytes())
@@ -39,3 +39,25 @@ assert len(actual['coverage']['costumesWithoutSkillReference'])==8
 assert all('liveLeaderSkillId' not in tables['Costume'][id] for id in actual['coverage']['costumesWithoutSkillReference'])
 assert actual_bytes==(json.dumps(project(canonical,runtime,source,source_bytes),ensure_ascii=False,separators=(',',':'))+'\n').encode()
 print('Leader: 131 exact Card→Costume→Skill joins, 54 isolated common effects, all 185 source skills, original texts and reproduction PASS')
+
+# Independent reconstruction ensures classification retains every amount and condition.
+import re
+from collections import Counter
+assert Counter(row['presentation']['category'] for row in actual['cardSkills']) == {
+    'センスUP':21, 'テクニックUP':20, 'パフォーマンスUP':22,
+    '全パラメータUP':42, 'スコアサポート':10, '複合効果':16}
+assert len({row['cardId'] for row in actual['cardSkills']}) == 131
+for row in actual['cardSkills']:
+    view = row['presentation']
+    assert view['status'] == 'classified'
+    assert len(view['effects']) == len(row['description'].splitlines())
+    for effect, original in zip(view['effects'], row['description'].splitlines()):
+        assert effect['description'] == original
+        prefix = effect['conditionText'] + 'で' if effect['conditionText'] else ''
+        suffix = 'スコアサポート効果' if effect['label'] == 'スコアサポート' else effect['label'][:-2] + 'が'
+        reconstructed = prefix + '全員の' + suffix + str(effect['amountPercent']) + '%' + ('' if effect['label'] == 'スコアサポート' else 'UP')
+        assert reconstructed == re.sub(r'\[[^\]]+\]', '', original)
+assert presentation('未確認の新効果')['status'] == 'unclassified'
+assert presentation('全員のセンスが100%UP\n未確認の新効果')['status'] == 'unclassified'
+assert all('presentation' not in row for row in actual['commonEffects'])
+print('Leader presentation: complete conditions/amounts, compound effects, unique cards and unknown fallback PASS')

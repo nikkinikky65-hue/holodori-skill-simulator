@@ -46,6 +46,20 @@
       assert(output.value==='0','responsive stepper restores');
     }
     if(page==='leader.html') assert(w.document.querySelectorAll('#leaderCards .leaderSkill').length===131 && !w.document.querySelector('#leaderStatus').dataset.error,'leader starts');
+    if(page==='leader.html'){
+      assert(w.document.documentElement.scrollWidth<=width,'leader body has no horizontal overflow');
+      const groups=[...w.document.querySelectorAll('.leaderCategory')];
+      assert(groups.length===6,'six effect categories');
+      for(const group of groups){
+        if(group.dataset.category!=='複合効果'){
+          const amounts=[...group.querySelectorAll('.leaderAmount h3')].map(h=>parseInt(h.textContent));
+          assert(amounts.every((v,i)=>!i||amounts[i-1]>=v),'amounts descending');
+        }
+      }
+      const details=w.document.querySelector('.leaderEntry details'); details.querySelector('summary').click();
+      assert(details.open && details.querySelector('.leaderDescription').getBoundingClientRect().height>0,'original text opens');
+      assert(w.document.documentElement.scrollWidth<=width,'expanded description fits');
+    }
     if(page==='event.html') assert(w.document.querySelector('#searchFormation') && w.document.querySelector('.requiredSlot'),'event starts');
   }
   try{
