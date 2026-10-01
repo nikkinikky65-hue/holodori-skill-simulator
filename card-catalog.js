@@ -1,5 +1,5 @@
-// Read-only view of the same generated catalog and common skill/Bloom adapter.
-// Bloom choices are view state only; member Library and saved formations are untouched.
+// Catalog data and parameter interpretation remain shared and immutable.
+// Only independent user card settings are persisted by this page.
 async function renderCardCatalog(){
   const status = document.querySelector('#catalogStatus');
   if(!status) throw new Error('カードライブラリUIの必須要素がありません：#catalogStatus');
@@ -17,8 +17,7 @@ async function renderCardCatalog(){
     const rarityButtons = [...document.querySelectorAll('[data-catalog-rarity]')];
     let rarity = '5';
     const type = document.querySelector('#catalogType');
-    const blooms = new Map();
-    const trainings = new Map();
+    readUserCardStates(); // Validate existing settings before presenting editable controls.
     // Same source order as library.js renderTalentSelect(); no separate roster.
     const memberOrder = new Map(HOLO_MEMBERS.map((member, index) => [member.id, index]));
     for(const [selector, element] of [['#catalogCards',container], ['#catalogSearch',search], ['#catalogType',type]]){
@@ -36,48 +35,59 @@ async function renderCardCatalog(){
           (memberOrder.get(canonicalMemberId(a)) ?? Number.MAX_SAFE_INTEGER) -
           (memberOrder.get(canonicalMemberId(b)) ?? Number.MAX_SAFE_INTEGER) ||
           b.classification.rarity.mapping.value - a.classification.rarity.mapping.value);
+      const userStates = readUserCardStates();
       container.replaceChildren();
       for(const card of cards){
         const panel = document.createElement('article');
         panel.className = 'panel catalogCard';
         panel.dataset.cardId = card.id;
-        const trainingLabel = document.createElement('label');
-        trainingLabel.textContent = '特訓';
-        const training = document.createElement('select');
-        training.dataset.catalogTraining = '';
-        training.setAttribute('aria-label', `${card.name}の特訓段階`);
-        for(const row of card.progression.trainingStages){
-          const option = document.createElement('option');
-          option.value = String(row.stage); option.textContent = String(row.stage);
-          training.append(option);
-        }
-        training.value = String(trainings.get(card.id) ?? 0);
-        trainingLabel.append(training);
-        const label = document.createElement('label');
-        label.textContent = '開花';
-        const select = document.createElement('select');
-        select.dataset.catalogBloom = '';
-        select.setAttribute('aria-label', `${card.name}の開花段階`);
-        for(let bloom = 0; bloom <= 5; bloom++){
-          const option = document.createElement('option');
-          option.value = String(bloom); option.textContent = String(bloom);
-          select.append(option);
-        }
-        select.value = String(blooms.get(card.id) ?? 0);
+        let userState = getUserCardState(card.id, userStates);
+        const ownedLabel = document.createElement('label'); ownedLabel.className = 'catalogOwned';
+        const owned = document.createElement('input'); owned.type = 'checkbox'; owned.dataset.catalogOwned = '';
+        owned.setAttribute('aria-label', `${card.name}を所持`);
+        ownedLabel.append(owned, document.createTextNode('所持'));
+        const saveStatus = document.createElement('p'); saveStatus.className = 'sub catalogSaveStatus';
+        saveStatus.setAttribute('role', 'status');
+        const change = patch => {
+          try{ userState = updateUserCardState(card.id, patch); saveStatus.textContent = ''; }
+          catch(error){ saveStatus.textContent = `保存できませんでした：${error.message}`; }
+          refresh();
+        };
+        const makeStepper = (field, title, max, dataKey) => {
+          const group = document.createElement('div'); group.className = 'catalogStepper';
+          group.setAttribute('role', 'group'); group.setAttribute('aria-label', `${card.name}の${title}`);
+          const caption = document.createElement('span'); caption.textContent = title;
+          const minus = document.createElement('button'); minus.type = 'button'; minus.textContent = '−';
+          minus.dataset.step = '-1'; minus.setAttribute('aria-label', `${card.name}の${title}を減らす`);
+          const value = document.createElement('output'); value.dataset[dataKey] = '';
+          value.setAttribute('aria-label', `${title}段階`); value.setAttribute('aria-live', 'polite');
+          const plus = document.createElement('button'); plus.type = 'button'; plus.textContent = '＋';
+          plus.dataset.step = '1'; plus.setAttribute('aria-label', `${card.name}の${title}を増やす`);
+          for(const [button, delta] of [[minus,-1],[plus,1]]) button.addEventListener('click', () => {
+            const next = userState[field] + delta;
+            if(next >= 0 && next <= max) change({[field]: next});
+          });
+          group.append(caption, minus, value, plus);
+          return {group, sync: () => {
+            value.value = String(userState[field]);
+            minus.disabled = userState[field] === 0; plus.disabled = userState[field] === max;
+          }};
+        };
+        const training = makeStepper('training', '特訓', 4, 'catalogTraining');
+        const opening = makeStepper('opening', '開花', 5, 'catalogBloom');
         const basic = document.createElement('p'); basic.className = 'canonicalSlotStatus';
         const growth = document.createElement('div'); growth.className = 'canonicalGrowth';
         const preview = document.createElement('p');
         preview.className = 'canonicalSlotStatus';
         const refresh = () => {
-          const bloom = Number(select.value);
-          blooms.set(card.id, bloom);
-          trainings.set(card.id, Number(training.value));
+          owned.checked = userState.owned; training.sync(); opening.sync();
           try{
-            const expansion = expandCanonicalBloom(card, bloom, catalog.dataset, Number(training.value));
+            const expansion = expandCanonicalBloom(card, userState.opening, catalog.dataset, userState.training);
             basic.textContent = canonicalBasicText(expansion);
             // Layout only: retain the shared adapter's computed values and skills.
             const [parameters, ...skills] = canonicalEffectsText(expansion)
               .replace(/\n(SP：[\s\S]*?)\n(P：[\s\S]*?)\n(A：[\s\S]*)$/, '\n$1\n$3\n$2')
+              .replace(/^(SP|A|P)：/gm, (_, label) => `${label} Lv.${expansion.levels[{SP:'special',A:'active',P:'passive'}[label]]}：`)
               .split('\n');
             const [pts, total] = parameters.split(' / TOTAL ');
             const ptsLine = document.createElement('span');
@@ -91,9 +101,9 @@ async function renderCardCatalog(){
           }
           catch(error){ preview.textContent = `表示できません：${error.message}`; }
         };
-        select.addEventListener('change', refresh);
-        training.addEventListener('change', refresh);
-        label.append(select); growth.append(trainingLabel, label); panel.append(basic, growth, preview); container.append(panel);
+        owned.addEventListener('change', () => change({owned: owned.checked}));
+        growth.append(training.group, opening.group);
+        panel.append(basic, ownedLabel, growth, saveStatus, preview); container.append(panel);
         refresh();
       }
       status.textContent = `${cards.length} / ${catalog.cards.length}枚`;

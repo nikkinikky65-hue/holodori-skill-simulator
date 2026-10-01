@@ -134,6 +134,9 @@ print('Score/segments regression and invalid-storage preservation: PASS');
 """
 for name in ['app.js','library.js','event.js','members.js','card-rules.js','formation-rules.js','formation.js','active-snapshot.js','support-rules.js','parameter-rules.js','canonical-card-adapter.js','card-catalog.js']:
     js += '\nnew Function(readFile('+repr(str(root/name))+'));'
+for page in ['tests/browser.html','tests/navigation-browser.html']:
+    for script in re.findall(r'<script>([\s\S]*?)</script>',(root/page).read_text()):
+        js += '\nnew Function('+json.dumps(script)+');'
 js += "\nprint('All JavaScript syntax: PASS');"
 with tempfile.NamedTemporaryFile(mode='w',suffix='.js') as f:
     f.write(js);f.flush()
@@ -175,3 +178,5 @@ for name in ['card-catalog.js','canonical-card-adapter.js']:
     digest=hashlib.sha256((root/name).read_bytes()).hexdigest()[:12]
     assert f'src="{name}?v={digest}"' in catalog_html, 'Update catalog script revision: '+name
 print('Catalog DOM references, rarity buttons and script revisions: PASS')
+
+subprocess.run([jsc,'user-card-state.js','tests/user-card-state.test.js'],check=True,cwd=root)
