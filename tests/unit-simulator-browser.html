@@ -1,0 +1,53 @@
+<!doctype html><meta charset="utf-8"><title>Unit simulator regression</title>
+<pre id="result">RUNNING</pre><iframe id="page" style="height:800px;border:0"></iframe><iframe id="stable" style="display:none"></iframe>
+<script>
+(async()=>{
+ const result=document.querySelector('#result'),frame=document.querySelector('#page');
+ const backup=new Map(Object.keys(localStorage).map(key=>[key,localStorage.getItem(key)]));
+ const assert=(ok,message)=>{if(!ok)throw Error(message);};
+ const open=()=>new Promise(resolve=>{frame.onload=()=>resolve(frame.contentWindow);frame.src='../unit-simulator.html';});
+ try{
+  const stable=document.querySelector('#stable');
+  await new Promise(resolve=>{stable.onload=resolve;stable.src='../index.html';});
+  const a=stable.contentWindow;await a.waitForCanonicalRestore();
+  const saved=JSON.stringify(Object.keys(localStorage).sort().map(key=>[key,localStorage.getItem(key)]));
+  const timeline=a.document.querySelector('#timeline').innerHTML;
+  for(const width of [1100,360]){
+   frame.style.width=width+'px';const w=await open();const api=await w.eval('unitSimulatorReady');
+   const select=[...w.document.querySelectorAll('[data-unit-card]')];
+   assert(select.length===5 && select[0].options.length===186,'185 cards / five slots');
+   assert(w.document.querySelector('#unitRun').disabled,'incomplete cannot run');
+   for(let i=0;i<5;i++){select[i].selectedIndex=i+1;select[i].dispatchEvent(new w.Event('change'));}
+   for(const [field,value] of [['training','4'],['bloom','3'],['short','12']]){
+    for(const control of w.document.querySelectorAll(`[data-${field}]`)){control.value=value;control.dispatchEvent(new w.Event('change'));}
+   }
+   let model=api.getModel();
+   assert(model.members.every(m=>m.expansion.levels.active===2 && m.expansion.levels.special===2 && m.expansion.levels.passive===1),'bloom P/A/SP');
+   assert(model.members.every(m=>m.parameters.training===4),'training retained');
+   for(const member of model.activeMembers){
+    assert(JSON.stringify(a.events(member,120))===JSON.stringify(w.eval('ActiveTimelineEngine').events(member,120)),'A event parity');
+    assert(a.adjustedInterval(member)===w.eval('ActiveTimelineEngine').adjustedInterval(member),'A frequency parity');
+   }
+   const all=model.eventsByMember.flat();
+   assert(JSON.stringify(a.maxSegments(all,120))===JSON.stringify(model.segments),'A duration/overlap parity');
+   assert(Math.abs(model.allSuccessX-(120+a.calcMax(all,120)/100))<1e-9,'A integral parity');
+   assert(w.document.querySelector('#unitParameters').textContent.includes('開花増分') && w.document.querySelector('#unitParameters').textContent.includes('最終値（補正未接続）'),'breakdown visible');
+   w.document.querySelector('#unitTrials').value='100';w.document.querySelector('#unitRun').click();
+   assert(w.document.querySelector('#unitResultStatus').textContent.includes('100試行完了'),'simulation works');
+   assert(w.document.querySelector('#unitResult').textContent.includes('X'),'symbolic result');
+   assert(w.document.documentElement.scrollWidth<=width,'page fits width');
+   assert(w.document.querySelector('#unitSlots').scrollWidth<=w.document.querySelector('#unitSlots').clientWidth,'slots fit width');
+   const duration=w.document.querySelector('#unitDuration');duration.value='90';duration.dispatchEvent(new w.Event('input'));
+   assert(api.getModel().duration===90 && !w.document.querySelector('#unitResult').textContent,'duration invalidates results');
+   const query=w.document.querySelector('.unitSlot input[type=search]');query.value='存在しない検索';query.dispatchEvent(new w.Event('input'));
+   assert(select[0].options.length===2 && select[0].value===model.members[0].card.id,'search retains selection');
+   assert(JSON.stringify(Object.keys(localStorage).sort().map(key=>[key,localStorage.getItem(key)]))===saved,'no writes to existing storage');
+   assert(a.document.querySelector('#timeline').innerHTML===timeline,'stable A untouched');
+   const reloaded=await open();await reloaded.eval('unitSimulatorReady');
+   assert([...reloaded.document.querySelectorAll('[data-unit-card]')].every(s=>s.value===''),'page-local selection resets on reload');
+  }
+  result.textContent='PASS: five slots, 185 cards, growth/skills, breakdown, A Timeline parity, simulation, storage isolation, reload, 1100px/360px';
+ }catch(error){result.textContent='FAIL: '+error.stack;}
+ finally{localStorage.clear();for(const [key,value] of backup)localStorage.setItem(key,value);}
+})();
+</script>

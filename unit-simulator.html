@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ホロドリ 統合シミュレーター（開発版）</title>
+<link rel="stylesheet" href="style.css"><script src="site-navigation.js" defer></script>
+</head>
+<body><main class="wrap" id="unitSimulator">
+<section class="panel"><h1>統合シミュレーター（開発版）</h1>
+<p>編成 → Parameter → Unit Score → Timeline → Simulation → Result</p>
+<p><a href="index.html">安定版A面へ</a></p>
+<p class="sub">このページの編成はページ内だけで保持し、再読み込みでリセットします。A面・所持カード・Library・保存編成は変更しません。</p>
+<p id="unitStatus" role="status">カードデータを読み込み中…</p></section>
+<section class="panel"><h2>1. 編成</h2><div id="unitSlots" class="unitSlots"></div></section>
+<section class="panel"><h2>2. パラメーター</h2>
+<p>特訓上限Lvの基礎P/T/Sと開花増分を計算します。表示小計はカード自身の値のみで、編成の最終パラメーターではありません。</p>
+<div id="unitParameters"></div>
+<p class="sub">Passive・強化ボーナス・Memory・Leader・Board・衣装等：未接続（0として確定しません）。</p></section>
+<section class="panel"><h2>3. Unit Score</h2><p id="unitScore">Unit Score = X（算出式未確定）</p>
+<p class="sub">Parameter合計をXへ換算しません。Xは単位時間あたりの基礎スコアを表す記号です。</p></section>
+<section class="panel"><h2>4. Timeline</h2>
+<label>楽曲時間 (s)<input id="unitDuration" type="number" min="0.01" step="0.01" value="120"></label>
+<p class="sub">Active基本効果の全発動候補。頻度UPは周期に適用し、重複時は最大補正のみを採用します。Support・条件付き効果・P/SPは含みません。</p>
+<div id="unitTimeline"></div></section>
+<section class="panel"><h2>5. シミュレーション結果</h2>
+<p class="sub">暫定シミュレーション：各判定を独立抽選し、Σ（秒数 × 区間倍率）Xを集計します。ゲーム内絶対スコアではありません。</p>
+<p id="unitProbability"></p>
+<label>試行回数<select id="unitTrials"><option value="100">100</option><option value="1000" selected>1,000</option><option value="10000">10,000</option></select></label>
+<button id="unitRun" type="button" disabled>シミュレーション実行</button>
+<p id="unitResultStatus" role="status"></p><div id="unitResult"></div></section>
+</main>
+<script src="members.js"></script><script src="canonical-card-adapter.js?v=b4659e28157c"></script>
+<script src="active-timeline-engine.js"></script><script src="activation-probability-rules.js"></script>
+<script src="active-random-simulation.js"></script><script src="unit-parameter-engine.js"></script>
+<script src="unit-score-engine.js"></script><script src="unit-simulator-engine.js"></script><script src="unit-simulator.js"></script>
+</body></html>

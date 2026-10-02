@@ -11,13 +11,24 @@ jsc = '/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Helpers/js
 app = (root / 'app.js').read_text()
 lib = (root / 'library.js').read_text()
 old = subprocess.check_output(['git', 'show', 'HEAD:app.js'], cwd=root, text=True)
+engine = (root/'active-timeline-engine.js').read_text()
+try:
+    old_engine = subprocess.check_output(['git','show','HEAD:active-timeline-engine.js'],cwd=root,text=True,stderr=subprocess.DEVNULL)
+except subprocess.CalledProcessError:
+    old_engine = None
+
+def timeline_check_source(text):
+    return text.replace('\nreturn {adjustedInterval, events, calcMax, maxSegments};\n})();', '\nfunction render(){')
+
 for start, end in [('function adjustedInterval(', '// ====='),
                    ('function maxSegments(', 'function render(){'),
                    ('function optimizeShortRates(', 'function renderOptimizedTimeline(')]:
     def section(text):
         a = text.index(start)
         return text[a:text.index(end, a)].strip()
-    assert section(app) == section(old), start + ' changed'
+    current_source = app if start.startswith('function optimize') else timeline_check_source(engine)
+    previous_source = old if start.startswith('function optimize') else timeline_check_source(old_engine or old)
+    assert section(current_source) == section(previous_source), start + ' changed'
 
 for page, script in [('index.html','app.js'),('library.html','library.js'),('event.html','event.js'),('index.html','formation.js'),('index.html','active-snapshot.js')]:
     html = (root / page).read_text()
@@ -113,7 +124,7 @@ for label, source in [('before',old),('after',app)]:
     b=source.index('// =====',a)
     c=source.index('function maxSegments(')
     d=source.index('function render(){',c)
-    body=source[a:b]+source[c:d]+"\nreturn {events,calcMax,maxSegments};"
+    body=(old_engine or engine if label=='before' else engine)+source[a:b]+source[c:d]+"\nreturn {events,calcMax,maxSegments};"
     js += '\nconst '+label+' = new Function('+json.dumps(body)+')();'
 js += """
 for(const T of [1,15,120,123.45]){
@@ -134,7 +145,7 @@ print('Score/segments regression and invalid-storage preservation: PASS');
 """
 for name in ['app.js','library.js','event.js','members.js','card-rules.js','formation-rules.js','formation.js','active-snapshot.js','support-rules.js','parameter-rules.js','canonical-card-adapter.js','card-catalog.js','leader.js','site-navigation.js']:
     js += '\nnew Function(readFile('+repr(str(root/name))+'));'
-for page in ['tests/browser.html','tests/navigation-browser.html']:
+for page in ['tests/browser.html','tests/navigation-browser.html','tests/unit-simulator-browser.html']:
     for script in re.findall(r'<script>([\s\S]*?)</script>',(root/page).read_text()):
         js += '\nnew Function('+json.dumps(script)+');'
 js += "\nprint('All JavaScript syntax: PASS');"
@@ -183,10 +194,21 @@ subprocess.run([jsc,'user-card-state.js','tests/user-card-state.test.js'],check=
 
 # Reuse the actual A Timeline functions in reproducible random-simulation tests.
 random_js = (root/'activation-probability-rules.js').read_text() + '\n' + (root/'active-random-simulation.js').read_text()
+random_js += '\n' + (root/'active-timeline-engine.js').read_text()
 random_js += '\n' + app[app.index('function adjustedInterval('):app.index('// ===== 発動頻度UP最適化')]
 random_js += '\n' + app[app.index('function maxSegments('):app.index('function render(){')]
 random_js += '\n' + (root/'tests/active-random.test.js').read_text()
 random_js += '\nnew Function(readFile("active-random-ui.js"));'
 with tempfile.NamedTemporaryFile(mode='w',suffix='.js') as f:
     f.write(random_js); f.flush()
+    subprocess.run([jsc,f.name],check=True,cwd=root)
+
+unit_js = "const URL = function(path, base){return path;}; const document = {baseURI:'http://localhost/',addEventListener:()=>{}};\n"
+unit_js += (root/'members.js').read_text()+'\n'+(root/'canonical-card-adapter.js').read_text()
+unit_js += '\nconst canonicalTestFixture=JSON.parse(readFile("data/runtime-cards.json"));\n'
+for name in ['active-timeline-engine.js','activation-probability-rules.js','active-random-simulation.js','unit-parameter-engine.js','unit-score-engine.js','unit-simulator-engine.js','tests/unit-simulator.test.js']:
+    unit_js += (root/name).read_text()+'\n'
+unit_js += 'new Function(readFile("unit-simulator.js"));'
+with tempfile.NamedTemporaryFile(mode='w',suffix='.js') as f:
+    f.write(unit_js);f.flush()
     subprocess.run([jsc,f.name],check=True,cwd=root)

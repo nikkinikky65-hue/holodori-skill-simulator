@@ -985,3 +985,16 @@
 .randomBin { flex: 1 0 65px; text-align: center; font-size: 12px; }
 .randomBar { background: #647bd4; min-height: 1px; margin: 3px 0; }
 .randomBin small { display: block; }
+
+/* Next-generation page only; shared calculation engines carry no layout. */
+.unitSlots { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,280px),1fr)); gap: 16px; }
+.unitSlot { min-width: 0; border: 1px solid #64748b; padding: 12px; border-radius: 8px; }
+.unitSlot select, .unitSlot input { max-width: 100%; width: 100%; }
+.unitSlot .canonicalGrowth select { width: auto; }
+.unitPreview { white-space: pre-line; overflow-wrap: anywhere; }
+.unitTableScroll { overflow-x: auto; }
+.unitTableScroll table { width: 100%; border-collapse: collapse; }
+.unitTableScroll td, .unitTableScroll th { padding: 8px; text-align: left; border-bottom: 1px solid #64748b; }
+.unitTrack { position: relative; height: 22px; background: #e2e8f0; overflow: hidden; }
+.unitTrack span { position: absolute; height: 100%; background: #637cdb; border-left: 1px solid white; }
+#unitSimulator .panel { min-width: 0; overflow-wrap: anywhere; }
