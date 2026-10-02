@@ -7,8 +7,8 @@ assertUnit(model.members.length===5 && model.unitScore.value===null && model.uni
 for(let i=0;i<5;i++){
   const member=model.members[i], expected=calculateCardParameters(catalog.cards[i],4,5);
   for(const key of ['performance','technique','sense','total']){
-    assertUnit(member.parameters.subtotal[key]===expected[key],'shared parameter values');
-    assertUnit(member.parameters.base[key]+member.parameters.opening[key]===member.parameters.subtotal[key],'traceable breakdown');
+    assertUnit(member.parameters.subtotal[key]===expected[key]+member.parameters.passive[key],'shared parameter values');
+    assertUnit(member.parameters.base[key]+member.parameters.opening[key]+member.parameters.passive[key]===member.parameters.subtotal[key],'traceable breakdown');
   }
   assertUnit(member.parameters.final===null && member.parameters.corrections.every(c=>c.value===null),'unknown corrections not zero');
   assertUnit(JSON.stringify(member.expansion.levels)===JSON.stringify(canonicalBloomLevels(catalog.cards[i],5)),'shared skill levels');

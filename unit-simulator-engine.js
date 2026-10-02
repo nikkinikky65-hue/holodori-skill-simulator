@@ -1,6 +1,6 @@
 // Orchestration only: no formula duplication and no persistence.
 const UnitSimulatorEngine = (() => {
-  function build(catalog, slots, duration){
+  function build(catalog, slots, duration, memoryInput, enhancementInput){
     if(slots.length!==5) throw Error('5枠の編成が必要です');
     if(!Number.isFinite(duration)||duration<=0) throw Error('曲時間を正の数にしてください');
     const byId=new Map(catalog.cards.map(card=>[card.id,card]));
@@ -12,10 +12,11 @@ const UnitSimulatorEngine = (() => {
       const expansion=expandCanonicalBloom(card,selection.bloom,catalog.dataset,selection.training);
       const active=adaptCanonicalCardToActiveInput(card,expansion.levels.active);
       return {slot:index+1,card,expansion,
-        parameters:UnitParameterEngine.calculateMemberParameter(card,selection.training,selection.bloom),
+        parameters:{...UnitParameterEngine.calculateMemberParameter(card,selection.training,selection.bloom),slot:index+1,totalAdjustmentInputs:selection.totalAdjustments},
         active:{slot:index+1,name:card.name,interval:active.interval,duration:active.duration,boost:active.boost,prob:active.probability,short:selection.short}};
     });
-    const parameters=UnitParameterEngine.calculateUnitParameter(members.filter(Boolean).map(member=>member.parameters));
+    const parameters=UnitParameterEngine.calculateUnitParameter(members.filter(Boolean).map(member=>member.parameters),memoryInput,enhancementInput);
+    members.filter(Boolean).forEach((member,index)=>{member.parameters=parameters.members[index];});
     const activeMembers=members.filter(Boolean).map(member=>member.active);
     const eventsByMember=activeMembers.map(member=>ActiveTimelineEngine.events(member,duration));
     const segments=ActiveTimelineEngine.maxSegments(eventsByMember.flat(),duration);

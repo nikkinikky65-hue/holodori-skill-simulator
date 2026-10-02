@@ -43,8 +43,74 @@
    assert(select[0].options.length===2 && select[0].value===model.members[0].card.id,'search retains selection');
    assert(JSON.stringify(Object.keys(localStorage).sort().map(key=>[key,localStorage.getItem(key)]))===saved,'no writes to existing storage');
    assert(a.document.querySelector('#timeline').innerHTML===timeline,'stable A untouched');
+   query.value='';query.dispatchEvent(new w.Event('input'));
+   for(const control of select){control.value='card-00022-3-nrml-0018-00';control.dispatchEvent(new w.Event('change'));}
+   for(const control of w.document.querySelectorAll('[data-bloom]')){control.value='4';control.dispatchEvent(new w.Event('change'));}
+   assert(api.getModel().parameters.passive.total>0,'real Noel self Passive applies');
+   assert(w.document.querySelector('#unitParameters').textContent.includes('Passive合計'),'Passive aggregate visible');
+   const trace=w.document.querySelector('#unitParameters details');trace.querySelector('summary').click();
+   assert(trace.open && trace.textContent.includes('referenceValue'),'trace expands');
+   assert(w.document.documentElement.scrollWidth<=width,'trace fits viewport');
+   const memoryInput=w.document.querySelector('#unitMemoryPercent'),memoryKind=w.document.querySelector('#unitMemoryKind');
+   const baselineMemory=api.getModel().parameters.subtotal.total;
+   const memoryTraceBefore=JSON.stringify(api.getModel().segments);
+   memoryInput.value='6.4';memoryInput.dispatchEvent(new w.Event('input'));
+   const memoryModel=api.getModel();
+   assert(memoryModel.parameters.memory.status==='applied' && memoryModel.parameters.memory.total>0,'Memory input connected');
+   assert(memoryModel.parameters.subtotal.total===baselineMemory+memoryModel.parameters.memory.total,'Memory subtotal');
+   assert(w.document.querySelector('#unitParameters').textContent.includes('Memory合計'),'Memory breakdown displayed');
+   assert(JSON.stringify(memoryModel.segments)===memoryTraceBefore,'Memory does not affect Timeline');
+   memoryKind.value='unsupported';memoryKind.dispatchEvent(new w.Event('change'));
+   assert(api.getModel().parameters.memory.status==='unsupported' && memoryInput.value==='6.4','unsupported preserves raw input');
+   assert(w.document.querySelector('#unitMemoryStatus').textContent.includes('未対応'),'unsupported visible');
+   memoryKind.value='manual-rate';memoryKind.dispatchEvent(new w.Event('change'));
+   assert(api.getModel().parameters.memory.total===memoryModel.parameters.memory.total,'switch restores retained rate');
+   memoryInput.value='0';memoryInput.dispatchEvent(new w.Event('input'));
+   assert(api.getModel().parameters.memory.status==='applied' && api.getModel().parameters.memory.total===0,'zero explicitly applied');
+   memoryInput.value='';memoryInput.dispatchEvent(new w.Event('input'));
+   assert(api.getModel().parameters.memory.status==='unset' && api.getModel().parameters.memory.total===null,'blank unset');
+   memoryInput.value='invalid';memoryInput.dispatchEvent(new w.Event('input'));
+   assert(api.getModel().parameters.memory.status==='unsupported','invalid not silently defaulted');
+   assert(w.document.documentElement.scrollWidth<=width,'Memory controls fit viewport');
+   assert(JSON.stringify(Object.keys(localStorage).sort().map(key=>[key,localStorage.getItem(key)]))===saved,'Memory does not write storage');
+   const enhancement=w.document.querySelector('#unitEnhancementPercent');
+   const beforeEnhancement=api.getModel();
+   enhancement.value='2.43';enhancement.dispatchEvent(new w.Event('input'));
+   const enhanced=api.getModel();
+   assert(enhanced.parameters.enhancementBonus.total>0,'enhancement applies');
+   assert(enhanced.parameters.subtotal.total===beforeEnhancement.parameters.subtotal.total+enhanced.parameters.enhancementBonus.total,'enhancement total');
+   assert(JSON.stringify(enhanced.parameters.memory)===JSON.stringify(beforeEnhancement.parameters.memory),'memory remains unchanged');
+   assert(w.document.querySelector('#unitParameters').textContent.includes('Enhancement Bonus合計'),'enhancement breakdown');
+   const enhancementTrace=w.document.querySelector('#unitParameters details');enhancementTrace.open=true;
+   assert(enhancementTrace.textContent.includes('memoryIncluded')&&enhancementTrace.textContent.includes('cardAfterBloom'),'enhancement basis in trace');
+   assert(w.document.documentElement.scrollWidth<=width,'enhancement controls/trace fit');
+   enhancement.value='0';enhancement.dispatchEvent(new w.Event('input'));
+   assert(api.getModel().parameters.enhancementBonus.total===0,'explicit zero enhancement');
+   enhancement.value='';enhancement.dispatchEvent(new w.Event('input'));
+   assert(api.getModel().parameters.enhancementBonus.total===null,'unset enhancement');
+   enhancement.value='bad';enhancement.dispatchEvent(new w.Event('input'));
+   assert(api.getModel().parameters.enhancementBonus.status==='unsupported','invalid enhancement');
+   assert(JSON.stringify(Object.keys(localStorage).sort().map(key=>[key,localStorage.getItem(key)]))===saved,'enhancement does not save');
+   enhancement.value='2.43';enhancement.dispatchEvent(new w.Event('input'));
+   for(const control of w.document.querySelectorAll('[data-total-adjustment]')){
+     control.value=control.dataset.totalAdjustment==='board'?'2937':'0';control.dispatchEvent(new w.Event('input'));
+   }
+   assert(api.getModel().parameters.enhancementBonus.scope==='complete-basis','external totals complete basis');
+   assert(w.document.querySelector('#unitParameters').textContent.includes('Board合計'),'TOTAL breakdown');
+   const boardInput=w.document.querySelector('[data-total-adjustment=board]');
+   boardInput.value='';boardInput.dispatchEvent(new w.Event('input'));
+   assert(api.getModel().parameters.members[0].board.status==='unset','blank board');
+   boardInput.value='0';boardInput.dispatchEvent(new w.Event('input'));
+   assert(api.getModel().parameters.enhancementBonus.scope==='complete-basis','zero complete');
+   boardInput.value='bad';boardInput.dispatchEvent(new w.Event('input'));
+   assert(api.getModel().parameters.members[0].board.status==='invalid'&&api.getModel().parameters.enhancementBonus.scope!=='complete-basis','invalid partial');
+   assert(w.document.documentElement.scrollWidth<=width,'external controls fit');
+   assert(JSON.stringify(Object.keys(localStorage).sort().map(key=>[key,localStorage.getItem(key)]))===saved,'external totals do not save');
    const reloaded=await open();await reloaded.eval('unitSimulatorReady');
    assert([...reloaded.document.querySelectorAll('[data-unit-card]')].every(s=>s.value===''),'page-local selection resets on reload');
+   assert(reloaded.document.querySelector('#unitMemoryPercent').value==='','Memory resets on reload');
+   assert(reloaded.document.querySelector('#unitEnhancementPercent').value==='','enhancement resets on reload');
+   assert([...reloaded.document.querySelectorAll('[data-total-adjustment]')].every(el=>el.value===''),'external totals reset on reload');
   }
   result.textContent='PASS: five slots, 185 cards, growth/skills, breakdown, A Timeline parity, simulation, storage isolation, reload, 1100px/360px';
  }catch(error){result.textContent='FAIL: '+error.stack;}

@@ -161,7 +161,7 @@ subprocess.run([jsc,'card-rules.js','support-rules.js','tests/support-rules.test
 
 subprocess.run([jsc,'card-rules.js','support-rules.js','tests/skill-data.test.js'],check=True,cwd=root)
 
-subprocess.run([jsc,'card-rules.js','parameter-rules.js','tests/parameter-rules.test.js'],check=True,cwd=root)
+subprocess.run([jsc,'card-rules.js','parameter-rules.js','unit-parameter-engine.js','tests/parameter-rules.test.js','tests/case-c-enhancement.test.js'],check=True,cwd=root)
 
 # Adapter runtime view: use JavaScriptCore without browser or network dependencies.
 canonical_js = "const URL = function(path, base){return path;}; const document = {baseURI:'http://localhost/',addEventListener:()=>{}};\n"
@@ -206,7 +206,7 @@ with tempfile.NamedTemporaryFile(mode='w',suffix='.js') as f:
 unit_js = "const URL = function(path, base){return path;}; const document = {baseURI:'http://localhost/',addEventListener:()=>{}};\n"
 unit_js += (root/'members.js').read_text()+'\n'+(root/'canonical-card-adapter.js').read_text()
 unit_js += '\nconst canonicalTestFixture=JSON.parse(readFile("data/runtime-cards.json"));\n'
-for name in ['active-timeline-engine.js','activation-probability-rules.js','active-random-simulation.js','unit-parameter-engine.js','unit-score-engine.js','unit-simulator-engine.js','tests/unit-simulator.test.js']:
+for name in ['card-rules.js','parameter-rules.js','active-timeline-engine.js','activation-probability-rules.js','active-random-simulation.js','unit-parameter-engine.js','unit-score-engine.js','unit-simulator-engine.js','tests/unit-simulator.test.js','tests/unit-passive.test.js','tests/unit-memory.test.js','tests/unit-enhancement.test.js','tests/unit-total-adjustments.test.js']:
     unit_js += (root/name).read_text()+'\n'
 unit_js += 'new Function(readFile("unit-simulator.js"));'
 with tempfile.NamedTemporaryFile(mode='w',suffix='.js') as f:
