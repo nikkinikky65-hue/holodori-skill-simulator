@@ -954,12 +954,6 @@
 .globalNav a:hover { background: #f0f4f7; }
 .globalNav a[aria-current="page"] { color: #124ea0; background: #eaf2fc; border-bottom-color: #124ea0; font-weight: 700; }
 .globalNav a:focus-visible { outline: 2px solid #124ea0; outline-offset: -3px; }
-.developmentNav { margin: 4px 0 8px; font-size: 13px; color: #66501f; }
-.developmentNav > summary { width: fit-content; padding: 8px 12px; cursor: pointer; border: 1px dashed #b8a475; border-radius: 6px; background: #fffaf0; }
-.developmentNav nav { padding: 8px 12px; }
-.developmentNav a { display: inline-block; padding: 8px 0; color: #66501f; overflow-wrap: anywhere; }
-.developmentNav.isCurrent > summary, .developmentNav a[aria-current="page"] { font-weight: 700; }
-.developmentNav :focus-visible { outline: 2px solid #826526; outline-offset: 2px; }
 
 .catalogCard .canonicalGrowth { flex-wrap: wrap; gap: 6px 12px; }
 .catalogStepper { display: inline-flex; align-items: center; gap: 3px; white-space: nowrap; }

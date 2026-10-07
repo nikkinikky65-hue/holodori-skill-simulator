@@ -24,21 +24,17 @@ async function initializeUnitSimulator(){
     function refresh(){
       node('unitResult').replaceChildren();node('unitResultStatus').textContent='編成・曲時間を変更した場合は再実行してください。';
       try{
-        model=UnitSimulatorEngine.build(catalog,slots,Number(node('unitDuration').value),{kind:node('unitMemoryKind').value,percent:node('unitMemoryPercent').value},{kind:'manual-rate',percent:node('unitEnhancementPercent').value});
-        const memoryLabels={applied:'適用済み',unset:'未設定',unsupported:'未対応'};
-        node('unitMemoryStatus').textContent=`Memory：${memoryLabels[model.parameters.memory.status]}${model.parameters.memory.reason ? ' / '+model.parameters.memory.reason : ' / '+model.parameters.memory.percent+'%'}`;
-        node('unitEnhancementStatus').textContent=`Enhancement Bonus：${memoryLabels[model.parameters.enhancementBonus.status]}（${model.parameters.enhancementBonus.scope==='complete-basis'?'完全基数':'部分基数'}）${model.parameters.enhancementBonus.reason ? ' / '+model.parameters.enhancementBonus.reason : ' / '+model.parameters.enhancementBonus.percent+'%'}`;
+        model=UnitSimulatorEngine.build(catalog,slots,Number(node('unitDuration').value));
         const rows=[];
         model.members.forEach((member,i)=>{
           previews[i].textContent=member ? canonicalEffectsText(member.expansion)+`\n使用Lv：SP ${member.expansion.levels.special} / A ${member.expansion.levels.active} / P ${member.expansion.levels.passive}` : 'カード未選択';
           if(!member)return;
-          for(const [part,label] of [['base','基礎'],['opening','開花増分'],['passive','Passive補正（適用済み分）'],['memory','Memory'],['board','Board（TOTAL補正）'],['costume','衣装（TOTAL補正）'],['enhancementBonus','Enhancement Bonus（TOTAL補正）'],['subtotal','現在計算値']]) rows.push([`枠${i+1} ${member.card.name}`,label,...pts(member.parameters[part])]);
+          for(const [part,label] of [['base','基礎'],['opening','開花増分'],['passive','Passive補正（適用済み分）'],['subtotal','現在計算値']]) rows.push([`枠${i+1} ${member.card.name}`,label,...pts(member.parameters[part])]);
         });
-        for(const [part,label] of [['base','基礎合計'],['opening','開花増分合計'],['passive','Passive合計（適用済み分）'],['memory','Memory合計'],['board','Board合計（入力済み分）'],['costume','衣装合計（入力済み分）'],['enhancementBonus','Enhancement Bonus合計'],['subtotal','現在計算値合計']]) rows.push(['編成（選択済み）',label,...pts(model.parameters[part])]);
-        rows.push(['編成','最終値（補正未接続）','—','—','—','—']);
+        for(const [part,label] of [['base','基礎合計'],['opening','開花増分合計'],['passive','Passive合計（適用済み分）'],['subtotal','現在計算値合計']]) rows.push(['編成（選択済み）',label,...pts(model.parameters[part])]);
         node('unitParameters').replaceChildren(table(['対象','内訳','P','T','S','TOTAL'],rows));
         for(const member of model.parameters.members){
-          const details=create('details'),summary=create('summary',`${member.cardId}：Parameter trace / Board ${member.board.status} / 衣装 ${member.costume.status} / 基数 ${member.enhancementBonus.scope==='complete-basis'?'完全':'部分'} / Enhancement ${memoryLabels[member.enhancementBonus.status]} / Memory ${memoryLabels[member.memory.status]} / Passive ${member.unresolved.length ? '未接続あり' : '評価済み'}`);
+          const details=create('details'),summary=create('summary',`${member.cardId}：Parameter trace`);
           const trace=create('pre',JSON.stringify(member.trace,null,2));trace.style.whiteSpace='pre-wrap';
           details.append(summary,trace);node('unitParameters').append(details);
         }
@@ -79,26 +75,10 @@ async function initializeUnitSimulator(){
         for(let n=0;n<=max;n++)select.append(new Option(String(n),String(n)));
         select.addEventListener('change',()=>{slot[key]=Number(select.value);refresh();});control.append(select);growth.append(control);
       }
-      const frequencyLabel=create('label','発動頻度UP (%)'),frequency=create('select');frequency.dataset.short='';
-      for(const n of [0,4,8,12])frequency.append(new Option(String(n),String(n)));
-      frequency.addEventListener('change',()=>{slot.short=Number(frequency.value);refresh();});frequencyLabel.append(frequency);
-      const adjustments=create('div');
-      for(const [key,title] of [['board','Board'],['costume','衣装']]){
-        const label=create('label',`${title}補正（TOTAL）`),input=create('input');input.type='text';input.inputMode='numeric';input.placeholder='未設定（0は設定済み）';input.dataset.totalAdjustment=key;
-        const info=create('span');info.setAttribute('role','status');
-        input.addEventListener('input',()=>{
-          slot.totalAdjustments[key].value=input.value;
-          const parsed=UnitParameterEngine.resolveTotalAdjustment(slot.totalAdjustments[key]);
-          info.textContent=({unset:'未設定',applied:'設定済み',invalid:'不正入力',unsupported:'未対応'})[parsed.status]+(parsed.reason?'：'+parsed.reason:'');refresh();
-        });info.textContent='未設定';label.append(input,info);adjustments.append(label);
-      }
       const preview=create('p');preview.className='unitPreview';previews.push(preview);
-      panel.append(searchLabel,cardLabel,growth,frequencyLabel,adjustments,preview);node('unitSlots').append(panel);
+      panel.append(searchLabel,cardLabel,growth,preview);node('unitSlots').append(panel);
     });
     node('unitDuration').addEventListener('input',refresh);
-    node('unitEnhancementPercent').addEventListener('input',refresh);
-    node('unitMemoryPercent').addEventListener('input',refresh);
-    node('unitMemoryKind').addEventListener('change',()=>{node('unitMemoryPercent').disabled=node('unitMemoryKind').value!=='manual-rate';refresh();});
     node('unitProbability').textContent='暫定発動率：'+[['low','低'],['mid','中'],['high','高']].map(([key,label])=>`${label}${ActivationProbabilityRules.percent[key]}%`).join(' / ');
     node('unitRun').addEventListener('click',()=>{
       try{

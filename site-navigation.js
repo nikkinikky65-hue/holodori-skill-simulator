@@ -6,7 +6,8 @@
     {label: 'ライブラリ', file: 'library.html'},
     {label: 'カード', file: 'card-catalog.html'},
     {label: 'リーダー', file: 'leader.html'},
-    {label: 'イベント編成探索', file: 'event.html'}
+    {label: 'イベント編成探索', file: 'event.html'},
+    {label: '開発中', file: 'unit-simulator.html'}
   ];
   const currentPath = location.pathname.endsWith('/')
     ? new URL('index.html', location.href).pathname : location.pathname;
@@ -28,26 +29,7 @@
     if(url.pathname === currentPath) link.setAttribute('aria-current', 'page');
     nav.append(link);
   }
-  const development = document.createElement('details');
-  development.className = 'developmentNav';
-  const summary = document.createElement('summary');
-  summary.textContent = '開発中';
-  const developmentLinks = document.createElement('nav');
-  developmentLinks.setAttribute('aria-label', '開発中の機能');
-  for(const page of [{label:'次世代 統合シミュレーター',file:'unit-simulator.html'}]){
-    const link = document.createElement('a');
-    const url = new URL(page.file, base);
-    link.href = url.href;
-    link.textContent = page.label;
-    if(url.pathname === currentPath){
-      link.setAttribute('aria-current', 'page');
-      development.open = true;
-      development.classList.add('isCurrent');
-    }
-    developmentLinks.append(link);
-  }
-  development.append(summary, developmentLinks);
-  inner.append(title, nav, development);
+  inner.append(title, nav);
   header.append(inner);
   document.body.prepend(header);
   // Reveal the active tab without scrolling the page vertically on mobile.
