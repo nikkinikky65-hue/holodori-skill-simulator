@@ -27,7 +27,7 @@ async function initializeUnitSimulator(){
         model=UnitSimulatorEngine.build(catalog,slots,Number(node('unitDuration').value),{kind:'manual-rate',percent:node('unitMemoryPercent').value},{kind:'manual-rate',percent:node('unitEnhancementPercent').value});
         const rows=[];
         model.members.forEach((member,i)=>{
-          previews[i].textContent=member ? canonicalEffectsText(member.expansion)+`\n使用Lv：SP ${member.expansion.levels.special} / A ${member.expansion.levels.active} / P ${member.expansion.levels.passive}` : 'カード未選択';
+          previews[i].textContent=member ? canonicalEffectsText(member.expansion) : 'カード未選択';
           if(!member)return;
           for(const [part,label] of [['base','基礎'],['opening','開花増分'],['passive','Passive補正（適用済み分）'],['subtotal','現在計算値']]) rows.push([`枠${i+1} ${member.card.name}`,label,...pts(member.parameters[part])]);
         });
