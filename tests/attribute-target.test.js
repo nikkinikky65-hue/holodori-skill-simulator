@@ -68,6 +68,6 @@ const active=UnitSimulatorEngine.build(catalog,slots,120);
 const disabled=JSON.parse(json(catalog));disabled.cards.find(c=>c.id===ids[0]).skills.passive.levels.forEach(p=>p.condition.state='unobserved');
 const baseline=UnitSimulatorEngine.build(disabled,slots,120);
 check(json(active.segments)===json(baseline.segments),'Timeline unchanged');
-check(json(UnitSimulatorEngine.simulate(active,100,ActiveRandomSimulation.seededRandom(8)))===json(UnitSimulatorEngine.simulate(baseline,100,ActiveRandomSimulation.seededRandom(8))),'seed unchanged');
+check(json(UnitSimulatorEngine.simulate(active,100,ActiveRandomSimulation.seededRandom(8)).normalized)===json(UnitSimulatorEngine.simulate(baseline,100,ActiveRandomSimulation.seededRandom(8)).normalized),'seed unchanged');
 print('Attribute selection: 35 cards/70 rows, counts 1–5, legacy parity, ties, CASE C, multiple sources, Memory/Enhancement/Timeline/seed PASS');
 }

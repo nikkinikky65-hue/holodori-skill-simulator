@@ -33,8 +33,8 @@ const slots=Array.from({length:5},()=>({cardId:card.id,training:0,bloom:4,short:
 const before=UnitSimulatorEngine.build(canonicalTestFixture,slots,120);
 const after=UnitSimulatorEngine.build(canonicalTestFixture,slots,120,rates('6.4'));
 check(after.parameters.subtotal.total===after.parameters.members.reduce((sum,m)=>sum+m.subtotal.total,0),'unit sum');
-check(after.unitScore.value===null && JSON.stringify(before.segments)===JSON.stringify(after.segments),'symbolic X and Timeline unchanged');
-check(JSON.stringify(UnitSimulatorEngine.simulate(before,100,ActiveRandomSimulation.seededRandom(12)))===JSON.stringify(UnitSimulatorEngine.simulate(after,100,ActiveRandomSimulation.seededRandom(12))),'Simulation unchanged');
+check(after.unitScore.value===after.parameters.subtotal.total && JSON.stringify(before.segments)===JSON.stringify(after.segments),'provisional score and Timeline unchanged');
+check(JSON.stringify(UnitSimulatorEngine.simulate(before,100,ActiveRandomSimulation.seededRandom(12)).normalized)===JSON.stringify(UnitSimulatorEngine.simulate(after,100,ActiveRandomSimulation.seededRandom(12)).normalized),'Simulation unchanged');
 check(after.parameters.members.every(m=>m.corrections.some(c=>c.label==='強化ボーナス'&&c.value===null)),'Enhancement remains unconnected');
 print('Memory: shared formula, CASE C 2451, pre-Passive basis, per-stat ceil, unset/zero/unsupported, trace, totals and isolation PASS');
 }

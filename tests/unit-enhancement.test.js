@@ -20,8 +20,8 @@ for(let i=0;i<5;i++){
 }
 check(after.parameters.enhancementBonus.total===after.parameters.members.reduce((s,m)=>s+m.enhancementBonus.total,0),'sum member rounding');
 check(build('50',rates('2.43')).parameters.enhancementBonus.total===after.parameters.enhancementBonus.total,'memory excluded');
-check(JSON.stringify(after.segments)===JSON.stringify(before.segments)&&after.unitScore.value===null,'Timeline and X unchanged');
-check(JSON.stringify(UnitSimulatorEngine.simulate(after,100,ActiveRandomSimulation.seededRandom(1)))===JSON.stringify(UnitSimulatorEngine.simulate(before,100,ActiveRandomSimulation.seededRandom(1))),'seed unchanged');
+check(JSON.stringify(after.segments)===JSON.stringify(before.segments)&&after.unitScore.value===after.parameters.subtotal.total,'Timeline unchanged and Unit Score follows total');
+check(JSON.stringify(UnitSimulatorEngine.simulate(after,100,ActiveRandomSimulation.seededRandom(1)).normalized)===JSON.stringify(UnitSimulatorEngine.simulate(before,100,ActiveRandomSimulation.seededRandom(1)).normalized),'seed unchanged');
 for(const input of [rates('-1'),rates('invalid'),{kind:'unknown',percent:'2.43'}])check(build('6.4',input).parameters.enhancementBonus.status==='unsupported','unsupported');
 print('Enhancement: unchanged Memory/Passive, scalar ceil, basis trace, null/zero/unsupported, partial scope and Timeline/Simulation PASS');
 }

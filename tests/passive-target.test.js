@@ -35,7 +35,7 @@ for(const id of expected){
  check(u.parameters.members[0].trace[0].status==='unresolved','missing data');
  check(JSON.stringify(m.parameters.members[0].memory)===JSON.stringify(u.parameters.members[0].memory),'Memory independent');
  check(JSON.stringify(m.segments)===JSON.stringify(u.segments),'Timeline independent');
- check(JSON.stringify(UnitSimulatorEngine.simulate(m,100,ActiveRandomSimulation.seededRandom(3)))===JSON.stringify(UnitSimulatorEngine.simulate(u,100,ActiveRandomSimulation.seededRandom(3))),'seed unchanged');
+ check(JSON.stringify(UnitSimulatorEngine.simulate(m,100,ActiveRandomSimulation.seededRandom(3)).normalized)===JSON.stringify(UnitSimulatorEngine.simulate(u,100,ActiveRandomSimulation.seededRandom(3)).normalized),'seed unchanged');
 }
 print('Partial affiliation targets: 15 cards, inactive/resolved/unresolved, self inclusion, multiple sources, aggregate ceil, missing data, Memory/Timeline/seed PASS');
 }

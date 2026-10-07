@@ -36,6 +36,6 @@ const edited=JSON.parse(JSON.stringify(canonicalTestFixture));edited.cards.find(
 const pending=UnitSimulatorEngine.build(edited,slots,120);
 check(baseline.parameters.passive.total>0 && pending.parameters.unresolved.length===5,'real Runtime connection');
 check(JSON.stringify(baseline.segments)===JSON.stringify(pending.segments),'Timeline independent');
-check(JSON.stringify(UnitSimulatorEngine.simulate(baseline,100,ActiveRandomSimulation.seededRandom(4)))===JSON.stringify(UnitSimulatorEngine.simulate(pending,100,ActiveRandomSimulation.seededRandom(4))),'Simulation independent');
+check(JSON.stringify(UnitSimulatorEngine.simulate(baseline,100,ActiveRandomSimulation.seededRandom(4)).normalized)===JSON.stringify(UnitSimulatorEngine.simulate(pending,100,ActiveRandomSimulation.seededRandom(4)).normalized),'Simulation independent');
 print('Unit Passive: self P/T/S/all, CASE C self component, ceil, trace, unsupported, slot gaps, Timeline/Simulation isolation PASS');
 }

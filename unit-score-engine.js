@@ -1,4 +1,11 @@
-// Boundary for a future verified formula. Never equate parameter total with score.
+// Provisional parameter-total scale, not the game's absolute scoring formula.
 const UnitScoreEngine = Object.freeze({
-  calculate(parameters){ return {symbol:'X',value:null,status:'unresolved',parameterStatus:parameters.status}; }
+  calculate(parameters){
+    const value=parameters.subtotal.total;
+    if(!Number.isFinite(value)||value<0) throw Error('現在計算TOTALが不正です');
+    const unresolved=[...parameters.unresolved,...parameters.corrections,
+      ...parameters.members.flatMap(member=>member.corrections)];
+    return {value,status:'provisional',basis:'parameter-current-total',parameterStatus:parameters.status,
+      incomplete:parameters.members.length!==5,hasUnresolved:unresolved.length>0,unresolved};
+  }
 });

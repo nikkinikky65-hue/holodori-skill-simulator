@@ -110,3 +110,10 @@ trace.targetResolution.selectionに候補のcardId/slot/baseTotal/formationIndex
 既存CASE Cの数値fixtureを読み、新EngineでPassive4532/Memory2451/Enhancement1397を検証する。CASE C先頭sourceは無条件なので、テストでは全5人が一致して成立する観測属性条件へ置き換える。無条件Runtimeの接続を実装したという意味ではない。Board・衣装はTOTAL外部入力、Memoryは従来基数、Enhancementは追加Passiveを従来式で反映する。
 
 属性接続の検証結果: tests/verify.py、runtime-catalog.test.py、leader-catalog.test.py、監査--checkはPASS。Chrome headlessのunit-simulator-browser.html（1100px/360px、属性selection trace表示・所属保留を含む）とbrowser.htmlもPASS。Canonical・カードRuntime・保存形式は変更していない。
+
+
+## 暫定Unit Scoreと共通Timeline UI
+
+ユーザー指定の暫定定義としてParameter Engine.subtotal.totalをUnit Score値に使用する。ゲームの正式スコア式を確定したという意味ではない。補正は再計算せず、未解決・未設定情報も別状態として保持。Memory/Enhancementの編成共通%入力を再表示し、Parameter Engine経由で反映する。
+
+active-timeline-view.jsは既存A面の描画を抽出した共通UI。統合区間・時間軸・各メンバーバー・クリック詳細を同じ実装で描画し、active-timeline-engine.jsは不変。Unit SimulatorのallSuccessScoreは従来allSuccessX×unitScore.value。Simulationは従来乱数結果をnormalizedに残し、各試行を同じ値で1回だけスケールして統計を集計する。A面の評価値・乱数シミュレーションは変更しない。

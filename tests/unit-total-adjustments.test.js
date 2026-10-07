@@ -25,7 +25,7 @@ const costume=filled.map(s=>({...s,totalAdjustments:{...s.totalAdjustments,costu
 check(build(costume).parameters.members[0].enhancementBonus.basis===after.parameters.members[0].enhancementBonus.basis+100,'costume basis');
 check(build(filled,'50').parameters.enhancementBonus.total===after.parameters.enhancementBonus.total,'Memory excluded');
 check(JSON.stringify(after.segments)===JSON.stringify(before.segments),'Timeline same');
-check(JSON.stringify(UnitSimulatorEngine.simulate(after,100,ActiveRandomSimulation.seededRandom(2)))===JSON.stringify(UnitSimulatorEngine.simulate(before,100,ActiveRandomSimulation.seededRandom(2))),'Simulation same');
+check(JSON.stringify(UnitSimulatorEngine.simulate(after,100,ActiveRandomSimulation.seededRandom(2)).normalized)===JSON.stringify(UnitSimulatorEngine.simulate(before,100,ActiveRandomSimulation.seededRandom(2)).normalized),'Simulation same');
 filled[0].totalAdjustments.board=input('bad');
 check(build(filled).parameters.enhancementBonus.scope!=='complete-basis','invalid partial');
 print('Board/costume: state distinctions, external TOTAL, basis, trace, PTS/Passive/Memory and Timeline/Simulation isolation PASS');

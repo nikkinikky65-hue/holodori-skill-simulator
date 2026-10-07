@@ -12,13 +12,14 @@
 <p id="unitStatus" role="status">カードデータを読み込み中…</p></section>
 <section class="panel"><h2>1. 編成</h2><div id="unitSlots" class="unitSlots"></div></section>
 <section class="panel"><h2>2. パラメーター</h2>
+<div class="canonicalGrowth"><label>Memory (%)<input id="unitMemoryPercent" type="text" inputmode="decimal" placeholder="未設定"></label><label>Enhancement Bonus (%)<input id="unitEnhancementPercent" type="text" inputmode="decimal" placeholder="未設定"></label></div>
 <div id="unitParameters"></div></section>
-<section class="panel"><h2>3. Unit Score</h2><p id="unitScore">Unit Score = X（算出式未確定）</p></section>
+<section class="panel"><h2>3. Unit Score</h2><p id="unitScore">暫定Unit Score</p></section>
 <section class="panel"><h2>4. Timeline</h2>
 <label>楽曲時間 (s)<input id="unitDuration" type="number" min="0.01" step="0.01" value="120"></label>
-<div id="unitTimeline"></div></section>
+<p id="unitTimelineScore"></p><div class="timeline-scroll"><div id="unitTimeline" class="timeline"></div></div><div id="unitTimelineDetail">バーを選ぶと詳細を表示します。</div></section>
 <section class="panel"><h2>5. シミュレーション結果</h2>
-<p class="sub">Active基本効果のみの暫定シミュレーション（X単位）。</p>
+<p class="sub">暫定スコア：現在計算値＋Active。ゲーム内絶対スコアではありません。</p>
 <p id="unitProbability"></p>
 <label>試行回数<select id="unitTrials"><option value="100">100</option><option value="1000" selected>1,000</option><option value="10000">10,000</option></select></label>
 <button id="unitRun" type="button" disabled>シミュレーション実行</button>
@@ -26,7 +27,7 @@
 </main>
 <script src="members.js"></script><script src="canonical-card-adapter.js?v=b4659e28157c"></script>
 <script src="card-rules.js"></script><script src="parameter-rules.js"></script>
-<script src="active-timeline-engine.js"></script><script src="activation-probability-rules.js"></script>
+<script src="active-timeline-engine.js"></script><script src="active-timeline-view.js"></script><script src="activation-probability-rules.js"></script>
 <script src="active-random-simulation.js"></script><script src="party-condition-resolver.js"></script><script src="passive-target-resolver.js"></script><script src="passive-selection-resolver.js"></script><script src="unit-parameter-engine.js"></script>
 <script src="unit-score-engine.js"></script><script src="unit-simulator-engine.js"></script><script src="unit-simulator.js"></script>
 </body></html>

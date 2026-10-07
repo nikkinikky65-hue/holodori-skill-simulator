@@ -212,3 +212,9 @@ unit_js += 'new Function(readFile("unit-simulator.js"));'
 with tempfile.NamedTemporaryFile(mode='w',suffix='.js') as f:
     f.write(unit_js);f.flush()
     subprocess.run([jsc,f.name],check=True,cwd=root)
+
+# Both pages use the same Timeline view; no copied UI in the page controller.
+for page in ['index.html','unit-simulator.html']:
+    assert 'active-timeline-view.js' in (root/page).read_text()
+for source in ['app.js','unit-simulator.js']:
+    assert 'ActiveTimelineView.render(' in (root/source).read_text()

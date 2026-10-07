@@ -34,7 +34,7 @@
    assert(w.document.querySelector('#unitParameters').textContent.includes('開花増分') && w.document.querySelector('#unitParameters').textContent.includes('現在計算値'),'breakdown visible');
    w.document.querySelector('#unitTrials').value='100';w.document.querySelector('#unitRun').click();
    assert(w.document.querySelector('#unitResultStatus').textContent.includes('100試行完了'),'simulation works');
-   assert(w.document.querySelector('#unitResult').textContent.includes('X'),'symbolic result');
+   assert(!w.document.querySelector('#unitResult').textContent.includes('X'),'numeric result');
    assert(w.document.documentElement.scrollWidth<=width,'page fits width');
    assert(w.document.querySelector('#unitSlots').scrollWidth<=w.document.querySelector('#unitSlots').clientWidth,'slots fit width');
    const duration=w.document.querySelector('#unitDuration');duration.value='90';duration.dispatchEvent(new w.Event('input'));
@@ -51,13 +51,23 @@
    const trace=w.document.querySelector('#unitParameters details');trace.querySelector('summary').click();
    assert(trace.open && trace.textContent.includes('referenceValue'),'trace expands');
    assert(w.document.documentElement.scrollWidth<=width,'trace fits viewport');
-   assert(!w.document.querySelector('#unitMemoryPercent, #unitMemoryKind, #unitEnhancementPercent, [data-total-adjustment], [data-short]'),'removed inputs have no stale DOM');
+   assert(!w.document.querySelector('#unitMemoryKind, [data-total-adjustment], [data-short]'),'removed inputs have no stale DOM');
    const current=api.getModel();
    assert(current.parameters.memory.status==='unset'&&current.parameters.enhancementBonus.status==='unset','removed controls preserve unset state');
    assert(current.activeMembers.every(m=>m.short===0),'frequency default unchanged');
    assert(current.parameters.members.every(m=>m.board.status==='unset'&&m.costume.status==='unset'),'external totals stay unset');
    assert(!w.document.querySelector('#unitParameters table').textContent.match(/Memory|Enhancement|Board|衣装/),'unused breakdowns omitted');
    assert(trace.textContent.includes('memoryIncluded'),'full internal trace retained');
+   assert(current.unitScore.value===current.parameters.subtotal.total && current.unitScore.hasUnresolved,'numeric provisional total with unknowns');
+   for(const id of ['unitMemoryPercent','unitEnhancementPercent']){
+     const old=api.getModel().unitScore.value,input=w.document.getElementById(id);
+     input.value='6.4';input.dispatchEvent(new w.Event('input'));
+     assert(api.getModel().unitScore.value>old && api.getModel().unitScore.value===api.getModel().parameters.subtotal.total,'input flows through parameter total');
+   }
+   assert(w.document.querySelector('#unitTimeline .axis') && w.document.querySelectorAll('#unitTimeline .row').length===6,'A Timeline structure');
+   const bar=w.document.querySelector('#unitTimeline .bar');bar.click();
+   assert(w.document.querySelector('#unitTimelineDetail').textContent.includes('有効補正'),'shared bar details');
+
    for(const control of select){control.value='card-00001-5-uniq-0000-00';control.dispatchEvent(new w.Event('change'));}
    assert(api.getModel().parameters.members[0].trace[0].condition.actualCount===5,'affiliation data loaded');
    assert(api.getModel().parameters.members[0].trace[0].status==='resolved','self affiliation Passive connected');

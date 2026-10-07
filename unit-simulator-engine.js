@@ -20,13 +20,17 @@ const UnitSimulatorEngine = (() => {
     const activeMembers=members.filter(Boolean).map(member=>member.active);
     const eventsByMember=activeMembers.map(member=>ActiveTimelineEngine.events(member,duration));
     const segments=ActiveTimelineEngine.maxSegments(eventsByMember.flat(),duration);
-    return {members,parameters,unitScore:UnitScoreEngine.calculate(parameters),duration,activeMembers,eventsByMember,segments,
-      allSuccessX:ActiveRandomSimulation.integrate(segments,duration)};
+    const unitScore=UnitScoreEngine.calculate(parameters);
+    const allSuccessX=ActiveRandomSimulation.integrate(segments,duration);
+    return {members,parameters,unitScore,duration,activeMembers,eventsByMember,segments,
+      allSuccessX,allSuccessScore:allSuccessX*unitScore.value};
   }
   function simulate(model,count,random=Math.random){
     if(model.parameters.status!=='card-only') throw Error('5人のカードを選択してください');
     const prepared=ActiveRandomSimulation.prepare(model.activeMembers,model.duration,ActiveTimelineEngine.events,q=>ActivationProbabilityRules.probability(q));
-    return ActiveRandomSimulation.run(prepared,count,ActiveTimelineEngine.maxSegments,random);
+    const normalized=ActiveRandomSimulation.run(prepared,count,ActiveTimelineEngine.maxSegments,random);
+    const values=normalized.values.map(value=>value*model.unitScore.value);
+    return {values,statistics:ActiveRandomSimulation.statistics(values),normalized,unitScore:model.unitScore};
   }
   return {build,simulate};
 })();

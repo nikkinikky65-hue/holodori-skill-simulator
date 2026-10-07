@@ -29,7 +29,7 @@ for(const id of expected){
   check(unknown.parameters.members[0].trace[0].status==='unresolved','missing identity not false');
   check(JSON.stringify(model.parameters.members[0].memory)===JSON.stringify(unknown.parameters.members[0].memory),'Memory unchanged');
   check(JSON.stringify(model.segments)===JSON.stringify(unknown.segments),'Timeline unchanged');
-  check(JSON.stringify(UnitSimulatorEngine.simulate(model,100,ActiveRandomSimulation.seededRandom(9)))===JSON.stringify(UnitSimulatorEngine.simulate(unknown,100,ActiveRandomSimulation.seededRandom(9))),'seed unchanged');
+  check(JSON.stringify(UnitSimulatorEngine.simulate(model,100,ActiveRandomSimulation.seededRandom(9)).normalized)===JSON.stringify(UnitSimulatorEngine.simulate(unknown,100,ActiveRandomSimulation.seededRandom(9)).normalized),'seed unchanged');
  }
 }
 // Existing self+attribute gate produces identical results with/without affiliations.
