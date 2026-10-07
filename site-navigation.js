@@ -28,7 +28,26 @@
     if(url.pathname === currentPath) link.setAttribute('aria-current', 'page');
     nav.append(link);
   }
-  inner.append(title, nav);
+  const development = document.createElement('details');
+  development.className = 'developmentNav';
+  const summary = document.createElement('summary');
+  summary.textContent = '開発中';
+  const developmentLinks = document.createElement('nav');
+  developmentLinks.setAttribute('aria-label', '開発中の機能');
+  for(const page of [{label:'次世代 統合シミュレーター',file:'unit-simulator.html'}]){
+    const link = document.createElement('a');
+    const url = new URL(page.file, base);
+    link.href = url.href;
+    link.textContent = page.label;
+    if(url.pathname === currentPath){
+      link.setAttribute('aria-current', 'page');
+      development.open = true;
+      development.classList.add('isCurrent');
+    }
+    developmentLinks.append(link);
+  }
+  development.append(summary, developmentLinks);
+  inner.append(title, nav, development);
   header.append(inner);
   document.body.prepend(header);
   // Reveal the active tab without scrolling the page vertically on mobile.

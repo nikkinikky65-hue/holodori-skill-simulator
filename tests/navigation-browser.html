@@ -13,6 +13,13 @@
     if(page==='card-catalog.html') await w.eval('cardCatalogReady');
     if(page==='leader.html') await w.eval('leaderCatalogReady');
     if(page==='index.html') await w.waitForCanonicalRestore();
+    const development=w.document.querySelector('.developmentNav');
+    assert(development && development.querySelector('summary').textContent==='開発中','development menu on every page');
+    development.querySelector('summary').click();
+    assert(development.open && development.querySelector('a').checkVisibility(),'development link opens');
+    assert(new URL(development.querySelector('a').href).pathname.endsWith('unit-simulator.html'),'development destination');
+    assert(w.document.documentElement.scrollWidth<=width,'development menu fits');
+    development.querySelector('summary').click();
     const nav=w.document.querySelector('.globalNav');
     const links=[...nav.querySelectorAll('a')];
     assert(JSON.stringify(links.map(a=>a.textContent))===JSON.stringify(labels),'five labels');
@@ -98,6 +105,22 @@
         }
       }
     }
+    for(const width of [1100,360]){
+      frame.style.width=width+'px';
+      let w=await open('index.html');
+      w.document.querySelector('.developmentNav summary').click();
+      w=await follow(w.document.querySelector('.developmentNav a'));
+      await w.eval('unitSimulatorReady');
+      assert(w.document.querySelector('.developmentNav').open,'current development menu open');
+      assert(w.document.querySelector('.developmentNav [aria-current="page"]'),'development active page');
+      assert(!w.document.querySelector('.globalNav [aria-current]'),'stable tabs not active on development page');
+      assert(w.document.querySelector('main').textContent.includes('開発中：計算仕様・UIは変更される可能性があります'),'development notice');
+      assert(w.document.querySelectorAll('[data-unit-card]').length===5,'simulator starts');
+      assert(w.document.documentElement.scrollWidth<=width,'development page fits');
+      w=await follow(w.document.querySelector('.globalNav a'));
+      await inspect(w,'index.html',width);
+    }
+    frame.style.width='360px';
     const w=await open('./');await inspect(w,'index.html',360);
     result.textContent='PASS: five routes, all tabs, active state, desktop/mobile geometry, active visibility, feature startup and root alias';
   }catch(error){result.textContent='FAIL: '+error.stack;}
