@@ -106,6 +106,26 @@
    assert(api.getModel().parameters.members[0].board.status==='invalid'&&api.getModel().parameters.enhancementBonus.scope!=='complete-basis','invalid partial');
    assert(w.document.documentElement.scrollWidth<=width,'external controls fit');
    assert(JSON.stringify(Object.keys(localStorage).sort().map(key=>[key,localStorage.getItem(key)]))===saved,'external totals do not save');
+   for(const control of select){control.value='card-00001-5-uniq-0000-00';control.dispatchEvent(new w.Event('change'));}
+   assert(api.getModel().parameters.members[0].trace[0].condition.actualCount===5,'affiliation data loaded');
+   assert(api.getModel().parameters.members[0].trace[0].status==='resolved','self affiliation Passive connected');
+   assert(w.document.querySelector('#unitParameters').textContent.includes('affiliationId'),'affiliation trace visible');
+   for(let i=0;i<select.length;i++){
+     select[i].value=i<2?'card-00006-5-uniq-0007-00':'card-00001-5-uniq-0000-00';select[i].dispatchEvent(new w.Event('change'));
+   }
+   assert(api.getModel().parameters.members[0].trace[0].targetSlots.length===2,'partial target exact pair');
+   select[2].value='card-00006-5-uniq-0007-00';select[2].dispatchEvent(new w.Event('change'));
+   assert(api.getModel().parameters.members[0].trace[0].status==='unresolved','three candidates deferred');
+   const targetTrace=w.document.querySelector('#unitParameters details');targetTrace.open=true;
+   assert(targetTrace.textContent.includes('target selection unresolved'),'target reason visible');
+   assert(w.document.documentElement.scrollWidth<=width,'target trace fits');
+   for(const control of select){control.value='card-00001-3-nrml-0000-00';control.dispatchEvent(new w.Event('change'));}
+   const attributeTrace=api.getModel().parameters.members[0].trace[0];
+   assert(attributeTrace.targetResolution.selection.rule==='attribute-baseTotal','attribute selection connected');
+   assert(attributeTrace.targetSlots.length===3,'attribute selects three');
+   const expanded=w.document.querySelector('#unitParameters details');expanded.open=true;
+   assert(expanded.textContent.includes('formationIndex')&&expanded.textContent.includes('baseTotal'),'selection trace visible');
+   assert(w.document.documentElement.scrollWidth<=width,'attribute trace fits');
    const reloaded=await open();await reloaded.eval('unitSimulatorReady');
    assert([...reloaded.document.querySelectorAll('[data-unit-card]')].every(s=>s.value===''),'page-local selection resets on reload');
    assert(reloaded.document.querySelector('#unitMemoryPercent').value==='','Memory resets on reload');

@@ -52,6 +52,10 @@ function parameterConditionMatches(condition, member){
   return null;
 }
 
+function rankPassiveCandidates(candidates){
+  return [...candidates].sort((a, b) => b.baseTotal - a.baseTotal || a.formationIndex - b.formationIndex);
+}
+
 function resolvePassiveTargets(source, effect, members){
   const condition = effect.condition || { kind: 'none' };
   const conditionMatches = members.map(member => parameterConditionMatches(condition, member));
@@ -83,7 +87,7 @@ function resolvePassiveTargets(source, effect, members){
   }else{
     targetStatus = 'unresolved-target';
   }
-  const ranked = [...candidates].sort((a, b) => b.baseTotal - a.baseTotal || a.formationIndex - b.formationIndex);
+  const ranked = rankPassiveCandidates(candidates);
   const targets = targetStatus === 'resolved' ? ranked.slice(0, targetCount) : [];
   const status = activated === false ? 'inactive'
     : activated === null ? 'unresolved-condition'
@@ -94,7 +98,7 @@ function resolvePassiveTargets(source, effect, members){
   };
 }
 
-function calculatePassiveEffects(members){
+function calculatePassiveEffects(members, targetResolver = resolvePassiveTargets){
   const prepared = members.map((member, index) => ({
     ...member,
     formationIndex: index,
@@ -106,7 +110,7 @@ function calculatePassiveEffects(members){
     const effect = getPassiveEffect(source.card);
     const affectedKeys = PARAMETER_PASSIVE_TYPES[effect.type];
     if(!affectedKeys || parameterNumber(effect.value) === 0) continue;
-    const resolution = resolvePassiveTargets(source, effect, prepared);
+    const resolution = targetResolver(source, effect, prepared);
     const { targets, ...reportedResolution } = resolution;
     passiveResults.push({
       sourceSlot: source.slot, sourceCardId: source.libraryCardId || source.card?.id || null,

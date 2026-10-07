@@ -15,7 +15,7 @@ const UnitSimulatorEngine = (() => {
         parameters:{...UnitParameterEngine.calculateMemberParameter(card,selection.training,selection.bloom),slot:index+1,totalAdjustmentInputs:selection.totalAdjustments},
         active:{slot:index+1,name:card.name,interval:active.interval,duration:active.duration,boost:active.boost,prob:active.probability,short:selection.short}};
     });
-    const parameters=UnitParameterEngine.calculateUnitParameter(members.filter(Boolean).map(member=>member.parameters),memoryInput,enhancementInput);
+    const parameters=UnitParameterEngine.calculateUnitParameter(members.filter(Boolean).map(member=>member.parameters),memoryInput,enhancementInput,catalog.affiliationCatalog?.canonicalSha256===catalog.dataset.canonicalSha256?catalog.affiliationCatalog:null);
     members.filter(Boolean).forEach((member,index)=>{member.parameters=parameters.members[index];});
     const activeMembers=members.filter(Boolean).map(member=>member.active);
     const eventsByMember=activeMembers.map(member=>ActiveTimelineEngine.events(member,duration));

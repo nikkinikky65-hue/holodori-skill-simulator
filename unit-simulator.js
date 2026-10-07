@@ -4,6 +4,10 @@ async function initializeUnitSimulator(){
   const status=node('unitStatus');
   try{
     const catalog=await loadRuntimeCardCatalog();
+    try{
+      const response=await fetch(new URL('data/runtime-affiliations.json',document.baseURI));
+      if(response.ok){const data=await response.json();if(data.format==='holodori-affiliations-v1'&&data.canonicalSha256===catalog.dataset.canonicalSha256)catalog.affiliationCatalog=data;}
+    }catch(error){ /* Missing affiliation data leaves those conditions unresolved. */ }
     const slots=Array.from({length:5},()=>({cardId:'',training:0,bloom:0,short:0,totalAdjustments:{board:{kind:'external-total',value:''},costume:{kind:'external-total',value:''}}}));
     const previews=[];
     let model=null;

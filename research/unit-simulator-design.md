@@ -77,3 +77,36 @@ Enhancementのcomponents.board/outfitへ正規化したTOTALを渡す。設定�
 traceには対象枠/カード、外部入力source、原入力、正規化値、入力状態、強化基数への採用有無、強化計算実行有無を記録する。Enhancement traceのcomponentsとbasisから全構成を確認可能。ページ再読み込みで外部入力も初期化し、既存保存へ書き込まない。
 
 `tests/unit-total-adjustments.test.js`で状態区別、TOTAL分離、Board/衣装の基数・現在計算値への接続、完全/部分判定、Memory/Passive/Timeline/seed Simulation非干渉を検証。CASE C検証は既存fixtureのBoard/衣装を外部入力の正規化経路に通して同じメンバー値と1397へ一致することを確認する。新ページの未対応順位PassiveをCASE C再現のために追加接続することはしない。
+
+## 所属人数条件：自己対象11カードの接続
+
+`build_affiliation_catalog.py`は完全CanonicalのCard.characterId、CharacterGrouping.characterIds、日本語group名を参照し、runtime-affiliations.json（185カード/15所属）を決定的に生成する。完全CanonicalとカードRuntimeは不変。unitページだけが補助データを取得し、Canonical SHA一致を確認する。欠落・取得失敗・SHA不一致は対応条件のunresolvedとして保持し、属性条件の計算は継続できる。
+
+`PartyConditionResolver.resolvePartyCondition`はaffiliation_count、group ID、必要数、5枠のcardId/slotを受け取り、所属名・actualCount・countedMembers・unknownMembers・satisfied/unsatisfied/unresolvedを返す。メンバー表示文字列を比較しない。原文の「所属2人以上」「自身への効果」を分離し、自己除外はしない。既存人数条件と同じ枠単位カウントで、同一カード/人物を重複選択した場合も枠ごとに数える（重複編成のゲーム上の可否を新規実装しない）。不足情報や未選択枠があればfalseへ変換しない。
+
+Parameter EngineのSELF gateのみへ所属人数条件を追加。成立/不成立が判定できるときは既存calculatePassiveEffectsのaffiliation判定・自己対象・ceilに渡し、unknown時は効果を計算へ渡さずunresolvedを保持する。traceは条件ID/名前/必要人数/実人数/計上メンバー/結果と既存の対象・基数・率・丸め・加算を含む。不成立時も加算0と参照値を残す。他者対象gateは変更しない。
+
+監査対応済みは29/58→40/80、未対応116/232→105/210。所属対象15カード、属性対象35カード、条件未観測55カードは未対応を維持。新規Passive増分は既存Enhancementの基数へ当然反映されるが、式は不変。Memory・Timeline・Simulationは新規Passive有無でも不変。既存29カードはMemory/Enhancementを含めて不変を比較検証する。
+
+## 所属対象の限定条件対応
+
+`PassiveTargetResolver.resolve`はCondition Resolver結果を受け取り、対象所属の候補集合・所属外メンバーと対象数を解決する。人数条件そのものは再実装しない。条件不成立なら対象0、条件成立かつ候補数が指定人数2と一致する場合だけ2人を確定する。超過時はtarget selection unresolvedで全効果を保留し、並べ替え・先頭2人選択はしない。source自身も所属候補に含める。条件IDと対象IDは別に保持する。
+
+`calculatePassiveEffects`へ省略可能なTarget Resolver引数を追加。既存呼出のデフォルトは従来関数のまま。限定所属対象だけは新Resolverの確定slotを渡すため、既存baseTotalソートへ流さない。率合算・各対象parameterのceilは既存の共通計算を維持する。
+
+source traceのcondition.countedMembersとtargetResolution.candidates/targets/excludedMembersを区別する。2人への適用時は各targetの参照値・source率とraw寄与、全source合算率・raw・ceil結果を表示する。ceil後の加算値はparameter全体の合算値であり、source別丸めを足したものではない。候補メンバーには保留source参照をunresolvedとして伝え、Enhancement基数の完全/部分判定へ反映する。Memory・Timeline・Simulationは変更しない。
+
+将来のN人選択は候補集合確定後のTarget Resolver段階へ追加できる。現時点で順位ルールは導入しない。属性側への接続・条件未観測の解釈は未実装。
+
+
+## 属性対象35カードの選択接続
+
+Condition: PartyConditionResolver.resolveAttributeCondition → Target: PassiveTargetResolver.resolveAttribute → Selection: PassiveSelectionResolver.resolve → calculatePassiveEffectsの率合算/ceil、の順。属性判定は5枠と属性情報が揃わなければunresolved。不成立はinactiveとしてSelectionを呼ばない。
+
+SelectionはcalculatePassiveEffectsが既に生成したbaseTotal/formationIndexを受け取り、既存rankPassiveCandidatesを再利用する。baseTotalの再計算や別定義は持たない。対象2/3人まで既存sliceと同じ選択。所属用ruleは拒否し、所属限定対応の経路は不変。
+
+trace.targetResolution.selectionに候補のcardId/slot/baseTotal/formationIndex/rank、selected/excluded、ties、rule、tieBreakを格納する。rankはtie-break後の選択順。targetResolution.excludedMembersは属性不一致、selection.excludedは順位による除外で、両者を区別する。補正traceのsourceRawは個別sourceの丸め前値、addedは全sourceの率合算後の対象parameter補正量。
+
+既存CASE Cの数値fixtureを読み、新EngineでPassive4532/Memory2451/Enhancement1397を検証する。CASE C先頭sourceは無条件なので、テストでは全5人が一致して成立する観測属性条件へ置き換える。無条件Runtimeの接続を実装したという意味ではない。Board・衣装はTOTAL外部入力、Memoryは従来基数、Enhancementは追加Passiveを従来式で反映する。
+
+属性接続の検証結果: tests/verify.py、runtime-catalog.test.py、leader-catalog.test.py、監査--checkはPASS。Chrome headlessのunit-simulator-browser.html（1100px/360px、属性selection trace表示・所属保留を含む）とbrowser.htmlもPASS。Canonical・カードRuntime・保存形式は変更していない。
