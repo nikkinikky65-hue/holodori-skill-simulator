@@ -17,6 +17,10 @@
    const select=[...w.document.querySelectorAll('[data-unit-card]')];
    assert(select.length===5 && select[0].options.length===186,'185 cards / five slots');
    assert(w.document.querySelector('#unitRun').disabled,'incomplete cannot run');
+   select[0].selectedIndex=1;select[0].dispatchEvent(new w.Event('change'));
+   const firstPreview=w.document.querySelector('.unitPreview');
+   assert(firstPreview.textContent.includes('SP：') && !firstPreview.textContent.includes('使用Lv'),'one selected card renders skills without level summary');
+   assert(!w.document.querySelector('#unitSlots').textContent.includes('使用Lv'),'no level summary in card DOM');
    for(let i=0;i<5;i++){select[i].selectedIndex=i+1;select[i].dispatchEvent(new w.Event('change'));}
    for(const [field,value] of [['training','4'],['bloom','3']]){
     for(const control of w.document.querySelectorAll(`[data-${field}]`)){control.value=value;control.dispatchEvent(new w.Event('change'));}
