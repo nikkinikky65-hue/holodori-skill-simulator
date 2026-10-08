@@ -1010,3 +1010,24 @@
 .unitTimelineHeading input { width:auto; }
 .unitSPInputs { display:grid; grid-template-columns:repeat(auto-fit,minmax(110px,1fr)); gap:8px; }
 #unitSupportTrace { white-space:pre-wrap; overflow-wrap:anywhere; font-size:12px; }
+
+/* Match A's axis geometry without inheriting the development panel's wrapping. */
+#unitTimeline { overflow-wrap: normal; }
+#unitTimeline .tick span { white-space: nowrap; writing-mode: horizontal-tb; }
+#unitTimeline .spInterval {
+  background: rgba(139, 146, 158, .16);
+  color: #68707b;
+  border-inline: 1px solid rgba(110, 119, 133, .24);
+  box-sizing: border-box;
+}
+/* Restore grid lines above the continuous SP overlay, below Active controls. */
+#unitTimeline .track::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(to right, transparent 0, transparent calc(10% - 1px), #e7e7e7 calc(10% - 1px), #e7e7e7 10%);
+  z-index: 2;
+  pointer-events: none;
+}
+#unitTimeline .track > .bar { z-index: 3; }
+#unitTimeline .axisTrack { z-index: 4; }

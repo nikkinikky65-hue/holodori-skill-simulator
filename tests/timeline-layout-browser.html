@@ -1,0 +1,29 @@
+<!doctype html><meta charset="utf-8"><title>Timeline layout comparison</title>
+<style>pre{max-height:80px;overflow:auto}iframe{display:block;margin-bottom:12px}</style><pre id="result">RUNNING</pre><iframe id="a" style="height:380px;border:0"></iframe><iframe id="unit" style="height:380px;border:0"></iframe>
+<script>
+(async()=>{
+ const out=document.querySelector('#result'), measurements=[];
+ const assert=(ok,message)=>{if(!ok)throw Error(message);};
+ const load=(frame,url)=>new Promise(resolve=>{frame.onload=()=>resolve(frame.contentWindow);frame.src=url;});
+ try{
+ for(const width of [1100,360]){
+  const af=document.querySelector('#a'),uf=document.querySelector('#unit');af.style.width=uf.style.width=width+'px';
+  const a=await load(af,'../index.html');await a.waitForCanonicalRestore();
+  const u=await load(uf,'../unit-simulator.html');const api=await u.eval('unitSimulatorReady');
+  [...u.document.querySelectorAll('[data-unit-card]')].forEach((s,i)=>{s.selectedIndex=i+1;s.dispatchEvent(new u.Event('change'));});
+  const model=api.getModel();a.comparisonModel=JSON.parse(JSON.stringify(model));
+  a.eval(`ActiveTimelineView.render({container:document.querySelector('#timeline'),detail:document.querySelector('#detail'),members:comparisonModel.activeMembers,eventsByMember:comparisonModel.eventsByMember,duration:comparisonModel.duration,probabilities:ActivationProbabilityRules.percent})`);
+  const inspect=(w,id)=>{const el=w.document.querySelector(id),rect=el.getBoundingClientRect();return {width:rect.width,label:el.querySelector('.name').getBoundingClientRect().width,axis:el.querySelector('.axisTrack').getBoundingClientRect().height,rows:[...el.querySelectorAll('.track')].map(e=>e.getBoundingClientRect().height),labels:[...el.querySelectorAll('.tick span')].map(e=>{const r=e.getBoundingClientRect(),s=w.getComputedStyle(e);return {left:r.left-rect.left,right:r.right-rect.left,height:r.height,writing:s.writingMode,wrap:s.overflowWrap};})};};
+  const av=inspect(a,'#timeline'),uv=inspect(u,'#unitTimeline');measurements.push({width,a:av,unit:uv});
+  out.textContent=JSON.stringify(measurements,null,2);
+  assert(av.width===uv.width && av.label===uv.label && av.axis===uv.axis && JSON.stringify(av.rows)===JSON.stringify(uv.rows),'shared geometry '+width);
+  uv.labels.forEach((l,i)=>{assert(l.height===av.labels[i].height && l.writing==='horizontal-tb','horizontal label '+width);if(i)assert(uv.labels[i-1].right<=l.left,'non-overlapping labels');});
+  const tl=u.document.querySelector('#unitTimeline'),tracks=[...tl.querySelectorAll('.track')],bands=[...tl.querySelectorAll('.spInterval')];assert(bands.length===5,'five SP bands');
+  for(const band of bands){const b=band.getBoundingClientRect();assert(b.top<=tracks[0].getBoundingClientRect().top && b.bottom>=tracks[5].getBoundingClientRect().bottom,'six row SP span');assert(u.getComputedStyle(band).pointerEvents==='none','SP cannot intercept clicks');}
+  a.document.querySelector('#timeline').scrollIntoView();tl.scrollIntoView();const bar=tl.querySelector('.row:not(.maxrow) .bar');bar.scrollIntoView({block:'center',inline:'center'});const r=bar.getBoundingClientRect();assert(u.document.elementFromPoint(r.left+r.width/2,r.top+r.height/2)===bar,'bar hit target');bar.click();assert(u.document.querySelector('#unitTimelineDetail').textContent.includes('s'),'bar details');
+  assert(u.document.documentElement.scrollWidth<=width,'no page overflow');
+ }
+ out.textContent='PASS\n'+JSON.stringify(measurements,null,2);
+ }catch(error){out.textContent='FAIL '+error.message+'\n'+JSON.stringify(measurements,null,2);}
+})();
+</script>
