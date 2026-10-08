@@ -111,5 +111,16 @@ const clone={...model,specialSchedule:{status:'resolved',entries:model.specialSc
 check(same(UnitSimulatorEngine.simulate(clone,100,ActiveRandomSimulation.seededRandom(3)).normalized,UnitSimulatorEngine.simulate(clone,100,ActiveRandomSimulation.seededRandom(3),{support:false}).normalized),'zero support seeded parity');
 check(model.allSuccessX>=model.activeOnlyX,'Support applies to integrated score');
 check(UnitSimulatorEngine.simulate(model,10000,ActiveRandomSimulation.seededRandom(7)).values.length===10000,'10000 scheduled trials');
+const manualStarts={1:40,3:75};
+const disabled=UnitSimulatorEngine.build(catalog,slots,120,undefined,undefined,manualStarts,false);
+const enabled=UnitSimulatorEngine.build(catalog,slots,120,undefined,undefined,manualStarts,true);
+check(same(disabled.specialSchedule,enabled.specialSchedule),'switch does not change placement');
+check(disabled.allSuccessX===disabled.activeOnlyX&&same(disabled.supportedSegments,disabled.segments),'OFF exact old Timeline');
+check(disabled.passiveSupport.status==='disabled'&&disabled.supportTrace.intervals.length===0,'OFF does not evaluate Support');
+const offSimulation=UnitSimulatorEngine.simulate(disabled,100,ActiveRandomSimulation.seededRandom(17));
+const legacy=ActiveRandomSimulation.run(ActiveRandomSimulation.prepare(disabled.activeMembers,120,ActiveTimelineEngine.events,q=>ActivationProbabilityRules.probability(q)),100,ActiveTimelineEngine.maxSegments,ActiveRandomSimulation.seededRandom(17));
+check(same(offSimulation.normalized,legacy),'OFF exact legacy fixed seed');
+check(offSimulation.values.every((v,i)=>v===legacy.values[i]*disabled.unitScore.value),'OFF numeric scores');
+check(same(enabled.parameters,disabled.parameters),'switch leaves Parameter unchanged');
 print('SP schedule/Support: 370 levels, midpoint starts, cascading constraints, interval support, unique Passive targets, deferred states, deterministic simulation PASS');
 }

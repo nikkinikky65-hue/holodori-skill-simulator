@@ -1,6 +1,6 @@
 // Orchestration only: no formula duplication and no persistence.
 const UnitSimulatorEngine = (() => {
-  function build(catalog, slots, duration, memoryInput, enhancementInput, specialStarts = {}){
+  function build(catalog, slots, duration, memoryInput, enhancementInput, specialStarts = {}, specialEnabled = true){
     if(slots.length!==5) throw Error('5枠の編成が必要です');
     if(!Number.isFinite(duration)||duration<=0) throw Error('曲時間を正の数にしてください');
     const byId=new Map(catalog.cards.map(card=>[card.id,card]));
@@ -22,19 +22,19 @@ const UnitSimulatorEngine = (() => {
     const segments=ActiveTimelineEngine.maxSegments(eventsByMember.flat(),duration);
     const unitScore=UnitScoreEngine.calculate(parameters);
     const specialSchedule=SpecialScheduleEngine.build(members,duration,specialStarts);
-    const passiveSupport=ScheduledSupportEngine.passive(members,catalog.affiliationCatalog?.canonicalSha256===catalog.dataset.canonicalSha256?catalog.affiliationCatalog:null);
-    const supported=ScheduledSupportEngine.evaluate(eventsByMember.flat(),duration,specialSchedule,passiveSupport);
+    const passiveSupport=specialEnabled ? ScheduledSupportEngine.passive(members,catalog.affiliationCatalog?.canonicalSha256===catalog.dataset.canonicalSha256?catalog.affiliationCatalog:null) : {sources:[],targets:[],unresolved:[],stackingUnresolved:[],status:'disabled'};
+    const supported=specialEnabled ? ScheduledSupportEngine.evaluate(eventsByMember.flat(),duration,specialSchedule,passiveSupport) : {segments,intervals:[]};
     const activeOnlyX=ActiveRandomSimulation.integrate(segments,duration);
     const allSuccessX=ActiveRandomSimulation.integrate(supported.segments,duration);
-    const supportTrace={schedule:specialSchedule,passiveSupport,intervals:supported.intervals,
+    const supportTrace={enabled:specialEnabled,status:specialEnabled?'enabled':'disabled',schedule:specialSchedule,passiveSupport,intervals:supported.intervals,
       specials:specialSchedule.entries.map(sp=>({...sp,overlapIntervals:supported.intervals.filter(i=>i.spSlot===sp.slot&&i.active.length)}))};
     return {members,parameters,unitScore,duration,activeMembers,eventsByMember,segments,
-      specialSchedule,passiveSupport,supportedSegments:supported.segments,supportTrace,activeOnlyX,allSuccessX,allSuccessScore:allSuccessX*unitScore.value};
+      specialEnabled,specialSchedule,passiveSupport,supportedSegments:supported.segments,supportTrace,activeOnlyX,allSuccessX,allSuccessScore:allSuccessX*unitScore.value};
   }
   function simulate(model,count,random=Math.random,{support=true}={}){
     if(model.parameters.status!=='card-only') throw Error('5人のカードを選択してください');
     const prepared=ActiveRandomSimulation.prepare(model.activeMembers,model.duration,ActiveTimelineEngine.events,q=>ActivationProbabilityRules.probability(q));
-    const segmentBuilder=support ? (events,duration)=>ScheduledSupportEngine.evaluate(events,duration,model.specialSchedule,model.passiveSupport,{trace:false}).segments : ActiveTimelineEngine.maxSegments;
+    const segmentBuilder=support && model.specialEnabled!==false ? (events,duration)=>ScheduledSupportEngine.evaluate(events,duration,model.specialSchedule,model.passiveSupport,{trace:false}).segments : ActiveTimelineEngine.maxSegments;
     const normalized=ActiveRandomSimulation.run(prepared,count,segmentBuilder,random);
     const values=normalized.values.map(value=>value*model.unitScore.value);
     return {values,statistics:ActiveRandomSimulation.statistics(values),normalized,unitScore:model.unitScore};

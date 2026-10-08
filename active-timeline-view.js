@@ -157,18 +157,6 @@ const ActiveTimelineView = {
         row.lastElementChild;
 
 
-      const special=specialSchedule?.status==='resolved' ? specialSchedule.entries.find(entry=>entry.slot===m.slot) : null;
-      if(special){
-        const background=document.createElement('div');
-        background.className='spInterval';
-        background.style.left=(special.start/T*100)+'%';
-        background.style.width=(special.duration/T*100)+'%';
-        background.textContent='SP';
-        background.title=`SP ${special.start.toFixed(2)}–${special.end.toFixed(2)}s / Support ${special.scoreSupportRate}%`;
-        background.setAttribute('aria-label',background.title);
-        track.append(background);
-      }
-
       by[i].forEach(
         (e,n) => {
 
@@ -231,5 +219,19 @@ const ActiveTimelineView = {
       tl.append(row);
     }
   );
+  if(specialSchedule?.status==='resolved'){
+    const layer=document.createElement('div');layer.className='spBackground';
+    // Track offset is the shared layout's actual name-column width plus gap.
+    layer.style.left=activeTrack.offsetLeft+'px';
+    for(const special of specialSchedule.entries){
+      const band=document.createElement('div');band.className='spInterval';
+      band.style.left=(special.start/T*100)+'%';band.style.width=(special.duration/T*100)+'%';
+      band.dataset.spSlot=String(special.slot);band.textContent='SP';
+      band.setAttribute('aria-label',`SP 枠${special.slot} ${special.start.toFixed(2)}–${special.end.toFixed(2)}s`);
+      layer.append(band);
+    }
+    tl.append(layer);
+  }
+
  }
 };

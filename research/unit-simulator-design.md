@@ -132,3 +132,10 @@ SP Supportはその時間帯に有効な各Activeへ、確定Passive Supportと�
 共通Timeline viewへoptional specialSchedule/segmentsを追加。SP背景は本人slotのtrack下層に置き、Activeバーは上層。表示チェックはCSSだけを切り替え、Schedule・モデル・抽選結果を変えない。開始数値入力はこのページだけの状態。traceはSP原文/レベル/raw condition/配置由来、SPとActiveの重複、各ActiveのSP率・Passive率・除外modifierを保持。通常UIは短い仮配置注記と折りたたみtraceのみ。A面の入力・計算にはSPを追加しない。
 
 検証: 全370 SP Lvの持続/主Support、観測Passive Support38行の条件人数境界、非重複/連鎖/曲末、Support区間積分、未解決除外、10,000試行、固定seed、既存回帰・CASE C・データ整合性がPASS。Chromeのunit/browser/navigationテストも1100px/360pxでPASS。SP表示OFFはSchedule/数値/ActiveバーDOM不変を確認。
+
+
+### SP使用スイッチ・全高背景帯
+
+「SPを使用」は表示と計算の共通スイッチ。OFFはSchedule設定を保持したまま、Passive Support解決とSP区間評価をスキップし、従来maxSegmentsをTimeline/Simulationに直接使用する。ONへ戻すと同じ設定から復元。trace.enabled/statusで無効状態を明示し、表示切替時は既存Simulation結果を無効化する。
+
+背景帯はTimeline全高の単一レイヤーに描画し、時間軸の横位置は共通Active trackのoffsetを使用。背景は紫alpha .36、Activeボタンは上層、目盛りはさらに上層。pointer-events:noneで操作を妨げない。Schedule配置・非重複ルール・Support式は不変。既存回帰、OFF時の従来固定seed完全一致、OFF/ONの手動配置保持、Chrome1100px/360pxの全6行貫通・帯位置・クリック確認はPASS。

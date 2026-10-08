@@ -26,7 +26,7 @@ async function initializeUnitSimulator(){
     function refresh(){
       node('unitResult').replaceChildren();node('unitResultStatus').textContent='編成・曲時間を変更した場合は再実行してください。';
       try{
-        model=UnitSimulatorEngine.build(catalog,slots,Number(node('unitDuration').value),{kind:'manual-rate',percent:node('unitMemoryPercent').value},{kind:'manual-rate',percent:node('unitEnhancementPercent').value},specialStarts);
+        model=UnitSimulatorEngine.build(catalog,slots,Number(node('unitDuration').value),{kind:'manual-rate',percent:node('unitMemoryPercent').value},{kind:'manual-rate',percent:node('unitEnhancementPercent').value},specialStarts,node('unitShowSP').checked);
         const rows=[];
         model.members.forEach((member,i)=>{
           previews[i].textContent=member ? canonicalEffectsText(member.expansion) : 'カード未選択';
@@ -42,7 +42,7 @@ async function initializeUnitSimulator(){
         }
         node('unitScore').textContent=`暫定Unit Score：${model.unitScore.value.toLocaleString()}（現在計算値ベース${model.unitScore.hasUnresolved?'・未接続効果あり':''}）`;
         node('unitTimelineScore').textContent=`全発動時の暫定スコア：${model.allSuccessScore.toLocaleString(undefined,{maximumFractionDigits:2})}`;
-        ActiveTimelineView.render({container:node('unitTimeline'),detail:node('unitTimelineDetail'),members:model.activeMembers,eventsByMember:model.eventsByMember,duration:model.duration,probabilities:ActivationProbabilityRules.percent,specialSchedule:model.specialSchedule,segments:model.supportedSegments});
+        ActiveTimelineView.render({container:node('unitTimeline'),detail:node('unitTimelineDetail'),members:model.activeMembers,eventsByMember:model.eventsByMember,duration:model.duration,probabilities:ActivationProbabilityRules.percent,specialSchedule:model.specialEnabled?model.specialSchedule:null,segments:model.supportedSegments});
         specialInputs.forEach((input,i)=>{const sp=model.specialSchedule.entries.find(e=>e.slot===i+1);input.disabled=!sp||model.specialSchedule.status!=='resolved';input.value=sp?.start??'';});
         node('unitSPStatus').textContent=model.specialSchedule.reason || '暫定配置。重なる後続SPは後ろへ移動し、曲末で制限します。';
         node('unitSupportTrace').textContent=JSON.stringify(model.supportTrace,null,2);
@@ -78,7 +78,7 @@ async function initializeUnitSimulator(){
       });
       specialInputs.push(input);label.append(input);node('unitSPSchedule').append(label);
     }
-    node('unitShowSP').addEventListener('change',()=>node('unitTimeline').classList.toggle('hideSP',!node('unitShowSP').checked));
+    node('unitShowSP').addEventListener('change',refresh);
     node('unitDuration').addEventListener('input',refresh);
     node('unitMemoryPercent').addEventListener('input',refresh);
     node('unitEnhancementPercent').addEventListener('input',refresh);
