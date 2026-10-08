@@ -117,3 +117,18 @@ trace.targetResolution.selectionに候補のcardId/slot/baseTotal/formationIndex
 ユーザー指定の暫定定義としてParameter Engine.subtotal.totalをUnit Score値に使用する。ゲームの正式スコア式を確定したという意味ではない。補正は再計算せず、未解決・未設定情報も別状態として保持。Memory/Enhancementの編成共通%入力を再表示し、Parameter Engine経由で反映する。
 
 active-timeline-view.jsは既存A面の描画を抽出した共通UI。統合区間・時間軸・各メンバーバー・クリック詳細を同じ実装で描画し、active-timeline-engine.jsは不変。Unit SimulatorのallSuccessScoreは従来allSuccessX×unitScore.value。Simulationは従来乱数結果をnormalizedに残し、各試行を同じ値で1回だけスケールして統計を集計する。A面の評価値・乱数シミュレーションは変更しない。
+
+
+## SP Scheduleと時間区間Support（2026-10-08）
+
+special-schedule-engine.jsは各slotの選択済みSP Lvからraw duration/独立effectsを保持する。初期start=(slot-0.5)*曲長/5はユーザー指定の仮配置。placeはslot順を維持し、後続duration合計を曲末に予約して開始位置をclampし、前SP終了より前へ移動させない。連鎖押出し時も持続時間は不変。全durationが曲長を超える場合は全SP配置unresolved（Active/確定Passiveだけの部分評価）とする。ドラッグ実装時も同じplaceへ開始時刻を渡す。
+
+RuntimeのSP主Supportは370行ともcondition=unobserved/durationScope未確定の研究メタデータを持つ。今回のユーザー指定「SP主SupportをそのSP duration中へ適用」を実行ポリシーrequested-primary-SP-support-durationとして明示し、原データを書き換えない。primaryのScore Support型・単一raw効果値が妥当で追加条件clausesがない場合だけ適用する。他のSP効果、条件付き主効果は未接続。発動率UPをshortや抽選確率へ変換しない。
+
+scheduled-support-engine.jsは既存PartyConditionResolverで観測済み属性/所属人数条件を評価し、resolveSupportTargetsで上限以下の全候補だけを確定する。条件未観測21カード/42行は保留。観測済み19カード/38行（属性9・所属10）は人数と対象次第で適用する。複数Passive sourceが同じtargetへ作用するときは既存A面と同じunresolved-stackingとして保留。support-rules.jsからこの判定だけresolveSupportStackingへ抽出した。Parameter Passiveの順位選択を使わない。
+
+SP Supportはその時間帯に有効な各Activeへ、確定Passive Supportとともに既存calculateSupportBoost(baseBoost,spRate,passiveRate)で反映する。Active効果の加算分はbaseBoost*(spRate+passiveRate)/100、丸めを導入しない。イベントをSP/Active境界で分割して既存maxSegmentsへ渡し、同時Activeは従来の最大効果採用を維持。SPだけの区間は倍率1。allSuccessX/scoreはSupport込み、activeOnlyX/segmentsは従来Activeのみの比較用。Simulationは同じScheduleと固定Passive対象を利用し、Activeだけ抽選する。support:falseの比較用オプションは従来の区間積算をそのまま使う。
+
+共通Timeline viewへoptional specialSchedule/segmentsを追加。SP背景は本人slotのtrack下層に置き、Activeバーは上層。表示チェックはCSSだけを切り替え、Schedule・モデル・抽選結果を変えない。開始数値入力はこのページだけの状態。traceはSP原文/レベル/raw condition/配置由来、SPとActiveの重複、各ActiveのSP率・Passive率・除外modifierを保持。通常UIは短い仮配置注記と折りたたみtraceのみ。A面の入力・計算にはSPを追加しない。
+
+検証: 全370 SP Lvの持続/主Support、観測Passive Support38行の条件人数境界、非重複/連鎖/曲末、Support区間積分、未解決除外、10,000試行、固定seed、既存回帰・CASE C・データ整合性がPASS。Chromeのunit/browser/navigationテストも1100px/360pxでPASS。SP表示OFFはSchedule/数値/ActiveバーDOM不変を確認。

@@ -34,7 +34,7 @@
    }
    const all=model.eventsByMember.flat();
    assert(JSON.stringify(a.maxSegments(all,120))===JSON.stringify(model.segments),'A duration/overlap parity');
-   assert(Math.abs(model.allSuccessX-(120+a.calcMax(all,120)/100))<1e-9,'A integral parity');
+   assert(Math.abs(model.activeOnlyX-(120+a.calcMax(all,120)/100))<1e-9,'A integral parity');
    assert(w.document.querySelector('#unitParameters').textContent.includes('開花増分') && w.document.querySelector('#unitParameters').textContent.includes('現在計算値'),'breakdown visible');
    w.document.querySelector('#unitTrials').value='100';w.document.querySelector('#unitRun').click();
    assert(w.document.querySelector('#unitResultStatus').textContent.includes('100試行完了'),'simulation works');
@@ -43,6 +43,25 @@
    assert(w.document.querySelector('#unitSlots').scrollWidth<=w.document.querySelector('#unitSlots').clientWidth,'slots fit width');
    const duration=w.document.querySelector('#unitDuration');duration.value='90';duration.dispatchEvent(new w.Event('input'));
    assert(api.getModel().duration===90 && !w.document.querySelector('#unitResult').textContent,'duration invalidates results');
+   const spBefore=JSON.stringify(api.getModel().specialSchedule),scoreBefore=api.getModel().allSuccessScore;
+   const activeBars=[...w.document.querySelectorAll('#unitTimeline .bar')].map(b=>b.outerHTML).join('');
+   assert(w.document.querySelectorAll('#unitTimeline .spInterval').length===5,'five SP backgrounds in member rows');
+   const showSP=w.document.querySelector('#unitShowSP');showSP.checked=false;showSP.dispatchEvent(new w.Event('change'));
+   assert([...w.document.querySelectorAll('.spInterval')].every(e=>!e.checkVisibility()),'SP backgrounds hide');
+   assert(JSON.stringify(api.getModel().specialSchedule)===spBefore && api.getModel().allSuccessScore===scoreBefore,'hide does not change schedule/calculation');
+   assert([...w.document.querySelectorAll('#unitTimeline .bar')].map(b=>b.outerHTML).join('')===activeBars,'Active bars unchanged when hidden');
+   showSP.checked=true;showSP.dispatchEvent(new w.Event('change'));
+   assert([...w.document.querySelectorAll('.spInterval')].every(e=>e.checkVisibility()),'SP backgrounds show');
+   const scheduleControl=w.document.querySelector('[data-sp-slot="1"]');
+   scheduleControl.closest('details').open=true;
+   scheduleControl.value='1000';scheduleControl.dispatchEvent(new w.Event('change'));
+   const moved=api.getModel().specialSchedule.entries;
+   assert(moved[0].placement==='manual'&&moved.every((sp,i)=>sp.end<=90&&(!i||sp.start>=moved[i-1].end)),'manual move bounded and nonoverlapping');
+   const supportDetails=w.document.querySelector('#unitSupportTrace').closest('details');supportDetails.open=true;
+   assert(w.document.querySelector('#unitSupportTrace').textContent.includes('overlapIntervals'),'SP overlap trace visible');
+   assert(w.document.documentElement.scrollWidth<=width,'SP inputs/trace fit');
+   supportDetails.open=false;
+
    const query=w.document.querySelector('.unitSlot input[type=search]');query.value='存在しない検索';query.dispatchEvent(new w.Event('input'));
    assert(select[0].options.length===2 && select[0].value===model.members[0].card.id,'search retains selection');
    assert(JSON.stringify(Object.keys(localStorage).sort().map(key=>[key,localStorage.getItem(key)]))===saved,'no writes to existing storage');

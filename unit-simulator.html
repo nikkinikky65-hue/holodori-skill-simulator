@@ -15,11 +15,12 @@
 <div class="canonicalGrowth"><label>Memory (%)<input id="unitMemoryPercent" type="text" inputmode="decimal" placeholder="未設定"></label><label>Enhancement Bonus (%)<input id="unitEnhancementPercent" type="text" inputmode="decimal" placeholder="未設定"></label></div>
 <div id="unitParameters"></div></section>
 <section class="panel"><h2>3. Unit Score</h2><p id="unitScore">暫定Unit Score</p></section>
-<section class="panel"><h2>4. Timeline</h2>
+<section class="panel"><div class="unitTimelineHeading"><h2>4. Timeline</h2><label><input id="unitShowSP" type="checkbox" checked> SPを表示</label></div>
 <label>楽曲時間 (s)<input id="unitDuration" type="number" min="0.01" step="0.01" value="120"></label>
-<p id="unitTimelineScore"></p><div class="timeline-scroll"><div id="unitTimeline" class="timeline"></div></div><div id="unitTimelineDetail">バーを選ぶと詳細を表示します。</div></section>
+<details><summary>SP開始時刻（暫定配置）</summary><div id="unitSPSchedule" class="unitSPInputs"></div><p id="unitSPStatus" role="status"></p></details>
+<p id="unitTimelineScore"></p><div class="timeline-scroll"><div id="unitTimeline" class="timeline"></div></div><div id="unitTimelineDetail">バーを選ぶと詳細を表示します。</div><details><summary>SP / Support trace</summary><pre id="unitSupportTrace"></pre></details></section>
 <section class="panel"><h2>5. シミュレーション結果</h2>
-<p class="sub">暫定スコア：現在計算値＋Active。ゲーム内絶対スコアではありません。</p>
+<p class="sub">暫定スコア：現在計算値＋Active・対応済みSupport。ゲーム内絶対スコアではありません。</p>
 <p id="unitProbability"></p>
 <label>試行回数<select id="unitTrials"><option value="100">100</option><option value="1000" selected>1,000</option><option value="10000">10,000</option></select></label>
 <button id="unitRun" type="button" disabled>シミュレーション実行</button>
@@ -27,7 +28,7 @@
 </main>
 <script src="members.js"></script><script src="canonical-card-adapter.js?v=b4659e28157c"></script>
 <script src="card-rules.js"></script><script src="parameter-rules.js"></script>
-<script src="active-timeline-engine.js"></script><script src="active-timeline-view.js"></script><script src="activation-probability-rules.js"></script>
+<script src="active-timeline-engine.js"></script><script src="active-timeline-view.js?v=447588365270"></script><script src="activation-probability-rules.js"></script>
 <script src="active-random-simulation.js"></script><script src="party-condition-resolver.js"></script><script src="passive-target-resolver.js"></script><script src="passive-selection-resolver.js"></script><script src="unit-parameter-engine.js"></script>
-<script src="unit-score-engine.js"></script><script src="unit-simulator-engine.js"></script><script src="unit-simulator.js?v=207ee6b71917"></script>
+<script src="unit-score-engine.js"></script><script src="support-rules.js?v=53c7a9c97f74"></script><script src="special-schedule-engine.js"></script><script src="scheduled-support-engine.js"></script><script src="unit-simulator-engine.js?v=8164ffc7315b"></script><script src="unit-simulator.js?v=9f98533cc587"></script>
 </body></html>

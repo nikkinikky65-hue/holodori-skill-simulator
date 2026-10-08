@@ -1,6 +1,6 @@
 // Shared A/unit Timeline UI. Calculation stays in ActiveTimelineEngine.
 const ActiveTimelineView = {
- render({container,detail,members:ms,eventsByMember:by,duration:T,probabilities}){
+ render({container,detail,members:ms,eventsByMember:by,duration:T,probabilities,specialSchedule=null,segments=null}){
  const all=by.flat();
   const tl = container;
 
@@ -26,10 +26,10 @@ const ActiveTimelineView = {
     activeRow.lastElementChild;
 
 
-  ActiveTimelineEngine.maxSegments(
+  (segments || ActiveTimelineEngine.maxSegments(
     all,
     T
-  ).forEach(seg => {
+  )).forEach(seg => {
 
     const b =
       document.createElement('button');
@@ -156,6 +156,18 @@ const ActiveTimelineView = {
       const track =
         row.lastElementChild;
 
+
+      const special=specialSchedule?.status==='resolved' ? specialSchedule.entries.find(entry=>entry.slot===m.slot) : null;
+      if(special){
+        const background=document.createElement('div');
+        background.className='spInterval';
+        background.style.left=(special.start/T*100)+'%';
+        background.style.width=(special.duration/T*100)+'%';
+        background.textContent='SP';
+        background.title=`SP ${special.start.toFixed(2)}–${special.end.toFixed(2)}s / Support ${special.scoreSupportRate}%`;
+        background.setAttribute('aria-label',background.title);
+        track.append(background);
+      }
 
       by[i].forEach(
         (e,n) => {

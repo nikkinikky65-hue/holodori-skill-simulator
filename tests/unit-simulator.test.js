@@ -16,7 +16,7 @@ for(let i=0;i<5;i++){
 assertUnit(model.parameters.subtotal.total===model.members.reduce((s,m)=>s+m.parameters.subtotal.total,0),'unit sum');
 const first=UnitSimulatorEngine.simulate(model,100,ActiveRandomSimulation.seededRandom(4));
 assertUnit(JSON.stringify(first)===JSON.stringify(UnitSimulatorEngine.simulate(model,100,ActiveRandomSimulation.seededRandom(4))),'shared reproducible simulation');
-assertUnit(model.allSuccessX===ActiveRandomSimulation.trial(ActiveRandomSimulation.prepare(model.activeMembers,120,ActiveTimelineEngine.events,()=>1),ActiveTimelineEngine.maxSegments,()=>0),'all-success integral');
+assertUnit(model.activeOnlyX===ActiveRandomSimulation.trial(ActiveRandomSimulation.prepare(model.activeMembers,120,ActiveTimelineEngine.events,()=>1),ActiveTimelineEngine.maxSegments,()=>0),'all-success integral');
 assertUnit(first.values.every((value,i)=>value===first.normalized.values[i]*model.unitScore.value),'every trial scales exactly once');
 assertUnit(model.allSuccessScore===model.allSuccessX*model.parameters.subtotal.total,'Timeline uses current total');
 assertUnit(JSON.stringify(first.statistics)===JSON.stringify(ActiveRandomSimulation.statistics(first.values)),'numeric statistics');
@@ -30,7 +30,7 @@ const enhanced=UnitSimulatorEngine.build(catalog,slots,120,{kind:'manual-rate',p
 assertUnit(memory.unitScore.value===model.unitScore.value+memory.parameters.memory.total,'Memory counted once');
 assertUnit(enhanced.unitScore.value===memory.unitScore.value+enhanced.parameters.enhancementBonus.total,'Enhancement counted once');
 const raw=ActiveRandomSimulation.run(ActiveRandomSimulation.prepare(model.activeMembers,120,ActiveTimelineEngine.events,q=>ActivationProbabilityRules.probability(q)),100,ActiveTimelineEngine.maxSegments,ActiveRandomSimulation.seededRandom(4));
-assertUnit(JSON.stringify(first.normalized)===JSON.stringify(raw),'seeded engine unchanged');
+assertUnit(JSON.stringify(UnitSimulatorEngine.simulate(model,100,ActiveRandomSimulation.seededRandom(4),{support:false}).normalized)===JSON.stringify(raw),'seeded engine unchanged');
 const empty=UnitSimulatorEngine.build(catalog,Array.from({length:5},()=>({cardId:'',training:0,bloom:0,short:0})),120);
 assertUnit(empty.parameters.status==='incomplete' && empty.allSuccessX===120,'empty is incomplete');
 let refused=false;try{UnitSimulatorEngine.simulate(empty,100);}catch(e){refused=true;}assertUnit(refused,'require five cards');

@@ -27,6 +27,13 @@ function supportNumber(value){
   return Number.isFinite(number) ? Math.max(0, number) : 0;
 }
 
+// Reused by the scheduled SP path: multiple Passive sources remain unresolved.
+function resolveSupportStacking(modifiers){
+  const applicable=modifiers.filter(modifier=>modifier.applied);
+  if(applicable.length>1) applicable.forEach(modifier=>{modifier.applied=false;modifier.status='unresolved-stacking';});
+  return modifiers.find(modifier=>modifier.applied)?.value || 0;
+}
+
 // 入力中の通常倍率と、Card v2のPassive追加倍率を分離して評価する。
 // リーダー・Specialはここへ渡さない。
 function precalculateSupportParty(members, cards){
@@ -79,16 +86,7 @@ function precalculateSupportParty(members, cards){
     }));
   });
   partyMembers.forEach(member => {
-    const applicable = member.supportRateModifiers.filter(modifier => modifier.applied);
-    // 複数Passiveの重複規則は今回確認されていないため、勝手に合算しない。
-    if(applicable.length > 1){
-      applicable.forEach(modifier => {
-        modifier.applied = false;
-        modifier.status = 'unresolved-stacking';
-      });
-    }
-    const applied = member.supportRateModifiers.find(modifier => modifier.applied);
-    const passiveAdditionalSupportRate = applied?.value || 0;
+    const passiveAdditionalSupportRate = resolveSupportStacking(member.supportRateModifiers);
     Object.assign(member, calculateSupportBoost(member.baseBoost, member.scoreSupportRate, passiveAdditionalSupportRate));
     member.passiveAdditionalSupportRate = passiveAdditionalSupportRate;
     member.supportStatus = member.supportRateModifiers.some(modifier => !modifier.applied)
