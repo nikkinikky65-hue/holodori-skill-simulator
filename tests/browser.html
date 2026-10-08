@@ -36,6 +36,13 @@
     assert(w.document.querySelectorAll('.card').length === 5,'A startup');
     input(w,'[data-k=memberId]','tokino_sora');
     input(w,'[data-k=interval]',15);input(w,'[data-k=duration]',5);input(w,'[data-k=boost]',20);
+    for(const costume of ['', '表示しない衣装名']){
+      input(w,'[data-k=costume]',costume);
+      click(w,'#timeline .row:not(.maxrow) .bar');
+      const detail=w.document.querySelector('#detail').textContent;
+      assert(detail.includes(' — 第1候補') && !detail.includes('衣装未入力') && !detail.includes('/ 表示しない衣装名'),'A detail omits costume');
+      assert(w.document.querySelector('[data-k=costume]').value===costume,'costume input retained');
+    }
     const before = w.document.querySelector('#max').textContent;
     assert(Number(before) === 700,'known timeline score: '+before+'; '+errors.join('; '));
     click(w,'[data-save-library="0"]');

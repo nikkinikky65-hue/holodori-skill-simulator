@@ -192,8 +192,7 @@ const ActiveTimelineView = {
             () => {
 
               detail.textContent =
-                `${m.name} / ` +
-                `${m.costume || '衣装未入力'} — ` +
+                `${m.name} — ` +
                 `第${n + 1}候補 ` +
                 `${e.start.toFixed(2)}s → ` +
                 `${e.end.toFixed(2)}s / ` +

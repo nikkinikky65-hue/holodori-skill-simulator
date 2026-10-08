@@ -21,6 +21,11 @@
    const firstPreview=w.document.querySelector('.unitPreview');
    assert(firstPreview.textContent.includes('SP：') && !firstPreview.textContent.includes('使用Lv'),'one selected card renders skills without level summary');
    assert(!w.document.querySelector('#unitSlots').textContent.includes('使用Lv'),'no level summary in card DOM');
+   w.document.querySelector('#unitTimeline .row:not(.maxrow) .bar').click();
+   const timelineDetail=w.document.querySelector('#unitTimelineDetail').textContent;
+   const activeMember=api.getModel().activeMembers[0];
+   assert(timelineDetail.startsWith(activeMember.name+' — 第1候補') && !timelineDetail.includes('衣装未入力'),'unit detail omits costume');
+
    for(let i=0;i<5;i++){select[i].selectedIndex=i+1;select[i].dispatchEvent(new w.Event('change'));}
    for(const [field,value] of [['training','4'],['bloom','3']]){
     for(const control of w.document.querySelectorAll(`[data-${field}]`)){control.value=value;control.dispatchEvent(new w.Event('change'));}
