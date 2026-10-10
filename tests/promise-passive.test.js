@@ -1,7 +1,7 @@
 {
  const check=(v,m)=>{if(!v)throw Error(m);};
  const catalog=canonicalTestFixture,aff=JSON.parse(readFile('data/runtime-affiliations.json'));
- const rows=catalog.cards.flatMap(c=>c.skills.passive.levels.map(p=>({c,p,gate:UnitParameterEngine.resolveInput(p)}))).filter(r=>r.gate.interpretation);
+ const rows=catalog.cards.flatMap(c=>c.skills.passive.levels.map(p=>({c,p,gate:UnitParameterEngine.resolveInput(p)}))).filter(r=>r.gate.interpretation==='developer-approved-provisional-affiliation-max-2');
  check(rows.length===28 && new Set(rows.map(r=>r.c.id)).size===14,'exact 14/28');
  for(const {c,p,gate} of rows){
    const missing=JSON.parse(JSON.stringify(p));missing.condition.referenceState='present';

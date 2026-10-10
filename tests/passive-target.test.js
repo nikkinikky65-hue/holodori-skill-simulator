@@ -25,7 +25,7 @@ for(const id of expected){
  // Multiple identical source effects: aggregate rates before ceil.
  const slots=[slot(card),slot(card),...others.slice(0,3).map(slot)];
  const clean=JSON.parse(JSON.stringify(catalog));
- for(const c of clean.cards)if(c.id!==id)c.skills.passive.levels.forEach(p=>p.condition.state='unobserved');
+ for(const c of clean.cards)if(c.id!==id)c.skills.passive.levels.forEach(p=>p.condition={state:'unobserved'});
  const m=UnitSimulatorEngine.build(clean,slots,120,{kind:'manual-rate',percent:'6.4'},{kind:'manual-rate',percent:'2.43'});
  const key=PARAMETER_PASSIVE_TYPES[effect.type][0],target=m.parameters.members[0];
  check(target.passive[key]===Math.ceil((target.base[key]+target.opening[key])*effect.value*2/100),'combined ceil');

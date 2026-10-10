@@ -1,6 +1,6 @@
 {
   "inputs": {
-    "unit-parameter-engine.js": "43fc606ee954cccbc69eacb7135e0a266903d69e6ab6f2d487e2c3f2ddfb6afd",
+    "unit-parameter-engine.js": "6240be9e65866ece0637be5d5aa6d370dda7a8c8a969c4b2a89cf479541ccfe6",
     "party-condition-resolver.js": "1ca56c409629effb0a288c0ab75af69382e84320ca84424319517da9f5c6f0ce",
     "passive-target-resolver.js": "4fdfb56da4c58ee06937ed6f5635c355487f46445c88b7553788dc5ce31a055c",
     "passive-selection-resolver.js": "3032c4d0c37dd60b2e48a01ddf642b1d8623e93d87a15a4bae70a2c7db34e774",
@@ -24,12 +24,8 @@
       "rows": 58
     },
     "supported": {
-      "cards": 75,
-      "rows": 150
-    },
-    "unsupported": {
-      "cards": 41,
-      "rows": 82
+      "cards": 116,
+      "rows": 232
     }
   },
   "parameter": {
@@ -46,12 +42,7 @@
       "rows": 28
     }
   },
-  "groups": {
-    "attribute members + unknown/unobserved": {
-      "cards": 41,
-      "rows": 82
-    }
-  },
+  "groups": {},
   "effect": {
     "P up": {
       "cards": 36,
@@ -102,42 +93,10 @@
       "rows": 152
     }
   },
-  "unsupportedEffect": {
-    "P up": {
-      "cards": 12,
-      "rows": 24
-    },
-    "S up": {
-      "cards": 12,
-      "rows": 24
-    },
-    "T up": {
-      "cards": 16,
-      "rows": 32
-    },
-    "all parameter up": {
-      "cards": 1,
-      "rows": 2
-    }
-  },
-  "unsupportedTarget": {
-    "attribute members": {
-      "cards": 41,
-      "rows": 82
-    }
-  },
-  "unsupportedCondition": {
-    "unknown/unobserved": {
-      "cards": 41,
-      "rows": 82
-    }
-  },
-  "gateReasons": {
-    "条件未観測・未解決": {
-      "cards": 41,
-      "rows": 82
-    }
-  },
+  "unsupportedEffect": {},
+  "unsupportedTarget": {},
+  "unsupportedCondition": {},
+  "gateReasons": {},
   "rows": [
     {
       "passiveId": "live_passive_skill-card-00001-3-nrml-0000-00",
@@ -283,13 +242,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "sense_up",
+          "value": 20,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -320,13 +291,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "sense_up",
+          "value": 30,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -469,13 +452,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "sense_up",
+          "value": 10,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -506,13 +501,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "sense_up",
+          "value": 20,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -2187,13 +2194,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "sense_up",
+          "value": 10,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -2224,13 +2243,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "sense_up",
+          "value": 20,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -2373,13 +2404,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "performance_up",
+          "value": 30,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -2410,13 +2453,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "performance_up",
+          "value": 41,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -2653,13 +2708,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "technique_up",
+          "value": 20,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -2690,13 +2757,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "technique_up",
+          "value": 30,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -2921,13 +3000,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "sense_up",
+          "value": 20,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -2958,13 +3049,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "sense_up",
+          "value": 30,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -3117,13 +3220,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "all_parameters_up",
+          "value": 11,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -3154,13 +3269,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "all_parameters_up",
+          "value": 15,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -3641,13 +3768,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "performance_up",
+          "value": 20,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -3678,13 +3817,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "performance_up",
+          "value": 30,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -4053,13 +4204,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "technique_up",
+          "value": 20,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -4090,13 +4253,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "technique_up",
+          "value": 30,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -4321,13 +4496,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "sense_up",
+          "value": 10,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -4358,13 +4545,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "sense_up",
+          "value": 20,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -4517,13 +4716,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "technique_up",
+          "value": 30,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -4554,13 +4765,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "technique_up",
+          "value": 41,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -5059,13 +5282,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "performance_up",
+          "value": 10,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -5096,13 +5331,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "performance_up",
+          "value": 20,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -5253,13 +5500,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "technique_up",
+          "value": 30,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -5290,13 +5549,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "technique_up",
+          "value": 41,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -5749,13 +6020,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "technique_up",
+          "value": 10,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -5786,13 +6069,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "technique_up",
+          "value": 20,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -6661,13 +6956,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "sense_up",
+          "value": 20,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -6698,13 +7005,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "sense_up",
+          "value": 30,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -6941,13 +7260,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "technique_up",
+          "value": 20,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -6978,13 +7309,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "technique_up",
+          "value": 30,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -7489,13 +7832,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "sense_up",
+          "value": 10,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -7526,13 +7881,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "sense_up",
+          "value": 20,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -7969,13 +8336,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "technique_up",
+          "value": 20,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -8006,13 +8385,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "technique_up",
+          "value": 30,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -8155,13 +8546,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "technique_up",
+          "value": 10,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -8192,13 +8595,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "technique_up",
+          "value": 20,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -8777,13 +9192,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "technique_up",
+          "value": 10,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -8814,13 +9241,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "technique_up",
+          "value": 20,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -9129,13 +9568,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "performance_up",
+          "value": 20,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -9166,13 +9617,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "performance_up",
+          "value": 30,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -9945,13 +10408,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "performance_up",
+          "value": 20,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -9982,13 +10457,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "performance_up",
+          "value": 30,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -10831,13 +11318,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "performance_up",
+          "value": 20,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -10868,13 +11367,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "performance_up",
+          "value": 30,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -11245,13 +11756,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "technique_up",
+          "value": 30,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -11282,13 +11805,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "technique_up",
+          "value": 41,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -11439,13 +11974,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "performance_up",
+          "value": 20,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -11476,13 +12023,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "performance_up",
+          "value": 30,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -11707,13 +12266,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "performance_up",
+          "value": 10,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -11744,13 +12315,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "performance_up",
+          "value": 20,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -12351,13 +12934,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "technique_up",
+          "value": 30,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -12388,13 +12983,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "technique_up",
+          "value": 41,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -12545,13 +13152,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "sense_up",
+          "value": 20,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -12582,13 +13201,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "sense_up",
+          "value": 30,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -12973,13 +13604,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "technique_up",
+          "value": 30,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -13010,13 +13653,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "technique_up",
+          "value": 41,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -13167,13 +13822,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "technique_up",
+          "value": 20,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -13204,13 +13871,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "technique_up",
+          "value": 30,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -13469,13 +14148,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "sense_up",
+          "value": 20,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -13506,13 +14197,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "sense_up",
+          "value": 30,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -14597,13 +15300,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "performance_up",
+          "value": 20,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -14634,13 +15349,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "performance_up",
+          "value": 30,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -14771,13 +15498,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "performance_up",
+          "value": 10,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -14808,13 +15547,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "performance_up",
+          "value": 20,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -14945,13 +15696,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "sense_up",
+          "value": 30,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -14982,13 +15745,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "sense_up",
+          "value": 41,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -15139,13 +15914,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "sense_up",
+          "value": 20,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -15176,13 +15963,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "sense_up",
+          "value": 30,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -16477,13 +17276,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "performance_up",
+          "value": 20,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -16514,13 +17325,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "performance_up",
+          "value": 30,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -16551,13 +17374,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "technique_up",
+          "value": 30,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -16588,13 +17423,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "technique_up",
+          "value": 41,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -17667,13 +18514,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "technique_up",
+          "value": 20,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -17704,13 +18563,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "technique_up",
+          "value": 30,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -17863,13 +18734,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "technique_up",
+          "value": 10,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -17900,13 +18783,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "technique_up",
+          "value": 20,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -18145,13 +19040,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "sense_up",
+          "value": 10,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -18182,13 +19089,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "sense_up",
+          "value": 20,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -18315,13 +19234,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "performance_up",
+          "value": 30,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
@@ -18352,13 +19283,25 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "supported",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "supported",
+        "effect": {
+          "type": "performance_up",
+          "value": 41,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-attribute-max-2"
       },
-      "group": "attribute members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
         "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",

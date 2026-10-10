@@ -1,3 +1,32 @@
+# 最新：属性対象41種の接続
+
+## 接続更新：開発者承認の属性対象実行ルール（2026-10-10）
+
+今回の指示に基づき、追加発動条件なしの属性対象41種/82行を既存属性Parameter経路へ接続した。元データのunobservedは変更していない。以下の調査本文の「未対応」は接続前の履歴。
+
+|Parameter Passive|接続前 カード/行|接続後 カード/行|
+|---|---:|---:|
+|完全対応|75/150|116/232|
+|限定対応|29/58|29/58|
+|unsupported|41/82|0/0|
+
+「完全対応」は今回承認された実行仕様の対応範囲であり、41種が新たにゲーム実測された意味ではない。所属29種は候補超過の選択を引き続き保留する。Parameter外Support40種はこの集計に含めない。
+
+### 実装
+
+`unit-parameter-engine.js` のresolveInputに、単一既知Parameter Effect・ATTRIBUTE selector1件・targetCount=2・有効属性ID・condition.state=unobserved・referenceState=absent・既存clauses/referenceIdなし、という共通構造条件を追加。カードID分岐なし。構造判定で41カード82行に限定されることをテストした。
+
+traceのconditionに `developer-approved-no-additional-condition`、interpretationに `developer-approved-attribute-max-2` を記録。既存Target→Selection→Effectの経路へ渡す。独立した人数条件は作らず、候補0/1/2人はその全員、3人以上は既存の開花後P/T/S合計降順・同値編成順で上位2人。5枠や属性情報が不足すればunresolved。P/T/S単一40種と全パラ1種を既存Effect表現で処理し、率合算→ceilを維持。
+
+### 検証
+
+- `tests/attribute-unobserved.test.js`：82行すべてについて候補0〜5人、異順位/同値、P/T/S/all、複数sourceの率合算、条件参照present/証拠欠落/clauses残存/referenceId残存の除外、Support非適用。
+- `tests/verify.py`：既存全回帰PASS。CASE C、既存35種・所属群、Memory、Enhancement、Leader131件、Timeline、固定seedを含む。
+- 既存テストの対象35種/所属14種の抽出を明示し、集計期待値を更新。他source隔離fixtureは、承認済みの未観測と混同しない情報不足conditionへ変更。
+- Runtime/Canonical整合性・再生成一致PASS。Passive監査再生成一致確認。
+
+Canonical、Runtime、保存形式、Selection Resolver、補正計算式、Support、Leader、Active/SPは変更なし。今回の計算変更はParameter Engineの入口と既存属性条件分岐への接続のみ。commit/pushなし。
+
 # 開発者承認による所属対象14種の限定接続（2026-10-10）
 
 原文に追加条件がなく、元レベルの条件参照もない所属2人対象のP/T/S補正14種/28行を共通接続。これは実機確定ではなく開発者承認の暫定解釈。対象人数2は最大人数とし、候補0/1/2人は0/1/2人へ適用、3人以上はselection unresolved。詳細は[promise-passive-resolution.md](promise-passive-resolution.md)。

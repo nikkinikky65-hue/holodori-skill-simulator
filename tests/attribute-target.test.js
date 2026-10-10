@@ -2,7 +2,7 @@
 const check=(ok,msg)=>{if(!ok)throw Error(msg);};
 const ids=JSON.parse(readFile('tests/attribute-target-expected-cards.json'));
 const catalog=canonicalTestFixture;
-const enabled=catalog.cards.filter(c=>UnitParameterEngine.resolveInput(c.skills.passive.levels[0]).effect?.target.kind==='type').map(c=>c.id).sort();
+const enabled=catalog.cards.filter(c=>UnitParameterEngine.resolveInput(c.skills.passive.levels[0]).effect?.target.kind==='type' && !UnitParameterEngine.resolveInput(c.skills.passive.levels[0]).interpretation).map(c=>c.id).sort();
 check(JSON.stringify(ids)===JSON.stringify(enabled)&&ids.length===35,'exact audited 35');
 const json=JSON.stringify;
 for(const id of ids){

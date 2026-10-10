@@ -40,6 +40,13 @@ const UnitParameterEngine = (() => {
         conditionCount:null,target:{kind:'affiliation',value:targets[0].characterGroupingId},targetCount:2},
         interpretation:'developer-approved-provisional-affiliation-max-2'};
     }
+    if(condition?.state==='unobserved' && condition.referenceState==='absent' &&
+       !condition.clauses && !condition.referenceId && attributeTarget && targets[0].targetCount===2 &&
+       /^CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_[123]$/.test(targets[0].cardAttributeType || '')){
+      return {status:'supported',effect:{type,value:value/10,condition:{kind:'developer-approved-no-additional-condition'},
+        conditionCount:null,target:{kind:'type',value:targets[0].cardAttributeType},targetCount:2},
+        interpretation:'developer-approved-attribute-max-2'};
+    }
     if(condition?.state!=='observed') return unsupported('条件未観測・未解決');
     const clauses=condition.clauses;
     if(clauses?.length!==1) return unsupported('複数条件・条件情報不足');
@@ -108,7 +115,8 @@ const UnitParameterEngine = (() => {
     const calculated=calculatePassiveEffects(prepared,(source,effect,members)=>{
       const index=prepared.findIndex(m=>m.slot===source.slot),target=targetResults[index];
       if(effect.target?.kind==='type' && bridges[index].status==='supported'){
-        const condition=PartyConditionResolver.resolveAttributeCondition({attribute:effect.condition.value,requiredCount:effect.conditionCount,unitMembers:members});
+        const condition=bridges[index].interpretation ? {...conditionResults[index],
+          result:members.length===5 && members.every(m=>/^CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_[123]$/.test(m.type || ''))?'satisfied':'unresolved'} : PartyConditionResolver.resolveAttributeCondition({attribute:effect.condition.value,requiredCount:effect.conditionCount,unitMembers:members});
         conditionResults[index]=condition;
         const resolved=PassiveTargetResolver.resolveAttribute({attribute:effect.target.value,condition,unitMembers:members});
         if(resolved.status==='candidates-resolved'){

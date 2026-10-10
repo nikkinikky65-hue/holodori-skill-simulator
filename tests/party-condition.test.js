@@ -6,7 +6,7 @@ const expected=JSON.parse(readFile('tests/affiliation-expected-cards.json'));
 const enabled=catalog.cards.filter(card=>card.skills.passive.levels.some(p=>UnitParameterEngine.resolveInput(p).status==='supported' && UnitParameterEngine.resolveInput(p).effect?.condition.kind==='affiliation')).map(c=>c.id).sort();
 check(JSON.stringify(enabled)===JSON.stringify(expected),'exact audited 11 only');
 const gateCounts={};for(const card of catalog.cards)for(const p of card.skills.passive.levels){const status=UnitParameterEngine.resolveInput(p).status;gateCounts[status]=(gateCounts[status]||0)+1;}
-check(gateCounts.supported===150,'75 cards / 150 levels supported');
+check(gateCounts.supported===232,'116 cards / 232 levels supported');
 const slot=id=>({cardId:id,training:0,bloom:0,short:0});
 for(const id of expected){
  const card=catalog.cards.find(c=>c.id===id),effect=UnitParameterEngine.resolveInput(card.skills.passive.levels[0]).effect;
@@ -18,7 +18,7 @@ for(const id of expected){
  for(const n of [1,2,3]){
   const slots=[card,...peers.slice(0,n-1),...others.slice(0,5-n)].map(c=>slot(c.id));
   const isolated=JSON.parse(JSON.stringify(catalog));
-  isolated.cards.filter(c=>c.id!==id).forEach(c=>c.skills.passive.levels.forEach(p=>p.condition.state='unobserved'));
+  isolated.cards.filter(c=>c.id!==id).forEach(c=>c.skills.passive.levels.forEach(p=>p.condition={state:'unobserved'}));
   const model=UnitSimulatorEngine.build(isolated,slots,120,{kind:'manual-rate',percent:'6.4'},{kind:'manual-rate',percent:'2.43'});
   const trace=model.parameters.members[0].trace[0];
   check(trace.condition.actualCount===n && trace.condition.countedMembers.some(m=>m.slot===1),'self counted, different groups excluded');
