@@ -32,6 +32,14 @@ const UnitParameterEngine = (() => {
     const attributeTarget=targets?.length===1 && targets[0].type==='LiveSkillEffectTargetType_LIVE_SKILL_EFFECT_TARGET_TYPE_ATTRIBUTE';
     if(targets?.length!==1 || (!attributeTarget && !groupTarget && targets[0].type!=='LiveSkillEffectTargetType_LIVE_SKILL_EFFECT_TARGET_TYPE_SELF')) return unsupported('自己以外の対象・順位選択は未接続');
     const condition=level.condition;
+    // Developer-approved provisional semantics; source condition remains unobserved.
+    if(condition?.state==='unobserved' && condition.referenceState==='absent' &&
+       groupTarget && targets[0].targetCount===2 && typeof targets[0].characterGroupingId==='string' &&
+       targets[0].characterGroupingId && ['performance_up','technique_up','sense_up'].includes(type)){
+      return {status:'partial',effect:{type,value:value/10,condition:{kind:'developer-approved-no-additional-condition'},
+        conditionCount:null,target:{kind:'affiliation',value:targets[0].characterGroupingId},targetCount:2},
+        interpretation:'developer-approved-provisional-affiliation-max-2'};
+    }
     if(condition?.state!=='observed') return unsupported('条件未観測・未解決');
     const clauses=condition.clauses;
     if(clauses?.length!==1) return unsupported('複数条件・条件情報不足');
@@ -88,12 +96,13 @@ const UnitParameterEngine = (() => {
     const bridges=inputMembers.map(member=>resolveInput(member.passiveInput));
     const conditionResults=bridges.map(bridge=>bridge.effect?.condition.kind==='affiliation' ? PartyConditionResolver.resolvePartyCondition({
       type:'affiliation_count',affiliationId:bridge.effect.condition.value,requiredCount:bridge.effect.conditionCount,
-      unitMembers:inputMembers.map((member,index)=>({cardId:member.cardId,slot:member.slot ?? index+1})),catalog:affiliationCatalog}) : null);
+      unitMembers:inputMembers.map((member,index)=>({cardId:member.cardId,slot:member.slot ?? index+1})),catalog:affiliationCatalog}) : bridge.interpretation ? {result:'satisfied',type:'developer-approved-no-additional-condition',interpretation:bridge.interpretation} : null);
     const prepared=inputMembers.map((member,index)=>({slot:member.slot ?? index+1,libraryCardId:member.cardId,
       affiliations:Object.entries(affiliationCatalog?.groups || {}).filter(([,group])=>group.characterIds?.includes(affiliationCatalog?.cardCharacters?.[member.cardId])).map(([id])=>id),
       type:member.attribute,base:{...member.subtotal},card:{skills:{passive:{effect:conditionResults[index]?.result==='unresolved'?{type:''}:bridges[index].effect || {type:''}}}}}));
     const targetResults=bridges.map((bridge,index)=>bridge.status==='partial'?PassiveTargetResolver.resolve({
       affiliationId:bridge.effect.target.value,targetCount:bridge.effect.targetCount,condition:conditionResults[index],
+      maximumCount:!!bridge.interpretation,
       unitMembers:inputMembers.map((m,i)=>({cardId:m.cardId,slot:m.slot ?? i+1})),catalog:affiliationCatalog}):null);
     // Existing accumulation/target resolution/ceil is the single source of calculation.
     const calculated=calculatePassiveEffects(prepared,(source,effect,members)=>{

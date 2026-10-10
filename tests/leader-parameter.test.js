@@ -32,8 +32,8 @@ for(const leader of rules.leaders){
   check(fail.values.every(v=>v.total===0),'condition false means zero');
  }
 }
-check(same(counts,{supported:103,partial:16,unsupported:12}),'card coverage '+JSON.stringify(counts));
-check(same(parameterCounts,{applied:119,unresolved:2,support:26}),'effect coverage');
+check(same(counts,{supported:105,partial:16,unsupported:10}),'card coverage '+JSON.stringify(counts));
+check(same(parameterCounts,{applied:121,unresolved:0,support:26}),'effect coverage');
 const common=rules.leaders.find(l=>l.kind==='common');
 const withLeader=UnitSimulatorEngine.build(catalog,slots,120,{kind:'manual-rate',percent:5},{kind:'manual-rate',percent:2.43},{},true,common);
 for(let i=0;i<5;i++){
@@ -54,4 +54,26 @@ check(multi.values.every((v,i)=>v.performance===Math.ceil(members[i].subtotal.pe
 const unknown=LeaderParameterEngine.calculate({id:'synthetic',effects:[{...testEffect,target:'unknown'}]},members,catalog.affiliationCatalog);
 check(unknown.status==='unsupported'&&unknown.values.every(v=>v.total===0),'unknown target not all members');
 print('Leader: 131 cards / 147 effects, 54 explicit common effects, ceil, conditions, compound isolation, Enhancement, Timeline and seed PASS');
+}
+
+{
+const check=(ok,msg)=>{if(!ok)throw Error(msg);};
+const catalog=canonicalTestFixture,aff=JSON.parse(readFile('data/runtime-affiliations.json'));
+const leaders=JSON.parse(readFile('data/leader-parameter-rules.json')).leaders.filter(l=>l.effects.some(e=>e.condition.affiliationId==='grp-promise'));
+check(leaders.length===2,'two Promise leaders');
+const promise=aff.groups['grp-promise'].characterIds.map(id=>catalog.cards.find(c=>aff.cardCharacters[c.id]===id)).filter(Boolean);
+const others=catalog.cards.filter(c=>!aff.groups['grp-promise'].characterIds.includes(aff.cardCharacters[c.id]));
+for(const leader of leaders){
+ check(leader.effects[0].condition.resolutionEvidence.rawTriggerRecordMissing,'retain missing raw evidence');
+ for(const n of [0,1,2,3]){
+  const cards=[...promise.slice(0,n),...others.slice(0,5-n)];
+  const members=cards.map((c,i)=>({...UnitParameterEngine.calculateMemberParameter(c,0,0),slot:i+1}));
+  const result=LeaderParameterEngine.calculate(leader,members,aff);
+  check(result.trace[0].condition.actualCount===n,'exact Promise count');
+  check(result.trace[0].status===(n>=2?'applied':'inactive'),'threshold '+n);
+  check(result.values.every(v=>n>=2?v.total>0:v.total===0),'all members affected including non-Promise');
+  check(LeaderParameterEngine.calculate(leader,members,null).trace[0].status==='unresolved','missing membership not false');
+ }
+}
+print('Promise: both leaders, 0/1/2/3 counts, all targets, missing membership PASS');
 }

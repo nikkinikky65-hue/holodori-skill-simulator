@@ -1,12 +1,12 @@
 {
   "inputs": {
-    "unit-parameter-engine.js": "5bfe50791eebf8ac5bbdc7dc61a5645ae95f1c257bcf302b397eec25e09a1428",
+    "unit-parameter-engine.js": "43fc606ee954cccbc69eacb7135e0a266903d69e6ab6f2d487e2c3f2ddfb6afd",
     "party-condition-resolver.js": "1ca56c409629effb0a288c0ab75af69382e84320ca84424319517da9f5c6f0ce",
-    "passive-target-resolver.js": "2da1307d7b79fd876af91310f0f2e7b088f27b7400a8ace268deec62476e340f",
+    "passive-target-resolver.js": "4fdfb56da4c58ee06937ed6f5635c355487f46445c88b7553788dc5ce31a055c",
     "passive-selection-resolver.js": "3032c4d0c37dd60b2e48a01ddf642b1d8623e93d87a15a4bae70a2c7db34e774",
     "parameter-rules.js": "6af525b6ab9df6839962b629fde088f0e25962f8bca96e3674a25f8574f48892",
     "data/runtime-affiliations.json": "63d8e7f896b575a699ecd1dadd7fafa788c4f2a2d1948abe98cb790476bb10c6",
-    "data/runtime-cards.json": "25a2a04c8ae704324313636af2d4eacfc13deb410153df2dd5ba6d3276141446",
+    "data/runtime-cards.json": "65a91081d4e23c1ec077af9317a796b9da744d6244749239a0055d4ff36f6c68",
     "research/canonical-cards.json": "306a0d43a4785983ddb200e0ace01d0f9d84a887d3ee6cab5fa44935dd9f8ef1"
   },
   "uniquePassiveIds": 185,
@@ -20,16 +20,16 @@
       "rows": 80
     },
     "partial": {
-      "cards": 15,
-      "rows": 30
+      "cards": 29,
+      "rows": 58
     },
     "supported": {
       "cards": 75,
       "rows": 150
     },
     "unsupported": {
-      "cards": 55,
-      "rows": 110
+      "cards": 41,
+      "rows": 82
     }
   },
   "parameter": {
@@ -40,16 +40,16 @@
     "generation/group members + generation/group count": {
       "cards": 15,
       "rows": 30
+    },
+    "generation/group members + unknown/unobserved": {
+      "cards": 14,
+      "rows": 28
     }
   },
   "groups": {
     "attribute members + unknown/unobserved": {
       "cards": 41,
       "rows": 82
-    },
-    "generation/group members + unknown/unobserved": {
-      "cards": 14,
-      "rows": 28
     }
   },
   "effect": {
@@ -104,16 +104,16 @@
   },
   "unsupportedEffect": {
     "P up": {
-      "cards": 17,
-      "rows": 34
+      "cards": 12,
+      "rows": 24
     },
     "S up": {
-      "cards": 17,
-      "rows": 34
+      "cards": 12,
+      "rows": 24
     },
     "T up": {
-      "cards": 20,
-      "rows": 40
+      "cards": 16,
+      "rows": 32
     },
     "all parameter up": {
       "cards": 1,
@@ -124,22 +124,18 @@
     "attribute members": {
       "cards": 41,
       "rows": 82
-    },
-    "generation/group members": {
-      "cards": 14,
-      "rows": 28
     }
   },
   "unsupportedCondition": {
     "unknown/unobserved": {
-      "cards": 55,
-      "rows": 110
+      "cards": 41,
+      "rows": 82
     }
   },
   "gateReasons": {
     "条件未観測・未解決": {
-      "cards": 55,
-      "rows": 110
+      "cards": 41,
+      "rows": 82
     }
   },
   "rows": [
@@ -175,7 +171,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -234,7 +231,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -281,7 +279,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -317,7 +316,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -363,7 +363,8 @@
         "description": "0期生が2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -418,7 +419,8 @@
         "description": "0期生が2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -463,7 +465,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -499,7 +502,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -547,7 +551,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -606,7 +611,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -653,7 +659,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -689,7 +696,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -737,7 +745,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -796,7 +805,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -853,7 +863,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -906,7 +917,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -949,14 +961,27 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "partial",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "partial",
+        "effect": {
+          "type": "sense_up",
+          "value": 32,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "affiliation",
+            "value": "grp-gen_1"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
       "group": "generation/group members + unknown/unobserved",
       "dependencies": [
@@ -986,14 +1011,27 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "partial",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "partial",
+        "effect": {
+          "type": "sense_up",
+          "value": 43,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "affiliation",
+            "value": "grp-gen_1"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
       "group": "generation/group members + unknown/unobserved",
       "dependencies": [
@@ -1023,14 +1061,27 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "partial",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "partial",
+        "effect": {
+          "type": "technique_up",
+          "value": 32,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "affiliation",
+            "value": "grp-gen_1"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
       "group": "generation/group members + unknown/unobserved",
       "dependencies": [
@@ -1060,14 +1111,27 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "partial",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "partial",
+        "effect": {
+          "type": "technique_up",
+          "value": 43,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "affiliation",
+            "value": "grp-gen_1"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
       "group": "generation/group members + unknown/unobserved",
       "dependencies": [
@@ -1109,7 +1173,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -1168,7 +1233,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -1225,7 +1291,8 @@
         "description": "1期生が2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -1280,7 +1347,8 @@
         "description": "1期生が2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -1325,7 +1393,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -1361,7 +1430,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -1407,7 +1477,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -1460,7 +1531,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -1515,7 +1587,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]3人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -1562,7 +1635,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]3人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -1609,7 +1683,8 @@
         "description": "1期生が2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "partial",
@@ -1669,7 +1744,8 @@
         "description": "1期生が2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "partial",
@@ -1717,7 +1793,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -1753,7 +1830,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -1801,7 +1879,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -1860,7 +1939,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -1919,7 +1999,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]3人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -1966,7 +2047,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]3人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -2001,14 +2083,27 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "partial",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "partial",
+        "effect": {
+          "type": "performance_up",
+          "value": 32,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "affiliation",
+            "value": "grp-gen_1"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
       "group": "generation/group members + unknown/unobserved",
       "dependencies": [
@@ -2038,14 +2133,27 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "partial",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "partial",
+        "effect": {
+          "type": "performance_up",
+          "value": 43,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "affiliation",
+            "value": "grp-gen_1"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
       "group": "generation/group members + unknown/unobserved",
       "dependencies": [
@@ -2075,7 +2183,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -2111,7 +2220,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -2157,7 +2267,8 @@
         "description": "2期生が2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -2212,7 +2323,8 @@
         "description": "2期生が2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -2257,7 +2369,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -2293,7 +2406,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -2341,7 +2455,8 @@
         "description": "2期生が2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -2389,7 +2504,8 @@
         "description": "2期生が2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -2435,7 +2551,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -2488,7 +2605,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -2531,7 +2649,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -2567,7 +2686,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -2603,7 +2723,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -2639,7 +2760,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -2687,7 +2809,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -2746,7 +2869,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -2793,7 +2917,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -2829,7 +2954,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -2877,7 +3003,8 @@
         "description": "2期生が2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "partial",
@@ -2937,7 +3064,8 @@
         "description": "2期生が2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "partial",
@@ -2985,7 +3113,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -3021,7 +3150,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -3067,7 +3197,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -3120,7 +3251,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -3175,7 +3307,8 @@
         "description": "0期生が2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "partial",
@@ -3235,7 +3368,8 @@
         "description": "0期生が2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "partial",
@@ -3283,14 +3417,27 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "partial",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "partial",
+        "effect": {
+          "type": "sense_up",
+          "value": 32,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "affiliation",
+            "value": "grp-gen_0"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
       "group": "generation/group members + unknown/unobserved",
       "dependencies": [
@@ -3320,14 +3467,27 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "partial",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "partial",
+        "effect": {
+          "type": "sense_up",
+          "value": 43,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "affiliation",
+            "value": "grp-gen_0"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
       "group": "generation/group members + unknown/unobserved",
       "dependencies": [
@@ -3369,7 +3529,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -3428,7 +3589,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -3475,7 +3637,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -3511,7 +3674,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -3559,7 +3723,8 @@
         "description": "ゲーマーズが2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -3607,7 +3772,8 @@
         "description": "ゲーマーズが2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -3655,7 +3821,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -3714,7 +3881,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -3773,7 +3941,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -3832,7 +4001,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -3879,7 +4049,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -3915,7 +4086,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -3951,7 +4123,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -3987,7 +4160,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -4035,7 +4209,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -4094,7 +4269,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -4141,7 +4317,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -4177,7 +4354,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -4225,7 +4403,8 @@
         "description": "ゲーマーズが2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "partial",
@@ -4285,7 +4464,8 @@
         "description": "ゲーマーズが2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "partial",
@@ -4333,7 +4513,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -4369,7 +4550,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -4405,14 +4587,27 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "partial",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "partial",
+        "effect": {
+          "type": "performance_up",
+          "value": 32,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "affiliation",
+            "value": "grp-gamers"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
       "group": "generation/group members + unknown/unobserved",
       "dependencies": [
@@ -4442,14 +4637,27 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "partial",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "partial",
+        "effect": {
+          "type": "performance_up",
+          "value": 43,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "affiliation",
+            "value": "grp-gamers"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
       "group": "generation/group members + unknown/unobserved",
       "dependencies": [
@@ -4489,7 +4697,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -4542,7 +4751,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -4595,7 +4805,8 @@
         "description": "ゲーマーズが2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -4650,7 +4861,8 @@
         "description": "ゲーマーズが2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -4695,7 +4907,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -4731,7 +4944,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -4767,7 +4981,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -4803,7 +5018,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -4839,7 +5055,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -4875,7 +5092,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -4923,7 +5141,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -4982,7 +5201,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -5029,7 +5249,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -5065,7 +5286,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -5113,7 +5335,8 @@
         "description": "0期生が2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -5161,7 +5384,8 @@
         "description": "0期生が2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -5209,7 +5433,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -5268,7 +5493,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -5327,7 +5553,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]3人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -5374,7 +5601,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]3人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -5419,7 +5647,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -5472,7 +5701,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -5515,7 +5745,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -5551,7 +5782,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -5599,7 +5831,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -5658,7 +5891,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -5705,14 +5939,27 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "partial",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "partial",
+        "effect": {
+          "type": "performance_up",
+          "value": 32,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "affiliation",
+            "value": "grp-gen_3"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
       "group": "generation/group members + unknown/unobserved",
       "dependencies": [
@@ -5742,14 +5989,27 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "partial",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "partial",
+        "effect": {
+          "type": "performance_up",
+          "value": 43,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "affiliation",
+            "value": "grp-gen_3"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
       "group": "generation/group members + unknown/unobserved",
       "dependencies": [
@@ -5779,7 +6039,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -5815,7 +6076,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -5861,7 +6123,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -5914,7 +6177,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -5969,7 +6233,8 @@
         "description": "3期生が2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "partial",
@@ -6029,7 +6294,8 @@
         "description": "3期生が2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "partial",
@@ -6087,7 +6353,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -6140,7 +6407,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -6195,7 +6463,8 @@
         "description": "3期生が2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -6243,7 +6512,8 @@
         "description": "3期生が2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -6289,7 +6559,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -6342,7 +6613,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -6385,7 +6657,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -6421,7 +6694,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -6469,7 +6743,8 @@
         "description": "3期生が2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -6517,7 +6792,8 @@
         "description": "3期生が2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -6563,7 +6839,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -6616,7 +6893,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -6659,7 +6937,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -6695,7 +6974,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -6731,7 +7011,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -6767,7 +7048,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -6803,7 +7085,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -6839,7 +7122,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -6885,7 +7169,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -6938,7 +7223,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -6993,7 +7279,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]3人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -7040,7 +7327,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]3人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -7087,7 +7375,8 @@
         "description": "4期生が2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "partial",
@@ -7147,7 +7436,8 @@
         "description": "4期生が2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "partial",
@@ -7195,7 +7485,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -7231,7 +7522,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -7279,7 +7571,8 @@
         "description": "4期生が2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -7327,7 +7620,8 @@
         "description": "4期生が2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -7363,14 +7657,27 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "partial",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "partial",
+        "effect": {
+          "type": "technique_up",
+          "value": 32,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "affiliation",
+            "value": "grp-gen_4"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
       "group": "generation/group members + unknown/unobserved",
       "dependencies": [
@@ -7400,14 +7707,27 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "partial",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "partial",
+        "effect": {
+          "type": "technique_up",
+          "value": 43,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "affiliation",
+            "value": "grp-gen_4"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
       "group": "generation/group members + unknown/unobserved",
       "dependencies": [
@@ -7437,14 +7757,27 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "partial",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "partial",
+        "effect": {
+          "type": "performance_up",
+          "value": 32,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "affiliation",
+            "value": "grp-gen_4"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
       "group": "generation/group members + unknown/unobserved",
       "dependencies": [
@@ -7474,14 +7807,27 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "partial",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "partial",
+        "effect": {
+          "type": "performance_up",
+          "value": 43,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "affiliation",
+            "value": "grp-gen_4"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
       "group": "generation/group members + unknown/unobserved",
       "dependencies": [
@@ -7521,7 +7867,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -7574,7 +7921,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -7617,7 +7965,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -7653,7 +8002,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -7699,7 +8049,8 @@
         "description": "5期生が2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -7754,7 +8105,8 @@
         "description": "5期生が2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -7799,7 +8151,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -7835,7 +8188,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -7881,7 +8235,8 @@
         "description": "5期生が2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -7936,7 +8291,8 @@
         "description": "5期生が2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -7981,7 +8337,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -8017,7 +8374,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -8065,7 +8423,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -8124,7 +8483,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -8183,7 +8543,8 @@
         "description": "5期生が2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "partial",
@@ -8243,7 +8604,8 @@
         "description": "5期生が2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "partial",
@@ -8303,7 +8665,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -8362,7 +8725,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -8409,7 +8773,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -8445,7 +8810,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -8493,7 +8859,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]3人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -8540,7 +8907,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]3人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -8575,7 +8943,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -8611,7 +8980,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -8657,7 +9027,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -8710,7 +9081,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -8753,7 +9125,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -8789,7 +9162,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -8835,7 +9209,8 @@
         "description": "holoXが2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -8890,7 +9265,8 @@
         "description": "holoXが2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -8935,7 +9311,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -8971,7 +9348,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -9017,7 +9395,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -9070,7 +9449,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -9125,7 +9505,8 @@
         "description": "holoXが2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "partial",
@@ -9185,7 +9566,8 @@
         "description": "holoXが2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "partial",
@@ -9243,7 +9625,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -9296,7 +9679,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -9351,7 +9735,8 @@
         "description": "holoXが2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -9399,7 +9784,8 @@
         "description": "holoXが2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -9447,7 +9833,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -9506,7 +9893,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -9553,7 +9941,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -9589,7 +9978,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -9637,7 +10027,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -9696,7 +10087,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -9753,7 +10145,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -9806,7 +10199,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -9859,7 +10253,8 @@
         "description": "holoXが2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -9914,7 +10309,8 @@
         "description": "holoXが2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -9959,7 +10355,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -9995,7 +10392,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -10043,7 +10441,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -10102,7 +10501,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -10161,7 +10561,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]3人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -10208,7 +10609,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]3人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -10243,7 +10645,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -10279,7 +10682,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -10325,7 +10729,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -10378,7 +10783,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -10421,7 +10827,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -10457,7 +10864,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -10505,7 +10913,8 @@
         "description": "ID1期生が2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "partial",
@@ -10565,7 +10974,8 @@
         "description": "ID1期生が2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "partial",
@@ -10625,7 +11035,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -10684,7 +11095,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -10743,7 +11155,8 @@
         "description": "ID1期生が2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -10791,7 +11204,8 @@
         "description": "ID1期生が2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -10827,7 +11241,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -10863,7 +11278,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -10911,7 +11327,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -10970,7 +11387,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -11017,7 +11435,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -11053,7 +11472,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -11089,7 +11509,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -11125,7 +11546,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -11173,7 +11595,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -11232,7 +11655,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -11279,7 +11703,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -11315,7 +11740,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -11363,7 +11789,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]3人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -11410,7 +11837,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]3人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -11455,7 +11883,8 @@
         "description": "ID2期生が2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -11510,7 +11939,8 @@
         "description": "ID2期生が2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -11567,7 +11997,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -11626,7 +12057,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -11685,7 +12117,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -11744,7 +12177,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -11803,7 +12237,8 @@
         "description": "ID2期生が2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "partial",
@@ -11863,7 +12298,8 @@
         "description": "ID2期生が2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "partial",
@@ -11911,7 +12347,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -11947,7 +12384,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -11995,7 +12433,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -12054,7 +12493,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -12101,7 +12541,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -12137,7 +12578,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -12183,7 +12625,8 @@
         "description": "ID3期生が2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -12238,7 +12681,8 @@
         "description": "ID3期生が2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -12295,7 +12739,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -12354,7 +12799,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -12413,7 +12859,8 @@
         "description": "ID3期生が2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "partial",
@@ -12473,7 +12920,8 @@
         "description": "ID3期生が2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "partial",
@@ -12521,7 +12969,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -12557,7 +13006,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -12605,7 +13055,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -12664,7 +13115,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -12711,7 +13163,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -12747,7 +13200,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -12793,7 +13247,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -12846,7 +13301,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -12901,7 +13357,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -12960,7 +13417,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -13007,7 +13465,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -13043,7 +13502,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -13091,7 +13551,8 @@
         "description": "Mythが2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -13139,7 +13600,8 @@
         "description": "Mythが2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -13187,7 +13649,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -13246,7 +13709,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -13303,7 +13767,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -13356,7 +13821,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -13411,7 +13877,8 @@
         "description": "Mythが2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "partial",
@@ -13471,7 +13938,8 @@
         "description": "Mythが2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "partial",
@@ -13519,7 +13987,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -13555,7 +14024,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -13603,7 +14073,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -13662,7 +14133,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -13721,7 +14193,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]3人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -13768,7 +14241,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]3人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -13813,7 +14287,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -13866,7 +14341,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -13909,14 +14385,27 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "partial",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "partial",
+        "effect": {
+          "type": "sense_up",
+          "value": 32,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "affiliation",
+            "value": "grp-myth"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
       "group": "generation/group members + unknown/unobserved",
       "dependencies": [
@@ -13946,14 +14435,27 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "partial",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "partial",
+        "effect": {
+          "type": "sense_up",
+          "value": 43,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "affiliation",
+            "value": "grp-myth"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
       "group": "generation/group members + unknown/unobserved",
       "dependencies": [
@@ -13993,7 +14495,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -14046,7 +14549,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -14089,7 +14593,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -14125,7 +14630,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -14161,14 +14667,27 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "partial",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "partial",
+        "effect": {
+          "type": "technique_up",
+          "value": 32,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "affiliation",
+            "value": "grp-promise"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
       "group": "generation/group members + unknown/unobserved",
       "dependencies": [
@@ -14198,14 +14717,27 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "partial",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "partial",
+        "effect": {
+          "type": "technique_up",
+          "value": 43,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "affiliation",
+            "value": "grp-promise"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
       "group": "generation/group members + unknown/unobserved",
       "dependencies": [
@@ -14235,7 +14767,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -14271,7 +14804,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -14307,14 +14841,27 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "partial",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "partial",
+        "effect": {
+          "type": "technique_up",
+          "value": 21,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "affiliation",
+            "value": "grp-promise"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
       "group": "generation/group members + unknown/unobserved",
       "dependencies": [
@@ -14344,14 +14891,27 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "partial",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "partial",
+        "effect": {
+          "type": "technique_up",
+          "value": 32,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "affiliation",
+            "value": "grp-promise"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
       "group": "generation/group members + unknown/unobserved",
       "dependencies": [
@@ -14381,7 +14941,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -14417,7 +14978,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -14465,7 +15027,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -14524,7 +15087,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -14571,7 +15135,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -14607,7 +15172,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -14643,7 +15209,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -14679,7 +15246,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -14727,7 +15295,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -14786,7 +15355,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -14845,7 +15415,8 @@
         "description": "Adventが2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -14893,7 +15464,8 @@
         "description": "Adventが2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -14929,14 +15501,27 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "partial",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "partial",
+        "effect": {
+          "type": "performance_up",
+          "value": 32,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "affiliation",
+            "value": "grp-advent"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
       "group": "generation/group members + unknown/unobserved",
       "dependencies": [
@@ -14966,14 +15551,27 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "partial",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "partial",
+        "effect": {
+          "type": "performance_up",
+          "value": 43,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "affiliation",
+            "value": "grp-advent"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
       "group": "generation/group members + unknown/unobserved",
       "dependencies": [
@@ -15013,7 +15611,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -15066,7 +15665,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -15121,7 +15721,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -15180,7 +15781,8 @@
         "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -15239,7 +15841,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -15298,7 +15901,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -15345,7 +15949,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -15381,7 +15986,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -15427,7 +16033,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -15480,7 +16087,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -15535,7 +16143,8 @@
         "description": "Adventが2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "partial",
@@ -15595,7 +16204,8 @@
         "description": "Adventが2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "partial",
@@ -15653,7 +16263,8 @@
         "description": "Adventが2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -15708,7 +16319,8 @@
         "description": "Adventが2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -15763,7 +16375,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -15816,7 +16429,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -15859,7 +16473,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -15895,7 +16510,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -15931,7 +16547,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -15967,7 +16584,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -16013,7 +16631,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -16066,7 +16685,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -16121,7 +16741,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -16180,7 +16801,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -16237,7 +16859,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -16290,7 +16913,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -16333,7 +16957,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -16369,7 +16994,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -16405,7 +17031,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -16441,7 +17068,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -16487,7 +17115,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -16540,7 +17169,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -16595,7 +17225,8 @@
         "description": "ReGLOSSが2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "partial",
@@ -16655,7 +17286,8 @@
         "description": "ReGLOSSが2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "partial",
@@ -16703,14 +17335,27 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "partial",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "partial",
+        "effect": {
+          "type": "sense_up",
+          "value": 32,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "affiliation",
+            "value": "grp-regloss"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
       "group": "generation/group members + unknown/unobserved",
       "dependencies": [
@@ -16740,14 +17385,27 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "partial",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "partial",
+        "effect": {
+          "type": "sense_up",
+          "value": 43,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "affiliation",
+            "value": "grp-regloss"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
       "group": "generation/group members + unknown/unobserved",
       "dependencies": [
@@ -16789,7 +17447,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -16848,7 +17507,8 @@
         "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -16905,7 +17565,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -16958,7 +17619,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -17001,7 +17663,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -17037,7 +17700,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -17085,7 +17749,8 @@
         "description": "ReGLOSSが2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "partial",
@@ -17145,7 +17810,8 @@
         "description": "ReGLOSSが2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "partial",
@@ -17193,7 +17859,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -17229,7 +17896,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -17275,7 +17943,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -17328,7 +17997,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": true,
       "status": "supported",
@@ -17371,14 +18041,27 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "partial",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "partial",
+        "effect": {
+          "type": "sense_up",
+          "value": 32,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "affiliation",
+            "value": "grp-regloss"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
       "group": "generation/group members + unknown/unobserved",
       "dependencies": [
@@ -17408,14 +18091,27 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
-      "status": "unsupported",
+      "status": "partial",
       "gate": {
-        "status": "unsupported",
-        "reason": "条件未観測・未解決",
-        "effect": null
+        "status": "partial",
+        "effect": {
+          "type": "sense_up",
+          "value": 43,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "affiliation",
+            "value": "grp-regloss"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
       "group": "generation/group members + unknown/unobserved",
       "dependencies": [
@@ -17445,7 +18141,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -17481,7 +18178,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -17529,7 +18227,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]3人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -17576,7 +18275,8 @@
         "description": "[attribute=pure]ピュアタイプ[/attribute]3人以上で",
         "resolutionClass": "formation-dependent",
         "evaluationMode": "resolve-from-formation",
-        "evaluationStatus": "not-evaluated"
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
       },
       "parameter": false,
       "status": "non-parameter",
@@ -17611,7 +18311,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",
@@ -17647,7 +18348,8 @@
       "condition": "unknown/unobserved",
       "conditionFacts": {
         "state": "unobserved",
-        "evaluationStatus": "unresolved"
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
       },
       "parameter": true,
       "status": "unsupported",

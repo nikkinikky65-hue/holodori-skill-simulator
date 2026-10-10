@@ -67,10 +67,12 @@ def project_level(level, kind, path):
     result = {'level': level['levelFact']['rawValue'], **entity(level, path)}
     if kind == 'passive':
         p = level['effect']
+        trigger_facts = [f for f in level['facts'] if f['sourceField'] == 'liveSkillTriggerGroupId']
         target = p['target']
         result.update(effect=entity(p['effect'], path + '/effect/effect'),
                       target={'source': path + '/effect/target', 'selectors': clauses(target.get('sourceFacts', [])), **description(target.get('sourceFacts', []))},
                       condition=condition(p, path + '/effect/condition'), calculationStatus='deferred')
+        result['condition']['referenceState'] = 'present' if trigger_facts else 'absent'
     elif kind == 'active':
         result.update(baseEffect=entity(level['baseEffect'], path + '/baseEffect'), conditionalOverrides=[], calculationStatus='base-only')
         for i, item in enumerate(level['conditionalOverrides']):

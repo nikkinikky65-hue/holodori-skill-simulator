@@ -25,7 +25,7 @@
   check(d.querySelector('#unitParameters').textContent.includes('Leader補正'),'visible breakdown');
   check(d.querySelector('#unitLeaderStatus').textContent.includes('適用'),'visible status');
   leader.value='live_leader_skill-card-04007-5-uniq-0047-00';leader.dispatchEvent(new w.Event('change'));
-  check(api.getModel().parameters.leader.total===0&&d.querySelector('#unitLeaderStatus').textContent.includes('条件参照不足'),'missing condition visible');
+  check(api.getModel().parameters.leader.total===0&&d.querySelector('#unitLeaderStatus').textContent.includes('条件不成立'),'Promise condition correctly inactive');
   leader.value='';leader.dispatchEvent(new w.Event('change'));
   check(api.getModel().unitScore.value===plain.unitScore.value,'unset restores values');
   leader.value='live_leader_skill-card-00010-5-uniq-0010-00';leader.dispatchEvent(new w.Event('change'));

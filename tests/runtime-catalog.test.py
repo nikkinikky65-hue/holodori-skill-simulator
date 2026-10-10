@@ -95,7 +95,9 @@ for src, dst in zip(canonical['cards'], runtime['cards']):
                 for f in original['effect']['target']['sourceFacts']:
                     if not f['source']['table'].startswith('Lang') and f['sourceField'] not in ('id', 'descriptionLangId'):
                         assert any(f['sourceField'] in raw and type(raw[f['sourceField']]) is type(f['rawValue']) and raw[f['sourceField']] == f['rawValue'] for raw in projected['target']['selectors'])
-                check_condition(original['effect'], projected['condition'])
+                expected_reference = 'present' if any(f['sourceField']=='liveSkillTriggerGroupId' for f in original['facts']) else 'absent'
+                assert projected['condition']['referenceState'] == expected_reference
+                check_condition(original['effect'], {k:v for k,v in projected['condition'].items() if k!='referenceState'})
             elif kind == 'active':
                 check_entity(original['baseEffect'], projected['baseEffect'])
                 assert len(original['conditionalOverrides']) == len(projected['conditionalOverrides'])

@@ -2,7 +2,7 @@
 const check=(ok,msg)=>{if(!ok)throw Error(msg);};
 const catalog=JSON.parse(JSON.stringify(canonicalTestFixture));catalog.affiliationCatalog=JSON.parse(readFile('data/runtime-affiliations.json'));
 const expected=JSON.parse(readFile('tests/affiliation-target-expected-cards.json'));
-const partial=catalog.cards.filter(c=>UnitParameterEngine.resolveInput(c.skills.passive.levels[0]).status==='partial').map(c=>c.id).sort();
+const partial=catalog.cards.filter(c=>UnitParameterEngine.resolveInput(c.skills.passive.levels[0]).status==='partial' && !UnitParameterEngine.resolveInput(c.skills.passive.levels[0]).interpretation).map(c=>c.id).sort();
 check(JSON.stringify(partial)===JSON.stringify(expected)&&partial.length===15,'exact partial set');
 const slot=card=>({cardId:card.id,training:0,bloom:0,short:0});
 for(const id of expected){

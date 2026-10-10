@@ -3,7 +3,8 @@
   "canonicalSha256": "306a0d43a4785983ddb200e0ace01d0f9d84a887d3ee6cab5fa44935dd9f8ef1",
   "inputs": {
     "research/unit-leader-audit.json": "ccf1bfc5f2e04aca7e842636a42d5aa8e55a33a8ff677a8a826da3785c4af88f",
-    "data/runtime-leader-skills.json": "47a6ca6f265b0c9362704ae595d66fcb879dab9c7ae15ff151f230d332450657"
+    "data/runtime-leader-skills.json": "47a6ca6f265b0c9362704ae595d66fcb879dab9c7ae15ff151f230d332450657",
+    "data/runtime-affiliations.json": "63d8e7f896b575a699ecd1dadd7fafa788c4f2a2d1948abe98cb790476bb10c6"
   },
   "leaders": [
     {
@@ -2564,12 +2565,21 @@
           "percent": 50,
           "target": "all_members",
           "condition": {
-            "type": "unknown",
+            "type": "affiliation_count",
             "attribute": null,
-            "affiliationId": null,
-            "requiredCount": null,
+            "affiliationId": "grp-promise",
+            "requiredCount": 2,
             "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-promise-2",
-            "text": "Promiseが2人以上"
+            "text": "Promiseが2人以上",
+            "resolutionEvidence": {
+              "basis": "original-leader-text-and-canonical-group-name",
+              "groupSource": {
+                "table": "CharacterGrouping",
+                "sourceId": "grp-promise"
+              },
+              "text": "Promiseが2人以上",
+              "rawTriggerRecordMissing": true
+            }
           },
           "description": "Promiseが2人以上で全員の全パラメータが50%UP"
         }
@@ -2587,12 +2597,21 @@
           "percent": 40,
           "target": "all_members",
           "condition": {
-            "type": "unknown",
+            "type": "affiliation_count",
             "attribute": null,
-            "affiliationId": null,
-            "requiredCount": null,
+            "affiliationId": "grp-promise",
+            "requiredCount": 2,
             "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-promise-2",
-            "text": "Promiseが2人以上"
+            "text": "Promiseが2人以上",
+            "resolutionEvidence": {
+              "basis": "original-leader-text-and-canonical-group-name",
+              "groupSource": {
+                "table": "CharacterGrouping",
+                "sourceId": "grp-promise"
+              },
+              "text": "Promiseが2人以上",
+              "rawTriggerRecordMissing": true
+            }
           },
           "description": "Promiseが2人以上で全員の全パラメータが40%UP"
         }
