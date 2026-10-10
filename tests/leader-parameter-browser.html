@@ -1,0 +1,45 @@
+<!doctype html><meta charset="utf-8"><title>Leader Parameter browser regression</title>
+<pre id="result">RUNNING</pre><iframe id="page" style="height:800px;border:0"></iframe>
+<script>
+(async()=>{
+ const check=(ok,msg)=>{if(!ok)throw Error(msg);};
+ const frame=document.querySelector('#page'),out=document.querySelector('#result');
+ const storage=()=>JSON.stringify(Object.keys(localStorage).sort().map(k=>[k,localStorage.getItem(k)]));
+ const before=storage();
+ try{
+ for(const width of [1100,360]){
+  frame.style.width=width+'px';const w=await new Promise(resolve=>{frame.onload=()=>resolve(frame.contentWindow);frame.src='../unit-simulator.html';});
+  const errors=[];w.addEventListener('error',e=>errors.push(e.message));
+  const api=await w.eval('unitSimulatorReady'),d=w.document;
+  [...d.querySelectorAll('[data-unit-card]')].forEach((s,i)=>{s.selectedIndex=i+1;s.dispatchEvent(new w.Event('change'));});
+  const leader=d.querySelector('#unitLeader');check(leader.options.length===186,'131 cards + 54 common + unset');
+  const old=api.getModel();
+  d.querySelector('#unitEnhancementPercent').value='2.43';d.querySelector('#unitEnhancementPercent').dispatchEvent(new w.Event('input'));
+  const plain=api.getModel();
+  leader.value='live_leader_skill-card-00001-4-cmmn-0000-00';leader.dispatchEvent(new w.Event('change'));
+  const model=api.getModel();
+  check(model.parameters.leader.sense>0&&model.parameters.leader.performance===0,'selected S leader applies');
+  check(model.parameters.leader.sense===plain.parameters.base.sense+plain.parameters.opening.sense,'100% post-bloom S');
+  check(model.parameters.enhancementBonus.total>plain.parameters.enhancementBonus.total,'Enhancement recalculates');
+  check(JSON.stringify(model.eventsByMember)===JSON.stringify(old.eventsByMember),'unchanged timeline');
+  check(d.querySelector('#unitParameters').textContent.includes('Leader補正'),'visible breakdown');
+  check(d.querySelector('#unitLeaderStatus').textContent.includes('適用'),'visible status');
+  leader.value='live_leader_skill-card-04007-5-uniq-0047-00';leader.dispatchEvent(new w.Event('change'));
+  check(api.getModel().parameters.leader.total===0&&d.querySelector('#unitLeaderStatus').textContent.includes('条件参照不足'),'missing condition visible');
+  leader.value='';leader.dispatchEvent(new w.Event('change'));
+  check(api.getModel().unitScore.value===plain.unitScore.value,'unset restores values');
+  leader.value='live_leader_skill-card-00010-5-uniq-0010-00';leader.dispatchEvent(new w.Event('change'));
+  const supported=api.getModel();check(supported.activationSupport.every(r=>r.leaderRate===60),'Leader60 display state');
+  d.querySelector('#unitTimeline .row:not(.maxrow) .bar').click();
+  const expected=supported.activationSupport[0];
+  check(d.querySelector('#unitTimelineDetail').textContent.includes(`${expected.baseBoost}+${expected.displayAdditional}`),'rendered start support');
+  check(d.querySelector('#unitLeaderStatus').textContent.includes('適用'),'Support status applied');
+  leader.value='';leader.dispatchEvent(new w.Event('change'));
+  check(api.getModel().activationSupport.every(r=>r.leaderRate===0),'Leader removal refreshes Support');
+  check(storage()===before,'no persistence changes');
+  check(d.documentElement.scrollWidth<=width,'responsive width');check(!errors.length,errors.join());
+ }
+ out.textContent='PASS: independent Leader selection, 185 options, S/Enhancement, unresolved, removal, storage, 1100/360';
+ }catch(e){out.textContent='FAIL: '+e.stack;}
+})();
+</script>

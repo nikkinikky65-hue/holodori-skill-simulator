@@ -8,6 +8,19 @@ async function initializeUnitSimulator(){
       const response=await fetch(new URL('data/runtime-affiliations.json',document.baseURI));
       if(response.ok){const data=await response.json();if(data.format==='holodori-affiliations-v1'&&data.canonicalSha256===catalog.dataset.canonicalSha256)catalog.affiliationCatalog=data;}
     }catch(error){ /* Missing affiliation data leaves those conditions unresolved. */ }
+    let leaderRules=[];
+    try{
+      const response=await fetch(new URL('data/leader-parameter-rules.json',document.baseURI));
+      if(!response.ok)throw Error('Leaderデータ取得失敗');
+      const data=await response.json();
+      if(data.canonicalSha256!==catalog.dataset.canonicalSha256)throw Error('Leaderデータ版不一致');
+      leaderRules=data.leaders;
+      for(const kind of ['card','common']){
+        const group=create('optgroup');group.label=kind==='card'?'カード固有リーダー':'基礎衣装 共通効果（明示選択）';
+        for(const leader of leaderRules.filter(l=>l.kind===kind))group.append(new Option(leader.name+' / '+leader.description,leader.id));
+        node('unitLeader').append(group);
+      }
+    }catch(error){node('unitLeaderStatus').textContent=error.message;}
     const slots=Array.from({length:5},()=>({cardId:'',training:0,bloom:0,short:0,totalAdjustments:{board:{kind:'external-total',value:''},costume:{kind:'external-total',value:''}}}));
     const previews=[];
     let model=null;
@@ -26,14 +39,16 @@ async function initializeUnitSimulator(){
     function refresh(){
       node('unitResult').replaceChildren();node('unitResultStatus').textContent='編成・曲時間を変更した場合は再実行してください。';
       try{
-        model=UnitSimulatorEngine.build(catalog,slots,Number(node('unitDuration').value),{kind:'manual-rate',percent:node('unitMemoryPercent').value},{kind:'manual-rate',percent:node('unitEnhancementPercent').value},specialStarts,node('unitShowSP').checked);
+        model=UnitSimulatorEngine.build(catalog,slots,Number(node('unitDuration').value),{kind:'manual-rate',percent:node('unitMemoryPercent').value},{kind:'manual-rate',percent:node('unitEnhancementPercent').value},specialStarts,node('unitShowSP').checked,leaderRules.find(l=>l.id===node('unitLeader').value)||null);
+        if(leaderRules.length)node('unitLeaderStatus').textContent=model.parameters.leaderResult ?
+          [...model.parameters.leaderResult.trace.filter(t=>t.effect.parameter!=='score_support'),...model.leaderSupport.sources].map(t=>`${t.description}：${t.status==='applied'?'適用':t.status==='inactive'?'条件不成立':t.reason}`).join(' / ') : '未選択（共通効果も自動付与しません）';
         const rows=[];
         model.members.forEach((member,i)=>{
           previews[i].textContent=member ? canonicalEffectsText(member.expansion) : 'カード未選択';
           if(!member)return;
-          for(const [part,label] of [['base','基礎'],['opening','開花増分'],['passive','Passive補正（適用済み分）'],['subtotal','現在計算値']]) rows.push([`枠${i+1} ${member.card.name}`,label,...pts(member.parameters[part])]);
+          for(const [part,label] of [['base','基礎'],['opening','開花増分'],['passive','Passive補正（適用済み分）'],['leader','Leader補正'],['subtotal','現在計算値']]) rows.push([`枠${i+1} ${member.card.name}`,label,...pts(member.parameters[part])]);
         });
-        for(const [part,label] of [['base','基礎合計'],['opening','開花増分合計'],['passive','Passive合計（適用済み分）'],['subtotal','現在計算値合計']]) rows.push(['編成（選択済み）',label,...pts(model.parameters[part])]);
+        for(const [part,label] of [['base','基礎合計'],['opening','開花増分合計'],['passive','Passive合計（適用済み分）'],['leader','Leader補正合計'],['subtotal','現在計算値合計']]) rows.push(['編成（選択済み）',label,...pts(model.parameters[part])]);
         node('unitParameters').replaceChildren(table(['対象','内訳','P','T','S','TOTAL'],rows));
         for(const member of model.parameters.members){
           const details=create('details'),summary=create('summary',`${member.cardId}：Parameter trace`);
@@ -42,7 +57,7 @@ async function initializeUnitSimulator(){
         }
         node('unitScore').textContent=`暫定Unit Score：${model.unitScore.value.toLocaleString()}（現在計算値ベース${model.unitScore.hasUnresolved?'・未接続効果あり':''}）`;
         node('unitTimelineScore').textContent=`全発動時の暫定スコア：${model.allSuccessScore.toLocaleString(undefined,{maximumFractionDigits:2})}`;
-        ActiveTimelineView.render({container:node('unitTimeline'),detail:node('unitTimelineDetail'),members:model.activeMembers,eventsByMember:model.eventsByMember,duration:model.duration,probabilities:ActivationProbabilityRules.percent,specialSchedule:model.specialEnabled?model.specialSchedule:null,segments:model.supportedSegments});
+        ActiveTimelineView.render({container:node('unitTimeline'),detail:node('unitTimelineDetail'),members:model.activeMembers,eventsByMember:model.eventsByMember,duration:model.duration,probabilities:ActivationProbabilityRules.percent,specialSchedule:model.specialEnabled?model.specialSchedule:null,segments:model.supportedSegments,activationSupport:model.activationSupport});
         specialInputs.forEach((input,i)=>{const sp=model.specialSchedule.entries.find(e=>e.slot===i+1);input.disabled=!sp||model.specialSchedule.status!=='resolved';input.value=sp?.start??'';});
         node('unitSPStatus').textContent=model.specialSchedule.reason || '暫定配置。重なる後続SPは後ろへ移動し、曲末で制限します。';
         node('unitSupportTrace').textContent=JSON.stringify(model.supportTrace,null,2);
@@ -78,6 +93,7 @@ async function initializeUnitSimulator(){
       });
       specialInputs.push(input);label.append(input);node('unitSPSchedule').append(label);
     }
+    node('unitLeader').addEventListener('change',refresh);
     node('unitShowSP').addEventListener('change',refresh);
     node('unitDuration').addEventListener('input',refresh);
     node('unitMemoryPercent').addEventListener('input',refresh);

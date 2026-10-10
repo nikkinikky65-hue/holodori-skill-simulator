@@ -82,7 +82,8 @@ const UnitParameterEngine = (() => {
     if(!['string','number'].includes(typeof source.value)||!/^\d+$/.test(String(source.value).trim())||!Number.isSafeInteger(Number(source.value))) return output('invalid',null,'0以上の安全な整数TOTALを入力してください');
     return output('applied',Number(source.value),null);
   }
-  function calculateUnitParameter(inputMembers, memoryInput, enhancementInput, affiliationCatalog){
+  function calculateUnitParameter(inputMembers, memoryInput, enhancementInput, affiliationCatalog, leaderInput = null){
+    const leaderResult=leaderInput ? LeaderParameterEngine.calculate(leaderInput,inputMembers,affiliationCatalog) : null;
     const memoryState=resolveMemory(memoryInput);
     const bridges=inputMembers.map(member=>resolveInput(member.passiveInput));
     const conditionResults=bridges.map(bridge=>bridge.effect?.condition.kind==='affiliation' ? PartyConditionResolver.resolvePartyCondition({
@@ -157,18 +158,20 @@ const UnitParameterEngine = (() => {
         parameters:keys.map(key=>({parameter:key,referenceValue:member.subtotal[key],rate:memoryState.rate,
           unrounded:memoryValues ? member.subtotal[key]*memoryState.rate : null,
           added:memoryValues ? memoryValues[key] : null,rounding:'各カード・各parameterごとにceil'}))};
-      const subtotal=Object.fromEntries([...keys,'total'].map(key=>[key,member.subtotal[key]+result.passive[key]+(memoryValues ? memoryValues[key] : 0)]));
+      const leader=leaderResult?.values[index] || {performance:0,technique:0,sense:0,total:0};
+      const leaderTrace=leaderResult?.trace || [];
+      const subtotal=Object.fromEntries([...keys,'total'].map(key=>[key,member.subtotal[key]+result.passive[key]+(memoryValues ? memoryValues[key] : 0)+leader[key]]));
       const board=resolveTotalAdjustment(member.totalAdjustmentInputs?.board);
       const costume=resolveTotalAdjustment(member.totalAdjustmentInputs?.costume);
       const enhancementBonus=calculateEnhancementLayer({cardAfterBloom:member.subtotal.total,
-        appliedPassive:result.passive.total,unresolvedPassive:unresolved.length?null:0,board:board.total,outfit:costume.total},enhancementInput);
+        appliedPassive:result.passive.total,unresolvedPassive:unresolved.length?null:0,board:board.total,outfit:costume.total,...(leaderResult?{leader:leader.total,unresolvedLeader:leaderResult.trace.some(r=>r.status==='unresolved')?null:0}:{})},enhancementInput);
       const enhancementTrace={kind:'Enhancement Bonus',targetCardId:member.cardId,targetSlot:prepared[index].slot,
         ...enhancementBonus,parameter:'total',added:enhancementBonus.total,memoryIncluded:false};
       const adjustmentTraces=Object.entries({board,costume}).map(([kind,value])=>({kind,targetCardId:member.cardId,targetSlot:prepared[index].slot,
         ...value,parameter:'total',includedInEnhancementBasis:value.status==='applied',enhancementCalculated:enhancementBonus.status==='applied'}));
       subtotal.total+=(board.total ?? 0)+(costume.total ?? 0)+(enhancementBonus.total ?? 0);
-      return {...member,board,costume,totalAdjustments:{board,costume,enhancementBonus},enhancementBonus,passive:{...result.passive},memory,subtotal,unresolved,trace:[trace,memoryTrace,...adjustmentTraces,enhancementTrace],
-        corrections:[...member.corrections,...Object.entries({Board:board,衣装:costume}).filter(([,v])=>v.status!=='applied').map(([label,v])=>({label,status:v.status,value:null,reason:v.reason})),...(enhancementBonus.status==='applied'?[]:[{label:'強化ボーナス',status:enhancementBonus.status,value:null,reason:enhancementBonus.reason}]),...(memoryState.status==='applied'?[]:[{label:'Memory',status:memoryState.status,value:null,reason:memoryState.reason}]),...unresolved.map(row=>({label:'Passive',status:row.status,value:null,reason:row.reason}))]};
+      return {...member,leader,board,costume,totalAdjustments:{board,costume,enhancementBonus},enhancementBonus,passive:{...result.passive},memory,subtotal,unresolved,trace:[trace,...leaderTrace,memoryTrace,...adjustmentTraces,enhancementTrace],
+        corrections:[...member.corrections.filter(c=>!leaderResult||c.label!=='Leader'),...leaderTrace.filter(r=>['unresolved','unsupported'].includes(r.status)).map(r=>({label:'Leader',status:r.status,value:null,reason:r.reason})),...Object.entries({Board:board,衣装:costume}).filter(([,v])=>v.status!=='applied').map(([label,v])=>({label,status:v.status,value:null,reason:v.reason})),...(enhancementBonus.status==='applied'?[]:[{label:'強化ボーナス',status:enhancementBonus.status,value:null,reason:enhancementBonus.reason}]),...(memoryState.status==='applied'?[]:[{label:'Memory',status:memoryState.status,value:null,reason:memoryState.reason}]),...unresolved.map(row=>({label:'Passive',status:row.status,value:null,reason:row.reason}))]};
     });
     const sum=part=>Object.fromEntries([...keys,'total'].map(key=>[key,members.reduce((total,member)=>total+member[part][key],0)]));
     const enhancementState=calculateEnhancementLayer({cardAfterBloom:0,appliedPassive:0,board:null,outfit:null},enhancementInput);
@@ -181,9 +184,9 @@ const UnitParameterEngine = (() => {
       status:members.length===5&&members.every(m=>m[kind].status==='applied')?'applied':'partial',
       states:members.map((m,i)=>({slot:m.slot ?? i+1,status:m[kind].status,reason:m[kind].reason}))});
     const board=adjustmentSum('board'),costume=adjustmentSum('costume');
-    return {board,costume,totalAdjustments:{board,costume,enhancementBonus},enhancementBonus,members,base:sum('base'),opening:sum('opening'),passive:sum('passive'),memory:{...memoryState,...(memoryState.status==='applied'?sum('memory'):Object.fromEntries([...keys,'total'].map(key=>[key,null])))},subtotal:sum('subtotal'),final:null,
+    return {leader:sum('leader'),leaderResult,board,costume,totalAdjustments:{board,costume,enhancementBonus},enhancementBonus,members,base:sum('base'),opening:sum('opening'),passive:sum('passive'),memory:{...memoryState,...(memoryState.status==='applied'?sum('memory'):Object.fromEntries([...keys,'total'].map(key=>[key,null])))},subtotal:sum('subtotal'),final:null,
       unresolved:members.flatMap(member=>member.unresolved),trace:members.flatMap(member=>member.trace),
-      status:members.length===5?'card-only':'incomplete',corrections:pending.map(label=>({label,status:'not-connected',value:null}))};
+      status:members.length===5?'card-only':'incomplete',corrections:pending.filter(label=>!leaderResult||label!=='Leader').map(label=>({label,status:'not-connected',value:null}))};
   }
   return {calculateMemberParameter,calculateUnitParameter,resolveInput,resolveMemory,calculateEnhancementLayer,resolveTotalAdjustment};
 })();

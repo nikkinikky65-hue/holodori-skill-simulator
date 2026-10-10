@@ -1,0 +1,4165 @@
+{
+  "format": "leader-parameter-rules-v1",
+  "canonicalSha256": "306a0d43a4785983ddb200e0ace01d0f9d84a887d3ee6cab5fa44935dd9f8ef1",
+  "inputs": {
+    "research/unit-leader-audit.json": "ccf1bfc5f2e04aca7e842636a42d5aa8e55a33a8ff677a8a826da3785c4af88f",
+    "data/runtime-leader-skills.json": "47a6ca6f265b0c9362704ae595d66fcb879dab9c7ae15ff151f230d332450657"
+  },
+  "leaders": [
+    {
+      "id": "live_leader_skill-card-00001-4-cmmn-0000-00",
+      "cardId": "card-00001-4-cmmn-0000-00",
+      "name": "ときのそら / 空まで届け！まっすぐな歌声",
+      "description": "全員のセンスが100%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "S",
+          "percent": 100,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のセンスが100%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00001-5-uniq-0000-00",
+      "cardId": "card-00001-5-uniq-0000-00",
+      "name": "ときのそら / ひたむきに描く虹のうた",
+      "description": "0期生が2人以上で全員の全パラメータが50%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 50,
+          "target": "all_members",
+          "condition": {
+            "type": "affiliation_count",
+            "attribute": null,
+            "affiliationId": "grp-gen_0",
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-gen_0-2",
+            "text": "0期生が2人以上"
+          },
+          "description": "0期生が2人以上で全員の全パラメータが50%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00002-4-cmmn-0000-00",
+      "cardId": "card-00002-4-cmmn-0000-00",
+      "name": "ロボ子さん / ゆるふわウインクLIVE",
+      "description": "全員の全パラメータが35%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 35,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員の全パラメータが35%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00002-5-uniq-0001-00",
+      "cardId": "card-00002-5-uniq-0001-00",
+      "name": "ロボ子さん / 高性能なVサイン",
+      "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で全員のパフォーマンスが130%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "P",
+          "percent": 130,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_3-2",
+            "text": "ハッピータイプ2人以上"
+          },
+          "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で全員のパフォーマンスが130%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00004-4-cmmn-0000-00",
+      "cardId": "card-00004-4-cmmn-0000-00",
+      "name": "アキ・ローゼンタール / 歌うcuriousハーフエルフ",
+      "description": "全員の全パラメータが35%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 35,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員の全パラメータが35%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00004-5-uniq-0005-00",
+      "cardId": "card-00004-5-uniq-0005-00",
+      "name": "アキ・ローゼンタール / 艶帯びたハーフエルフ",
+      "description": "全員のセンスが120%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "S",
+          "percent": 120,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のセンスが120%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00004-5-uniq-0081-00",
+      "cardId": "card-00004-5-uniq-0081-00",
+      "name": "アキ・ローゼンタール / 陽だまりのミスティカルスイング",
+      "description": "1期生が2人以上で全員のテクニックが135%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "T",
+          "percent": 135,
+          "target": "all_members",
+          "condition": {
+            "type": "affiliation_count",
+            "attribute": null,
+            "affiliationId": "grp-gen_1",
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-gen_1-2",
+            "text": "1期生が2人以上"
+          },
+          "description": "1期生が2人以上で全員のテクニックが135%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00005-4-cmmn-0000-00",
+      "cardId": "card-00005-4-cmmn-0000-00",
+      "name": "赤井はあと / ハートくすぐる奔放ライブ",
+      "description": "1期生が2人以上で全員の全パラメータが40%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 40,
+          "target": "all_members",
+          "condition": {
+            "type": "affiliation_count",
+            "attribute": null,
+            "affiliationId": "grp-gen_1",
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-gen_1-2",
+            "text": "1期生が2人以上"
+          },
+          "description": "1期生が2人以上で全員の全パラメータが40%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00005-5-uniq-0006-00",
+      "cardId": "card-00005-5-uniq-0006-00",
+      "name": "赤井はあと / let's freestyle おやつタイム",
+      "description": "全員のテクニックが120%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "T",
+          "percent": 120,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のテクニックが120%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00006-4-cmmn-0000-00",
+      "cardId": "card-00006-4-cmmn-0000-00",
+      "name": "白上フブキ / ギアあげるFOXパフォーマンス",
+      "description": "全員のテクニックが100%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "T",
+          "percent": 100,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のテクニックが100%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00006-5-uniq-0007-00",
+      "cardId": "card-00006-5-uniq-0007-00",
+      "name": "白上フブキ / 狐のお宮でこんこんこん",
+      "description": "1期生が2人以上で全員の全パラメータが50%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 50,
+          "target": "all_members",
+          "condition": {
+            "type": "affiliation_count",
+            "attribute": null,
+            "affiliationId": "grp-gen_1",
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-gen_1-2",
+            "text": "1期生が2人以上"
+          },
+          "description": "1期生が2人以上で全員の全パラメータが50%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00006-5-uniq-0074-00",
+      "cardId": "card-00006-5-uniq-0074-00",
+      "name": "白上フブキ / 渚で魅せるtwinkle",
+      "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員のセンスが130%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "S",
+          "percent": 130,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
+            "text": "キュートタイプ2人以上"
+          },
+          "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員のセンスが130%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00007-4-cmmn-0000-00",
+      "cardId": "card-00007-4-cmmn-0000-00",
+      "name": "夏色まつり / あざとさ全開キュンキュンライブ",
+      "description": "全員の全パラメータが35%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 35,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員の全パラメータが35%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00007-5-uniq-0008-00",
+      "cardId": "card-00007-5-uniq-0008-00",
+      "name": "夏色まつり / ハジける快活チアリーダー",
+      "description": "全員のパフォーマンスが120%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "P",
+          "percent": 120,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のパフォーマンスが120%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00010-4-cmmn-0000-00",
+      "cardId": "card-00010-4-cmmn-0000-00",
+      "name": "百鬼あやめ / 鬼娘のほわっとアンコール",
+      "description": "2期生が2人以上で全員の全パラメータが40%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 40,
+          "target": "all_members",
+          "condition": {
+            "type": "affiliation_count",
+            "attribute": null,
+            "affiliationId": "grp-gen_2",
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-gen_2-2",
+            "text": "2期生が2人以上"
+          },
+          "description": "2期生が2人以上で全員の全パラメータが40%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00010-5-uniq-0010-00",
+      "cardId": "card-00010-5-uniq-0010-00",
+      "name": "百鬼あやめ / 隠世でのほほん、気ままな提灯",
+      "description": "全員のスコアサポート効果60%",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "score_support",
+          "percent": 60,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のスコアサポート効果60%"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00010-5-uniq-0069-00",
+      "cardId": "card-00010-5-uniq-0069-00",
+      "name": "百鬼あやめ / 鬼神流・ぷかぷかリゾート",
+      "description": "2期生が2人以上で全員のテクニックが135%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "T",
+          "percent": 135,
+          "target": "all_members",
+          "condition": {
+            "type": "affiliation_count",
+            "attribute": null,
+            "affiliationId": "grp-gen_2",
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-gen_2-2",
+            "text": "2期生が2人以上"
+          },
+          "description": "2期生が2人以上で全員のテクニックが135%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00011-4-cmmn-0000-00",
+      "cardId": "card-00011-4-cmmn-0000-00",
+      "name": "癒月ちょこ / 保健医さん魅惑のライブ",
+      "description": "全員のテクニックが100%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "T",
+          "percent": 100,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のテクニックが100%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00011-5-uniq-0011-00",
+      "cardId": "card-00011-5-uniq-0011-00",
+      "name": "癒月ちょこ / 悪魔な魅惑に手玉にとられて",
+      "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で全員の全パラメータが30%UP\n[attribute=happy]ハッピータイプ[/attribute]2人以上で全員のスコアサポート効果25%",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 30,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_3-2",
+            "text": "ハッピータイプ2人以上"
+          },
+          "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で全員の全パラメータが30%UP"
+        },
+        {
+          "parameter": "score_support",
+          "percent": 25,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_3-2",
+            "text": "ハッピータイプ2人以上"
+          },
+          "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で全員のスコアサポート効果25%"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00012-4-cmmn-0000-00",
+      "cardId": "card-00012-4-cmmn-0000-00",
+      "name": "大空スバル / 心照らすActive Live",
+      "description": "全員のセンスが100%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "S",
+          "percent": 100,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のセンスが100%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00012-5-uniq-0012-00",
+      "cardId": "card-00012-5-uniq-0012-00",
+      "name": "大空スバル / クワッとじゃれ合うアヒルの午後",
+      "description": "2期生が2人以上で全員の全パラメータが50%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 50,
+          "target": "all_members",
+          "condition": {
+            "type": "affiliation_count",
+            "attribute": null,
+            "affiliationId": "grp-gen_2",
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-gen_2-2",
+            "text": "2期生が2人以上"
+          },
+          "description": "2期生が2人以上で全員の全パラメータが50%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00012-5-uniq-0062-00",
+      "cardId": "card-00012-5-uniq-0062-00",
+      "name": "大空スバル / Energeticスプラッシュ！",
+      "description": "全員のスコアサポート効果60%",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "score_support",
+          "percent": 60,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のスコアサポート効果60%"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00013-4-cmmn-0000-00",
+      "cardId": "card-00013-4-cmmn-0000-00",
+      "name": "AZKi / やわらかな旋律に乗せて",
+      "description": "0期生が2人以上で全員の全パラメータが40%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 40,
+          "target": "all_members",
+          "condition": {
+            "type": "affiliation_count",
+            "attribute": null,
+            "affiliationId": "grp-gen_0",
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-gen_0-2",
+            "text": "0期生が2人以上"
+          },
+          "description": "0期生が2人以上で全員の全パラメータが40%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00013-5-uniq-0002-00",
+      "cardId": "card-00013-5-uniq-0002-00",
+      "name": "AZKi / 咲き誇る一途な花",
+      "description": "全員のセンスが120%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "S",
+          "percent": 120,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のセンスが120%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00014-4-cmmn-0000-00",
+      "cardId": "card-00014-4-cmmn-0000-00",
+      "name": "大神ミオ / 光射す狼の歌声",
+      "description": "全員のパフォーマンスが100%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "P",
+          "percent": 100,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のパフォーマンスが100%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00014-5-uniq-0013-00",
+      "cardId": "card-00014-5-uniq-0013-00",
+      "name": "大神ミオ / ホッととろけるnightscape",
+      "description": "ゲーマーズが2人以上で全員の全パラメータが50%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 50,
+          "target": "all_members",
+          "condition": {
+            "type": "affiliation_count",
+            "attribute": null,
+            "affiliationId": "grp-gamers",
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-gamers-2",
+            "text": "ゲーマーズが2人以上"
+          },
+          "description": "ゲーマーズが2人以上で全員の全パラメータが50%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00014-5-uniq-0075-00",
+      "cardId": "card-00014-5-uniq-0075-00",
+      "name": "大神ミオ / 夏にまどろむWolf Heart",
+      "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のテクニックが130%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "T",
+          "percent": 130,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
+            "text": "ピュアタイプ2人以上"
+          },
+          "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のテクニックが130%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00015-4-cmmn-0000-00",
+      "cardId": "card-00015-4-cmmn-0000-00",
+      "name": "さくらみこ / 両手広げるCheerful show",
+      "description": "全員のテクニックが100%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "T",
+          "percent": 100,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のテクニックが100%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00015-5-uniq-0003-00",
+      "cardId": "card-00015-5-uniq-0003-00",
+      "name": "さくらみこ / サクラBloom",
+      "description": "全員のセンスが120%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "S",
+          "percent": 120,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のセンスが120%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00015-5-uniq-0067-00",
+      "cardId": "card-00015-5-uniq-0067-00",
+      "name": "さくらみこ / ビーチで弾ける、光彩ショット！",
+      "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のパフォーマンスが80%UP\n[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のスコアサポート効果25%",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "P",
+          "percent": 80,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
+            "text": "ピュアタイプ2人以上"
+          },
+          "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のパフォーマンスが80%UP"
+        },
+        {
+          "parameter": "score_support",
+          "percent": 25,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
+            "text": "ピュアタイプ2人以上"
+          },
+          "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のスコアサポート効果25%"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00016-4-cmmn-0000-00",
+      "cardId": "card-00016-4-cmmn-0000-00",
+      "name": "猫又おかゆ / 夢中にさせるいたずらCATライブ",
+      "description": "全員のパフォーマンスが100%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "P",
+          "percent": 100,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のパフォーマンスが100%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00016-5-uniq-0014-00",
+      "cardId": "card-00016-5-uniq-0014-00",
+      "name": "猫又おかゆ / 宴の果てに、ナイショの戯れ",
+      "description": "全員のテクニックが120%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "T",
+          "percent": 120,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のテクニックが120%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00016-5-uniq-0076-00",
+      "cardId": "card-00016-5-uniq-0076-00",
+      "name": "猫又おかゆ / パラソル下のリバティキャット",
+      "description": "ゲーマーズが2人以上で全員のパフォーマンスが135%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "P",
+          "percent": 135,
+          "target": "all_members",
+          "condition": {
+            "type": "affiliation_count",
+            "attribute": null,
+            "affiliationId": "grp-gamers",
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-gamers-2",
+            "text": "ゲーマーズが2人以上"
+          },
+          "description": "ゲーマーズが2人以上で全員のパフォーマンスが135%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00017-4-cmmn-0000-00",
+      "cardId": "card-00017-4-cmmn-0000-00",
+      "name": "戌神ころね / farout dogパンチライン",
+      "description": "ゲーマーズが2人以上で全員の全パラメータが40%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 40,
+          "target": "all_members",
+          "condition": {
+            "type": "affiliation_count",
+            "attribute": null,
+            "affiliationId": "grp-gamers",
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-gamers-2",
+            "text": "ゲーマーズが2人以上"
+          },
+          "description": "ゲーマーズが2人以上で全員の全パラメータが40%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00017-5-uniq-0015-00",
+      "cardId": "card-00017-5-uniq-0015-00",
+      "name": "戌神ころね / Go! Go! Laughing Skater",
+      "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で全員のセンスが130%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "S",
+          "percent": 130,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_3-2",
+            "text": "ハッピータイプ2人以上"
+          },
+          "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で全員のセンスが130%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00017-5-uniq-0077-00",
+      "cardId": "card-00017-5-uniq-0077-00",
+      "name": "戌神ころね / 密林を舞うワイルドサマー！",
+      "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のテクニックが80%UP\n[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のスコアサポート効果25%",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "T",
+          "percent": 80,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
+            "text": "ピュアタイプ2人以上"
+          },
+          "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のテクニックが80%UP"
+        },
+        {
+          "parameter": "score_support",
+          "percent": 25,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
+            "text": "ピュアタイプ2人以上"
+          },
+          "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のスコアサポート効果25%"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00018-4-cmmn-0000-00",
+      "cardId": "card-00018-4-cmmn-0000-00",
+      "name": "星街すいせい / フロア沸かす目映い存在",
+      "description": "全員の全パラメータが35%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 35,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員の全パラメータが35%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00018-5-uniq-0004-00",
+      "cardId": "card-00018-5-uniq-0004-00",
+      "name": "星街すいせい / 心奪うComet Tune",
+      "description": "全員のテクニックが120%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "T",
+          "percent": 120,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のテクニックが120%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00018-5-uniq-0068-00",
+      "cardId": "card-00018-5-uniq-0068-00",
+      "name": "星街すいせい / 夏に一閃！水鉄砲のアルペジオ",
+      "description": "0期生が2人以上で全員のセンスが135%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "S",
+          "percent": 135,
+          "target": "all_members",
+          "condition": {
+            "type": "affiliation_count",
+            "attribute": null,
+            "affiliationId": "grp-gen_0",
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-gen_0-2",
+            "text": "0期生が2人以上"
+          },
+          "description": "0期生が2人以上で全員のセンスが135%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00019-4-cmmn-0000-00",
+      "cardId": "card-00019-4-cmmn-0000-00",
+      "name": "兎田ぺこら / cheekyホッピンバニー",
+      "description": "全員のセンスが100%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "S",
+          "percent": 100,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のセンスが100%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00019-5-uniq-0016-00",
+      "cardId": "card-00019-5-uniq-0016-00",
+      "name": "兎田ぺこら / 愛嬌たっぷりラビットフィールド",
+      "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員の全パラメータが30%UP\n[attribute=cute]キュートタイプ[/attribute]2人以上で全員のスコアサポート効果25%",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 30,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
+            "text": "キュートタイプ2人以上"
+          },
+          "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員の全パラメータが30%UP"
+        },
+        {
+          "parameter": "score_support",
+          "percent": 25,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
+            "text": "キュートタイプ2人以上"
+          },
+          "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員のスコアサポート効果25%"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00021-4-cmmn-0000-00",
+      "cardId": "card-00021-4-cmmn-0000-00",
+      "name": "不知火フレア / ダンスから伝わる気遣い",
+      "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員の全パラメータが20%UP\n[attribute=cute]キュートタイプ[/attribute]2人以上で全員のスコアサポート効果25%",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 20,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
+            "text": "キュートタイプ2人以上"
+          },
+          "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員の全パラメータが20%UP"
+        },
+        {
+          "parameter": "score_support",
+          "percent": 25,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
+            "text": "キュートタイプ2人以上"
+          },
+          "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員のスコアサポート効果25%"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00021-5-uniq-0017-00",
+      "cardId": "card-00021-5-uniq-0017-00",
+      "name": "不知火フレア / ハーフエルフの風渡るゴンドラ",
+      "description": "全員のパフォーマンスが120%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "P",
+          "percent": 120,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のパフォーマンスが120%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00021-5-uniq-0064-00",
+      "cardId": "card-00021-5-uniq-0064-00",
+      "name": "不知火フレア / sparks sunset",
+      "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で全員のテクニックが80%UP\n[attribute=happy]ハッピータイプ[/attribute]2人以上で全員のスコアサポート効果25%",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "T",
+          "percent": 80,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_3-2",
+            "text": "ハッピータイプ2人以上"
+          },
+          "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で全員のテクニックが80%UP"
+        },
+        {
+          "parameter": "score_support",
+          "percent": 25,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_3-2",
+            "text": "ハッピータイプ2人以上"
+          },
+          "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で全員のスコアサポート効果25%"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00022-4-cmmn-0000-00",
+      "cardId": "card-00022-4-cmmn-0000-00",
+      "name": "白銀ノエル / 歌う脳筋ゴリ押しナイト",
+      "description": "3期生が2人以上で全員の全パラメータが40%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 40,
+          "target": "all_members",
+          "condition": {
+            "type": "affiliation_count",
+            "attribute": null,
+            "affiliationId": "grp-gen_3",
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-gen_3-2",
+            "text": "3期生が2人以上"
+          },
+          "description": "3期生が2人以上で全員の全パラメータが40%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00022-5-uniq-0018-00",
+      "cardId": "card-00022-5-uniq-0018-00",
+      "name": "白銀ノエル / 風薫るおっとり騎士",
+      "description": "全員のスコアサポート効果60%",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "score_support",
+          "percent": 60,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のスコアサポート効果60%"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00022-5-uniq-0063-00",
+      "cardId": "card-00022-5-uniq-0063-00",
+      "name": "白銀ノエル / 波まとうゆるふわKnight",
+      "description": "3期生が2人以上で全員のパフォーマンスが135%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "P",
+          "percent": 135,
+          "target": "all_members",
+          "condition": {
+            "type": "affiliation_count",
+            "attribute": null,
+            "affiliationId": "grp-gen_3",
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-gen_3-2",
+            "text": "3期生が2人以上"
+          },
+          "description": "3期生が2人以上で全員のパフォーマンスが135%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00023-4-cmmn-0000-00",
+      "cardId": "card-00023-4-cmmn-0000-00",
+      "name": "宝鐘マリン / ♡とらえる海賊のテリトリー",
+      "description": "全員のセンスが100%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "S",
+          "percent": 100,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のセンスが100%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00023-5-uniq-0019-00",
+      "cardId": "card-00023-5-uniq-0019-00",
+      "name": "宝鐘マリン / 妖艶あふれるマリンブルー",
+      "description": "3期生が2人以上で全員の全パラメータが50%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 50,
+          "target": "all_members",
+          "condition": {
+            "type": "affiliation_count",
+            "attribute": null,
+            "affiliationId": "grp-gen_3",
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-gen_3-2",
+            "text": "3期生が2人以上"
+          },
+          "description": "3期生が2人以上で全員の全パラメータが50%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00026-4-cmmn-0000-00",
+      "cardId": "card-00026-4-cmmn-0000-00",
+      "name": "角巻わため / 広がるhealing sound",
+      "description": "全員のテクニックが100%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "T",
+          "percent": 100,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のテクニックが100%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00026-5-uniq-0021-00",
+      "cardId": "card-00026-5-uniq-0021-00",
+      "name": "角巻わため / Woolly Smile Festival",
+      "description": "全員の全パラメータが45%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 45,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員の全パラメータが45%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00026-5-uniq-0065-00",
+      "cardId": "card-00026-5-uniq-0065-00",
+      "name": "角巻わため / 真夏のもふもふフロートタイム",
+      "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で全員のセンスが80%UP\n[attribute=happy]ハッピータイプ[/attribute]2人以上で全員のスコアサポート効果25%",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "S",
+          "percent": 80,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_3-2",
+            "text": "ハッピータイプ2人以上"
+          },
+          "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で全員のセンスが80%UP"
+        },
+        {
+          "parameter": "score_support",
+          "percent": 25,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_3-2",
+            "text": "ハッピータイプ2人以上"
+          },
+          "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で全員のスコアサポート効果25%"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00027-4-cmmn-0000-00",
+      "cardId": "card-00027-4-cmmn-0000-00",
+      "name": "常闇トワ / 余裕ぶっこくナイトライブ",
+      "description": "全員のパフォーマンスが100%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "P",
+          "percent": 100,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のパフォーマンスが100%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00027-5-uniq-0022-00",
+      "cardId": "card-00027-5-uniq-0022-00",
+      "name": "常闇トワ / ガチで終わらんチルい夜遊び",
+      "description": "4期生が2人以上で全員の全パラメータが50%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 50,
+          "target": "all_members",
+          "condition": {
+            "type": "affiliation_count",
+            "attribute": null,
+            "affiliationId": "grp-gen_4",
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-gen_4-2",
+            "text": "4期生が2人以上"
+          },
+          "description": "4期生が2人以上で全員の全パラメータが50%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00028-4-cmmn-0000-00",
+      "cardId": "card-00028-4-cmmn-0000-00",
+      "name": "姫森ルーナ / ふんわりプリンセスステージ",
+      "description": "4期生が2人以上で全員の全パラメータが40%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 40,
+          "target": "all_members",
+          "condition": {
+            "type": "affiliation_count",
+            "attribute": null,
+            "affiliationId": "grp-gen_4",
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-gen_4-2",
+            "text": "4期生が2人以上"
+          },
+          "description": "4期生が2人以上で全員の全パラメータが40%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00028-5-uniq-0023-00",
+      "cardId": "card-00028-5-uniq-0023-00",
+      "name": "姫森ルーナ / 姫に忠誠アフタヌーン",
+      "description": "全員のテクニックが120%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "T",
+          "percent": 120,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のテクニックが120%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00028-5-uniq-0070-00",
+      "cardId": "card-00028-5-uniq-0070-00",
+      "name": "姫森ルーナ / のんびり姫のおねだりビーチ",
+      "description": "4期生が2人以上で全員のパフォーマンスが135%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "P",
+          "percent": 135,
+          "target": "all_members",
+          "condition": {
+            "type": "affiliation_count",
+            "attribute": null,
+            "affiliationId": "grp-gen_4",
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-gen_4-2",
+            "text": "4期生が2人以上"
+          },
+          "description": "4期生が2人以上で全員のパフォーマンスが135%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00030-4-cmmn-0000-00",
+      "cardId": "card-00030-4-cmmn-0000-00",
+      "name": "雪花ラミィ / 照らすsnow mood！",
+      "description": "全員のテクニックが100%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "T",
+          "percent": 100,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のテクニックが100%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00030-5-uniq-0024-00",
+      "cardId": "card-00030-5-uniq-0024-00",
+      "name": "雪花ラミィ / さびしがり屋な雪夜の令嬢",
+      "description": "5期生が2人以上で全員の全パラメータが50%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 50,
+          "target": "all_members",
+          "condition": {
+            "type": "affiliation_count",
+            "attribute": null,
+            "affiliationId": "grp-gen_5",
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-gen_5-2",
+            "text": "5期生が2人以上"
+          },
+          "description": "5期生が2人以上で全員の全パラメータが50%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00031-4-cmmn-0000-00",
+      "cardId": "card-00031-4-cmmn-0000-00",
+      "name": "桃鈴ねね / get excitedジャンプ！",
+      "description": "5期生が2人以上で全員の全パラメータが40%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 40,
+          "target": "all_members",
+          "condition": {
+            "type": "affiliation_count",
+            "attribute": null,
+            "affiliationId": "grp-gen_5",
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-gen_5-2",
+            "text": "5期生が2人以上"
+          },
+          "description": "5期生が2人以上で全員の全パラメータが40%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00031-5-uniq-0025-00",
+      "cardId": "card-00031-5-uniq-0025-00",
+      "name": "桃鈴ねね / 一緒に歌お！イノセントリズム",
+      "description": "全員のパフォーマンスが120%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "P",
+          "percent": 120,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のパフォーマンスが120%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00032-4-cmmn-0000-00",
+      "cardId": "card-00032-4-cmmn-0000-00",
+      "name": "獅白ぼたん / 魅せるLaughing Lion",
+      "description": "全員のテクニックが100%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "T",
+          "percent": 100,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のテクニックが100%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00032-5-uniq-0026-00",
+      "cardId": "card-00032-5-uniq-0026-00",
+      "name": "獅白ぼたん / 目を奪う神エイム！lion’s hunt",
+      "description": "全員の全パラメータが45%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 45,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員の全パラメータが45%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00034-4-cmmn-0000-00",
+      "cardId": "card-00034-4-cmmn-0000-00",
+      "name": "尾丸ポルカ / パーティーハード全開LIVE",
+      "description": "全員のパフォーマンスが100%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "P",
+          "percent": 100,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のパフォーマンスが100%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00034-5-uniq-0027-00",
+      "cardId": "card-00034-5-uniq-0027-00",
+      "name": "尾丸ポルカ / 変幻自在！ポルカサーカス開演！",
+      "description": "全員の全パラメータが45%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 45,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員の全パラメータが45%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00035-4-cmmn-0000-00",
+      "cardId": "card-00035-4-cmmn-0000-00",
+      "name": "ラプラス・ダークネス / 今宵のライブ、吾輩が主役",
+      "description": "全員のパフォーマンスが100%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "P",
+          "percent": 100,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のパフォーマンスが100%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00035-5-uniq-0028-00",
+      "cardId": "card-00035-5-uniq-0028-00",
+      "name": "ラプラス・ダークネス / 作戦開始！見せろ総帥の手腕",
+      "description": "holoXが2人以上で全員の全パラメータが50%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 50,
+          "target": "all_members",
+          "condition": {
+            "type": "affiliation_count",
+            "attribute": null,
+            "affiliationId": "grp-holox",
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-holox-2",
+            "text": "holoXが2人以上"
+          },
+          "description": "holoXが2人以上で全員の全パラメータが50%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00035-5-uniq-0082-00",
+      "cardId": "card-00035-5-uniq-0082-00",
+      "name": "ラプラス・ダークネス / 総帥専用！シークレットプール",
+      "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員のパフォーマンスが80%UP\n[attribute=cute]キュートタイプ[/attribute]2人以上で全員のスコアサポート効果25%",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "P",
+          "percent": 80,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
+            "text": "キュートタイプ2人以上"
+          },
+          "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員のパフォーマンスが80%UP"
+        },
+        {
+          "parameter": "score_support",
+          "percent": 25,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
+            "text": "キュートタイプ2人以上"
+          },
+          "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員のスコアサポート効果25%"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00036-4-cmmn-0000-00",
+      "cardId": "card-00036-4-cmmn-0000-00",
+      "name": "鷹嶺ルイ / どこでも信頼！切れ者LIVE",
+      "description": "全員のスコアサポート効果50%",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "score_support",
+          "percent": 50,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のスコアサポート効果50%"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00036-5-uniq-0029-00",
+      "cardId": "card-00036-5-uniq-0029-00",
+      "name": "鷹嶺ルイ / 組織支える超敏腕幹部",
+      "description": "全員の全パラメータが45%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 45,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員の全パラメータが45%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00036-5-uniq-0078-00",
+      "cardId": "card-00036-5-uniq-0078-00",
+      "name": "鷹嶺ルイ / 波音に安らぐ、しごでき幹部",
+      "description": "holoXが2人以上で全員のセンスが135%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "S",
+          "percent": 135,
+          "target": "all_members",
+          "condition": {
+            "type": "affiliation_count",
+            "attribute": null,
+            "affiliationId": "grp-holox",
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-holox-2",
+            "text": "holoXが2人以上"
+          },
+          "description": "holoXが2人以上で全員のセンスが135%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00037-4-cmmn-0000-00",
+      "cardId": "card-00037-4-cmmn-0000-00",
+      "name": "博衣こより / 舞台に響くcute howl",
+      "description": "全員のパフォーマンスが100%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "P",
+          "percent": 100,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のパフォーマンスが100%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00037-5-uniq-0030-00",
+      "cardId": "card-00037-5-uniq-0030-00",
+      "name": "博衣こより / 助手くんの心を鷲掴みライブ！",
+      "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員の全パラメータが30%UP\n[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のスコアサポート効果25%",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 30,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
+            "text": "ピュアタイプ2人以上"
+          },
+          "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員の全パラメータが30%UP"
+        },
+        {
+          "parameter": "score_support",
+          "percent": 25,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
+            "text": "ピュアタイプ2人以上"
+          },
+          "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のスコアサポート効果25%"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00039-4-cmmn-0000-00",
+      "cardId": "card-00039-4-cmmn-0000-00",
+      "name": "風真いろは / ステージで放つ！修行の成果",
+      "description": "holoXが2人以上で全員の全パラメータが40%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 40,
+          "target": "all_members",
+          "condition": {
+            "type": "affiliation_count",
+            "attribute": null,
+            "affiliationId": "grp-holox",
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-holox-2",
+            "text": "holoXが2人以上"
+          },
+          "description": "holoXが2人以上で全員の全パラメータが40%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00039-5-uniq-0032-00",
+      "cardId": "card-00039-5-uniq-0032-00",
+      "name": "風真いろは / ちくりんジャキン！と一刀両断",
+      "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員のテクニックが130%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "T",
+          "percent": 130,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
+            "text": "キュートタイプ2人以上"
+          },
+          "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員のテクニックが130%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-03001-4-cmmn-0000-00",
+      "cardId": "card-03001-4-cmmn-0000-00",
+      "name": "アユンダ・リス / まんまるしっぽのキュートライブ",
+      "description": "全員の全パラメータが35%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 35,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員の全パラメータが35%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-03001-5-uniq-0033-00",
+      "cardId": "card-03001-5-uniq-0033-00",
+      "name": "アユンダ・リス / いたずらたくらむ木漏れ日の森",
+      "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で全員のテクニックが130%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "T",
+          "percent": 130,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_3-2",
+            "text": "ハッピータイプ2人以上"
+          },
+          "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で全員のテクニックが130%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-03002-4-cmmn-0000-00",
+      "cardId": "card-03002-4-cmmn-0000-00",
+      "name": "ムーナ・ホシノヴァ / 月のヒカリに溶けこむ歌声",
+      "description": "全員のパフォーマンスが100%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "P",
+          "percent": 100,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のパフォーマンスが100%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-03002-5-uniq-0034-00",
+      "cardId": "card-03002-5-uniq-0034-00",
+      "name": "ムーナ・ホシノヴァ / Lunar Songstress",
+      "description": "ID1期生が2人以上で全員の全パラメータが50%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 50,
+          "target": "all_members",
+          "condition": {
+            "type": "affiliation_count",
+            "attribute": null,
+            "affiliationId": "grp-indonesia-gen_1",
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-indonesia-gen_1-2",
+            "text": "ID1期生が2人以上"
+          },
+          "description": "ID1期生が2人以上で全員の全パラメータが50%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-03003-4-cmmn-0000-00",
+      "cardId": "card-03003-4-cmmn-0000-00",
+      "name": "アイラニ・イオフィフティーン / 麗らかなStage View",
+      "description": "ID1期生が2人以上で全員の全パラメータが40%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 40,
+          "target": "all_members",
+          "condition": {
+            "type": "affiliation_count",
+            "attribute": null,
+            "affiliationId": "grp-indonesia-gen_1",
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-indonesia-gen_1-2",
+            "text": "ID1期生が2人以上"
+          },
+          "description": "ID1期生が2人以上で全員の全パラメータが40%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-03003-5-uniq-0035-00",
+      "cardId": "card-03003-5-uniq-0035-00",
+      "name": "アイラニ・イオフィフティーン / 陽光射すCosmos Palette",
+      "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のテクニックが130%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "T",
+          "percent": 130,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
+            "text": "ピュアタイプ2人以上"
+          },
+          "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のテクニックが130%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-03004-4-cmmn-0000-00",
+      "cardId": "card-03004-4-cmmn-0000-00",
+      "name": "クレイジー・オリー / Deadly Encore",
+      "description": "全員のパフォーマンスが100%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "P",
+          "percent": 100,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のパフォーマンスが100%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-03004-5-uniq-0036-00",
+      "cardId": "card-03004-5-uniq-0036-00",
+      "name": "クレイジー・オリー / Z nonstop talker",
+      "description": "全員の全パラメータが45%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 45,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員の全パラメータが45%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-03004-5-uniq-0073-00",
+      "cardId": "card-03004-5-uniq-0073-00",
+      "name": "クレイジー・オリー / 常夏のCrazy Dive",
+      "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で全員のセンスが80%UP\n[attribute=happy]ハッピータイプ[/attribute]2人以上で全員のスコアサポート効果25%",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "S",
+          "percent": 80,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_3-2",
+            "text": "ハッピータイプ2人以上"
+          },
+          "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で全員のセンスが80%UP"
+        },
+        {
+          "parameter": "score_support",
+          "percent": 25,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_3-2",
+            "text": "ハッピータイプ2人以上"
+          },
+          "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で全員のスコアサポート効果25%"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-03005-4-cmmn-0000-00",
+      "cardId": "card-03005-4-cmmn-0000-00",
+      "name": "アーニャ・メルフィッサ / Little Back気ままなステージ",
+      "description": "全員のテクニックが100%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "T",
+          "percent": 100,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のテクニックが100%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-03005-5-uniq-0037-00",
+      "cardId": "card-03005-5-uniq-0037-00",
+      "name": "アーニャ・メルフィッサ / ソファに沈んでまったりゲーム",
+      "description": "ID2期生が2人以上で全員の全パラメータが50%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 50,
+          "target": "all_members",
+          "condition": {
+            "type": "affiliation_count",
+            "attribute": null,
+            "affiliationId": "grp-indonesia-gen_2",
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-indonesia-gen_2-2",
+            "text": "ID2期生が2人以上"
+          },
+          "description": "ID2期生が2人以上で全員の全パラメータが50%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-03005-5-uniq-0084-00",
+      "cardId": "card-03005-5-uniq-0084-00",
+      "name": "アーニャ・メルフィッサ / まったりサニーホリデイ",
+      "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のパフォーマンスが130%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "P",
+          "percent": 130,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
+            "text": "ピュアタイプ2人以上"
+          },
+          "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のパフォーマンスが130%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-03006-4-cmmn-0000-00",
+      "cardId": "card-03006-4-cmmn-0000-00",
+      "name": "パヴォリア・レイネ / 祝福のラグジュアリーナイト",
+      "description": "ID2期生が2人以上で全員の全パラメータが40%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 40,
+          "target": "all_members",
+          "condition": {
+            "type": "affiliation_count",
+            "attribute": null,
+            "affiliationId": "grp-indonesia-gen_2",
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-indonesia-gen_2-2",
+            "text": "ID2期生が2人以上"
+          },
+          "description": "ID2期生が2人以上で全員の全パラメータが40%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-03006-5-uniq-0038-00",
+      "cardId": "card-03006-5-uniq-0038-00",
+      "name": "パヴォリア・レイネ / おすまし孔雀と嗜む一杯",
+      "description": "全員のスコアサポート効果60%",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "score_support",
+          "percent": 60,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のスコアサポート効果60%"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-03007-4-cmmn-0000-00",
+      "cardId": "card-03007-4-cmmn-0000-00",
+      "name": "ベスティア・ゼータ / childlikeるんるんライブ",
+      "description": "全員のセンスが100%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "S",
+          "percent": 100,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のセンスが100%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-03007-5-uniq-0039-00",
+      "cardId": "card-03007-5-uniq-0039-00",
+      "name": "ベスティア・ゼータ / 陽だまりとネコと構成員",
+      "description": "ID3期生が2人以上で全員の全パラメータが50%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 50,
+          "target": "all_members",
+          "condition": {
+            "type": "affiliation_count",
+            "attribute": null,
+            "affiliationId": "grp-indonesia-gen_3",
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-indonesia-gen_3-2",
+            "text": "ID3期生が2人以上"
+          },
+          "description": "ID3期生が2人以上で全員の全パラメータが50%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-03008-4-cmmn-0000-00",
+      "cardId": "card-03008-4-cmmn-0000-00",
+      "name": "カエラ・コヴァルスキア / 鍛冶場に匹敵！激アツライブ",
+      "description": "ID3期生が2人以上で全員の全パラメータが40%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 40,
+          "target": "all_members",
+          "condition": {
+            "type": "affiliation_count",
+            "attribute": null,
+            "affiliationId": "grp-indonesia-gen_3",
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-indonesia-gen_3-2",
+            "text": "ID3期生が2人以上"
+          },
+          "description": "ID3期生が2人以上で全員の全パラメータが40%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-03008-5-uniq-0040-00",
+      "cardId": "card-03008-5-uniq-0040-00",
+      "name": "カエラ・コヴァルスキア / こころ強さは鍛冶場で研ぐ",
+      "description": "全員のスコアサポート効果60%",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "score_support",
+          "percent": 60,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のスコアサポート効果60%"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-03009-4-cmmn-0000-00",
+      "cardId": "card-03009-4-cmmn-0000-00",
+      "name": "こぼ・かなえる / ドタバタフルスロットルステージ",
+      "description": "全員のテクニックが100%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "T",
+          "percent": 100,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のテクニックが100%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-03009-5-uniq-0041-00",
+      "cardId": "card-03009-5-uniq-0041-00",
+      "name": "こぼ・かなえる / あめ上がりの雨喜雨喜シャーマン",
+      "description": "全員の全パラメータが45%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 45,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員の全パラメータが45%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-04001-4-cmmn-0000-00",
+      "cardId": "card-04001-4-cmmn-0000-00",
+      "name": "森カリオペ / レペゼン冥土！ here we go",
+      "description": "全員のセンスが100%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "S",
+          "percent": 100,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のセンスが100%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-04001-5-uniq-0042-00",
+      "cardId": "card-04001-5-uniq-0042-00",
+      "name": "森カリオペ / Reaper’s death flow",
+      "description": "Mythが2人以上で全員の全パラメータが50%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 50,
+          "target": "all_members",
+          "condition": {
+            "type": "affiliation_count",
+            "attribute": null,
+            "affiliationId": "grp-myth",
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-myth-2",
+            "text": "Mythが2人以上"
+          },
+          "description": "Mythが2人以上で全員の全パラメータが50%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-04001-5-uniq-0071-00",
+      "cardId": "card-04001-5-uniq-0071-00",
+      "name": "森カリオペ / ビーチに刺さるReaper's Spike",
+      "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員のセンスが80%UP\n[attribute=cute]キュートタイプ[/attribute]2人以上で全員のスコアサポート効果25%",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "S",
+          "percent": 80,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
+            "text": "キュートタイプ2人以上"
+          },
+          "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員のセンスが80%UP"
+        },
+        {
+          "parameter": "score_support",
+          "percent": 25,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
+            "text": "キュートタイプ2人以上"
+          },
+          "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員のスコアサポート効果25%"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-04002-4-cmmn-0000-00",
+      "cardId": "card-04002-4-cmmn-0000-00",
+      "name": "小鳥遊キアラ / ようこそハピネスステージへ",
+      "description": "Mythが2人以上で全員の全パラメータが40%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 40,
+          "target": "all_members",
+          "condition": {
+            "type": "affiliation_count",
+            "attribute": null,
+            "affiliationId": "grp-myth",
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-myth-2",
+            "text": "Mythが2人以上"
+          },
+          "description": "Mythが2人以上で全員の全パラメータが40%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-04002-5-uniq-0043-00",
+      "cardId": "card-04002-5-uniq-0043-00",
+      "name": "小鳥遊キアラ / Lovely Phoenixダイナー",
+      "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員のパフォーマンスが130%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "P",
+          "percent": 130,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
+            "text": "キュートタイプ2人以上"
+          },
+          "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員のパフォーマンスが130%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-04003-4-cmmn-0000-00",
+      "cardId": "card-04003-4-cmmn-0000-00",
+      "name": "一伊那尓栖 / 舞台を飾る和やか笑顔",
+      "description": "全員のセンスが100%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "S",
+          "percent": 100,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のセンスが100%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-04003-5-uniq-0044-00",
+      "cardId": "card-04003-5-uniq-0044-00",
+      "name": "一伊那尓栖 / ぽかぽかチャージなひととき",
+      "description": "全員のスコアサポート効果60%",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "score_support",
+          "percent": 60,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のスコアサポート効果60%"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-04003-5-uniq-0072-00",
+      "cardId": "card-04003-5-uniq-0072-00",
+      "name": "一伊那尓栖 / 潮騒の記憶をたどって",
+      "description": "Mythが2人以上で全員のセンスが135%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "S",
+          "percent": 135,
+          "target": "all_members",
+          "condition": {
+            "type": "affiliation_count",
+            "attribute": null,
+            "affiliationId": "grp-myth",
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-myth-2",
+            "text": "Mythが2人以上"
+          },
+          "description": "Mythが2人以上で全員のセンスが135%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-04007-4-cmmn-0000-00",
+      "cardId": "card-04007-4-cmmn-0000-00",
+      "name": "IRyS / 響き渡るホープフルボイス",
+      "description": "全員のパフォーマンスが100%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "P",
+          "percent": 100,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のパフォーマンスが100%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-04007-5-uniq-0047-00",
+      "cardId": "card-04007-5-uniq-0047-00",
+      "name": "IRyS / nephilim sonority",
+      "description": "Promiseが2人以上で全員の全パラメータが50%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 50,
+          "target": "all_members",
+          "condition": {
+            "type": "unknown",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-promise-2",
+            "text": "Promiseが2人以上"
+          },
+          "description": "Promiseが2人以上で全員の全パラメータが50%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-04010-4-cmmn-0000-00",
+      "cardId": "card-04010-4-cmmn-0000-00",
+      "name": "オーロ・クロニー / 刻を忘れるパフォーマンス",
+      "description": "Promiseが2人以上で全員の全パラメータが40%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 40,
+          "target": "all_members",
+          "condition": {
+            "type": "unknown",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-promise-2",
+            "text": "Promiseが2人以上"
+          },
+          "description": "Promiseが2人以上で全員の全パラメータが40%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-04010-5-uniq-0049-00",
+      "cardId": "card-04010-5-uniq-0049-00",
+      "name": "オーロ・クロニー / 典獄ささやくClock Tower",
+      "description": "全員のスコアサポート効果60%",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "score_support",
+          "percent": 60,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のスコアサポート効果60%"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-04012-4-cmmn-0000-00",
+      "cardId": "card-04012-4-cmmn-0000-00",
+      "name": "ハコス・ベールズ / Let's dance more！",
+      "description": "全員のセンスが100%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "S",
+          "percent": 100,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のセンスが100%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-04012-5-uniq-0051-00",
+      "cardId": "card-04012-5-uniq-0051-00",
+      "name": "ハコス・ベールズ / Chaotic Powerful Rat",
+      "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のパフォーマンスが130%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "P",
+          "percent": 130,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
+            "text": "ピュアタイプ2人以上"
+          },
+          "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のパフォーマンスが130%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-04013-4-cmmn-0000-00",
+      "cardId": "card-04013-4-cmmn-0000-00",
+      "name": "シオリ・ノヴェラ / ステージでもKeep it real",
+      "description": "Adventが2人以上で全員の全パラメータが40%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 40,
+          "target": "all_members",
+          "condition": {
+            "type": "affiliation_count",
+            "attribute": null,
+            "affiliationId": "grp-advent",
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-advent-2",
+            "text": "Adventが2人以上"
+          },
+          "description": "Adventが2人以上で全員の全パラメータが40%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-04013-5-uniq-0052-00",
+      "cardId": "card-04013-5-uniq-0052-00",
+      "name": "シオリ・ノヴェラ / 書庫ではぐくむ探求心",
+      "description": "全員のパフォーマンスが120%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "P",
+          "percent": 120,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のパフォーマンスが120%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-04013-5-uniq-0083-00",
+      "cardId": "card-04013-5-uniq-0083-00",
+      "name": "シオリ・ノヴェラ / 知を潤すナイトプール",
+      "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員の全パラメータが30%UP\n[attribute=cute]キュートタイプ[/attribute]2人以上で全員のスコアサポート効果25%",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 30,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
+            "text": "キュートタイプ2人以上"
+          },
+          "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員の全パラメータが30%UP"
+        },
+        {
+          "parameter": "score_support",
+          "percent": 25,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
+            "text": "キュートタイプ2人以上"
+          },
+          "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員のスコアサポート効果25%"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-04014-4-cmmn-0000-00",
+      "cardId": "card-04014-4-cmmn-0000-00",
+      "name": "古石ビジュー / キラリと見せる無垢な素顔",
+      "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で全員の全パラメータが20%UP\n[attribute=happy]ハッピータイプ[/attribute]2人以上で全員のスコアサポート効果25%",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 20,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_3-2",
+            "text": "ハッピータイプ2人以上"
+          },
+          "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で全員の全パラメータが20%UP"
+        },
+        {
+          "parameter": "score_support",
+          "percent": 25,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_3-2",
+            "text": "ハッピータイプ2人以上"
+          },
+          "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で全員のスコアサポート効果25%"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-04014-5-uniq-0053-00",
+      "cardId": "card-04014-5-uniq-0053-00",
+      "name": "古石ビジュー / キラッキラCrystal place",
+      "description": "全員のセンスが120%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "S",
+          "percent": 120,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のセンスが120%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-04015-4-cmmn-0000-00",
+      "cardId": "card-04015-4-cmmn-0000-00",
+      "name": "ネリッサ・レイヴンクロフト / 美声届ける夕闇ステージ",
+      "description": "全員のセンスが100%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "S",
+          "percent": 100,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のセンスが100%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-04015-5-uniq-0054-00",
+      "cardId": "card-04015-5-uniq-0054-00",
+      "name": "ネリッサ・レイヴンクロフト / 歌に揺らめくノクターン",
+      "description": "Adventが2人以上で全員の全パラメータが50%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 50,
+          "target": "all_members",
+          "condition": {
+            "type": "affiliation_count",
+            "attribute": null,
+            "affiliationId": "grp-advent",
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-advent-2",
+            "text": "Adventが2人以上"
+          },
+          "description": "Adventが2人以上で全員の全パラメータが50%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-04016-4-cmmn-0000-00",
+      "cardId": "card-04016-4-cmmn-0000-00",
+      "name": "フワワ・アビスガード / ホッと安らぐフワフワライブ",
+      "description": "全員のスコアサポート効果50%",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "score_support",
+          "percent": 50,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のスコアサポート効果50%"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-04016-5-uniq-0055-00",
+      "cardId": "card-04016-5-uniq-0055-00",
+      "name": "フワワ・アビスガード / ぽわぽわドーナツパーティー♪",
+      "description": "全員のテクニックが120%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "T",
+          "percent": 120,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のテクニックが120%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-04016-5-uniq-0079-00",
+      "cardId": "card-04016-5-uniq-0079-00",
+      "name": "フワワ・アビスガード / フワワのFlowing Summer",
+      "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員の全パラメータが30%UP\n[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のスコアサポート効果25%",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 30,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
+            "text": "ピュアタイプ2人以上"
+          },
+          "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員の全パラメータが30%UP"
+        },
+        {
+          "parameter": "score_support",
+          "percent": 25,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
+            "text": "ピュアタイプ2人以上"
+          },
+          "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のスコアサポート効果25%"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-04017-4-cmmn-0000-00",
+      "cardId": "card-04017-4-cmmn-0000-00",
+      "name": "モココ・アビスガード / パッと笑顔にモコモコライブ",
+      "description": "全員の全パラメータが35%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 35,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員の全パラメータが35%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-04017-5-uniq-0056-00",
+      "cardId": "card-04017-5-uniq-0056-00",
+      "name": "モココ・アビスガード / のほほんドーナツパーティー♪",
+      "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員のセンスが130%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "S",
+          "percent": 130,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
+            "text": "キュートタイプ2人以上"
+          },
+          "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員のセンスが130%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-04017-5-uniq-0080-00",
+      "cardId": "card-04017-5-uniq-0080-00",
+      "name": "モココ・アビスガード / モココのBreezy Summer",
+      "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のパフォーマンスが80%UP\n[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のスコアサポート効果25%",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "P",
+          "percent": 80,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
+            "text": "ピュアタイプ2人以上"
+          },
+          "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のパフォーマンスが80%UP"
+        },
+        {
+          "parameter": "score_support",
+          "percent": 25,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
+            "text": "ピュアタイプ2人以上"
+          },
+          "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のスコアサポート効果25%"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-06002-4-cmmn-0000-00",
+      "cardId": "card-06002-4-cmmn-0000-00",
+      "name": "音乃瀬奏 / 届け！とびっきりハーモニー",
+      "description": "ReGLOSSが2人以上で全員の全パラメータが40%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 40,
+          "target": "all_members",
+          "condition": {
+            "type": "affiliation_count",
+            "attribute": null,
+            "affiliationId": "grp-regloss",
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-regloss-2",
+            "text": "ReGLOSSが2人以上"
+          },
+          "description": "ReGLOSSが2人以上で全員の全パラメータが40%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-06002-5-uniq-0058-00",
+      "cardId": "card-06002-5-uniq-0058-00",
+      "name": "音乃瀬奏 / パレードで笑顔をお届け",
+      "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のセンスが130%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "S",
+          "percent": 130,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
+            "text": "ピュアタイプ2人以上"
+          },
+          "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のセンスが130%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-06002-5-uniq-0066-00",
+      "cardId": "card-06002-5-uniq-0066-00",
+      "name": "音乃瀬奏 / 潮風にのせる、笑顔のハーモニー",
+      "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で全員のパフォーマンスが130%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "P",
+          "percent": 130,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_3-2",
+            "text": "ハッピータイプ2人以上"
+          },
+          "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で全員のパフォーマンスが130%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-06003-4-cmmn-0000-00",
+      "cardId": "card-06003-4-cmmn-0000-00",
+      "name": "一条莉々華 / ずっきゅんばっきゅんLIVE♡",
+      "description": "全員のスコアサポート効果50%",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "score_support",
+          "percent": 50,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のスコアサポート効果50%"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-06003-5-uniq-0059-00",
+      "cardId": "card-06003-5-uniq-0059-00",
+      "name": "一条莉々華 / 深夜にひと息、CEOの限界飯",
+      "description": "ReGLOSSが2人以上で全員の全パラメータが50%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 50,
+          "target": "all_members",
+          "condition": {
+            "type": "affiliation_count",
+            "attribute": null,
+            "affiliationId": "grp-regloss",
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-regloss-2",
+            "text": "ReGLOSSが2人以上"
+          },
+          "description": "ReGLOSSが2人以上で全員の全パラメータが50%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-06004-4-cmmn-0000-00",
+      "cardId": "card-06004-4-cmmn-0000-00",
+      "name": "儒烏風亭らでん / cultural performer",
+      "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員の全パラメータが20%UP\n[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のスコアサポート効果25%",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 20,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
+            "text": "ピュアタイプ2人以上"
+          },
+          "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員の全パラメータが20%UP"
+        },
+        {
+          "parameter": "score_support",
+          "percent": 25,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
+            "text": "ピュアタイプ2人以上"
+          },
+          "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のスコアサポート効果25%"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-06004-5-uniq-0060-00",
+      "cardId": "card-06004-5-uniq-0060-00",
+      "name": "儒烏風亭らでん / 叡智を灯し、アートに導く",
+      "description": "全員のセンスが120%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "S",
+          "percent": 120,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のセンスが120%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-06005-4-cmmn-0000-00",
+      "cardId": "card-06005-4-cmmn-0000-00",
+      "name": "轟はじめ / 番長の番長たる所以",
+      "description": "全員のテクニックが100%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "T",
+          "percent": 100,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のテクニックが100%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-06005-5-uniq-0061-00",
+      "cardId": "card-06005-5-uniq-0061-00",
+      "name": "轟はじめ / ガーリー番長のお裾分け",
+      "description": "全員のパフォーマンスが120%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "P",
+          "percent": 120,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のパフォーマンスが120%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00021-3-nrml-0017-00",
+      "name": "不知火フレア / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00022-3-nrml-0018-00",
+      "name": "白銀ノエル / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00023-3-nrml-0019-00",
+      "name": "宝鐘マリン / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00026-3-nrml-0021-00",
+      "name": "角巻わため / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00027-3-nrml-0022-00",
+      "name": "常闇トワ / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00028-3-nrml-0023-00",
+      "name": "姫森ルーナ / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00030-3-nrml-0024-00",
+      "name": "雪花ラミィ / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00031-3-nrml-0025-00",
+      "name": "桃鈴ねね / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00032-3-nrml-0026-00",
+      "name": "獅白ぼたん / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00034-3-nrml-0027-00",
+      "name": "尾丸ポルカ / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00035-3-nrml-0028-00",
+      "name": "ラプラス・ダークネス / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00036-3-nrml-0029-00",
+      "name": "鷹嶺ルイ / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00037-3-nrml-0030-00",
+      "name": "博衣こより / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00039-3-nrml-0032-00",
+      "name": "風真いろは / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-03001-3-nrml-0033-00",
+      "name": "アユンダ・リス / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-03002-3-nrml-0034-00",
+      "name": "ムーナ・ホシノヴァ / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-03003-3-nrml-0035-00",
+      "name": "アイラニ・イオフィフティーン / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-03004-3-nrml-0036-00",
+      "name": "クレイジー・オリー / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-03005-3-nrml-0037-00",
+      "name": "アーニャ・メルフィッサ / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-03006-3-nrml-0038-00",
+      "name": "パヴォリア・レイネ / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-03007-3-nrml-0039-00",
+      "name": "ベスティア・ゼータ / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-03008-3-nrml-0040-00",
+      "name": "カエラ・コヴァルスキア / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-04003-3-nrml-0044-00",
+      "name": "一伊那尓栖 / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-04007-3-nrml-0047-00",
+      "name": "IRyS / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-04010-3-nrml-0049-00",
+      "name": "オーロ・クロニー / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-04012-3-nrml-0051-00",
+      "name": "ハコス・ベールズ / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-04013-3-nrml-0052-00",
+      "name": "シオリ・ノヴェラ / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-04014-3-nrml-0053-00",
+      "name": "古石ビジュー / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-04015-3-nrml-0054-00",
+      "name": "ネリッサ・レイヴンクロフト / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-04016-3-nrml-0055-00",
+      "name": "フワワ・アビスガード / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-04017-3-nrml-0056-00",
+      "name": "モココ・アビスガード / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-06002-3-nrml-0058-00",
+      "name": "音乃瀬奏 / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-06003-3-nrml-0059-00",
+      "name": "一条莉々華 / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-06004-3-nrml-0060-00",
+      "name": "儒烏風亭らでん / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-06005-3-nrml-0061-00",
+      "name": "轟はじめ / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00010-3-nrml-0010-00",
+      "name": "百鬼あやめ / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00011-3-nrml-0011-00",
+      "name": "癒月ちょこ / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00012-3-nrml-0012-00",
+      "name": "大空スバル / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00013-3-nrml-0002-00",
+      "name": "AZKi / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00014-3-nrml-0013-00",
+      "name": "大神ミオ / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00015-3-nrml-0003-00",
+      "name": "さくらみこ / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00016-3-nrml-0014-00",
+      "name": "猫又おかゆ / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00017-3-nrml-0015-00",
+      "name": "戌神ころね / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00018-3-nrml-0004-00",
+      "name": "星街すいせい / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00001-3-nrml-0000-00",
+      "name": "ときのそら / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00002-3-nrml-0001-00",
+      "name": "ロボ子さん / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00004-3-nrml-0005-00",
+      "name": "アキ・ローゼンタール / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00005-3-nrml-0006-00",
+      "name": "赤井はあと / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00006-3-nrml-0007-00",
+      "name": "白上フブキ / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00007-3-nrml-0008-00",
+      "name": "夏色まつり / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00019-3-nrml-0016-00",
+      "name": "兎田ぺこら / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-03009-3-nrml-0041-00",
+      "name": "こぼ・かなえる / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-04001-3-nrml-0042-00",
+      "name": "森カリオペ / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-04002-3-nrml-0043-00",
+      "name": "小鳥遊キアラ / デフォルト",
+      "description": "全員の全パラメータが15%UP",
+      "kind": "common",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 15,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated"
+          },
+          "description": "全員の全パラメータが15%UP"
+        }
+      ]
+    }
+  ]
+}

@@ -49,7 +49,7 @@ const ScheduledSupportEngine = (() => {
     return {sources,targets,unresolved:sources.filter(s=>s.status.startsWith('unresolved')),
       stackingUnresolved:targets.filter(t=>t.modifiers.some(m=>m.status==='unresolved-stacking'))};
   }
-  function evaluate(events,duration,schedule,passiveSupport,{trace=true}={}){
+  function evaluate(events,duration,schedule,passiveSupport,{trace=true,leaderSupport={targets:[]}}={}){
     const spans=schedule.status==='resolved'?schedule.entries:[];
     const points=[...new Set([0,duration,...events.flatMap(e=>[e.start,e.end]),...spans.flatMap(s=>[s.start,s.end])])].filter(t=>t>=0&&t<=duration).sort((a,b)=>a-b);
     const boosted=[],intervals=[];
@@ -60,9 +60,10 @@ const ScheduledSupportEngine = (() => {
       const calculations=[];
       for(const event of active){
         const p=passiveSupport.targets.find(t=>t.slot===event.m.slot);
-        const values=calculateSupportBoost(event.boost,sp?.scoreSupportRate||0,p?.rate||0);
+        const leaderRate=leaderSupport.targets.find(t=>t.slot===event.m.slot)?.rate||0;
+        const values=calculateSupportBoost(event.boost,sp?.scoreSupportRate||0,(p?.rate||0)+leaderRate);
         boosted.push({...event,start,end,boost:values.effectiveBoost});
-        if(trace)calculations.push({slot:event.m.slot,...values,spSlot:sp?.slot??null,passiveModifiers:p?.modifiers||[]});
+        if(trace)calculations.push({slot:event.m.slot,...values,spSlot:sp?.slot??null,leaderRate,passiveModifiers:p?.modifiers||[]});
       }
       if(trace)intervals.push({start,end,state:active.length?(sp?'active+sp':'active-only'):(sp?'sp-only':'neither'),spSlot:sp?.slot??null,active:calculations});
     }

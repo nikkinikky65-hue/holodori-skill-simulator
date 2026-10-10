@@ -1,0 +1,275 @@
+{
+  "format": "holodori-support-display-observations-v1",
+  "recordedDate": "2026-10-09",
+  "source": "User-reported in-game measurements; no screenshots or independent measurements supplied",
+  "measurementDate": null,
+  "gameVersion": null,
+  "song": null,
+  "difficulty": null,
+  "cardIds": null,
+  "formationOrder": null,
+  "activeTimestamps": null,
+  "terminology": "Leader skill and costume skill denote the same source in this report, not two additive sources",
+  "modelScope": "displayed additional boost only; not final score or internal rounding",
+  "model": "floor(baseBoostPercent * (leaderPercent + applicablePassivePercent + activeSPPercent) / 100)",
+  "sessions": [
+    {
+      "id": "leader_sp",
+      "leaderSupportPercent": 60,
+      "redBoardSupportPercent": 0,
+      "passiveDescription": null,
+      "rows": [
+        {
+          "no": 1,
+          "status": "recorded",
+          "baseBoostPercent": 55,
+          "observedAdditionalPercent": 79,
+          "spPercent": 85,
+          "applicablePassivePercentForReportedModel": 0,
+          "calculatedAdditionalPercent": 79
+        },
+        {
+          "no": 2,
+          "status": "recorded",
+          "baseBoostPercent": 65,
+          "observedAdditionalPercent": 94,
+          "spPercent": 85,
+          "applicablePassivePercentForReportedModel": 0,
+          "calculatedAdditionalPercent": 94
+        },
+        {
+          "no": 3,
+          "status": "recorded",
+          "baseBoostPercent": 65,
+          "observedAdditionalPercent": 39,
+          "spPercent": 0,
+          "applicablePassivePercentForReportedModel": 0,
+          "calculatedAdditionalPercent": 39
+        },
+        {
+          "no": 4,
+          "status": "recorded",
+          "baseBoostPercent": 55,
+          "observedAdditionalPercent": 33,
+          "spPercent": 0,
+          "applicablePassivePercentForReportedModel": 0,
+          "calculatedAdditionalPercent": 33
+        },
+        {
+          "no": 5,
+          "status": "recorded",
+          "baseBoostPercent": 55,
+          "observedAdditionalPercent": 33,
+          "spPercent": 0,
+          "applicablePassivePercentForReportedModel": 0,
+          "calculatedAdditionalPercent": 33
+        },
+        {
+          "no": 6,
+          "status": "not-activated",
+          "baseBoostPercent": null,
+          "observedAdditionalPercent": null,
+          "spPercent": 80,
+          "applicablePassivePercentForReportedModel": null,
+          "calculatedAdditionalPercent": null
+        },
+        {
+          "no": 7,
+          "status": "recorded",
+          "baseBoostPercent": 65,
+          "observedAdditionalPercent": 78,
+          "spPercent": 60,
+          "applicablePassivePercentForReportedModel": 0,
+          "calculatedAdditionalPercent": 78
+        },
+        {
+          "no": 8,
+          "status": "recorded",
+          "baseBoostPercent": 70,
+          "observedAdditionalPercent": 42,
+          "spPercent": 0,
+          "applicablePassivePercentForReportedModel": 0,
+          "calculatedAdditionalPercent": 42
+        },
+        {
+          "no": 9,
+          "status": "not-activated",
+          "baseBoostPercent": null,
+          "observedAdditionalPercent": null,
+          "spPercent": null,
+          "applicablePassivePercentForReportedModel": null,
+          "calculatedAdditionalPercent": null
+        }
+      ]
+    },
+    {
+      "id": "red_board_added",
+      "leaderSupportPercent": 60,
+      "redBoardSupportPercent": 10,
+      "passiveDescription": null,
+      "rows": [
+        {
+          "no": 1,
+          "status": "recorded",
+          "baseBoostPercent": 55,
+          "observedAdditionalPercent": 79,
+          "spPercent": 85,
+          "applicablePassivePercentForReportedModel": 0,
+          "calculatedAdditionalPercent": 79
+        },
+        {
+          "no": 2,
+          "status": "recorded",
+          "baseBoostPercent": 55,
+          "observedAdditionalPercent": 33,
+          "spPercent": 0,
+          "applicablePassivePercentForReportedModel": 0,
+          "calculatedAdditionalPercent": 33
+        },
+        {
+          "no": 3,
+          "status": "recorded",
+          "baseBoostPercent": 55,
+          "observedAdditionalPercent": 33,
+          "spPercent": 0,
+          "applicablePassivePercentForReportedModel": 0,
+          "calculatedAdditionalPercent": 33
+        },
+        {
+          "no": 4,
+          "status": "recorded",
+          "baseBoostPercent": 70,
+          "observedAdditionalPercent": 42,
+          "spPercent": 0,
+          "applicablePassivePercentForReportedModel": 0,
+          "calculatedAdditionalPercent": 42
+        },
+        {
+          "no": 5,
+          "status": "recorded",
+          "baseBoostPercent": 70,
+          "observedAdditionalPercent": 42,
+          "spPercent": 0,
+          "applicablePassivePercentForReportedModel": 0,
+          "calculatedAdditionalPercent": 42
+        },
+        {
+          "no": 6,
+          "status": "not-recorded",
+          "baseBoostPercent": null,
+          "observedAdditionalPercent": null,
+          "spPercent": null,
+          "applicablePassivePercentForReportedModel": null,
+          "calculatedAdditionalPercent": null
+        },
+        {
+          "no": 7,
+          "status": "recorded",
+          "baseBoostPercent": 70,
+          "observedAdditionalPercent": 42,
+          "spPercent": 0,
+          "applicablePassivePercentForReportedModel": 0,
+          "calculatedAdditionalPercent": 42
+        },
+        {
+          "no": 8,
+          "status": "recorded",
+          "baseBoostPercent": 55,
+          "observedAdditionalPercent": 79,
+          "spPercent": 85,
+          "applicablePassivePercentForReportedModel": 0,
+          "calculatedAdditionalPercent": 79
+        },
+        {
+          "no": 9,
+          "status": "not-recorded",
+          "baseBoostPercent": null,
+          "observedAdditionalPercent": null,
+          "spPercent": null,
+          "applicablePassivePercentForReportedModel": null,
+          "calculatedAdditionalPercent": null
+        }
+      ]
+    },
+    {
+      "id": "passive_added",
+      "leaderSupportPercent": 60,
+      "redBoardSupportPercent": 10,
+      "passiveDescription": "キュート2名にスコアサポート効果+8%",
+      "rows": [
+        {
+          "no": 1,
+          "status": "recorded",
+          "baseBoostPercent": 55,
+          "observedAdditionalPercent": 79,
+          "spPercent": 85,
+          "applicablePassivePercentForReportedModel": 0,
+          "calculatedAdditionalPercent": 79
+        },
+        {
+          "no": 2,
+          "status": "recorded",
+          "baseBoostPercent": 55,
+          "observedAdditionalPercent": 79,
+          "spPercent": 85,
+          "applicablePassivePercentForReportedModel": 0,
+          "calculatedAdditionalPercent": 79
+        },
+        {
+          "no": 3,
+          "status": "recorded",
+          "baseBoostPercent": 100,
+          "observedAdditionalPercent": 68,
+          "spPercent": 0,
+          "applicablePassivePercentForReportedModel": 8,
+          "calculatedAdditionalPercent": 68
+        },
+        {
+          "no": 4,
+          "status": "recorded",
+          "baseBoostPercent": 65,
+          "observedAdditionalPercent": 39,
+          "spPercent": 0,
+          "applicablePassivePercentForReportedModel": 0,
+          "calculatedAdditionalPercent": 39
+        },
+        {
+          "no": 5,
+          "status": "recorded",
+          "baseBoostPercent": 70,
+          "observedAdditionalPercent": 47,
+          "spPercent": 0,
+          "applicablePassivePercentForReportedModel": 8,
+          "calculatedAdditionalPercent": 47
+        },
+        {
+          "no": 6,
+          "status": "recorded",
+          "baseBoostPercent": 100,
+          "observedAdditionalPercent": 148,
+          "spPercent": 80,
+          "applicablePassivePercentForReportedModel": 8,
+          "calculatedAdditionalPercent": 148
+        },
+        {
+          "no": 7,
+          "status": "recorded",
+          "baseBoostPercent": 100,
+          "observedAdditionalPercent": 68,
+          "spPercent": 0,
+          "applicablePassivePercentForReportedModel": 8,
+          "calculatedAdditionalPercent": 68
+        },
+        {
+          "no": 8,
+          "status": "not-recorded",
+          "baseBoostPercent": null,
+          "observedAdditionalPercent": null,
+          "spPercent": null,
+          "applicablePassivePercentForReportedModel": null,
+          "calculatedAdditionalPercent": null
+        }
+      ]
+    }
+  ]
+}

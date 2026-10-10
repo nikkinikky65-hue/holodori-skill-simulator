@@ -4,14 +4,19 @@ const ActiveRandomSimulation = (() => {
     let state = seed >>> 0;
     return () => { state = (Math.imul(1664525, state) + 1013904223) >>> 0; return state / 4294967296; };
   }
-  function prepare(members, duration, generateEvents, probability){
+  function prepare(members, duration, generateEvents, probability, resolveProbability = null){
     if(!Number.isFinite(duration) || duration <= 0) throw Error('曲時間を正の数にしてください');
     return {duration, candidates: members.flatMap(member => {
       const candidates = generateEvents(member, duration);
       if(!candidates.length) return [];
       const p = probability(member.prob);
       if(!Number.isFinite(p) || p < 0 || p > 1) throw Error('発動確率が範囲外です');
-      return candidates.map(event => ({event, probability:p}));
+      return candidates.map(event => {
+        const probabilityTrace=resolveProbability ? resolveProbability({member,event,baseProbability:p}) : null;
+        const resolved=probabilityTrace ? probabilityTrace.probability : p;
+        if(!Number.isFinite(resolved)||resolved<0||resolved>1)throw Error('発動確率が範囲外です');
+        return probabilityTrace ? {event,probability:resolved,probabilityTrace} : {event,probability:p};
+      });
     })};
   }
   function integrate(segments, duration){

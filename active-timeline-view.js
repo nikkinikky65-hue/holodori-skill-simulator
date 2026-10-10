@@ -1,6 +1,6 @@
 // Shared A/unit Timeline UI. Calculation stays in ActiveTimelineEngine.
 const ActiveTimelineView = {
- render({container,detail,members:ms,eventsByMember:by,duration:T,probabilities,specialSchedule=null,segments=null}){
+ render({container,detail,members:ms,eventsByMember:by,duration:T,probabilities,specialSchedule=null,segments=null,activationSupport=null}){
  const all=by.flat();
   const tl = container;
 
@@ -206,6 +206,8 @@ const ActiveTimelineView = {
                 `${probabilities[m.prob].toFixed(2)}% / ` +
                 `+${m.boost.toFixed(2)}% / ` +
                 `発動頻度UP ${m.short.toFixed(2)}%`;
+              const support=activationSupport?.find(s=>s.slot===m.slot&&s.time===e.start);
+              if(support)detail.textContent+=` / 表示補正 ${e.boost}+${support.displayAdditional}（開始時：Leader ${support.leaderRate}%・Passive ${support.passiveRate}%・SP ${support.spRate}%）`;
             }
           );
 

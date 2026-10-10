@@ -11,7 +11,7 @@
     "passive-target-resolver.js": "2da1307d7b79fd876af91310f0f2e7b088f27b7400a8ace268deec62476e340f",
     "passive-selection-resolver.js": "3032c4d0c37dd60b2e48a01ddf642b1d8623e93d87a15a4bae70a2c7db34e774",
     "parameter-rules.js": "6af525b6ab9df6839962b629fde088f0e25962f8bca96e3674a25f8574f48892",
-    "unit-parameter-engine.js": "b0a8517414ff53d7b31bc99c2de30ebbd9b6304749f82d91a0b11ed150d7984c",
+    "unit-parameter-engine.js": "5bfe50791eebf8ac5bbdc7dc61a5645ae95f1c257bcf302b397eec25e09a1428",
     "tests/parameter-rules.test.js": "c7357b737d541a64c3faee6b8fb95eea37384a7235cc42ce3391b67806f361e5",
     "tests/case-c-enhancement.test.js": "5537e3f752d24f245b25f3220a8b56f873eac3b67ffc3e57a7b0cfb4b03655b1",
     "research/parameter-score-validation.md": "fbebb20feb46a08cf27f4ffea4feb118352f67b77c890ba291a771a4497eff37",
