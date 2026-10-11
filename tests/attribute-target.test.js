@@ -40,12 +40,12 @@ for(const id of ids){
  }
 }
 const candidates=[{slot:5,formationIndex:0,baseTotal:100},{slot:1,formationIndex:1,baseTotal:100},{slot:2,formationIndex:2,baseTotal:200}];
-const selection=PassiveSelectionResolver.resolve({candidates,selectCount:2,rule:'attribute-baseTotal'});
+const selection=PassiveSelectionResolver.resolve({candidates,selectCount:2,rule:'attribute-parameter',effectType:'all_parameters_up'});
 check(selection.selected.map(m=>m.slot).join(',')==='2,5'&&selection.ties.length===1,'ties use input order');
 check(PassiveSelectionResolver.resolve({candidates,selectCount:2,rule:'affiliation-baseTotal'}).status==='unresolved','affiliation ranking not enabled');
 // Feed the existing CASE C fixture through the new bridge, without inventing values.
 const fixtureSource=readFile('tests/parameter-rules.test.js');
-const caseData=eval('(()=>{'+fixtureSource.slice(fixtureSource.indexOf('const caseCCards='),fixtureSource.indexOf('const caseC=calculateUnitParameterBreakdown'))+'return {cards:caseCCards,base:caseCBaseStats};})()');
+const caseData=eval('(()=>{'+fixtureSource.slice(fixtureSource.indexOf('const caseCCards='),fixtureSource.indexOf('const currentRankPassiveCandidates='))+'return {cards:caseCCards,base:caseCBaseStats};})()');
 const template=catalog.cards.find(c=>c.id===ids[0]);
 const attr='CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1';
 const caseMembers=caseData.cards.map((card,i)=>{
@@ -60,9 +60,9 @@ const caseMembers=caseData.cards.map((card,i)=>{
  m.passiveInput=p;m.totalAdjustmentInputs={board:{kind:'external-total',value:2937},costume:{kind:'external-total',value:0}};return m;
 });
 const result=UnitParameterEngine.calculateUnitParameter(caseMembers,{kind:'manual-rate',percent:6.4},{kind:'manual-rate',percent:2.43});
-check(result.passive.total===4532&&result.memory.total===2451&&result.enhancementBonus.total===1397,'CASE C totals through bridge');
-check(result.members.map(m=>m.enhancementBonus.total).join(',')==='248,300,301,297,251','CASE C members');
-check(result.members[1].trace[0].targetSlots.join(',')==='2,4,3','CASE C target order and tie');
+check(result.passive.total===4858&&result.memory.total===2451&&result.enhancementBonus.total===1405,'CASE C totals through bridge');
+check(result.members.map(m=>m.enhancementBonus.total).join(',')==='268,300,290,283,264','CASE C members');
+check(result.members[1].trace[0].targetSlots.join(',')==='1,2,3','CASE C target order and tie');
 const slots=Array.from({length:5},()=>({cardId:ids[0],training:0,bloom:4,short:0}));
 const active=UnitSimulatorEngine.build(catalog,slots,120);
 const disabled=JSON.parse(json(catalog));disabled.cards.find(c=>c.id===ids[0]).skills.passive.levels.forEach(p=>p.condition.state='unobserved');

@@ -52,8 +52,15 @@ function parameterConditionMatches(condition, member){
   return null;
 }
 
-function rankPassiveCandidates(candidates){
-  return [...candidates].sort((a, b) => b.baseTotal - a.baseTotal || a.formationIndex - b.formationIndex);
+function passiveRankingParameter(effectType){
+  const keys=PARAMETER_PASSIVE_TYPES[effectType];
+  return keys?.length===1 ? keys[0] : 'total';
+}
+function passiveRankingValue(member, parameter){
+  return parameter==='total' ? member.baseTotal : member.base?.[parameter];
+}
+function rankPassiveCandidates(candidates, parameter='total'){
+  return [...candidates].sort((a, b) => passiveRankingValue(b,parameter)-passiveRankingValue(a,parameter) || a.formationIndex-b.formationIndex);
 }
 
 function resolvePassiveTargets(source, effect, members){
@@ -87,7 +94,7 @@ function resolvePassiveTargets(source, effect, members){
   }else{
     targetStatus = 'unresolved-target';
   }
-  const ranked = rankPassiveCandidates(candidates);
+  const ranked = rankPassiveCandidates(candidates, target.kind==='type' ? passiveRankingParameter(effect.type) : 'total');
   const targets = targetStatus === 'resolved' ? ranked.slice(0, targetCount) : [];
   const status = activated === false ? 'inactive'
     : activated === null ? 'unresolved-condition'

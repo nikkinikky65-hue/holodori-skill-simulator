@@ -1,3 +1,5 @@
+> 最新順位仕様：属性P/T/S効果は開花後単項降順へ更新。全パラTOTAL・同値編成順は暫定。実機5観測一致、CASE C旧記録は履歴として維持。詳細：[parameter-ranking-update.md](parameter-ranking-update.md)。以下のTOTAL順位の説明は更新前の記録。
+
 # 属性対象Passive接続結果
 
 ## 接続更新：開発者承認の属性対象実行ルール（2026-10-10）

@@ -120,7 +120,7 @@ const UnitParameterEngine = (() => {
         conditionResults[index]=condition;
         const resolved=PassiveTargetResolver.resolveAttribute({attribute:effect.target.value,condition,unitMembers:members});
         if(resolved.status==='candidates-resolved'){
-          resolved.selection=PassiveSelectionResolver.resolve({candidates:resolved.candidates,selectCount:effect.targetCount,rule:'attribute-baseTotal'});
+          resolved.selection=PassiveSelectionResolver.resolve({candidates:resolved.candidates,selectCount:effect.targetCount,rule:'attribute-parameter',effectType:effect.type});
           resolved.status=resolved.selection.status;resolved.reason=resolved.selection.reason;
           resolved.targets=resolved.selection.selected;
         }

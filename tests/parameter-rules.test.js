@@ -31,11 +31,11 @@ const members = cards.map((card,index)=>({
 const result = calculateUnitParameterBreakdown(members,{cards,memoryRate:0.064});
 assert(result.passiveResults.length===3,'only parameter passives are processed');
 assert(result.passiveResults[0].status==='resolved' && result.passiveResults[0].candidateSlots.join(',')==='3','condition count includes the source member');
-assert(result.passiveResults[2].targetSlots.join(',')==='2','target ranked by baseTotal, not Performance or Board');
-assert(result.members[1].passive.performance===11,'the highest baseTotal target receives the effect');
+assert(result.passiveResults[2].targetSlots.join(',')==='1','target ranked by Performance, not TOTAL or Board');
+assert(result.members[0].passive.performance===30,'the highest baseTotal target receives the effect');
 assert(result.members[2].passive.performance===17 && result.members[2].passive.technique===17 && result.members[2].passive.sense===28,'same parameter rates combine before one ceil');
 assert(result.members[2].passive.sense===Math.ceil(105*0.26),'self all-parameter and Sense effects combine');
-assert(result.members[0].outfit.performance===300 && result.members[0].passive.performance===0,'outfit is isolated from passive calculation');
+assert(result.members[0].outfit.performance===300 && result.members[0].passive.performance===30,'outfit is isolated from passive calculation');
 assert(result.members[0].memory.total===Math.ceil(300*0.064)+Math.ceil(10*0.064)+Math.ceil(10*0.064),'memory reads base only');
 for(const member of result.members){
   assert(member.enhancement===calculateEnhancementBonus(member.base.total+member.board.total+member.passive.total+member.outfit.total), 'enhancement excludes Memory');
@@ -91,6 +91,8 @@ const caseCBaseStats=[
   {performance:2281,technique:3304,sense:2475},
   {performance:2210,technique:2299,sense:2883}
 ];
+const currentRankPassiveCandidates=rankPassiveCandidates;
+rankPassiveCandidates=candidates=>currentRankPassiveCandidates(candidates,'total'); // Historical CASE C only.
 const caseC=calculateUnitParameterBreakdown(caseCCards.map((card,index)=>({
   slot:index+1,libraryCardId:card.id,card,baseStats:caseCBaseStats[index],
   board:{performance:979,technique:979,sense:979}
@@ -107,6 +109,9 @@ assert(caseC.passive===4532 && caseC.memory===2451 && caseC.enhancement===1397 &
 assert(caseC.members.map(member=>member.memory.total).join(',')==='466,518,475,517,475','CASE C per-member Memory from baseStats');
 assert(caseC.members.map(member=>member.enhancement).join(',')==='248,300,301,297,251','CASE C per-member enhancement');
 
+rankPassiveCandidates=currentRankPassiveCandidates;
+const caseCNew=calculateUnitParameterBreakdown(caseCCards.map((card,i)=>({slot:i+1,card,baseStats:caseCBaseStats[i],board:{performance:979,technique:979,sense:979}})),{memoryRate:.064,enhancementRate:.0243});
+assert(caseCNew.passive===4858 && caseCNew.memory===2451 && caseCNew.enhancement===1405 && caseCNew.total===61589,'CASE C new model; historical observations above preserved');
 const reportedCases = [
   [53522,14685,0,3433,0,1662,73302],
   [50187,14685,1184,3220,0,1609,70885],

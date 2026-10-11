@@ -9,7 +9,7 @@
     subtotal:{performance:tie?101:101+i*10,technique:103,sense:107,total:tie?311:311+i*10},passiveInput:i===0?p:null}));
    const result=UnitParameterEngine.calculateUnitParameter(members);
    const trace=result.members[0].trace[0];
-   const selected=Array.from({length:n},(_,i)=>i).sort((a,b)=>tie?a-b:b-a).slice(0,2);
+   const selected=Array.from({length:n},(_,i)=>i).sort((a,b)=>tie||['technique_up','sense_up'].includes(g.effect.type)?a-b:b-a).slice(0,2);
    check(trace.status==='resolved'&&trace.condition.interpretation===g.interpretation,'approved resolved trace');
    check(JSON.stringify(trace.targetSlots)===JSON.stringify(selected.map(i=>i+1)),'rank/ties/0-5');
    for(let i=0;i<5;i++)for(const key of ['performance','technique','sense']){
