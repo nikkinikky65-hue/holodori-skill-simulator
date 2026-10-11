@@ -42,7 +42,7 @@ for(const id of ids){
 const candidates=[{slot:5,formationIndex:0,baseTotal:100},{slot:1,formationIndex:1,baseTotal:100},{slot:2,formationIndex:2,baseTotal:200}];
 const selection=PassiveSelectionResolver.resolve({candidates,selectCount:2,rule:'attribute-parameter',effectType:'all_parameters_up'});
 check(selection.selected.map(m=>m.slot).join(',')==='2,5'&&selection.ties.length===1,'ties use input order');
-check(PassiveSelectionResolver.resolve({candidates,selectCount:2,rule:'affiliation-baseTotal'}).status==='unresolved','affiliation ranking not enabled');
+check(PassiveSelectionResolver.resolve({candidates,selectCount:2,rule:'affiliation-baseTotal'}).status==='unresolved','obsolete affiliation-baseTotal rule is not accepted');
 // Feed the existing CASE C fixture through the new bridge, without inventing values.
 const fixtureSource=readFile('tests/parameter-rules.test.js');
 const caseData=eval('(()=>{'+fixtureSource.slice(fixtureSource.indexOf('const caseCCards='),fixtureSource.indexOf('const currentRankPassiveCandidates='))+'return {cards:caseCCards,base:caseCBaseStats};})()');

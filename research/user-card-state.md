@@ -23,3 +23,15 @@
 - この段階では所持フィルタや編成への自動反映はしない。データはブラウザー・オリジン単位で保存され、アカウント同期はない。
 
 検証: `python3 -B tests/verify.py`（user-card-state単体テストを含む）、`tests/browser.html`（Chrome）、`tests/navigation-browser.html`（PC/狭幅）、`tests/runtime-catalog.test.py`、Canonical/Runtime生成スクリプトの`--check`。
+
+## カード画面JSONエクスポート（2026-10-11）
+
+共有メンバーライブラリのマニュアル入力出力とは別。カード画面のフィルター上部に「所持・育成JSONを出力」を追加。現在の保存内容をクリック時に読み取り、検索・レア度・属性絞り込みに依存せず出力する。保存への書き込みなし。
+
+形式は `format: holodori-user-card-state-export`、`version: 1`。exportedAtはUTC ISO日時。sourceはページ、storageKey、storagePresent、Runtime dataset参照情報。cardsは全Runtime IDと保存済みIDの和集合で、各行にcardId、inCatalog、saved、stateを持つ。未保存はsaved=false/state=null。保存済み未所持はsaved=true/state.owned=false。training/openingの明示0は0のまま。マスターから除外されたIDもinCatalog=falseで保持する。
+
+savedDataは元ストアのJSON値全体（存在しなければnull）。拡張フィールド、明示nullを保持し、未設定フィールドは補完しない。現行保存ではowned/training/openingは必須。不正・未対応形式はエラー表示し、既定値へ補正して出力しない。発動頻度UPはこのストアに存在せず出力しない。A/Bや共有Libraryの設定を混ぜない。
+
+JSONダウンロードはBlobとして生成。保存形式・カードマスター・計算エンジン変更なし、インポートなし。
+
+テスト：user-card-state.test.jsで未保存/未所持/0/null/拡張項目/未知ID/不正入力/書き込み非干渉。card-export-browser.htmlでChrome 1100px/360px、Blob内容とファイル名、検索中でも185件、チェック/育成・絞り込み・再読込復元・保存文字列不変を確認。

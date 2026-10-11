@@ -1,0 +1,224 @@
+[
+  {
+    "observation": 6,
+    "members": [
+      {
+        "cardId": "card-00035-5-uniq-0082-00",
+        "level": 60,
+        "bloom": 0,
+        "passiveLevel": 1
+      },
+      {
+        "cardId": "card-00031-5-uniq-0025-00",
+        "level": 60,
+        "bloom": 0,
+        "passiveLevel": 1
+      },
+      {
+        "cardId": "card-00039-5-uniq-0032-00",
+        "level": 60,
+        "bloom": 0,
+        "passiveLevel": 1
+      },
+      {
+        "cardId": "card-06005-5-uniq-0061-00",
+        "level": 60,
+        "bloom": 2,
+        "passiveLevel": 1
+      },
+      {
+        "cardId": "card-03005-5-uniq-0037-00",
+        "level": 60,
+        "bloom": 0,
+        "passiveLevel": 1
+      }
+    ],
+    "observedBase": 94397,
+    "observedPassive": 5122
+  },
+  {
+    "observation": 7,
+    "members": [
+      {
+        "cardId": "card-00030-5-uniq-0024-00",
+        "level": 60,
+        "bloom": 0,
+        "passiveLevel": 1
+      },
+      {
+        "cardId": "card-04012-5-uniq-0051-00",
+        "level": 60,
+        "bloom": 0,
+        "passiveLevel": 1
+      },
+      {
+        "cardId": "card-00031-5-uniq-0025-00",
+        "level": 60,
+        "bloom": 0,
+        "passiveLevel": 1
+      },
+      {
+        "cardId": "card-03005-5-uniq-0084-00",
+        "level": 70,
+        "bloom": 0,
+        "passiveLevel": 1
+      },
+      {
+        "cardId": "card-04010-5-uniq-0049-00",
+        "level": 70,
+        "bloom": 0,
+        "passiveLevel": 1
+      }
+    ],
+    "observedBase": 97715,
+    "observedPassive": 14332
+  },
+  {
+    "observation": 8,
+    "members": [
+      {
+        "cardId": "card-00016-4-cmmn-0000-00",
+        "level": 60,
+        "bloom": 2,
+        "passiveLevel": 1
+      },
+      {
+        "cardId": "card-04001-4-cmmn-0000-00",
+        "level": 70,
+        "bloom": 2,
+        "passiveLevel": 1
+      },
+      {
+        "cardId": "card-00035-4-cmmn-0000-00",
+        "level": 60,
+        "bloom": 0,
+        "passiveLevel": 1
+      },
+      {
+        "cardId": "card-03003-4-cmmn-0000-00",
+        "level": 30,
+        "bloom": 1,
+        "passiveLevel": 1
+      },
+      {
+        "cardId": "card-03002-4-cmmn-0000-00",
+        "level": 30,
+        "bloom": 1,
+        "passiveLevel": 1
+      }
+    ],
+    "observedBase": 80423,
+    "observedPassive": 7033
+  },
+  {
+    "observation": 9,
+    "members": [
+      {
+        "cardId": "card-00005-4-cmmn-0000-00",
+        "level": 30,
+        "bloom": 0,
+        "passiveLevel": 1
+      },
+      {
+        "cardId": "card-00021-4-cmmn-0000-00",
+        "level": 30,
+        "bloom": 0,
+        "passiveLevel": 1
+      },
+      {
+        "cardId": "card-00004-4-cmmn-0000-00",
+        "level": 40,
+        "bloom": 0,
+        "passiveLevel": 1
+      },
+      {
+        "cardId": "card-00002-4-cmmn-0000-00",
+        "level": 30,
+        "bloom": 3,
+        "passiveLevel": 1
+      },
+      {
+        "cardId": "card-04015-4-cmmn-0000-00",
+        "level": 30,
+        "bloom": 1,
+        "passiveLevel": 1
+      }
+    ],
+    "observedBase": 56915,
+    "observedPassive": 5491
+  },
+  {
+    "observation": 10,
+    "members": [
+      {
+        "cardId": "card-00005-4-cmmn-0000-00",
+        "level": 30,
+        "bloom": 0,
+        "passiveLevel": 1
+      },
+      {
+        "cardId": "card-04014-4-cmmn-0000-00",
+        "level": 30,
+        "bloom": 3,
+        "passiveLevel": 1
+      },
+      {
+        "cardId": "card-00004-4-cmmn-0000-00",
+        "level": 40,
+        "bloom": 0,
+        "passiveLevel": 1
+      },
+      {
+        "cardId": "card-00002-4-cmmn-0000-00",
+        "level": 30,
+        "bloom": 3,
+        "passiveLevel": 1
+      },
+      {
+        "cardId": "card-04015-4-cmmn-0000-00",
+        "level": 30,
+        "bloom": 1,
+        "passiveLevel": 1
+      }
+    ],
+    "observedBase": 57987,
+    "observedPassive": 9408
+  },
+  {
+    "observation": 11,
+    "members": [
+      {
+        "cardId": "card-00005-4-cmmn-0000-00",
+        "level": 30,
+        "bloom": 0,
+        "passiveLevel": 1
+      },
+      {
+        "cardId": "card-04014-4-cmmn-0000-00",
+        "level": 30,
+        "bloom": 3,
+        "passiveLevel": 1
+      },
+      {
+        "cardId": "card-00004-4-cmmn-0000-00",
+        "level": 40,
+        "bloom": 0,
+        "passiveLevel": 1
+      },
+      {
+        "cardId": "card-04015-4-cmmn-0000-00",
+        "level": 30,
+        "bloom": 1,
+        "passiveLevel": 1
+      },
+      {
+        "cardId": "card-04017-4-cmmn-0000-00",
+        "level": 50,
+        "bloom": 0,
+        "passiveLevel": 1
+      }
+    ],
+    "observedBase": 61599,
+    "observedPassive": 8011
+  }
+]

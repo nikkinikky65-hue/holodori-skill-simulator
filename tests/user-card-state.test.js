@@ -28,3 +28,21 @@ for(const bad of ['{broken',JSON.stringify({version:99,cards:{}}),JSON.stringify
 }
 assertUser(userStorage.get('holodori-active-input-v1')==='unchanged A' && userStorage.get('holodori-member-card-library-v2')==='unchanged Library','separate storage');
 print('User card state: defaults, ownership/growth persistence, isolation, extensions, bounds and failed-write preservation PASS');
+const exportCatalog={dataset:{canonicalSha256:'test'},cards:[{id:'a'},{id:'b'},{id:'unsaved'}]};
+userStorage.delete(USER_CARD_STATE_STORAGE_KEY);
+const emptyExport=exportUserCardStates(exportCatalog,'fixed');
+assertUser(!emptyExport.source.storagePresent && emptyExport.cards.every(c=>!c.saved && c.state===null),'unsaved is not false/zero');
+const exportStore={version:1,future:null,cards:{a:{owned:false,training:4,opening:5},b:{owned:true,training:0,opening:0,optional:null},removed:{owned:false,training:1,opening:2}}};
+userStorage.set(USER_CARD_STATE_STORAGE_KEY,JSON.stringify(exportStore));
+const exportBefore=JSON.stringify([...userStorage]);
+const snapshot=exportUserCardStates(exportCatalog,'fixed');
+assertUser(JSON.stringify(snapshot.savedData)===JSON.stringify(exportStore),'exact stored fields');
+assertUser(snapshot.cards.find(c=>c.cardId==='a').state.owned===false && snapshot.cards.find(c=>c.cardId==='a').saved,'explicit unowned retained');
+assertUser(!snapshot.cards.find(c=>c.cardId==='removed').inCatalog,'unknown card preserved');
+assertUser(snapshot.cards.find(c=>c.cardId==='b').state.optional===null,'explicit null preserved');
+assertUser(JSON.stringify([...userStorage])===exportBefore,'export never mutates any storage');
+for(const raw of ['null','{}','{broken']){
+ userStorage.set(USER_CARD_STATE_STORAGE_KEY,raw);let failed=false;try{exportUserCardStates(exportCatalog);}catch(e){failed=true;}
+ assertUser(failed && userStorage.get(USER_CARD_STATE_STORAGE_KEY)===raw,'invalid export rejected without write');
+}
+print('Card export: saved/unowned/unset/unknown, extensions, read-only PASS');

@@ -34,3 +34,28 @@ function updateUserCardState(cardId, patch){
   localStorage.setItem(USER_CARD_STATE_STORAGE_KEY, JSON.stringify({...store, cards: {...store.cards, [cardId]: state}}));
   return state;
 }
+
+// Read-only snapshot: saved:false is distinct from an explicitly unowned card.
+function exportUserCardStates(catalog, exportedAt = new Date().toISOString()){
+  const raw = localStorage.getItem(USER_CARD_STATE_STORAGE_KEY);
+  const savedData = raw === null ? null : JSON.parse(raw);
+  if(raw !== null){
+    if(!savedData || savedData.version !== 1 || !savedData.cards || typeof savedData.cards !== 'object' || Array.isArray(savedData.cards)) throw new Error('未対応の所持カード保存形式です。');
+    Object.values(savedData.cards).forEach(validateUserCardState);
+  }
+  const cards = savedData?.cards ?? {};
+  const knownIds = new Set(catalog.cards.map(card => card.id));
+  const ids = [...new Set([...knownIds, ...Object.keys(cards)])];
+  return {
+    format: 'holodori-user-card-state-export', version: 1, exportedAt,
+    source: {page: 'card-catalog.html', storageKey: USER_CARD_STATE_STORAGE_KEY,
+      storagePresent: raw !== null, dataset: catalog.dataset},
+    cards: ids.map(cardId => {
+      const saved = Object.prototype.hasOwnProperty.call(cards, cardId);
+      return {cardId, inCatalog: knownIds.has(cardId), saved,
+        state: saved ? {...cards[cardId]} : null};
+    }),
+    // Retain extension fields and distinguish no store from an empty saved store.
+    savedData
+  };
+}

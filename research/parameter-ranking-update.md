@@ -1,3 +1,5 @@
+> 2026-10-11更新：属性・所属Parameter対象選択を共通単項順位へ統合。11観測一致。完全145種/290行（採用モデル上）、限定0、unsupported0。全パラ・同値は暫定。No.10比較モデルの提供値との差1を含む詳細は[parameter-passive-unified-selection.md](parameter-passive-unified-selection.md)。以下は旧段階の記録。
+
 # 属性Parameter Passive順位改修
 
 2026-10-10。ユーザー提示の新実機観測に基づくモデル更新。

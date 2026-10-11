@@ -116,6 +116,24 @@ async function renderCardCatalog(){
     });
     type.addEventListener('change', render);
     render();
+    const exportButton = document.querySelector('#catalogExport');
+    const exportStatus = document.querySelector('#catalogExportStatus');
+    if(!exportButton || !exportStatus) throw new Error('エクスポートUIがありません。');
+    exportButton.disabled = false;
+    exportButton.addEventListener('click', () => {
+      let url;
+      try{
+        const snapshot = exportUserCardStates(catalog);
+        const blob = new Blob([JSON.stringify(snapshot, null, 2) + '\n'], {type: 'application/json'});
+        url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `holodori-cards-${snapshot.exportedAt.replace(/[:.]/g, '-')}.json`;
+        document.body.append(link); link.click(); link.remove();
+        exportStatus.textContent = `${snapshot.cards.filter(card => card.saved).length}枚の保存済み設定を出力しました。`;
+      }catch(error){ exportStatus.textContent = `出力できませんでした：${error.message}`; }
+      finally{ if(url) setTimeout(() => URL.revokeObjectURL(url), 1000); }
+    });
   }catch(error){
     status.dataset.errorKind = 'ui';
     status.textContent = `カードライブラリのUIを初期化できませんでした：${error.message}`;

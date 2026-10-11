@@ -1,10 +1,10 @@
 {
   "inputs": {
-    "unit-parameter-engine.js": "303f8d0cffd82acc4a10fe9113b9c71542e79fe845cffc1bc16394b7320a9eea",
+    "unit-parameter-engine.js": "f7220c40e02f6c668170c384720970cd4922de3506c75dcd823922248004d6f6",
     "party-condition-resolver.js": "1ca56c409629effb0a288c0ab75af69382e84320ca84424319517da9f5c6f0ce",
-    "passive-target-resolver.js": "4fdfb56da4c58ee06937ed6f5635c355487f46445c88b7553788dc5ce31a055c",
-    "passive-selection-resolver.js": "3d93334797a82a1322f043b46404c0fdb1860a0d7941f7684156981c87777277",
-    "parameter-rules.js": "d142dd357c2c888fc5d663da2d184be47af9d31c3a243dc50c816b34c5ff84fc",
+    "passive-target-resolver.js": "3398b17cd921bebef7e6572879a43278c10276c2a2fa50c9b42b286d075744b8",
+    "passive-selection-resolver.js": "f8ff897cc5b5582fd91c39aaf9d569be1f66f6f3800f678ef1d1b36b5cefc8bb",
+    "parameter-rules.js": "a3cbb4820f906abc0748f3ff4501cb5733e49684a16dba72b7579e56ca6b5700",
     "data/runtime-affiliations.json": "63d8e7f896b575a699ecd1dadd7fafa788c4f2a2d1948abe98cb790476bb10c6",
     "data/runtime-cards.json": "65a91081d4e23c1ec077af9317a796b9da744d6244749239a0055d4ff36f6c68",
     "research/canonical-cards.json": "306a0d43a4785983ddb200e0ace01d0f9d84a887d3ee6cab5fa44935dd9f8ef1"
@@ -19,29 +19,16 @@
       "cards": 40,
       "rows": 80
     },
-    "partial": {
-      "cards": 29,
-      "rows": 58
-    },
     "supported": {
-      "cards": 116,
-      "rows": 232
+      "cards": 145,
+      "rows": 290
     }
   },
   "parameter": {
     "cards": 145,
     "rows": 290
   },
-  "partialGroups": {
-    "generation/group members + generation/group count": {
-      "cards": 15,
-      "rows": 30
-    },
-    "generation/group members + unknown/unobserved": {
-      "cards": 14,
-      "rows": 28
-    }
-  },
+  "partialGroups": {},
   "groups": {},
   "effect": {
     "P up": {
@@ -155,7 +142,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -215,7 +202,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -263,7 +250,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -312,7 +299,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -473,7 +460,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -522,7 +509,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -583,7 +570,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -643,7 +630,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -679,7 +666,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -716,7 +703,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -777,7 +764,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -837,7 +824,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -972,9 +959,9 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "sense_up",
           "value": 32,
@@ -990,10 +977,10 @@
         },
         "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
-      "group": "generation/group members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
@@ -1022,9 +1009,9 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "sense_up",
           "value": 43,
@@ -1040,10 +1027,10 @@
         },
         "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
-      "group": "generation/group members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
@@ -1072,9 +1059,9 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "technique_up",
           "value": 32,
@@ -1090,10 +1077,10 @@
         },
         "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
-      "group": "generation/group members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
@@ -1122,9 +1109,9 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "technique_up",
           "value": 43,
@@ -1140,10 +1127,10 @@
         },
         "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
-      "group": "generation/group members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
@@ -1205,7 +1192,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -1265,7 +1252,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -1413,7 +1400,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -1450,7 +1437,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -1607,7 +1594,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -1655,7 +1642,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -1694,9 +1681,9 @@
         "referenceState": "present"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "performance_up",
           "value": 34,
@@ -1712,10 +1699,10 @@
           "targetCount": 2
         }
       },
-      "group": "generation/group members + generation/group count",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -1755,9 +1742,9 @@
         "referenceState": "present"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "performance_up",
           "value": 45,
@@ -1773,10 +1760,10 @@
           "targetCount": 2
         }
       },
-      "group": "generation/group members + generation/group count",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -1813,7 +1800,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -1850,7 +1837,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -1911,7 +1898,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -1971,7 +1958,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -2019,7 +2006,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -2067,7 +2054,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -2094,9 +2081,9 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "performance_up",
           "value": 32,
@@ -2112,10 +2099,10 @@
         },
         "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
-      "group": "generation/group members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
@@ -2144,9 +2131,9 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "performance_up",
           "value": 43,
@@ -2162,10 +2149,10 @@
         },
         "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
-      "group": "generation/group members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
@@ -2215,7 +2202,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -2264,7 +2251,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -2425,7 +2412,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -2474,7 +2461,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -2523,7 +2510,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -2572,7 +2559,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -2729,7 +2716,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -2778,7 +2765,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -2815,7 +2802,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -2852,7 +2839,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -2913,7 +2900,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -2973,7 +2960,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -3021,7 +3008,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -3070,7 +3057,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -3110,9 +3097,9 @@
         "referenceState": "present"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "performance_up",
           "value": 34,
@@ -3128,10 +3115,10 @@
           "targetCount": 2
         }
       },
-      "group": "generation/group members + generation/group count",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -3171,9 +3158,9 @@
         "referenceState": "present"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "performance_up",
           "value": 45,
@@ -3189,10 +3176,10 @@
           "targetCount": 2
         }
       },
-      "group": "generation/group members + generation/group count",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -3241,7 +3228,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -3290,7 +3277,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -3438,9 +3425,9 @@
         "referenceState": "present"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "performance_up",
           "value": 23,
@@ -3456,10 +3443,10 @@
           "targetCount": 2
         }
       },
-      "group": "generation/group members + generation/group count",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -3499,9 +3486,9 @@
         "referenceState": "present"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "performance_up",
           "value": 34,
@@ -3517,10 +3504,10 @@
           "targetCount": 2
         }
       },
-      "group": "generation/group members + generation/group count",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -3548,9 +3535,9 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "sense_up",
           "value": 32,
@@ -3566,10 +3553,10 @@
         },
         "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
-      "group": "generation/group members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
@@ -3598,9 +3585,9 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "sense_up",
           "value": 43,
@@ -3616,10 +3603,10 @@
         },
         "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
-      "group": "generation/group members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
@@ -3681,7 +3668,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -3741,7 +3728,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -3789,7 +3776,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -3838,7 +3825,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -3887,7 +3874,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -3936,7 +3923,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -3997,7 +3984,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -4057,7 +4044,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -4117,7 +4104,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -4177,7 +4164,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -4225,7 +4212,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -4274,7 +4261,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -4311,7 +4298,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -4348,7 +4335,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -4409,7 +4396,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -4469,7 +4456,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -4517,7 +4504,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -4566,7 +4553,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -4606,9 +4593,9 @@
         "referenceState": "present"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "performance_up",
           "value": 23,
@@ -4624,10 +4611,10 @@
           "targetCount": 2
         }
       },
-      "group": "generation/group members + generation/group count",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -4667,9 +4654,9 @@
         "referenceState": "present"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "performance_up",
           "value": 34,
@@ -4685,10 +4672,10 @@
           "targetCount": 2
         }
       },
-      "group": "generation/group members + generation/group count",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -4737,7 +4724,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -4786,7 +4773,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -4814,9 +4801,9 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "performance_up",
           "value": 32,
@@ -4832,10 +4819,10 @@
         },
         "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
-      "group": "generation/group members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
@@ -4864,9 +4851,9 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "performance_up",
           "value": 43,
@@ -4882,10 +4869,10 @@
         },
         "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
-      "group": "generation/group members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
@@ -5143,7 +5130,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -5180,7 +5167,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -5217,7 +5204,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -5254,7 +5241,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -5303,7 +5290,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -5352,7 +5339,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -5413,7 +5400,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -5473,7 +5460,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -5521,7 +5508,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -5570,7 +5557,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -5619,7 +5606,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -5668,7 +5655,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -5729,7 +5716,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -5789,7 +5776,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -5837,7 +5824,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -5885,7 +5872,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -6041,7 +6028,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -6090,7 +6077,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -6151,7 +6138,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -6211,7 +6198,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -6238,9 +6225,9 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "performance_up",
           "value": 32,
@@ -6256,10 +6243,10 @@
         },
         "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
-      "group": "generation/group members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
@@ -6288,9 +6275,9 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "performance_up",
           "value": 43,
@@ -6306,10 +6293,10 @@
         },
         "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
-      "group": "generation/group members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
@@ -6347,7 +6334,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -6384,7 +6371,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -6532,9 +6519,9 @@
         "referenceState": "present"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "technique_up",
           "value": 23,
@@ -6550,10 +6537,10 @@
           "targetCount": 2
         }
       },
-      "group": "generation/group members + generation/group count",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -6593,9 +6580,9 @@
         "referenceState": "present"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "technique_up",
           "value": 34,
@@ -6611,10 +6598,10 @@
           "targetCount": 2
         }
       },
-      "group": "generation/group members + generation/group count",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -6771,7 +6758,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -6820,7 +6807,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -6977,7 +6964,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -7026,7 +7013,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -7075,7 +7062,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -7124,7 +7111,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -7281,7 +7268,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -7330,7 +7317,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -7367,7 +7354,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -7404,7 +7391,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -7441,7 +7428,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -7478,7 +7465,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -7635,7 +7622,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -7683,7 +7670,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -7722,9 +7709,9 @@
         "referenceState": "present"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "sense_up",
           "value": 34,
@@ -7740,10 +7727,10 @@
           "targetCount": 2
         }
       },
-      "group": "generation/group members + generation/group count",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -7783,9 +7770,9 @@
         "referenceState": "present"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "sense_up",
           "value": 45,
@@ -7801,10 +7788,10 @@
           "targetCount": 2
         }
       },
-      "group": "generation/group members + generation/group count",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -7853,7 +7840,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -7902,7 +7889,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -7951,7 +7938,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -8000,7 +7987,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -8028,9 +8015,9 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "technique_up",
           "value": 32,
@@ -8046,10 +8033,10 @@
         },
         "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
-      "group": "generation/group members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
@@ -8078,9 +8065,9 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "technique_up",
           "value": 43,
@@ -8096,10 +8083,10 @@
         },
         "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
-      "group": "generation/group members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
@@ -8128,9 +8115,9 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "performance_up",
           "value": 32,
@@ -8146,10 +8133,10 @@
         },
         "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
-      "group": "generation/group members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
@@ -8178,9 +8165,9 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "performance_up",
           "value": 43,
@@ -8196,10 +8183,10 @@
         },
         "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
-      "group": "generation/group members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
@@ -8357,7 +8344,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -8406,7 +8393,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -8567,7 +8554,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -8616,7 +8603,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -8765,7 +8752,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -8802,7 +8789,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -8863,7 +8850,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -8923,7 +8910,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -8962,9 +8949,9 @@
         "referenceState": "present"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "technique_up",
           "value": 23,
@@ -8980,10 +8967,10 @@
           "targetCount": 2
         }
       },
-      "group": "generation/group members + generation/group count",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -9023,9 +9010,9 @@
         "referenceState": "present"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "technique_up",
           "value": 34,
@@ -9041,10 +9028,10 @@
           "targetCount": 2
         }
       },
-      "group": "generation/group members + generation/group count",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -9105,7 +9092,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -9165,7 +9152,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -9213,7 +9200,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -9262,7 +9249,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -9311,7 +9298,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -9359,7 +9346,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -9395,7 +9382,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -9432,7 +9419,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -9589,7 +9576,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -9638,7 +9625,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -9787,7 +9774,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -9824,7 +9811,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -9972,9 +9959,9 @@
         "referenceState": "present"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "performance_up",
           "value": 23,
@@ -9990,10 +9977,10 @@
           "targetCount": 2
         }
       },
-      "group": "generation/group members + generation/group count",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -10033,9 +10020,9 @@
         "referenceState": "present"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "performance_up",
           "value": 34,
@@ -10051,10 +10038,10 @@
           "targetCount": 2
         }
       },
-      "group": "generation/group members + generation/group count",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -10211,7 +10198,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -10260,7 +10247,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -10321,7 +10308,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -10381,7 +10368,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -10429,7 +10416,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -10478,7 +10465,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -10539,7 +10526,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -10599,7 +10586,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -10855,7 +10842,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -10892,7 +10879,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -10953,7 +10940,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -11013,7 +11000,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -11061,7 +11048,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -11109,7 +11096,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -11145,7 +11132,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -11182,7 +11169,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -11339,7 +11326,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -11388,7 +11375,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -11428,9 +11415,9 @@
         "referenceState": "present"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "sense_up",
           "value": 34,
@@ -11446,10 +11433,10 @@
           "targetCount": 2
         }
       },
-      "group": "generation/group members + generation/group count",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -11489,9 +11476,9 @@
         "referenceState": "present"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "sense_up",
           "value": 45,
@@ -11507,10 +11494,10 @@
           "targetCount": 2
         }
       },
-      "group": "generation/group members + generation/group count",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -11571,7 +11558,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -11631,7 +11618,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -11679,7 +11666,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -11728,7 +11715,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -11777,7 +11764,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -11826,7 +11813,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -11887,7 +11874,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -11947,7 +11934,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -11995,7 +11982,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -12044,7 +12031,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -12081,7 +12068,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -12118,7 +12105,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -12179,7 +12166,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -12239,7 +12226,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -12287,7 +12274,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -12336,7 +12323,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -12385,7 +12372,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -12433,7 +12420,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -12605,7 +12592,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -12665,7 +12652,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -12725,7 +12712,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -12785,7 +12772,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -12824,9 +12811,9 @@
         "referenceState": "present"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "sense_up",
           "value": 23,
@@ -12842,10 +12829,10 @@
           "targetCount": 2
         }
       },
-      "group": "generation/group members + generation/group count",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -12885,9 +12872,9 @@
         "referenceState": "present"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "sense_up",
           "value": 34,
@@ -12903,10 +12890,10 @@
           "targetCount": 2
         }
       },
-      "group": "generation/group members + generation/group count",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -12955,7 +12942,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -13004,7 +12991,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -13065,7 +13052,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -13125,7 +13112,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -13173,7 +13160,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -13222,7 +13209,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -13395,7 +13382,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -13455,7 +13442,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -13494,9 +13481,9 @@
         "referenceState": "present"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "sense_up",
           "value": 23,
@@ -13512,10 +13499,10 @@
           "targetCount": 2
         }
       },
-      "group": "generation/group members + generation/group count",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -13555,9 +13542,9 @@
         "referenceState": "present"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "sense_up",
           "value": 34,
@@ -13573,10 +13560,10 @@
           "targetCount": 2
         }
       },
-      "group": "generation/group members + generation/group count",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -13625,7 +13612,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -13674,7 +13661,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -13735,7 +13722,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -13795,7 +13782,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -13843,7 +13830,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -13892,7 +13879,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -14061,7 +14048,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -14121,7 +14108,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -14169,7 +14156,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -14218,7 +14205,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -14267,7 +14254,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -14316,7 +14303,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -14377,7 +14364,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -14437,7 +14424,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -14584,9 +14571,9 @@
         "referenceState": "present"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "sense_up",
           "value": 23,
@@ -14602,10 +14589,10 @@
           "targetCount": 2
         }
       },
-      "group": "generation/group members + generation/group count",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -14645,9 +14632,9 @@
         "referenceState": "present"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "sense_up",
           "value": 34,
@@ -14663,10 +14650,10 @@
           "targetCount": 2
         }
       },
-      "group": "generation/group members + generation/group count",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -14703,7 +14690,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -14740,7 +14727,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -14801,7 +14788,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -14861,7 +14848,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -14909,7 +14896,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -14957,7 +14944,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -15092,9 +15079,9 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "sense_up",
           "value": 32,
@@ -15110,10 +15097,10 @@
         },
         "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
-      "group": "generation/group members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
@@ -15142,9 +15129,9 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "sense_up",
           "value": 43,
@@ -15160,10 +15147,10 @@
         },
         "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
-      "group": "generation/group members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
@@ -15321,7 +15308,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -15370,7 +15357,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -15398,9 +15385,9 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "technique_up",
           "value": 32,
@@ -15416,10 +15403,10 @@
         },
         "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
-      "group": "generation/group members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
@@ -15448,9 +15435,9 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "technique_up",
           "value": 43,
@@ -15466,10 +15453,10 @@
         },
         "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
-      "group": "generation/group members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
@@ -15519,7 +15506,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -15568,7 +15555,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -15596,9 +15583,9 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "technique_up",
           "value": 21,
@@ -15614,10 +15601,10 @@
         },
         "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
-      "group": "generation/group members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
@@ -15646,9 +15633,9 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "technique_up",
           "value": 32,
@@ -15664,10 +15651,10 @@
         },
         "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
-      "group": "generation/group members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
@@ -15717,7 +15704,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -15766,7 +15753,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -15827,7 +15814,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -15887,7 +15874,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -15935,7 +15922,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -15984,7 +15971,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -16021,7 +16008,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -16058,7 +16045,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -16119,7 +16106,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -16179,7 +16166,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -16227,7 +16214,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -16276,7 +16263,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -16304,9 +16291,9 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "performance_up",
           "value": 32,
@@ -16322,10 +16309,10 @@
         },
         "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
-      "group": "generation/group members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
@@ -16354,9 +16341,9 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "performance_up",
           "value": 43,
@@ -16372,10 +16359,10 @@
         },
         "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
-      "group": "generation/group members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
@@ -16545,7 +16532,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -16605,7 +16592,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -16665,7 +16652,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -16725,7 +16712,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -16761,7 +16748,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -16798,7 +16785,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -16946,9 +16933,9 @@
         "referenceState": "present"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "sense_up",
           "value": 23,
@@ -16964,10 +16951,10 @@
           "targetCount": 2
         }
       },
-      "group": "generation/group members + generation/group count",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -17007,9 +16994,9 @@
         "referenceState": "present"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "sense_up",
           "value": 34,
@@ -17025,10 +17012,10 @@
           "targetCount": 2
         }
       },
-      "group": "generation/group members + generation/group count",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -17297,7 +17284,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -17346,7 +17333,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -17395,7 +17382,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -17444,7 +17431,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -17613,7 +17600,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -17673,7 +17660,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -17817,7 +17804,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -17854,7 +17841,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -17891,7 +17878,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -17928,7 +17915,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -18076,9 +18063,9 @@
         "referenceState": "present"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "technique_up",
           "value": 23,
@@ -18094,10 +18081,10 @@
           "targetCount": 2
         }
       },
-      "group": "generation/group members + generation/group count",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -18137,9 +18124,9 @@
         "referenceState": "present"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "technique_up",
           "value": 34,
@@ -18155,10 +18142,10 @@
           "targetCount": 2
         }
       },
-      "group": "generation/group members + generation/group count",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -18186,9 +18173,9 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "sense_up",
           "value": 32,
@@ -18204,10 +18191,10 @@
         },
         "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
-      "group": "generation/group members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
@@ -18236,9 +18223,9 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "sense_up",
           "value": 43,
@@ -18254,10 +18241,10 @@
         },
         "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
-      "group": "generation/group members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
@@ -18319,7 +18306,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -18379,7 +18366,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -18535,7 +18522,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -18584,7 +18571,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -18624,9 +18611,9 @@
         "referenceState": "present"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "performance_up",
           "value": 34,
@@ -18642,10 +18629,10 @@
           "targetCount": 2
         }
       },
-      "group": "generation/group members + generation/group count",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -18685,9 +18672,9 @@
         "referenceState": "present"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "performance_up",
           "value": 45,
@@ -18703,10 +18690,10 @@
           "targetCount": 2
         }
       },
-      "group": "generation/group members + generation/group count",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応"
       ]
     },
@@ -18755,7 +18742,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -18804,7 +18791,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -18940,9 +18927,9 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "sense_up",
           "value": 32,
@@ -18958,10 +18945,10 @@
         },
         "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
-      "group": "generation/group members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
@@ -18990,9 +18977,9 @@
         "referenceState": "absent"
       },
       "parameter": true,
-      "status": "partial",
+      "status": "supported",
       "gate": {
-        "status": "partial",
+        "status": "supported",
         "effect": {
           "type": "sense_up",
           "value": 43,
@@ -19008,10 +18995,10 @@
         },
         "interpretation": "developer-approved-provisional-affiliation-max-2"
       },
-      "group": "generation/group members + unknown/unobserved",
+      "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "group IDとメンバー所属の対応",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
@@ -19061,7 +19048,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -19110,7 +19097,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -19159,7 +19146,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -19207,7 +19194,7 @@
       "group": "non-parameter",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）"
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
       ]
     },
     {
@@ -19255,7 +19242,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     },
@@ -19304,7 +19291,7 @@
       "group": "supported",
       "dependencies": [
         "対象集合の解決",
-        "対象数Nの選択（既存baseTotal順位規則の接続範囲確認）",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
         "条件未観測の解釈（alwaysとは確定しない）"
       ]
     }

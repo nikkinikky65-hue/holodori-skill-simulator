@@ -1,3 +1,5 @@
+> 2026-10-11更新：属性・所属Parameter対象選択を共通単項順位へ統合。11観測一致。完全145種/290行（採用モデル上）、限定0、unsupported0。全パラ・同値は暫定。No.10比較モデルの提供値との差1を含む詳細は[parameter-passive-unified-selection.md](parameter-passive-unified-selection.md)。以下は旧段階の記録。
+
 > 最新順位仕様：属性P/T/S効果は開花後単項降順へ更新。全パラTOTAL・同値編成順は暫定。実機5観測一致、CASE C旧記録は履歴として維持。詳細：[parameter-ranking-update.md](parameter-ranking-update.md)。以下のTOTAL順位の説明は更新前の記録。
 
 # 最新：属性対象41種の接続

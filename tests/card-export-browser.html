@@ -1,0 +1,34 @@
+<!doctype html><meta charset="utf-8"><pre id="result">RUNNING</pre><iframe id="page" style="height:800px;border:0"></iframe>
+<script>
+(async()=>{
+ const out=document.querySelector('#result'),frame=document.querySelector('#page'),key='holodori-user-card-state-v1';
+ const before=localStorage.getItem(key),check=(v,m)=>{if(!v)throw Error(m);};
+ try{
+ for(const width of [1100,360]){
+ localStorage.removeItem(key);frame.style.width=width+'px';
+ const w=await new Promise(resolve=>{frame.onload=()=>resolve(frame.contentWindow);frame.src='../card-catalog.html?export-test='+width;});
+ await w.eval('cardCatalogReady');const d=w.document;
+ check(!d.querySelector('#catalogStatus').dataset.errorKind,'initialization');
+ const owned=d.querySelector('[data-catalog-owned]');owned.click();
+ d.querySelector('.catalogStepper [data-step="1"]').click();
+ const saved=localStorage.getItem(key),id=Object.keys(JSON.parse(saved).cards)[0];
+ const search=d.querySelector('#catalogSearch');search.value='存在しない検索';search.dispatchEvent(new w.Event('input'));
+ let blob,filename;w.URL.createObjectURL=b=>{blob=b;return 'blob:test';};w.URL.revokeObjectURL=()=>{};
+ w.HTMLAnchorElement.prototype.click=function(){filename=this.download;};
+ d.querySelector('#catalogExport').click();
+ check(blob && filename.endsWith('.json'),'download created');
+ const data=JSON.parse(await blob.text());check(data.cards.length===185,'export independent of filter');
+ check(data.cards.find(c=>c.cardId===id).state.training===1,'growth exported');
+ check(data.cards.filter(c=>c.saved).length===1,'only saved record');
+ check(saved===localStorage.getItem(key),'export read only');
+ const button=d.querySelector('#catalogExport').getBoundingClientRect();check(button.width<=width&&button.height>=44,'responsive button');
+ search.value='';search.dispatchEvent(new w.Event('input'));d.querySelector('[data-catalog-rarity="4"]').click();check(d.querySelectorAll('.catalogCard').length>0,'rarity works');
+ const type=d.querySelector('#catalogType');type.value='cute';type.dispatchEvent(new w.Event('change'));check(d.querySelectorAll('.catalogCard').length>0,'type works');
+ await new Promise(resolve=>{frame.onload=resolve;frame.contentWindow.location.reload();});await frame.contentWindow.eval('cardCatalogReady');
+ check(saved===localStorage.getItem(key),'reload keeps state');
+ check(frame.contentDocument.querySelector(`[data-card-id="${id}"] [data-catalog-owned]`).checked,'owned restored');
+ }
+ out.textContent='PASS: export Blob/filename, 185 cards, saved states, storage isolation, filters/reload, 1100/360';
+ }catch(e){out.textContent='FAIL: '+e.stack;}finally{if(before===null)localStorage.removeItem(key);else localStorage.setItem(key,before);}
+})();
+</script>

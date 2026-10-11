@@ -2,8 +2,8 @@
 const check=(ok,msg)=>{if(!ok)throw Error(msg);};
 const catalog=JSON.parse(JSON.stringify(canonicalTestFixture));catalog.affiliationCatalog=JSON.parse(readFile('data/runtime-affiliations.json'));
 const expected=JSON.parse(readFile('tests/affiliation-target-expected-cards.json'));
-const partial=catalog.cards.filter(c=>UnitParameterEngine.resolveInput(c.skills.passive.levels[0]).status==='partial' && !UnitParameterEngine.resolveInput(c.skills.passive.levels[0]).interpretation).map(c=>c.id).sort();
-check(JSON.stringify(partial)===JSON.stringify(expected)&&partial.length===15,'exact partial set');
+const supported=catalog.cards.filter(c=>UnitParameterEngine.resolveInput(c.skills.passive.levels[0]).effect?.target.kind==='affiliation' && !UnitParameterEngine.resolveInput(c.skills.passive.levels[0]).interpretation).map(c=>c.id).sort();
+check(JSON.stringify(supported)===JSON.stringify(expected)&&supported.length===15,'exact conditional affiliation set');
 const slot=card=>({cardId:card.id,training:0,bloom:0,short:0});
 for(const id of expected){
  const card=catalog.cards.find(c=>c.id===id),effect=UnitParameterEngine.resolveInput(card.skills.passive.levels[0]).effect;
@@ -17,10 +17,10 @@ for(const id of expected){
   const m=UnitSimulatorEngine.build(catalog,slots,120);
   const t=m.parameters.members[0].trace[0];
   check(t.condition.actualCount===n && t.condition.result===(n===1?'unsatisfied':'satisfied'),'independent condition');
-  check(t.status===(n===1?'inactive':n===2?'resolved':'unresolved'),'three states');
-  check(t.targetSlots.length===(n===2?2:0),'no selection above 2');
+  check(t.status===(n===1?'inactive':'resolved'),'inactive or resolved by condition');
+  check(t.targetSlots.length===(n>=2?2:0),'select two when condition satisfied');
   if(n===2){check(t.targetSlots.includes(1)&&t.targetSlots.includes(2),'source included');check(t.parameters.every(p=>p.targetSlot<=2),'only affiliated targets');}
-  if(n===3){check(t.targetResolution.candidates.length===3&&t.reason.includes('target selection unresolved'),'candidates and reason');check(m.parameters.members[1].unresolved.some(r=>r.sourceSlot===1),'unresolved recipient basis');}
+  if(n===3){check(t.targetResolution.candidates.length===3 && t.targetResolution.selection.selected.length===2,'ranked excess candidates'); const ranking=t.targetResolution.selection; check(ranking.parameter===PARAMETER_PASSIVE_TYPES[effect.type][0],'single-stat affiliation ranking'); check(ranking.selected[0].comparisonValue>=ranking.selected[1].comparisonValue,'descending values');}
  }
  // Multiple identical source effects: aggregate rates before ceil.
  const slots=[slot(card),slot(card),...others.slice(0,3).map(slot)];
@@ -37,5 +37,5 @@ for(const id of expected){
  check(JSON.stringify(m.segments)===JSON.stringify(u.segments),'Timeline independent');
  check(JSON.stringify(UnitSimulatorEngine.simulate(m,100,ActiveRandomSimulation.seededRandom(3)).normalized)===JSON.stringify(UnitSimulatorEngine.simulate(u,100,ActiveRandomSimulation.seededRandom(3)).normalized),'seed unchanged');
 }
-print('Partial affiliation targets: 15 cards, inactive/resolved/unresolved, self inclusion, multiple sources, aggregate ceil, missing data, Memory/Timeline/seed PASS');
+print('Ranked affiliation targets: 15 cards, inactive/resolved/unresolved, self inclusion, multiple sources, aggregate ceil, missing data, Memory/Timeline/seed PASS');
 }

@@ -94,7 +94,7 @@ function resolvePassiveTargets(source, effect, members){
   }else{
     targetStatus = 'unresolved-target';
   }
-  const ranked = rankPassiveCandidates(candidates, target.kind==='type' ? passiveRankingParameter(effect.type) : 'total');
+  const ranked = rankPassiveCandidates(candidates, ['type','affiliation'].includes(target.kind) ? passiveRankingParameter(effect.type) : 'total');
   const targets = targetStatus === 'resolved' ? ranked.slice(0, targetCount) : [];
   const status = activated === false ? 'inactive'
     : activated === null ? 'unresolved-condition'

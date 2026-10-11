@@ -36,7 +36,7 @@ const UnitParameterEngine = (() => {
     if(condition?.state==='unobserved' && condition.referenceState==='absent' &&
        groupTarget && targets[0].targetCount===2 && typeof targets[0].characterGroupingId==='string' &&
        targets[0].characterGroupingId && ['performance_up','technique_up','sense_up'].includes(type)){
-      return {status:'partial',effect:{type,value:value/10,condition:{kind:'developer-approved-no-additional-condition'},
+      return {status:'supported',effect:{type,value:value/10,condition:{kind:'developer-approved-no-additional-condition'},
         conditionCount:null,target:{kind:'affiliation',value:targets[0].characterGroupingId},targetCount:2},
         interpretation:'developer-approved-provisional-affiliation-max-2'};
     }
@@ -55,7 +55,7 @@ const UnitParameterEngine = (() => {
       const clause=clauses[0],count=Number(clause.threshold);
       if(typeof clause.characterGroupingId!=='string'||!clause.characterGroupingId||clause.threshold==null||!Number.isInteger(count)||count<1) return unsupported('所属ID・人数未確認');
       if(groupTarget && (typeof targets[0].characterGroupingId!=='string'||targets[0].targetCount!==2)) return unsupported('所属対象のID・人数未確認');
-      return {status:groupTarget?'partial':'supported',effect:{type,value:value/10,condition:{kind:'affiliation',value:clause.characterGroupingId},conditionCount:count,target:groupTarget?{kind:'affiliation',value:targets[0].characterGroupingId}:{kind:'self'},targetCount:groupTarget?targets[0].targetCount:1}};
+      return {status:'supported',effect:{type,value:value/10,condition:{kind:'affiliation',value:clause.characterGroupingId},conditionCount:count,target:groupTarget?{kind:'affiliation',value:targets[0].characterGroupingId}:{kind:'self'},targetCount:groupTarget?targets[0].targetCount:1}};
     }
     if(groupTarget) return unsupported('所属対象＋所属人数条件以外は未接続');
     if(clauses[0].type!=='LiveSkillTriggerType_LIVE_SKILL_TRIGGER_TYPE_DECK_CARD_ATTRIBUTE') return unsupported('未対応の条件');
@@ -107,34 +107,35 @@ const UnitParameterEngine = (() => {
     const prepared=inputMembers.map((member,index)=>({slot:member.slot ?? index+1,libraryCardId:member.cardId,
       affiliations:Object.entries(affiliationCatalog?.groups || {}).filter(([,group])=>group.characterIds?.includes(affiliationCatalog?.cardCharacters?.[member.cardId])).map(([id])=>id),
       type:member.attribute,base:{...member.subtotal},card:{skills:{passive:{effect:conditionResults[index]?.result==='unresolved'?{type:''}:bridges[index].effect || {type:''}}}}}));
-    const targetResults=bridges.map((bridge,index)=>bridge.status==='partial'?PassiveTargetResolver.resolve({
+    const targetResults=bridges.map((bridge,index)=>bridge.effect?.target.kind==='affiliation'?PassiveTargetResolver.resolve({
       affiliationId:bridge.effect.target.value,targetCount:bridge.effect.targetCount,condition:conditionResults[index],
-      maximumCount:!!bridge.interpretation,
       unitMembers:inputMembers.map((m,i)=>({cardId:m.cardId,slot:m.slot ?? i+1})),catalog:affiliationCatalog}):null);
     // Existing accumulation/target resolution/ceil is the single source of calculation.
     const calculated=calculatePassiveEffects(prepared,(source,effect,members)=>{
       const index=prepared.findIndex(m=>m.slot===source.slot),target=targetResults[index];
-      if(effect.target?.kind==='type' && bridges[index].status==='supported'){
-        const condition=bridges[index].interpretation ? {...conditionResults[index],
-          result:members.length===5 && members.every(m=>/^CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_[123]$/.test(m.type || ''))?'satisfied':'unresolved'} : PartyConditionResolver.resolveAttributeCondition({attribute:effect.condition.value,requiredCount:effect.conditionCount,unitMembers:members});
-        conditionResults[index]=condition;
-        const resolved=PassiveTargetResolver.resolveAttribute({attribute:effect.target.value,condition,unitMembers:members});
+      if(['type','affiliation'].includes(effect.target?.kind) && bridges[index].status==='supported'){
+        let condition=conditionResults[index],resolved=target;
+        if(effect.target.kind==='type'){
+          condition=bridges[index].interpretation ? {...condition,
+            result:members.length===5 && members.every(m=>/^CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_[123]$/.test(m.type || ''))?'satisfied':'unresolved'} : PartyConditionResolver.resolveAttributeCondition({attribute:effect.condition.value,requiredCount:effect.conditionCount,unitMembers:members});
+          conditionResults[index]=condition;
+          resolved=PassiveTargetResolver.resolveAttribute({attribute:effect.target.value,condition,unitMembers:members});
+        }
         if(resolved.status==='candidates-resolved'){
-          resolved.selection=PassiveSelectionResolver.resolve({candidates:resolved.candidates,selectCount:effect.targetCount,rule:'attribute-parameter',effectType:effect.type});
+          // Membership resolver returns identities; calculator supplies untouched post-Bloom values.
+          const candidates=members.filter(m=>resolved.candidates.some(c=>c.slot===m.slot));
+          resolved.selection=PassiveSelectionResolver.resolve({candidates,selectCount:effect.targetCount,
+            rule:effect.target.kind==='type'?'attribute-parameter':'affiliation-parameter',effectType:effect.type});
           resolved.status=resolved.selection.status;resolved.reason=resolved.selection.reason;
           resolved.targets=resolved.selection.selected;
+          resolved.candidates=resolved.selection.candidates;
         }
-        // Keep trace detached from calculator's mutable member/rate objects.
-        resolved.candidates=resolved.candidates.map(m=>({slot:m.slot,cardId:m.libraryCardId,baseTotal:m.baseTotal,formationIndex:m.formationIndex}));
-        resolved.excludedMembers=resolved.excludedMembers.map(m=>({slot:m.slot,cardId:m.libraryCardId}));
+        resolved.excludedMembers=resolved.excludedMembers.map(m=>({slot:m.slot,cardId:m.libraryCardId || m.cardId}));
         targetResults[index]=resolved;
         return {activated:condition.result==='satisfied',status:resolved.status,conditionCount:effect.conditionCount,targetCount:effect.targetCount,
           candidateSlots:resolved.candidates.map(m=>m.slot),targetSlots:resolved.targets.map(m=>m.slot),targets:members.filter(m=>resolved.targets.some(t=>t.slot===m.slot))};
       }
-      if(!target) return resolvePassiveTargets(source,effect,members);
-      return {activated:conditionResults[index].result==='satisfied',status:target.status,
-        conditionCount:effect.conditionCount,targetCount:effect.targetCount,candidateSlots:target.candidates.map(m=>m.slot),
-        targetSlots:target.targets.map(m=>m.slot),targets:members.filter(m=>target.targets.some(t=>t.slot===m.slot))};
+      return resolvePassiveTargets(source,effect,members);
     });
     const members=inputMembers.map((member,index)=>{
       const bridge=bridges[index], result=calculated.members[index];

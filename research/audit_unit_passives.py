@@ -33,7 +33,7 @@ print(JSON.stringify(data.cards.flatMap(c=>c.skills.passive.levels.map(p=>UnitPa
             status='partial' if gate['status']=='partial' else 'supported' if gate['status']=='supported' else 'unsupported' if parameter else 'non-parameter' if effect!='unknown' else 'unknown'
             group='supported' if status=='supported' else 'non-parameter' if not parameter else f'{target} + {condition}'
             dependencies=[]
-            if target!='self': dependencies+=['対象集合の解決','対象数Nの選択（既存baseTotal順位規則の接続範囲確認）']
+            if target!='self': dependencies+=['対象集合の解決','対象数Nの選択（対象単項順位・全パラTOTAL暫定）']
             if condition=='generation/group count' or target=='generation/group members':dependencies+=['group IDとメンバー所属の対応']
             if condition=='unknown/unobserved': dependencies+=['条件未観測の解釈（alwaysとは確定しない）']
             rows.append(dict(passiveId=skill_ids[card['id']],cardId=card['id'],cardName=card['name'],member=card['member']['name'],level=p['level'],description=p['description'],source=p['source'],effect=effect,target=target,targetFacts=selectors,condition=condition,conditionFacts=p['condition'],parameter=parameter,status=status,gate=gate,group=group,dependencies=dependencies))

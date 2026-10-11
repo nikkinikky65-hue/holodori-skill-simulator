@@ -18,10 +18,10 @@
      const result=UnitParameterEngine.calculateUnitParameter(members,null,null,aff);
      const trace=result.members[0].trace[0];
      check(trace.condition.type==='developer-approved-no-additional-condition','provisional trace');
-     check(trace.status===(n>2?'unresolved':'resolved'),'selection state');
-     check(trace.targetSlots.length===(n>2?0:n),'max 2, never rank');
+     check(trace.status==='resolved','selection state');
+     check(trace.targetSlots.length===Math.min(n,2),'max 2 with common ranking');
      const key=PARAMETER_PASSIVE_TYPES[gate.effect.type][0];
-     result.members.forEach((m,i)=>check(m.passive[key]===(i<n&&n<=2?Math.ceil(members[i].subtotal[key]*gate.effect.value/100):0),'level amount, non-target isolation'));
+     result.members.forEach((m,i)=>check(m.passive[key]===(trace.targetSlots.includes(i+1)?Math.ceil(members[i].subtotal[key]*gate.effect.value/100):0),'level amount, non-target isolation'));
      if(n===2){
        const doubled=members.map((m,i)=>({...m,passiveInput:i<2?p:null}));
        const both=UnitParameterEngine.calculateUnitParameter(doubled,null,null,aff);

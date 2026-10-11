@@ -1031,3 +1031,7 @@
 }
 #unitTimeline .track > .bar { z-index: 3; }
 #unitTimeline .axisTrack { z-index: 4; }
+
+.catalogExport { display:flex; flex-wrap:wrap; align-items:center; gap:.6rem; margin:0 0 1rem; }
+.catalogExport button { min-height:44px; }
+.catalogExport [role="status"] { font-size:.85rem; }
