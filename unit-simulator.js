@@ -129,7 +129,7 @@ async function initializeUnitSimulator(){
       specialStarts=saved.specialStarts;node('unitShowSP').checked=saved.specialEnabled;refresh();
     }
     refresh();
-    initializeUnitFormationUI({capture,restore});
+    initializeUnitFormationUI({capture,restore,getDefaultName:()=>{const leader=leaderRules.find(l=>l.id===node('unitLeader').value);return catalog.cards.find(c=>c.id===leader?.cardId)?.name||leader?.name||'新しい編成';}});
     return {getModel:()=>model,capture,restore};
   }catch(error){status.textContent=`初期化できませんでした：${error.message}`;throw error;}
 }

@@ -1,0 +1,34 @@
+<!doctype html><meta charset="utf-8"><pre id="result">RUNNING</pre><iframe id="page" style="height:900px;border:0"></iframe>
+<script>
+(async()=>{
+const frame=document.querySelector('iframe'),out=document.querySelector('pre'),key='holodori-unit-formations-v1',backup=localStorage.getItem(key);
+const assert=(v,m)=>{if(!v)throw Error(m);};
+const open=path=>new Promise(resolve=>{frame.onload=()=>resolve(frame.contentWindow);frame.src='../'+path;});
+try{for(const width of [1100,360]){
+ localStorage.removeItem(key);frame.style.width=width+'px';
+ let w=await open('unit-simulator.html'),api=await w.eval('unitSimulatorReady'),d=w.document;
+ const name=d.getElementById('unitFormationName'),leader=d.getElementById('unitLeader'),save=d.getElementById('unitFormationNew');
+ assert(name.value==='新しい編成','fallback');leader.selectedIndex=1;leader.dispatchEvent(new w.Event('change'));
+ [...d.querySelectorAll('[data-unit-card]')].forEach((select,i)=>{select.selectedIndex=i+1;select.dispatchEvent(new w.Event('change'));});
+ const base=name.value;assert(base!=='新しい編成'&&!base.includes(' / '),'leader card name');
+ save.click();save.click();save.click();let rows=JSON.parse(localStorage.getItem(key)).formations;
+ assert(rows.map(f=>f.name).join('|')===[base,base+' (2)',base+' (3)'].join('|'),'auto sequence');
+ w.eval('UnitFormationStore').remove(rows[1].id);save.click();rows=JSON.parse(localStorage.getItem(key)).formations;assert(rows[2].name===base+' (2)','gap');
+ name.value='手動名';name.dispatchEvent(new w.Event('input'));leader.selectedIndex=2;leader.dispatchEvent(new w.Event('change'));assert(name.value==='手動名','manual retained');save.click();
+ const saved=JSON.parse(localStorage.getItem(key)).formations.at(-1),snap=JSON.stringify(saved.snapshot);
+ const buttons=[...d.querySelectorAll('.unitFormationActions button')];assert(buttons.every((b,i)=>!i||b.getBoundingClientRect().top>=buttons[i-1].getBoundingClientRect().bottom),'vertical actions');
+ w=await open('unit-formations.html');await w.eval('unitFormationsReady');d=w.document;
+ assert(d.querySelectorAll('.savedFormation').length===4,'list all');assert(d.querySelectorAll('.savedFormation ol li').length===20,'five ordered slots');assert(d.documentElement.scrollWidth<=width,'list fits');assert(d.querySelector('.formationMembers').textContent.includes('card-'),'real card information');
+ let panel=[...d.querySelectorAll('.savedFormation')].find(p=>p.dataset.id===saved.id);
+ const link=panel.querySelector('a');assert(link.target==='_blank'&&link.rel==='noopener','preserve open draft');const href=link.getAttribute('href');
+ w.prompt=()=> '改名';panel.querySelectorAll('button')[0].click();assert(JSON.stringify(JSON.parse(localStorage.getItem(key)).formations.find(f=>f.id===saved.id).snapshot)===snap,'rename snapshot intact');
+ panel=[...d.querySelectorAll('.savedFormation')].find(p=>p.dataset.id===saved.id);w.prompt=()=> '改名';panel.querySelectorAll('button')[1].click();assert(JSON.parse(localStorage.getItem(key)).formations.at(-1).name==='改名 (2)','duplicate unique');
+ let copy=d.querySelector('.savedFormation:last-child');w.confirm=()=>false;copy.querySelectorAll('button')[2].click();assert(d.querySelectorAll('.savedFormation').length===5,'delete cancelled');w.confirm=()=>true;copy.querySelectorAll('button')[2].click();assert(d.querySelectorAll('.savedFormation').length===4,'delete');
+ w=await open(href);api=await w.eval('unitSimulatorReady');assert(JSON.stringify(api.capture())===snap,'URL shared restore');assert(w.document.getElementById('unitFormationName').value==='改名','renamed persisted');
+ w=await open('unit-simulator.html?formation=missing');await w.eval('unitSimulatorReady');assert(w.document.getElementById('unitFormationStatus').textContent.includes('見つかりません'),'invalid URL safe');
+ localStorage.removeItem(key);w=await open('unit-formations.html');await w.eval('unitFormationsReady');assert(w.document.getElementById('formationCards').textContent.includes('ありません'),'empty');
+}
+out.textContent='PASS: naming/gaps/manual, vertical, list CRUD, URL restore, empty/missing, 1100/360';
+}catch(e){out.textContent='FAIL: '+e.stack;}finally{if(backup===null)localStorage.removeItem(key);else localStorage.setItem(key,backup);}
+})();
+</script>

@@ -7,7 +7,8 @@
     {label: 'カード', file: 'card-catalog.html'},
     {label: 'リーダー', file: 'leader.html'},
     {label: 'イベント編成探索', file: 'event.html'},
-    {label: '開発中', file: 'unit-simulator.html'}
+    {label: '開発中', file: 'unit-simulator.html'},
+    {label: '編成一覧', file: 'unit-formations.html'}
   ];
   const currentPath = location.pathname.endsWith('/')
     ? new URL('index.html', location.href).pathname : location.pathname;

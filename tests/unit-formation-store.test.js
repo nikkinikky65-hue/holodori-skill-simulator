@@ -20,3 +20,12 @@ for(const bad of ['{bad','null',JSON.stringify({version:2,formations:[]}),JSON.s
 }
 checkFormation(stateMap.get('holodori-user-card-state-v1')==='ownership'&&stateMap.get('stable-A')==='stable','other keys unchanged');
 print('Unit formation store: CRUD, independent snapshots, fields/null/zero, corruption/quota isolation PASS');
+stateMap.set(UnitFormationStore.key,good);
+const named=UnitFormationStore.save('Leader',snapshot);
+const named3=UnitFormationStore.save('Leader (3)',snapshot);
+checkFormation(UnitFormationStore.uniqueName('Leader')==='Leader (2)','smallest unused suffix');
+const named2=UnitFormationStore.duplicate(named.id,'Leader');
+checkFormation(named2.name==='Leader (2)'&&UnitFormationStore.uniqueName('Leader')==='Leader (4)','duplicate collision');
+UnitFormationStore.rename(named.id,'Manual');
+checkFormation(UnitFormationStore.read().formations.find(f=>f.id===named.id).name==='Manual'&&JSON.stringify(UnitFormationStore.read().formations.find(f=>f.id===named.id).snapshot)===JSON.stringify(named.snapshot),'rename preserves snapshot');
+print('Formation naming and rename: PASS');

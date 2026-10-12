@@ -4,8 +4,8 @@
 (async()=>{
   const result=document.querySelector('#result'),frame=document.querySelector('#page');
   const assert=(ok,message)=>{if(!ok)throw Error(message);};
-  const pages=['index.html','library.html','card-catalog.html','leader.html','event.html','unit-simulator.html'];
-  const labels=['A','ライブラリ','カード','リーダー','イベント編成探索','開発中'];
+  const pages=['index.html','library.html','card-catalog.html','leader.html','event.html','unit-simulator.html','unit-formations.html'];
+  const labels=['A','ライブラリ','カード','リーダー','イベント編成探索','開発中','編成一覧'];
   const backup=new Map(Object.keys(localStorage).map(key=>[key,localStorage.getItem(key)]));
   const open=path=>new Promise(resolve=>{frame.onload=()=>resolve(frame.contentWindow);frame.src='../'+path;});
   const follow=link=>new Promise(resolve=>{frame.onload=()=>resolve(frame.contentWindow);link.click();});
@@ -16,8 +16,8 @@
     if(page==='unit-simulator.html') await w.eval('unitSimulatorReady');
     const nav=w.document.querySelector('.globalNav');
     const links=[...nav.querySelectorAll('a')];
-    assert(JSON.stringify(links.map(a=>a.textContent))===JSON.stringify(labels),'six labels');
-    assert(JSON.stringify(links.map(a=>new URL(a.href).pathname.split('/').pop()))===JSON.stringify(pages),'six targets');
+    assert(JSON.stringify(links.map(a=>a.textContent))===JSON.stringify(labels),'seven labels');
+    assert(JSON.stringify(links.map(a=>new URL(a.href).pathname.split('/').pop()))===JSON.stringify(pages),'seven targets');
     assert(links.filter(a=>a.getAttribute('aria-current')==='page').length===1,'one active tab');
     assert(new URL(nav.querySelector('[aria-current]').href).pathname.endsWith(page),'active page correct');
     assert(!w.document.querySelector('main .globalNav'),'navigation outside feature UI');
@@ -101,7 +101,7 @@
     }
     frame.style.width='360px';
     const w=await open('./');await inspect(w,'index.html',360);
-    result.textContent='PASS: six routes, all tabs, active state, desktop/mobile geometry, active visibility, feature startup and root alias';
+    result.textContent='PASS: seven routes, all tabs, active state, desktop/mobile geometry, active visibility, feature startup and root alias';
   }catch(error){result.textContent='FAIL: '+error.stack;}
   finally{localStorage.clear();for(const [key,value] of backup)localStorage.setItem(key,value);}
 })();

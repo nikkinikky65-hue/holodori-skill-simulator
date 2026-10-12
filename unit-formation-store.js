@@ -33,7 +33,13 @@ const UnitFormationStore = (() => {
     data.formations=previous?data.formations.map(f=>f.id===id?record:f):[...data.formations,record];
     localStorage.setItem(key,JSON.stringify(data));return copy(record);
   }
-  function duplicate(id,name){const f=read().formations.find(f=>f.id===id);if(!f)throw Error('複製する編成を選択してください。');return save(name,f.snapshot);}
+  function uniqueName(name,excludeId=null){
+    const base=(name||'新しい編成').trim()||'新しい編成',names=new Set(read().formations.filter(f=>f.id!==excludeId).map(f=>f.name));
+    if(!names.has(base))return base;
+    let n=2;while(names.has(`${base} (${n})`))n++;return `${base} (${n})`;
+  }
+  function rename(id,name){const f=read().formations.find(f=>f.id===id);if(!f)throw Error('保存編成が見つかりません。');return save(name,f.snapshot,id);}
+  function duplicate(id,name){const f=read().formations.find(f=>f.id===id);if(!f)throw Error('複製する編成を選択してください。');return save(uniqueName(name||f.name),f.snapshot);}
   function remove(id){const data=read();if(!data.formations.some(f=>f.id===id))throw Error('削除する編成を選択してください。');data.formations=data.formations.filter(f=>f.id!==id);localStorage.setItem(key,JSON.stringify(data));}
-  return {key,read,save,duplicate,remove,validateSnapshot};
+  return {key,read,save,duplicate,remove,rename,uniqueName,validateSnapshot};
 })();
