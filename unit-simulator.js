@@ -23,6 +23,7 @@ async function initializeUnitSimulator(){
     }catch(error){node('unitLeaderStatus').textContent=error.message;}
     const slots=Array.from({length:5},()=>({cardId:'',training:0,bloom:0,short:0,totalAdjustments:{board:{kind:'external-total',value:''},costume:{kind:'external-total',value:''}}}));
     const previews=[];
+    const slotControls=[];
     let model=null;
     let specialStarts={};
     const specialInputs=[];
@@ -74,6 +75,7 @@ async function initializeUnitSimulator(){
         for(const card of catalog.cards.filter(card=>card.id===slot.cardId||`${card.name} ${canonicalMemberName(card)}`.toLocaleLowerCase().includes(query)))choice.append(new Option(`${canonicalMemberName(card)} / ★${card.classification.rarity.mapping.value} / ${card.name}`,card.id));
         choice.value=slot.cardId;
       }
+      slotControls.push({choices,search,panel});
       choices();search.addEventListener('input',choices);
       choice.addEventListener('change',()=>{slot.cardId=choice.value;refresh();});
       const growth=create('div');growth.className='canonicalGrowth';
@@ -106,8 +108,29 @@ async function initializeUnitSimulator(){
         node('unitResultStatus').textContent=`${result.statistics.count}試行完了（実行時の編成）`;
       }catch(error){node('unitResultStatus').textContent=error.message;}
     });
+    function capture(){
+      return JSON.parse(JSON.stringify({version:1,slots,leaderId:node('unitLeader').value,
+        duration:node('unitDuration').value,memoryPercent:node('unitMemoryPercent').value,
+        enhancementPercent:node('unitEnhancementPercent').value,trials:node('unitTrials').value,
+        specialEnabled:node('unitShowSP').checked,specialStarts}));
+    }
+    function restore(snapshot){
+      UnitFormationStore.validateSnapshot(snapshot);
+      // Validate all references before touching current input; missing data is not silently defaulted.
+      if(snapshot.slots.some(s=>s.cardId&&!catalog.cards.some(c=>c.id===s.cardId)))throw Error('保存編成のカードが現在のデータにありません。現在の入力は保持しています。');
+      if(snapshot.leaderId&&!leaderRules.some(l=>l.id===snapshot.leaderId))throw Error('保存編成のリーダーが現在のデータにありません。');
+      const saved=JSON.parse(JSON.stringify(snapshot));
+      saved.slots.forEach((slot,i)=>{
+        Object.assign(slots[i],slot);const controls=slotControls[i];controls.search.value='';controls.choices();
+        controls.panel.querySelector('[data-training]').value=String(slot.training);
+        controls.panel.querySelector('[data-bloom]').value=String(slot.bloom);
+      });
+      for(const [id,key] of [['unitLeader','leaderId'],['unitDuration','duration'],['unitMemoryPercent','memoryPercent'],['unitEnhancementPercent','enhancementPercent'],['unitTrials','trials']])node(id).value=saved[key];
+      specialStarts=saved.specialStarts;node('unitShowSP').checked=saved.specialEnabled;refresh();
+    }
     refresh();
-    return {getModel:()=>model};
+    initializeUnitFormationUI({capture,restore});
+    return {getModel:()=>model,capture,restore};
   }catch(error){status.textContent=`初期化できませんでした：${error.message}`;throw error;}
 }
 const unitSimulatorReady=initializeUnitSimulator();

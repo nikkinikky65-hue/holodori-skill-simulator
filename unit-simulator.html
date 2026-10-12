@@ -10,6 +10,15 @@
 <p class="sub">開発中：計算仕様・UIは変更される可能性があります</p>
 <p><a href="index.html">安定版A面へ</a></p>
 <p id="unitStatus" role="status">カードデータを読み込み中…</p></section>
+<div class="unitWorkspace"><aside class="panel unitFormationPanel" aria-label="編成保存">
+<h2>編成保存</h2>
+<label>編成名<input id="unitFormationName" type="text" placeholder="編成名"></label>
+<button id="unitFormationNew" type="button">新規保存</button>
+<label>保存済み編成<select id="unitFormationList"><option value="">保存編成を選択</option></select></label>
+<div class="unitFormationActions">
+<button id="unitFormationLoad" type="button">読み込み</button><button id="unitFormationOverwrite" type="button">上書き保存</button>
+<button id="unitFormationDuplicate" type="button">複製</button><button id="unitFormationDelete" type="button">削除</button><button id="unitFormationRefresh" type="button">一覧更新</button>
+</div><p id="unitFormationStatus" role="status"></p></aside><div class="unitWorkspaceMain">
 <section class="panel"><h2>1. 編成</h2><label>リーダー衣装（編成5枠とは独立）<select id="unitLeader"><option value="">未選択</option></select></label><p id="unitLeaderStatus" class="sub"></p><div id="unitSlots" class="unitSlots"></div></section>
 <section class="panel"><h2>2. パラメーター</h2>
 <div class="canonicalGrowth"><label>Memory (%)<input id="unitMemoryPercent" type="text" inputmode="decimal" placeholder="未設定"></label><label>Enhancement Bonus (%)<input id="unitEnhancementPercent" type="text" inputmode="decimal" placeholder="未設定"></label></div>
@@ -25,10 +34,10 @@
 <label>試行回数<select id="unitTrials"><option value="100">100</option><option value="1000" selected>1,000</option><option value="10000">10,000</option></select></label>
 <button id="unitRun" type="button" disabled>シミュレーション実行</button>
 <p id="unitResultStatus" role="status"></p><div id="unitResult"></div></section>
-</main>
+</div></div></main>
 <script src="members.js"></script><script src="canonical-card-adapter.js?v=b4659e28157c"></script>
 <script src="card-rules.js"></script><script src="parameter-rules.js"></script>
 <script src="active-timeline-engine.js"></script><script src="active-timeline-view.js?v=66d685783815"></script><script src="activation-probability-rules.js"></script>
 <script src="active-random-simulation.js"></script><script src="party-condition-resolver.js"></script><script src="passive-target-resolver.js"></script><script src="passive-selection-resolver.js"></script><script src="leader-parameter-engine.js"></script><script src="unit-parameter-engine.js"></script>
-<script src="unit-score-engine.js"></script><script src="support-rules.js?v=53c7a9c97f74"></script><script src="special-schedule-engine.js"></script><script src="scheduled-support-engine.js"></script><script src="activation-probability-engine.js"></script><script src="leader-support-engine.js"></script><script src="unit-simulator-engine.js?v=703ccade8fcd"></script><script src="unit-simulator.js?v=4c7e7c9290ce"></script>
+<script src="unit-score-engine.js"></script><script src="support-rules.js?v=53c7a9c97f74"></script><script src="special-schedule-engine.js"></script><script src="scheduled-support-engine.js"></script><script src="activation-probability-engine.js"></script><script src="leader-support-engine.js"></script><script src="unit-simulator-engine.js?v=703ccade8fcd"></script><script src="unit-formation-store.js"></script><script src="unit-formation-ui.js"></script><script src="unit-simulator.js?v=b6502b14546d"></script>
 </body></html>

@@ -1,0 +1,39 @@
+<!doctype html><meta charset="utf-8"><pre id="result">RUNNING</pre><iframe id="page" style="height:850px;border:0"></iframe>
+<script>
+(async()=>{
+ const frame=document.querySelector('#page'),out=document.querySelector('#result'),key='holodori-unit-formations-v1';
+ const backup=localStorage.getItem(key),check=(v,m)=>{if(!v)throw Error(m);};
+ const others=()=>JSON.stringify(Object.keys(localStorage).filter(k=>k!==key).sort().map(k=>[k,localStorage.getItem(k)]));const before=others();
+ const open=()=>new Promise(resolve=>{frame.onload=()=>resolve(frame.contentWindow);frame.src='../unit-simulator.html?formations='+Math.random();});
+ try{
+ for(const width of [1100,360]){
+ localStorage.removeItem(key);frame.style.width=width+'px';let w=await open(),api=await w.eval('unitSimulatorReady'),d=w.document;
+ const click=id=>d.getElementById(id).click();let confirms=0;w.confirm=()=>{confirms++;return true;};w.prompt=()=> 'Copy';
+ [...d.querySelectorAll('[data-unit-card]')].forEach((s,i)=>{s.selectedIndex=i+1;s.dispatchEvent(new w.Event('change'));});
+ let snapshot=api.capture();snapshot.slots.forEach((s,i)=>{s.training=i;s.bloom=5-i;s.short=i+1;s.totalAdjustments.board.value=String(i*100);s.totalAdjustments.costume.value=i?'0':'';});
+ snapshot.leaderId=d.getElementById('unitLeader').options[1].value;snapshot.memoryPercent='6.4';snapshot.enhancementPercent='2.43';snapshot.specialStarts={1:13,2:40};snapshot.duration='150';snapshot.trials='100';snapshot.specialEnabled=false;
+ api.restore(snapshot);const expected=JSON.stringify(api.capture()),power=api.getModel().unitScore.value,timeline=JSON.stringify(api.getModel().eventsByMember);
+ d.getElementById('unitFormationName').value='One';click('unitFormationNew');const one=d.getElementById('unitFormationList').value;
+ snapshot.slots[0].bloom=0;snapshot.specialEnabled=true;api.restore(snapshot);d.getElementById('unitFormationName').value='Two';click('unitFormationNew');const two=d.getElementById('unitFormationList').value;
+ snapshot.duration='160';api.restore(snapshot);d.getElementById('unitFormationList').value=one;
+ w.confirm=()=>false;click('unitFormationLoad');check(api.capture().duration==='160','cancel unsaved load');
+ w.confirm=()=>{confirms++;return true;};click('unitFormationLoad');
+ check(JSON.stringify(api.capture())===expected,'all input fields restored');check(api.getModel().unitScore.value===power&&JSON.stringify(api.getModel().eventsByMember)===timeline,'recalculated Parameter/Timeline');
+ check(d.querySelector('[data-bloom]').value==='5','growth DOM synced');
+ check(api.getModel().members[0].expansion.levels.passive===2,'skills derived again');
+ click('unitRun');check(d.getElementById('unitResultStatus').textContent.includes('100試行'),'simulation restored settings');
+ snapshot=api.capture();snapshot.memoryPercent='0';api.restore(snapshot);click('unitFormationOverwrite');
+ const store=()=>JSON.parse(localStorage.getItem(key));check(store().formations.find(f=>f.id===one).snapshot.memoryPercent==='0','overwrite');check(store().formations.find(f=>f.id===two).snapshot.memoryPercent==='6.4','other snapshot isolated');
+ click('unitFormationDuplicate');const copied=d.getElementById('unitFormationList').value;check(copied!==one&&store().formations.length===3,'duplicate');
+ w.confirm=()=>false;click('unitFormationDelete');check(store().formations.length===3,'cancel deletion');w.confirm=()=>true;click('unitFormationDelete');check(store().formations.length===2,'delete');
+ const panel=d.querySelector('.unitFormationPanel').getBoundingClientRect();check(panel.width<=width&&panel.left>=0,'panel fits');
+ if(width===1100)check(panel.right<=d.querySelector('.unitWorkspaceMain').getBoundingClientRect().left,'left sidebar');
+ w=await open();api=await w.eval('unitSimulatorReady');d=w.document;check(d.getElementById('unitFormationList').options.length===3,'reload list');d.getElementById('unitFormationList').value=one;d.getElementById('unitFormationLoad').click();check(api.capture().memoryPercent==='0','reload/load');
+ const prior=JSON.stringify(api.capture());const broken=store();broken.formations[0].snapshot.slots[0].cardId='missing-card';localStorage.setItem(key,JSON.stringify(broken));d.getElementById('unitFormationLoad').click();check(JSON.stringify(api.capture())===prior,'missing reference preserves draft');
+ localStorage.setItem(key,'{broken');w=await open();api=await w.eval('unitSimulatorReady');d=w.document;check(d.getElementById('unitFormationStatus').textContent.includes('破損'),'corruption visible');check(d.querySelectorAll('[data-unit-card]').length===5&&api.getModel(),'page alive on corruption');d.getElementById('unitFormationName').value='No';d.getElementById('unitFormationNew').click();check(localStorage.getItem(key)==='{broken','corrupt data retained');
+ check(others()===before,'ownership and stable state unchanged');
+ }
+ out.textContent='PASS: CRUD, confirmations, full snapshot/skills/SP, reload, recomputation/Simulation, missing/corrupt data, isolation, 1100/360';
+ }catch(e){out.textContent='FAIL: '+e.stack;}finally{if(backup===null)localStorage.removeItem(key);else localStorage.setItem(key,backup);}
+})();
+</script>

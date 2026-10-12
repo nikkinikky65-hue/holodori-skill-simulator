@@ -1035,3 +1035,12 @@
 .catalogExport { display:flex; flex-wrap:wrap; align-items:center; gap:.6rem; margin:0 0 1rem; }
 .catalogExport button { min-height:44px; }
 .catalogExport [role="status"] { font-size:.85rem; }
+
+.unitWorkspace { display:grid; grid-template-columns:240px minmax(0,1fr); gap:16px; align-items:start; }
+.unitWorkspaceMain, .unitFormationPanel { min-width:0; }
+.unitFormationPanel label { display:grid; gap:.4rem; margin-bottom:.8rem; }
+.unitFormationPanel input, .unitFormationPanel select { width:100%; min-width:0; box-sizing:border-box; }
+.unitFormationPanel button { min-height:44px; margin-bottom:.5rem; }
+.unitFormationActions { display:flex; flex-wrap:wrap; gap:.4rem; }
+.unitFormationPanel [role="status"] { overflow-wrap:anywhere; }
+@media(max-width:760px) { .unitWorkspace { grid-template-columns:minmax(0,1fr); } }

@@ -218,3 +218,5 @@ for page in ['index.html','unit-simulator.html']:
     assert 'active-timeline-view.js' in (root/page).read_text()
 for source in ['app.js','unit-simulator.js']:
     assert 'ActiveTimelineView.render(' in (root/source).read_text()
+
+subprocess.run([jsc,'unit-formation-store.js','tests/unit-formation-store.test.js'],check=True,cwd=root)
