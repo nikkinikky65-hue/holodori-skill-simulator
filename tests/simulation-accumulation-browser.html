@@ -1,0 +1,39 @@
+<!doctype html><meta charset="utf-8"><pre id="result">RUNNING</pre><iframe id="page" style="height:900px;border:0"></iframe>
+<script>
+(async()=>{
+ const f=document.querySelector('iframe'),out=document.querySelector('pre'),backup=new Map(Object.keys(localStorage).map(k=>[k,localStorage.getItem(k)]));
+ const check=(v,m)=>{if(!v)throw Error(m);};
+ const open=p=>new Promise(resolve=>{f.onload=()=>resolve(f.contentWindow);f.src='../'+p;});
+ try{for(const width of [1100,360]){
+ f.style.width=width+'px';let w=await open('index.html');await w.waitForCanonicalRestore();let d=w.document;
+ const area=d.querySelector('#randomSimulation'),select=area.querySelector('select'),run=area.querySelector('button'),metric=k=>area.querySelector(`[data-random-metric=${k}]`);
+ select.value='100';run.click();check(metric('count').textContent==='100回','A initial');select.value='1000';run.click();check(metric('count').textContent==='1100回','A unequal batches');
+ check(area.querySelectorAll('.randomMetrics').length===1&&area.querySelectorAll('.randomHistogram').length===1,'A updates in place');
+ check([...area.querySelectorAll('.randomBin > span')].reduce((n,e)=>n+Number(e.textContent),0)===1100,'A distribution count');
+ let song=d.querySelector('#song');song.value='151';song.dispatchEvent(new w.Event('input',{bubbles:true}));check(!metric('count'),'A condition reset');song.value='120';song.dispatchEvent(new w.Event('input',{bubbles:true}));select.value='100';run.click();check(metric('count').textContent==='100回','A no restoration of old aggregate');
+ area.querySelector('[data-random-reset]').click();check(!metric('count'),'A reset');run.click();
+ const rect=area.getBoundingClientRect();check(rect.width<=width&&area.scrollWidth<=area.clientWidth,'A responsive');
+ w=await open('unit-simulator.html');const api=await w.eval('unitSimulatorReady');d=w.document;
+ [...d.querySelectorAll('[data-unit-card]')].forEach((e,i)=>{e.selectedIndex=i+1;e.dispatchEvent(new w.Event('change'));});
+ const engine=w.eval('UnitSimulatorEngine'),sim=w.eval('ActiveRandomSimulation');
+ const rng=sim.seededRandom(88),batch1=engine.simulate(api.getModel(),100,rng),batch2=engine.simulate(api.getModel(),1000,rng),all=[...batch1.values,...batch2.values],expected=sim.statistics(all),variance=all.reduce((s,x)=>s+(x-expected.mean)**2,0)/all.length;
+ w.Math.random=sim.seededRandom(88);
+ const trials=d.querySelector('#unitTrials'),button=d.querySelector('#unitRun'),status=d.querySelector('#unitResultStatus');trials.value='100';button.click();trials.value='1000';button.click();check(status.textContent.includes('累積1100試行'),'unit unequal batches');
+ const cells=[...d.querySelectorAll('#unitResult tbody tr')].map(tr=>[...tr.children].map(td=>td.textContent));
+ check(cells[0][1]===expected.mean.toLocaleString(undefined,{maximumFractionDigits:2}),'unit combined exact mean');check(cells[1][1]===variance.toLocaleString(undefined,{maximumFractionDigits:2}),'unit variance');
+ const snapshot=api.capture();api.restore(snapshot);check(status.textContent.includes('累積1100試行'),'same restore preserves count');
+ d.querySelector('#unitFormationName').value='表示名のみ';trials.value='100';button.click();check(status.textContent.includes('累積1200試行'),'name and trials excluded');
+ for(const id of ['unitShowSP','unitMemoryPercent','unitEnhancementPercent','unitDuration']){
+ const e=d.getElementById(id);if(e.type==='checkbox'){e.checked=!e.checked;e.dispatchEvent(new w.Event('change'));}else{e.value=id==='unitDuration'?'130':'5';e.dispatchEvent(new w.Event('input'));}
+ check(!d.querySelector('#unitResult table'),'unit input resets '+id);button.click();check(status.textContent.includes('累積100試行'),'fresh '+id);
+ }
+ const sp=d.querySelector('[data-sp-slot="1"]');sp.value='10';sp.dispatchEvent(new w.Event('change'));check(!d.querySelector('#unitResult table'),'SP schedule resets');button.click();
+ const growth=d.querySelector('[data-bloom]');growth.value='5';growth.dispatchEvent(new w.Event('change'));check(!d.querySelector('#unitResult table'),'growth resets');button.click();
+ d.querySelector('#unitResetSimulation').click();check(status.textContent.includes('累積0試行'),'unit reset');
+ check(d.documentElement.scrollWidth<=width,'unit responsive');
+ w=await open('event.html');check(w.document.querySelector('.globalNav'),'B startup');check(!w.document.querySelector('#randomSimulation'),'B has no existing random UI');
+ }
+ out.textContent='PASS: A/unit cumulative counts, weighted moments, histogram, conditions/reset, seed, restore/name exclusion, B startup, 1100/360';
+ }catch(e){out.textContent='FAIL: '+e.stack;}finally{for(const k of Object.keys(localStorage))if(!backup.has(k))localStorage.removeItem(k);for(const [k,v] of backup)localStorage.setItem(k,v);}
+})();
+</script>

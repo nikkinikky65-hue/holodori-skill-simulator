@@ -1166,6 +1166,7 @@ function render(){
 
 
   ActiveTimelineView.render({container:document.querySelector('#timeline'),detail:document.querySelector('#detail'),members:ms,eventsByMember:by,duration:T,probabilities:probs});
+  document.dispatchEvent(new Event('active-inputs-rendered'));
 
 }
 // ===== 入力状態の保存・復元 =====

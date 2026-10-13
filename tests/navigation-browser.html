@@ -34,7 +34,7 @@
     if(page==='index.html'){
       const panel=w.document.querySelector('#randomSimulation');
       panel.querySelector('select').value='100';panel.querySelector('button').click();
-      assert(panel.querySelectorAll('[data-random-metric]').length===7,'random simulation starts');
+      assert(panel.querySelectorAll('[data-random-metric]').length===8,'random simulation starts');
       const box=panel.getBoundingClientRect();
       assert(box.width<=width && panel.scrollWidth<=panel.clientWidth,'random panel fits');
     }

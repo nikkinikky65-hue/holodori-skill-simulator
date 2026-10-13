@@ -733,7 +733,8 @@
     assert(randomPanel.querySelector('[data-random-metric=count]').textContent==='100回','random count');
     assert(w.document.querySelector('#timeline').innerHTML===timelineBeforeRandom,'random does not modify deterministic timeline');
     assert(JSON.stringify(Object.keys(localStorage).sort().map(k=>[k,localStorage.getItem(k)]))===stateBeforeRandom,'random does not save');
-    input(w,'#cards .card [data-k=boost]','0');
+    const boostInput=w.document.querySelector('#cards .card [data-k=boost]');
+    input(w,'#cards .card [data-k=boost]',String(Number(boostInput.value)+1));
     assert(!randomPanel.querySelector('[data-random-metric]'),'changed inputs invalidate result');
     const beforeLeader=JSON.stringify(Object.keys(localStorage).sort().map(key=>[key,localStorage.getItem(key)]));
     w=await open('leader.html');watch(w);await w.eval('leaderCatalogReady');

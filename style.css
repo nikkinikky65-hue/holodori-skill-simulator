@@ -1048,3 +1048,5 @@
 .formationActions button, .formationActions a { min-height:44px; display:inline-flex; align-items:center; }
 .unitFormationPanel [role="status"] { overflow-wrap:anywhere; }
 @media(max-width:760px) { .unitWorkspace { grid-template-columns:minmax(0,1fr); } }
+
+.simulationReset { margin-inline-start:.8rem; margin-block:.5rem; min-height:44px; }

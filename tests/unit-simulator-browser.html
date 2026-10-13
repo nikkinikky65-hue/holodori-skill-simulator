@@ -42,7 +42,7 @@
    assert(Math.abs(model.activeOnlyX-(120+a.calcMax(all,120)/100))<1e-9,'A integral parity');
    assert(w.document.querySelector('#unitParameters').textContent.includes('開花増分') && w.document.querySelector('#unitParameters').textContent.includes('現在計算値'),'breakdown visible');
    w.document.querySelector('#unitTrials').value='100';w.document.querySelector('#unitRun').click();
-   assert(w.document.querySelector('#unitResultStatus').textContent.includes('100試行完了'),'simulation works');
+   assert(w.document.querySelector('#unitResultStatus').textContent.includes('累積100試行'),'simulation works');
    assert(!w.document.querySelector('#unitResult').textContent.includes('X'),'numeric result');
    assert(w.document.documentElement.scrollWidth<=width,'page fits width');
    assert(w.document.querySelector('#unitSlots').scrollWidth<=w.document.querySelector('#unitSlots').clientWidth,'slots fit width');

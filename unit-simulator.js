@@ -25,6 +25,8 @@ async function initializeUnitSimulator(){
     const previews=[];
     const slotControls=[];
     let model=null;
+    const accumulation=SimulationAccumulator.create();
+    let simulating=false;
     let specialStarts={};
     const specialInputs=[];
     const table=(headers,rows)=>{
@@ -38,9 +40,10 @@ async function initializeUnitSimulator(){
     };
     const pts=value=>['performance','technique','sense','total'].map(key=>value[key] ?? '—');
     function refresh(){
-      node('unitResult').replaceChildren();node('unitResultStatus').textContent='編成・曲時間を変更した場合は再実行してください。';
+
       try{
         model=UnitSimulatorEngine.build(catalog,slots,Number(node('unitDuration').value),{kind:'manual-rate',percent:node('unitMemoryPercent').value},{kind:'manual-rate',percent:node('unitEnhancementPercent').value},specialStarts,node('unitShowSP').checked,leaderRules.find(l=>l.id===node('unitLeader').value)||null);
+        if(accumulation.sync(simulationInput())){node('unitResult').replaceChildren();node('unitResultStatus').textContent='条件変更：累積0試行。再実行してください。';}
         if(leaderRules.length)node('unitLeaderStatus').textContent=model.parameters.leaderResult ?
           [...model.parameters.leaderResult.trace.filter(t=>t.effect.parameter!=='score_support'),...model.leaderSupport.sources].map(t=>`${t.description}：${t.status==='applied'?'適用':t.status==='inactive'?'条件不成立':t.reason}`).join(' / ') : '未選択（共通効果も自動付与しません）';
         const rows=[];
@@ -64,7 +67,7 @@ async function initializeUnitSimulator(){
         node('unitSupportTrace').textContent=JSON.stringify(model.supportTrace,null,2);
         node('unitRun').disabled=model.parameters.status!=='card-only';
         status.textContent=`${catalog.cards.length}枚 / 選択 ${model.activeMembers.length}人（5人でシミュレーション実行可能）`;
-      }catch(error){model=null;node('unitRun').disabled=true;node('unitParameters').replaceChildren();node('unitTimeline').replaceChildren();status.textContent=error.message;}
+      }catch(error){accumulation.reset();node('unitResult').replaceChildren();node('unitResultStatus').textContent='累積0試行';model=null;node('unitRun').disabled=true;node('unitParameters').replaceChildren();node('unitTimeline').replaceChildren();status.textContent=error.message;}
     }
     slots.forEach((slot,i)=>{
       const panel=create('article');panel.className='unitSlot';panel.append(create('h3',`枠${i+1}`));
@@ -101,12 +104,24 @@ async function initializeUnitSimulator(){
     node('unitMemoryPercent').addEventListener('input',refresh);
     node('unitEnhancementPercent').addEventListener('input',refresh);
     node('unitProbability').textContent='暫定発動率：'+[['low','低'],['mid','中'],['high','高']].map(([key,label])=>`${label}${ActivationProbabilityRules.percent[key]}%`).join(' / ');
+    function simulationInput(){
+      const rate=v=>typeof v==='string'?(v.trim()===''?null:Number.isFinite(Number(v))?Number(v):v.trim()):v;
+      const state=capture();delete state.trials;
+      state.duration=Number(state.duration);state.memoryPercent=rate(state.memoryPercent);state.enhancementPercent=rate(state.enhancementPercent);
+      for(const slot of state.slots)for(const part of ['board','costume'])slot.totalAdjustments[part].value=rate(slot.totalAdjustments[part].value);
+      state.specialStarts=model.specialSchedule.entries.map(e=>({slot:e.slot,start:e.start,duration:e.duration}));
+      return state;
+    }
+    node('unitResetSimulation').addEventListener('click',()=>{accumulation.reset();node('unitResult').replaceChildren();node('unitResultStatus').textContent='累積0試行：リセットしました。';});
     node('unitRun').addEventListener('click',()=>{
+      if(simulating)return;simulating=true;node('unitRun').disabled=true;
       try{
-        const result=UnitSimulatorEngine.simulate(model,Number(node('unitTrials').value));
-        node('unitResult').replaceChildren(table(['集計','結果'],[['mean','平均'],['median','中央値'],['min','最小'],['max','最大'],['p10','10%点'],['p90','90%点']].map(([key,label])=>[label,result.statistics[key].toLocaleString(undefined,{maximumFractionDigits:2})])));
-        node('unitResultStatus').textContent=`${result.statistics.count}試行完了（実行時の編成）`;
-      }catch(error){node('unitResultStatus').textContent=error.message;}
+        accumulation.sync(simulationInput());const count=Number(node('unitTrials').value);accumulation.checkSize(count);
+        const batch=UnitSimulatorEngine.simulate(model,count);
+        const result=accumulation.append(batch.values);
+        node('unitResult').replaceChildren(table(['集計','結果'],[['mean','平均'],['variance','分散'],['median','中央値'],['min','最小'],['max','最大'],['p10','10%点'],['p90','90%点']].map(([key,label])=>[label,result.statistics[key].toLocaleString(undefined,{maximumFractionDigits:2})])));
+        node('unitResultStatus').textContent=`今回${count}試行 / 累積${result.statistics.count}試行（現在の条件）`;
+      }catch(error){node('unitResultStatus').textContent=error.message;}finally{simulating=false;node('unitRun').disabled=!model||model.parameters.status!=='card-only';}
     });
     function capture(){
       return JSON.parse(JSON.stringify({version:1,slots,leaderId:node('unitLeader').value,
