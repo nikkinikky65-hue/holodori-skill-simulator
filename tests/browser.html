@@ -377,7 +377,7 @@
     click(w,'[data-load-canonical="0"]');
     assert(!w.document.querySelector('#canonicalCardModal').hidden,'Canonical picker opens from A slot');
     await new Promise(resolve=>w.setTimeout(resolve,0));
-    assert(w.document.querySelector('[data-canonical-card]').options.length===185,'all cards selectable');
+    assert(w.document.querySelector('[data-canonical-card]').options.length===192,'all cards selectable');
     input(w,'[data-canonical-search]','サクラBloom');
     assert(w.document.querySelector('[data-canonical-card]').options.length===1,'card name filtering');
     input(w,'#canonicalCardModal [data-canonical-bloom]','3');
@@ -531,7 +531,7 @@
     await w.loadRuntimeCardCatalog();
     click(w,'.requiredSlot [data-load-canonical-slot="0"]');
     await new Promise(resolve=>w.setTimeout(resolve,0));
-    assert(w.document.querySelector('[data-canonical-card]').options.length===185,'all cards selectable');
+    assert(w.document.querySelector('[data-canonical-card]').options.length===192,'all cards selectable');
     input(w,'[data-canonical-search]','サクラBloom');
     assert(w.document.querySelector('[data-canonical-card]').options.length===1,'card name filtering');
     input(w,'#canonicalCardModal [data-canonical-bloom]','3');
@@ -578,7 +578,7 @@
     w.console.error=(...args)=>{catalogRuntimeErrors.push(args.join(' '));originalConsoleError.apply(w.console,args);};
     assert(!w.document.querySelector('#catalogStatus').dataset.errorKind,'catalog initialization succeeds');
     // Requested sequence, including handlers that previously targeted the removed select.
-    assert(w.document.querySelectorAll('.catalogCard').length===77,'initial star5');
+    assert(w.document.querySelectorAll('.catalogCard').length===84,'initial star5');
     click(w,'[data-catalog-rarity="4"]');assert(w.document.querySelectorAll('.catalogCard').length===54,'star4 handler');
     click(w,'[data-catalog-rarity="3"]');assert(w.document.querySelectorAll('.catalogCard').length===54,'star3 handler');
     input(w,'#catalogSearch','ときのそら');
@@ -600,7 +600,7 @@
     await w.renderCardCatalog();
     assert(w.document.querySelector('#catalogStatus').dataset.errorKind==='data','network failure classified data');
     w=await open('card-catalog.html');watch(w);await w.eval('cardCatalogReady');
-    assert(w.document.querySelectorAll('.catalogCard').length===77 && w.document.querySelector('[data-catalog-rarity="5"]').getAttribute('aria-pressed')==='true','library defaults to star 5');
+    assert(w.document.querySelectorAll('.catalogCard').length===84 && w.document.querySelector('[data-catalog-rarity="5"]').getAttribute('aria-pressed')==='true','library defaults to star 5');
     input(w,'#catalogSearch','星街すいせい');
     assert(w.document.querySelectorAll('.catalogCard').length>1,'library member search');
     input(w,'#catalogSearch','');click(w,'[data-catalog-rarity="5"]');input(w,'#catalogType','pure');
@@ -659,7 +659,7 @@
       }
     }
     click(w,'[data-catalog-rarity="5"]');
-    assert(visitedCards===185,'all 185 cards reachable by categories');
+    assert(visitedCards===192,'all 192 cards reachable by categories');
     input(w,'#catalogSearch','存在しないカード');assert(w.document.querySelectorAll('.catalogCard').length===0,'empty search');
     input(w,'#catalogSearch','サクラBloom');assert(w.document.querySelector('[data-catalog-bloom]').value==='5','filter retains saved opening');
     // Card user settings survive reload and ownership never gates growth editing.
@@ -739,7 +739,7 @@
     const beforeLeader=JSON.stringify(Object.keys(localStorage).sort().map(key=>[key,localStorage.getItem(key)]));
     w=await open('leader.html');watch(w);await w.eval('leaderCatalogReady');
     const leaderData=await (await w.fetch('data/runtime-leader-skills.json')).json();
-    assert(w.document.querySelectorAll('#leaderCards .leaderSkill').length===131,'all card leader rows');
+    assert(w.document.querySelectorAll('#leaderCards .leaderSkill').length===138,'all card leader rows');
     assert(w.document.querySelectorAll('#leaderCommon .leaderSkill').length===54,'common effects separate');
     for(const row of leaderData.cardSkills){
       const article=w.document.querySelector(`#leaderCards [data-card-id="${row.cardId}"]`);

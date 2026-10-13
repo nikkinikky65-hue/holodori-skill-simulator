@@ -1,14 +1,15 @@
 {
+  "scope": "Raw condition evidence only; developer-approved execution status is in unit-passive-audit.json",
   "inputs": {
-    "research/holodoridb-all-card-survey.json": "dcce8ef7057e5053d9ebea7a4a93c000785a28cd6451f31bdceb68222e69bb2a",
-    "research/canonical-cards.json": "306a0d43a4785983ddb200e0ace01d0f9d84a887d3ee6cab5fa44935dd9f8ef1",
-    "data/runtime-cards.json": "65a91081d4e23c1ec077af9317a796b9da744d6244749239a0055d4ff36f6c68",
-    "data/runtime-affiliations.json": "63d8e7f896b575a699ecd1dadd7fafa788c4f2a2d1948abe98cb790476bb10c6"
+    "research/holodoridb-all-card-survey.json": "aa7f6223aade1b40062a1f90bc309d09414275d920a7be9dd352d16585101260",
+    "research/canonical-cards.json": "8872740811b48d365e6d2756ec4c731006d7068a27fb8e2665cb8163aee9422f",
+    "data/runtime-cards.json": "9c82cb867e1e1f0bcf8d7fa76cea71d48007af609d173d03f62ae020078bfd38",
+    "data/runtime-affiliations.json": "75910ec1dc221285ebb49cff515f47ce7d991ffb3fe3a35a0bda6f1e851b762e"
   },
   "summary": {
     "parameter": {
-      "cards": 55,
-      "rows": 110
+      "cards": 56,
+      "rows": 112
     },
     "support": {
       "cards": 21,
@@ -18,13 +19,13 @@
   "classification": {
     "existingDataConnectable": 0,
     "recoverableMissingReferenceIdentified": 0,
-    "conditionSemanticsUnverified": 76,
+    "conditionSemanticsUnverified": 77,
     "additionalSelectionVerification": 35
   },
   "selectionDependencies": {
     "existing-attribute-ranking-after-condition-resolution": {
-      "cards": 41,
-      "rows": 82
+      "cards": 42,
+      "rows": 84
     },
     "unverified": {
       "cards": 35,
@@ -2685,6 +2686,80 @@
         "level": 2,
         "livePassiveSkillEffectGroupId": "live_passive_skill_effect-technique_up_permil_up-300-live_skill_effect_target-attribute-attribute_3-2",
         "descriptionLangId": "la-generated-live_passive_skill-card-00030-4-cmmn-0000-00.2-description"
+      },
+      "condition": {
+        "state": "unobserved",
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
+      },
+      "category": "C",
+      "family": "parameter",
+      "dependency": "condition-semantics-unverified",
+      "excessSelection": "existing-attribute-ranking-after-condition-resolution"
+    },
+    {
+      "cardId": "card-00030-5-uniq-0089-00",
+      "cardName": "火照りを鎮める癒しの一口",
+      "member": "雪花ラミィ",
+      "skillId": "live_passive_skill-card-00030-5-uniq-0089-00",
+      "level": 1,
+      "description": "[attribute=cute]キュートタイプ[/attribute]2人の全パラメータが11%UP",
+      "effect": {
+        "number": 1,
+        "type": "LivePassiveSkillEffectType_LIVE_PASSIVE_SKILL_EFFECT_TYPE_ALL_PARAMETER_UP_PERMIL_UP",
+        "value": "110"
+      },
+      "target": {
+        "type": "LiveSkillEffectTargetType_LIVE_SKILL_EFFECT_TARGET_TYPE_ATTRIBUTE",
+        "targetCount": 2,
+        "cardAttributeType": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1"
+      },
+      "source": {
+        "table": "LivePassiveSkillLevel",
+        "sourceId": "level=1;live_passive_skill_id=live_passive_skill-card-00030-5-uniq-0089-00"
+      },
+      "sourceFields": {
+        "livePassiveSkillId": "live_passive_skill-card-00030-5-uniq-0089-00",
+        "level": 1,
+        "livePassiveSkillEffectGroupId": "live_passive_skill_effect-all_parameter_up_permil_up-110-live_skill_effect_target-attribute-attribute_1-2",
+        "descriptionLangId": "la-generated-live_passive_skill-card-00030-5-uniq-0089-00.1-description"
+      },
+      "condition": {
+        "state": "unobserved",
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
+      },
+      "category": "C",
+      "family": "parameter",
+      "dependency": "condition-semantics-unverified",
+      "excessSelection": "existing-attribute-ranking-after-condition-resolution"
+    },
+    {
+      "cardId": "card-00030-5-uniq-0089-00",
+      "cardName": "火照りを鎮める癒しの一口",
+      "member": "雪花ラミィ",
+      "skillId": "live_passive_skill-card-00030-5-uniq-0089-00",
+      "level": 2,
+      "description": "[attribute=cute]キュートタイプ[/attribute]2人の全パラメータが[highlight]15[/highlight]%UP",
+      "effect": {
+        "number": 1,
+        "type": "LivePassiveSkillEffectType_LIVE_PASSIVE_SKILL_EFFECT_TYPE_ALL_PARAMETER_UP_PERMIL_UP",
+        "value": "150"
+      },
+      "target": {
+        "type": "LiveSkillEffectTargetType_LIVE_SKILL_EFFECT_TARGET_TYPE_ATTRIBUTE",
+        "targetCount": 2,
+        "cardAttributeType": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1"
+      },
+      "source": {
+        "table": "LivePassiveSkillLevel",
+        "sourceId": "level=2;live_passive_skill_id=live_passive_skill-card-00030-5-uniq-0089-00"
+      },
+      "sourceFields": {
+        "livePassiveSkillId": "live_passive_skill-card-00030-5-uniq-0089-00",
+        "level": 2,
+        "livePassiveSkillEffectGroupId": "live_passive_skill_effect-all_parameter_up_permil_up-150-live_skill_effect_target-attribute-attribute_1-2",
+        "descriptionLangId": "la-generated-live_passive_skill-card-00030-5-uniq-0089-00.2-description"
       },
       "condition": {
         "state": "unobserved",

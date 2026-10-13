@@ -1,5 +1,7 @@
 # 全185カードCanonical変換と呼び出し
 
+> 2026-10-13データ更新：192カード（追加7、既存計算値変更0）、カード固有Leader138件＋共通54件。最新差分・生成手順・対応範囲は [カード差分更新](card-library-update.md) を参照。以下の旧件数・固定commit記述は各工程時点の履歴です。
+
 `canonical-cards.json`は、固定commit `e43f062c32ff4e04567235efcd58448cd6b10f35` の既存調査JSONを変換した成果物。上流の再取得は行わない。
 
 既存の `canonical-card-schema-proposal.schema.json` とサクラBloom fixtureは変更しない。schemaが要求する `proposalStatus: proposal-not-implemented` も維持している。この文字列、および旧設計文書・fixtureの「未接続」は当時の境界を示すものであり、現在は別のadapterが全185件を限定的にUIへ接続する。

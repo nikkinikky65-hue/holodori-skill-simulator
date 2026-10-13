@@ -197,7 +197,7 @@ class Converter:
                 progression['bloomSteps'].append({'source': ref(r), 'bloomStepFact': fact(r, 'upgradeCount'), 'effectTypeFact': fact(r, 'effectType'), 'valueFact': fact(r, 'value'), 'facts': self.facts(r)})
             cards.append({'sourceCard': ref(row), 'identity': {'sourceIdFact': fact(row, 'id'), 'names': [{'locale': 'ja-JP', 'textFact': fact(name, 'text')}], 'memberFacts': self.facts(character), 'memberSourceRefs': [ref(character)]}, 'classification': classification, 'progression': progression, 'skills': {kind: self.skill(row, kind) for kind in ('passive', 'active', 'special')}, 'sourceFieldFacts': self.facts(row, localized=False), 'otherSourceRefs': [edge['to'] for edge in self.edges[key(row)] if edge['to']['table'] in ('SkillTreeConnectEffect', 'CardPotentialUpgradeItem')], 'annotations': ['No final stats, numeric activation probability, per-effect SP duration or Connect runtime semantics inferred.']})
         provenance = self.survey['provenance']
-        return {'proposalStatus': 'proposal-not-implemented', 'schemaVersion': 'proposal-v1', 'sourceDataset': {k: provenance[k] for k in ('repository', 'commitSha', 'commitUrl', 'retrievedAtUtc')}, 'cards': cards, 'sourceRecords': self.rows, 'joins': [edge for row in self.rows for edge in self.edges[key(row)]], 'unresolvedReferences': self.missing, 'notes': ['Uses the existing proposal schema without changing its status marker. All 185 cards from the pinned survey are converted; runtime remains a separate, limited adapter.', 'Connect and board rows are evidence only. Missing fields, raw JSON types and source wrappers are retained.'], 'conversionEvidence': {'inputArtifact': {'path': 'research/' + INPUT.name, 'sha256': hashlib.sha256(INPUT.read_bytes()).hexdigest()}, 'preservedSections': ['cardIndex IDs', 'joinedSourceRows (all fields and wrappers)'], 'unresolvedItems': ['Final stat formula and rounding', 'Numeric probability interpretation', 'Per-effect Special duration', 'Unobserved Passive condition', 'Active simultaneous replacement priority', 'Connect/board runtime behavior']}}
+        return {'proposalStatus': 'proposal-not-implemented', 'schemaVersion': 'proposal-v1', 'sourceDataset': {k: provenance[k] for k in ('repository', 'commitSha', 'commitUrl', 'retrievedAtUtc')}, 'cards': cards, 'sourceRecords': self.rows, 'joins': [edge for row in self.rows for edge in self.edges[key(row)]], 'unresolvedReferences': self.missing, 'notes': ['Uses the existing proposal schema without changing its status marker. All cards from the pinned survey are converted; runtime remains a separate, limited adapter.', 'Connect and board rows are evidence only. Missing fields, raw JSON types and source wrappers are retained.'], 'conversionEvidence': {'inputArtifact': {'path': 'research/' + INPUT.name, 'sha256': hashlib.sha256(INPUT.read_bytes()).hexdigest()}, 'preservedSections': ['cardIndex IDs', 'joinedSourceRows (all fields and wrappers)'], 'unresolvedItems': ['Final stat formula and rounding', 'Numeric probability interpretation', 'Per-effect Special duration', 'Unobserved Passive condition', 'Active simultaneous replacement priority', 'Connect/board runtime behavior']}}
 
 
 def validate(result, survey):
@@ -209,7 +209,7 @@ def validate(result, survey):
     for k, row in rows.items():
         assert row['fields'] == original[k]['fields'] and row['sourceWrapper'] == original[k]['sourceWrapper']
     ids = [card['sourceCard']['sourceId'] for card in result['cards']]
-    assert len(ids) == len(set(ids)) == 185
+    assert len(ids) == len(set(ids)) == len(survey['cardIndex'])
     assert set(ids) == {row['sourceId'] for row in survey['cardIndex']}
 
     def walk(value):
@@ -266,11 +266,11 @@ def validate(result, survey):
         assert dst['fields'][edge['targetField']] == edge['rawJoinValue']
     # Fixed survey observations independently guard the meaning of the three skill tracks.
     levels = {kind: [level for c in result['cards'] for level in c['skills'][kind]['levels']] for kind in ('passive', 'active', 'special')}
-    assert sum('condition' in l['effect'] for l in levels['passive']) == 218
-    assert sum(len(l['conditionalOverrides']) for l in levels['active']) == 142
+    assert sum('condition' in l['effect'] for l in levels['passive']) == 230
+    assert sum(len(l['conditionalOverrides']) for l in levels['active']) == 148
     assert sum(len(l['effects']) == 2 for l in levels['special']) == 174
     assert sum('condition' in e for l in levels['special'] for e in l['effects']) == 66
-    assert sum(len(c['progression']['levelRows']) for c in result['cards']) == 13180
+    assert sum(len(c['progression']['levelRows']) for c in result['cards']) == 13740
     assert all(len(c['progression']['trainingStages']) == 5 and len(c['progression']['bloomSteps']) == 5 for c in result['cards'])
 
 

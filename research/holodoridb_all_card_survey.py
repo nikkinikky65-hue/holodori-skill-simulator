@@ -11,12 +11,13 @@ import argparse
 import collections
 import datetime as dt
 import json
+import hashlib
 import urllib.error
 import urllib.request
 from pathlib import Path
 
 REPOSITORY = "https://github.com/HolodoriDB/holodori-db-jpn-diff"
-COMMIT = "e43f062c32ff4e04567235efcd58448cd6b10f35"
+COMMIT = "6680c7c37a8a3b3d56d919df823dca318db0d802"
 RAW_BASE = f"https://raw.githubusercontent.com/HolodoriDB/holodori-db-jpn-diff/{COMMIT}/"
 TABLES = [
     "Card", "CardLevel", "CardLevelLimit", "CardPotential", "CardPotentialUpgradeItem",
@@ -95,11 +96,22 @@ def json_safe_counter(counter):
 
 
 def main():
+    global COMMIT, RAW_BASE
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", default="research/holodoridb-all-card-survey.json", help="output JSON path")
+    parser.add_argument('--commit', default=COMMIT)
+    parser.add_argument('--source-dir', type=Path, help='Previously fetched immutable table cache')
     args = parser.parse_args()
+    COMMIT = args.commit
+    RAW_BASE = f"https://raw.githubusercontent.com/HolodoriDB/holodori-db-jpn-diff/{COMMIT}/"
+    capture = json.loads((args.source_dir/'capture.json').read_text()) if args.source_dir else None
+    if capture:
+        assert capture['commitSha'] == COMMIT
+        for name in TABLES:
+            assert hashlib.sha256((args.source_dir/(name+'.json')).read_bytes()).hexdigest() == capture['sha256'][name]
 
-    tables = {name: fetch_table(name) for name in TABLES}
+
+    tables = {name: json.loads((args.source_dir/(name+'.json')).read_text()) if args.source_dir else fetch_table(name) for name in TABLES}
     tables = {name: rows for name, rows in tables.items() if rows is not None}
     indexed = {name: [row_data(row) for row in rows] for name, rows in tables.items()}
     wrappers = {name: rows for name, rows in tables.items()}
@@ -470,10 +482,10 @@ def main():
             "repository": REPOSITORY,
             "commitSha": COMMIT,
             "commitUrl": f"{REPOSITORY}/tree/{COMMIT}",
-            "retrievedAtUtc": dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
+            "retrievedAtUtc": capture["retrievedAtUtc"] if capture else dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
             "publicScope": {
-                "selection": "All records in the pinned Card table; 185 unique IDs and 185/185 Japanese name lookups resolved.",
-                "independentPublishedCatalogCheck": "The public Holodori card-list page reported 185 listed cards on 2026-09-29, matching the source Card table cardinality. This is a count-level cross-check, not a separate ID-by-ID web verification.",
+                "selection": f"All {len(cards)} records in the pinned Card table; name joins are recorded in cardIndex.",
+                "independentPublishedCatalogCheck": "Not independently verified for this capture; repository default-branch HEAD checked separately.",
                 "url": "https://www.horodori.com/cards",
             },
             "originalFilesCopied": False,

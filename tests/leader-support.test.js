@@ -25,7 +25,7 @@ for(const l of rules.filter(l=>l.effects.some(e=>e.parameter==='score_support'))
  const effect=l.effects.find(e=>e.parameter==='score_support');
  const party=members.map(m=>({...m,attribute:effect.condition.attribute||m.attribute}));
  const supported=LeaderSupportEngine.resolve(l,party,null);
- check(supported.sources.length===1&&supported.sources[0].status==='applied','all 26 support effects');
+ check(supported.sources.length===1&&supported.sources[0].status==='applied','all 30 support effects');
  check(supported.targets.every(t=>t.rate===effect.percent),'library rates');count++;
  if(effect.condition.type==='attribute_count'){
   const other=effect.condition.attribute.endsWith('_1')?'CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2':'CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1';
@@ -33,7 +33,7 @@ for(const l of rules.filter(l=>l.effects.some(e=>e.parameter==='score_support'))
   check(inactive.sources[0].status==='inactive'&&inactive.targets.every(t=>t.rate===0),'condition false');
  }
 }
-check(count===26,'26 cards / rows');
+check(count===30,'30 cards / rows');
 const invalidLeader={id:'synthetic',effects:[{parameter:'score_support',percent:60,target:'unknown',condition:{type:'not_stated'}}]};
 check(LeaderSupportEngine.resolve(invalidLeader,members,null).sources[0].status==='unresolved','unknown target excluded');
 const missing={...invalidLeader,effects:[{...invalidLeader.effects[0],target:'all_members',condition:{type:'unknown'}}]};

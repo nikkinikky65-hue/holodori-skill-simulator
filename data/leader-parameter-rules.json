@@ -1,10 +1,10 @@
 {
   "format": "leader-parameter-rules-v1",
-  "canonicalSha256": "306a0d43a4785983ddb200e0ace01d0f9d84a887d3ee6cab5fa44935dd9f8ef1",
+  "canonicalSha256": "8872740811b48d365e6d2756ec4c731006d7068a27fb8e2665cb8163aee9422f",
   "inputs": {
-    "research/unit-leader-audit.json": "ccf1bfc5f2e04aca7e842636a42d5aa8e55a33a8ff677a8a826da3785c4af88f",
-    "data/runtime-leader-skills.json": "47a6ca6f265b0c9362704ae595d66fcb879dab9c7ae15ff151f230d332450657",
-    "data/runtime-affiliations.json": "63d8e7f896b575a699ecd1dadd7fafa788c4f2a2d1948abe98cb790476bb10c6"
+    "research/unit-leader-audit.json": "ef124beeef085c3fb3dead58a42cbcf3ca3c2a16376ceb0d19932c06f86cb1bf",
+    "data/runtime-leader-skills.json": "f10b972a523d3e7aaf606e551112fcc9b0c119972b376ff51176def4b4f1c78c",
+    "data/runtime-affiliations.json": "75910ec1dc221285ebb49cff515f47ce7d991ffb3fe3a35a0bda6f1e851b762e"
   },
   "leaders": [
     {
@@ -1219,6 +1219,43 @@
       ]
     },
     {
+      "id": "live_leader_skill-card-00023-5-uniq-0085-00",
+      "cardId": "card-00023-5-uniq-0085-00",
+      "name": "宝鐘マリン / お宝独占♡ウォーターキャノン",
+      "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のセンスが80%UP\n[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のスコアサポート効果25%",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "S",
+          "percent": 80,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
+            "text": "ピュアタイプ2人以上"
+          },
+          "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のセンスが80%UP"
+        },
+        {
+          "parameter": "score_support",
+          "percent": 25,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
+            "text": "ピュアタイプ2人以上"
+          },
+          "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のスコアサポート効果25%"
+        }
+      ]
+    },
+    {
       "id": "live_leader_skill-card-00026-4-cmmn-0000-00",
       "cardId": "card-00026-4-cmmn-0000-00",
       "name": "角巻わため / 広がるhealing sound",
@@ -1463,6 +1500,29 @@
       ]
     },
     {
+      "id": "live_leader_skill-card-00030-5-uniq-0089-00",
+      "cardId": "card-00030-5-uniq-0089-00",
+      "name": "雪花ラミィ / 火照りを鎮める癒しの一口",
+      "description": "全員のスコアサポート効果60%",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "score_support",
+          "percent": 60,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のスコアサポート効果60%"
+        }
+      ]
+    },
+    {
       "id": "live_leader_skill-card-00031-4-cmmn-0000-00",
       "cardId": "card-00031-4-cmmn-0000-00",
       "name": "桃鈴ねね / get excitedジャンプ！",
@@ -1597,6 +1657,43 @@
             "text": null
           },
           "description": "全員の全パラメータが45%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00034-5-uniq-0090-00",
+      "cardId": "card-00034-5-uniq-0090-00",
+      "name": "尾丸ポルカ / 幸せ分け合うMeat For You",
+      "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のテクニックが80%UP\n[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のスコアサポート効果25%",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "T",
+          "percent": 80,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
+            "text": "ピュアタイプ2人以上"
+          },
+          "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のテクニックが80%UP"
+        },
+        {
+          "parameter": "score_support",
+          "percent": 25,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
+            "text": "ピュアタイプ2人以上"
+          },
+          "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のスコアサポート効果25%"
         }
       ]
     },
@@ -1809,6 +1906,29 @@
             "text": "ピュアタイプ2人以上"
           },
           "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のスコアサポート効果25%"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00037-5-uniq-0086-00",
+      "cardId": "card-00037-5-uniq-0086-00",
+      "name": "博衣こより / 振り向きざまのaventure",
+      "description": "全員のスコアサポート効果60%",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "score_support",
+          "percent": 60,
+          "target": "all_members",
+          "condition": {
+            "type": "not_stated",
+            "attribute": null,
+            "affiliationId": null,
+            "requiredCount": null,
+            "referenceId": null,
+            "text": null
+          },
+          "description": "全員のスコアサポート効果60%"
         }
       ]
     },
@@ -2333,6 +2453,29 @@
       ]
     },
     {
+      "id": "live_leader_skill-card-03009-5-uniq-0088-00",
+      "cardId": "card-03009-5-uniq-0088-00",
+      "name": "こぼ・かなえる / 波間に揺れるBody ＆ Soul",
+      "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員のセンスが130%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "S",
+          "percent": 130,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
+            "text": "キュートタイプ2人以上"
+          },
+          "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員のセンスが130%UP"
+        }
+      ]
+    },
+    {
       "id": "live_leader_skill-card-04001-4-cmmn-0000-00",
       "cardId": "card-04001-4-cmmn-0000-00",
       "name": "森カリオペ / レペゼン冥土！ here we go",
@@ -2570,16 +2713,7 @@
             "affiliationId": "grp-promise",
             "requiredCount": 2,
             "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-promise-2",
-            "text": "Promiseが2人以上",
-            "resolutionEvidence": {
-              "basis": "original-leader-text-and-canonical-group-name",
-              "groupSource": {
-                "table": "CharacterGrouping",
-                "sourceId": "grp-promise"
-              },
-              "text": "Promiseが2人以上",
-              "rawTriggerRecordMissing": true
-            }
+            "text": "Promiseが2人以上"
           },
           "description": "Promiseが2人以上で全員の全パラメータが50%UP"
         }
@@ -2602,16 +2736,7 @@
             "affiliationId": "grp-promise",
             "requiredCount": 2,
             "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-promise-2",
-            "text": "Promiseが2人以上",
-            "resolutionEvidence": {
-              "basis": "original-leader-text-and-canonical-group-name",
-              "groupSource": {
-                "table": "CharacterGrouping",
-                "sourceId": "grp-promise"
-              },
-              "text": "Promiseが2人以上",
-              "rawTriggerRecordMissing": true
-            }
+            "text": "Promiseが2人以上"
           },
           "description": "Promiseが2人以上で全員の全パラメータが40%UP"
         }
@@ -2683,6 +2808,29 @@
             "text": "ピュアタイプ2人以上"
           },
           "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のパフォーマンスが130%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-04012-5-uniq-0087-00",
+      "cardId": "card-04012-5-uniq-0087-00",
+      "name": "ハコス・ベールズ / これがボクのイチオシ！",
+      "description": "Promiseが2人以上で全員の全パラメータが50%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 50,
+          "target": "all_members",
+          "condition": {
+            "type": "affiliation_count",
+            "attribute": null,
+            "affiliationId": "grp-promise",
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-promise-2",
+            "text": "Promiseが2人以上"
+          },
+          "description": "Promiseが2人以上で全員の全パラメータが50%UP"
         }
       ]
     },
@@ -3153,6 +3301,29 @@
             "text": "ReGLOSSが2人以上"
           },
           "description": "ReGLOSSが2人以上で全員の全パラメータが50%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-06003-5-uniq-0091-00",
+      "cardId": "card-06003-5-uniq-0091-00",
+      "name": "一条莉々華 / 夏夜を彩るBrilliant Smile",
+      "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員のテクニックが130%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "T",
+          "percent": 130,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
+            "text": "キュートタイプ2人以上"
+          },
+          "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員のテクニックが130%UP"
         }
       ]
     },

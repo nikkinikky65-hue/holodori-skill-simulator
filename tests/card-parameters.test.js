@@ -3,7 +3,7 @@ let parameterChecks=0;
 for(const card of canonicalTestFixture.cards){
   const inputs=card.progression.parameterInputs;
   const weights=['performance','technique','sense'].map(k=>Number(inputs[k+'PermilMultiply']));
-  assertCanonical(weights.reduce((a,b)=>a+b,0)===1000,'all 185 coefficient sums');
+  assertCanonical(weights.reduce((a,b)=>a+b,0)===1000,'all 192 coefficient sums');
   for(const stage of card.progression.trainingStages){
     const value=Number(card.progression.statSnapshots.find(s=>s.level===stage.levelCap).raw.parameterBaseValue);
     const base=weights.map(w=>Math.floor((value*w+999)/1000));
@@ -39,5 +39,5 @@ let refused=false;try{calculateCardParameters(invalid,0,0);}catch(e){refused=tru
 assertCanonical(refused,'invalid coefficient sum rejected');
 assertCanonical(!expandCanonicalCard(sora3,{passive:2,active:1,special:2},canonicalTestFixture.dataset).cardParameters,'legacy skill levels do not imply Bloom');
 assertCanonical(JSON.stringify(canonicalTestFixture)===originalCanonical,'parameter calculation never mutates catalog');
-assertCanonical(parameterChecks===5550,'185 cards x 5 training x 6 Bloom');
+assertCanonical(parameterChecks===5760,'192 cards x 5 training x 6 Bloom');
 print('Card parameters: 5550 states, coefficient sums, two ceilings, additive Bloom, totals and legacy isolation PASS');

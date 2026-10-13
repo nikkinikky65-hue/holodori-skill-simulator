@@ -138,6 +138,14 @@ def project(canonical, canonical_bytes, members_bytes):
                         'sourceArtifact': canonical['conversionEvidence']['inputArtifact'],
                         'memberMaster': {'path': 'members.js', 'sha256': sha(members_bytes)},
                         'unresolved': canonical['conversionEvidence']['unresolvedItems']}, 'cards': cards}
+    # Accept old saved references only for cards whose entire runtime payload is unchanged
+    # (Canonical pointer positions are provenance, not a game-value difference).
+    from card_update_integrity import runtime_card_digest
+    baseline_path = CANONICAL.parent / 'card-library-baseline-185.json'
+    baseline = json.loads(baseline_path.read_text())
+    unchanged = [card['id'] for card in cards if baseline['runtimeCardDigests'].get(card['id']) == runtime_card_digest(card)]
+    result['dataset']['compatibleSelections'] = [{'canonicalSha256': baseline['canonicalSha256'],
+        'sourceCommit': baseline['sourceDataset']['commitSha'], 'runtimeVersions': baseline['runtimeVersions'], 'cardIds': unchanged}]
     result['dataset']['version'] = sha(json.dumps(result, ensure_ascii=False, separators=(',', ':')).encode())
     return result
 
@@ -149,7 +157,7 @@ def main():
     data = CANONICAL.read_bytes()
     result = project(json.loads(data), data, MEMBERS.read_bytes())
     ids = [c['id'] for c in result['cards']]
-    assert len(ids) == len(set(ids)) == 185
+    assert len(ids) == len(set(ids)) == len(json.loads(data)['cards'])
     encoded = (json.dumps(result, ensure_ascii=False, separators=(',', ':')) + '\n').encode()
     if args.check:
         assert OUTPUT.read_bytes() == encoded, 'Regenerate Runtime Catalog'

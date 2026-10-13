@@ -10,9 +10,9 @@ sys.path.insert(0, str(ROOT / 'research'))
 from build_runtime_catalog import condition, project
 
 PROTECTED = {
-    'research/canonical-cards.json': '306a0d43a4785983ddb200e0ace01d0f9d84a887d3ee6cab5fa44935dd9f8ef1',
+    'research/canonical-cards.json': '8872740811b48d365e6d2756ec4c731006d7068a27fb8e2665cb8163aee9422f',
     'research/canonical-card-schema-proposal.schema.json': 'fc9e3f37e1518895cf7a91fb846892e0b71dac0e0c73f903c57c3f809198c5d4',
-    'research/holodoridb-all-card-survey.json': 'dcce8ef7057e5053d9ebea7a4a93c000785a28cd6451f31bdceb68222e69bb2a',
+    'research/holodoridb-all-card-survey.json': 'aa7f6223aade1b40062a1f90bc309d09414275d920a7be9dd352d16585101260',
     'research/canonical-card-sakura-bloom.fixture.json': 'b14e8a1572079daf7dc6f0a7b75546c2fea1982496e4ba903e5d73e02cadb73e',
 }
 for path, digest in PROTECTED.items():
@@ -24,9 +24,9 @@ runtime = json.loads(runtime_bytes)
 assert runtime['dataset']['canonicalSha256'] == PROTECTED['research/canonical-cards.json']
 assert runtime['dataset']['sourceDataset'] == canonical['sourceDataset']
 assert runtime['dataset']['sourceArtifact'] == canonical['conversionEvidence']['inputArtifact']
-assert len(runtime['cards']) == 185
+assert len(runtime['cards']) == 192
 assert {c['id'] for c in runtime['cards']} == {c['sourceCard']['sourceId'] for c in canonical['cards']}
-assert len({c['id'] for c in runtime['cards']}) == 185
+assert len({c['id'] for c in runtime['cards']}) == 192
 
 
 def same(a, b):
@@ -145,13 +145,13 @@ for src, dst in zip(canonical['cards'], runtime['cards']):
     same(dst['progression']['parameterInputs'], {f['sourceField']: f['rawValue'] for f in src['progression']['parameterInputFacts']})
     counts['snapshots'] += len(snapshots)
     counts['excludedLevels'] += len(full_levels) - len(expected_levels)
-assert counts['overrides'] == 142 and counts['specialEffects'] == 544
-assert all(counts[k] == 370 for k in ('passive', 'active', 'special'))
+assert counts['overrides'] == 148 and counts['specialEffects'] == 558
+assert all(counts[k] == 384 for k in ('passive', 'active', 'special'))
 # Explicit states must not collapse to the unobserved state, even for future data.
 assert condition({}, '/test')['state'] == 'unobserved'
 assert condition({'condition': None}, '/test')['state'] == 'explicit-null'
 assert condition({'condition': {'kind': 'none'}}, '/test')['state'] == 'explicit'
 reproduced = project(canonical, canonical_bytes, (ROOT / 'members.js').read_bytes())
 assert runtime_bytes == (json.dumps(reproduced, ensure_ascii=False, separators=(',', ':')) + '\n').encode()
-print('Source/full Canonical/schema unchanged; Runtime IDs, raw types, P/A/SP semantics, pointers, selected stats and byte reproduction: PASS')
+print('Pinned source/full Canonical and unchanged schema; Runtime IDs, raw types, P/A/SP semantics, pointers, selected stats and byte reproduction: PASS')
 print(counts)

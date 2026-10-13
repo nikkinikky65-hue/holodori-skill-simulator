@@ -1,64 +1,63 @@
 {
   "scope": "research-only; no executable Leader rules",
   "inputs": {
-    "data/runtime-leader-skills.json": "47a6ca6f265b0c9362704ae595d66fcb879dab9c7ae15ff151f230d332450657",
-    "data/runtime-cards.json": "25a2a04c8ae704324313636af2d4eacfc13deb410153df2dd5ba6d3276141446",
-    "data/runtime-affiliations.json": "63d8e7f896b575a699ecd1dadd7fafa788c4f2a2d1948abe98cb790476bb10c6",
-    "research/canonical-cards.json": "306a0d43a4785983ddb200e0ace01d0f9d84a887d3ee6cab5fa44935dd9f8ef1",
-    "research/holodoridb-leader-source.json": "423e99e981b7203856b6d0d528c4518debbcd8341d628c332720bf9e3b7f35bb",
-    "research/holodoridb-all-card-survey.json": "dcce8ef7057e5053d9ebea7a4a93c000785a28cd6451f31bdceb68222e69bb2a",
+    "data/runtime-leader-skills.json": "f10b972a523d3e7aaf606e551112fcc9b0c119972b376ff51176def4b4f1c78c",
+    "data/runtime-cards.json": "9c82cb867e1e1f0bcf8d7fa76cea71d48007af609d173d03f62ae020078bfd38",
+    "data/runtime-affiliations.json": "75910ec1dc221285ebb49cff515f47ce7d991ffb3fe3a35a0bda6f1e851b762e",
+    "research/canonical-cards.json": "8872740811b48d365e6d2756ec4c731006d7068a27fb8e2665cb8163aee9422f",
+    "research/holodoridb-leader-source.json": "35ba3ba3f4c66de3a4229cdd4e3e5fdf679d18ea233fbb3e2c68c3ac08de6d59",
+    "research/holodoridb-all-card-survey.json": "aa7f6223aade1b40062a1f90bc309d09414275d920a7be9dd352d16585101260",
     "party-condition-resolver.js": "1ca56c409629effb0a288c0ab75af69382e84320ca84424319517da9f5c6f0ce",
-    "passive-target-resolver.js": "2da1307d7b79fd876af91310f0f2e7b088f27b7400a8ace268deec62476e340f",
-    "passive-selection-resolver.js": "3032c4d0c37dd60b2e48a01ddf642b1d8623e93d87a15a4bae70a2c7db34e774",
-    "parameter-rules.js": "6af525b6ab9df6839962b629fde088f0e25962f8bca96e3674a25f8574f48892",
-    "unit-parameter-engine.js": "5bfe50791eebf8ac5bbdc7dc61a5645ae95f1c257bcf302b397eec25e09a1428",
-    "tests/parameter-rules.test.js": "c7357b737d541a64c3faee6b8fb95eea37384a7235cc42ce3391b67806f361e5",
+    "passive-target-resolver.js": "3398b17cd921bebef7e6572879a43278c10276c2a2fa50c9b42b286d075744b8",
+    "passive-selection-resolver.js": "f8ff897cc5b5582fd91c39aaf9d569be1f66f6f3800f678ef1d1b36b5cefc8bb",
+    "parameter-rules.js": "a3cbb4820f906abc0748f3ff4501cb5733e49684a16dba72b7579e56ca6b5700",
+    "unit-parameter-engine.js": "f7220c40e02f6c668170c384720970cd4922de3506c75dcd823922248004d6f6",
+    "tests/parameter-rules.test.js": "49ee4be0e81015dd73926edbd65b459064774437524c85111722d7efdfc10cff",
     "tests/case-c-enhancement.test.js": "5537e3f752d24f245b25f3220a8b56f873eac3b67ffc3e57a7b0cfb4b03655b1",
     "research/parameter-score-validation.md": "fbebb20feb46a08cf27f4ffea4feb118352f67b77c890ba291a771a4497eff37",
-    "research/leader-catalog.md": "dd4b13748f8ac86e24a0178518c2a6f0bb21e768e32ef2866cbbc398a75f3776",
+    "research/leader-catalog.md": "92bf0fba7a82824693956d3bc3cf695566678baffda2b048b542053f41d30566",
     "research/build_leader_catalog.py": "6d11d765f8dffa020618ee397b30f8b062266bb00ecec8181f6c87ffd1df5f7f",
-    "research/audit_unit_leaders.py": "59ae5da247bde0e542874b0d0185fb4e073833adb40076ff9e7d19c3a0fa19fa"
+    "research/audit_unit_leaders.py": "e930fb3e8da4c9abc47106e4611ae1420a906515d3806f7ac53db30292766a73"
   },
   "classificationPolicy": "A=構造参照確定、B=参照確定かつ小規模構造拡張、C=参照/意味/計算根拠不足。今回は全件効果参照不足でC。数値検証は別field。",
   "summary": {
-    "leaderCount": 131,
-    "effectRowCount": 147,
-    "parameterIncluded": 121,
-    "parameterExcluded": 10,
-    "singleParameter": 105,
-    "compound": 16,
+    "leaderCount": 138,
+    "effectRowCount": 156,
+    "parameterIncluded": 126,
+    "parameterExcluded": 12,
+    "singleParameter": 108,
+    "compound": 18,
     "classification": {
       "A": 0,
       "B": 0,
-      "C": 131
+      "C": 138
     },
     "conditionLeaderCounts": {
-      "not_stated": 64,
-      "affiliation_count": 36,
-      "attribute_count": 29,
-      "unknown": 2
+      "not_stated": 66,
+      "affiliation_count": 39,
+      "attribute_count": 33
     },
     "effectRowCounts": {
-      "S": 24,
-      "all_parameter": 50,
+      "S": 26,
+      "all_parameter": 51,
       "P": 25,
-      "T": 22,
-      "score_support": 26
+      "T": 24,
+      "score_support": 30
     },
     "targetLeaderCounts": {
-      "all_members_from_text": 131
+      "all_members_from_text": 138
     },
     "selectCountLeaderCounts": {
-      "all_no_fixed_N": 131
+      "all_no_fixed_N": 138
     },
     "conditionGroups": 18,
-    "resolvedConditionGroups": 17,
+    "resolvedConditionGroups": 18,
     "effectGroups": 24,
     "resolvedEffectGroups": 0,
-    "existingConditionResolverCompatibleLeaders": 65,
+    "existingConditionResolverCompatibleLeaders": 72,
     "existingResolversOnly": 0,
     "numericConfirmed": 0,
-    "parameterNumericUnconfirmed": 121,
+    "parameterNumericUnconfirmed": 126,
     "commonEffectsExcluded": 54
   },
   "conditionGroups": {
@@ -68,7 +67,7 @@
         "text": "0期生が2人以上",
         "canonicalRecords": [
           {
-            "pointer": "/sourceRecords/4948",
+            "pointer": "/sourceRecords/5057",
             "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-gen_0-2;number=1",
             "fields": {
               "groupId": "live_skill_trigger-deck_card_character_grouping-grp-gen_0-2",
@@ -102,7 +101,7 @@
         "text": "ハッピータイプ2人以上",
         "canonicalRecords": [
           {
-            "pointer": "/sourceRecords/4944",
+            "pointer": "/sourceRecords/5053",
             "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_3-2;number=1",
             "fields": {
               "groupId": "live_skill_trigger-deck_card_attribute-attribute_3-2",
@@ -142,7 +141,7 @@
         "text": "1期生が2人以上",
         "canonicalRecords": [
           {
-            "pointer": "/sourceRecords/4949",
+            "pointer": "/sourceRecords/5058",
             "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-gen_1-2;number=1",
             "fields": {
               "groupId": "live_skill_trigger-deck_card_character_grouping-grp-gen_1-2",
@@ -176,7 +175,7 @@
         "text": "キュートタイプ2人以上",
         "canonicalRecords": [
           {
-            "pointer": "/sourceRecords/4940",
+            "pointer": "/sourceRecords/5049",
             "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_1-2;number=1",
             "fields": {
               "groupId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
@@ -201,10 +200,12 @@
         "live_leader_skill-card-00021-4-cmmn-0000-00",
         "live_leader_skill-card-00035-5-uniq-0082-00",
         "live_leader_skill-card-00039-5-uniq-0032-00",
+        "live_leader_skill-card-03009-5-uniq-0088-00",
         "live_leader_skill-card-04001-5-uniq-0071-00",
         "live_leader_skill-card-04002-5-uniq-0043-00",
         "live_leader_skill-card-04013-5-uniq-0083-00",
-        "live_leader_skill-card-04017-5-uniq-0056-00"
+        "live_leader_skill-card-04017-5-uniq-0056-00",
+        "live_leader_skill-card-06003-5-uniq-0091-00"
       ],
       "texts": [
         "キュートタイプ2人以上"
@@ -216,7 +217,7 @@
         "text": "2期生が2人以上",
         "canonicalRecords": [
           {
-            "pointer": "/sourceRecords/4950",
+            "pointer": "/sourceRecords/5059",
             "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-gen_2-2;number=1",
             "fields": {
               "groupId": "live_skill_trigger-deck_card_character_grouping-grp-gen_2-2",
@@ -250,7 +251,7 @@
         "text": "ゲーマーズが2人以上",
         "canonicalRecords": [
           {
-            "pointer": "/sourceRecords/4947",
+            "pointer": "/sourceRecords/5056",
             "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-gamers-2;number=1",
             "fields": {
               "groupId": "live_skill_trigger-deck_card_character_grouping-grp-gamers-2",
@@ -284,7 +285,7 @@
         "text": "ピュアタイプ2人以上",
         "canonicalRecords": [
           {
-            "pointer": "/sourceRecords/4942",
+            "pointer": "/sourceRecords/5051",
             "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_2-2;number=1",
             "fields": {
               "groupId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
@@ -307,6 +308,8 @@
         "live_leader_skill-card-00014-5-uniq-0075-00",
         "live_leader_skill-card-00015-5-uniq-0067-00",
         "live_leader_skill-card-00017-5-uniq-0077-00",
+        "live_leader_skill-card-00023-5-uniq-0085-00",
+        "live_leader_skill-card-00034-5-uniq-0090-00",
         "live_leader_skill-card-00037-5-uniq-0030-00",
         "live_leader_skill-card-03003-5-uniq-0035-00",
         "live_leader_skill-card-03005-5-uniq-0084-00",
@@ -326,7 +329,7 @@
         "text": "3期生が2人以上",
         "canonicalRecords": [
           {
-            "pointer": "/sourceRecords/4951",
+            "pointer": "/sourceRecords/5060",
             "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-gen_3-2;number=1",
             "fields": {
               "groupId": "live_skill_trigger-deck_card_character_grouping-grp-gen_3-2",
@@ -360,7 +363,7 @@
         "text": "4期生が2人以上",
         "canonicalRecords": [
           {
-            "pointer": "/sourceRecords/4952",
+            "pointer": "/sourceRecords/5061",
             "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-gen_4-2;number=1",
             "fields": {
               "groupId": "live_skill_trigger-deck_card_character_grouping-grp-gen_4-2",
@@ -394,7 +397,7 @@
         "text": "5期生が2人以上",
         "canonicalRecords": [
           {
-            "pointer": "/sourceRecords/4953",
+            "pointer": "/sourceRecords/5062",
             "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-gen_5-2;number=1",
             "fields": {
               "groupId": "live_skill_trigger-deck_card_character_grouping-grp-gen_5-2",
@@ -427,7 +430,7 @@
         "text": "holoXが2人以上",
         "canonicalRecords": [
           {
-            "pointer": "/sourceRecords/4954",
+            "pointer": "/sourceRecords/5063",
             "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-holox-2;number=1",
             "fields": {
               "groupId": "live_skill_trigger-deck_card_character_grouping-grp-holox-2",
@@ -461,7 +464,7 @@
         "text": "ID1期生が2人以上",
         "canonicalRecords": [
           {
-            "pointer": "/sourceRecords/4955",
+            "pointer": "/sourceRecords/5064",
             "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-indonesia-gen_1-2;number=1",
             "fields": {
               "groupId": "live_skill_trigger-deck_card_character_grouping-grp-indonesia-gen_1-2",
@@ -494,7 +497,7 @@
         "text": "ID2期生が2人以上",
         "canonicalRecords": [
           {
-            "pointer": "/sourceRecords/4956",
+            "pointer": "/sourceRecords/5065",
             "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-indonesia-gen_2-2;number=1",
             "fields": {
               "groupId": "live_skill_trigger-deck_card_character_grouping-grp-indonesia-gen_2-2",
@@ -527,7 +530,7 @@
         "text": "ID3期生が2人以上",
         "canonicalRecords": [
           {
-            "pointer": "/sourceRecords/4957",
+            "pointer": "/sourceRecords/5066",
             "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-indonesia-gen_3-2;number=1",
             "fields": {
               "groupId": "live_skill_trigger-deck_card_character_grouping-grp-indonesia-gen_3-2",
@@ -560,7 +563,7 @@
         "text": "Mythが2人以上",
         "canonicalRecords": [
           {
-            "pointer": "/sourceRecords/4958",
+            "pointer": "/sourceRecords/5067",
             "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-myth-2;number=1",
             "fields": {
               "groupId": "live_skill_trigger-deck_card_character_grouping-grp-myth-2",
@@ -592,16 +595,31 @@
       "condition": {
         "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-promise-2",
         "text": "Promiseが2人以上",
-        "canonicalRecords": [],
-        "snapshotRecordCount": 0,
-        "type": "unknown",
-        "status": "unresolved",
-        "requiredCount": null,
-        "reason": "既存Canonicalと保存済み調査snapshotに条件参照先なし。原文・IDから実行条件を生成しない"
+        "canonicalRecords": [
+          {
+            "pointer": "/sourceRecords/5068",
+            "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-promise-2;number=1",
+            "fields": {
+              "groupId": "live_skill_trigger-deck_card_character_grouping-grp-promise-2",
+              "number": 1,
+              "type": "LiveSkillTriggerType_LIVE_SKILL_TRIGGER_TYPE_DECK_CARD_CHARACTER_GROUPING",
+              "threshold": "2",
+              "characterGroupingId": "grp-promise",
+              "descriptionLangId": "la-generated-live_skill_trigger-deck_card_character_grouping-grp-promise-2.1-description"
+            }
+          }
+        ],
+        "snapshotRecordCount": 1,
+        "type": "affiliation_count",
+        "status": "reference_resolved",
+        "requiredCount": 2,
+        "affiliationId": "grp-promise",
+        "reason": null
       },
       "leaderIds": [
         "live_leader_skill-card-04007-5-uniq-0047-00",
-        "live_leader_skill-card-04010-4-cmmn-0000-00"
+        "live_leader_skill-card-04010-4-cmmn-0000-00",
+        "live_leader_skill-card-04012-5-uniq-0087-00"
       ],
       "texts": [
         "Promiseが2人以上"
@@ -613,7 +631,7 @@
         "text": "Adventが2人以上",
         "canonicalRecords": [
           {
-            "pointer": "/sourceRecords/4946",
+            "pointer": "/sourceRecords/5055",
             "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-advent-2;number=1",
             "fields": {
               "groupId": "live_skill_trigger-deck_card_character_grouping-grp-advent-2",
@@ -646,7 +664,7 @@
         "text": "ReGLOSSが2人以上",
         "canonicalRecords": [
           {
-            "pointer": "/sourceRecords/4959",
+            "pointer": "/sourceRecords/5069",
             "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-regloss-2;number=1",
             "fields": {
               "groupId": "live_skill_trigger-deck_card_character_grouping-grp-regloss-2",
@@ -707,6 +725,7 @@
         "live_leader_skill-card-03007-5-uniq-0039-00",
         "live_leader_skill-card-04001-5-uniq-0042-00",
         "live_leader_skill-card-04007-5-uniq-0047-00",
+        "live_leader_skill-card-04012-5-uniq-0087-00",
         "live_leader_skill-card-04015-5-uniq-0054-00",
         "live_leader_skill-card-06003-5-uniq-0059-00"
       ]
@@ -806,6 +825,7 @@
       "leaderIds": [
         "live_leader_skill-card-00006-5-uniq-0074-00",
         "live_leader_skill-card-00017-5-uniq-0015-00",
+        "live_leader_skill-card-03009-5-uniq-0088-00",
         "live_leader_skill-card-04017-5-uniq-0056-00",
         "live_leader_skill-card-06002-5-uniq-0058-00"
       ]
@@ -828,6 +848,8 @@
         "live_leader_skill-card-00010-5-uniq-0010-00",
         "live_leader_skill-card-00012-5-uniq-0062-00",
         "live_leader_skill-card-00022-5-uniq-0018-00",
+        "live_leader_skill-card-00030-5-uniq-0089-00",
+        "live_leader_skill-card-00037-5-uniq-0086-00",
         "live_leader_skill-card-03006-5-uniq-0038-00",
         "live_leader_skill-card-03008-5-uniq-0040-00",
         "live_leader_skill-card-04003-5-uniq-0044-00",
@@ -855,7 +877,9 @@
         "live_leader_skill-card-00019-5-uniq-0016-00",
         "live_leader_skill-card-00021-4-cmmn-0000-00",
         "live_leader_skill-card-00021-5-uniq-0064-00",
+        "live_leader_skill-card-00023-5-uniq-0085-00",
         "live_leader_skill-card-00026-5-uniq-0065-00",
+        "live_leader_skill-card-00034-5-uniq-0090-00",
         "live_leader_skill-card-00035-5-uniq-0082-00",
         "live_leader_skill-card-00037-5-uniq-0030-00",
         "live_leader_skill-card-03004-5-uniq-0073-00",
@@ -889,7 +913,8 @@
         "live_leader_skill-card-00014-5-uniq-0075-00",
         "live_leader_skill-card-00039-5-uniq-0032-00",
         "live_leader_skill-card-03001-5-uniq-0033-00",
-        "live_leader_skill-card-03003-5-uniq-0035-00"
+        "live_leader_skill-card-03003-5-uniq-0035-00",
+        "live_leader_skill-card-06003-5-uniq-0091-00"
       ]
     },
     "live_leader_skill_effect-performance_up_permil_up-800-live_skill_effect_target-all": {
@@ -915,7 +940,8 @@
       "snapshotRecordCount": 0,
       "leaderIds": [
         "live_leader_skill-card-00017-5-uniq-0077-00",
-        "live_leader_skill-card-00021-5-uniq-0064-00"
+        "live_leader_skill-card-00021-5-uniq-0064-00",
+        "live_leader_skill-card-00034-5-uniq-0090-00"
       ]
     },
     "live_leader_skill_effect-sense_up_permil_up-1350-live_skill_effect_target-all": {
@@ -936,6 +962,16 @@
         "live_leader_skill-card-06004-4-cmmn-0000-00"
       ]
     },
+    "live_leader_skill_effect-sense_up_permil_up-800-live_skill_effect_target-all": {
+      "canonicalRecords": [],
+      "snapshotRecordCount": 0,
+      "leaderIds": [
+        "live_leader_skill-card-00023-5-uniq-0085-00",
+        "live_leader_skill-card-00026-5-uniq-0065-00",
+        "live_leader_skill-card-03004-5-uniq-0073-00",
+        "live_leader_skill-card-04001-5-uniq-0071-00"
+      ]
+    },
     "live_leader_skill_effect-all_parameter_up_permil_up-450-live_skill_effect_target-all": {
       "canonicalRecords": [],
       "snapshotRecordCount": 0,
@@ -946,15 +982,6 @@
         "live_leader_skill-card-00036-5-uniq-0029-00",
         "live_leader_skill-card-03004-5-uniq-0036-00",
         "live_leader_skill-card-03009-5-uniq-0041-00"
-      ]
-    },
-    "live_leader_skill_effect-sense_up_permil_up-800-live_skill_effect_target-all": {
-      "canonicalRecords": [],
-      "snapshotRecordCount": 0,
-      "leaderIds": [
-        "live_leader_skill-card-00026-5-uniq-0065-00",
-        "live_leader_skill-card-03004-5-uniq-0073-00",
-        "live_leader_skill-card-04001-5-uniq-0071-00"
       ]
     },
     "live_leader_skill_effect-live_active_skill_effect_up_permil_up-500-live_skill_effect_target-all": {
@@ -1108,7 +1135,7 @@
             "text": "0期生が2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4948",
+                "pointer": "/sourceRecords/5057",
                 "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-gen_0-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_character_grouping-grp-gen_0-2",
@@ -1301,7 +1328,7 @@
             "text": "ハッピータイプ2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4944",
+                "pointer": "/sourceRecords/5053",
                 "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_3-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_attribute-attribute_3-2",
@@ -1584,7 +1611,7 @@
             "text": "1期生が2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4949",
+                "pointer": "/sourceRecords/5058",
                 "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-gen_1-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_character_grouping-grp-gen_1-2",
@@ -1687,7 +1714,7 @@
             "text": "1期生が2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4949",
+                "pointer": "/sourceRecords/5058",
                 "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-gen_1-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_character_grouping-grp-gen_1-2",
@@ -1970,7 +1997,7 @@
             "text": "1期生が2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4949",
+                "pointer": "/sourceRecords/5058",
                 "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-gen_1-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_character_grouping-grp-gen_1-2",
@@ -2073,7 +2100,7 @@
             "text": "キュートタイプ2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4940",
+                "pointer": "/sourceRecords/5049",
                 "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_1-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
@@ -2356,7 +2383,7 @@
             "text": "2期生が2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4950",
+                "pointer": "/sourceRecords/5059",
                 "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-gen_2-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_character_grouping-grp-gen_2-2",
@@ -2549,7 +2576,7 @@
             "text": "2期生が2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4950",
+                "pointer": "/sourceRecords/5059",
                 "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-gen_2-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_character_grouping-grp-gen_2-2",
@@ -2744,7 +2771,7 @@
             "text": "ハッピータイプ2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4944",
+                "pointer": "/sourceRecords/5053",
                 "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_3-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_attribute-attribute_3-2",
@@ -2792,7 +2819,7 @@
             "text": "ハッピータイプ2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4944",
+                "pointer": "/sourceRecords/5053",
                 "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_3-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_attribute-attribute_3-2",
@@ -2988,7 +3015,7 @@
             "text": "2期生が2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4950",
+                "pointer": "/sourceRecords/5059",
                 "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-gen_2-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_character_grouping-grp-gen_2-2",
@@ -3181,7 +3208,7 @@
             "text": "0期生が2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4948",
+                "pointer": "/sourceRecords/5057",
                 "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-gen_0-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_character_grouping-grp-gen_0-2",
@@ -3464,7 +3491,7 @@
             "text": "ゲーマーズが2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4947",
+                "pointer": "/sourceRecords/5056",
                 "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-gamers-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_character_grouping-grp-gamers-2",
@@ -3567,7 +3594,7 @@
             "text": "ピュアタイプ2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4942",
+                "pointer": "/sourceRecords/5051",
                 "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_2-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
@@ -3852,7 +3879,7 @@
             "text": "ピュアタイプ2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4942",
+                "pointer": "/sourceRecords/5051",
                 "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_2-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
@@ -3900,7 +3927,7 @@
             "text": "ピュアタイプ2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4942",
+                "pointer": "/sourceRecords/5051",
                 "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_2-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
@@ -4186,7 +4213,7 @@
             "text": "ゲーマーズが2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4947",
+                "pointer": "/sourceRecords/5056",
                 "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-gamers-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_character_grouping-grp-gamers-2",
@@ -4289,7 +4316,7 @@
             "text": "ゲーマーズが2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4947",
+                "pointer": "/sourceRecords/5056",
                 "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-gamers-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_character_grouping-grp-gamers-2",
@@ -4392,7 +4419,7 @@
             "text": "ハッピータイプ2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4944",
+                "pointer": "/sourceRecords/5053",
                 "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_3-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_attribute-attribute_3-2",
@@ -4497,7 +4524,7 @@
             "text": "ピュアタイプ2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4942",
+                "pointer": "/sourceRecords/5051",
                 "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_2-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
@@ -4545,7 +4572,7 @@
             "text": "ピュアタイプ2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4942",
+                "pointer": "/sourceRecords/5051",
                 "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_2-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
@@ -4831,7 +4858,7 @@
             "text": "0期生が2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4948",
+                "pointer": "/sourceRecords/5057",
                 "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-gen_0-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_character_grouping-grp-gen_0-2",
@@ -5026,7 +5053,7 @@
             "text": "キュートタイプ2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4940",
+                "pointer": "/sourceRecords/5049",
                 "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_1-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
@@ -5074,7 +5101,7 @@
             "text": "キュートタイプ2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4940",
+                "pointer": "/sourceRecords/5049",
                 "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_1-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
@@ -5182,7 +5209,7 @@
             "text": "キュートタイプ2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4940",
+                "pointer": "/sourceRecords/5049",
                 "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_1-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
@@ -5230,7 +5257,7 @@
             "text": "キュートタイプ2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4940",
+                "pointer": "/sourceRecords/5049",
                 "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_1-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
@@ -5428,7 +5455,7 @@
             "text": "ハッピータイプ2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4944",
+                "pointer": "/sourceRecords/5053",
                 "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_3-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_attribute-attribute_3-2",
@@ -5476,7 +5503,7 @@
             "text": "ハッピータイプ2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4944",
+                "pointer": "/sourceRecords/5053",
                 "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_3-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_attribute-attribute_3-2",
@@ -5582,7 +5609,7 @@
             "text": "3期生が2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4951",
+                "pointer": "/sourceRecords/5060",
                 "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-gen_3-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_character_grouping-grp-gen_3-2",
@@ -5775,7 +5802,7 @@
             "text": "3期生が2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4951",
+                "pointer": "/sourceRecords/5060",
                 "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-gen_3-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_character_grouping-grp-gen_3-2",
@@ -5968,7 +5995,7 @@
             "text": "3期生が2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4951",
+                "pointer": "/sourceRecords/5060",
                 "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-gen_3-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_character_grouping-grp-gen_3-2",
@@ -6029,6 +6056,162 @@
       ]
     },
     {
+      "leaderId": "live_leader_skill-card-00023-5-uniq-0085-00",
+      "cardId": "card-00023-5-uniq-0085-00",
+      "cardName": "お宝独占♡ウォーターキャノン",
+      "memberName": "宝鐘マリン",
+      "costumeId": "cos-00023-uniq-0085-00",
+      "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のセンスが80%UP\n[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のスコアサポート効果25%",
+      "sourceReferences": {
+        "costume": "cos-00023-uniq-0085-00",
+        "skill": "live_leader_skill-card-00023-5-uniq-0085-00",
+        "description": "la-generated-live_leader_skill-card-00023-5-uniq-0085-00-description",
+        "card": "/cards/68"
+      },
+      "rawLeaderRecord": {
+        "id": "live_leader_skill-card-00023-5-uniq-0085-00",
+        "liveSkillTriggerGroupId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
+        "livePassiveSkillEffectGroupId": "live_leader_skill_effect-sense_up_permil_up-800-live_skill_effect_target-all",
+        "additionalLiveSkillTriggerGroupId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
+        "additionalLivePassiveSkillEffectGroupId": "live_leader_skill_effect-live_active_skill_effect_up_permil_up-250-live_skill_effect_target-all",
+        "descriptionLangId": "la-generated-live_leader_skill-card-00023-5-uniq-0085-00-description"
+      },
+      "parameterIncluded": true,
+      "supportIncluded": true,
+      "compound": true,
+      "effects": [
+        {
+          "index": 0,
+          "role": "primary",
+          "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のセンスが80%UP",
+          "typeFromOriginalText": "S",
+          "isParameter": true,
+          "amountPercentFromOriginalText": 80,
+          "amountEvidence": "LangGeneratedLiveLeaderSkill_Jpn原文の%（ID命名から推定しない）",
+          "target": {
+            "typeFromOriginalText": "all_members",
+            "text": "全員",
+            "selectionRule": "not_required_by_text",
+            "selectCount": null,
+            "countMeaning": "全員。固定N人の指定なし"
+          },
+          "condition": {
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
+            "text": "ピュアタイプ2人以上",
+            "canonicalRecords": [
+              {
+                "pointer": "/sourceRecords/5051",
+                "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_2-2;number=1",
+                "fields": {
+                  "groupId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
+                  "number": 1,
+                  "type": "LiveSkillTriggerType_LIVE_SKILL_TRIGGER_TYPE_DECK_CARD_ATTRIBUTE",
+                  "threshold": "2",
+                  "cardAttributeType": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2",
+                  "descriptionLangId": "la-generated-live_skill_trigger-deck_card_attribute-attribute_2-2.1-description"
+                }
+              }
+            ],
+            "snapshotRecordCount": 1,
+            "type": "attribute_count",
+            "status": "reference_resolved",
+            "requiredCount": 2,
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2",
+            "reason": null
+          },
+          "effectGroupId": "live_leader_skill_effect-sense_up_permil_up-800-live_skill_effect_target-all",
+          "effectRecords": [],
+          "snapshotEffectRecordCount": 0,
+          "effectReferenceStatus": "unresolved",
+          "effectReferenceReason": "Leader原本5テーブルに効果テーブル未収録。Canonical/snapshotにも該当groupIdなし",
+          "effectSchemaCompatibility": "P/T/S/allの既存表現と同型",
+          "numericCalculation": "unconfirmed",
+          "semanticsFullyConfirmed": false
+        },
+        {
+          "index": 1,
+          "role": "additional",
+          "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のスコアサポート効果25%",
+          "typeFromOriginalText": "score_support",
+          "isParameter": false,
+          "amountPercentFromOriginalText": 25,
+          "amountEvidence": "LangGeneratedLiveLeaderSkill_Jpn原文の%（ID命名から推定しない）",
+          "target": {
+            "typeFromOriginalText": "all_members",
+            "text": "全員",
+            "selectionRule": "not_required_by_text",
+            "selectCount": null,
+            "countMeaning": "全員。固定N人の指定なし"
+          },
+          "condition": {
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
+            "text": "ピュアタイプ2人以上",
+            "canonicalRecords": [
+              {
+                "pointer": "/sourceRecords/5051",
+                "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_2-2;number=1",
+                "fields": {
+                  "groupId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
+                  "number": 1,
+                  "type": "LiveSkillTriggerType_LIVE_SKILL_TRIGGER_TYPE_DECK_CARD_ATTRIBUTE",
+                  "threshold": "2",
+                  "cardAttributeType": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2",
+                  "descriptionLangId": "la-generated-live_skill_trigger-deck_card_attribute-attribute_2-2.1-description"
+                }
+              }
+            ],
+            "snapshotRecordCount": 1,
+            "type": "attribute_count",
+            "status": "reference_resolved",
+            "requiredCount": 2,
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2",
+            "reason": null
+          },
+          "effectGroupId": "live_leader_skill_effect-live_active_skill_effect_up_permil_up-250-live_skill_effect_target-all",
+          "effectRecords": [],
+          "snapshotEffectRecordCount": 0,
+          "effectReferenceStatus": "unresolved",
+          "effectReferenceReason": "Leader原本5テーブルに効果テーブル未収録。Canonical/snapshotにも該当groupIdなし",
+          "effectSchemaCompatibility": "Parameter Effect対象外・Support仕様未確認",
+          "numericCalculation": "not_applicable_to_parameter",
+          "semanticsFullyConfirmed": false
+        }
+      ],
+      "classification": "C",
+      "classificationReasons": [
+        "効果groupの参照先未収録。原文による意味候補とraw effect定義を区別する",
+        "Leader計算基数・丸め・Passiveとの集約方式の検証根拠なし",
+        "Supportの数値計算・適用方式は今回未確認"
+      ],
+      "resolverCompatibility": {
+        "structure": "全員target追加・Leader source追加で原文構造を表現可能。実行仕様確定とは別",
+        "condition": [
+          "existing-resolver",
+          "existing-resolver"
+        ],
+        "target": "all_membersの追加が必要（既存targetに全員typeなし）",
+        "selection": "不要（原文上全員）",
+        "effectSchema": "Parameter P/T/S/allの効果表現は同型。複合は独立effect配列が必要",
+        "numericCommonality": "未確認",
+        "existingResolversOnly": false
+      },
+      "calculationVerification": {
+        "status": "unconfirmed",
+        "basis": "unknown",
+        "baseBloomPassiveMemoryBoardCostumeInclusion": "unknown",
+        "rounding": "unknown",
+        "sourceRateAggregation": "unknown",
+        "passiveLeaderAggregation": "unknown",
+        "parameterVsTotal": "原文はP/T/Sまたは全パラ。P/T/S別計算は推測可能だが未検証",
+        "verifiedLeaderFixture": null
+      },
+      "unresolved": [
+        "効果groupの参照先未収録。原文による意味候補とraw effect定義を区別する",
+        "Leader計算基数・丸め・Passiveとの集約方式の検証根拠なし",
+        "Supportの数値計算・適用方式は今回未確認"
+      ]
+    },
+    {
       "leaderId": "live_leader_skill-card-00026-4-cmmn-0000-00",
       "cardId": "card-00026-4-cmmn-0000-00",
       "cardName": "広がるhealing sound",
@@ -6039,7 +6222,7 @@
         "costume": "cos-00026-cmmn-0000-00",
         "skill": "live_leader_skill-card-00026-4-cmmn-0000-00",
         "description": "la-generated-live_leader_skill-card-00026-4-cmmn-0000-00-description",
-        "card": "/cards/69"
+        "card": "/cards/70"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-00026-4-cmmn-0000-00",
@@ -6129,7 +6312,7 @@
         "costume": "cos-00026-uniq-0021-00",
         "skill": "live_leader_skill-card-00026-5-uniq-0021-00",
         "description": "la-generated-live_leader_skill-card-00026-5-uniq-0021-00-description",
-        "card": "/cards/70"
+        "card": "/cards/71"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-00026-5-uniq-0021-00",
@@ -6219,7 +6402,7 @@
         "costume": "cos-00026-uniq-0065-00",
         "skill": "live_leader_skill-card-00026-5-uniq-0065-00",
         "description": "la-generated-live_leader_skill-card-00026-5-uniq-0065-00-description",
-        "card": "/cards/71"
+        "card": "/cards/72"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-00026-5-uniq-0065-00",
@@ -6253,7 +6436,7 @@
             "text": "ハッピータイプ2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4944",
+                "pointer": "/sourceRecords/5053",
                 "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_3-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_attribute-attribute_3-2",
@@ -6301,7 +6484,7 @@
             "text": "ハッピータイプ2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4944",
+                "pointer": "/sourceRecords/5053",
                 "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_3-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_attribute-attribute_3-2",
@@ -6375,7 +6558,7 @@
         "costume": "cos-00027-cmmn-0000-00",
         "skill": "live_leader_skill-card-00027-4-cmmn-0000-00",
         "description": "la-generated-live_leader_skill-card-00027-4-cmmn-0000-00-description",
-        "card": "/cards/73"
+        "card": "/cards/74"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-00027-4-cmmn-0000-00",
@@ -6465,7 +6648,7 @@
         "costume": "cos-00027-uniq-0022-00",
         "skill": "live_leader_skill-card-00027-5-uniq-0022-00",
         "description": "la-generated-live_leader_skill-card-00027-5-uniq-0022-00-description",
-        "card": "/cards/74"
+        "card": "/cards/75"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-00027-5-uniq-0022-00",
@@ -6497,7 +6680,7 @@
             "text": "4期生が2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4952",
+                "pointer": "/sourceRecords/5061",
                 "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-gen_4-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_character_grouping-grp-gen_4-2",
@@ -6568,7 +6751,7 @@
         "costume": "cos-00028-cmmn-0000-00",
         "skill": "live_leader_skill-card-00028-4-cmmn-0000-00",
         "description": "la-generated-live_leader_skill-card-00028-4-cmmn-0000-00-description",
-        "card": "/cards/76"
+        "card": "/cards/77"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-00028-4-cmmn-0000-00",
@@ -6600,7 +6783,7 @@
             "text": "4期生が2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4952",
+                "pointer": "/sourceRecords/5061",
                 "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-gen_4-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_character_grouping-grp-gen_4-2",
@@ -6671,7 +6854,7 @@
         "costume": "cos-00028-uniq-0023-00",
         "skill": "live_leader_skill-card-00028-5-uniq-0023-00",
         "description": "la-generated-live_leader_skill-card-00028-5-uniq-0023-00-description",
-        "card": "/cards/77"
+        "card": "/cards/78"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-00028-5-uniq-0023-00",
@@ -6761,7 +6944,7 @@
         "costume": "cos-00028-uniq-0070-00",
         "skill": "live_leader_skill-card-00028-5-uniq-0070-00",
         "description": "la-generated-live_leader_skill-card-00028-5-uniq-0070-00-description",
-        "card": "/cards/78"
+        "card": "/cards/79"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-00028-5-uniq-0070-00",
@@ -6793,7 +6976,7 @@
             "text": "4期生が2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4952",
+                "pointer": "/sourceRecords/5061",
                 "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-gen_4-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_character_grouping-grp-gen_4-2",
@@ -6864,7 +7047,7 @@
         "costume": "cos-00030-cmmn-0000-00",
         "skill": "live_leader_skill-card-00030-4-cmmn-0000-00",
         "description": "la-generated-live_leader_skill-card-00030-4-cmmn-0000-00-description",
-        "card": "/cards/80"
+        "card": "/cards/81"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-00030-4-cmmn-0000-00",
@@ -6954,7 +7137,7 @@
         "costume": "cos-00030-uniq-0024-00",
         "skill": "live_leader_skill-card-00030-5-uniq-0024-00",
         "description": "la-generated-live_leader_skill-card-00030-5-uniq-0024-00-description",
-        "card": "/cards/81"
+        "card": "/cards/82"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-00030-5-uniq-0024-00",
@@ -6986,7 +7169,7 @@
             "text": "5期生が2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4953",
+                "pointer": "/sourceRecords/5062",
                 "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-gen_5-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_character_grouping-grp-gen_5-2",
@@ -7047,6 +7230,96 @@
       ]
     },
     {
+      "leaderId": "live_leader_skill-card-00030-5-uniq-0089-00",
+      "cardId": "card-00030-5-uniq-0089-00",
+      "cardName": "火照りを鎮める癒しの一口",
+      "memberName": "雪花ラミィ",
+      "costumeId": "cos-00030-uniq-0089-00",
+      "description": "全員のスコアサポート効果60%",
+      "sourceReferences": {
+        "costume": "cos-00030-uniq-0089-00",
+        "skill": "live_leader_skill-card-00030-5-uniq-0089-00",
+        "description": "la-generated-live_leader_skill-card-00030-5-uniq-0089-00-description",
+        "card": "/cards/83"
+      },
+      "rawLeaderRecord": {
+        "id": "live_leader_skill-card-00030-5-uniq-0089-00",
+        "livePassiveSkillEffectGroupId": "live_leader_skill_effect-live_active_skill_effect_up_permil_up-600-live_skill_effect_target-all",
+        "descriptionLangId": "la-generated-live_leader_skill-card-00030-5-uniq-0089-00-description"
+      },
+      "parameterIncluded": false,
+      "supportIncluded": true,
+      "compound": false,
+      "effects": [
+        {
+          "index": 0,
+          "role": "primary",
+          "description": "全員のスコアサポート効果60%",
+          "typeFromOriginalText": "score_support",
+          "isParameter": false,
+          "amountPercentFromOriginalText": 60,
+          "amountEvidence": "LangGeneratedLiveLeaderSkill_Jpn原文の%（ID命名から推定しない）",
+          "target": {
+            "typeFromOriginalText": "all_members",
+            "text": "全員",
+            "selectionRule": "not_required_by_text",
+            "selectCount": null,
+            "countMeaning": "全員。固定N人の指定なし"
+          },
+          "condition": {
+            "referenceId": null,
+            "text": null,
+            "canonicalRecords": [],
+            "snapshotRecordCount": 0,
+            "type": "not_stated",
+            "status": "unresolved",
+            "requiredCount": null,
+            "reason": "原文に条件記載なし・Leader行にtrigger参照なし。明示alwaysとは確定しない"
+          },
+          "effectGroupId": "live_leader_skill_effect-live_active_skill_effect_up_permil_up-600-live_skill_effect_target-all",
+          "effectRecords": [],
+          "snapshotEffectRecordCount": 0,
+          "effectReferenceStatus": "unresolved",
+          "effectReferenceReason": "Leader原本5テーブルに効果テーブル未収録。Canonical/snapshotにも該当groupIdなし",
+          "effectSchemaCompatibility": "Parameter Effect対象外・Support仕様未確認",
+          "numericCalculation": "not_applicable_to_parameter",
+          "semanticsFullyConfirmed": false
+        }
+      ],
+      "classification": "C",
+      "classificationReasons": [
+        "効果groupの参照先未収録。原文による意味候補とraw effect定義を区別する",
+        "条件参照欠落または明示always未確認",
+        "Supportの数値計算・適用方式は今回未確認"
+      ],
+      "resolverCompatibility": {
+        "structure": "全員target追加・Leader source追加で原文構造を表現可能。実行仕様確定とは別",
+        "condition": [
+          "unresolved"
+        ],
+        "target": "all_membersの追加が必要（既存targetに全員typeなし）",
+        "selection": "不要（原文上全員）",
+        "effectSchema": "Parameter P/T/S/allの効果表現は同型。複合は独立effect配列が必要",
+        "numericCommonality": "Parameter対象外",
+        "existingResolversOnly": false
+      },
+      "calculationVerification": {
+        "status": "not_applicable",
+        "basis": "unknown",
+        "baseBloomPassiveMemoryBoardCostumeInclusion": "unknown",
+        "rounding": "unknown",
+        "sourceRateAggregation": "unknown",
+        "passiveLeaderAggregation": "unknown",
+        "parameterVsTotal": "Parameter対象外",
+        "verifiedLeaderFixture": null
+      },
+      "unresolved": [
+        "効果groupの参照先未収録。原文による意味候補とraw effect定義を区別する",
+        "条件参照欠落または明示always未確認",
+        "Supportの数値計算・適用方式は今回未確認"
+      ]
+    },
+    {
       "leaderId": "live_leader_skill-card-00031-4-cmmn-0000-00",
       "cardId": "card-00031-4-cmmn-0000-00",
       "cardName": "get excitedジャンプ！",
@@ -7057,7 +7330,7 @@
         "costume": "cos-00031-cmmn-0000-00",
         "skill": "live_leader_skill-card-00031-4-cmmn-0000-00",
         "description": "la-generated-live_leader_skill-card-00031-4-cmmn-0000-00-description",
-        "card": "/cards/83"
+        "card": "/cards/85"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-00031-4-cmmn-0000-00",
@@ -7089,7 +7362,7 @@
             "text": "5期生が2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4953",
+                "pointer": "/sourceRecords/5062",
                 "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-gen_5-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_character_grouping-grp-gen_5-2",
@@ -7160,7 +7433,7 @@
         "costume": "cos-00031-uniq-0025-00",
         "skill": "live_leader_skill-card-00031-5-uniq-0025-00",
         "description": "la-generated-live_leader_skill-card-00031-5-uniq-0025-00-description",
-        "card": "/cards/84"
+        "card": "/cards/86"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-00031-5-uniq-0025-00",
@@ -7250,7 +7523,7 @@
         "costume": "cos-00032-cmmn-0000-00",
         "skill": "live_leader_skill-card-00032-4-cmmn-0000-00",
         "description": "la-generated-live_leader_skill-card-00032-4-cmmn-0000-00-description",
-        "card": "/cards/86"
+        "card": "/cards/88"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-00032-4-cmmn-0000-00",
@@ -7340,7 +7613,7 @@
         "costume": "cos-00032-uniq-0026-00",
         "skill": "live_leader_skill-card-00032-5-uniq-0026-00",
         "description": "la-generated-live_leader_skill-card-00032-5-uniq-0026-00-description",
-        "card": "/cards/87"
+        "card": "/cards/89"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-00032-5-uniq-0026-00",
@@ -7430,7 +7703,7 @@
         "costume": "cos-00034-cmmn-0000-00",
         "skill": "live_leader_skill-card-00034-4-cmmn-0000-00",
         "description": "la-generated-live_leader_skill-card-00034-4-cmmn-0000-00-description",
-        "card": "/cards/89"
+        "card": "/cards/91"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-00034-4-cmmn-0000-00",
@@ -7520,7 +7793,7 @@
         "costume": "cos-00034-uniq-0027-00",
         "skill": "live_leader_skill-card-00034-5-uniq-0027-00",
         "description": "la-generated-live_leader_skill-card-00034-5-uniq-0027-00-description",
-        "card": "/cards/90"
+        "card": "/cards/92"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-00034-5-uniq-0027-00",
@@ -7600,6 +7873,162 @@
       ]
     },
     {
+      "leaderId": "live_leader_skill-card-00034-5-uniq-0090-00",
+      "cardId": "card-00034-5-uniq-0090-00",
+      "cardName": "幸せ分け合うMeat For You",
+      "memberName": "尾丸ポルカ",
+      "costumeId": "cos-00034-uniq-0090-00",
+      "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のテクニックが80%UP\n[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のスコアサポート効果25%",
+      "sourceReferences": {
+        "costume": "cos-00034-uniq-0090-00",
+        "skill": "live_leader_skill-card-00034-5-uniq-0090-00",
+        "description": "la-generated-live_leader_skill-card-00034-5-uniq-0090-00-description",
+        "card": "/cards/93"
+      },
+      "rawLeaderRecord": {
+        "id": "live_leader_skill-card-00034-5-uniq-0090-00",
+        "liveSkillTriggerGroupId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
+        "livePassiveSkillEffectGroupId": "live_leader_skill_effect-technique_up_permil_up-800-live_skill_effect_target-all",
+        "additionalLiveSkillTriggerGroupId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
+        "additionalLivePassiveSkillEffectGroupId": "live_leader_skill_effect-live_active_skill_effect_up_permil_up-250-live_skill_effect_target-all",
+        "descriptionLangId": "la-generated-live_leader_skill-card-00034-5-uniq-0090-00-description"
+      },
+      "parameterIncluded": true,
+      "supportIncluded": true,
+      "compound": true,
+      "effects": [
+        {
+          "index": 0,
+          "role": "primary",
+          "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のテクニックが80%UP",
+          "typeFromOriginalText": "T",
+          "isParameter": true,
+          "amountPercentFromOriginalText": 80,
+          "amountEvidence": "LangGeneratedLiveLeaderSkill_Jpn原文の%（ID命名から推定しない）",
+          "target": {
+            "typeFromOriginalText": "all_members",
+            "text": "全員",
+            "selectionRule": "not_required_by_text",
+            "selectCount": null,
+            "countMeaning": "全員。固定N人の指定なし"
+          },
+          "condition": {
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
+            "text": "ピュアタイプ2人以上",
+            "canonicalRecords": [
+              {
+                "pointer": "/sourceRecords/5051",
+                "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_2-2;number=1",
+                "fields": {
+                  "groupId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
+                  "number": 1,
+                  "type": "LiveSkillTriggerType_LIVE_SKILL_TRIGGER_TYPE_DECK_CARD_ATTRIBUTE",
+                  "threshold": "2",
+                  "cardAttributeType": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2",
+                  "descriptionLangId": "la-generated-live_skill_trigger-deck_card_attribute-attribute_2-2.1-description"
+                }
+              }
+            ],
+            "snapshotRecordCount": 1,
+            "type": "attribute_count",
+            "status": "reference_resolved",
+            "requiredCount": 2,
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2",
+            "reason": null
+          },
+          "effectGroupId": "live_leader_skill_effect-technique_up_permil_up-800-live_skill_effect_target-all",
+          "effectRecords": [],
+          "snapshotEffectRecordCount": 0,
+          "effectReferenceStatus": "unresolved",
+          "effectReferenceReason": "Leader原本5テーブルに効果テーブル未収録。Canonical/snapshotにも該当groupIdなし",
+          "effectSchemaCompatibility": "P/T/S/allの既存表現と同型",
+          "numericCalculation": "unconfirmed",
+          "semanticsFullyConfirmed": false
+        },
+        {
+          "index": 1,
+          "role": "additional",
+          "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のスコアサポート効果25%",
+          "typeFromOriginalText": "score_support",
+          "isParameter": false,
+          "amountPercentFromOriginalText": 25,
+          "amountEvidence": "LangGeneratedLiveLeaderSkill_Jpn原文の%（ID命名から推定しない）",
+          "target": {
+            "typeFromOriginalText": "all_members",
+            "text": "全員",
+            "selectionRule": "not_required_by_text",
+            "selectCount": null,
+            "countMeaning": "全員。固定N人の指定なし"
+          },
+          "condition": {
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
+            "text": "ピュアタイプ2人以上",
+            "canonicalRecords": [
+              {
+                "pointer": "/sourceRecords/5051",
+                "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_2-2;number=1",
+                "fields": {
+                  "groupId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
+                  "number": 1,
+                  "type": "LiveSkillTriggerType_LIVE_SKILL_TRIGGER_TYPE_DECK_CARD_ATTRIBUTE",
+                  "threshold": "2",
+                  "cardAttributeType": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2",
+                  "descriptionLangId": "la-generated-live_skill_trigger-deck_card_attribute-attribute_2-2.1-description"
+                }
+              }
+            ],
+            "snapshotRecordCount": 1,
+            "type": "attribute_count",
+            "status": "reference_resolved",
+            "requiredCount": 2,
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2",
+            "reason": null
+          },
+          "effectGroupId": "live_leader_skill_effect-live_active_skill_effect_up_permil_up-250-live_skill_effect_target-all",
+          "effectRecords": [],
+          "snapshotEffectRecordCount": 0,
+          "effectReferenceStatus": "unresolved",
+          "effectReferenceReason": "Leader原本5テーブルに効果テーブル未収録。Canonical/snapshotにも該当groupIdなし",
+          "effectSchemaCompatibility": "Parameter Effect対象外・Support仕様未確認",
+          "numericCalculation": "not_applicable_to_parameter",
+          "semanticsFullyConfirmed": false
+        }
+      ],
+      "classification": "C",
+      "classificationReasons": [
+        "効果groupの参照先未収録。原文による意味候補とraw effect定義を区別する",
+        "Leader計算基数・丸め・Passiveとの集約方式の検証根拠なし",
+        "Supportの数値計算・適用方式は今回未確認"
+      ],
+      "resolverCompatibility": {
+        "structure": "全員target追加・Leader source追加で原文構造を表現可能。実行仕様確定とは別",
+        "condition": [
+          "existing-resolver",
+          "existing-resolver"
+        ],
+        "target": "all_membersの追加が必要（既存targetに全員typeなし）",
+        "selection": "不要（原文上全員）",
+        "effectSchema": "Parameter P/T/S/allの効果表現は同型。複合は独立effect配列が必要",
+        "numericCommonality": "未確認",
+        "existingResolversOnly": false
+      },
+      "calculationVerification": {
+        "status": "unconfirmed",
+        "basis": "unknown",
+        "baseBloomPassiveMemoryBoardCostumeInclusion": "unknown",
+        "rounding": "unknown",
+        "sourceRateAggregation": "unknown",
+        "passiveLeaderAggregation": "unknown",
+        "parameterVsTotal": "原文はP/T/Sまたは全パラ。P/T/S別計算は推測可能だが未検証",
+        "verifiedLeaderFixture": null
+      },
+      "unresolved": [
+        "効果groupの参照先未収録。原文による意味候補とraw effect定義を区別する",
+        "Leader計算基数・丸め・Passiveとの集約方式の検証根拠なし",
+        "Supportの数値計算・適用方式は今回未確認"
+      ]
+    },
+    {
       "leaderId": "live_leader_skill-card-00035-4-cmmn-0000-00",
       "cardId": "card-00035-4-cmmn-0000-00",
       "cardName": "今宵のライブ、吾輩が主役",
@@ -7610,7 +8039,7 @@
         "costume": "cos-00035-cmmn-0000-00",
         "skill": "live_leader_skill-card-00035-4-cmmn-0000-00",
         "description": "la-generated-live_leader_skill-card-00035-4-cmmn-0000-00-description",
-        "card": "/cards/92"
+        "card": "/cards/95"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-00035-4-cmmn-0000-00",
@@ -7700,7 +8129,7 @@
         "costume": "cos-00035-uniq-0028-00",
         "skill": "live_leader_skill-card-00035-5-uniq-0028-00",
         "description": "la-generated-live_leader_skill-card-00035-5-uniq-0028-00-description",
-        "card": "/cards/93"
+        "card": "/cards/96"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-00035-5-uniq-0028-00",
@@ -7732,7 +8161,7 @@
             "text": "holoXが2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4954",
+                "pointer": "/sourceRecords/5063",
                 "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-holox-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_character_grouping-grp-holox-2",
@@ -7803,7 +8232,7 @@
         "costume": "cos-00035-uniq-0082-00",
         "skill": "live_leader_skill-card-00035-5-uniq-0082-00",
         "description": "la-generated-live_leader_skill-card-00035-5-uniq-0082-00-description",
-        "card": "/cards/94"
+        "card": "/cards/97"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-00035-5-uniq-0082-00",
@@ -7837,7 +8266,7 @@
             "text": "キュートタイプ2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4940",
+                "pointer": "/sourceRecords/5049",
                 "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_1-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
@@ -7885,7 +8314,7 @@
             "text": "キュートタイプ2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4940",
+                "pointer": "/sourceRecords/5049",
                 "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_1-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
@@ -7959,7 +8388,7 @@
         "costume": "cos-00036-cmmn-0000-00",
         "skill": "live_leader_skill-card-00036-4-cmmn-0000-00",
         "description": "la-generated-live_leader_skill-card-00036-4-cmmn-0000-00-description",
-        "card": "/cards/96"
+        "card": "/cards/99"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-00036-4-cmmn-0000-00",
@@ -8049,7 +8478,7 @@
         "costume": "cos-00036-uniq-0029-00",
         "skill": "live_leader_skill-card-00036-5-uniq-0029-00",
         "description": "la-generated-live_leader_skill-card-00036-5-uniq-0029-00-description",
-        "card": "/cards/97"
+        "card": "/cards/100"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-00036-5-uniq-0029-00",
@@ -8139,7 +8568,7 @@
         "costume": "cos-00036-uniq-0078-00",
         "skill": "live_leader_skill-card-00036-5-uniq-0078-00",
         "description": "la-generated-live_leader_skill-card-00036-5-uniq-0078-00-description",
-        "card": "/cards/98"
+        "card": "/cards/101"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-00036-5-uniq-0078-00",
@@ -8171,7 +8600,7 @@
             "text": "holoXが2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4954",
+                "pointer": "/sourceRecords/5063",
                 "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-holox-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_character_grouping-grp-holox-2",
@@ -8242,7 +8671,7 @@
         "costume": "cos-00037-cmmn-0000-00",
         "skill": "live_leader_skill-card-00037-4-cmmn-0000-00",
         "description": "la-generated-live_leader_skill-card-00037-4-cmmn-0000-00-description",
-        "card": "/cards/100"
+        "card": "/cards/103"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-00037-4-cmmn-0000-00",
@@ -8332,7 +8761,7 @@
         "costume": "cos-00037-uniq-0030-00",
         "skill": "live_leader_skill-card-00037-5-uniq-0030-00",
         "description": "la-generated-live_leader_skill-card-00037-5-uniq-0030-00-description",
-        "card": "/cards/101"
+        "card": "/cards/104"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-00037-5-uniq-0030-00",
@@ -8366,7 +8795,7 @@
             "text": "ピュアタイプ2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4942",
+                "pointer": "/sourceRecords/5051",
                 "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_2-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
@@ -8414,7 +8843,7 @@
             "text": "ピュアタイプ2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4942",
+                "pointer": "/sourceRecords/5051",
                 "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_2-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
@@ -8478,6 +8907,96 @@
       ]
     },
     {
+      "leaderId": "live_leader_skill-card-00037-5-uniq-0086-00",
+      "cardId": "card-00037-5-uniq-0086-00",
+      "cardName": "振り向きざまのaventure",
+      "memberName": "博衣こより",
+      "costumeId": "cos-00037-uniq-0086-00",
+      "description": "全員のスコアサポート効果60%",
+      "sourceReferences": {
+        "costume": "cos-00037-uniq-0086-00",
+        "skill": "live_leader_skill-card-00037-5-uniq-0086-00",
+        "description": "la-generated-live_leader_skill-card-00037-5-uniq-0086-00-description",
+        "card": "/cards/105"
+      },
+      "rawLeaderRecord": {
+        "id": "live_leader_skill-card-00037-5-uniq-0086-00",
+        "livePassiveSkillEffectGroupId": "live_leader_skill_effect-live_active_skill_effect_up_permil_up-600-live_skill_effect_target-all",
+        "descriptionLangId": "la-generated-live_leader_skill-card-00037-5-uniq-0086-00-description"
+      },
+      "parameterIncluded": false,
+      "supportIncluded": true,
+      "compound": false,
+      "effects": [
+        {
+          "index": 0,
+          "role": "primary",
+          "description": "全員のスコアサポート効果60%",
+          "typeFromOriginalText": "score_support",
+          "isParameter": false,
+          "amountPercentFromOriginalText": 60,
+          "amountEvidence": "LangGeneratedLiveLeaderSkill_Jpn原文の%（ID命名から推定しない）",
+          "target": {
+            "typeFromOriginalText": "all_members",
+            "text": "全員",
+            "selectionRule": "not_required_by_text",
+            "selectCount": null,
+            "countMeaning": "全員。固定N人の指定なし"
+          },
+          "condition": {
+            "referenceId": null,
+            "text": null,
+            "canonicalRecords": [],
+            "snapshotRecordCount": 0,
+            "type": "not_stated",
+            "status": "unresolved",
+            "requiredCount": null,
+            "reason": "原文に条件記載なし・Leader行にtrigger参照なし。明示alwaysとは確定しない"
+          },
+          "effectGroupId": "live_leader_skill_effect-live_active_skill_effect_up_permil_up-600-live_skill_effect_target-all",
+          "effectRecords": [],
+          "snapshotEffectRecordCount": 0,
+          "effectReferenceStatus": "unresolved",
+          "effectReferenceReason": "Leader原本5テーブルに効果テーブル未収録。Canonical/snapshotにも該当groupIdなし",
+          "effectSchemaCompatibility": "Parameter Effect対象外・Support仕様未確認",
+          "numericCalculation": "not_applicable_to_parameter",
+          "semanticsFullyConfirmed": false
+        }
+      ],
+      "classification": "C",
+      "classificationReasons": [
+        "効果groupの参照先未収録。原文による意味候補とraw effect定義を区別する",
+        "条件参照欠落または明示always未確認",
+        "Supportの数値計算・適用方式は今回未確認"
+      ],
+      "resolverCompatibility": {
+        "structure": "全員target追加・Leader source追加で原文構造を表現可能。実行仕様確定とは別",
+        "condition": [
+          "unresolved"
+        ],
+        "target": "all_membersの追加が必要（既存targetに全員typeなし）",
+        "selection": "不要（原文上全員）",
+        "effectSchema": "Parameter P/T/S/allの効果表現は同型。複合は独立effect配列が必要",
+        "numericCommonality": "Parameter対象外",
+        "existingResolversOnly": false
+      },
+      "calculationVerification": {
+        "status": "not_applicable",
+        "basis": "unknown",
+        "baseBloomPassiveMemoryBoardCostumeInclusion": "unknown",
+        "rounding": "unknown",
+        "sourceRateAggregation": "unknown",
+        "passiveLeaderAggregation": "unknown",
+        "parameterVsTotal": "Parameter対象外",
+        "verifiedLeaderFixture": null
+      },
+      "unresolved": [
+        "効果groupの参照先未収録。原文による意味候補とraw effect定義を区別する",
+        "条件参照欠落または明示always未確認",
+        "Supportの数値計算・適用方式は今回未確認"
+      ]
+    },
+    {
       "leaderId": "live_leader_skill-card-00039-4-cmmn-0000-00",
       "cardId": "card-00039-4-cmmn-0000-00",
       "cardName": "ステージで放つ！修行の成果",
@@ -8488,7 +9007,7 @@
         "costume": "cos-00039-cmmn-0000-00",
         "skill": "live_leader_skill-card-00039-4-cmmn-0000-00",
         "description": "la-generated-live_leader_skill-card-00039-4-cmmn-0000-00-description",
-        "card": "/cards/103"
+        "card": "/cards/107"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-00039-4-cmmn-0000-00",
@@ -8520,7 +9039,7 @@
             "text": "holoXが2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4954",
+                "pointer": "/sourceRecords/5063",
                 "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-holox-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_character_grouping-grp-holox-2",
@@ -8591,7 +9110,7 @@
         "costume": "cos-00039-uniq-0032-00",
         "skill": "live_leader_skill-card-00039-5-uniq-0032-00",
         "description": "la-generated-live_leader_skill-card-00039-5-uniq-0032-00-description",
-        "card": "/cards/104"
+        "card": "/cards/108"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-00039-5-uniq-0032-00",
@@ -8623,7 +9142,7 @@
             "text": "キュートタイプ2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4940",
+                "pointer": "/sourceRecords/5049",
                 "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_1-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
@@ -8694,7 +9213,7 @@
         "costume": "cos-03001-cmmn-0000-00",
         "skill": "live_leader_skill-card-03001-4-cmmn-0000-00",
         "description": "la-generated-live_leader_skill-card-03001-4-cmmn-0000-00-description",
-        "card": "/cards/106"
+        "card": "/cards/110"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-03001-4-cmmn-0000-00",
@@ -8784,7 +9303,7 @@
         "costume": "cos-03001-uniq-0033-00",
         "skill": "live_leader_skill-card-03001-5-uniq-0033-00",
         "description": "la-generated-live_leader_skill-card-03001-5-uniq-0033-00-description",
-        "card": "/cards/107"
+        "card": "/cards/111"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-03001-5-uniq-0033-00",
@@ -8816,7 +9335,7 @@
             "text": "ハッピータイプ2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4944",
+                "pointer": "/sourceRecords/5053",
                 "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_3-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_attribute-attribute_3-2",
@@ -8887,7 +9406,7 @@
         "costume": "cos-03002-cmmn-0000-00",
         "skill": "live_leader_skill-card-03002-4-cmmn-0000-00",
         "description": "la-generated-live_leader_skill-card-03002-4-cmmn-0000-00-description",
-        "card": "/cards/109"
+        "card": "/cards/113"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-03002-4-cmmn-0000-00",
@@ -8977,7 +9496,7 @@
         "costume": "cos-03002-uniq-0034-00",
         "skill": "live_leader_skill-card-03002-5-uniq-0034-00",
         "description": "la-generated-live_leader_skill-card-03002-5-uniq-0034-00-description",
-        "card": "/cards/110"
+        "card": "/cards/114"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-03002-5-uniq-0034-00",
@@ -9009,7 +9528,7 @@
             "text": "ID1期生が2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4955",
+                "pointer": "/sourceRecords/5064",
                 "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-indonesia-gen_1-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_character_grouping-grp-indonesia-gen_1-2",
@@ -9080,7 +9599,7 @@
         "costume": "cos-03003-cmmn-0000-00",
         "skill": "live_leader_skill-card-03003-4-cmmn-0000-00",
         "description": "la-generated-live_leader_skill-card-03003-4-cmmn-0000-00-description",
-        "card": "/cards/112"
+        "card": "/cards/116"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-03003-4-cmmn-0000-00",
@@ -9112,7 +9631,7 @@
             "text": "ID1期生が2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4955",
+                "pointer": "/sourceRecords/5064",
                 "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-indonesia-gen_1-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_character_grouping-grp-indonesia-gen_1-2",
@@ -9183,7 +9702,7 @@
         "costume": "cos-03003-uniq-0035-00",
         "skill": "live_leader_skill-card-03003-5-uniq-0035-00",
         "description": "la-generated-live_leader_skill-card-03003-5-uniq-0035-00-description",
-        "card": "/cards/113"
+        "card": "/cards/117"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-03003-5-uniq-0035-00",
@@ -9215,7 +9734,7 @@
             "text": "ピュアタイプ2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4942",
+                "pointer": "/sourceRecords/5051",
                 "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_2-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
@@ -9286,7 +9805,7 @@
         "costume": "cos-03004-cmmn-0000-00",
         "skill": "live_leader_skill-card-03004-4-cmmn-0000-00",
         "description": "la-generated-live_leader_skill-card-03004-4-cmmn-0000-00-description",
-        "card": "/cards/115"
+        "card": "/cards/119"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-03004-4-cmmn-0000-00",
@@ -9376,7 +9895,7 @@
         "costume": "cos-03004-uniq-0036-00",
         "skill": "live_leader_skill-card-03004-5-uniq-0036-00",
         "description": "la-generated-live_leader_skill-card-03004-5-uniq-0036-00-description",
-        "card": "/cards/116"
+        "card": "/cards/120"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-03004-5-uniq-0036-00",
@@ -9466,7 +9985,7 @@
         "costume": "cos-03004-uniq-0073-00",
         "skill": "live_leader_skill-card-03004-5-uniq-0073-00",
         "description": "la-generated-live_leader_skill-card-03004-5-uniq-0073-00-description",
-        "card": "/cards/117"
+        "card": "/cards/121"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-03004-5-uniq-0073-00",
@@ -9500,7 +10019,7 @@
             "text": "ハッピータイプ2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4944",
+                "pointer": "/sourceRecords/5053",
                 "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_3-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_attribute-attribute_3-2",
@@ -9548,7 +10067,7 @@
             "text": "ハッピータイプ2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4944",
+                "pointer": "/sourceRecords/5053",
                 "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_3-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_attribute-attribute_3-2",
@@ -9622,7 +10141,7 @@
         "costume": "cos-03005-cmmn-0000-00",
         "skill": "live_leader_skill-card-03005-4-cmmn-0000-00",
         "description": "la-generated-live_leader_skill-card-03005-4-cmmn-0000-00-description",
-        "card": "/cards/119"
+        "card": "/cards/123"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-03005-4-cmmn-0000-00",
@@ -9712,7 +10231,7 @@
         "costume": "cos-03005-uniq-0037-00",
         "skill": "live_leader_skill-card-03005-5-uniq-0037-00",
         "description": "la-generated-live_leader_skill-card-03005-5-uniq-0037-00-description",
-        "card": "/cards/120"
+        "card": "/cards/124"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-03005-5-uniq-0037-00",
@@ -9744,7 +10263,7 @@
             "text": "ID2期生が2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4956",
+                "pointer": "/sourceRecords/5065",
                 "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-indonesia-gen_2-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_character_grouping-grp-indonesia-gen_2-2",
@@ -9815,7 +10334,7 @@
         "costume": "cos-03005-uniq-0084-00",
         "skill": "live_leader_skill-card-03005-5-uniq-0084-00",
         "description": "la-generated-live_leader_skill-card-03005-5-uniq-0084-00-description",
-        "card": "/cards/121"
+        "card": "/cards/125"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-03005-5-uniq-0084-00",
@@ -9847,7 +10366,7 @@
             "text": "ピュアタイプ2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4942",
+                "pointer": "/sourceRecords/5051",
                 "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_2-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
@@ -9918,7 +10437,7 @@
         "costume": "cos-03006-cmmn-0000-00",
         "skill": "live_leader_skill-card-03006-4-cmmn-0000-00",
         "description": "la-generated-live_leader_skill-card-03006-4-cmmn-0000-00-description",
-        "card": "/cards/123"
+        "card": "/cards/127"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-03006-4-cmmn-0000-00",
@@ -9950,7 +10469,7 @@
             "text": "ID2期生が2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4956",
+                "pointer": "/sourceRecords/5065",
                 "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-indonesia-gen_2-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_character_grouping-grp-indonesia-gen_2-2",
@@ -10021,7 +10540,7 @@
         "costume": "cos-03006-uniq-0038-00",
         "skill": "live_leader_skill-card-03006-5-uniq-0038-00",
         "description": "la-generated-live_leader_skill-card-03006-5-uniq-0038-00-description",
-        "card": "/cards/124"
+        "card": "/cards/128"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-03006-5-uniq-0038-00",
@@ -10111,7 +10630,7 @@
         "costume": "cos-03007-cmmn-0000-00",
         "skill": "live_leader_skill-card-03007-4-cmmn-0000-00",
         "description": "la-generated-live_leader_skill-card-03007-4-cmmn-0000-00-description",
-        "card": "/cards/126"
+        "card": "/cards/130"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-03007-4-cmmn-0000-00",
@@ -10201,7 +10720,7 @@
         "costume": "cos-03007-uniq-0039-00",
         "skill": "live_leader_skill-card-03007-5-uniq-0039-00",
         "description": "la-generated-live_leader_skill-card-03007-5-uniq-0039-00-description",
-        "card": "/cards/127"
+        "card": "/cards/131"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-03007-5-uniq-0039-00",
@@ -10233,7 +10752,7 @@
             "text": "ID3期生が2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4957",
+                "pointer": "/sourceRecords/5066",
                 "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-indonesia-gen_3-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_character_grouping-grp-indonesia-gen_3-2",
@@ -10304,7 +10823,7 @@
         "costume": "cos-03008-cmmn-0000-00",
         "skill": "live_leader_skill-card-03008-4-cmmn-0000-00",
         "description": "la-generated-live_leader_skill-card-03008-4-cmmn-0000-00-description",
-        "card": "/cards/129"
+        "card": "/cards/133"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-03008-4-cmmn-0000-00",
@@ -10336,7 +10855,7 @@
             "text": "ID3期生が2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4957",
+                "pointer": "/sourceRecords/5066",
                 "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-indonesia-gen_3-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_character_grouping-grp-indonesia-gen_3-2",
@@ -10407,7 +10926,7 @@
         "costume": "cos-03008-uniq-0040-00",
         "skill": "live_leader_skill-card-03008-5-uniq-0040-00",
         "description": "la-generated-live_leader_skill-card-03008-5-uniq-0040-00-description",
-        "card": "/cards/130"
+        "card": "/cards/134"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-03008-5-uniq-0040-00",
@@ -10497,7 +11016,7 @@
         "costume": "cos-03009-cmmn-0000-00",
         "skill": "live_leader_skill-card-03009-4-cmmn-0000-00",
         "description": "la-generated-live_leader_skill-card-03009-4-cmmn-0000-00-description",
-        "card": "/cards/132"
+        "card": "/cards/136"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-03009-4-cmmn-0000-00",
@@ -10587,7 +11106,7 @@
         "costume": "cos-03009-uniq-0041-00",
         "skill": "live_leader_skill-card-03009-5-uniq-0041-00",
         "description": "la-generated-live_leader_skill-card-03009-5-uniq-0041-00-description",
-        "card": "/cards/133"
+        "card": "/cards/137"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-03009-5-uniq-0041-00",
@@ -10667,6 +11186,109 @@
       ]
     },
     {
+      "leaderId": "live_leader_skill-card-03009-5-uniq-0088-00",
+      "cardId": "card-03009-5-uniq-0088-00",
+      "cardName": "波間に揺れるBody ＆ Soul",
+      "memberName": "こぼ・かなえる",
+      "costumeId": "cos-03009-uniq-0088-00",
+      "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員のセンスが130%UP",
+      "sourceReferences": {
+        "costume": "cos-03009-uniq-0088-00",
+        "skill": "live_leader_skill-card-03009-5-uniq-0088-00",
+        "description": "la-generated-live_leader_skill-card-03009-5-uniq-0088-00-description",
+        "card": "/cards/138"
+      },
+      "rawLeaderRecord": {
+        "id": "live_leader_skill-card-03009-5-uniq-0088-00",
+        "liveSkillTriggerGroupId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
+        "livePassiveSkillEffectGroupId": "live_leader_skill_effect-sense_up_permil_up-1300-live_skill_effect_target-all",
+        "descriptionLangId": "la-generated-live_leader_skill-card-03009-5-uniq-0088-00-description"
+      },
+      "parameterIncluded": true,
+      "supportIncluded": false,
+      "compound": false,
+      "effects": [
+        {
+          "index": 0,
+          "role": "primary",
+          "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員のセンスが130%UP",
+          "typeFromOriginalText": "S",
+          "isParameter": true,
+          "amountPercentFromOriginalText": 130,
+          "amountEvidence": "LangGeneratedLiveLeaderSkill_Jpn原文の%（ID命名から推定しない）",
+          "target": {
+            "typeFromOriginalText": "all_members",
+            "text": "全員",
+            "selectionRule": "not_required_by_text",
+            "selectCount": null,
+            "countMeaning": "全員。固定N人の指定なし"
+          },
+          "condition": {
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
+            "text": "キュートタイプ2人以上",
+            "canonicalRecords": [
+              {
+                "pointer": "/sourceRecords/5049",
+                "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_1-2;number=1",
+                "fields": {
+                  "groupId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
+                  "number": 1,
+                  "type": "LiveSkillTriggerType_LIVE_SKILL_TRIGGER_TYPE_DECK_CARD_ATTRIBUTE",
+                  "threshold": "2",
+                  "cardAttributeType": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1",
+                  "descriptionLangId": "la-generated-live_skill_trigger-deck_card_attribute-attribute_1-2.1-description"
+                }
+              }
+            ],
+            "snapshotRecordCount": 1,
+            "type": "attribute_count",
+            "status": "reference_resolved",
+            "requiredCount": 2,
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1",
+            "reason": null
+          },
+          "effectGroupId": "live_leader_skill_effect-sense_up_permil_up-1300-live_skill_effect_target-all",
+          "effectRecords": [],
+          "snapshotEffectRecordCount": 0,
+          "effectReferenceStatus": "unresolved",
+          "effectReferenceReason": "Leader原本5テーブルに効果テーブル未収録。Canonical/snapshotにも該当groupIdなし",
+          "effectSchemaCompatibility": "P/T/S/allの既存表現と同型",
+          "numericCalculation": "unconfirmed",
+          "semanticsFullyConfirmed": false
+        }
+      ],
+      "classification": "C",
+      "classificationReasons": [
+        "効果groupの参照先未収録。原文による意味候補とraw effect定義を区別する",
+        "Leader計算基数・丸め・Passiveとの集約方式の検証根拠なし"
+      ],
+      "resolverCompatibility": {
+        "structure": "全員target追加・Leader source追加で原文構造を表現可能。実行仕様確定とは別",
+        "condition": [
+          "existing-resolver"
+        ],
+        "target": "all_membersの追加が必要（既存targetに全員typeなし）",
+        "selection": "不要（原文上全員）",
+        "effectSchema": "Parameter P/T/S/allの効果表現は同型。複合は独立effect配列が必要",
+        "numericCommonality": "未確認",
+        "existingResolversOnly": false
+      },
+      "calculationVerification": {
+        "status": "unconfirmed",
+        "basis": "unknown",
+        "baseBloomPassiveMemoryBoardCostumeInclusion": "unknown",
+        "rounding": "unknown",
+        "sourceRateAggregation": "unknown",
+        "passiveLeaderAggregation": "unknown",
+        "parameterVsTotal": "原文はP/T/Sまたは全パラ。P/T/S別計算は推測可能だが未検証",
+        "verifiedLeaderFixture": null
+      },
+      "unresolved": [
+        "効果groupの参照先未収録。原文による意味候補とraw effect定義を区別する",
+        "Leader計算基数・丸め・Passiveとの集約方式の検証根拠なし"
+      ]
+    },
+    {
       "leaderId": "live_leader_skill-card-04001-4-cmmn-0000-00",
       "cardId": "card-04001-4-cmmn-0000-00",
       "cardName": "レペゼン冥土！ here we go",
@@ -10677,7 +11299,7 @@
         "costume": "cos-04001-cmmn-0000-00",
         "skill": "live_leader_skill-card-04001-4-cmmn-0000-00",
         "description": "la-generated-live_leader_skill-card-04001-4-cmmn-0000-00-description",
-        "card": "/cards/135"
+        "card": "/cards/140"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-04001-4-cmmn-0000-00",
@@ -10767,7 +11389,7 @@
         "costume": "cos-04001-uniq-0042-00",
         "skill": "live_leader_skill-card-04001-5-uniq-0042-00",
         "description": "la-generated-live_leader_skill-card-04001-5-uniq-0042-00-description",
-        "card": "/cards/136"
+        "card": "/cards/141"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-04001-5-uniq-0042-00",
@@ -10799,7 +11421,7 @@
             "text": "Mythが2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4958",
+                "pointer": "/sourceRecords/5067",
                 "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-myth-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_character_grouping-grp-myth-2",
@@ -10870,7 +11492,7 @@
         "costume": "cos-04001-uniq-0071-00",
         "skill": "live_leader_skill-card-04001-5-uniq-0071-00",
         "description": "la-generated-live_leader_skill-card-04001-5-uniq-0071-00-description",
-        "card": "/cards/137"
+        "card": "/cards/142"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-04001-5-uniq-0071-00",
@@ -10904,7 +11526,7 @@
             "text": "キュートタイプ2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4940",
+                "pointer": "/sourceRecords/5049",
                 "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_1-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
@@ -10952,7 +11574,7 @@
             "text": "キュートタイプ2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4940",
+                "pointer": "/sourceRecords/5049",
                 "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_1-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
@@ -11026,7 +11648,7 @@
         "costume": "cos-04002-cmmn-0000-00",
         "skill": "live_leader_skill-card-04002-4-cmmn-0000-00",
         "description": "la-generated-live_leader_skill-card-04002-4-cmmn-0000-00-description",
-        "card": "/cards/139"
+        "card": "/cards/144"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-04002-4-cmmn-0000-00",
@@ -11058,7 +11680,7 @@
             "text": "Mythが2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4958",
+                "pointer": "/sourceRecords/5067",
                 "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-myth-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_character_grouping-grp-myth-2",
@@ -11129,7 +11751,7 @@
         "costume": "cos-04002-uniq-0043-00",
         "skill": "live_leader_skill-card-04002-5-uniq-0043-00",
         "description": "la-generated-live_leader_skill-card-04002-5-uniq-0043-00-description",
-        "card": "/cards/140"
+        "card": "/cards/145"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-04002-5-uniq-0043-00",
@@ -11161,7 +11783,7 @@
             "text": "キュートタイプ2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4940",
+                "pointer": "/sourceRecords/5049",
                 "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_1-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
@@ -11232,7 +11854,7 @@
         "costume": "cos-04003-cmmn-0000-00",
         "skill": "live_leader_skill-card-04003-4-cmmn-0000-00",
         "description": "la-generated-live_leader_skill-card-04003-4-cmmn-0000-00-description",
-        "card": "/cards/142"
+        "card": "/cards/147"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-04003-4-cmmn-0000-00",
@@ -11322,7 +11944,7 @@
         "costume": "cos-04003-uniq-0044-00",
         "skill": "live_leader_skill-card-04003-5-uniq-0044-00",
         "description": "la-generated-live_leader_skill-card-04003-5-uniq-0044-00-description",
-        "card": "/cards/143"
+        "card": "/cards/148"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-04003-5-uniq-0044-00",
@@ -11412,7 +12034,7 @@
         "costume": "cos-04003-uniq-0072-00",
         "skill": "live_leader_skill-card-04003-5-uniq-0072-00",
         "description": "la-generated-live_leader_skill-card-04003-5-uniq-0072-00-description",
-        "card": "/cards/144"
+        "card": "/cards/149"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-04003-5-uniq-0072-00",
@@ -11444,7 +12066,7 @@
             "text": "Mythが2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4958",
+                "pointer": "/sourceRecords/5067",
                 "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-myth-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_character_grouping-grp-myth-2",
@@ -11515,7 +12137,7 @@
         "costume": "cos-04007-cmmn-0000-00",
         "skill": "live_leader_skill-card-04007-4-cmmn-0000-00",
         "description": "la-generated-live_leader_skill-card-04007-4-cmmn-0000-00-description",
-        "card": "/cards/146"
+        "card": "/cards/151"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-04007-4-cmmn-0000-00",
@@ -11605,7 +12227,7 @@
         "costume": "cos-04007-uniq-0047-00",
         "skill": "live_leader_skill-card-04007-5-uniq-0047-00",
         "description": "la-generated-live_leader_skill-card-04007-5-uniq-0047-00-description",
-        "card": "/cards/147"
+        "card": "/cards/152"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-04007-5-uniq-0047-00",
@@ -11635,12 +12257,26 @@
           "condition": {
             "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-promise-2",
             "text": "Promiseが2人以上",
-            "canonicalRecords": [],
-            "snapshotRecordCount": 0,
-            "type": "unknown",
-            "status": "unresolved",
-            "requiredCount": null,
-            "reason": "既存Canonicalと保存済み調査snapshotに条件参照先なし。原文・IDから実行条件を生成しない"
+            "canonicalRecords": [
+              {
+                "pointer": "/sourceRecords/5068",
+                "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-promise-2;number=1",
+                "fields": {
+                  "groupId": "live_skill_trigger-deck_card_character_grouping-grp-promise-2",
+                  "number": 1,
+                  "type": "LiveSkillTriggerType_LIVE_SKILL_TRIGGER_TYPE_DECK_CARD_CHARACTER_GROUPING",
+                  "threshold": "2",
+                  "characterGroupingId": "grp-promise",
+                  "descriptionLangId": "la-generated-live_skill_trigger-deck_card_character_grouping-grp-promise-2.1-description"
+                }
+              }
+            ],
+            "snapshotRecordCount": 1,
+            "type": "affiliation_count",
+            "status": "reference_resolved",
+            "requiredCount": 2,
+            "affiliationId": "grp-promise",
+            "reason": null
           },
           "effectGroupId": "live_leader_skill_effect-all_parameter_up_permil_up-500-live_skill_effect_target-all",
           "effectRecords": [],
@@ -11655,13 +12291,12 @@
       "classification": "C",
       "classificationReasons": [
         "効果groupの参照先未収録。原文による意味候補とraw effect定義を区別する",
-        "条件参照欠落または明示always未確認",
         "Leader計算基数・丸め・Passiveとの集約方式の検証根拠なし"
       ],
       "resolverCompatibility": {
         "structure": "全員target追加・Leader source追加で原文構造を表現可能。実行仕様確定とは別",
         "condition": [
-          "unresolved"
+          "existing-resolver"
         ],
         "target": "all_membersの追加が必要（既存targetに全員typeなし）",
         "selection": "不要（原文上全員）",
@@ -11681,7 +12316,6 @@
       },
       "unresolved": [
         "効果groupの参照先未収録。原文による意味候補とraw effect定義を区別する",
-        "条件参照欠落または明示always未確認",
         "Leader計算基数・丸め・Passiveとの集約方式の検証根拠なし"
       ]
     },
@@ -11696,7 +12330,7 @@
         "costume": "cos-04010-cmmn-0000-00",
         "skill": "live_leader_skill-card-04010-4-cmmn-0000-00",
         "description": "la-generated-live_leader_skill-card-04010-4-cmmn-0000-00-description",
-        "card": "/cards/149"
+        "card": "/cards/154"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-04010-4-cmmn-0000-00",
@@ -11726,12 +12360,26 @@
           "condition": {
             "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-promise-2",
             "text": "Promiseが2人以上",
-            "canonicalRecords": [],
-            "snapshotRecordCount": 0,
-            "type": "unknown",
-            "status": "unresolved",
-            "requiredCount": null,
-            "reason": "既存Canonicalと保存済み調査snapshotに条件参照先なし。原文・IDから実行条件を生成しない"
+            "canonicalRecords": [
+              {
+                "pointer": "/sourceRecords/5068",
+                "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-promise-2;number=1",
+                "fields": {
+                  "groupId": "live_skill_trigger-deck_card_character_grouping-grp-promise-2",
+                  "number": 1,
+                  "type": "LiveSkillTriggerType_LIVE_SKILL_TRIGGER_TYPE_DECK_CARD_CHARACTER_GROUPING",
+                  "threshold": "2",
+                  "characterGroupingId": "grp-promise",
+                  "descriptionLangId": "la-generated-live_skill_trigger-deck_card_character_grouping-grp-promise-2.1-description"
+                }
+              }
+            ],
+            "snapshotRecordCount": 1,
+            "type": "affiliation_count",
+            "status": "reference_resolved",
+            "requiredCount": 2,
+            "affiliationId": "grp-promise",
+            "reason": null
           },
           "effectGroupId": "live_leader_skill_effect-all_parameter_up_permil_up-400-live_skill_effect_target-all",
           "effectRecords": [],
@@ -11746,13 +12394,12 @@
       "classification": "C",
       "classificationReasons": [
         "効果groupの参照先未収録。原文による意味候補とraw effect定義を区別する",
-        "条件参照欠落または明示always未確認",
         "Leader計算基数・丸め・Passiveとの集約方式の検証根拠なし"
       ],
       "resolverCompatibility": {
         "structure": "全員target追加・Leader source追加で原文構造を表現可能。実行仕様確定とは別",
         "condition": [
-          "unresolved"
+          "existing-resolver"
         ],
         "target": "all_membersの追加が必要（既存targetに全員typeなし）",
         "selection": "不要（原文上全員）",
@@ -11772,7 +12419,6 @@
       },
       "unresolved": [
         "効果groupの参照先未収録。原文による意味候補とraw effect定義を区別する",
-        "条件参照欠落または明示always未確認",
         "Leader計算基数・丸め・Passiveとの集約方式の検証根拠なし"
       ]
     },
@@ -11787,7 +12433,7 @@
         "costume": "cos-04010-uniq-0049-00",
         "skill": "live_leader_skill-card-04010-5-uniq-0049-00",
         "description": "la-generated-live_leader_skill-card-04010-5-uniq-0049-00-description",
-        "card": "/cards/150"
+        "card": "/cards/155"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-04010-5-uniq-0049-00",
@@ -11877,7 +12523,7 @@
         "costume": "cos-04012-cmmn-0000-00",
         "skill": "live_leader_skill-card-04012-4-cmmn-0000-00",
         "description": "la-generated-live_leader_skill-card-04012-4-cmmn-0000-00-description",
-        "card": "/cards/152"
+        "card": "/cards/157"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-04012-4-cmmn-0000-00",
@@ -11967,7 +12613,7 @@
         "costume": "cos-04012-uniq-0051-00",
         "skill": "live_leader_skill-card-04012-5-uniq-0051-00",
         "description": "la-generated-live_leader_skill-card-04012-5-uniq-0051-00-description",
-        "card": "/cards/153"
+        "card": "/cards/158"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-04012-5-uniq-0051-00",
@@ -11999,7 +12645,7 @@
             "text": "ピュアタイプ2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4942",
+                "pointer": "/sourceRecords/5051",
                 "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_2-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
@@ -12060,6 +12706,109 @@
       ]
     },
     {
+      "leaderId": "live_leader_skill-card-04012-5-uniq-0087-00",
+      "cardId": "card-04012-5-uniq-0087-00",
+      "cardName": "これがボクのイチオシ！",
+      "memberName": "ハコス・ベールズ",
+      "costumeId": "cos-04012-uniq-0087-00",
+      "description": "Promiseが2人以上で全員の全パラメータが50%UP",
+      "sourceReferences": {
+        "costume": "cos-04012-uniq-0087-00",
+        "skill": "live_leader_skill-card-04012-5-uniq-0087-00",
+        "description": "la-generated-live_leader_skill-card-04012-5-uniq-0087-00-description",
+        "card": "/cards/159"
+      },
+      "rawLeaderRecord": {
+        "id": "live_leader_skill-card-04012-5-uniq-0087-00",
+        "liveSkillTriggerGroupId": "live_skill_trigger-deck_card_character_grouping-grp-promise-2",
+        "livePassiveSkillEffectGroupId": "live_leader_skill_effect-all_parameter_up_permil_up-500-live_skill_effect_target-all",
+        "descriptionLangId": "la-generated-live_leader_skill-card-04012-5-uniq-0087-00-description"
+      },
+      "parameterIncluded": true,
+      "supportIncluded": false,
+      "compound": false,
+      "effects": [
+        {
+          "index": 0,
+          "role": "primary",
+          "description": "Promiseが2人以上で全員の全パラメータが50%UP",
+          "typeFromOriginalText": "all_parameter",
+          "isParameter": true,
+          "amountPercentFromOriginalText": 50,
+          "amountEvidence": "LangGeneratedLiveLeaderSkill_Jpn原文の%（ID命名から推定しない）",
+          "target": {
+            "typeFromOriginalText": "all_members",
+            "text": "全員",
+            "selectionRule": "not_required_by_text",
+            "selectCount": null,
+            "countMeaning": "全員。固定N人の指定なし"
+          },
+          "condition": {
+            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-promise-2",
+            "text": "Promiseが2人以上",
+            "canonicalRecords": [
+              {
+                "pointer": "/sourceRecords/5068",
+                "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-promise-2;number=1",
+                "fields": {
+                  "groupId": "live_skill_trigger-deck_card_character_grouping-grp-promise-2",
+                  "number": 1,
+                  "type": "LiveSkillTriggerType_LIVE_SKILL_TRIGGER_TYPE_DECK_CARD_CHARACTER_GROUPING",
+                  "threshold": "2",
+                  "characterGroupingId": "grp-promise",
+                  "descriptionLangId": "la-generated-live_skill_trigger-deck_card_character_grouping-grp-promise-2.1-description"
+                }
+              }
+            ],
+            "snapshotRecordCount": 1,
+            "type": "affiliation_count",
+            "status": "reference_resolved",
+            "requiredCount": 2,
+            "affiliationId": "grp-promise",
+            "reason": null
+          },
+          "effectGroupId": "live_leader_skill_effect-all_parameter_up_permil_up-500-live_skill_effect_target-all",
+          "effectRecords": [],
+          "snapshotEffectRecordCount": 0,
+          "effectReferenceStatus": "unresolved",
+          "effectReferenceReason": "Leader原本5テーブルに効果テーブル未収録。Canonical/snapshotにも該当groupIdなし",
+          "effectSchemaCompatibility": "P/T/S/allの既存表現と同型",
+          "numericCalculation": "unconfirmed",
+          "semanticsFullyConfirmed": false
+        }
+      ],
+      "classification": "C",
+      "classificationReasons": [
+        "効果groupの参照先未収録。原文による意味候補とraw effect定義を区別する",
+        "Leader計算基数・丸め・Passiveとの集約方式の検証根拠なし"
+      ],
+      "resolverCompatibility": {
+        "structure": "全員target追加・Leader source追加で原文構造を表現可能。実行仕様確定とは別",
+        "condition": [
+          "existing-resolver"
+        ],
+        "target": "all_membersの追加が必要（既存targetに全員typeなし）",
+        "selection": "不要（原文上全員）",
+        "effectSchema": "Parameter P/T/S/allの効果表現は同型。複合は独立effect配列が必要",
+        "numericCommonality": "未確認",
+        "existingResolversOnly": false
+      },
+      "calculationVerification": {
+        "status": "unconfirmed",
+        "basis": "unknown",
+        "baseBloomPassiveMemoryBoardCostumeInclusion": "unknown",
+        "rounding": "unknown",
+        "sourceRateAggregation": "unknown",
+        "passiveLeaderAggregation": "unknown",
+        "parameterVsTotal": "原文はP/T/Sまたは全パラ。P/T/S別計算は推測可能だが未検証",
+        "verifiedLeaderFixture": null
+      },
+      "unresolved": [
+        "効果groupの参照先未収録。原文による意味候補とraw effect定義を区別する",
+        "Leader計算基数・丸め・Passiveとの集約方式の検証根拠なし"
+      ]
+    },
+    {
       "leaderId": "live_leader_skill-card-04013-4-cmmn-0000-00",
       "cardId": "card-04013-4-cmmn-0000-00",
       "cardName": "ステージでもKeep it real",
@@ -12070,7 +12819,7 @@
         "costume": "cos-04013-cmmn-0000-00",
         "skill": "live_leader_skill-card-04013-4-cmmn-0000-00",
         "description": "la-generated-live_leader_skill-card-04013-4-cmmn-0000-00-description",
-        "card": "/cards/155"
+        "card": "/cards/161"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-04013-4-cmmn-0000-00",
@@ -12102,7 +12851,7 @@
             "text": "Adventが2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4946",
+                "pointer": "/sourceRecords/5055",
                 "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-advent-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_character_grouping-grp-advent-2",
@@ -12173,7 +12922,7 @@
         "costume": "cos-04013-uniq-0052-00",
         "skill": "live_leader_skill-card-04013-5-uniq-0052-00",
         "description": "la-generated-live_leader_skill-card-04013-5-uniq-0052-00-description",
-        "card": "/cards/156"
+        "card": "/cards/162"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-04013-5-uniq-0052-00",
@@ -12263,7 +13012,7 @@
         "costume": "cos-04013-uniq-0083-00",
         "skill": "live_leader_skill-card-04013-5-uniq-0083-00",
         "description": "la-generated-live_leader_skill-card-04013-5-uniq-0083-00-description",
-        "card": "/cards/157"
+        "card": "/cards/163"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-04013-5-uniq-0083-00",
@@ -12297,7 +13046,7 @@
             "text": "キュートタイプ2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4940",
+                "pointer": "/sourceRecords/5049",
                 "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_1-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
@@ -12345,7 +13094,7 @@
             "text": "キュートタイプ2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4940",
+                "pointer": "/sourceRecords/5049",
                 "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_1-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
@@ -12419,7 +13168,7 @@
         "costume": "cos-04014-cmmn-0000-00",
         "skill": "live_leader_skill-card-04014-4-cmmn-0000-00",
         "description": "la-generated-live_leader_skill-card-04014-4-cmmn-0000-00-description",
-        "card": "/cards/159"
+        "card": "/cards/165"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-04014-4-cmmn-0000-00",
@@ -12453,7 +13202,7 @@
             "text": "ハッピータイプ2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4944",
+                "pointer": "/sourceRecords/5053",
                 "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_3-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_attribute-attribute_3-2",
@@ -12501,7 +13250,7 @@
             "text": "ハッピータイプ2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4944",
+                "pointer": "/sourceRecords/5053",
                 "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_3-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_attribute-attribute_3-2",
@@ -12575,7 +13324,7 @@
         "costume": "cos-04014-uniq-0053-00",
         "skill": "live_leader_skill-card-04014-5-uniq-0053-00",
         "description": "la-generated-live_leader_skill-card-04014-5-uniq-0053-00-description",
-        "card": "/cards/160"
+        "card": "/cards/166"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-04014-5-uniq-0053-00",
@@ -12665,7 +13414,7 @@
         "costume": "cos-04015-cmmn-0000-00",
         "skill": "live_leader_skill-card-04015-4-cmmn-0000-00",
         "description": "la-generated-live_leader_skill-card-04015-4-cmmn-0000-00-description",
-        "card": "/cards/162"
+        "card": "/cards/168"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-04015-4-cmmn-0000-00",
@@ -12755,7 +13504,7 @@
         "costume": "cos-04015-uniq-0054-00",
         "skill": "live_leader_skill-card-04015-5-uniq-0054-00",
         "description": "la-generated-live_leader_skill-card-04015-5-uniq-0054-00-description",
-        "card": "/cards/163"
+        "card": "/cards/169"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-04015-5-uniq-0054-00",
@@ -12787,7 +13536,7 @@
             "text": "Adventが2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4946",
+                "pointer": "/sourceRecords/5055",
                 "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-advent-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_character_grouping-grp-advent-2",
@@ -12858,7 +13607,7 @@
         "costume": "cos-04016-cmmn-0000-00",
         "skill": "live_leader_skill-card-04016-4-cmmn-0000-00",
         "description": "la-generated-live_leader_skill-card-04016-4-cmmn-0000-00-description",
-        "card": "/cards/165"
+        "card": "/cards/171"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-04016-4-cmmn-0000-00",
@@ -12948,7 +13697,7 @@
         "costume": "cos-04016-uniq-0055-00",
         "skill": "live_leader_skill-card-04016-5-uniq-0055-00",
         "description": "la-generated-live_leader_skill-card-04016-5-uniq-0055-00-description",
-        "card": "/cards/166"
+        "card": "/cards/172"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-04016-5-uniq-0055-00",
@@ -13038,7 +13787,7 @@
         "costume": "cos-04016-uniq-0079-00",
         "skill": "live_leader_skill-card-04016-5-uniq-0079-00",
         "description": "la-generated-live_leader_skill-card-04016-5-uniq-0079-00-description",
-        "card": "/cards/167"
+        "card": "/cards/173"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-04016-5-uniq-0079-00",
@@ -13072,7 +13821,7 @@
             "text": "ピュアタイプ2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4942",
+                "pointer": "/sourceRecords/5051",
                 "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_2-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
@@ -13120,7 +13869,7 @@
             "text": "ピュアタイプ2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4942",
+                "pointer": "/sourceRecords/5051",
                 "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_2-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
@@ -13194,7 +13943,7 @@
         "costume": "cos-04017-cmmn-0000-00",
         "skill": "live_leader_skill-card-04017-4-cmmn-0000-00",
         "description": "la-generated-live_leader_skill-card-04017-4-cmmn-0000-00-description",
-        "card": "/cards/169"
+        "card": "/cards/175"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-04017-4-cmmn-0000-00",
@@ -13284,7 +14033,7 @@
         "costume": "cos-04017-uniq-0056-00",
         "skill": "live_leader_skill-card-04017-5-uniq-0056-00",
         "description": "la-generated-live_leader_skill-card-04017-5-uniq-0056-00-description",
-        "card": "/cards/170"
+        "card": "/cards/176"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-04017-5-uniq-0056-00",
@@ -13316,7 +14065,7 @@
             "text": "キュートタイプ2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4940",
+                "pointer": "/sourceRecords/5049",
                 "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_1-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
@@ -13387,7 +14136,7 @@
         "costume": "cos-04017-uniq-0080-00",
         "skill": "live_leader_skill-card-04017-5-uniq-0080-00",
         "description": "la-generated-live_leader_skill-card-04017-5-uniq-0080-00-description",
-        "card": "/cards/171"
+        "card": "/cards/177"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-04017-5-uniq-0080-00",
@@ -13421,7 +14170,7 @@
             "text": "ピュアタイプ2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4942",
+                "pointer": "/sourceRecords/5051",
                 "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_2-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
@@ -13469,7 +14218,7 @@
             "text": "ピュアタイプ2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4942",
+                "pointer": "/sourceRecords/5051",
                 "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_2-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
@@ -13543,7 +14292,7 @@
         "costume": "cos-06002-cmmn-0000-00",
         "skill": "live_leader_skill-card-06002-4-cmmn-0000-00",
         "description": "la-generated-live_leader_skill-card-06002-4-cmmn-0000-00-description",
-        "card": "/cards/173"
+        "card": "/cards/179"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-06002-4-cmmn-0000-00",
@@ -13575,7 +14324,7 @@
             "text": "ReGLOSSが2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4959",
+                "pointer": "/sourceRecords/5069",
                 "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-regloss-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_character_grouping-grp-regloss-2",
@@ -13646,7 +14395,7 @@
         "costume": "cos-06002-uniq-0058-00",
         "skill": "live_leader_skill-card-06002-5-uniq-0058-00",
         "description": "la-generated-live_leader_skill-card-06002-5-uniq-0058-00-description",
-        "card": "/cards/174"
+        "card": "/cards/180"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-06002-5-uniq-0058-00",
@@ -13678,7 +14427,7 @@
             "text": "ピュアタイプ2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4942",
+                "pointer": "/sourceRecords/5051",
                 "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_2-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
@@ -13749,7 +14498,7 @@
         "costume": "cos-06002-uniq-0066-00",
         "skill": "live_leader_skill-card-06002-5-uniq-0066-00",
         "description": "la-generated-live_leader_skill-card-06002-5-uniq-0066-00-description",
-        "card": "/cards/175"
+        "card": "/cards/181"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-06002-5-uniq-0066-00",
@@ -13781,7 +14530,7 @@
             "text": "ハッピータイプ2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4944",
+                "pointer": "/sourceRecords/5053",
                 "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_3-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_attribute-attribute_3-2",
@@ -13852,7 +14601,7 @@
         "costume": "cos-06003-cmmn-0000-00",
         "skill": "live_leader_skill-card-06003-4-cmmn-0000-00",
         "description": "la-generated-live_leader_skill-card-06003-4-cmmn-0000-00-description",
-        "card": "/cards/177"
+        "card": "/cards/183"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-06003-4-cmmn-0000-00",
@@ -13942,7 +14691,7 @@
         "costume": "cos-06003-uniq-0059-00",
         "skill": "live_leader_skill-card-06003-5-uniq-0059-00",
         "description": "la-generated-live_leader_skill-card-06003-5-uniq-0059-00-description",
-        "card": "/cards/178"
+        "card": "/cards/184"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-06003-5-uniq-0059-00",
@@ -13974,7 +14723,7 @@
             "text": "ReGLOSSが2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4959",
+                "pointer": "/sourceRecords/5069",
                 "sourceId": "group_id=live_skill_trigger-deck_card_character_grouping-grp-regloss-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_character_grouping-grp-regloss-2",
@@ -14035,6 +14784,109 @@
       ]
     },
     {
+      "leaderId": "live_leader_skill-card-06003-5-uniq-0091-00",
+      "cardId": "card-06003-5-uniq-0091-00",
+      "cardName": "夏夜を彩るBrilliant Smile",
+      "memberName": "一条莉々華",
+      "costumeId": "cos-06003-uniq-0091-00",
+      "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員のテクニックが130%UP",
+      "sourceReferences": {
+        "costume": "cos-06003-uniq-0091-00",
+        "skill": "live_leader_skill-card-06003-5-uniq-0091-00",
+        "description": "la-generated-live_leader_skill-card-06003-5-uniq-0091-00-description",
+        "card": "/cards/185"
+      },
+      "rawLeaderRecord": {
+        "id": "live_leader_skill-card-06003-5-uniq-0091-00",
+        "liveSkillTriggerGroupId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
+        "livePassiveSkillEffectGroupId": "live_leader_skill_effect-technique_up_permil_up-1300-live_skill_effect_target-all",
+        "descriptionLangId": "la-generated-live_leader_skill-card-06003-5-uniq-0091-00-description"
+      },
+      "parameterIncluded": true,
+      "supportIncluded": false,
+      "compound": false,
+      "effects": [
+        {
+          "index": 0,
+          "role": "primary",
+          "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員のテクニックが130%UP",
+          "typeFromOriginalText": "T",
+          "isParameter": true,
+          "amountPercentFromOriginalText": 130,
+          "amountEvidence": "LangGeneratedLiveLeaderSkill_Jpn原文の%（ID命名から推定しない）",
+          "target": {
+            "typeFromOriginalText": "all_members",
+            "text": "全員",
+            "selectionRule": "not_required_by_text",
+            "selectCount": null,
+            "countMeaning": "全員。固定N人の指定なし"
+          },
+          "condition": {
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
+            "text": "キュートタイプ2人以上",
+            "canonicalRecords": [
+              {
+                "pointer": "/sourceRecords/5049",
+                "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_1-2;number=1",
+                "fields": {
+                  "groupId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
+                  "number": 1,
+                  "type": "LiveSkillTriggerType_LIVE_SKILL_TRIGGER_TYPE_DECK_CARD_ATTRIBUTE",
+                  "threshold": "2",
+                  "cardAttributeType": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1",
+                  "descriptionLangId": "la-generated-live_skill_trigger-deck_card_attribute-attribute_1-2.1-description"
+                }
+              }
+            ],
+            "snapshotRecordCount": 1,
+            "type": "attribute_count",
+            "status": "reference_resolved",
+            "requiredCount": 2,
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1",
+            "reason": null
+          },
+          "effectGroupId": "live_leader_skill_effect-technique_up_permil_up-1300-live_skill_effect_target-all",
+          "effectRecords": [],
+          "snapshotEffectRecordCount": 0,
+          "effectReferenceStatus": "unresolved",
+          "effectReferenceReason": "Leader原本5テーブルに効果テーブル未収録。Canonical/snapshotにも該当groupIdなし",
+          "effectSchemaCompatibility": "P/T/S/allの既存表現と同型",
+          "numericCalculation": "unconfirmed",
+          "semanticsFullyConfirmed": false
+        }
+      ],
+      "classification": "C",
+      "classificationReasons": [
+        "効果groupの参照先未収録。原文による意味候補とraw effect定義を区別する",
+        "Leader計算基数・丸め・Passiveとの集約方式の検証根拠なし"
+      ],
+      "resolverCompatibility": {
+        "structure": "全員target追加・Leader source追加で原文構造を表現可能。実行仕様確定とは別",
+        "condition": [
+          "existing-resolver"
+        ],
+        "target": "all_membersの追加が必要（既存targetに全員typeなし）",
+        "selection": "不要（原文上全員）",
+        "effectSchema": "Parameter P/T/S/allの効果表現は同型。複合は独立effect配列が必要",
+        "numericCommonality": "未確認",
+        "existingResolversOnly": false
+      },
+      "calculationVerification": {
+        "status": "unconfirmed",
+        "basis": "unknown",
+        "baseBloomPassiveMemoryBoardCostumeInclusion": "unknown",
+        "rounding": "unknown",
+        "sourceRateAggregation": "unknown",
+        "passiveLeaderAggregation": "unknown",
+        "parameterVsTotal": "原文はP/T/Sまたは全パラ。P/T/S別計算は推測可能だが未検証",
+        "verifiedLeaderFixture": null
+      },
+      "unresolved": [
+        "効果groupの参照先未収録。原文による意味候補とraw effect定義を区別する",
+        "Leader計算基数・丸め・Passiveとの集約方式の検証根拠なし"
+      ]
+    },
+    {
       "leaderId": "live_leader_skill-card-06004-4-cmmn-0000-00",
       "cardId": "card-06004-4-cmmn-0000-00",
       "cardName": "cultural performer",
@@ -14045,7 +14897,7 @@
         "costume": "cos-06004-cmmn-0000-00",
         "skill": "live_leader_skill-card-06004-4-cmmn-0000-00",
         "description": "la-generated-live_leader_skill-card-06004-4-cmmn-0000-00-description",
-        "card": "/cards/180"
+        "card": "/cards/187"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-06004-4-cmmn-0000-00",
@@ -14079,7 +14931,7 @@
             "text": "ピュアタイプ2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4942",
+                "pointer": "/sourceRecords/5051",
                 "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_2-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
@@ -14127,7 +14979,7 @@
             "text": "ピュアタイプ2人以上",
             "canonicalRecords": [
               {
-                "pointer": "/sourceRecords/4942",
+                "pointer": "/sourceRecords/5051",
                 "sourceId": "group_id=live_skill_trigger-deck_card_attribute-attribute_2-2;number=1",
                 "fields": {
                   "groupId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
@@ -14201,7 +15053,7 @@
         "costume": "cos-06004-uniq-0060-00",
         "skill": "live_leader_skill-card-06004-5-uniq-0060-00",
         "description": "la-generated-live_leader_skill-card-06004-5-uniq-0060-00-description",
-        "card": "/cards/181"
+        "card": "/cards/188"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-06004-5-uniq-0060-00",
@@ -14291,7 +15143,7 @@
         "costume": "cos-06005-cmmn-0000-00",
         "skill": "live_leader_skill-card-06005-4-cmmn-0000-00",
         "description": "la-generated-live_leader_skill-card-06005-4-cmmn-0000-00-description",
-        "card": "/cards/183"
+        "card": "/cards/190"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-06005-4-cmmn-0000-00",
@@ -14381,7 +15233,7 @@
         "costume": "cos-06005-uniq-0061-00",
         "skill": "live_leader_skill-card-06005-5-uniq-0061-00",
         "description": "la-generated-live_leader_skill-card-06005-5-uniq-0061-00-description",
-        "card": "/cards/184"
+        "card": "/cards/191"
       },
       "rawLeaderRecord": {
         "id": "live_leader_skill-card-06005-5-uniq-0061-00",

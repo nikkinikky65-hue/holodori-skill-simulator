@@ -1,5 +1,7 @@
 # リーダースキル一覧（表示専用）
 
+> 2026-10-13データ更新：192カード（追加7、既存計算値変更0）、カード固有Leader138件＋共通54件。最新差分・生成手順・対応範囲は [カード差分更新](card-library-update.md) を参照。以下の旧件数・固定commit記述は各工程時点の履歴です。
+
 ## 調査結果
 
 既存CanonicalのCard source factsには `rewardCostumeId` が131枚に存在するが、Costume / LiveLeaderSkill / リーダー原文は従来の調査対象外。既存のP/A/SPをリーダーへ読み替えず、同じ固定commitから次の5テーブルを追加取得した。

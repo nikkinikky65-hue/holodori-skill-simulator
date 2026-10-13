@@ -39,7 +39,7 @@
       assert(box.width<=width && panel.scrollWidth<=panel.clientWidth,'random panel fits');
     }
     if(page==='library.html') assert(w.document.querySelector('#cardTalent').options.length>50,'registration starts');
-    if(page==='card-catalog.html') assert(w.document.querySelectorAll('.catalogCard').length===77 && !w.document.querySelector('#catalogStatus').dataset.errorKind,'catalog starts');
+    if(page==='card-catalog.html') assert(w.document.querySelectorAll('.catalogCard').length===84 && !w.document.querySelector('#catalogStatus').dataset.errorKind,'catalog starts');
     if(page==='card-catalog.html'){
       const panel=w.document.querySelector('.catalogCard');
       for(const button of panel.querySelectorAll('.catalogStepper button')){
@@ -53,7 +53,7 @@
       output.closest('.catalogStepper').querySelector('[data-step="-1"]').click();
       assert(output.value==='0','responsive stepper restores');
     }
-    if(page==='leader.html') assert(w.document.querySelectorAll('#leaderCards .leaderSkill').length===131 && !w.document.querySelector('#leaderStatus').dataset.error,'leader starts');
+    if(page==='leader.html') assert(w.document.querySelectorAll('#leaderCards .leaderSkill').length===138 && !w.document.querySelector('#leaderStatus').dataset.error,'leader starts');
     if(page==='leader.html'){
       assert(w.document.documentElement.scrollWidth<=width,'leader body has no horizontal overflow');
       const groups=[...w.document.querySelectorAll('.leaderCategory')];
@@ -64,7 +64,7 @@
           assert(amounts.every((v,i)=>!i||amounts[i-1]>=v),'amounts descending');
         }
       }
-      assert(w.document.querySelectorAll('[data-category="複合効果"] .leaderEntry').length===16,'all compound leaders');
+      assert(w.document.querySelectorAll('[data-category="複合効果"] .leaderEntry').length===18,'all compound leaders');
       assert(w.document.querySelectorAll('#leaderCommon .leaderSkill').length===54,'common effects unchanged');
       for(const amount of w.document.querySelectorAll('.leaderAmount')){
         const summary=amount.querySelector(':scope > summary');

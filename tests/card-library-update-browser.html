@@ -1,0 +1,23 @@
+<!doctype html><meta charset="utf-8"><pre id="result">RUNNING</pre><iframe style="height:900px;border:0"></iframe>
+<script>
+(async()=>{
+const out=document.querySelector('pre'),frame=document.querySelector('iframe'),backup=new Map(Object.keys(localStorage).map(k=>[k,localStorage.getItem(k)]));
+const check=(v,m)=>{if(!v)throw Error(m);};
+const open=path=>new Promise(resolve=>{frame.onload=()=>resolve(frame.contentWindow);frame.src='../'+path;});
+try{
+const diff=await(await fetch('../research/card-library-update.json')).json();
+for(const width of [1100,360]){
+ frame.style.width=width+'px';let w=await open('card-catalog.html');await w.eval('cardCatalogReady');let d=w.document;
+ check(d.querySelectorAll('.catalogCard').length===84,'84 star5');
+ for(const c of diff.added){const search=d.querySelector('#catalogSearch');search.value=c.name;search.dispatchEvent(new w.Event('input'));const card=d.querySelector('.catalogCard');check(card?.dataset.cardId===c.cardId,'new card search');check(card.textContent.includes('SP')&&card.textContent.includes('スコア'),'new skills');check(card.getBoundingClientRect().width<=width,'card fits');}
+ const ownership=localStorage.getItem('holodori-user-card-state-v1');
+ w=await open('unit-simulator.html');let api=await w.eval('unitSimulatorReady');d=w.document;
+ for(const c of diff.added){const s=api.capture();s.slots.forEach((slot,i)=>{slot.cardId=diff.added[(diff.added.indexOf(c)+i)%7].cardId;slot.training=0;slot.bloom=5;});s.trials='100';api.restore(s);check(api.getModel().activeMembers.length===5&&Number.isFinite(api.getModel().unitScore.value),'new selection/model');d.querySelector('#unitRun').click();check(d.querySelector('#unitResultStatus').textContent.includes('100試行'),'new simulation');}
+ const snapshot=api.capture();d.querySelector('#unitFormationName').value='追加カード検証';d.querySelector('#unitFormationName').dispatchEvent(new w.Event('input'));d.querySelector('#unitFormationNew').click();const id=d.querySelector('#unitFormationList').value;
+ check(!!id,'save');w=await open('unit-formations.html');await w.eval('unitFormationsReady');check(w.document.querySelector(`[data-id="${id}"]`).textContent.includes(diff.added[6].name),'saved list');
+ w=await open('unit-simulator.html?formation='+encodeURIComponent(id));api=await w.eval('unitSimulatorReady');check(JSON.stringify(api.capture())===JSON.stringify(snapshot),'snapshot restored');check(localStorage.getItem('holodori-user-card-state-v1')===ownership,'ownership unchanged');check(w.document.documentElement.scrollWidth<=width,'unit fits');
+}
+out.textContent='PASS: seven new cards search/skills, five slots, parameter/Timeline/Simulation, save/list/load, ownership isolation, 1100/360';
+}catch(e){out.textContent='FAIL: '+e.stack;}finally{for(const k of Object.keys(localStorage))if(!backup.has(k))localStorage.removeItem(k);for(const [k,v] of backup)localStorage.setItem(k,v);}
+})();
+</script>

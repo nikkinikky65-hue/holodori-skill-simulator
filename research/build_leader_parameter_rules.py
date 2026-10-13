@@ -3,7 +3,7 @@ import json, pathlib, hashlib, argparse, re
 root=pathlib.Path(__file__).resolve().parent.parent
 read=lambda p:json.loads((root/p).read_text())
 audit=read('research/unit-leader-audit.json'); runtime=read('data/runtime-leader-skills.json')
-assert len(audit['leaders'])==len(runtime['cardSkills'])==131
+assert len(audit['leaders'])==len(runtime['cardSkills'])
 assert {r['leaderId'] for r in audit['leaders']}=={r['skillId'] for r in runtime['cardSkills']}
 by_id={r['skillId']:r for r in runtime['cardSkills']}
 affiliations=read('data/runtime-affiliations.json')

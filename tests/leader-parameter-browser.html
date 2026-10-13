@@ -12,7 +12,7 @@
   const errors=[];w.addEventListener('error',e=>errors.push(e.message));
   const api=await w.eval('unitSimulatorReady'),d=w.document;
   [...d.querySelectorAll('[data-unit-card]')].forEach((s,i)=>{s.selectedIndex=i+1;s.dispatchEvent(new w.Event('change'));});
-  const leader=d.querySelector('#unitLeader');check(leader.options.length===186,'131 cards + 54 common + unset');
+  const leader=d.querySelector('#unitLeader');check(leader.options.length===193,'138 cards + 54 common + unset');
   const old=api.getModel();
   d.querySelector('#unitEnhancementPercent').value='2.43';d.querySelector('#unitEnhancementPercent').dispatchEvent(new w.Event('input'));
   const plain=api.getModel();
@@ -39,7 +39,7 @@
   check(storage()===before,'no persistence changes');
   check(d.documentElement.scrollWidth<=width,'responsive width');check(!errors.length,errors.join());
  }
- out.textContent='PASS: independent Leader selection, 185 options, S/Enhancement, unresolved, removal, storage, 1100/360';
+ out.textContent='PASS: independent Leader selection, 192 options, S/Enhancement, unresolved, removal, storage, 1100/360';
  }catch(e){out.textContent='FAIL: '+e.stack;}
 })();
 </script>

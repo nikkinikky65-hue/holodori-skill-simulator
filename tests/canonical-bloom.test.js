@@ -39,7 +39,7 @@ assertCanonical(!canonicalDatasetMatches({...oldSelection,datasetVersion:'differ
 const oldRead=readCanonicalSelection(canonicalTestCard.id+':lv1',oldSelection,null);
 assertCanonical(!('bloom' in oldRead) && oldRead.levels.passive===2 && oldRead.levels.active===1,'unreachable legacy combination is not guessed into Bloom');
 assertCanonical(JSON.stringify(canonicalTestFixture)===originalCanonical,'Bloom expansion does not mutate Runtime');
-print('Bloom: 185 cards × 6 stages, rarities 3/4/5, source derivation, compact display, save restoration and legacy compatibility: PASS');
+print('Bloom: 192 cards × 6 stages, rarities 3/4/5, source derivation, compact display, save restoration and legacy compatibility: PASS');
 
 const capOracle={3:[20,30,40,50,60],4:[30,40,50,60,70],5:[40,50,60,70,80]};
 let trainingChecks=0;
@@ -66,5 +66,5 @@ for(const invalid of [-1,5,null,'0']){
   let rejected=false;try{canonicalTrainingStats(canonicalTestCard,invalid);}catch(e){rejected=true;}
   assertCanonical(rejected,'invalid training does not fall back to Lv1');
 }
-assertCanonical(trainingChecks===925,'all 185 cards and all training stages');
+assertCanonical(trainingChecks===960,'all 192 cards and all training stages');
 print('Training caps: 925 source snapshots, Bloom isolation and persistence PASS');

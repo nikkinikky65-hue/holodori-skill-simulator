@@ -10,7 +10,7 @@ card_characters={card['sourceCard']['sourceId']:tables['Card'][card['sourceCard'
 groups={id:{'name':tables['LangCharacterGrouping_Jpn'][row['nameLangId']]['text'],'characterIds':row['characterIds'],'source':{'table':'CharacterGrouping','sourceId':id}} for id,row in tables['CharacterGrouping'].items()}
 assert all(character in tables['Character'] for character in card_characters.values())
 assert all(all(isinstance(character,str) for character in group['characterIds']) for group in groups.values())
-assert len(card_characters)==185 and all(isinstance(g['characterIds'],list) for g in groups.values())
+assert len(card_characters)==len(c['cards']) and all(isinstance(g['characterIds'],list) for g in groups.values())
 result={'format':'holodori-affiliations-v1','canonicalSha256':hashlib.sha256(b).hexdigest(),'sourceCommit':c['sourceDataset']['commitSha'],'cardCharacters':card_characters,'groups':groups}
 out=(json.dumps(result,ensure_ascii=False,separators=(',',':'))+'\n').encode();path=ROOT/'data/runtime-affiliations.json'
 if args.check:assert path.read_bytes()==out

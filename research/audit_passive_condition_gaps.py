@@ -36,11 +36,11 @@ for card in runtime['cards']:
             excessSelection='unverified' if support or group else 'existing-attribute-ranking-after-condition-resolution'))
 def count(rs):return dict(cards=len({r['cardId'] for r in rs}),rows=len(rs))
 summary={family:count([r for r in rows if r['family']==family]) for family in ['parameter','support']}
-assert summary=={'parameter':{'cards':55,'rows':110},'support':{'cards':21,'rows':42}}
-assert len(rows)==152
-out=dict(inputs={p:hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in paths},
+assert summary=={'parameter':{'cards':56,'rows':112},'support':{'cards':21,'rows':42}}
+assert len(rows)==154
+out=dict(scope='Raw condition evidence only; developer-approved execution status is in unit-passive-audit.json', inputs={p:hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in paths},
     summary=summary,classification={'existingDataConnectable':0,'recoverableMissingReferenceIdentified':0,
-    'conditionSemanticsUnverified':76,'additionalSelectionVerification':35},
+    'conditionSemanticsUnverified':77,'additionalSelectionVerification':35},
     selectionDependencies={f:count([r for r in rows if r['excessSelection']==f]) for f in sorted({r['excessSelection'] for r in rows})},rows=rows)
 text=json.dumps(out,ensure_ascii=False,indent=2)+'\n'; dest=ROOT/'research/passive-condition-gaps.json'
 p=argparse.ArgumentParser();p.add_argument('--check',action='store_true')

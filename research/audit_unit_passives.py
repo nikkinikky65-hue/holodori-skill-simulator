@@ -10,7 +10,7 @@ def main():
     canonical=json.loads((ROOT/'research/canonical-cards.json').read_bytes())
     assert digest(ROOT/'research/canonical-cards.json')==runtime['dataset']['canonicalSha256']
     skill_ids={c['sourceCard']['sourceId']:c['skills']['passive']['skillSource']['sourceId'] for c in canonical['cards']}
-    assert len(set(skill_ids.values()))==185
+    assert len(set(skill_ids.values()))==len(runtime['cards'])
     engine=ROOT/'unit-parameter-engine.js'
     js=engine.read_text()+'''\nconst data=JSON.parse(readFile('data/runtime-cards.json'));
 print(JSON.stringify(data.cards.flatMap(c=>c.skills.passive.levels.map(p=>UnitParameterEngine.resolveInput(p)))));'''
@@ -42,8 +42,8 @@ print(JSON.stringify(data.cards.flatMap(c=>c.skills.passive.levels.map(p=>UnitPa
         return {key:counts([r for r in items if r[field]==key]) for key in sorted({r[field] for r in items})}
     unsupported=[r for r in rows if r['status']=='unsupported']
     result={'inputs':{str(p.relative_to(ROOT)):digest(p) for p in [engine,ROOT/'party-condition-resolver.js',ROOT/'passive-target-resolver.js',ROOT/'passive-selection-resolver.js',ROOT/'party-condition-resolver.js',ROOT/'parameter-rules.js',ROOT/'data/runtime-affiliations.json',ROOT/'parameter-rules.js',ROOT/'data/runtime-cards.json',ROOT/'research/canonical-cards.json']},'uniquePassiveIds':len(set(skill_ids.values())),'counts':counts(rows),'status':groupby('status',rows),'parameter':counts([r for r in rows if r['parameter']]),'partialGroups':groupby('group',[r for r in rows if r['status']=='partial']),'groups':groupby('group',unsupported),'effect':groupby('effect',rows),'target':groupby('target',rows),'condition':groupby('condition',rows),'unsupportedEffect':groupby('effect',unsupported),'unsupportedTarget':groupby('target',unsupported),'unsupportedCondition':groupby('condition',unsupported),'gateReasons':{reason:counts([r for r in unsupported if r['gate'].get('reason')==reason]) for reason in sorted({r['gate'].get('reason') for r in unsupported})},'rows':rows}
-    assert len(rows)==370 and counts(rows)['cards']==185
-    assert len({(r['cardId'],r['level']) for r in rows})==370
+    assert len(rows)==2*len(runtime['cards']) and counts(rows)['cards']==len(runtime['cards'])
+    assert len({(r['cardId'],r['level']) for r in rows})==len(rows)
     assert all(len([r for r in rows if r['cardId']==id])==2 for id in {r['cardId'] for r in rows})
     # Ensure level changes do not silently change the logic family.
     for id in {r['cardId'] for r in rows}:

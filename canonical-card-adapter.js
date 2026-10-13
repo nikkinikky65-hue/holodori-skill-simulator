@@ -11,8 +11,8 @@ function loadRuntimeCardCatalog(){
       })
       .then(catalog => {
         if(catalog.format !== 'holodori-runtime-catalog-v1' || !catalog.dataset?.version ||
-           !Array.isArray(catalog.cards) || catalog.cards.length !== 185 ||
-           new Set(catalog.cards.map(card => card.id)).size !== 185){
+           !Array.isArray(catalog.cards) || catalog.cards.length === 0 ||
+           new Set(catalog.cards.map(card => card.id)).size !== catalog.cards.length){
           throw new Error('Runtime Catalog shape is unexpected.');
         }
         return catalog;
@@ -192,6 +192,10 @@ function adaptCanonicalCardToEventCard(card, levelNumber, expansion = null){
 // The released pre-Bloom catalog had this exact Canonical hash; allow that one
 // metadata-only migration, not arbitrary dataset mismatches.
 function canonicalDatasetMatches(selection, dataset){
+  const compatible=(dataset.compatibleSelections||[]).find(entry=>entry.cardIds.includes(selection.cardId) &&
+    (selection.canonicalSha256 ? selection.canonicalSha256===entry.canonicalSha256 :
+     selection.legacySourceCommit ? selection.legacySourceCommit===entry.sourceCommit : entry.runtimeVersions.includes(selection.datasetVersion)));
+  if(compatible)return true;
   if(selection.canonicalSha256) return selection.canonicalSha256 === dataset.canonicalSha256;
   if(selection.legacySourceCommit) return selection.legacySourceCommit === dataset.sourceDataset.commitSha;
   return !selection.datasetVersion || selection.datasetVersion === dataset.version ||
