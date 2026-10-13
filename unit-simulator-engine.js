@@ -17,7 +17,9 @@ const UnitSimulatorEngine = (() => {
     });
     const parameters=UnitParameterEngine.calculateUnitParameter(members.filter(Boolean).map(member=>member.parameters),memoryInput,enhancementInput,catalog.affiliationCatalog?.canonicalSha256===catalog.dataset.canonicalSha256?catalog.affiliationCatalog:null,leaderInput);
     members.filter(Boolean).forEach((member,index)=>{member.parameters=parameters.members[index];});
-    const activeMembers=members.filter(Boolean).map(member=>member.active);
+    const selected=members.filter(Boolean);
+    const activeMembers=ActiveConditionalRules.apply(selected.map(member=>member.active),selected.map(member=>member.expansion),catalog.affiliationCatalog);
+    selected.forEach((member,i)=>{member.active=activeMembers[i];});
     const eventsByMember=activeMembers.map(member=>ActiveTimelineEngine.events(member,duration));
     const segments=ActiveTimelineEngine.maxSegments(eventsByMember.flat(),duration);
     const unitScore=UnitScoreEngine.calculate(parameters);

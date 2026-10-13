@@ -2,6 +2,8 @@
 const check=(ok,msg)=>{if(!ok)throw Error(msg);};
 const catalog=JSON.parse(JSON.stringify(canonicalTestFixture));
 catalog.affiliationCatalog=JSON.parse(readFile('data/runtime-affiliations.json'));
+// Isolate Passive regressions from newly connected Active affiliation replacement.
+catalog.cards.forEach(c=>c.skills.active.levels.forEach(l=>{l.conditionalOverrides=[];}));
 const expected=JSON.parse(readFile('tests/affiliation-expected-cards.json'));
 const enabled=catalog.cards.filter(card=>card.skills.passive.levels.some(p=>UnitParameterEngine.resolveInput(p).status==='supported' && UnitParameterEngine.resolveInput(p).effect?.condition.kind==='affiliation' && UnitParameterEngine.resolveInput(p).effect.target.kind==='self')).map(c=>c.id).sort();
 check(JSON.stringify(enabled)===JSON.stringify(expected),'exact audited 12');

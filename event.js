@@ -85,6 +85,8 @@ const memberCards =
 
 // Canonical cards are transient event-condition choices, never Library records.
 const canonicalEventCards = new Map();
+let candidateAliases = new Map();
+let candidateReady;
 
 
 // ========================================
@@ -253,7 +255,7 @@ function renderRequiredSlots(){
     );
 
     cardSelect.addEventListener('change', () => {
-      showCanonicalExpansion(canonicalStatus, canonicalEventCards.get(cardSelect.value)?.canonicalExpansion);
+      showCanonicalExpansion(canonicalStatus, findEventCard(cardSelect.value)?.canonicalExpansion);
     });
 
     canonicalButton.addEventListener('click', () => {
@@ -351,7 +353,7 @@ function addCanonicalCardOption(cardSelect, card){
 }
 
 function canonicalEventSelection(cardId){
-  const card = canonicalEventCards.get(cardId);
+  const card = findEventCard(cardId);
   if(card?.canonicalExpansion) return canonicalSelection(card.canonicalExpansion);
   const match = /^canonical:(.+):lv(\d+)$/.exec(cardId || '');
   return match ? {version: 1, cardId: match[1], levels: {active: Number(match[2])}} : null;
@@ -408,6 +410,7 @@ function saveEventSearchState(){
 
 
 async function loadEventSearchState(){
+  if(candidateReady) await candidateReady;
 
   const saved =
     localStorage.getItem(
@@ -471,7 +474,8 @@ async function loadEventSearchState(){
 
 
         cardSelect.value =
-          condition.cardId || '';
+          candidateAliases.get(condition.cardId) || condition.cardId || '';
+        showCanonicalExpansion(slot.querySelector('.canonicalSlotStatus'),findEventCard(cardSelect.value)?.canonicalExpansion);
     }
 
   }catch(error){
@@ -540,6 +544,7 @@ function getRequiredConditions(){
 }
 
 function findEventCard(cardId){
+  cardId = candidateAliases.get(cardId) || cardId;
   return memberCards.find(card => card.id === cardId) || canonicalEventCards.get(cardId) || null;
 }
 
@@ -868,7 +873,7 @@ function formationToMembers(
   shorts = null
 ){
 
-  return formation.map(
+  const members = formation.map(
     (card, index) =>
       cardToActiveMember(
         card,
@@ -878,6 +883,7 @@ function formationToMembers(
           : 0
       )
   );
+  return ActiveConditionalRules.apply(members,formation.map(c=>c.canonicalExpansion));
 }
 
 
@@ -1593,4 +1599,21 @@ clearConditionsButton.addEventListener(
 // ========================================
 
 renderRequiredSlots();
+searchFormationButton.disabled = true;
+candidateReady = (async()=>{
+  const status=document.querySelector('#candidateLibraryStatus');
+  try{
+    const catalog=await loadRuntimeCardCatalog();
+    const merged=EventCandidateLibrary.merge(catalog,readUserCardStates(),memberCards);
+    memberCards.splice(0,memberCards.length,...merged.cards);
+    candidateAliases=merged.aliases;
+    const c=merged.counts;
+    status.textContent=`カードライブラリ ${c.owned}枚 / 手動登録 ${c.manual}枚 / 重複除外 ${c.duplicates}枚 / 最終候補 ${c.total}枚`;
+    if(merged.errors.length) status.textContent+=` / 展開不可 ${merged.errors.length}枚`;
+  }catch(error){
+    status.textContent=`所持カードを取得できません：${error.message}。手動登録 ${memberCards.length}枚で利用できます。`;
+  }
+  renderRequiredSlots();
+  searchFormationButton.disabled=false;
+})();
 loadEventSearchState();

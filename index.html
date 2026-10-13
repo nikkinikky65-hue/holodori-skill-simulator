@@ -216,14 +216,15 @@
 <section class="panel" aria-label="データについて">
   <h2>データについて</h2>
   <p class="sub">P/T/Sは特訓上限の基礎値を個別に切り上げて分配し、開花補正後に再度切り上げます。TOTALは3項目の合計です。ボード・メモリー・編成補正は含みません。育成状態が不明な旧保存は「—」で表示します。</p>
-  <p class="sub">呼び出したカードのタイムライン・編成探索への反映はActive Skill基本効果のみです。条件付き効果・Passive・Special・Connect・表示ステータスは評価に反映しません。</p>
+  <p class="sub">Activeは編成条件で倍率を置換します。現行モードではCOMBO40・LIFE600条件を成立として計算します。</p>
 </section>
 </main>
 <script src="members.js"></script>
 <script src="card-rules.js"></script>
 <script src="support-rules.js?v=53c7a9c97f74"></script>
 <script src="parameter-rules.js"></script>
-<script src="canonical-card-adapter.js?v=8ac0132c7592"></script>
+<script src="party-condition-resolver.js"></script><script src="active-conditional-rules.js"></script>
+<script src="canonical-card-adapter.js?v=d7387010aeec"></script>
 <script src="activation-probability-rules.js"></script>
 <script src="active-timeline-engine.js"></script><script src="active-timeline-view.js?v=66d685783815"></script>
 <script src="app.js"></script>

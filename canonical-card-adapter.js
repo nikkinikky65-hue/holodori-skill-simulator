@@ -9,7 +9,8 @@ function loadRuntimeCardCatalog(){
         if(!response.ok) throw new Error(`catalog load failed: ${response.status}`);
         return response.json();
       })
-      .then(catalog => {
+      .then(async catalog => {
+        if(typeof ActiveConditionalRules!=='undefined') await ActiveConditionalRules.ready;
         if(catalog.format !== 'holodori-runtime-catalog-v1' || !catalog.dataset?.version ||
            !Array.isArray(catalog.cards) || catalog.cards.length === 0 ||
            new Set(catalog.cards.map(card => card.id)).size !== catalog.cards.length){
@@ -54,7 +55,7 @@ function adaptCanonicalCardToActiveInput(card, levelNumber){
     conditionalOverrideCount: level.conditionalOverrides.length,
     warnings: [
       '効果値は原文と照合した候補対応です。raw値や確率係数をゲーム内計算規則として確定していません。',
-      ...(level.conditionalOverrides.length ? ['条件付き上位効果は計算せず、base effectのみを入力しました。条件成立時は置換であり、加算ではありません。'] : []),
+      ...(level.conditionalOverrides.length ? ['入力欄は基本効果です。編成評価時に条件付き倍率へ置換します（COMBO40・LIFE600は現行モードで成立扱い）。'] : []),
       'Libraryへの自動登録は行っていません。'
     ]
   };

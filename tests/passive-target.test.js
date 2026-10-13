@@ -1,6 +1,8 @@
 {
 const check=(ok,msg)=>{if(!ok)throw Error(msg);};
 const catalog=JSON.parse(JSON.stringify(canonicalTestFixture));catalog.affiliationCatalog=JSON.parse(readFile('data/runtime-affiliations.json'));
+// Isolate Passive regressions from newly connected Active affiliation replacement.
+catalog.cards.forEach(c=>c.skills.active.levels.forEach(l=>{l.conditionalOverrides=[];}));
 const expected=JSON.parse(readFile('tests/affiliation-target-expected-cards.json'));
 const supported=catalog.cards.filter(c=>UnitParameterEngine.resolveInput(c.skills.passive.levels[0]).effect?.target.kind==='affiliation' && !UnitParameterEngine.resolveInput(c.skills.passive.levels[0]).interpretation).map(c=>c.id).sort();
 check(JSON.stringify(supported)===JSON.stringify(expected)&&supported.length===15,'exact conditional affiliation set');

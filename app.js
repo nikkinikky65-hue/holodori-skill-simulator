@@ -780,7 +780,8 @@ function loadLibraryCardIntoSlot(
 
 function num(v,f=0){const x=Number(v);return Number.isFinite(x)?x:f}
 function getMembers(){
-  return [...document.querySelectorAll('.card')].map((c,i)=>{
+  const slots=[...document.querySelectorAll('.card')];
+  const members=slots.map((c,i)=>{
 
     const g = k =>
       c.querySelector(`[data-k="${k}"]`)?.value ?? '';
@@ -835,6 +836,7 @@ function getMembers(){
         num(g('short'))
     };
   });
+  return ActiveConditionalRules.apply(members,slots.map(c=>c.canonicalExpansion));
 }
 
 // ========================================

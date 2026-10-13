@@ -1,0 +1,13 @@
+<meta charset="utf-8"><pre id="result">RUNNING</pre><iframe></iframe><script>
+(async()=>{const out=document.querySelector('pre'),frame=document.querySelector('iframe');const backup=new Map(Object.keys(localStorage).map(k=>[k,localStorage.getItem(k)]));const check=(x,m)=>{if(!x)throw Error(m)};const open=()=>new Promise(r=>{frame.onload=()=>r(frame.contentWindow);frame.src='../event.html'});try{
+const catalog=await(await fetch('../data/runtime-cards.json')).json();const cards=catalog.cards.filter((c,i,a)=>a.findIndex(x=>x.member.name===c.member.name)===i).slice(0,5);
+for(const width of [1100,360]){
+frame.style.width=width+'px';localStorage.clear();const states={version:1,cards:Object.fromEntries(cards.map(c=>[c.id,{owned:true,training:2,opening:5}]))};localStorage.setItem('holodori-user-card-state-v1',JSON.stringify(states));
+const raw=localStorage.getItem('holodori-user-card-state-v1');let w=await open();await w.eval('candidateReady');await w.loadEventSearchState();let d=w.document;
+check(w.eval('memberCards.length')===5,'five owned');check(d.querySelector('#candidateLibraryStatus').textContent.includes('最終候補 5枚'),'count UI');
+const slot=d.querySelector('.requiredSlot');slot.querySelector('[data-role=member]').value=w.canonicalMemberId(cards[0]);slot.querySelector('[data-role=member]').dispatchEvent(new w.Event('change'));slot.querySelector('[data-role=card]').value=cards[0].id;slot.querySelector('[data-role=card]').dispatchEvent(new w.Event('change',{bubbles:true}));
+d.querySelector('#searchFormation').click();await new Promise(r=>setTimeout(r,300));check(d.querySelector('#formationResults').textContent.includes(cards[0].name),'owned search');check(localStorage.getItem('holodori-user-card-state-v1')===raw,'ownership unchanged');
+w=await open();await w.eval('candidateReady');await w.loadEventSearchState();d=w.document;check(d.querySelector('[data-role=card]').value===cards[0].id,'required restored');check(d.documentElement.scrollWidth<=width,'responsive');
+}
+out.textContent='PASS: owned candidates, required slot, search result, reload, read-only, 1100/360';
+}catch(e){out.textContent='FAIL '+e.stack}finally{localStorage.clear();for(const [k,v]of backup)localStorage.setItem(k,v)}})();</script>
