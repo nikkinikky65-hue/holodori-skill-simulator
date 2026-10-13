@@ -1,0 +1,53 @@
+<!doctype html><meta charset="utf-8"><pre id="result">RUNNING</pre><iframe></iframe>
+<script>
+(async()=>{
+const output=document.querySelector('#result'),frame=document.querySelector('iframe');
+const open=path=>new Promise(resolve=>{frame.onload=()=>resolve(frame.contentWindow);frame.src='../'+path;});
+const check=(value,message)=>{if(!value)throw Error(message);};
+try{
+for(const width of [1100,360]){
+ frame.style.width=width+'px';
+ const library=await open('card-catalog.html');await library.eval('cardCatalogReady');
+ const catalog=await library.loadRuntimeCardCatalog(),byId=new Map(catalog.cards.map(card=>[card.id,card]));
+ const expected=new Map();
+ for(const rarity of [5,4,3]){
+  library.document.querySelector(`[data-catalog-rarity="${rarity}"]`).click();
+  expected.set(rarity,[...library.document.querySelectorAll('.catalogCard')].map(card=>card.dataset.cardId));
+ }
+ const memberExpected=new Map();
+ const librarySearch=library.document.querySelector('#catalogSearch');
+ librarySearch.value='星街すいせい';librarySearch.dispatchEvent(new library.Event('input'));
+ for(const rarity of [5,4,3]){
+  library.document.querySelector(`[data-catalog-rarity="${rarity}"]`).click();
+  memberExpected.set(rarity,[...library.document.querySelectorAll('.catalogCard')].map(card=>card.dataset.cardId));
+ }
+ const checkOrder=(actual,label)=>{
+  check(actual.length===192,label+' count');
+  for(const rarity of [5,4,3]){
+   const filtered=actual.filter(id=>byId.get(id)?.classification.rarity.mapping.value===rarity);
+   check(JSON.stringify(filtered)===JSON.stringify(expected.get(rarity)),label+' rarity '+rarity);
+  }
+ };
+ for(const page of ['index.html','event.html']){
+  const window=await open(page),document=window.document;
+  document.querySelector(page==='index.html'?'[data-load-canonical="0"]':'[data-load-canonical-slot="0"]').click();
+  await new Promise(resolve=>window.setTimeout(resolve,20));
+  const options=[...document.querySelectorAll('[data-canonical-card] option')].map(option=>option.value);
+  checkOrder(options,page);
+  const query=document.querySelector('[data-canonical-search]');query.value='星街すいせい';query.dispatchEvent(new window.Event('input'));
+  const filtered=[...document.querySelectorAll('[data-canonical-card] option')].map(option=>option.value);
+  check(JSON.stringify(filtered)===JSON.stringify(options.filter(id=>`${byId.get(id).name} ${byId.get(id).member.name} ${id}`.toLocaleLowerCase().includes('星街すいせい'))),page+' search');
+  for(const rarity of [5,4,3])check(JSON.stringify(filtered.filter(id=>byId.get(id).classification.rarity.mapping.value===rarity))===JSON.stringify(memberExpected.get(rarity)),page+' search rarity '+rarity);
+ }
+ const unit=await open('unit-simulator.html');await unit.eval('unitSimulatorReady');
+ const options=[...unit.document.querySelector('[data-unit-card]').options].map(option=>option.value).filter(Boolean);
+ checkOrder(options,'unit');
+ const query=unit.document.querySelector('.unitSlot input[type=search]');query.value='星街すいせい';query.dispatchEvent(new unit.Event('input'));
+ const filtered=[...unit.document.querySelector('[data-unit-card]').options].map(option=>option.value).filter(Boolean);
+ check(JSON.stringify(filtered)===JSON.stringify(options.filter(id=>`${byId.get(id).name} ${byId.get(id).member.name}`.toLocaleLowerCase().includes('星街すいせい'))),'unit search');
+ for(const rarity of [5,4,3])check(JSON.stringify(filtered.filter(id=>byId.get(id).classification.rarity.mapping.value===rarity))===JSON.stringify(memberExpected.get(rarity)),'unit search rarity '+rarity);
+}
+output.textContent='PASS: catalog rarity order equals A/B/unit card options and search, 1100/360';
+}catch(error){output.textContent='FAIL: '+error.stack;}
+})();
+</script>

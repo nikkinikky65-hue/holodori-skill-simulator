@@ -18,8 +18,6 @@ async function renderCardCatalog(){
     let rarity = '5';
     const type = document.querySelector('#catalogType');
     readUserCardStates(); // Validate existing settings before presenting editable controls.
-    // Same source order as library.js renderTalentSelect(); no separate roster.
-    const memberOrder = new Map(HOLO_MEMBERS.map((member, index) => [member.id, index]));
     for(const [selector, element] of [['#catalogCards',container], ['#catalogSearch',search], ['#catalogType',type]]){
       if(!element) throw new Error(`必須要素がありません：${selector}`);
     }
@@ -27,14 +25,10 @@ async function renderCardCatalog(){
     delete status.dataset.errorKind;
     const render = () => {
       const query = search.value.trim().toLocaleLowerCase();
-      const cards = catalog.cards.filter(card =>
+      const cards = sortCatalogCardsForDisplay(catalog.cards.filter(card =>
         `${card.name} ${canonicalMemberName(card)}`.toLocaleLowerCase().includes(query) &&
         String(card.classification.rarity.mapping.value) === rarity &&
-        (!type.value || card.classification.attributeType.mapping.value === type.value))
-        .sort((a, b) =>
-          (memberOrder.get(canonicalMemberId(a)) ?? Number.MAX_SAFE_INTEGER) -
-          (memberOrder.get(canonicalMemberId(b)) ?? Number.MAX_SAFE_INTEGER) ||
-          b.classification.rarity.mapping.value - a.classification.rarity.mapping.value);
+        (!type.value || card.classification.attributeType.mapping.value === type.value)), catalog.cards);
       const userStates = readUserCardStates();
       container.replaceChildren();
       for(const card of cards){

@@ -547,7 +547,9 @@
     assert(w.document.querySelector('.requiredSlot [data-role=card]').value===canonicalEventId,'Event Canonical choice restored');
     assert(w.document.querySelector('.requiredSlot .canonicalSlotStatus').textContent.includes('145'),'Event SP effect restored');
     click(w,'#searchFormation');
-    await new Promise(resolve=>w.setTimeout(resolve,50));
+    for(let attempts=0;attempts<500 && w.eval('searchRunning');attempts++){
+      await new Promise(resolve=>w.setTimeout(resolve,10));
+    }
     assert(w.document.querySelector('#searchStatus').textContent.includes('編成'),'Event search accepts transient Canonical card');
     assert(w.document.querySelector('#formationResults').textContent.includes('サクラBloom'),'Event result includes fixture card');
     assert(localStorage.getItem(key)===eventLibraryBefore,'Event search does not register Canonical fixture');

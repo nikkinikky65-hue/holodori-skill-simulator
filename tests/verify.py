@@ -169,6 +169,7 @@ canonical_js += (root/'members.js').read_text() + '\n'
 canonical_js += (root/'canonical-card-adapter.js').read_text()
 canonical_js += '\nconst canonicalTestFixture = JSON.parse(readFile(\"data/runtime-cards.json\"));\n'
 canonical_js += (root/'tests/canonical-card-adapter.test.js').read_text()
+canonical_js += (root/'tests/card-display-order.test.js').read_text()
 canonical_js += (root/'tests/canonical-all-cards.test.js').read_text()
 canonical_js += (root/'tests/canonical-bloom.test.js').read_text()
 canonical_js += (root/'tests/card-parameters.test.js').read_text()

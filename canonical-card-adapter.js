@@ -34,6 +34,19 @@ function canonicalMemberId(card){
   if(typeof HOLO_MEMBERS !== 'undefined' && !HOLO_MEMBERS.some(member => member.id === mapping.id && member.name === card.member.name)) return null;
   return mapping.id;
 }
+// Card Library order: registration member order, then ★5 → ★4 → ★3.
+// Preserve Runtime order for multiple cards of the same member and rarity.
+function sortCatalogCardsForDisplay(cards, catalogCards = cards){
+  const memberOrder = new Map(HOLO_MEMBERS.map((member, index) => [member.id, index]));
+  const sourceOrder = new Map(catalogCards.map((card, index) => [card.id, index]));
+  return [...cards].sort((a, b) =>
+    (memberOrder.get(canonicalMemberId(a)) ?? Number.MAX_SAFE_INTEGER) -
+      (memberOrder.get(canonicalMemberId(b)) ?? Number.MAX_SAFE_INTEGER) ||
+    (b.classification.rarity?.mapping?.value ?? 0) -
+      (a.classification.rarity?.mapping?.value ?? 0) ||
+    (sourceOrder.get(a.id) ?? Number.MAX_SAFE_INTEGER) -
+      (sourceOrder.get(b.id) ?? Number.MAX_SAFE_INTEGER));
+}
 function canonicalSkillText(level){ return level.description || ''; }
 
 function adaptCanonicalCardToActiveInput(card, levelNumber){
@@ -259,7 +272,7 @@ async function openCanonicalCardPicker({targetText, apply, selection = null}){
     const selectedPanel = document.createElement('div');
     selectedPanel.className = 'canonicalCardChoice';
     cardList.append(searchLabel, choiceLabel, selectedPanel);
-    const rows = dataset.cards.map(card => ({card, name: card.name, member: canonicalMemberName(card)}));
+    const rows = sortCatalogCardsForDisplay(dataset.cards).map(card => ({card, name: card.name, member: canonicalMemberName(card)}));
     let displayedCardId = null;
     const renderSelected = () => {
       if(displayedCardId === choice.value) return;

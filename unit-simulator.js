@@ -4,6 +4,7 @@ async function initializeUnitSimulator(){
   const status=node('unitStatus');
   try{
     const catalog=await loadRuntimeCardCatalog();
+    const sortedCards=sortCatalogCardsForDisplay(catalog.cards);
     try{
       const response=await fetch(new URL('data/runtime-affiliations.json',document.baseURI));
       if(response.ok){const data=await response.json();if(data.format==='holodori-affiliations-v1'&&data.canonicalSha256===catalog.dataset.canonicalSha256)catalog.affiliationCatalog=data;}
@@ -75,7 +76,7 @@ async function initializeUnitSimulator(){
       const cardLabel=create('label','カード'),choice=create('select');choice.dataset.unitCard=String(i);cardLabel.append(choice);
       function choices(){
         const query=search.value.trim().toLocaleLowerCase();choice.replaceChildren(new Option('未選択',''));
-        for(const card of catalog.cards.filter(card=>card.id===slot.cardId||`${card.name} ${canonicalMemberName(card)}`.toLocaleLowerCase().includes(query)))choice.append(new Option(`${canonicalMemberName(card)} / ★${card.classification.rarity.mapping.value} / ${card.name}`,card.id));
+        for(const card of sortedCards.filter(card=>card.id===slot.cardId||`${card.name} ${canonicalMemberName(card)}`.toLocaleLowerCase().includes(query)))choice.append(new Option(`${canonicalMemberName(card)} / ★${card.classification.rarity.mapping.value} / ${card.name}`,card.id));
         choice.value=slot.cardId;
       }
       slotControls.push({choices,search,panel});
