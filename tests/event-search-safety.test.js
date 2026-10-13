@@ -1,0 +1,14 @@
+const check=(v,m)=>{if(!v)throw Error(m);};
+const cards=[{id:'a3',talentId:'a',rarity:3},{id:'a4',talentId:'a',rarity:4},{id:'a5',talentId:'a',rarity:5},{id:'a5b',talentId:'a',rarity:5},{id:'unknown',talentId:'a',rarity:null},{id:'b3',talentId:'b',rarity:3}];
+check(EventSearchSafety.filter(cards).map(c=>c.id).join(',')==='a5,a5b,unknown,b3','max/unknown');
+check(EventSearchSafety.filter(cards,['a3']).some(c=>c.id==='a3'),'required exempt');
+check(EventSearchSafety.filter(cards,[],false).length===cards.length,'off');
+check(EventSearchSafety.filter(cards.filter(c=>c.rarity!==5)).map(c=>c.id).join(',')==='a4,unknown,b3','actual candidates');
+const groups=Array.from({length:4},(_,i)=>[{id:'r'+i,talentId:'r'+i}]);
+const large=Array.from({length:10001},(_,i)=>({id:String(i),talentId:String(i)}));
+check(EventSearchSafety.estimate(large.slice(0,10000),groups)===10000,'boundary');
+check(EventSearchSafety.estimate(large,groups)===10001,'over');
+const small=large.slice(0,20);check(EventSearchSafety.estimate(small,[])===10001,'20 choose 5 blocked');
+check(EventSearchSafety.estimate(small,[[small[0]]])===3876,'required reduces');
+check(EventSearchSafety.estimate(small,[[]])===0,'impossible');
+print('Search safety: rarity, unknown, required, off, 10000 boundary and conservative cap PASS');

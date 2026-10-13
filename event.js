@@ -586,7 +586,7 @@ function validateConditions(
 // ========================================
 
 function buildRequiredCardGroups(
-  conditions
+  conditions, candidates = memberCards
 ){
 
   return conditions.map(
@@ -605,7 +605,7 @@ function buildRequiredCardGroups(
 
 
       // メンバーだけ固定
-      return memberCards.filter(
+      return candidates.filter(
         card =>
           card.talentId ===
           condition.memberId
@@ -716,12 +716,12 @@ function combinations(
 // ========================================
 
 function generateFormations(
-  conditions
+  conditions, candidates = memberCards
 ){
 
   const requiredGroups =
     buildRequiredCardGroups(
-      conditions
+      conditions, candidates
     );
 
 
@@ -735,6 +735,7 @@ function generateFormations(
   }
 
 
+  if(EventSearchSafety.estimate(candidates,requiredGroups)>EventSearchSafety.LIMIT) throw Error('探索上限を超えています');
   const requiredPatterns =
     cartesianProduct(
       requiredGroups
@@ -757,7 +758,7 @@ function generateFormations(
 
 
       const remainingCards =
-        memberCards.filter(
+        candidates.filter(
           card =>
             !usedMemberIds.has(
               card.talentId
@@ -803,6 +804,7 @@ function generateFormations(
           }
 
 
+          if(formations.length>=EventSearchSafety.LIMIT) throw Error('探索上限');
           formations.push(
             formation
           );
@@ -1111,7 +1113,7 @@ function selectFinalists(
 // 発動頻度UP最適化
 // ========================================
 
-function optimizeFormation(
+function* optimizeFormationSteps(
   formation,
   T
 ){
@@ -1120,7 +1122,7 @@ function optimizeFormation(
   let tested = 0;
 
 
-  function search(
+  function* search(
     index,
     shorts
   ){
@@ -1137,7 +1139,7 @@ function optimizeFormation(
 
         shorts.push(value);
 
-        search(
+        yield* search(
           index + 1,
           shorts
         );
@@ -1150,6 +1152,7 @@ function optimizeFormation(
 
 
     tested++;
+    if(tested%32===0) yield tested;
 
 
     const members =
@@ -1200,7 +1203,7 @@ function optimizeFormation(
   }
 
 
-  search(
+  yield* search(
     0,
     []
   );
@@ -1214,6 +1217,12 @@ function optimizeFormation(
   };
 }
 
+
+function optimizeFormation(formation,T){
+  const iterator=optimizeFormationSteps(formation,T);let step;
+  do{step=iterator.next();}while(!step.done);
+  return step.value;
+}
 
 // ========================================
 // 最終候補作成
@@ -1462,113 +1471,50 @@ function renderFinalResults(
 // 探索実行
 // ========================================
 
-searchFormationButton.addEventListener(
-  'click',
-  () => {
-
-    const conditions =
-      getRequiredConditions();
-
-
-    if(
-      !validateConditions(
-        conditions
-      )
-    ){
-      return;
+let searchRunning=false, searchCancelled=false;
+const yieldSearch=()=>new Promise(resolve=>setTimeout(resolve,0));
+function searchCandidates(conditions=getRequiredConditions()){
+  const ids=conditions.map(c=>candidateAliases.get(c.cardId)||c.cardId);
+  const candidates=EventSearchSafety.filter(memberCards,ids,document.querySelector('#highestRarityOnly').checked);
+  document.querySelector('#candidateFilterStatus').textContent=`絞り込み前 ${memberCards.length}枚 → ${candidates.length}枚（必須枠の指定カードは保持）`;
+  return candidates;
+}
+document.querySelector('#highestRarityOnly').addEventListener('change',()=>searchCandidates());
+requiredSlots.addEventListener('change',()=>searchCandidates());
+document.querySelector('#cancelSearch').addEventListener('click',()=>{searchCancelled=true;});
+searchFormationButton.addEventListener('click',async()=>{
+  if(searchRunning)return;
+  const conditions=getRequiredConditions();if(!validateConditions(conditions))return;
+  const candidates=searchCandidates(conditions);
+  const estimate=EventSearchSafety.estimate(candidates,buildRequiredCardGroups(conditions,candidates));
+  if(estimate>EventSearchSafety.LIMIT){searchStatus.textContent='探索上限10,000組合せを超える見込みです。必須枠を指定するか候補を減らしてください（安全側の上限推定）。';return;}
+  searchRunning=true;searchCancelled=false;
+  const controls=[...document.querySelectorAll('input,select,button')].filter(e=>e.id!=='cancelSearch');
+  const disabled=controls.map(e=>e.disabled);controls.forEach(e=>e.disabled=true);
+  document.querySelector('#cancelSearch').disabled=false;
+  const check=()=>{if(searchCancelled)throw Error('探索を中断しました');};
+  try{
+    searchStatus.textContent=`探索準備：最大 ${estimate}組合せ`;await yieldSearch();check();
+    const formations=generateFormations(conditions,candidates),evaluated=[];
+    for(const formation of formations){
+      check();if(evaluated.length>=EventSearchSafety.LIMIT)throw Error('探索上限に到達しました');
+      evaluated.push(evaluateFormation(formation,DEFAULT_SONG_LENGTH));
+      if(evaluated.length%25===0){searchStatus.textContent=`一次評価 ${evaluated.length} / ${formations.length}`;await yieldSearch();}
     }
-
-
-    const availableMemberIds = new Set([
-      ...memberCards.map(card => card.talentId),
-      ...conditions.map(condition => canonicalEventCards.get(condition.cardId)?.talentId).filter(Boolean)
-    ]);
-
-    if(availableMemberIds.size < FORMATION_SIZE){
-
-      alert(
-        'ライブラリに5枚以上のカードを登録してください'
-      );
-
-      return;
+    evaluated.sort((a,b)=>b.score-a.score);
+    const results=[];
+    for(const preliminary of evaluated.slice(0,FINALIST_COUNT)){
+      searchStatus.textContent=`発動頻度UP最適化 ${results.length+1} / ${Math.min(FINALIST_COUNT,evaluated.length)}`;
+      const iterator=optimizeFormationSteps(preliminary.formation,DEFAULT_SONG_LENGTH);let step;
+      do{await yieldSearch();check();step=iterator.next();}while(!step.done);
+      const optimized=step.value;
+      results.push({formation:preliminary.formation,preliminaryScore:preliminary.score,preliminaryAverage:preliminary.average,optimizedScore:optimized.score,optimizedAverage:optimized.average,shorts:optimized.shorts,tested:optimized.tested});
     }
-
-
-    searchFormationButton.disabled =
-      true;
-
-    searchStatus.textContent =
-      '編成候補を探索中...';
-
-
-    // 描画を先に反映させる
-    setTimeout(
-      () => {
-
-        try{
-
-          const T =
-            DEFAULT_SONG_LENGTH;
-
-
-          // ① 条件を満たす編成生成
-          const formations =
-            generateFormations(
-              conditions
-            );
-
-
-          if(
-            formations.length === 0
-          ){
-
-            searchStatus.textContent =
-              '条件を満たす編成がありません';
-
-            renderFinalResults([]);
-
-            return;
-          }
-
-
-          // ② 全編成を発動頻度UP0%で一次評価
-          const finalists =
-            selectFinalists(
-              formations,
-              T
-            );
-
-
-          // ③ 上位3編成だけ発動頻度UP総当たり
-          const results =
-            buildFinalResults(
-              finalists,
-              T
-            );
-
-
-          searchStatus.textContent =
-            `${formations.length}編成を一次評価 → ` +
-            `上位${results.length}編成を発動頻度UP最適化`;
-
-
-          renderFinalResults(
-            results
-          );
-
-
-        }finally{
-
-          searchFormationButton.disabled =
-            false;
-        }
-
-      },
-      0
-    );
-  }
-);
-
+    check();results.sort((a,b)=>b.optimizedScore-a.optimizedScore);renderFinalResults(results);
+    searchStatus.textContent=formations.length?`${formations.length}編成を一次評価 → 上位${results.length}編成を発動頻度UP最適化`:'条件を満たす編成がありません';
+  }catch(error){searchStatus.textContent=error.message;}
+  finally{controls.forEach((e,i)=>e.disabled=disabled[i]);document.querySelector('#cancelSearch').disabled=true;searchRunning=false;}
+});
 
 // ========================================
 // 条件クリア
@@ -1615,5 +1561,6 @@ candidateReady = (async()=>{
   }
   renderRequiredSlots();
   searchFormationButton.disabled=false;
+  searchCandidates();
 })();
 loadEventSearchState();
