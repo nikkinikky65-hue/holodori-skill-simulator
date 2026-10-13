@@ -1,0 +1,33 @@
+<!doctype html><meta charset="utf-8"><pre id="result">RUNNING</pre><iframe style="height:900px;border:0"></iframe>
+<script>
+(async()=>{
+const frame=document.querySelector('iframe'),out=document.querySelector('pre'),backup=new Map(Object.keys(localStorage).map(k=>[k,localStorage.getItem(k)]));
+const check=(v,m)=>{if(!v)throw Error(m);};
+const open=path=>new Promise(resolve=>{frame.onload=()=>resolve(frame.contentWindow);frame.src='../'+path;});
+try{
+for(const width of [1100,360])for(const page of ['index.html','unit-simulator.html']){
+ frame.style.width=width+'px';const w=await open(page),d=w.document,unit=page!=='index.html';
+ let api;
+ if(unit){api=await w.eval('unitSimulatorReady');[...d.querySelectorAll('[data-unit-card]')].forEach((e,i)=>{e.selectedIndex=i+1;e.dispatchEvent(new w.Event('change'));});}
+ else {await w.waitForCanonicalRestore();for(const [key,value] of [['interval','10'],['boost','50'],['duration','5']]){const e=d.querySelector(`[data-k="${key}"]`);e.value=value;e.dispatchEvent(new w.Event('input',{bubbles:true}));}}
+ const output=d.querySelector(unit?'#unitResult':'.randomResults'),select=d.querySelector(unit?'#unitTrials':'#randomSimulation select'),run=d.querySelector(unit?'#unitRun':'#randomSimulation button');
+ const sim=w.eval('ActiveRandomSimulation'),acc=w.eval('SimulationAccumulator'),view=w.eval('SimulationDistributionView');
+ const reference=unit?w.eval('UnitSimulatorEngine').simulate(api.getModel(),10000,sim.seededRandom(17)):sim.run(sim.prepare(w.getMembers(),Number(d.querySelector('#song').value),w.events,q=>w.eval('ActivationProbabilityRules').probability(q)),10000,w.maxSegments,sim.seededRandom(17));
+ const expected=acc.create().append(reference.values).histogram;
+ const bins=()=>[...output.querySelectorAll('.randomBin')].map(e=>({from:Number(e.dataset.from),to:Number(e.dataset.to),count:Number(e.dataset.count)}));
+ w.Math.random=sim.seededRandom(17);select.value='1000';run.click();check(bins().reduce((n,b)=>n+b.count,0)===1000,'first frequency');
+ select.append(new w.Option('9000','9000'));select.value='9000';run.click();
+ check(JSON.stringify(bins())===JSON.stringify(expected),'UI split/bulk histogram '+page);
+ check(output.querySelectorAll('.randomHistogram').length===1,'single chart');
+ d.querySelector(unit?'#unitResetSimulation':'[data-random-reset]').click();check(!output.querySelector('.randomHistogram'),'manual reset');
+ select.value='1000';run.click();const duration=d.querySelector(unit?'#unitDuration':'#song');duration.value=String(Number(duration.value)+1);duration.dispatchEvent(new w.Event('input',{bubbles:true}));check(!output.querySelector('.randomHistogram'),'condition reset');
+ // Exercise the actual accumulator and shared renderer at the maximum sample count.
+ const million=acc.create(),values=new Float64Array(1000000);for(let i=0;i<values.length;i++)values[i]=i%1001;
+ const result=million.append(values);view.render(output,result,{unit:unit?'':'X'});view.render(output,result,{unit:unit?'':'X'});
+ check(output.querySelectorAll('.randomHistogram').length===1,'million does not duplicate');check(bins().reduce((n,b)=>n+b.count,0)===1000000,'million frequency');
+ const chart=output.querySelector('.randomHistogram');check(chart.getBoundingClientRect().width<=width&&output.scrollWidth<=output.clientWidth,'responsive histogram '+page);
+}
+out.textContent='PASS: A/unit 1000+9000 vs 10000, all frequencies, one chart, reset/conditions, million display, 1100/360';
+}catch(e){out.textContent='FAIL: '+e.stack;}finally{for(const k of Object.keys(localStorage))if(!backup.has(k))localStorage.removeItem(k);for(const [k,v] of backup)localStorage.setItem(k,v);}
+})();
+</script>

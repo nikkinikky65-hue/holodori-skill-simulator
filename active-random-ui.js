@@ -27,20 +27,7 @@
         group.append(term,value); metrics.append(group);
       }
       output.append(metrics);
-      const caption=document.createElement('p');caption.textContent='結果分布（横軸：X値／縦軸：試行数）';
-      const chart=document.createElement('div');chart.className='randomHistogram';
-      const bins=result.histogram;
-      const largest=Math.max(...bins.map(bin=>bin.count));
-      for(const bin of bins){
-        const column=document.createElement('div');column.className='randomBin';
-        const bar=document.createElement('div');bar.className='randomBar';
-        bar.style.height=`${100*bin.count/largest}px`;
-        bar.title=`${bin.from.toFixed(2)}〜${bin.to.toFixed(2)}X：${bin.count}回`;
-        const count=document.createElement('span');count.textContent=bin.count;
-        const label=document.createElement('small');label.textContent=`${bin.from.toFixed(2)}〜${bin.to.toFixed(2)}X`;
-        column.append(count,bar,label);chart.append(column);
-      }
-      output.append(caption,chart);
+      SimulationDistributionView.render(output,result);
       status.textContent=`今回${count}試行 / 累積${result.statistics.count}試行：曲時間 ${duration}s、発動候補 ${prepared.candidates.length}件。`;
     }catch(error){ status.textContent=`実行できませんでした：${error.message}`; }finally{running=false;button.disabled=false;}
   });

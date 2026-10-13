@@ -120,6 +120,7 @@ async function initializeUnitSimulator(){
         const batch=UnitSimulatorEngine.simulate(model,count);
         const result=accumulation.append(batch.values);
         node('unitResult').replaceChildren(table(['集計','結果'],[['mean','平均'],['variance','分散'],['median','中央値'],['min','最小'],['max','最大'],['p10','10%点'],['p90','90%点']].map(([key,label])=>[label,result.statistics[key].toLocaleString(undefined,{maximumFractionDigits:2})])));
+        SimulationDistributionView.render(node('unitResult'),result,{unit:''});
         node('unitResultStatus').textContent=`今回${count}試行 / 累積${result.statistics.count}試行（現在の条件）`;
       }catch(error){node('unitResultStatus').textContent=error.message;}finally{simulating=false;node('unitRun').disabled=!model||model.parameters.status!=='card-only';}
     });

@@ -17,3 +17,15 @@ const combined=ActiveRandomSimulation.run(prepared,1100,ActiveTimelineEngine.max
 assertAccum(JSON.stringify([...one.values,...two.values])===JSON.stringify(combined.values),'existing seeded trial order unchanged');
 agg.append(one.values);r=agg.append(two.values);assertAccum(Math.abs(r.statistics.mean-combined.statistics.mean)<1e-10&&r.statistics.count===1100,'unequal batches');
 print('Simulation accumulation: moments, exact quantiles/histogram, identity, reset, cap, million samples, seeded equivalence PASS');
+const split=SimulationAccumulator.create(),whole=SimulationAccumulator.create();
+const continuous=ActiveRandomSimulation.seededRandom(123);
+const first1000=ActiveRandomSimulation.run(prepared,1000,ActiveTimelineEngine.maxSegments,continuous);
+const next9000=ActiveRandomSimulation.run(prepared,9000,ActiveTimelineEngine.maxSegments,continuous);
+split.append(first1000.values);const splitResult=split.append(next9000.values);
+const wholeResult=whole.append(ActiveRandomSimulation.run(prepared,10000,ActiveTimelineEngine.maxSegments,ActiveRandomSimulation.seededRandom(123)).values);
+assertAccum(JSON.stringify(splitResult.histogram)===JSON.stringify(wholeResult.histogram),'1000+9000 equals 10000 histogram');
+assertAccum(splitResult.histogram.reduce((n,b)=>n+b.count,0)===10000,'total frequency');
+const expanded=SimulationAccumulator.create();expanded.append([5,5,6]);const expandedResult=expanded.append([-100,200]);
+assertAccum(JSON.stringify(expandedResult.histogram)===JSON.stringify(ActiveRandomSimulation.histogram([5,5,6,-100,200])),'range expansion re-bins all old values');
+assertAccum(large.result().histogram.reduce((n,b)=>n+b.count,0)===1000000,'million histogram total');
+print('Cumulative distribution: split/bulk equivalence, range changes, million frequency PASS');
