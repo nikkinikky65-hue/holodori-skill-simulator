@@ -8,7 +8,7 @@ try{
 const diff=await(await fetch('../research/card-library-update.json')).json();
 for(const width of [1100,360]){
  frame.style.width=width+'px';let w=await open('card-catalog.html');await w.eval('cardCatalogReady');let d=w.document;
- check(d.querySelectorAll('.catalogCard').length===84,'84 star5');
+ check(d.querySelectorAll('.catalogCard').length===196,'196 cards initially');
  for(const c of diff.added){const search=d.querySelector('#catalogSearch');search.value=c.name;search.dispatchEvent(new w.Event('input'));const card=d.querySelector('.catalogCard');check(card?.dataset.cardId===c.cardId,'new card search');check(card.textContent.includes('SP')&&card.textContent.includes('スコア'),'new skills');check(card.getBoundingClientRect().width<=width,'card fits');}
  const ownership=localStorage.getItem('holodori-user-card-state-v1');
  w=await open('unit-simulator.html');let api=await w.eval('unitSimulatorReady');d=w.document;

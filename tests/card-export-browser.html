@@ -17,7 +17,7 @@
  w.HTMLAnchorElement.prototype.click=function(){filename=this.download;};
  d.querySelector('#catalogExport').click();
  check(blob && filename.endsWith('.json'),'download created');
- const data=JSON.parse(await blob.text());check(data.cards.length===192,'export independent of filter');
+ const data=JSON.parse(await blob.text());check(data.cards.length===196,'export independent of filter');
  check(data.cards.find(c=>c.cardId===id).state.training===1,'growth exported');
  check(data.cards.filter(c=>c.saved).length===1,'only saved record');
  check(saved===localStorage.getItem(key),'export read only');
@@ -28,7 +28,7 @@
  check(saved===localStorage.getItem(key),'reload keeps state');
  check(frame.contentDocument.querySelector(`[data-card-id="${id}"] [data-catalog-owned]`).checked,'owned restored');
  }
- out.textContent='PASS: export Blob/filename, 192 cards, saved states, storage isolation, filters/reload, 1100/360';
+ out.textContent='PASS: export Blob/filename, 196 cards, saved states, storage isolation, filters/reload, 1100/360';
  }catch(e){out.textContent='FAIL: '+e.stack;}finally{if(before===null)localStorage.removeItem(key);else localStorage.setItem(key,before);}
 })();
 </script>

@@ -928,14 +928,15 @@
 .canonicalCardChoice details { margin-top: 12px; }
 
 /* Runtime card library; distinct from editable member Library. */
-.catalogFilters { display: flex; flex-wrap: wrap; gap: 1rem; }
-.catalogFilters label { display: grid; gap: .4rem; }
+.catalogFilters { display: flex; flex-wrap: wrap; gap: 1rem; align-items: end; }
+.catalogFilters label { display: grid; gap: .4rem; min-width: 0; }
+.catalogFilters input, .catalogFilters select { max-width: 100%; }
 .catalogCards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 1rem; }
 .catalogCard { min-width: 0; }
 .catalogCard .canonicalSlotStatus { line-height: 1.8; }
 .canonicalCardChoiceControls label { display: grid; gap: .4rem; }
 
-.catalogRarity { display: flex; gap: .5rem; align-items: center; }
+.catalogRarity { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
 .catalogRarity button { border-radius: 999px; padding: .65rem 1.5rem; border: 2px solid #697783; }
 .catalogRarity button[aria-pressed="true"] { background: #176555; color: #fff; border-color: #176555; }
 .canonicalGrowth { display: flex; flex-wrap: nowrap; gap: 1rem; align-items: center; }
