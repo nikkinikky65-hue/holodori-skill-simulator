@@ -14,35 +14,21 @@ async function renderCardCatalog(){
   try{
     const container = document.querySelector('#catalogCards');
     const search = document.querySelector('#catalogSearch');
-    const member = document.querySelector('#catalogMember');
     const rarityButtons = [...document.querySelectorAll('[data-catalog-rarity]')];
-    let rarity = 'all';
+    let rarity = '5';
     const type = document.querySelector('#catalogType');
     readUserCardStates(); // Validate existing settings before presenting editable controls.
-    for(const [selector, element] of [['#catalogCards',container], ['#catalogSearch',search], ['#catalogMember',member], ['#catalogType',type]]){
+    for(const [selector, element] of [['#catalogCards',container], ['#catalogSearch',search], ['#catalogType',type]]){
       if(!element) throw new Error(`必須要素がありません：${selector}`);
     }
-    if(rarityButtons.map(button => button.dataset.catalogRarity).join(',') !== 'all,5,4,3') throw new Error('レア度ボタン（すべて・★5・★4・★3）が不足、または順序が不正です。');
-    const memberIds = new Set(catalog.cards.map(canonicalMemberId));
-    for(const item of HOLO_MEMBERS){
-      if(!memberIds.has(item.id)) continue;
-      const option = document.createElement('option');
-      option.value = item.id;
-      option.textContent = item.name;
-      member.append(option);
-    }
+    if(rarityButtons.map(button => button.dataset.catalogRarity).join(',') !== '5,4,3') throw new Error('レア度ボタン（★5・★4・★3）が不足、または順序が不正です。');
     delete status.dataset.errorKind;
-    const displayOrder = new Map(sortCatalogCardsForDisplay(catalog.cards).map((card, index) => [card.id, index]));
     const render = () => {
       const query = search.value.trim().toLocaleLowerCase();
-      const cards = catalog.cards.filter(card =>
+      const cards = sortCatalogCardsForDisplay(catalog.cards.filter(card =>
         `${card.name} ${canonicalMemberName(card)}`.toLocaleLowerCase().includes(query) &&
-        (!member.value || canonicalMemberId(card) === member.value) &&
-        (rarity === 'all' || String(card.classification.rarity.mapping.value) === rarity) &&
-        (!type.value || card.classification.attributeType.mapping.value === type.value))
-        .sort((a, b) =>
-          b.classification.rarity.mapping.value - a.classification.rarity.mapping.value ||
-          displayOrder.get(a.id) - displayOrder.get(b.id));
+        String(card.classification.rarity.mapping.value) === rarity &&
+        (!type.value || card.classification.attributeType.mapping.value === type.value)), catalog.cards);
       const userStates = readUserCardStates();
       container.replaceChildren();
       for(const card of cards){
@@ -117,7 +103,6 @@ async function renderCardCatalog(){
       status.textContent = `${cards.length} / ${catalog.cards.length}枚`;
     };
     search.addEventListener('input', render);
-    member.addEventListener('change', render);
     for(const button of rarityButtons) button.addEventListener('click', () => {
       rarity = button.dataset.catalogRarity;
       for(const item of rarityButtons) item.setAttribute('aria-pressed', String(item === button));

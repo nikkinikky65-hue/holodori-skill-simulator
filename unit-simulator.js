@@ -4,7 +4,12 @@ async function initializeUnitSimulator(){
   const status=node('unitStatus');
   try{
     const catalog=await loadRuntimeCardCatalog();
-    const sortedCards=sortCatalogCardsForDisplay(catalog.cards);
+    const memberSortedCards=sortCatalogCardsForDisplay(catalog.cards);
+    const memberOrder=new Map(memberSortedCards.map((card,index)=>[card.id,index]));
+    const sortedCards=[...memberSortedCards].sort((a,b)=>
+      b.classification.rarity.mapping.value-a.classification.rarity.mapping.value ||
+      memberOrder.get(a.id)-memberOrder.get(b.id));
+    const availableMemberIds=new Set(catalog.cards.map(canonicalMemberId));
     try{
       const response=await fetch(new URL('data/runtime-affiliations.json',document.baseURI));
       if(response.ok){const data=await response.json();if(data.format==='holodori-affiliations-v1'&&data.canonicalSha256===catalog.dataset.canonicalSha256)catalog.affiliationCatalog=data;}
@@ -73,14 +78,23 @@ async function initializeUnitSimulator(){
     slots.forEach((slot,i)=>{
       const panel=create('article');panel.className='unitSlot';panel.append(create('h3',`枠${i+1}`));
       const searchLabel=create('label','カード名・メンバー名で検索'),search=create('input');search.type='search';searchLabel.append(search);
+      const memberLabel=create('label','メンバー'),memberChoice=create('select');memberChoice.dataset.unitMember=String(i);
+      memberChoice.append(new Option('すべてのメンバー',''));
+      for(const member of HOLO_MEMBERS){
+        if(availableMemberIds.has(member.id))memberChoice.append(new Option(member.name,member.id));
+      }
+      memberLabel.append(memberChoice);
       const cardLabel=create('label','カード'),choice=create('select');choice.dataset.unitCard=String(i);cardLabel.append(choice);
       function choices(){
         const query=search.value.trim().toLocaleLowerCase();choice.replaceChildren(new Option('未選択',''));
-        for(const card of sortedCards.filter(card=>card.id===slot.cardId||`${card.name} ${canonicalMemberName(card)}`.toLocaleLowerCase().includes(query)))choice.append(new Option(`${canonicalMemberName(card)} / ★${card.classification.rarity.mapping.value} / ${card.name}`,card.id));
+        for(const card of sortedCards.filter(card=>card.id===slot.cardId||
+          ((!memberChoice.value||canonicalMemberId(card)===memberChoice.value) &&
+           `${card.name} ${canonicalMemberName(card)}`.toLocaleLowerCase().includes(query))))
+          choice.append(new Option(`${canonicalMemberName(card)} / ★${card.classification.rarity.mapping.value} / ${card.name}`,card.id));
         choice.value=slot.cardId;
       }
-      slotControls.push({choices,search,panel});
-      choices();search.addEventListener('input',choices);
+      slotControls.push({choices,search,memberChoice,panel});
+      choices();search.addEventListener('input',choices);memberChoice.addEventListener('change',choices);
       choice.addEventListener('change',()=>{slot.cardId=choice.value;refresh();});
       const growth=create('div');growth.className='canonicalGrowth';
       for(const [key,label,max] of [['training','特訓',4],['bloom','開花',5]]){
@@ -89,7 +103,7 @@ async function initializeUnitSimulator(){
         select.addEventListener('change',()=>{slot[key]=Number(select.value);refresh();});control.append(select);growth.append(control);
       }
       const preview=create('p');preview.className='unitPreview';previews.push(preview);
-      panel.append(searchLabel,cardLabel,growth,preview);node('unitSlots').append(panel);
+      panel.append(searchLabel,memberLabel,cardLabel,growth,preview);node('unitSlots').append(panel);
     });
     for(let i=0;i<5;i++){
       const label=create('label',`枠${i+1} (秒)`),input=create('input');input.type='number';input.min='0';input.step='0.1';input.dataset.spSlot=String(i+1);
@@ -138,7 +152,7 @@ async function initializeUnitSimulator(){
       if(snapshot.leaderId&&!leaderRules.some(l=>l.id===snapshot.leaderId))throw Error('保存編成のリーダーが現在のデータにありません。');
       const saved=JSON.parse(JSON.stringify(snapshot));
       saved.slots.forEach((slot,i)=>{
-        Object.assign(slots[i],slot);const controls=slotControls[i];controls.search.value='';controls.choices();
+        Object.assign(slots[i],slot);const controls=slotControls[i];controls.search.value='';controls.memberChoice.value='';controls.choices();
         controls.panel.querySelector('[data-training]').value=String(slot.training);
         controls.panel.querySelector('[data-bloom]').value=String(slot.bloom);
       });

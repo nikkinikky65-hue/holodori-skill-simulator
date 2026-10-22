@@ -9,23 +9,6 @@ for(const width of [1100,360]){
  frame.style.width=width+'px';
  const library=await open('card-catalog.html');await library.eval('cardCatalogReady');
  const catalog=await library.loadRuntimeCardCatalog(),byId=new Map(catalog.cards.map(card=>[card.id,card]));
- const all=[...library.document.querySelectorAll('.catalogCard')].map(card=>card.dataset.cardId);
- check(all.length===196,'catalog initial count');
- check(all.every((id,i)=>i===0||byId.get(all[i-1]).classification.rarity.mapping.value>=byId.get(id).classification.rarity.mapping.value),'catalog rarity descending');
- const memberSelect=library.document.querySelector('#catalogMember');
- const memberId=library.canonicalMemberId(catalog.cards.find(card=>card.member.name==='星街すいせい'));
- check([...memberSelect.options].some(option=>option.value===memberId),'member option from catalog');
- memberSelect.value=memberId;memberSelect.dispatchEvent(new library.Event('change'));
- check([...library.document.querySelectorAll('.catalogCard')].every(card=>library.canonicalMemberId(byId.get(card.dataset.cardId))===memberId),'member filter');
- const combinedSearch=library.document.querySelector('#catalogSearch');
- combinedSearch.value='一致しない';combinedSearch.dispatchEvent(new library.Event('input'));
- check(library.document.querySelectorAll('.catalogCard').length===0,'combined empty');
- combinedSearch.value='星街すいせい';combinedSearch.dispatchEvent(new library.Event('input'));
- check(library.document.querySelectorAll('.catalogCard').length>0,'combined match');
- memberSelect.value='';memberSelect.dispatchEvent(new library.Event('change'));
- combinedSearch.value='';combinedSearch.dispatchEvent(new library.Event('input'));
- check(library.document.querySelectorAll('.catalogCard').length===196,'filters cleared');
- check(memberSelect.getBoundingClientRect().right<=width,'member control fits viewport');
  const expected=new Map();
  for(const rarity of [5,4,3]){
   library.document.querySelector(`[data-catalog-rarity="${rarity}"]`).click();
@@ -64,7 +47,7 @@ for(const width of [1100,360]){
  check(JSON.stringify(filtered)===JSON.stringify(options.filter(id=>`${byId.get(id).name} ${byId.get(id).member.name}`.toLocaleLowerCase().includes('星街すいせい'))),'unit search');
  for(const rarity of [5,4,3])check(JSON.stringify(filtered.filter(id=>byId.get(id).classification.rarity.mapping.value===rarity))===JSON.stringify(memberExpected.get(rarity)),'unit search rarity '+rarity);
 }
-output.textContent='PASS: catalog 196 cards, member/search filters and rarity order; A/B/unit unchanged, 1100/360';
+output.textContent='PASS: catalog rarity order equals A/B/unit card options and search, 1100/360';
 }catch(error){output.textContent='FAIL: '+error.stack;}
 })();
 </script>
