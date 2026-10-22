@@ -1,6 +1,6 @@
 // Orchestration only: no formula duplication and no persistence.
 const UnitSimulatorEngine = (() => {
-  function build(catalog, slots, duration, memoryInput, enhancementInput, specialStarts = {}, specialEnabled = true, leaderInput = null){
+  function build(catalog, slots, duration, memoryInput, enhancementInput, specialStarts = {}, specialEnabled = true, leaderInput = null, specialOrder = null){
     if(slots.length!==5) throw Error('5枠の編成が必要です');
     if(!Number.isFinite(duration)||duration<=0) throw Error('曲時間を正の数にしてください');
     const byId=new Map(catalog.cards.map(card=>[card.id,card]));
@@ -23,7 +23,7 @@ const UnitSimulatorEngine = (() => {
     const eventsByMember=activeMembers.map(member=>ActiveTimelineEngine.events(member,duration));
     const segments=ActiveTimelineEngine.maxSegments(eventsByMember.flat(),duration);
     const unitScore=UnitScoreEngine.calculate(parameters);
-    const specialSchedule=SpecialScheduleEngine.build(members,duration,specialStarts);
+    const specialSchedule=SpecialScheduleEngine.build(members,duration,specialStarts,specialOrder);
     const probabilitySources=ActivationProbabilityEngine.fromSchedule(specialSchedule);
     const passiveSupport=specialEnabled ? ScheduledSupportEngine.passive(members,catalog.affiliationCatalog?.canonicalSha256===catalog.dataset.canonicalSha256?catalog.affiliationCatalog:null) : {sources:[],targets:[],unresolved:[],stackingUnresolved:[],status:'disabled'};
     const leaderSupport=LeaderSupportEngine.resolve(leaderInput,members.filter(Boolean).map(m=>m.parameters),catalog.affiliationCatalog?.canonicalSha256===catalog.dataset.canonicalSha256?catalog.affiliationCatalog:null);

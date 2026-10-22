@@ -995,6 +995,9 @@
 .unitSlot > label { display: block; margin-bottom: 8px; }
 .unitSlot select, .unitSlot input { max-width: 100%; width: 100%; }
 .unitSlot .canonicalGrowth select { width: auto; }
+.unitOptimize { margin: 12px 0; padding: 12px; border: 1px solid #64748b; border-radius: 8px; }
+.unitOptimizeLimits { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0; }
+.unitOptimizeLimits label { display: grid; gap: 4px; min-width: 78px; }
 .unitPreview { white-space: pre-line; overflow-wrap: anywhere; }
 .unitTableScroll { overflow-x: auto; }
 .unitTableScroll table { width: 100%; border-collapse: collapse; }

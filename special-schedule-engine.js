@@ -1,4 +1,5 @@
-// Page-local scheduling policy, not measured game timing. Slots keep formation order.
+// Page-local scheduling policy, not measured game timing. Default order is formation order;
+// an explicit permutation changes only the SP schedule, not member/Active order.
 const SpecialScheduleEngine = (() => {
   const supportType='LiveActiveSkillEffectType_LIVE_ACTIVE_SKILL_EFFECT_TYPE_SCORE_UP_EFFECT_UP_PERMIL_UP';
   function describe(member){
@@ -26,7 +27,7 @@ const SpecialScheduleEngine = (() => {
     if(invalid||total>songDuration) return {status:'unresolved',reason:invalid?'SP持続時間未確認':'全SPの持続時間が曲長を超えています（短縮せず配置保留）',entries:entries.map(e=>({...e,start:null,end:null,placement:'unresolved'}))};
     let end=0,remaining=total;
     const placed=entries.map(entry=>{
-      const initial=(entry.slot-.5)*songDuration/5;
+      const initial=((entry.scheduleIndex??entry.slot)-.5)*songDuration/5;
       const manual=Object.hasOwn(starts,entry.slot);
       const requestedStart=manual?starts[entry.slot]:initial;
       if(typeof requestedStart!=='number'||!Number.isFinite(requestedStart))throw Error('SP開始時刻は有限の数値で指定してください');
@@ -38,6 +39,14 @@ const SpecialScheduleEngine = (() => {
     });
     return {status:'resolved',reason:null,entries:placed};
   }
-  function build(members,songDuration,starts={}){return place(members.filter(Boolean).map(describe),songDuration,starts);}
+  function build(members,songDuration,starts={},order=null){
+    const entries=members.filter(Boolean).map(describe);
+    if(order!==null){
+      if(!Array.isArray(order)||order.length!==entries.length||new Set(order).size!==order.length||
+         order.some(slot=>!entries.some(entry=>entry.slot===slot)))throw Error('SP順序が不正です');
+      return place(order.map((slot,index)=>({...entries.find(entry=>entry.slot===slot),scheduleIndex:index+1})),songDuration,starts);
+    }
+    return place(entries,songDuration,starts);
+  }
   return {build,place,describe};
 })();

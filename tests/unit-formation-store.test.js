@@ -4,6 +4,9 @@ let failWrite=false,serial=0;
 const localStorage={getItem:k=>stateMap.get(k)??null,setItem:(k,v)=>{if(failWrite)throw Error('quota');stateMap.set(k,v);}};
 const crypto={randomUUID:()=>`id-${++serial}`};
 const snapshot={version:1,slots:Array.from({length:5},(_,i)=>({cardId:'card-'+i,training:i,bloom:i+1,short:i*3,totalAdjustments:{board:{kind:'external-total',value:i?'0':''},costume:{kind:'external-total',value:null}}})),leaderId:'leader',duration:'120',memoryPercent:'',enhancementPercent:'0',trials:'1000',specialEnabled:false,specialStarts:{1:15,3:44.5}};
+checkFormation(UnitFormationStore.validateSnapshot({...snapshot,specialOrder:[4,2,1,3,5]}).specialOrder[0]===4,'SP order snapshot accepted');
+let badOrder=false;try{UnitFormationStore.validateSnapshot({...snapshot,specialOrder:[1,1,2,3,4]});}catch(error){badOrder=true;}
+checkFormation(badOrder,'duplicate SP order rejected');
 checkFormation(UnitFormationStore.read().formations.length===0&&!stateMap.has(UnitFormationStore.key),'read does not initialize storage');
 const a=UnitFormationStore.save('A',snapshot),b=UnitFormationStore.save('B',{...snapshot,duration:'150'});
 snapshot.slots[0].short=99;

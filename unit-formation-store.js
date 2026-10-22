@@ -10,7 +10,9 @@ const UnitFormationStore = (() => {
       !s.slots.every(x=>object(x)&&string(x.cardId)&&Number.isInteger(x.training)&&x.training>=0&&x.training<=4&&Number.isInteger(x.bloom)&&x.bloom>=0&&x.bloom<=5&&Number.isFinite(x.short)&&x.short>=0&&object(x.totalAdjustments)&&adjustment(x.totalAdjustments.board)&&adjustment(x.totalAdjustments.costume))||
       !['leaderId','duration','memoryPercent','enhancementPercent'].every(k=>string(s[k]))||
       !['100','1000','10000'].includes(s.trials)||typeof s.specialEnabled!=='boolean'||!object(s.specialStarts)||
-      !Object.entries(s.specialStarts).every(([k,v])=>/^[1-5]$/.test(k)&&Number.isFinite(v)))throw Error('編成スナップショットが不正、または未対応の形式です。');
+      !Object.entries(s.specialStarts).every(([k,v])=>/^[1-5]$/.test(k)&&Number.isFinite(v))||
+      (s.specialOrder!==undefined&&s.specialOrder!==null&&(!Array.isArray(s.specialOrder)||s.specialOrder.length!==5||
+        new Set(s.specialOrder).size!==5||s.specialOrder.some((slot,index)=>!Number.isInteger(slot)||slot<1||slot>5))))throw Error('編成スナップショットが不正、または未対応の形式です。');
     return s;
   }
   function read(){

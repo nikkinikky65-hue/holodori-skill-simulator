@@ -877,54 +877,7 @@ for(let i = 0; i < 5; i++){
 }
 
 function optimizeShortRates(members, T, limits){
-  let best = null;
-  let tested = 0;
-
-  const candidates = limits.map(limit =>
-    SHORT_OPTIONS.filter(v => v <= limit)
-  );
-
-  function search(index, shorts){
-    if(index < members.length){
-      for(const value of candidates[index]){
-        shorts.push(value);
-        search(index + 1, shorts);
-        shorts.pop();
-      }
-      return;
-    }
-
-    tested++;
-
-    const testMembers = members.map((m, i) => ({
-      ...m,
-      short: shorts[i]
-    }));
-
-    const by = testMembers.map(m => events(m, T));
-    const all = by.flat();
-    const score = calcMax(all, T);
-
-    if(
-      best === null ||
-      score > best.score + 1e-9
-    ){
-      best = {
-        score,
-        shorts: [...shorts],
-        members: testMembers,
-        by,
-        all
-      };
-    }
-  }
-
-  search(0, []);
-
-  return {
-    ...best,
-    tested
-  };
+  return TimelineOptimizer.optimizeActive(members, T, limits);
 }
 
 function renderOptimizedTimeline(result, T, currentScore){

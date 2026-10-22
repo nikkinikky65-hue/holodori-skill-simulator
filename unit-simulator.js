@@ -34,6 +34,8 @@ async function initializeUnitSimulator(){
     const accumulation=SimulationAccumulator.create();
     let simulating=false;
     let specialStarts={};
+    let specialOrder=null;
+    let optimizationRun=0;
     const specialInputs=[];
     const table=(headers,rows)=>{
       const wrapper=create('div');wrapper.className='unitTableScroll';
@@ -48,7 +50,7 @@ async function initializeUnitSimulator(){
     function refresh(){
 
       try{
-        model=UnitSimulatorEngine.build(catalog,slots,Number(node('unitDuration').value),{kind:'manual-rate',percent:node('unitMemoryPercent').value},{kind:'manual-rate',percent:node('unitEnhancementPercent').value},specialStarts,node('unitShowSP').checked,leaderRules.find(l=>l.id===node('unitLeader').value)||null);
+        model=UnitSimulatorEngine.build(catalog,slots,Number(node('unitDuration').value),{kind:'manual-rate',percent:node('unitMemoryPercent').value},{kind:'manual-rate',percent:node('unitEnhancementPercent').value},specialStarts,node('unitShowSP').checked,leaderRules.find(l=>l.id===node('unitLeader').value)||null,slots.every(slot=>slot.cardId)?specialOrder:null);
         if(accumulation.sync(simulationInput())){node('unitResult').replaceChildren();node('unitResultStatus').textContent='条件変更：累積0試行。再実行してください。';}
         if(leaderRules.length)node('unitLeaderStatus').textContent=model.parameters.leaderResult ?
           [...model.parameters.leaderResult.trace.filter(t=>t.effect.parameter!=='score_support'),...model.leaderSupport.sources].map(t=>`${t.description}：${t.status==='applied'?'適用':t.status==='inactive'?'条件不成立':t.reason}`).join(' / ') : '未選択（共通効果も自動付与しません）';
@@ -119,6 +121,47 @@ async function initializeUnitSimulator(){
     node('unitDuration').addEventListener('input',refresh);
     node('unitMemoryPercent').addEventListener('input',refresh);
     node('unitEnhancementPercent').addEventListener('input',refresh);
+    for(let i=0;i<5;i++){
+      const label=create('label',`枠${i+1} 上限`),limit=create('select');limit.dataset.unitOptimizeLimit=String(i);
+      for(const value of TimelineOptimizer.shortOptions)limit.append(new Option(`最大 ${value}%`,String(value)));
+      limit.value='4';label.append(limit);node('unitOptimizeLimits').append(label);
+    }
+    node('unitOptimizeCancel').addEventListener('click',()=>{optimizationRun++;node('unitOptimizeCancel').disabled=true;node('unitOptimizeStatus').textContent='探索を中断しました。';});
+    node('unitOptimizeRun').addEventListener('click',async()=>{
+      if(!model||model.parameters.status!=='card-only'){node('unitOptimizeStatus').textContent='5人のカードを選択してください。';return;}
+      const startModel=model,limits=[...document.querySelectorAll('[data-unit-optimize-limit]')].map(input=>Number(input.value));
+      const orders=startModel.specialEnabled?TimelineOptimizer.permutations([1,2,3,4,5]):[null];
+      const total=TimelineOptimizer.count(limits,orders.length),cap=10000;
+      if(total>cap){node('unitOptimizeStatus').textContent=`探索候補${total.toLocaleString()}通りが上限${cap.toLocaleString()}を超えます。上限を下げてください。`;return;}
+      const currentInput=JSON.stringify(capture()),run=++optimizationRun;
+      const button=node('unitOptimizeRun'),cancel=node('unitOptimizeCancel'),message=node('unitOptimizeStatus');
+      button.disabled=true;cancel.disabled=false;message.textContent=`探索中：0 / ${total}通り`;
+      let best=null,tested=0;
+      try{
+        const candidates=TimelineOptimizer.candidates(limits,orders);
+        for(const candidate of candidates){
+          if(run!==optimizationRun||JSON.stringify(capture())!==currentInput){message.textContent='入力変更または中断により探索を停止しました。';return;}
+          const active=TimelineOptimizer.active(startModel.activeMembers,startModel.duration,candidate.shorts);
+          let score=active.score;
+          if(startModel.specialEnabled){
+            const schedule=SpecialScheduleEngine.build(startModel.members,startModel.duration,specialStarts,candidate.order);
+            if(schedule.status!=='resolved')throw Error(schedule.reason);
+            const segments=ScheduledSupportEngine.evaluate(active.all,startModel.duration,schedule,startModel.passiveSupport,{trace:false,leaderSupport:startModel.leaderSupport}).segments;
+            score=(ActiveRandomSimulation.integrate(segments,startModel.duration)-startModel.duration)*100;
+          }
+          if(best===null||score>best.score+1e-9)best={score,shorts:candidate.shorts,order:candidate.order};
+          tested++;
+          if(tested%25===0){message.textContent=`探索中：${tested.toLocaleString()} / ${total.toLocaleString()}通り`;
+            await new Promise(resolve=>setTimeout(resolve,0));}
+        }
+        if(run!==optimizationRun||JSON.stringify(capture())!==currentInput){message.textContent='入力変更または中断により探索を停止しました。';return;}
+        best.shorts.forEach((value,i)=>{slots[i].short=value;});
+        if(startModel.specialEnabled)specialOrder=best.order;
+        refresh();
+        message.textContent=`探索完了：${tested.toLocaleString()}通り / 評価値 ${best.score.toFixed(2)} / 発動頻度UP ${best.shorts.join('・')}%${best.order?' / SP順序 '+best.order.map(slot=>'枠'+slot).join('→'):''}`;
+      }catch(error){message.textContent=`探索できませんでした：${error.message}`;}
+      finally{button.disabled=false;cancel.disabled=true;}
+    });
     node('unitProbability').textContent='暫定発動率：'+[['low','低'],['mid','中'],['high','高']].map(([key,label])=>`${label}${ActivationProbabilityRules.percent[key]}%`).join(' / ');
     function simulationInput(){
       const rate=v=>typeof v==='string'?(v.trim()===''?null:Number.isFinite(Number(v))?Number(v):v.trim()):v;
@@ -144,7 +187,7 @@ async function initializeUnitSimulator(){
       return JSON.parse(JSON.stringify({version:1,slots,leaderId:node('unitLeader').value,
         duration:node('unitDuration').value,memoryPercent:node('unitMemoryPercent').value,
         enhancementPercent:node('unitEnhancementPercent').value,trials:node('unitTrials').value,
-        specialEnabled:node('unitShowSP').checked,specialStarts}));
+        specialEnabled:node('unitShowSP').checked,specialStarts,specialOrder}));
     }
     function restore(snapshot){
       UnitFormationStore.validateSnapshot(snapshot);
@@ -158,7 +201,7 @@ async function initializeUnitSimulator(){
         controls.panel.querySelector('[data-bloom]').value=String(slot.bloom);
       });
       for(const [id,key] of [['unitLeader','leaderId'],['unitDuration','duration'],['unitMemoryPercent','memoryPercent'],['unitEnhancementPercent','enhancementPercent'],['unitTrials','trials']])node(id).value=saved[key];
-      specialStarts=saved.specialStarts;node('unitShowSP').checked=saved.specialEnabled;refresh();
+      specialStarts=saved.specialStarts;specialOrder=saved.specialOrder??null;node('unitShowSP').checked=saved.specialEnabled;refresh();
     }
     refresh();
     initializeUnitFormationUI({capture,restore,getDefaultName:()=>{const leader=leaderRules.find(l=>l.id===node('unitLeader').value);return catalog.cards.find(c=>c.id===leader?.cardId)?.name||leader?.name||'新しい編成';}});

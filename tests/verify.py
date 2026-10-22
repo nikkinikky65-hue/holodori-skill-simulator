@@ -21,13 +21,12 @@ def timeline_check_source(text):
     return text.replace('\nreturn {adjustedInterval, events, calcMax, maxSegments};\n})();', '\nfunction render(){')
 
 for start, end in [('function adjustedInterval(', '// ====='),
-                   ('function maxSegments(', 'function render(){'),
-                   ('function optimizeShortRates(', 'function renderOptimizedTimeline(')]:
+                   ('function maxSegments(', 'function render(){')]:
     def section(text):
         a = text.index(start)
         return text[a:text.index(end, a)].strip()
-    current_source = app if start.startswith('function optimize') else timeline_check_source(engine)
-    previous_source = old if start.startswith('function optimize') else timeline_check_source(old_engine or old)
+    current_source = timeline_check_source(engine)
+    previous_source = timeline_check_source(old_engine or old)
     assert section(current_source) == section(previous_source), start + ' changed'
 
 for page, script in [('index.html','app.js'),('library.html','library.js'),('event.html','event.js'),('index.html','formation.js'),('index.html','active-snapshot.js')]:
@@ -156,6 +155,7 @@ subprocess.run([jsc,'card-rules.js','tests/card-rules.test.js'],check=True,cwd=r
 print('DOM IDs, script order, unchanged optimizer/timeline evaluation functions: PASS')
 
 subprocess.run([jsc,'formation-rules.js','tests/formation-rules.test.js'],check=True,cwd=root)
+subprocess.run([jsc,'active-timeline-engine.js','timeline-optimizer.js','tests/timeline-optimizer.test.js'],check=True,cwd=root)
 
 subprocess.run([jsc,'card-rules.js','support-rules.js','tests/support-rules.test.js'],check=True,cwd=root)
 
