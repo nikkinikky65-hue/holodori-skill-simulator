@@ -131,7 +131,7 @@ async function initializeUnitSimulator(){
       if(!model||model.parameters.status!=='card-only'){node('unitOptimizeStatus').textContent='5人のカードを選択してください。';return;}
       const startModel=model,limits=[...document.querySelectorAll('[data-unit-optimize-limit]')].map(input=>Number(input.value));
       const orders=startModel.specialEnabled?TimelineOptimizer.permutations([1,2,3,4,5]):[null];
-      const total=TimelineOptimizer.count(limits,orders.length),cap=10000;
+      const total=TimelineOptimizer.count(limits,orders.length),cap=122880;
       if(total>cap){node('unitOptimizeStatus').textContent=`探索候補${total.toLocaleString()}通りが上限${cap.toLocaleString()}を超えます。上限を下げてください。`;return;}
       const currentInput=JSON.stringify(capture()),run=++optimizationRun;
       const button=node('unitOptimizeRun'),cancel=node('unitOptimizeCancel'),message=node('unitOptimizeStatus');

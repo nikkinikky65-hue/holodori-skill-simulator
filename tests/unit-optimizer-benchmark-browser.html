@@ -1,0 +1,28 @@
+<!doctype html><meta charset="utf-8"><pre id="result">RUNNING</pre><iframe style="height:800px;border:0"></iframe>
+<script>
+(async()=>{
+ const out=document.querySelector('#result'),frame=document.querySelector('iframe');
+ const count=Number(new URLSearchParams(location.search).get('count'));
+ if(![3840,122880].includes(count)){out.textContent='FAIL: count';return;}
+ try{
+  frame.style.width='1100px';
+  const w=await new Promise(resolve=>{frame.onload=()=>resolve(frame.contentWindow);frame.src='../unit-simulator.html';});
+  const api=await w.eval('unitSimulatorReady'),catalog=await w.loadRuntimeCardCatalog();
+  const cards=catalog.cards.filter(card=>card.classification.rarity.mapping.value===5).slice(0,5);
+  [...w.document.querySelectorAll('[data-unit-card]')].forEach((choice,i)=>{choice.value=cards[i].id;choice.dispatchEvent(new w.Event('change'));});
+  const limit=count===3840?'4':'12';
+  for(const control of w.document.querySelectorAll('[data-unit-optimize-limit]'))control.value=limit;
+  let heartbeats=0,progress=0;
+  const heartbeat=setInterval(()=>heartbeats++,10),status=w.document.querySelector('#unitOptimizeStatus');
+  const observer=new MutationObserver(()=>{if(status.textContent.startsWith('探索中：'))progress++;});
+  observer.observe(status,{childList:true,characterData:true,subtree:true});
+  const start=performance.now();w.document.querySelector('#unitOptimizeRun').click();
+  while(!status.textContent.includes('探索完了')&&!status.textContent.includes('探索できませんでした'))await new Promise(resolve=>setTimeout(resolve,20));
+  const elapsed=performance.now()-start;clearInterval(heartbeat);observer.disconnect();
+  if(!status.textContent.includes('探索完了')||!status.textContent.includes(count.toLocaleString()+'通り'))throw Error(status.textContent);
+  if(heartbeats<2||progress<2)throw Error('UI did not yield');
+  if(api.getModel().specialSchedule.entries.length!==5)throw Error('schedule lost');
+  out.textContent=`PASS: ${count} candidates, ${elapsed.toFixed(1)} ms in page, ${heartbeats} UI heartbeats, ${progress} progress updates`;
+ }catch(error){out.textContent='FAIL: '+error.stack;}
+})();
+</script>
