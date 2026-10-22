@@ -12,6 +12,13 @@
    const controls=[...w.document.querySelectorAll('[data-unit-card]')];
    const members=[...w.document.querySelectorAll('[data-unit-member]')];
    check(controls.length===5&&members.length===5,'five card and member controls');
+   for(const filters of w.document.querySelectorAll('.unitCardFilters')){
+    const search=filters.querySelector('input[type=search]'),member=filters.querySelector('[data-unit-member]');
+    const searchBox=search.getBoundingClientRect(),memberBox=member.getBoundingClientRect();
+    check(Math.abs(searchBox.top-memberBox.top)<2&&searchBox.right<=memberBox.left,'filters share one row');
+    check(searchBox.width>memberBox.width,'search wider than member');
+    check(memberBox.right<=width,'filter row fits');
+   }
    const fullOrder=[...controls[0].options].map(o=>o.value).filter(Boolean);
    check(fullOrder.length===196,'all cards');
    check(fullOrder.every((id,i)=>i===0||byId.get(fullOrder[i-1]).classification.rarity.mapping.value>=byId.get(id).classification.rarity.mapping.value),'rarity order');

@@ -989,6 +989,9 @@
 /* Next-generation page only; shared calculation engines carry no layout. */
 .unitSlots { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,280px),1fr)); gap: 16px; }
 .unitSlot { min-width: 0; border: 1px solid #64748b; padding: 12px; border-radius: 8px; }
+.unitCardFilters { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 8px; margin-bottom: 8px; }
+.unitCardFilters label { display: grid; min-width: 0; gap: 4px; }
+.unitCardFilters input, .unitCardFilters select { min-width: 0; }
 .unitSlot > label { display: block; margin-bottom: 8px; }
 .unitSlot select, .unitSlot input { max-width: 100%; width: 100%; }
 .unitSlot .canonicalGrowth select { width: auto; }

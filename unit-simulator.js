@@ -77,7 +77,7 @@ async function initializeUnitSimulator(){
     }
     slots.forEach((slot,i)=>{
       const panel=create('article');panel.className='unitSlot';panel.append(create('h3',`枠${i+1}`));
-      const searchLabel=create('label','カード名・メンバー名で検索'),search=create('input');search.type='search';searchLabel.append(search);
+      const searchLabel=create('label','検索'),search=create('input');search.type='search';search.placeholder='カード名・メンバー名';searchLabel.append(search);
       const memberLabel=create('label','メンバー'),memberChoice=create('select');memberChoice.dataset.unitMember=String(i);
       memberChoice.append(new Option('すべてのメンバー',''));
       for(const member of HOLO_MEMBERS){
@@ -103,7 +103,8 @@ async function initializeUnitSimulator(){
         select.addEventListener('change',()=>{slot[key]=Number(select.value);refresh();});control.append(select);growth.append(control);
       }
       const preview=create('p');preview.className='unitPreview';previews.push(preview);
-      panel.append(searchLabel,memberLabel,cardLabel,growth,preview);node('unitSlots').append(panel);
+      const filters=create('div');filters.className='unitCardFilters';filters.append(searchLabel,memberLabel);
+      panel.append(filters,cardLabel,growth,preview);node('unitSlots').append(panel);
     });
     for(let i=0;i<5;i++){
       const label=create('label',`枠${i+1} (秒)`),input=create('input');input.type='number';input.min='0';input.step='0.1';input.dataset.spSlot=String(i+1);
