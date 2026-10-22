@@ -29,11 +29,11 @@ let calls=0;ActiveRandomSimulation.trial(corrected,ActiveTimelineEngine.maxSegme
 let count=0, applied=0, deferred=0;
 for(const card of canonicalTestFixture.cards)for(const level of card.skills.special.levels){
  const schedule={status:'resolved',entries:[{cardId:card.id,slot:1,level:level.level,start:10,end:10+level.raw.effectDurationMillisecond/1000,effects:level.effects}]};
- const sources=ActivationProbabilityEngine.fromSchedule(schedule);count+=sources.length;
+ const sources=ActivationProbabilityEngine.fromSchedule(schedule);if(releaseBaselineIds.has(card.id))count+=sources.length;
  for(const source of sources){
   check(source.scope==='activation-start','SP activation scope');
-  if(source.applicable){applied++;check(near(resolve([source]).probability,.45*(1+source.rate)),'real SP enabled');}
-  else{deferred++;check(source.unresolvedReasons.join()==='condition-evaluation-deferred'&&resolve([source]).probability===.45,'conditional SP withheld');}
+  if(source.applicable){if(releaseBaselineIds.has(card.id))applied++;check(near(resolve([source]).probability,.45*(1+source.rate)),'real SP enabled');}
+  else{if(releaseBaselineIds.has(card.id))deferred++;check(source.unresolvedReasons.join()==='condition-evaluation-deferred'&&resolve([source]).probability===.45,'conditional SP withheld');}
  }
 }
 check(count===84&&applied===48&&deferred===36,'84 rows: 48 enabled / 36 conditional');

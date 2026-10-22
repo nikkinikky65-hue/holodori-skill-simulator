@@ -66,5 +66,5 @@ for(const invalid of [-1,5,null,'0']){
   let rejected=false;try{canonicalTrainingStats(canonicalTestCard,invalid);}catch(e){rejected=true;}
   assertCanonical(rejected,'invalid training does not fall back to Lv1');
 }
-assertCanonical(trainingChecks===960,'all 192 cards and all training stages');
+assertCanonical(trainingChecks===allCanonical.cards.length*5,'all 192 cards and all training stages');
 print('Training caps: 925 source snapshots, Bloom isolation and persistence PASS');

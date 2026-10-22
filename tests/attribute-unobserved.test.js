@@ -1,7 +1,7 @@
 {
  const check=(v,m)=>{if(!v)throw Error(m);};
  const rows=canonicalTestFixture.cards.flatMap(c=>c.skills.passive.levels.map(p=>({c,p,g:UnitParameterEngine.resolveInput(p)}))).filter(r=>r.g.interpretation==='developer-approved-attribute-max-2');
- check(rows.length===84&&new Set(rows.map(r=>r.c.id)).size===42,'42/84 only');
+ check(rows.filter(r=>releaseBaselineIds.has(r.c.id)).length===84&&new Set(rows.filter(r=>releaseBaselineIds.has(r.c.id)).map(r=>r.c.id)).size===42,'42/84 only');
  for(const {c,p,g} of rows){
   for(const n of [0,1,2,3,4,5])for(const tie of [false,true]){
    const members=Array.from({length:5},(_,i)=>({...UnitParameterEngine.calculateMemberParameter(c,0,0),slot:i+1,

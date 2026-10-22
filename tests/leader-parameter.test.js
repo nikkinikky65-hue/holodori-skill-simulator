@@ -17,12 +17,12 @@ for(const leader of rules.leaders){
   party=party.map((m,i)=>({...m,cardId:ids[i%ids.length]}));
  }
  const result=LeaderParameterEngine.calculate(leader,party,catalog.affiliationCatalog);
- if(leader.kind==='card')counts[result.status]++;
+ if(leader.kind==='card' && releaseBaselineIds.has(leader.cardId))counts[result.status]++;
  for(const row of result.trace){
-  if(row.effect.parameter==='score_support'){check(row.status==='unsupported','support excluded');if(leader.kind==='card')parameterCounts.support++;continue;}
-  if(row.effect.condition.type==='unknown'){check(row.status==='unresolved','missing Promise reference');if(leader.kind==='card')parameterCounts.unresolved++;continue;}
+  if(row.effect.parameter==='score_support'){check(row.status==='unsupported','support excluded');if(leader.kind==='card' && releaseBaselineIds.has(leader.cardId))parameterCounts.support++;continue;}
+  if(row.effect.condition.type==='unknown'){check(row.status==='unresolved','missing Promise reference');if(leader.kind==='card' && releaseBaselineIds.has(leader.cardId))parameterCounts.unresolved++;continue;}
   check(row.status==='applied','all known parameter effects applied: '+leader.id);
-  if(leader.kind==='card')parameterCounts.applied++;
+  if(leader.kind==='card' && releaseBaselineIds.has(leader.cardId))parameterCounts.applied++;
   for(const p of row.parameters)check(p.added===Math.ceil(p.reference*row.effect.percent/100),'library percentage ceil');
  }
  check(result.values.every((v,i)=>v.total===v.performance+v.technique+v.sense),'PTS sum');

@@ -5,28 +5,28 @@
     "passive-target-resolver.js": "3398b17cd921bebef7e6572879a43278c10276c2a2fa50c9b42b286d075744b8",
     "passive-selection-resolver.js": "f8ff897cc5b5582fd91c39aaf9d569be1f66f6f3800f678ef1d1b36b5cefc8bb",
     "parameter-rules.js": "a3cbb4820f906abc0748f3ff4501cb5733e49684a16dba72b7579e56ca6b5700",
-    "data/runtime-affiliations.json": "75910ec1dc221285ebb49cff515f47ce7d991ffb3fe3a35a0bda6f1e851b762e",
-    "data/runtime-cards.json": "9c82cb867e1e1f0bcf8d7fa76cea71d48007af609d173d03f62ae020078bfd38",
-    "research/canonical-cards.json": "8872740811b48d365e6d2756ec4c731006d7068a27fb8e2665cb8163aee9422f"
+    "data/runtime-affiliations.json": "a5cf7fc06a942a049217e7aca5d7584af9b8f9fc214e08d4be9962729602ecdc",
+    "data/runtime-cards.json": "0b7b5479b881efedc78e304978e78faef2946c9490134acd834c36e2cfc03a64",
+    "research/canonical-cards.json": "fe625b7f00e0f7c3c437add3557243d33595b21a11a9b77cb323b3749cc8435c"
   },
-  "uniquePassiveIds": 192,
+  "uniquePassiveIds": 196,
   "counts": {
-    "cards": 192,
-    "rows": 384
+    "cards": 196,
+    "rows": 392
   },
   "status": {
     "non-parameter": {
-      "cards": 40,
-      "rows": 80
+      "cards": 42,
+      "rows": 84
     },
     "supported": {
-      "cards": 152,
-      "rows": 304
+      "cards": 154,
+      "rows": 308
     }
   },
   "parameter": {
-    "cards": 152,
-    "rows": 304
+    "cards": 154,
+    "rows": 308
   },
   "partialGroups": {},
   "groups": {},
@@ -36,16 +36,16 @@
       "rows": 74
     },
     "S up": {
-      "cards": 36,
-      "rows": 72
+      "cards": 37,
+      "rows": 74
     },
     "Support / parameter外": {
-      "cards": 40,
-      "rows": 80
+      "cards": 42,
+      "rows": 84
     },
     "T up": {
-      "cards": 36,
-      "rows": 72
+      "cards": 37,
+      "rows": 74
     },
     "all parameter up": {
       "cards": 43,
@@ -54,12 +54,12 @@
   },
   "target": {
     "attribute members": {
-      "cards": 112,
-      "rows": 224
+      "cards": 114,
+      "rows": 228
     },
     "generation/group members": {
-      "cards": 39,
-      "rows": 78
+      "cards": 41,
+      "rows": 82
     },
     "self": {
       "cards": 41,
@@ -68,16 +68,16 @@
   },
   "condition": {
     "attribute count": {
-      "cards": 78,
-      "rows": 156
+      "cards": 79,
+      "rows": 158
     },
     "generation/group count": {
-      "cards": 37,
-      "rows": 74
+      "cards": 38,
+      "rows": 76
     },
     "unknown/unobserved": {
-      "cards": 77,
-      "rows": 154
+      "cards": 79,
+      "rows": 158
     }
   },
   "unsupportedEffect": {},
@@ -7916,13 +7916,133 @@
       ]
     },
     {
+      "passiveId": "live_passive_skill-card-00027-5-uniq-0092-00",
+      "cardId": "card-00027-5-uniq-0092-00",
+      "cardName": "ゆらゆら過ごす木陰のバカンス",
+      "member": "常闇トワ",
+      "level": 1,
+      "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で[attribute=cute]キュートタイプ[/attribute]2人のテクニックが32%UP",
+      "source": "/cards/76/skills/passive/levels/0",
+      "effect": "T up",
+      "target": "attribute members",
+      "targetFacts": [
+        {
+          "type": "LiveSkillEffectTargetType_LIVE_SKILL_EFFECT_TARGET_TYPE_ATTRIBUTE",
+          "targetCount": 2,
+          "cardAttributeType": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1"
+        }
+      ],
+      "condition": "attribute count",
+      "conditionFacts": {
+        "state": "observed",
+        "source": "/cards/76/skills/passive/levels/0/effect/condition",
+        "clauses": [
+          {
+            "number": 1,
+            "type": "LiveSkillTriggerType_LIVE_SKILL_TRIGGER_TYPE_DECK_CARD_ATTRIBUTE",
+            "threshold": "2",
+            "cardAttributeType": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1"
+          }
+        ],
+        "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で",
+        "resolutionClass": "formation-dependent",
+        "evaluationMode": "resolve-from-formation",
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
+      },
+      "parameter": true,
+      "status": "supported",
+      "gate": {
+        "status": "supported",
+        "effect": {
+          "type": "technique_up",
+          "value": 32,
+          "condition": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1"
+          },
+          "conditionCount": 2,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1"
+          },
+          "targetCount": 2
+        }
+      },
+      "group": "supported",
+      "dependencies": [
+        "対象集合の解決",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
+      ]
+    },
+    {
+      "passiveId": "live_passive_skill-card-00027-5-uniq-0092-00",
+      "cardId": "card-00027-5-uniq-0092-00",
+      "cardName": "ゆらゆら過ごす木陰のバカンス",
+      "member": "常闇トワ",
+      "level": 2,
+      "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で[attribute=cute]キュートタイプ[/attribute]2人のテクニックが[highlight]43[/highlight]%UP",
+      "source": "/cards/76/skills/passive/levels/1",
+      "effect": "T up",
+      "target": "attribute members",
+      "targetFacts": [
+        {
+          "type": "LiveSkillEffectTargetType_LIVE_SKILL_EFFECT_TARGET_TYPE_ATTRIBUTE",
+          "targetCount": 2,
+          "cardAttributeType": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1"
+        }
+      ],
+      "condition": "attribute count",
+      "conditionFacts": {
+        "state": "observed",
+        "source": "/cards/76/skills/passive/levels/1/effect/condition",
+        "clauses": [
+          {
+            "number": 1,
+            "type": "LiveSkillTriggerType_LIVE_SKILL_TRIGGER_TYPE_DECK_CARD_ATTRIBUTE",
+            "threshold": "2",
+            "cardAttributeType": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1"
+          }
+        ],
+        "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で",
+        "resolutionClass": "formation-dependent",
+        "evaluationMode": "resolve-from-formation",
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
+      },
+      "parameter": true,
+      "status": "supported",
+      "gate": {
+        "status": "supported",
+        "effect": {
+          "type": "technique_up",
+          "value": 43,
+          "condition": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1"
+          },
+          "conditionCount": 2,
+          "target": {
+            "kind": "type",
+            "value": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1"
+          },
+          "targetCount": 2
+        }
+      },
+      "group": "supported",
+      "dependencies": [
+        "対象集合の解決",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）"
+      ]
+    },
+    {
       "passiveId": "live_passive_skill-card-00028-3-nrml-0023-00",
       "cardId": "card-00028-3-nrml-0023-00",
       "cardName": "We are hololive!",
       "member": "姫森ルーナ",
       "level": 1,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人のセンスが10%UP",
-      "source": "/cards/76/skills/passive/levels/0",
+      "source": "/cards/77/skills/passive/levels/0",
       "effect": "S up",
       "target": "attribute members",
       "targetFacts": [
@@ -7971,7 +8091,7 @@
       "member": "姫森ルーナ",
       "level": 2,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人のセンスが[highlight]20[/highlight]%UP",
-      "source": "/cards/76/skills/passive/levels/1",
+      "source": "/cards/77/skills/passive/levels/1",
       "effect": "S up",
       "target": "attribute members",
       "targetFacts": [
@@ -8020,7 +8140,7 @@
       "member": "姫森ルーナ",
       "level": 1,
       "description": "4期生が2人以上で4期生2人のスコアサポート効果6%",
-      "source": "/cards/77/skills/passive/levels/0",
+      "source": "/cards/78/skills/passive/levels/0",
       "effect": "Support / parameter外",
       "target": "generation/group members",
       "targetFacts": [
@@ -8033,7 +8153,7 @@
       "condition": "generation/group count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/77/skills/passive/levels/0/effect/condition",
+        "source": "/cards/78/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -8069,7 +8189,7 @@
       "member": "姫森ルーナ",
       "level": 2,
       "description": "4期生が2人以上で4期生2人のスコアサポート効果[highlight]9[/highlight]%",
-      "source": "/cards/77/skills/passive/levels/1",
+      "source": "/cards/78/skills/passive/levels/1",
       "effect": "Support / parameter外",
       "target": "generation/group members",
       "targetFacts": [
@@ -8082,7 +8202,7 @@
       "condition": "generation/group count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/77/skills/passive/levels/1/effect/condition",
+        "source": "/cards/78/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -8118,7 +8238,7 @@
       "member": "姫森ルーナ",
       "level": 1,
       "description": "4期生2人のテクニックが32%UP",
-      "source": "/cards/78/skills/passive/levels/0",
+      "source": "/cards/79/skills/passive/levels/0",
       "effect": "T up",
       "target": "generation/group members",
       "targetFacts": [
@@ -8168,7 +8288,7 @@
       "member": "姫森ルーナ",
       "level": 2,
       "description": "4期生2人のテクニックが[highlight]43[/highlight]%UP",
-      "source": "/cards/78/skills/passive/levels/1",
+      "source": "/cards/79/skills/passive/levels/1",
       "effect": "T up",
       "target": "generation/group members",
       "targetFacts": [
@@ -8218,7 +8338,7 @@
       "member": "姫森ルーナ",
       "level": 1,
       "description": "4期生2人のパフォーマンスが32%UP",
-      "source": "/cards/79/skills/passive/levels/0",
+      "source": "/cards/80/skills/passive/levels/0",
       "effect": "P up",
       "target": "generation/group members",
       "targetFacts": [
@@ -8268,7 +8388,7 @@
       "member": "姫森ルーナ",
       "level": 2,
       "description": "4期生2人のパフォーマンスが[highlight]43[/highlight]%UP",
-      "source": "/cards/79/skills/passive/levels/1",
+      "source": "/cards/80/skills/passive/levels/1",
       "effect": "P up",
       "target": "generation/group members",
       "targetFacts": [
@@ -8318,7 +8438,7 @@
       "member": "雪花ラミィ",
       "level": 1,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で自身の全パラメータが8%UP",
-      "source": "/cards/80/skills/passive/levels/0",
+      "source": "/cards/81/skills/passive/levels/0",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -8329,7 +8449,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/80/skills/passive/levels/0/effect/condition",
+        "source": "/cards/81/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -8372,7 +8492,7 @@
       "member": "雪花ラミィ",
       "level": 2,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で自身の全パラメータが[highlight]16[/highlight]%UP",
-      "source": "/cards/80/skills/passive/levels/1",
+      "source": "/cards/81/skills/passive/levels/1",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -8383,7 +8503,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/80/skills/passive/levels/1/effect/condition",
+        "source": "/cards/81/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -8426,7 +8546,7 @@
       "member": "雪花ラミィ",
       "level": 1,
       "description": "[attribute=happy]ハッピータイプ[/attribute]2人のテクニックが20%UP",
-      "source": "/cards/81/skills/passive/levels/0",
+      "source": "/cards/82/skills/passive/levels/0",
       "effect": "T up",
       "target": "attribute members",
       "targetFacts": [
@@ -8475,7 +8595,7 @@
       "member": "雪花ラミィ",
       "level": 2,
       "description": "[attribute=happy]ハッピータイプ[/attribute]2人のテクニックが[highlight]30[/highlight]%UP",
-      "source": "/cards/81/skills/passive/levels/1",
+      "source": "/cards/82/skills/passive/levels/1",
       "effect": "T up",
       "target": "attribute members",
       "targetFacts": [
@@ -8524,7 +8644,7 @@
       "member": "雪花ラミィ",
       "level": 1,
       "description": "5期生が2人以上で自身の全パラメータが25%UP",
-      "source": "/cards/82/skills/passive/levels/0",
+      "source": "/cards/83/skills/passive/levels/0",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -8535,7 +8655,7 @@
       "condition": "generation/group count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/82/skills/passive/levels/0/effect/condition",
+        "source": "/cards/83/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -8580,7 +8700,7 @@
       "member": "雪花ラミィ",
       "level": 2,
       "description": "5期生が2人以上で自身の全パラメータが[highlight]33[/highlight]%UP",
-      "source": "/cards/82/skills/passive/levels/1",
+      "source": "/cards/83/skills/passive/levels/1",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -8591,7 +8711,7 @@
       "condition": "generation/group count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/82/skills/passive/levels/1/effect/condition",
+        "source": "/cards/83/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -8636,7 +8756,7 @@
       "member": "雪花ラミィ",
       "level": 1,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人の全パラメータが11%UP",
-      "source": "/cards/83/skills/passive/levels/0",
+      "source": "/cards/84/skills/passive/levels/0",
       "effect": "all parameter up",
       "target": "attribute members",
       "targetFacts": [
@@ -8685,7 +8805,7 @@
       "member": "雪花ラミィ",
       "level": 2,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人の全パラメータが[highlight]15[/highlight]%UP",
-      "source": "/cards/83/skills/passive/levels/1",
+      "source": "/cards/84/skills/passive/levels/1",
       "effect": "all parameter up",
       "target": "attribute members",
       "targetFacts": [
@@ -8734,7 +8854,7 @@
       "member": "桃鈴ねね",
       "level": 1,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人のテクニックが10%UP",
-      "source": "/cards/84/skills/passive/levels/0",
+      "source": "/cards/85/skills/passive/levels/0",
       "effect": "T up",
       "target": "attribute members",
       "targetFacts": [
@@ -8783,7 +8903,7 @@
       "member": "桃鈴ねね",
       "level": 2,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人のテクニックが[highlight]20[/highlight]%UP",
-      "source": "/cards/84/skills/passive/levels/1",
+      "source": "/cards/85/skills/passive/levels/1",
       "effect": "T up",
       "target": "attribute members",
       "targetFacts": [
@@ -8832,7 +8952,7 @@
       "member": "桃鈴ねね",
       "level": 1,
       "description": "5期生が2人以上で自身の全パラメータが17%UP",
-      "source": "/cards/85/skills/passive/levels/0",
+      "source": "/cards/86/skills/passive/levels/0",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -8843,7 +8963,7 @@
       "condition": "generation/group count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/85/skills/passive/levels/0/effect/condition",
+        "source": "/cards/86/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -8888,7 +9008,7 @@
       "member": "桃鈴ねね",
       "level": 2,
       "description": "5期生が2人以上で自身の全パラメータが[highlight]25[/highlight]%UP",
-      "source": "/cards/85/skills/passive/levels/1",
+      "source": "/cards/86/skills/passive/levels/1",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -8899,7 +9019,7 @@
       "condition": "generation/group count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/85/skills/passive/levels/1/effect/condition",
+        "source": "/cards/86/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -8944,7 +9064,7 @@
       "member": "桃鈴ねね",
       "level": 1,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人のスコアサポート効果8%",
-      "source": "/cards/86/skills/passive/levels/0",
+      "source": "/cards/87/skills/passive/levels/0",
       "effect": "Support / parameter外",
       "target": "attribute members",
       "targetFacts": [
@@ -8981,7 +9101,7 @@
       "member": "桃鈴ねね",
       "level": 2,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人のスコアサポート効果[highlight]11[/highlight]%",
-      "source": "/cards/86/skills/passive/levels/1",
+      "source": "/cards/87/skills/passive/levels/1",
       "effect": "Support / parameter外",
       "target": "attribute members",
       "targetFacts": [
@@ -9018,7 +9138,7 @@
       "member": "獅白ぼたん",
       "level": 1,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で[attribute=cute]キュートタイプ[/attribute]3人のセンスが7%UP",
-      "source": "/cards/87/skills/passive/levels/0",
+      "source": "/cards/88/skills/passive/levels/0",
       "effect": "S up",
       "target": "attribute members",
       "targetFacts": [
@@ -9031,7 +9151,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/87/skills/passive/levels/0/effect/condition",
+        "source": "/cards/88/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -9078,7 +9198,7 @@
       "member": "獅白ぼたん",
       "level": 2,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で[attribute=cute]キュートタイプ[/attribute]3人のセンスが[highlight]14[/highlight]%UP",
-      "source": "/cards/87/skills/passive/levels/1",
+      "source": "/cards/88/skills/passive/levels/1",
       "effect": "S up",
       "target": "attribute members",
       "targetFacts": [
@@ -9091,7 +9211,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/87/skills/passive/levels/1/effect/condition",
+        "source": "/cards/88/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -9138,7 +9258,7 @@
       "member": "獅白ぼたん",
       "level": 1,
       "description": "5期生が2人以上で5期生2人のテクニックが23%UP",
-      "source": "/cards/88/skills/passive/levels/0",
+      "source": "/cards/89/skills/passive/levels/0",
       "effect": "T up",
       "target": "generation/group members",
       "targetFacts": [
@@ -9151,7 +9271,7 @@
       "condition": "generation/group count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/88/skills/passive/levels/0/effect/condition",
+        "source": "/cards/89/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -9199,7 +9319,7 @@
       "member": "獅白ぼたん",
       "level": 2,
       "description": "5期生が2人以上で5期生2人のテクニックが[highlight]34[/highlight]%UP",
-      "source": "/cards/88/skills/passive/levels/1",
+      "source": "/cards/89/skills/passive/levels/1",
       "effect": "T up",
       "target": "generation/group members",
       "targetFacts": [
@@ -9212,7 +9332,7 @@
       "condition": "generation/group count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/88/skills/passive/levels/1/effect/condition",
+        "source": "/cards/89/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -9260,7 +9380,7 @@
       "member": "獅白ぼたん",
       "level": 1,
       "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で[attribute=happy]ハッピータイプ[/attribute]2人のパフォーマンスが32%UP",
-      "source": "/cards/89/skills/passive/levels/0",
+      "source": "/cards/90/skills/passive/levels/0",
       "effect": "P up",
       "target": "attribute members",
       "targetFacts": [
@@ -9273,7 +9393,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/89/skills/passive/levels/0/effect/condition",
+        "source": "/cards/90/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -9320,7 +9440,7 @@
       "member": "獅白ぼたん",
       "level": 2,
       "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で[attribute=happy]ハッピータイプ[/attribute]2人のパフォーマンスが[highlight]43[/highlight]%UP",
-      "source": "/cards/89/skills/passive/levels/1",
+      "source": "/cards/90/skills/passive/levels/1",
       "effect": "P up",
       "target": "attribute members",
       "targetFacts": [
@@ -9333,7 +9453,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/89/skills/passive/levels/1/effect/condition",
+        "source": "/cards/90/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -9374,13 +9494,87 @@
       ]
     },
     {
+      "passiveId": "live_passive_skill-card-00032-5-uniq-0093-00",
+      "cardId": "card-00032-5-uniq-0093-00",
+      "cardName": "一心不乱のちゅるタイム",
+      "member": "獅白ぼたん",
+      "level": 1,
+      "description": "[attribute=cute]キュートタイプ[/attribute]2人のスコアサポート効果8%",
+      "source": "/cards/91/skills/passive/levels/0",
+      "effect": "Support / parameter外",
+      "target": "attribute members",
+      "targetFacts": [
+        {
+          "type": "LiveSkillEffectTargetType_LIVE_SKILL_EFFECT_TARGET_TYPE_ATTRIBUTE",
+          "targetCount": 2,
+          "cardAttributeType": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1"
+        }
+      ],
+      "condition": "unknown/unobserved",
+      "conditionFacts": {
+        "state": "unobserved",
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
+      },
+      "parameter": false,
+      "status": "non-parameter",
+      "gate": {
+        "status": "unsupported",
+        "reason": "未対応の効果（Support等）",
+        "effect": null
+      },
+      "group": "non-parameter",
+      "dependencies": [
+        "対象集合の解決",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
+        "条件未観測の解釈（alwaysとは確定しない）"
+      ]
+    },
+    {
+      "passiveId": "live_passive_skill-card-00032-5-uniq-0093-00",
+      "cardId": "card-00032-5-uniq-0093-00",
+      "cardName": "一心不乱のちゅるタイム",
+      "member": "獅白ぼたん",
+      "level": 2,
+      "description": "[attribute=cute]キュートタイプ[/attribute]2人のスコアサポート効果[highlight]11[/highlight]%",
+      "source": "/cards/91/skills/passive/levels/1",
+      "effect": "Support / parameter外",
+      "target": "attribute members",
+      "targetFacts": [
+        {
+          "type": "LiveSkillEffectTargetType_LIVE_SKILL_EFFECT_TARGET_TYPE_ATTRIBUTE",
+          "targetCount": 2,
+          "cardAttributeType": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1"
+        }
+      ],
+      "condition": "unknown/unobserved",
+      "conditionFacts": {
+        "state": "unobserved",
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
+      },
+      "parameter": false,
+      "status": "non-parameter",
+      "gate": {
+        "status": "unsupported",
+        "reason": "未対応の効果（Support等）",
+        "effect": null
+      },
+      "group": "non-parameter",
+      "dependencies": [
+        "対象集合の解決",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
+        "条件未観測の解釈（alwaysとは確定しない）"
+      ]
+    },
+    {
       "passiveId": "live_passive_skill-card-00034-3-nrml-0027-00",
       "cardId": "card-00034-3-nrml-0027-00",
       "cardName": "We are hololive!",
       "member": "尾丸ポルカ",
       "level": 1,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人のテクニックが10%UP",
-      "source": "/cards/90/skills/passive/levels/0",
+      "source": "/cards/92/skills/passive/levels/0",
       "effect": "T up",
       "target": "attribute members",
       "targetFacts": [
@@ -9429,7 +9623,7 @@
       "member": "尾丸ポルカ",
       "level": 2,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人のテクニックが[highlight]20[/highlight]%UP",
-      "source": "/cards/90/skills/passive/levels/1",
+      "source": "/cards/92/skills/passive/levels/1",
       "effect": "T up",
       "target": "attribute members",
       "targetFacts": [
@@ -9478,7 +9672,7 @@
       "member": "尾丸ポルカ",
       "level": 1,
       "description": "[attribute=cute]キュートタイプ[/attribute]3人以上で[attribute=cute]キュートタイプ[/attribute]3人のスコアサポート効果4%",
-      "source": "/cards/91/skills/passive/levels/0",
+      "source": "/cards/93/skills/passive/levels/0",
       "effect": "Support / parameter外",
       "target": "attribute members",
       "targetFacts": [
@@ -9491,7 +9685,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/91/skills/passive/levels/0/effect/condition",
+        "source": "/cards/93/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -9526,7 +9720,7 @@
       "member": "尾丸ポルカ",
       "level": 2,
       "description": "[attribute=cute]キュートタイプ[/attribute]3人以上で[attribute=cute]キュートタイプ[/attribute]3人のスコアサポート効果[highlight]6[/highlight]%",
-      "source": "/cards/91/skills/passive/levels/1",
+      "source": "/cards/93/skills/passive/levels/1",
       "effect": "Support / parameter外",
       "target": "attribute members",
       "targetFacts": [
@@ -9539,7 +9733,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/91/skills/passive/levels/1/effect/condition",
+        "source": "/cards/93/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -9574,7 +9768,7 @@
       "member": "尾丸ポルカ",
       "level": 1,
       "description": "[attribute=happy]ハッピータイプ[/attribute]2人のスコアサポート効果8%",
-      "source": "/cards/92/skills/passive/levels/0",
+      "source": "/cards/94/skills/passive/levels/0",
       "effect": "Support / parameter外",
       "target": "attribute members",
       "targetFacts": [
@@ -9611,7 +9805,7 @@
       "member": "尾丸ポルカ",
       "level": 2,
       "description": "[attribute=happy]ハッピータイプ[/attribute]2人のスコアサポート効果[highlight]11[/highlight]%",
-      "source": "/cards/92/skills/passive/levels/1",
+      "source": "/cards/94/skills/passive/levels/1",
       "effect": "Support / parameter外",
       "target": "attribute members",
       "targetFacts": [
@@ -9648,7 +9842,7 @@
       "member": "尾丸ポルカ",
       "level": 1,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で[attribute=pure]ピュアタイプ[/attribute]2人のテクニックが32%UP",
-      "source": "/cards/93/skills/passive/levels/0",
+      "source": "/cards/95/skills/passive/levels/0",
       "effect": "T up",
       "target": "attribute members",
       "targetFacts": [
@@ -9661,7 +9855,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/93/skills/passive/levels/0/effect/condition",
+        "source": "/cards/95/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -9708,7 +9902,7 @@
       "member": "尾丸ポルカ",
       "level": 2,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で[attribute=pure]ピュアタイプ[/attribute]2人のテクニックが[highlight]43[/highlight]%UP",
-      "source": "/cards/93/skills/passive/levels/1",
+      "source": "/cards/95/skills/passive/levels/1",
       "effect": "T up",
       "target": "attribute members",
       "targetFacts": [
@@ -9721,7 +9915,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/93/skills/passive/levels/1/effect/condition",
+        "source": "/cards/95/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -9768,7 +9962,7 @@
       "member": "ラプラス・ダークネス",
       "level": 1,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で自身の全パラメータが8%UP",
-      "source": "/cards/94/skills/passive/levels/0",
+      "source": "/cards/96/skills/passive/levels/0",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -9779,7 +9973,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/94/skills/passive/levels/0/effect/condition",
+        "source": "/cards/96/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -9822,7 +10016,7 @@
       "member": "ラプラス・ダークネス",
       "level": 2,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で自身の全パラメータが[highlight]16[/highlight]%UP",
-      "source": "/cards/94/skills/passive/levels/1",
+      "source": "/cards/96/skills/passive/levels/1",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -9833,7 +10027,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/94/skills/passive/levels/1/effect/condition",
+        "source": "/cards/96/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -9876,7 +10070,7 @@
       "member": "ラプラス・ダークネス",
       "level": 1,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人のパフォーマンスが20%UP",
-      "source": "/cards/95/skills/passive/levels/0",
+      "source": "/cards/97/skills/passive/levels/0",
       "effect": "P up",
       "target": "attribute members",
       "targetFacts": [
@@ -9925,7 +10119,7 @@
       "member": "ラプラス・ダークネス",
       "level": 2,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人のパフォーマンスが[highlight]30[/highlight]%UP",
-      "source": "/cards/95/skills/passive/levels/1",
+      "source": "/cards/97/skills/passive/levels/1",
       "effect": "P up",
       "target": "attribute members",
       "targetFacts": [
@@ -9974,7 +10168,7 @@
       "member": "ラプラス・ダークネス",
       "level": 1,
       "description": "holoXが2人以上で自身の全パラメータが25%UP",
-      "source": "/cards/96/skills/passive/levels/0",
+      "source": "/cards/98/skills/passive/levels/0",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -9985,7 +10179,7 @@
       "condition": "generation/group count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/96/skills/passive/levels/0/effect/condition",
+        "source": "/cards/98/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -10030,7 +10224,7 @@
       "member": "ラプラス・ダークネス",
       "level": 2,
       "description": "holoXが2人以上で自身の全パラメータが[highlight]33[/highlight]%UP",
-      "source": "/cards/96/skills/passive/levels/1",
+      "source": "/cards/98/skills/passive/levels/1",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -10041,7 +10235,7 @@
       "condition": "generation/group count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/96/skills/passive/levels/1/effect/condition",
+        "source": "/cards/98/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -10086,7 +10280,7 @@
       "member": "ラプラス・ダークネス",
       "level": 1,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人のスコアサポート効果8%",
-      "source": "/cards/97/skills/passive/levels/0",
+      "source": "/cards/99/skills/passive/levels/0",
       "effect": "Support / parameter外",
       "target": "attribute members",
       "targetFacts": [
@@ -10123,7 +10317,7 @@
       "member": "ラプラス・ダークネス",
       "level": 2,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人のスコアサポート効果[highlight]11[/highlight]%",
-      "source": "/cards/97/skills/passive/levels/1",
+      "source": "/cards/99/skills/passive/levels/1",
       "effect": "Support / parameter外",
       "target": "attribute members",
       "targetFacts": [
@@ -10160,7 +10354,7 @@
       "member": "鷹嶺ルイ",
       "level": 1,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で自身の全パラメータが8%UP",
-      "source": "/cards/98/skills/passive/levels/0",
+      "source": "/cards/100/skills/passive/levels/0",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -10171,7 +10365,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/98/skills/passive/levels/0/effect/condition",
+        "source": "/cards/100/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -10214,7 +10408,7 @@
       "member": "鷹嶺ルイ",
       "level": 2,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で自身の全パラメータが[highlight]16[/highlight]%UP",
-      "source": "/cards/98/skills/passive/levels/1",
+      "source": "/cards/100/skills/passive/levels/1",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -10225,7 +10419,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/98/skills/passive/levels/1/effect/condition",
+        "source": "/cards/100/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -10268,7 +10462,7 @@
       "member": "鷹嶺ルイ",
       "level": 1,
       "description": "holoXが2人以上でholoX2人のパフォーマンスが23%UP",
-      "source": "/cards/99/skills/passive/levels/0",
+      "source": "/cards/101/skills/passive/levels/0",
       "effect": "P up",
       "target": "generation/group members",
       "targetFacts": [
@@ -10281,7 +10475,7 @@
       "condition": "generation/group count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/99/skills/passive/levels/0/effect/condition",
+        "source": "/cards/101/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -10329,7 +10523,7 @@
       "member": "鷹嶺ルイ",
       "level": 2,
       "description": "holoXが2人以上でholoX2人のパフォーマンスが[highlight]34[/highlight]%UP",
-      "source": "/cards/99/skills/passive/levels/1",
+      "source": "/cards/101/skills/passive/levels/1",
       "effect": "P up",
       "target": "generation/group members",
       "targetFacts": [
@@ -10342,7 +10536,7 @@
       "condition": "generation/group count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/99/skills/passive/levels/1/effect/condition",
+        "source": "/cards/101/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -10390,7 +10584,7 @@
       "member": "鷹嶺ルイ",
       "level": 1,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で自身の全パラメータが24%UP",
-      "source": "/cards/100/skills/passive/levels/0",
+      "source": "/cards/102/skills/passive/levels/0",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -10401,7 +10595,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/100/skills/passive/levels/0/effect/condition",
+        "source": "/cards/102/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -10444,7 +10638,7 @@
       "member": "鷹嶺ルイ",
       "level": 2,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で自身の全パラメータが[highlight]32[/highlight]%UP",
-      "source": "/cards/100/skills/passive/levels/1",
+      "source": "/cards/102/skills/passive/levels/1",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -10455,7 +10649,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/100/skills/passive/levels/1/effect/condition",
+        "source": "/cards/102/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -10498,7 +10692,7 @@
       "member": "鷹嶺ルイ",
       "level": 1,
       "description": "holoXが2人以上でholoX2人のスコアサポート効果9%",
-      "source": "/cards/101/skills/passive/levels/0",
+      "source": "/cards/103/skills/passive/levels/0",
       "effect": "Support / parameter外",
       "target": "generation/group members",
       "targetFacts": [
@@ -10511,7 +10705,7 @@
       "condition": "generation/group count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/101/skills/passive/levels/0/effect/condition",
+        "source": "/cards/103/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -10547,7 +10741,7 @@
       "member": "鷹嶺ルイ",
       "level": 2,
       "description": "holoXが2人以上でholoX2人のスコアサポート効果[highlight]12[/highlight]%",
-      "source": "/cards/101/skills/passive/levels/1",
+      "source": "/cards/103/skills/passive/levels/1",
       "effect": "Support / parameter外",
       "target": "generation/group members",
       "targetFacts": [
@@ -10560,7 +10754,7 @@
       "condition": "generation/group count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/101/skills/passive/levels/1/effect/condition",
+        "source": "/cards/103/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -10596,7 +10790,7 @@
       "member": "博衣こより",
       "level": 1,
       "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で[attribute=happy]ハッピータイプ[/attribute]3人のテクニックが7%UP",
-      "source": "/cards/102/skills/passive/levels/0",
+      "source": "/cards/104/skills/passive/levels/0",
       "effect": "T up",
       "target": "attribute members",
       "targetFacts": [
@@ -10609,7 +10803,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/102/skills/passive/levels/0/effect/condition",
+        "source": "/cards/104/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -10656,7 +10850,7 @@
       "member": "博衣こより",
       "level": 2,
       "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で[attribute=happy]ハッピータイプ[/attribute]3人のテクニックが[highlight]14[/highlight]%UP",
-      "source": "/cards/102/skills/passive/levels/1",
+      "source": "/cards/104/skills/passive/levels/1",
       "effect": "T up",
       "target": "attribute members",
       "targetFacts": [
@@ -10669,7 +10863,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/102/skills/passive/levels/1/effect/condition",
+        "source": "/cards/104/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -10716,7 +10910,7 @@
       "member": "博衣こより",
       "level": 1,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人のパフォーマンスが20%UP",
-      "source": "/cards/103/skills/passive/levels/0",
+      "source": "/cards/105/skills/passive/levels/0",
       "effect": "P up",
       "target": "attribute members",
       "targetFacts": [
@@ -10765,7 +10959,7 @@
       "member": "博衣こより",
       "level": 2,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人のパフォーマンスが[highlight]30[/highlight]%UP",
-      "source": "/cards/103/skills/passive/levels/1",
+      "source": "/cards/105/skills/passive/levels/1",
       "effect": "P up",
       "target": "attribute members",
       "targetFacts": [
@@ -10814,7 +11008,7 @@
       "member": "博衣こより",
       "level": 1,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で[attribute=pure]ピュアタイプ[/attribute]2人のセンスが32%UP",
-      "source": "/cards/104/skills/passive/levels/0",
+      "source": "/cards/106/skills/passive/levels/0",
       "effect": "S up",
       "target": "attribute members",
       "targetFacts": [
@@ -10827,7 +11021,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/104/skills/passive/levels/0/effect/condition",
+        "source": "/cards/106/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -10874,7 +11068,7 @@
       "member": "博衣こより",
       "level": 2,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で[attribute=pure]ピュアタイプ[/attribute]2人のセンスが[highlight]43[/highlight]%UP",
-      "source": "/cards/104/skills/passive/levels/1",
+      "source": "/cards/106/skills/passive/levels/1",
       "effect": "S up",
       "target": "attribute members",
       "targetFacts": [
@@ -10887,7 +11081,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/104/skills/passive/levels/1/effect/condition",
+        "source": "/cards/106/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -10934,7 +11128,7 @@
       "member": "博衣こより",
       "level": 1,
       "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で[attribute=happy]ハッピータイプ[/attribute]2人のパフォーマンスが32%UP",
-      "source": "/cards/105/skills/passive/levels/0",
+      "source": "/cards/107/skills/passive/levels/0",
       "effect": "P up",
       "target": "attribute members",
       "targetFacts": [
@@ -10947,7 +11141,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/105/skills/passive/levels/0/effect/condition",
+        "source": "/cards/107/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -10994,7 +11188,7 @@
       "member": "博衣こより",
       "level": 2,
       "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で[attribute=happy]ハッピータイプ[/attribute]2人のパフォーマンスが[highlight]43[/highlight]%UP",
-      "source": "/cards/105/skills/passive/levels/1",
+      "source": "/cards/107/skills/passive/levels/1",
       "effect": "P up",
       "target": "attribute members",
       "targetFacts": [
@@ -11007,7 +11201,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/105/skills/passive/levels/1/effect/condition",
+        "source": "/cards/107/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -11054,7 +11248,7 @@
       "member": "風真いろは",
       "level": 1,
       "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で自身の全パラメータが8%UP",
-      "source": "/cards/106/skills/passive/levels/0",
+      "source": "/cards/108/skills/passive/levels/0",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -11065,7 +11259,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/106/skills/passive/levels/0/effect/condition",
+        "source": "/cards/108/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -11108,7 +11302,7 @@
       "member": "風真いろは",
       "level": 2,
       "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で自身の全パラメータが[highlight]16[/highlight]%UP",
-      "source": "/cards/106/skills/passive/levels/1",
+      "source": "/cards/108/skills/passive/levels/1",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -11119,7 +11313,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/106/skills/passive/levels/1/effect/condition",
+        "source": "/cards/108/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -11162,7 +11356,7 @@
       "member": "風真いろは",
       "level": 1,
       "description": "holoXが2人以上で自身の全パラメータが17%UP",
-      "source": "/cards/107/skills/passive/levels/0",
+      "source": "/cards/109/skills/passive/levels/0",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -11173,7 +11367,7 @@
       "condition": "generation/group count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/107/skills/passive/levels/0/effect/condition",
+        "source": "/cards/109/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -11218,7 +11412,7 @@
       "member": "風真いろは",
       "level": 2,
       "description": "holoXが2人以上で自身の全パラメータが[highlight]25[/highlight]%UP",
-      "source": "/cards/107/skills/passive/levels/1",
+      "source": "/cards/109/skills/passive/levels/1",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -11229,7 +11423,7 @@
       "condition": "generation/group count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/107/skills/passive/levels/1/effect/condition",
+        "source": "/cards/109/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -11274,7 +11468,7 @@
       "member": "風真いろは",
       "level": 1,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人のスコアサポート効果8%",
-      "source": "/cards/108/skills/passive/levels/0",
+      "source": "/cards/110/skills/passive/levels/0",
       "effect": "Support / parameter外",
       "target": "attribute members",
       "targetFacts": [
@@ -11311,7 +11505,7 @@
       "member": "風真いろは",
       "level": 2,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人のスコアサポート効果[highlight]11[/highlight]%",
-      "source": "/cards/108/skills/passive/levels/1",
+      "source": "/cards/110/skills/passive/levels/1",
       "effect": "Support / parameter外",
       "target": "attribute members",
       "targetFacts": [
@@ -11348,7 +11542,7 @@
       "member": "アユンダ・リス",
       "level": 1,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で[attribute=cute]キュートタイプ[/attribute]3人のパフォーマンスが7%UP",
-      "source": "/cards/109/skills/passive/levels/0",
+      "source": "/cards/111/skills/passive/levels/0",
       "effect": "P up",
       "target": "attribute members",
       "targetFacts": [
@@ -11361,7 +11555,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/109/skills/passive/levels/0/effect/condition",
+        "source": "/cards/111/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -11408,7 +11602,7 @@
       "member": "アユンダ・リス",
       "level": 2,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で[attribute=cute]キュートタイプ[/attribute]3人のパフォーマンスが[highlight]14[/highlight]%UP",
-      "source": "/cards/109/skills/passive/levels/1",
+      "source": "/cards/111/skills/passive/levels/1",
       "effect": "P up",
       "target": "attribute members",
       "targetFacts": [
@@ -11421,7 +11615,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/109/skills/passive/levels/1/effect/condition",
+        "source": "/cards/111/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -11468,7 +11662,7 @@
       "member": "アユンダ・リス",
       "level": 1,
       "description": "[attribute=pure]ピュアタイプ[/attribute]3人以上で[attribute=pure]ピュアタイプ[/attribute]3人のスコアサポート効果4%",
-      "source": "/cards/110/skills/passive/levels/0",
+      "source": "/cards/112/skills/passive/levels/0",
       "effect": "Support / parameter外",
       "target": "attribute members",
       "targetFacts": [
@@ -11481,7 +11675,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/110/skills/passive/levels/0/effect/condition",
+        "source": "/cards/112/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -11516,7 +11710,7 @@
       "member": "アユンダ・リス",
       "level": 2,
       "description": "[attribute=pure]ピュアタイプ[/attribute]3人以上で[attribute=pure]ピュアタイプ[/attribute]3人のスコアサポート効果[highlight]6[/highlight]%",
-      "source": "/cards/110/skills/passive/levels/1",
+      "source": "/cards/112/skills/passive/levels/1",
       "effect": "Support / parameter外",
       "target": "attribute members",
       "targetFacts": [
@@ -11529,7 +11723,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/110/skills/passive/levels/1/effect/condition",
+        "source": "/cards/112/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -11564,7 +11758,7 @@
       "member": "アユンダ・リス",
       "level": 1,
       "description": "[attribute=happy]ハッピータイプ[/attribute]2人のスコアサポート効果8%",
-      "source": "/cards/111/skills/passive/levels/0",
+      "source": "/cards/113/skills/passive/levels/0",
       "effect": "Support / parameter外",
       "target": "attribute members",
       "targetFacts": [
@@ -11601,7 +11795,7 @@
       "member": "アユンダ・リス",
       "level": 2,
       "description": "[attribute=happy]ハッピータイプ[/attribute]2人のスコアサポート効果[highlight]11[/highlight]%",
-      "source": "/cards/111/skills/passive/levels/1",
+      "source": "/cards/113/skills/passive/levels/1",
       "effect": "Support / parameter外",
       "target": "attribute members",
       "targetFacts": [
@@ -11638,7 +11832,7 @@
       "member": "ムーナ・ホシノヴァ",
       "level": 1,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で自身の全パラメータが8%UP",
-      "source": "/cards/112/skills/passive/levels/0",
+      "source": "/cards/114/skills/passive/levels/0",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -11649,7 +11843,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/112/skills/passive/levels/0/effect/condition",
+        "source": "/cards/114/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -11692,7 +11886,7 @@
       "member": "ムーナ・ホシノヴァ",
       "level": 2,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で自身の全パラメータが[highlight]16[/highlight]%UP",
-      "source": "/cards/112/skills/passive/levels/1",
+      "source": "/cards/114/skills/passive/levels/1",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -11703,7 +11897,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/112/skills/passive/levels/1/effect/condition",
+        "source": "/cards/114/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -11746,7 +11940,7 @@
       "member": "ムーナ・ホシノヴァ",
       "level": 1,
       "description": "[attribute=happy]ハッピータイプ[/attribute]2人のパフォーマンスが20%UP",
-      "source": "/cards/113/skills/passive/levels/0",
+      "source": "/cards/115/skills/passive/levels/0",
       "effect": "P up",
       "target": "attribute members",
       "targetFacts": [
@@ -11795,7 +11989,7 @@
       "member": "ムーナ・ホシノヴァ",
       "level": 2,
       "description": "[attribute=happy]ハッピータイプ[/attribute]2人のパフォーマンスが[highlight]30[/highlight]%UP",
-      "source": "/cards/113/skills/passive/levels/1",
+      "source": "/cards/115/skills/passive/levels/1",
       "effect": "P up",
       "target": "attribute members",
       "targetFacts": [
@@ -11844,7 +12038,7 @@
       "member": "ムーナ・ホシノヴァ",
       "level": 1,
       "description": "ID1期生が2人以上でID1期生2人のセンスが34%UP",
-      "source": "/cards/114/skills/passive/levels/0",
+      "source": "/cards/116/skills/passive/levels/0",
       "effect": "S up",
       "target": "generation/group members",
       "targetFacts": [
@@ -11857,7 +12051,7 @@
       "condition": "generation/group count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/114/skills/passive/levels/0/effect/condition",
+        "source": "/cards/116/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -11905,7 +12099,7 @@
       "member": "ムーナ・ホシノヴァ",
       "level": 2,
       "description": "ID1期生が2人以上でID1期生2人のセンスが[highlight]45[/highlight]%UP",
-      "source": "/cards/114/skills/passive/levels/1",
+      "source": "/cards/116/skills/passive/levels/1",
       "effect": "S up",
       "target": "generation/group members",
       "targetFacts": [
@@ -11918,7 +12112,7 @@
       "condition": "generation/group count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/114/skills/passive/levels/1/effect/condition",
+        "source": "/cards/116/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -11966,7 +12160,7 @@
       "member": "アイラニ・イオフィフティーン",
       "level": 1,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で[attribute=cute]キュートタイプ[/attribute]3人のセンスが7%UP",
-      "source": "/cards/115/skills/passive/levels/0",
+      "source": "/cards/117/skills/passive/levels/0",
       "effect": "S up",
       "target": "attribute members",
       "targetFacts": [
@@ -11979,7 +12173,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/115/skills/passive/levels/0/effect/condition",
+        "source": "/cards/117/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -12026,7 +12220,7 @@
       "member": "アイラニ・イオフィフティーン",
       "level": 2,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で[attribute=cute]キュートタイプ[/attribute]3人のセンスが[highlight]14[/highlight]%UP",
-      "source": "/cards/115/skills/passive/levels/1",
+      "source": "/cards/117/skills/passive/levels/1",
       "effect": "S up",
       "target": "attribute members",
       "targetFacts": [
@@ -12039,7 +12233,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/115/skills/passive/levels/1/effect/condition",
+        "source": "/cards/117/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -12086,7 +12280,7 @@
       "member": "アイラニ・イオフィフティーン",
       "level": 1,
       "description": "ID1期生が2人以上でID1期生2人のスコアサポート効果6%",
-      "source": "/cards/116/skills/passive/levels/0",
+      "source": "/cards/118/skills/passive/levels/0",
       "effect": "Support / parameter外",
       "target": "generation/group members",
       "targetFacts": [
@@ -12099,7 +12293,7 @@
       "condition": "generation/group count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/116/skills/passive/levels/0/effect/condition",
+        "source": "/cards/118/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -12135,7 +12329,7 @@
       "member": "アイラニ・イオフィフティーン",
       "level": 2,
       "description": "ID1期生が2人以上でID1期生2人のスコアサポート効果[highlight]9[/highlight]%",
-      "source": "/cards/116/skills/passive/levels/1",
+      "source": "/cards/118/skills/passive/levels/1",
       "effect": "Support / parameter外",
       "target": "generation/group members",
       "targetFacts": [
@@ -12148,7 +12342,7 @@
       "condition": "generation/group count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/116/skills/passive/levels/1/effect/condition",
+        "source": "/cards/118/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -12184,7 +12378,7 @@
       "member": "アイラニ・イオフィフティーン",
       "level": 1,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人のテクニックが30%UP",
-      "source": "/cards/117/skills/passive/levels/0",
+      "source": "/cards/119/skills/passive/levels/0",
       "effect": "T up",
       "target": "attribute members",
       "targetFacts": [
@@ -12233,7 +12427,7 @@
       "member": "アイラニ・イオフィフティーン",
       "level": 2,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人のテクニックが[highlight]41[/highlight]%UP",
-      "source": "/cards/117/skills/passive/levels/1",
+      "source": "/cards/119/skills/passive/levels/1",
       "effect": "T up",
       "target": "attribute members",
       "targetFacts": [
@@ -12282,7 +12476,7 @@
       "member": "クレイジー・オリー",
       "level": 1,
       "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で[attribute=happy]ハッピータイプ[/attribute]3人のセンスが7%UP",
-      "source": "/cards/118/skills/passive/levels/0",
+      "source": "/cards/120/skills/passive/levels/0",
       "effect": "S up",
       "target": "attribute members",
       "targetFacts": [
@@ -12295,7 +12489,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/118/skills/passive/levels/0/effect/condition",
+        "source": "/cards/120/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -12342,7 +12536,7 @@
       "member": "クレイジー・オリー",
       "level": 2,
       "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で[attribute=happy]ハッピータイプ[/attribute]3人のセンスが[highlight]14[/highlight]%UP",
-      "source": "/cards/118/skills/passive/levels/1",
+      "source": "/cards/120/skills/passive/levels/1",
       "effect": "S up",
       "target": "attribute members",
       "targetFacts": [
@@ -12355,7 +12549,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/118/skills/passive/levels/1/effect/condition",
+        "source": "/cards/120/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -12402,7 +12596,7 @@
       "member": "クレイジー・オリー",
       "level": 1,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人のパフォーマンスが20%UP",
-      "source": "/cards/119/skills/passive/levels/0",
+      "source": "/cards/121/skills/passive/levels/0",
       "effect": "P up",
       "target": "attribute members",
       "targetFacts": [
@@ -12451,7 +12645,7 @@
       "member": "クレイジー・オリー",
       "level": 2,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人のパフォーマンスが[highlight]30[/highlight]%UP",
-      "source": "/cards/119/skills/passive/levels/1",
+      "source": "/cards/121/skills/passive/levels/1",
       "effect": "P up",
       "target": "attribute members",
       "targetFacts": [
@@ -12500,7 +12694,7 @@
       "member": "クレイジー・オリー",
       "level": 1,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人のスコアサポート効果8%",
-      "source": "/cards/120/skills/passive/levels/0",
+      "source": "/cards/122/skills/passive/levels/0",
       "effect": "Support / parameter外",
       "target": "attribute members",
       "targetFacts": [
@@ -12537,7 +12731,7 @@
       "member": "クレイジー・オリー",
       "level": 2,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人のスコアサポート効果[highlight]11[/highlight]%",
-      "source": "/cards/120/skills/passive/levels/1",
+      "source": "/cards/122/skills/passive/levels/1",
       "effect": "Support / parameter外",
       "target": "attribute members",
       "targetFacts": [
@@ -12574,7 +12768,7 @@
       "member": "クレイジー・オリー",
       "level": 1,
       "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で[attribute=happy]ハッピータイプ[/attribute]2人のセンスが32%UP",
-      "source": "/cards/121/skills/passive/levels/0",
+      "source": "/cards/123/skills/passive/levels/0",
       "effect": "S up",
       "target": "attribute members",
       "targetFacts": [
@@ -12587,7 +12781,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/121/skills/passive/levels/0/effect/condition",
+        "source": "/cards/123/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -12634,7 +12828,7 @@
       "member": "クレイジー・オリー",
       "level": 2,
       "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で[attribute=happy]ハッピータイプ[/attribute]2人のセンスが[highlight]43[/highlight]%UP",
-      "source": "/cards/121/skills/passive/levels/1",
+      "source": "/cards/123/skills/passive/levels/1",
       "effect": "S up",
       "target": "attribute members",
       "targetFacts": [
@@ -12647,7 +12841,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/121/skills/passive/levels/1/effect/condition",
+        "source": "/cards/123/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -12694,7 +12888,7 @@
       "member": "アーニャ・メルフィッサ",
       "level": 1,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人のパフォーマンスが10%UP",
-      "source": "/cards/122/skills/passive/levels/0",
+      "source": "/cards/124/skills/passive/levels/0",
       "effect": "P up",
       "target": "attribute members",
       "targetFacts": [
@@ -12743,7 +12937,7 @@
       "member": "アーニャ・メルフィッサ",
       "level": 2,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人のパフォーマンスが[highlight]20[/highlight]%UP",
-      "source": "/cards/122/skills/passive/levels/1",
+      "source": "/cards/124/skills/passive/levels/1",
       "effect": "P up",
       "target": "attribute members",
       "targetFacts": [
@@ -12792,7 +12986,7 @@
       "member": "アーニャ・メルフィッサ",
       "level": 1,
       "description": "[attribute=happy]ハッピータイプ[/attribute]3人以上で[attribute=happy]ハッピータイプ[/attribute]3人のスコアサポート効果4%",
-      "source": "/cards/123/skills/passive/levels/0",
+      "source": "/cards/125/skills/passive/levels/0",
       "effect": "Support / parameter外",
       "target": "attribute members",
       "targetFacts": [
@@ -12805,7 +12999,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/123/skills/passive/levels/0/effect/condition",
+        "source": "/cards/125/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -12840,7 +13034,7 @@
       "member": "アーニャ・メルフィッサ",
       "level": 2,
       "description": "[attribute=happy]ハッピータイプ[/attribute]3人以上で[attribute=happy]ハッピータイプ[/attribute]3人のスコアサポート効果[highlight]6[/highlight]%",
-      "source": "/cards/123/skills/passive/levels/1",
+      "source": "/cards/125/skills/passive/levels/1",
       "effect": "Support / parameter外",
       "target": "attribute members",
       "targetFacts": [
@@ -12853,7 +13047,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/123/skills/passive/levels/1/effect/condition",
+        "source": "/cards/125/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -12888,7 +13082,7 @@
       "member": "アーニャ・メルフィッサ",
       "level": 1,
       "description": "ID2期生が2人以上で自身の全パラメータが25%UP",
-      "source": "/cards/124/skills/passive/levels/0",
+      "source": "/cards/126/skills/passive/levels/0",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -12899,7 +13093,7 @@
       "condition": "generation/group count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/124/skills/passive/levels/0/effect/condition",
+        "source": "/cards/126/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -12944,7 +13138,7 @@
       "member": "アーニャ・メルフィッサ",
       "level": 2,
       "description": "ID2期生が2人以上で自身の全パラメータが[highlight]33[/highlight]%UP",
-      "source": "/cards/124/skills/passive/levels/1",
+      "source": "/cards/126/skills/passive/levels/1",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -12955,7 +13149,7 @@
       "condition": "generation/group count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/124/skills/passive/levels/1/effect/condition",
+        "source": "/cards/126/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -13000,7 +13194,7 @@
       "member": "アーニャ・メルフィッサ",
       "level": 1,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で[attribute=pure]ピュアタイプ[/attribute]2人のパフォーマンスが32%UP",
-      "source": "/cards/125/skills/passive/levels/0",
+      "source": "/cards/127/skills/passive/levels/0",
       "effect": "P up",
       "target": "attribute members",
       "targetFacts": [
@@ -13013,7 +13207,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/125/skills/passive/levels/0/effect/condition",
+        "source": "/cards/127/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -13060,7 +13254,7 @@
       "member": "アーニャ・メルフィッサ",
       "level": 2,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で[attribute=pure]ピュアタイプ[/attribute]2人のパフォーマンスが[highlight]43[/highlight]%UP",
-      "source": "/cards/125/skills/passive/levels/1",
+      "source": "/cards/127/skills/passive/levels/1",
       "effect": "P up",
       "target": "attribute members",
       "targetFacts": [
@@ -13073,7 +13267,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/125/skills/passive/levels/1/effect/condition",
+        "source": "/cards/127/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -13120,7 +13314,7 @@
       "member": "パヴォリア・レイネ",
       "level": 1,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で[attribute=cute]キュートタイプ[/attribute]3人のパフォーマンスが7%UP",
-      "source": "/cards/126/skills/passive/levels/0",
+      "source": "/cards/128/skills/passive/levels/0",
       "effect": "P up",
       "target": "attribute members",
       "targetFacts": [
@@ -13133,7 +13327,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/126/skills/passive/levels/0/effect/condition",
+        "source": "/cards/128/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -13180,7 +13374,7 @@
       "member": "パヴォリア・レイネ",
       "level": 2,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で[attribute=cute]キュートタイプ[/attribute]3人のパフォーマンスが[highlight]14[/highlight]%UP",
-      "source": "/cards/126/skills/passive/levels/1",
+      "source": "/cards/128/skills/passive/levels/1",
       "effect": "P up",
       "target": "attribute members",
       "targetFacts": [
@@ -13193,7 +13387,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/126/skills/passive/levels/1/effect/condition",
+        "source": "/cards/128/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -13240,7 +13434,7 @@
       "member": "パヴォリア・レイネ",
       "level": 1,
       "description": "ID2期生が2人以上でID2期生2人のセンスが23%UP",
-      "source": "/cards/127/skills/passive/levels/0",
+      "source": "/cards/129/skills/passive/levels/0",
       "effect": "S up",
       "target": "generation/group members",
       "targetFacts": [
@@ -13253,7 +13447,7 @@
       "condition": "generation/group count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/127/skills/passive/levels/0/effect/condition",
+        "source": "/cards/129/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -13301,7 +13495,7 @@
       "member": "パヴォリア・レイネ",
       "level": 2,
       "description": "ID2期生が2人以上でID2期生2人のセンスが[highlight]34[/highlight]%UP",
-      "source": "/cards/127/skills/passive/levels/1",
+      "source": "/cards/129/skills/passive/levels/1",
       "effect": "S up",
       "target": "generation/group members",
       "targetFacts": [
@@ -13314,7 +13508,7 @@
       "condition": "generation/group count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/127/skills/passive/levels/1/effect/condition",
+        "source": "/cards/129/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -13362,7 +13556,7 @@
       "member": "パヴォリア・レイネ",
       "level": 1,
       "description": "[attribute=happy]ハッピータイプ[/attribute]2人のテクニックが30%UP",
-      "source": "/cards/128/skills/passive/levels/0",
+      "source": "/cards/130/skills/passive/levels/0",
       "effect": "T up",
       "target": "attribute members",
       "targetFacts": [
@@ -13411,7 +13605,7 @@
       "member": "パヴォリア・レイネ",
       "level": 2,
       "description": "[attribute=happy]ハッピータイプ[/attribute]2人のテクニックが[highlight]41[/highlight]%UP",
-      "source": "/cards/128/skills/passive/levels/1",
+      "source": "/cards/130/skills/passive/levels/1",
       "effect": "T up",
       "target": "attribute members",
       "targetFacts": [
@@ -13460,7 +13654,7 @@
       "member": "ベスティア・ゼータ",
       "level": 1,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で[attribute=pure]ピュアタイプ[/attribute]3人のテクニックが7%UP",
-      "source": "/cards/129/skills/passive/levels/0",
+      "source": "/cards/131/skills/passive/levels/0",
       "effect": "T up",
       "target": "attribute members",
       "targetFacts": [
@@ -13473,7 +13667,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/129/skills/passive/levels/0/effect/condition",
+        "source": "/cards/131/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -13520,7 +13714,7 @@
       "member": "ベスティア・ゼータ",
       "level": 2,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で[attribute=pure]ピュアタイプ[/attribute]3人のテクニックが[highlight]14[/highlight]%UP",
-      "source": "/cards/129/skills/passive/levels/1",
+      "source": "/cards/131/skills/passive/levels/1",
       "effect": "T up",
       "target": "attribute members",
       "targetFacts": [
@@ -13533,7 +13727,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/129/skills/passive/levels/1/effect/condition",
+        "source": "/cards/131/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -13580,7 +13774,7 @@
       "member": "ベスティア・ゼータ",
       "level": 1,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人のセンスが20%UP",
-      "source": "/cards/130/skills/passive/levels/0",
+      "source": "/cards/132/skills/passive/levels/0",
       "effect": "S up",
       "target": "attribute members",
       "targetFacts": [
@@ -13629,7 +13823,7 @@
       "member": "ベスティア・ゼータ",
       "level": 2,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人のセンスが[highlight]30[/highlight]%UP",
-      "source": "/cards/130/skills/passive/levels/1",
+      "source": "/cards/132/skills/passive/levels/1",
       "effect": "S up",
       "target": "attribute members",
       "targetFacts": [
@@ -13678,7 +13872,7 @@
       "member": "ベスティア・ゼータ",
       "level": 1,
       "description": "ID3期生が2人以上で自身の全パラメータが25%UP",
-      "source": "/cards/131/skills/passive/levels/0",
+      "source": "/cards/133/skills/passive/levels/0",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -13689,7 +13883,7 @@
       "condition": "generation/group count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/131/skills/passive/levels/0/effect/condition",
+        "source": "/cards/133/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -13734,7 +13928,7 @@
       "member": "ベスティア・ゼータ",
       "level": 2,
       "description": "ID3期生が2人以上で自身の全パラメータが[highlight]33[/highlight]%UP",
-      "source": "/cards/131/skills/passive/levels/1",
+      "source": "/cards/133/skills/passive/levels/1",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -13745,7 +13939,7 @@
       "condition": "generation/group count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/131/skills/passive/levels/1/effect/condition",
+        "source": "/cards/133/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -13790,7 +13984,7 @@
       "member": "カエラ・コヴァルスキア",
       "level": 1,
       "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で[attribute=happy]ハッピータイプ[/attribute]3人のパフォーマンスが7%UP",
-      "source": "/cards/132/skills/passive/levels/0",
+      "source": "/cards/134/skills/passive/levels/0",
       "effect": "P up",
       "target": "attribute members",
       "targetFacts": [
@@ -13803,7 +13997,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/132/skills/passive/levels/0/effect/condition",
+        "source": "/cards/134/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -13850,7 +14044,7 @@
       "member": "カエラ・コヴァルスキア",
       "level": 2,
       "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で[attribute=happy]ハッピータイプ[/attribute]3人のパフォーマンスが[highlight]14[/highlight]%UP",
-      "source": "/cards/132/skills/passive/levels/1",
+      "source": "/cards/134/skills/passive/levels/1",
       "effect": "P up",
       "target": "attribute members",
       "targetFacts": [
@@ -13863,7 +14057,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/132/skills/passive/levels/1/effect/condition",
+        "source": "/cards/134/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -13910,7 +14104,7 @@
       "member": "カエラ・コヴァルスキア",
       "level": 1,
       "description": "ID3期生が2人以上でID3期生2人のセンスが23%UP",
-      "source": "/cards/133/skills/passive/levels/0",
+      "source": "/cards/135/skills/passive/levels/0",
       "effect": "S up",
       "target": "generation/group members",
       "targetFacts": [
@@ -13923,7 +14117,7 @@
       "condition": "generation/group count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/133/skills/passive/levels/0/effect/condition",
+        "source": "/cards/135/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -13971,7 +14165,7 @@
       "member": "カエラ・コヴァルスキア",
       "level": 2,
       "description": "ID3期生が2人以上でID3期生2人のセンスが[highlight]34[/highlight]%UP",
-      "source": "/cards/133/skills/passive/levels/1",
+      "source": "/cards/135/skills/passive/levels/1",
       "effect": "S up",
       "target": "generation/group members",
       "targetFacts": [
@@ -13984,7 +14178,7 @@
       "condition": "generation/group count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/133/skills/passive/levels/1/effect/condition",
+        "source": "/cards/135/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -14032,7 +14226,7 @@
       "member": "カエラ・コヴァルスキア",
       "level": 1,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人のテクニックが30%UP",
-      "source": "/cards/134/skills/passive/levels/0",
+      "source": "/cards/136/skills/passive/levels/0",
       "effect": "T up",
       "target": "attribute members",
       "targetFacts": [
@@ -14081,7 +14275,7 @@
       "member": "カエラ・コヴァルスキア",
       "level": 2,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人のテクニックが[highlight]41[/highlight]%UP",
-      "source": "/cards/134/skills/passive/levels/1",
+      "source": "/cards/136/skills/passive/levels/1",
       "effect": "T up",
       "target": "attribute members",
       "targetFacts": [
@@ -14124,13 +14318,113 @@
       ]
     },
     {
+      "passiveId": "live_passive_skill-card-03008-5-uniq-0095-00",
+      "cardId": "card-03008-5-uniq-0095-00",
+      "cardName": "木陰で紡ぐShiny Memory",
+      "member": "カエラ・コヴァルスキア",
+      "level": 1,
+      "description": "ID3期生2人のセンスが32%UP",
+      "source": "/cards/137/skills/passive/levels/0",
+      "effect": "S up",
+      "target": "generation/group members",
+      "targetFacts": [
+        {
+          "type": "LiveSkillEffectTargetType_LIVE_SKILL_EFFECT_TARGET_TYPE_CHARACTER_GROUPING",
+          "targetCount": 2,
+          "characterGroupingId": "grp-indonesia-gen_3"
+        }
+      ],
+      "condition": "unknown/unobserved",
+      "conditionFacts": {
+        "state": "unobserved",
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
+      },
+      "parameter": true,
+      "status": "supported",
+      "gate": {
+        "status": "supported",
+        "effect": {
+          "type": "sense_up",
+          "value": 32,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "affiliation",
+            "value": "grp-indonesia-gen_3"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-provisional-affiliation-max-2"
+      },
+      "group": "supported",
+      "dependencies": [
+        "対象集合の解決",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
+        "group IDとメンバー所属の対応",
+        "条件未観測の解釈（alwaysとは確定しない）"
+      ]
+    },
+    {
+      "passiveId": "live_passive_skill-card-03008-5-uniq-0095-00",
+      "cardId": "card-03008-5-uniq-0095-00",
+      "cardName": "木陰で紡ぐShiny Memory",
+      "member": "カエラ・コヴァルスキア",
+      "level": 2,
+      "description": "ID3期生2人のセンスが[highlight]43[/highlight]%UP",
+      "source": "/cards/137/skills/passive/levels/1",
+      "effect": "S up",
+      "target": "generation/group members",
+      "targetFacts": [
+        {
+          "type": "LiveSkillEffectTargetType_LIVE_SKILL_EFFECT_TARGET_TYPE_CHARACTER_GROUPING",
+          "targetCount": 2,
+          "characterGroupingId": "grp-indonesia-gen_3"
+        }
+      ],
+      "condition": "unknown/unobserved",
+      "conditionFacts": {
+        "state": "unobserved",
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
+      },
+      "parameter": true,
+      "status": "supported",
+      "gate": {
+        "status": "supported",
+        "effect": {
+          "type": "sense_up",
+          "value": 43,
+          "condition": {
+            "kind": "developer-approved-no-additional-condition"
+          },
+          "conditionCount": null,
+          "target": {
+            "kind": "affiliation",
+            "value": "grp-indonesia-gen_3"
+          },
+          "targetCount": 2
+        },
+        "interpretation": "developer-approved-provisional-affiliation-max-2"
+      },
+      "group": "supported",
+      "dependencies": [
+        "対象集合の解決",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
+        "group IDとメンバー所属の対応",
+        "条件未観測の解釈（alwaysとは確定しない）"
+      ]
+    },
+    {
       "passiveId": "live_passive_skill-card-03009-3-nrml-0041-00",
       "cardId": "card-03009-3-nrml-0041-00",
       "cardName": "We are hololive!",
       "member": "こぼ・かなえる",
       "level": 1,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で[attribute=cute]キュートタイプ[/attribute]3人のセンスが7%UP",
-      "source": "/cards/135/skills/passive/levels/0",
+      "source": "/cards/138/skills/passive/levels/0",
       "effect": "S up",
       "target": "attribute members",
       "targetFacts": [
@@ -14143,7 +14437,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/135/skills/passive/levels/0/effect/condition",
+        "source": "/cards/138/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -14190,7 +14484,7 @@
       "member": "こぼ・かなえる",
       "level": 2,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で[attribute=cute]キュートタイプ[/attribute]3人のセンスが[highlight]14[/highlight]%UP",
-      "source": "/cards/135/skills/passive/levels/1",
+      "source": "/cards/138/skills/passive/levels/1",
       "effect": "S up",
       "target": "attribute members",
       "targetFacts": [
@@ -14203,7 +14497,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/135/skills/passive/levels/1/effect/condition",
+        "source": "/cards/138/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -14250,7 +14544,7 @@
       "member": "こぼ・かなえる",
       "level": 1,
       "description": "[attribute=happy]ハッピータイプ[/attribute]2人のテクニックが20%UP",
-      "source": "/cards/136/skills/passive/levels/0",
+      "source": "/cards/139/skills/passive/levels/0",
       "effect": "T up",
       "target": "attribute members",
       "targetFacts": [
@@ -14299,7 +14593,7 @@
       "member": "こぼ・かなえる",
       "level": 2,
       "description": "[attribute=happy]ハッピータイプ[/attribute]2人のテクニックが[highlight]30[/highlight]%UP",
-      "source": "/cards/136/skills/passive/levels/1",
+      "source": "/cards/139/skills/passive/levels/1",
       "effect": "T up",
       "target": "attribute members",
       "targetFacts": [
@@ -14348,7 +14642,7 @@
       "member": "こぼ・かなえる",
       "level": 1,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で自身の全パラメータが24%UP",
-      "source": "/cards/137/skills/passive/levels/0",
+      "source": "/cards/140/skills/passive/levels/0",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -14359,7 +14653,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/137/skills/passive/levels/0/effect/condition",
+        "source": "/cards/140/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -14402,7 +14696,7 @@
       "member": "こぼ・かなえる",
       "level": 2,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で自身の全パラメータが[highlight]32[/highlight]%UP",
-      "source": "/cards/137/skills/passive/levels/1",
+      "source": "/cards/140/skills/passive/levels/1",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -14413,7 +14707,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/137/skills/passive/levels/1/effect/condition",
+        "source": "/cards/140/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -14456,7 +14750,7 @@
       "member": "こぼ・かなえる",
       "level": 1,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で[attribute=cute]キュートタイプ[/attribute]2人のセンスが32%UP",
-      "source": "/cards/138/skills/passive/levels/0",
+      "source": "/cards/141/skills/passive/levels/0",
       "effect": "S up",
       "target": "attribute members",
       "targetFacts": [
@@ -14469,7 +14763,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/138/skills/passive/levels/0/effect/condition",
+        "source": "/cards/141/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -14516,7 +14810,7 @@
       "member": "こぼ・かなえる",
       "level": 2,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で[attribute=cute]キュートタイプ[/attribute]2人のセンスが[highlight]43[/highlight]%UP",
-      "source": "/cards/138/skills/passive/levels/1",
+      "source": "/cards/141/skills/passive/levels/1",
       "effect": "S up",
       "target": "attribute members",
       "targetFacts": [
@@ -14529,7 +14823,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/138/skills/passive/levels/1/effect/condition",
+        "source": "/cards/141/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -14576,7 +14870,7 @@
       "member": "森カリオペ",
       "level": 1,
       "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で[attribute=happy]ハッピータイプ[/attribute]3人のテクニックが7%UP",
-      "source": "/cards/139/skills/passive/levels/0",
+      "source": "/cards/142/skills/passive/levels/0",
       "effect": "T up",
       "target": "attribute members",
       "targetFacts": [
@@ -14589,7 +14883,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/139/skills/passive/levels/0/effect/condition",
+        "source": "/cards/142/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -14636,7 +14930,7 @@
       "member": "森カリオペ",
       "level": 2,
       "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で[attribute=happy]ハッピータイプ[/attribute]3人のテクニックが[highlight]14[/highlight]%UP",
-      "source": "/cards/139/skills/passive/levels/1",
+      "source": "/cards/142/skills/passive/levels/1",
       "effect": "T up",
       "target": "attribute members",
       "targetFacts": [
@@ -14649,7 +14943,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/139/skills/passive/levels/1/effect/condition",
+        "source": "/cards/142/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -14696,7 +14990,7 @@
       "member": "森カリオペ",
       "level": 1,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人のセンスが20%UP",
-      "source": "/cards/140/skills/passive/levels/0",
+      "source": "/cards/143/skills/passive/levels/0",
       "effect": "S up",
       "target": "attribute members",
       "targetFacts": [
@@ -14745,7 +15039,7 @@
       "member": "森カリオペ",
       "level": 2,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人のセンスが[highlight]30[/highlight]%UP",
-      "source": "/cards/140/skills/passive/levels/1",
+      "source": "/cards/143/skills/passive/levels/1",
       "effect": "S up",
       "target": "attribute members",
       "targetFacts": [
@@ -14794,7 +15088,7 @@
       "member": "森カリオペ",
       "level": 1,
       "description": "Mythが2人以上でMyth2人のスコアサポート効果9%",
-      "source": "/cards/141/skills/passive/levels/0",
+      "source": "/cards/144/skills/passive/levels/0",
       "effect": "Support / parameter外",
       "target": "generation/group members",
       "targetFacts": [
@@ -14807,7 +15101,7 @@
       "condition": "generation/group count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/141/skills/passive/levels/0/effect/condition",
+        "source": "/cards/144/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -14843,7 +15137,7 @@
       "member": "森カリオペ",
       "level": 2,
       "description": "Mythが2人以上でMyth2人のスコアサポート効果[highlight]12[/highlight]%",
-      "source": "/cards/141/skills/passive/levels/1",
+      "source": "/cards/144/skills/passive/levels/1",
       "effect": "Support / parameter外",
       "target": "generation/group members",
       "targetFacts": [
@@ -14856,7 +15150,7 @@
       "condition": "generation/group count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/141/skills/passive/levels/1/effect/condition",
+        "source": "/cards/144/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -14892,7 +15186,7 @@
       "member": "森カリオペ",
       "level": 1,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で[attribute=cute]キュートタイプ[/attribute]2人のセンスが32%UP",
-      "source": "/cards/142/skills/passive/levels/0",
+      "source": "/cards/145/skills/passive/levels/0",
       "effect": "S up",
       "target": "attribute members",
       "targetFacts": [
@@ -14905,7 +15199,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/142/skills/passive/levels/0/effect/condition",
+        "source": "/cards/145/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -14952,7 +15246,7 @@
       "member": "森カリオペ",
       "level": 2,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で[attribute=cute]キュートタイプ[/attribute]2人のセンスが[highlight]43[/highlight]%UP",
-      "source": "/cards/142/skills/passive/levels/1",
+      "source": "/cards/145/skills/passive/levels/1",
       "effect": "S up",
       "target": "attribute members",
       "targetFacts": [
@@ -14965,7 +15259,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/142/skills/passive/levels/1/effect/condition",
+        "source": "/cards/145/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -15012,7 +15306,7 @@
       "member": "小鳥遊キアラ",
       "level": 1,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で自身の全パラメータが8%UP",
-      "source": "/cards/143/skills/passive/levels/0",
+      "source": "/cards/146/skills/passive/levels/0",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -15023,7 +15317,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/143/skills/passive/levels/0/effect/condition",
+        "source": "/cards/146/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -15066,7 +15360,7 @@
       "member": "小鳥遊キアラ",
       "level": 2,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で自身の全パラメータが[highlight]16[/highlight]%UP",
-      "source": "/cards/143/skills/passive/levels/1",
+      "source": "/cards/146/skills/passive/levels/1",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -15077,7 +15371,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/143/skills/passive/levels/1/effect/condition",
+        "source": "/cards/146/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -15120,7 +15414,7 @@
       "member": "小鳥遊キアラ",
       "level": 1,
       "description": "Mythが2人以上でMyth2人のセンスが23%UP",
-      "source": "/cards/144/skills/passive/levels/0",
+      "source": "/cards/147/skills/passive/levels/0",
       "effect": "S up",
       "target": "generation/group members",
       "targetFacts": [
@@ -15133,7 +15427,7 @@
       "condition": "generation/group count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/144/skills/passive/levels/0/effect/condition",
+        "source": "/cards/147/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -15181,7 +15475,7 @@
       "member": "小鳥遊キアラ",
       "level": 2,
       "description": "Mythが2人以上でMyth2人のセンスが[highlight]34[/highlight]%UP",
-      "source": "/cards/144/skills/passive/levels/1",
+      "source": "/cards/147/skills/passive/levels/1",
       "effect": "S up",
       "target": "generation/group members",
       "targetFacts": [
@@ -15194,7 +15488,7 @@
       "condition": "generation/group count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/144/skills/passive/levels/1/effect/condition",
+        "source": "/cards/147/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -15242,7 +15536,7 @@
       "member": "小鳥遊キアラ",
       "level": 1,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人のスコアサポート効果8%",
-      "source": "/cards/145/skills/passive/levels/0",
+      "source": "/cards/148/skills/passive/levels/0",
       "effect": "Support / parameter外",
       "target": "attribute members",
       "targetFacts": [
@@ -15279,7 +15573,7 @@
       "member": "小鳥遊キアラ",
       "level": 2,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人のスコアサポート効果[highlight]11[/highlight]%",
-      "source": "/cards/145/skills/passive/levels/1",
+      "source": "/cards/148/skills/passive/levels/1",
       "effect": "Support / parameter外",
       "target": "attribute members",
       "targetFacts": [
@@ -15316,7 +15610,7 @@
       "member": "一伊那尓栖",
       "level": 1,
       "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で[attribute=happy]ハッピータイプ[/attribute]3人のパフォーマンスが7%UP",
-      "source": "/cards/146/skills/passive/levels/0",
+      "source": "/cards/149/skills/passive/levels/0",
       "effect": "P up",
       "target": "attribute members",
       "targetFacts": [
@@ -15329,7 +15623,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/146/skills/passive/levels/0/effect/condition",
+        "source": "/cards/149/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -15376,7 +15670,7 @@
       "member": "一伊那尓栖",
       "level": 2,
       "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で[attribute=happy]ハッピータイプ[/attribute]3人のパフォーマンスが[highlight]14[/highlight]%UP",
-      "source": "/cards/146/skills/passive/levels/1",
+      "source": "/cards/149/skills/passive/levels/1",
       "effect": "P up",
       "target": "attribute members",
       "targetFacts": [
@@ -15389,7 +15683,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/146/skills/passive/levels/1/effect/condition",
+        "source": "/cards/149/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -15436,7 +15730,7 @@
       "member": "一伊那尓栖",
       "level": 1,
       "description": "[attribute=cute]キュートタイプ[/attribute]3人以上で[attribute=cute]キュートタイプ[/attribute]3人のスコアサポート効果4%",
-      "source": "/cards/147/skills/passive/levels/0",
+      "source": "/cards/150/skills/passive/levels/0",
       "effect": "Support / parameter外",
       "target": "attribute members",
       "targetFacts": [
@@ -15449,7 +15743,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/147/skills/passive/levels/0/effect/condition",
+        "source": "/cards/150/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -15484,7 +15778,7 @@
       "member": "一伊那尓栖",
       "level": 2,
       "description": "[attribute=cute]キュートタイプ[/attribute]3人以上で[attribute=cute]キュートタイプ[/attribute]3人のスコアサポート効果[highlight]6[/highlight]%",
-      "source": "/cards/147/skills/passive/levels/1",
+      "source": "/cards/150/skills/passive/levels/1",
       "effect": "Support / parameter外",
       "target": "attribute members",
       "targetFacts": [
@@ -15497,7 +15791,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/147/skills/passive/levels/1/effect/condition",
+        "source": "/cards/150/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -15532,7 +15826,7 @@
       "member": "一伊那尓栖",
       "level": 1,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で自身の全パラメータが24%UP",
-      "source": "/cards/148/skills/passive/levels/0",
+      "source": "/cards/151/skills/passive/levels/0",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -15543,7 +15837,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/148/skills/passive/levels/0/effect/condition",
+        "source": "/cards/151/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -15586,7 +15880,7 @@
       "member": "一伊那尓栖",
       "level": 2,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で自身の全パラメータが[highlight]32[/highlight]%UP",
-      "source": "/cards/148/skills/passive/levels/1",
+      "source": "/cards/151/skills/passive/levels/1",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -15597,7 +15891,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/148/skills/passive/levels/1/effect/condition",
+        "source": "/cards/151/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -15640,7 +15934,7 @@
       "member": "一伊那尓栖",
       "level": 1,
       "description": "Myth2人のセンスが32%UP",
-      "source": "/cards/149/skills/passive/levels/0",
+      "source": "/cards/152/skills/passive/levels/0",
       "effect": "S up",
       "target": "generation/group members",
       "targetFacts": [
@@ -15690,7 +15984,7 @@
       "member": "一伊那尓栖",
       "level": 2,
       "description": "Myth2人のセンスが[highlight]43[/highlight]%UP",
-      "source": "/cards/149/skills/passive/levels/1",
+      "source": "/cards/152/skills/passive/levels/1",
       "effect": "S up",
       "target": "generation/group members",
       "targetFacts": [
@@ -15740,7 +16034,7 @@
       "member": "IRyS",
       "level": 1,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で自身の全パラメータが8%UP",
-      "source": "/cards/150/skills/passive/levels/0",
+      "source": "/cards/153/skills/passive/levels/0",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -15751,7 +16045,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/150/skills/passive/levels/0/effect/condition",
+        "source": "/cards/153/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -15794,7 +16088,7 @@
       "member": "IRyS",
       "level": 2,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で自身の全パラメータが[highlight]16[/highlight]%UP",
-      "source": "/cards/150/skills/passive/levels/1",
+      "source": "/cards/153/skills/passive/levels/1",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -15805,7 +16099,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/150/skills/passive/levels/1/effect/condition",
+        "source": "/cards/153/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -15848,7 +16142,7 @@
       "member": "IRyS",
       "level": 1,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人のパフォーマンスが20%UP",
-      "source": "/cards/151/skills/passive/levels/0",
+      "source": "/cards/154/skills/passive/levels/0",
       "effect": "P up",
       "target": "attribute members",
       "targetFacts": [
@@ -15897,7 +16191,7 @@
       "member": "IRyS",
       "level": 2,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人のパフォーマンスが[highlight]30[/highlight]%UP",
-      "source": "/cards/151/skills/passive/levels/1",
+      "source": "/cards/154/skills/passive/levels/1",
       "effect": "P up",
       "target": "attribute members",
       "targetFacts": [
@@ -15946,7 +16240,7 @@
       "member": "IRyS",
       "level": 1,
       "description": "Promise2人のテクニックが32%UP",
-      "source": "/cards/152/skills/passive/levels/0",
+      "source": "/cards/155/skills/passive/levels/0",
       "effect": "T up",
       "target": "generation/group members",
       "targetFacts": [
@@ -15996,7 +16290,7 @@
       "member": "IRyS",
       "level": 2,
       "description": "Promise2人のテクニックが[highlight]43[/highlight]%UP",
-      "source": "/cards/152/skills/passive/levels/1",
+      "source": "/cards/155/skills/passive/levels/1",
       "effect": "T up",
       "target": "generation/group members",
       "targetFacts": [
@@ -16046,7 +16340,7 @@
       "member": "オーロ・クロニー",
       "level": 1,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人のパフォーマンスが10%UP",
-      "source": "/cards/153/skills/passive/levels/0",
+      "source": "/cards/156/skills/passive/levels/0",
       "effect": "P up",
       "target": "attribute members",
       "targetFacts": [
@@ -16095,7 +16389,7 @@
       "member": "オーロ・クロニー",
       "level": 2,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人のパフォーマンスが[highlight]20[/highlight]%UP",
-      "source": "/cards/153/skills/passive/levels/1",
+      "source": "/cards/156/skills/passive/levels/1",
       "effect": "P up",
       "target": "attribute members",
       "targetFacts": [
@@ -16144,7 +16438,7 @@
       "member": "オーロ・クロニー",
       "level": 1,
       "description": "Promise2人のテクニックが21%UP",
-      "source": "/cards/154/skills/passive/levels/0",
+      "source": "/cards/157/skills/passive/levels/0",
       "effect": "T up",
       "target": "generation/group members",
       "targetFacts": [
@@ -16194,7 +16488,7 @@
       "member": "オーロ・クロニー",
       "level": 2,
       "description": "Promise2人のテクニックが[highlight]32[/highlight]%UP",
-      "source": "/cards/154/skills/passive/levels/1",
+      "source": "/cards/157/skills/passive/levels/1",
       "effect": "T up",
       "target": "generation/group members",
       "targetFacts": [
@@ -16244,7 +16538,7 @@
       "member": "オーロ・クロニー",
       "level": 1,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人のセンスが30%UP",
-      "source": "/cards/155/skills/passive/levels/0",
+      "source": "/cards/158/skills/passive/levels/0",
       "effect": "S up",
       "target": "attribute members",
       "targetFacts": [
@@ -16293,7 +16587,7 @@
       "member": "オーロ・クロニー",
       "level": 2,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人のセンスが[highlight]41[/highlight]%UP",
-      "source": "/cards/155/skills/passive/levels/1",
+      "source": "/cards/158/skills/passive/levels/1",
       "effect": "S up",
       "target": "attribute members",
       "targetFacts": [
@@ -16342,7 +16636,7 @@
       "member": "ハコス・ベールズ",
       "level": 1,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で[attribute=cute]キュートタイプ[/attribute]3人のテクニックが7%UP",
-      "source": "/cards/156/skills/passive/levels/0",
+      "source": "/cards/159/skills/passive/levels/0",
       "effect": "T up",
       "target": "attribute members",
       "targetFacts": [
@@ -16355,7 +16649,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/156/skills/passive/levels/0/effect/condition",
+        "source": "/cards/159/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -16402,7 +16696,7 @@
       "member": "ハコス・ベールズ",
       "level": 2,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で[attribute=cute]キュートタイプ[/attribute]3人のテクニックが[highlight]14[/highlight]%UP",
-      "source": "/cards/156/skills/passive/levels/1",
+      "source": "/cards/159/skills/passive/levels/1",
       "effect": "T up",
       "target": "attribute members",
       "targetFacts": [
@@ -16415,7 +16709,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/156/skills/passive/levels/1/effect/condition",
+        "source": "/cards/159/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -16462,7 +16756,7 @@
       "member": "ハコス・ベールズ",
       "level": 1,
       "description": "[attribute=happy]ハッピータイプ[/attribute]2人のセンスが20%UP",
-      "source": "/cards/157/skills/passive/levels/0",
+      "source": "/cards/160/skills/passive/levels/0",
       "effect": "S up",
       "target": "attribute members",
       "targetFacts": [
@@ -16511,7 +16805,7 @@
       "member": "ハコス・ベールズ",
       "level": 2,
       "description": "[attribute=happy]ハッピータイプ[/attribute]2人のセンスが[highlight]30[/highlight]%UP",
-      "source": "/cards/157/skills/passive/levels/1",
+      "source": "/cards/160/skills/passive/levels/1",
       "effect": "S up",
       "target": "attribute members",
       "targetFacts": [
@@ -16560,7 +16854,7 @@
       "member": "ハコス・ベールズ",
       "level": 1,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人のスコアサポート効果8%",
-      "source": "/cards/158/skills/passive/levels/0",
+      "source": "/cards/161/skills/passive/levels/0",
       "effect": "Support / parameter外",
       "target": "attribute members",
       "targetFacts": [
@@ -16597,7 +16891,7 @@
       "member": "ハコス・ベールズ",
       "level": 2,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人のスコアサポート効果[highlight]11[/highlight]%",
-      "source": "/cards/158/skills/passive/levels/1",
+      "source": "/cards/161/skills/passive/levels/1",
       "effect": "Support / parameter外",
       "target": "attribute members",
       "targetFacts": [
@@ -16634,7 +16928,7 @@
       "member": "ハコス・ベールズ",
       "level": 1,
       "description": "Promiseが2人以上で自身の全パラメータが25%UP",
-      "source": "/cards/159/skills/passive/levels/0",
+      "source": "/cards/162/skills/passive/levels/0",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -16645,7 +16939,7 @@
       "condition": "generation/group count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/159/skills/passive/levels/0/effect/condition",
+        "source": "/cards/162/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -16690,7 +16984,7 @@
       "member": "ハコス・ベールズ",
       "level": 2,
       "description": "Promiseが2人以上で自身の全パラメータが[highlight]33[/highlight]%UP",
-      "source": "/cards/159/skills/passive/levels/1",
+      "source": "/cards/162/skills/passive/levels/1",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -16701,7 +16995,7 @@
       "condition": "generation/group count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/159/skills/passive/levels/1/effect/condition",
+        "source": "/cards/162/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -16746,7 +17040,7 @@
       "member": "シオリ・ノヴェラ",
       "level": 1,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で[attribute=pure]ピュアタイプ[/attribute]3人のセンスが7%UP",
-      "source": "/cards/160/skills/passive/levels/0",
+      "source": "/cards/163/skills/passive/levels/0",
       "effect": "S up",
       "target": "attribute members",
       "targetFacts": [
@@ -16759,7 +17053,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/160/skills/passive/levels/0/effect/condition",
+        "source": "/cards/163/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -16806,7 +17100,7 @@
       "member": "シオリ・ノヴェラ",
       "level": 2,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で[attribute=pure]ピュアタイプ[/attribute]3人のセンスが[highlight]14[/highlight]%UP",
-      "source": "/cards/160/skills/passive/levels/1",
+      "source": "/cards/163/skills/passive/levels/1",
       "effect": "S up",
       "target": "attribute members",
       "targetFacts": [
@@ -16819,7 +17113,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/160/skills/passive/levels/1/effect/condition",
+        "source": "/cards/163/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -16866,7 +17160,7 @@
       "member": "シオリ・ノヴェラ",
       "level": 1,
       "description": "Adventが2人以上でAdvent2人のスコアサポート効果6%",
-      "source": "/cards/161/skills/passive/levels/0",
+      "source": "/cards/164/skills/passive/levels/0",
       "effect": "Support / parameter外",
       "target": "generation/group members",
       "targetFacts": [
@@ -16879,7 +17173,7 @@
       "condition": "generation/group count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/161/skills/passive/levels/0/effect/condition",
+        "source": "/cards/164/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -16915,7 +17209,7 @@
       "member": "シオリ・ノヴェラ",
       "level": 2,
       "description": "Adventが2人以上でAdvent2人のスコアサポート効果[highlight]9[/highlight]%",
-      "source": "/cards/161/skills/passive/levels/1",
+      "source": "/cards/164/skills/passive/levels/1",
       "effect": "Support / parameter外",
       "target": "generation/group members",
       "targetFacts": [
@@ -16928,7 +17222,7 @@
       "condition": "generation/group count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/161/skills/passive/levels/1/effect/condition",
+        "source": "/cards/164/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -16964,7 +17258,7 @@
       "member": "シオリ・ノヴェラ",
       "level": 1,
       "description": "Advent2人のパフォーマンスが32%UP",
-      "source": "/cards/162/skills/passive/levels/0",
+      "source": "/cards/165/skills/passive/levels/0",
       "effect": "P up",
       "target": "generation/group members",
       "targetFacts": [
@@ -17014,7 +17308,7 @@
       "member": "シオリ・ノヴェラ",
       "level": 2,
       "description": "Advent2人のパフォーマンスが[highlight]43[/highlight]%UP",
-      "source": "/cards/162/skills/passive/levels/1",
+      "source": "/cards/165/skills/passive/levels/1",
       "effect": "P up",
       "target": "generation/group members",
       "targetFacts": [
@@ -17064,7 +17358,7 @@
       "member": "シオリ・ノヴェラ",
       "level": 1,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で自身の全パラメータが24%UP",
-      "source": "/cards/163/skills/passive/levels/0",
+      "source": "/cards/166/skills/passive/levels/0",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -17075,7 +17369,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/163/skills/passive/levels/0/effect/condition",
+        "source": "/cards/166/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -17118,7 +17412,7 @@
       "member": "シオリ・ノヴェラ",
       "level": 2,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で自身の全パラメータが[highlight]32[/highlight]%UP",
-      "source": "/cards/163/skills/passive/levels/1",
+      "source": "/cards/166/skills/passive/levels/1",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -17129,7 +17423,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/163/skills/passive/levels/1/effect/condition",
+        "source": "/cards/166/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -17172,7 +17466,7 @@
       "member": "古石ビジュー",
       "level": 1,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で[attribute=cute]キュートタイプ[/attribute]3人のテクニックが7%UP",
-      "source": "/cards/164/skills/passive/levels/0",
+      "source": "/cards/167/skills/passive/levels/0",
       "effect": "T up",
       "target": "attribute members",
       "targetFacts": [
@@ -17185,7 +17479,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/164/skills/passive/levels/0/effect/condition",
+        "source": "/cards/167/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -17232,7 +17526,7 @@
       "member": "古石ビジュー",
       "level": 2,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で[attribute=cute]キュートタイプ[/attribute]3人のテクニックが[highlight]14[/highlight]%UP",
-      "source": "/cards/164/skills/passive/levels/1",
+      "source": "/cards/167/skills/passive/levels/1",
       "effect": "T up",
       "target": "attribute members",
       "targetFacts": [
@@ -17245,7 +17539,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/164/skills/passive/levels/1/effect/condition",
+        "source": "/cards/167/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -17292,7 +17586,7 @@
       "member": "古石ビジュー",
       "level": 1,
       "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で[attribute=happy]ハッピータイプ[/attribute]2人のパフォーマンスが21%UP",
-      "source": "/cards/165/skills/passive/levels/0",
+      "source": "/cards/168/skills/passive/levels/0",
       "effect": "P up",
       "target": "attribute members",
       "targetFacts": [
@@ -17305,7 +17599,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/165/skills/passive/levels/0/effect/condition",
+        "source": "/cards/168/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -17352,7 +17646,7 @@
       "member": "古石ビジュー",
       "level": 2,
       "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で[attribute=happy]ハッピータイプ[/attribute]2人のパフォーマンスが[highlight]32[/highlight]%UP",
-      "source": "/cards/165/skills/passive/levels/1",
+      "source": "/cards/168/skills/passive/levels/1",
       "effect": "P up",
       "target": "attribute members",
       "targetFacts": [
@@ -17365,7 +17659,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/165/skills/passive/levels/1/effect/condition",
+        "source": "/cards/168/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -17412,7 +17706,7 @@
       "member": "古石ビジュー",
       "level": 1,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人のスコアサポート効果8%",
-      "source": "/cards/166/skills/passive/levels/0",
+      "source": "/cards/169/skills/passive/levels/0",
       "effect": "Support / parameter外",
       "target": "attribute members",
       "targetFacts": [
@@ -17449,7 +17743,7 @@
       "member": "古石ビジュー",
       "level": 2,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人のスコアサポート効果[highlight]11[/highlight]%",
-      "source": "/cards/166/skills/passive/levels/1",
+      "source": "/cards/169/skills/passive/levels/1",
       "effect": "Support / parameter外",
       "target": "attribute members",
       "targetFacts": [
@@ -17480,13 +17774,111 @@
       ]
     },
     {
+      "passiveId": "live_passive_skill-card-04014-5-uniq-0094-00",
+      "cardId": "card-04014-5-uniq-0094-00",
+      "cardName": "笑顔輝くSand castle",
+      "member": "古石ビジュー",
+      "level": 1,
+      "description": "Adventが2人以上でAdvent2人のスコアサポート効果9%",
+      "source": "/cards/170/skills/passive/levels/0",
+      "effect": "Support / parameter外",
+      "target": "generation/group members",
+      "targetFacts": [
+        {
+          "type": "LiveSkillEffectTargetType_LIVE_SKILL_EFFECT_TARGET_TYPE_CHARACTER_GROUPING",
+          "targetCount": 2,
+          "characterGroupingId": "grp-advent"
+        }
+      ],
+      "condition": "generation/group count",
+      "conditionFacts": {
+        "state": "observed",
+        "source": "/cards/170/skills/passive/levels/0/effect/condition",
+        "clauses": [
+          {
+            "number": 1,
+            "type": "LiveSkillTriggerType_LIVE_SKILL_TRIGGER_TYPE_DECK_CARD_CHARACTER_GROUPING",
+            "threshold": "2",
+            "characterGroupingId": "grp-advent"
+          }
+        ],
+        "description": "Adventが2人以上で",
+        "resolutionClass": "formation-dependent",
+        "evaluationMode": "resolve-from-formation",
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
+      },
+      "parameter": false,
+      "status": "non-parameter",
+      "gate": {
+        "status": "unsupported",
+        "reason": "未対応の効果（Support等）",
+        "effect": null
+      },
+      "group": "non-parameter",
+      "dependencies": [
+        "対象集合の解決",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
+        "group IDとメンバー所属の対応"
+      ]
+    },
+    {
+      "passiveId": "live_passive_skill-card-04014-5-uniq-0094-00",
+      "cardId": "card-04014-5-uniq-0094-00",
+      "cardName": "笑顔輝くSand castle",
+      "member": "古石ビジュー",
+      "level": 2,
+      "description": "Adventが2人以上でAdvent2人のスコアサポート効果[highlight]12[/highlight]%",
+      "source": "/cards/170/skills/passive/levels/1",
+      "effect": "Support / parameter外",
+      "target": "generation/group members",
+      "targetFacts": [
+        {
+          "type": "LiveSkillEffectTargetType_LIVE_SKILL_EFFECT_TARGET_TYPE_CHARACTER_GROUPING",
+          "targetCount": 2,
+          "characterGroupingId": "grp-advent"
+        }
+      ],
+      "condition": "generation/group count",
+      "conditionFacts": {
+        "state": "observed",
+        "source": "/cards/170/skills/passive/levels/1/effect/condition",
+        "clauses": [
+          {
+            "number": 1,
+            "type": "LiveSkillTriggerType_LIVE_SKILL_TRIGGER_TYPE_DECK_CARD_CHARACTER_GROUPING",
+            "threshold": "2",
+            "characterGroupingId": "grp-advent"
+          }
+        ],
+        "description": "Adventが2人以上で",
+        "resolutionClass": "formation-dependent",
+        "evaluationMode": "resolve-from-formation",
+        "evaluationStatus": "not-evaluated",
+        "referenceState": "present"
+      },
+      "parameter": false,
+      "status": "non-parameter",
+      "gate": {
+        "status": "unsupported",
+        "reason": "未対応の効果（Support等）",
+        "effect": null
+      },
+      "group": "non-parameter",
+      "dependencies": [
+        "対象集合の解決",
+        "対象数Nの選択（対象単項順位・全パラTOTAL暫定）",
+        "group IDとメンバー所属の対応"
+      ]
+    },
+    {
       "passiveId": "live_passive_skill-card-04015-3-nrml-0054-00",
       "cardId": "card-04015-3-nrml-0054-00",
       "cardName": "We are hololive!",
       "member": "ネリッサ・レイヴンクロフト",
       "level": 1,
       "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で自身の全パラメータが8%UP",
-      "source": "/cards/167/skills/passive/levels/0",
+      "source": "/cards/171/skills/passive/levels/0",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -17497,7 +17889,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/167/skills/passive/levels/0/effect/condition",
+        "source": "/cards/171/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -17540,7 +17932,7 @@
       "member": "ネリッサ・レイヴンクロフト",
       "level": 2,
       "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で自身の全パラメータが[highlight]16[/highlight]%UP",
-      "source": "/cards/167/skills/passive/levels/1",
+      "source": "/cards/171/skills/passive/levels/1",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -17551,7 +17943,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/167/skills/passive/levels/1/effect/condition",
+        "source": "/cards/171/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -17594,7 +17986,7 @@
       "member": "ネリッサ・レイヴンクロフト",
       "level": 1,
       "description": "Adventが2人以上でAdvent2人のセンスが23%UP",
-      "source": "/cards/168/skills/passive/levels/0",
+      "source": "/cards/172/skills/passive/levels/0",
       "effect": "S up",
       "target": "generation/group members",
       "targetFacts": [
@@ -17607,7 +17999,7 @@
       "condition": "generation/group count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/168/skills/passive/levels/0/effect/condition",
+        "source": "/cards/172/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -17655,7 +18047,7 @@
       "member": "ネリッサ・レイヴンクロフト",
       "level": 2,
       "description": "Adventが2人以上でAdvent2人のセンスが[highlight]34[/highlight]%UP",
-      "source": "/cards/168/skills/passive/levels/1",
+      "source": "/cards/172/skills/passive/levels/1",
       "effect": "S up",
       "target": "generation/group members",
       "targetFacts": [
@@ -17668,7 +18060,7 @@
       "condition": "generation/group count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/168/skills/passive/levels/1/effect/condition",
+        "source": "/cards/172/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -17716,7 +18108,7 @@
       "member": "ネリッサ・レイヴンクロフト",
       "level": 1,
       "description": "Adventが2人以上で自身の全パラメータが25%UP",
-      "source": "/cards/169/skills/passive/levels/0",
+      "source": "/cards/173/skills/passive/levels/0",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -17727,7 +18119,7 @@
       "condition": "generation/group count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/169/skills/passive/levels/0/effect/condition",
+        "source": "/cards/173/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -17772,7 +18164,7 @@
       "member": "ネリッサ・レイヴンクロフト",
       "level": 2,
       "description": "Adventが2人以上で自身の全パラメータが[highlight]33[/highlight]%UP",
-      "source": "/cards/169/skills/passive/levels/1",
+      "source": "/cards/173/skills/passive/levels/1",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -17783,7 +18175,7 @@
       "condition": "generation/group count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/169/skills/passive/levels/1/effect/condition",
+        "source": "/cards/173/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -17828,7 +18220,7 @@
       "member": "フワワ・アビスガード",
       "level": 1,
       "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で自身の全パラメータが8%UP",
-      "source": "/cards/170/skills/passive/levels/0",
+      "source": "/cards/174/skills/passive/levels/0",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -17839,7 +18231,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/170/skills/passive/levels/0/effect/condition",
+        "source": "/cards/174/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -17882,7 +18274,7 @@
       "member": "フワワ・アビスガード",
       "level": 2,
       "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で自身の全パラメータが[highlight]16[/highlight]%UP",
-      "source": "/cards/170/skills/passive/levels/1",
+      "source": "/cards/174/skills/passive/levels/1",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -17893,7 +18285,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/170/skills/passive/levels/1/effect/condition",
+        "source": "/cards/174/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -17936,7 +18328,7 @@
       "member": "フワワ・アビスガード",
       "level": 1,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人のパフォーマンスが20%UP",
-      "source": "/cards/171/skills/passive/levels/0",
+      "source": "/cards/175/skills/passive/levels/0",
       "effect": "P up",
       "target": "attribute members",
       "targetFacts": [
@@ -17985,7 +18377,7 @@
       "member": "フワワ・アビスガード",
       "level": 2,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人のパフォーマンスが[highlight]30[/highlight]%UP",
-      "source": "/cards/171/skills/passive/levels/1",
+      "source": "/cards/175/skills/passive/levels/1",
       "effect": "P up",
       "target": "attribute members",
       "targetFacts": [
@@ -18034,7 +18426,7 @@
       "member": "フワワ・アビスガード",
       "level": 1,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人のテクニックが30%UP",
-      "source": "/cards/172/skills/passive/levels/0",
+      "source": "/cards/176/skills/passive/levels/0",
       "effect": "T up",
       "target": "attribute members",
       "targetFacts": [
@@ -18083,7 +18475,7 @@
       "member": "フワワ・アビスガード",
       "level": 2,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人のテクニックが[highlight]41[/highlight]%UP",
-      "source": "/cards/172/skills/passive/levels/1",
+      "source": "/cards/176/skills/passive/levels/1",
       "effect": "T up",
       "target": "attribute members",
       "targetFacts": [
@@ -18132,7 +18524,7 @@
       "member": "フワワ・アビスガード",
       "level": 1,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で自身の全パラメータが24%UP",
-      "source": "/cards/173/skills/passive/levels/0",
+      "source": "/cards/177/skills/passive/levels/0",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -18143,7 +18535,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/173/skills/passive/levels/0/effect/condition",
+        "source": "/cards/177/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -18186,7 +18578,7 @@
       "member": "フワワ・アビスガード",
       "level": 2,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で自身の全パラメータが[highlight]32[/highlight]%UP",
-      "source": "/cards/173/skills/passive/levels/1",
+      "source": "/cards/177/skills/passive/levels/1",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -18197,7 +18589,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/173/skills/passive/levels/1/effect/condition",
+        "source": "/cards/177/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -18240,7 +18632,7 @@
       "member": "モココ・アビスガード",
       "level": 1,
       "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で[attribute=happy]ハッピータイプ[/attribute]3人のパフォーマンスが7%UP",
-      "source": "/cards/174/skills/passive/levels/0",
+      "source": "/cards/178/skills/passive/levels/0",
       "effect": "P up",
       "target": "attribute members",
       "targetFacts": [
@@ -18253,7 +18645,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/174/skills/passive/levels/0/effect/condition",
+        "source": "/cards/178/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -18300,7 +18692,7 @@
       "member": "モココ・アビスガード",
       "level": 2,
       "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で[attribute=happy]ハッピータイプ[/attribute]3人のパフォーマンスが[highlight]14[/highlight]%UP",
-      "source": "/cards/174/skills/passive/levels/1",
+      "source": "/cards/178/skills/passive/levels/1",
       "effect": "P up",
       "target": "attribute members",
       "targetFacts": [
@@ -18313,7 +18705,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/174/skills/passive/levels/1/effect/condition",
+        "source": "/cards/178/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -18360,7 +18752,7 @@
       "member": "モココ・アビスガード",
       "level": 1,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で自身の全パラメータが16%UP",
-      "source": "/cards/175/skills/passive/levels/0",
+      "source": "/cards/179/skills/passive/levels/0",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -18371,7 +18763,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/175/skills/passive/levels/0/effect/condition",
+        "source": "/cards/179/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -18414,7 +18806,7 @@
       "member": "モココ・アビスガード",
       "level": 2,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で自身の全パラメータが[highlight]24[/highlight]%UP",
-      "source": "/cards/175/skills/passive/levels/1",
+      "source": "/cards/179/skills/passive/levels/1",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -18425,7 +18817,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/175/skills/passive/levels/1/effect/condition",
+        "source": "/cards/179/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -18468,7 +18860,7 @@
       "member": "モココ・アビスガード",
       "level": 1,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人のスコアサポート効果8%",
-      "source": "/cards/176/skills/passive/levels/0",
+      "source": "/cards/180/skills/passive/levels/0",
       "effect": "Support / parameter外",
       "target": "attribute members",
       "targetFacts": [
@@ -18505,7 +18897,7 @@
       "member": "モココ・アビスガード",
       "level": 2,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人のスコアサポート効果[highlight]11[/highlight]%",
-      "source": "/cards/176/skills/passive/levels/1",
+      "source": "/cards/180/skills/passive/levels/1",
       "effect": "Support / parameter外",
       "target": "attribute members",
       "targetFacts": [
@@ -18542,7 +18934,7 @@
       "member": "モココ・アビスガード",
       "level": 1,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人のスコアサポート効果8%",
-      "source": "/cards/177/skills/passive/levels/0",
+      "source": "/cards/181/skills/passive/levels/0",
       "effect": "Support / parameter外",
       "target": "attribute members",
       "targetFacts": [
@@ -18579,7 +18971,7 @@
       "member": "モココ・アビスガード",
       "level": 2,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人のスコアサポート効果[highlight]11[/highlight]%",
-      "source": "/cards/177/skills/passive/levels/1",
+      "source": "/cards/181/skills/passive/levels/1",
       "effect": "Support / parameter外",
       "target": "attribute members",
       "targetFacts": [
@@ -18616,7 +19008,7 @@
       "member": "音乃瀬奏",
       "level": 1,
       "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で自身の全パラメータが8%UP",
-      "source": "/cards/178/skills/passive/levels/0",
+      "source": "/cards/182/skills/passive/levels/0",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -18627,7 +19019,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/178/skills/passive/levels/0/effect/condition",
+        "source": "/cards/182/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -18670,7 +19062,7 @@
       "member": "音乃瀬奏",
       "level": 2,
       "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で自身の全パラメータが[highlight]16[/highlight]%UP",
-      "source": "/cards/178/skills/passive/levels/1",
+      "source": "/cards/182/skills/passive/levels/1",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -18681,7 +19073,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/178/skills/passive/levels/1/effect/condition",
+        "source": "/cards/182/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -18724,7 +19116,7 @@
       "member": "音乃瀬奏",
       "level": 1,
       "description": "ReGLOSSが2人以上でReGLOSS2人のテクニックが23%UP",
-      "source": "/cards/179/skills/passive/levels/0",
+      "source": "/cards/183/skills/passive/levels/0",
       "effect": "T up",
       "target": "generation/group members",
       "targetFacts": [
@@ -18737,7 +19129,7 @@
       "condition": "generation/group count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/179/skills/passive/levels/0/effect/condition",
+        "source": "/cards/183/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -18785,7 +19177,7 @@
       "member": "音乃瀬奏",
       "level": 2,
       "description": "ReGLOSSが2人以上でReGLOSS2人のテクニックが[highlight]34[/highlight]%UP",
-      "source": "/cards/179/skills/passive/levels/1",
+      "source": "/cards/183/skills/passive/levels/1",
       "effect": "T up",
       "target": "generation/group members",
       "targetFacts": [
@@ -18798,7 +19190,7 @@
       "condition": "generation/group count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/179/skills/passive/levels/1/effect/condition",
+        "source": "/cards/183/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -18846,7 +19238,7 @@
       "member": "音乃瀬奏",
       "level": 1,
       "description": "ReGLOSS2人のセンスが32%UP",
-      "source": "/cards/180/skills/passive/levels/0",
+      "source": "/cards/184/skills/passive/levels/0",
       "effect": "S up",
       "target": "generation/group members",
       "targetFacts": [
@@ -18896,7 +19288,7 @@
       "member": "音乃瀬奏",
       "level": 2,
       "description": "ReGLOSS2人のセンスが[highlight]43[/highlight]%UP",
-      "source": "/cards/180/skills/passive/levels/1",
+      "source": "/cards/184/skills/passive/levels/1",
       "effect": "S up",
       "target": "generation/group members",
       "targetFacts": [
@@ -18946,7 +19338,7 @@
       "member": "音乃瀬奏",
       "level": 1,
       "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で[attribute=happy]ハッピータイプ[/attribute]2人のパフォーマンスが32%UP",
-      "source": "/cards/181/skills/passive/levels/0",
+      "source": "/cards/185/skills/passive/levels/0",
       "effect": "P up",
       "target": "attribute members",
       "targetFacts": [
@@ -18959,7 +19351,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/181/skills/passive/levels/0/effect/condition",
+        "source": "/cards/185/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -19006,7 +19398,7 @@
       "member": "音乃瀬奏",
       "level": 2,
       "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で[attribute=happy]ハッピータイプ[/attribute]2人のパフォーマンスが[highlight]43[/highlight]%UP",
-      "source": "/cards/181/skills/passive/levels/1",
+      "source": "/cards/185/skills/passive/levels/1",
       "effect": "P up",
       "target": "attribute members",
       "targetFacts": [
@@ -19019,7 +19411,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/181/skills/passive/levels/1/effect/condition",
+        "source": "/cards/185/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -19066,7 +19458,7 @@
       "member": "一条莉々華",
       "level": 1,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で自身の全パラメータが8%UP",
-      "source": "/cards/182/skills/passive/levels/0",
+      "source": "/cards/186/skills/passive/levels/0",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -19077,7 +19469,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/182/skills/passive/levels/0/effect/condition",
+        "source": "/cards/186/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -19120,7 +19512,7 @@
       "member": "一条莉々華",
       "level": 2,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で自身の全パラメータが[highlight]16[/highlight]%UP",
-      "source": "/cards/182/skills/passive/levels/1",
+      "source": "/cards/186/skills/passive/levels/1",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -19131,7 +19523,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/182/skills/passive/levels/1/effect/condition",
+        "source": "/cards/186/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -19174,7 +19566,7 @@
       "member": "一条莉々華",
       "level": 1,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人のテクニックが20%UP",
-      "source": "/cards/183/skills/passive/levels/0",
+      "source": "/cards/187/skills/passive/levels/0",
       "effect": "T up",
       "target": "attribute members",
       "targetFacts": [
@@ -19223,7 +19615,7 @@
       "member": "一条莉々華",
       "level": 2,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人のテクニックが[highlight]30[/highlight]%UP",
-      "source": "/cards/183/skills/passive/levels/1",
+      "source": "/cards/187/skills/passive/levels/1",
       "effect": "T up",
       "target": "attribute members",
       "targetFacts": [
@@ -19272,7 +19664,7 @@
       "member": "一条莉々華",
       "level": 1,
       "description": "ReGLOSSが2人以上でReGLOSS2人のパフォーマンスが34%UP",
-      "source": "/cards/184/skills/passive/levels/0",
+      "source": "/cards/188/skills/passive/levels/0",
       "effect": "P up",
       "target": "generation/group members",
       "targetFacts": [
@@ -19285,7 +19677,7 @@
       "condition": "generation/group count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/184/skills/passive/levels/0/effect/condition",
+        "source": "/cards/188/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -19333,7 +19725,7 @@
       "member": "一条莉々華",
       "level": 2,
       "description": "ReGLOSSが2人以上でReGLOSS2人のパフォーマンスが[highlight]45[/highlight]%UP",
-      "source": "/cards/184/skills/passive/levels/1",
+      "source": "/cards/188/skills/passive/levels/1",
       "effect": "P up",
       "target": "generation/group members",
       "targetFacts": [
@@ -19346,7 +19738,7 @@
       "condition": "generation/group count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/184/skills/passive/levels/1/effect/condition",
+        "source": "/cards/188/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -19394,7 +19786,7 @@
       "member": "一条莉々華",
       "level": 1,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で[attribute=cute]キュートタイプ[/attribute]2人のテクニックが32%UP",
-      "source": "/cards/185/skills/passive/levels/0",
+      "source": "/cards/189/skills/passive/levels/0",
       "effect": "T up",
       "target": "attribute members",
       "targetFacts": [
@@ -19407,7 +19799,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/185/skills/passive/levels/0/effect/condition",
+        "source": "/cards/189/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -19454,7 +19846,7 @@
       "member": "一条莉々華",
       "level": 2,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で[attribute=cute]キュートタイプ[/attribute]2人のテクニックが[highlight]43[/highlight]%UP",
-      "source": "/cards/185/skills/passive/levels/1",
+      "source": "/cards/189/skills/passive/levels/1",
       "effect": "T up",
       "target": "attribute members",
       "targetFacts": [
@@ -19467,7 +19859,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/185/skills/passive/levels/1/effect/condition",
+        "source": "/cards/189/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -19514,7 +19906,7 @@
       "member": "儒烏風亭らでん",
       "level": 1,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人のテクニックが10%UP",
-      "source": "/cards/186/skills/passive/levels/0",
+      "source": "/cards/190/skills/passive/levels/0",
       "effect": "T up",
       "target": "attribute members",
       "targetFacts": [
@@ -19563,7 +19955,7 @@
       "member": "儒烏風亭らでん",
       "level": 2,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人のテクニックが[highlight]20[/highlight]%UP",
-      "source": "/cards/186/skills/passive/levels/1",
+      "source": "/cards/190/skills/passive/levels/1",
       "effect": "T up",
       "target": "attribute members",
       "targetFacts": [
@@ -19612,7 +20004,7 @@
       "member": "儒烏風亭らでん",
       "level": 1,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で自身の全パラメータが16%UP",
-      "source": "/cards/187/skills/passive/levels/0",
+      "source": "/cards/191/skills/passive/levels/0",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -19623,7 +20015,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/187/skills/passive/levels/0/effect/condition",
+        "source": "/cards/191/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -19666,7 +20058,7 @@
       "member": "儒烏風亭らでん",
       "level": 2,
       "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で自身の全パラメータが[highlight]24[/highlight]%UP",
-      "source": "/cards/187/skills/passive/levels/1",
+      "source": "/cards/191/skills/passive/levels/1",
       "effect": "all parameter up",
       "target": "self",
       "targetFacts": [
@@ -19677,7 +20069,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/187/skills/passive/levels/1/effect/condition",
+        "source": "/cards/191/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -19720,7 +20112,7 @@
       "member": "儒烏風亭らでん",
       "level": 1,
       "description": "ReGLOSS2人のセンスが32%UP",
-      "source": "/cards/188/skills/passive/levels/0",
+      "source": "/cards/192/skills/passive/levels/0",
       "effect": "S up",
       "target": "generation/group members",
       "targetFacts": [
@@ -19770,7 +20162,7 @@
       "member": "儒烏風亭らでん",
       "level": 2,
       "description": "ReGLOSS2人のセンスが[highlight]43[/highlight]%UP",
-      "source": "/cards/188/skills/passive/levels/1",
+      "source": "/cards/192/skills/passive/levels/1",
       "effect": "S up",
       "target": "generation/group members",
       "targetFacts": [
@@ -19820,7 +20212,7 @@
       "member": "轟はじめ",
       "level": 1,
       "description": "[attribute=happy]ハッピータイプ[/attribute]2人のセンスが10%UP",
-      "source": "/cards/189/skills/passive/levels/0",
+      "source": "/cards/193/skills/passive/levels/0",
       "effect": "S up",
       "target": "attribute members",
       "targetFacts": [
@@ -19869,7 +20261,7 @@
       "member": "轟はじめ",
       "level": 2,
       "description": "[attribute=happy]ハッピータイプ[/attribute]2人のセンスが[highlight]20[/highlight]%UP",
-      "source": "/cards/189/skills/passive/levels/1",
+      "source": "/cards/193/skills/passive/levels/1",
       "effect": "S up",
       "target": "attribute members",
       "targetFacts": [
@@ -19918,7 +20310,7 @@
       "member": "轟はじめ",
       "level": 1,
       "description": "[attribute=pure]ピュアタイプ[/attribute]3人以上で[attribute=pure]ピュアタイプ[/attribute]3人のスコアサポート効果4%",
-      "source": "/cards/190/skills/passive/levels/0",
+      "source": "/cards/194/skills/passive/levels/0",
       "effect": "Support / parameter外",
       "target": "attribute members",
       "targetFacts": [
@@ -19931,7 +20323,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/190/skills/passive/levels/0/effect/condition",
+        "source": "/cards/194/skills/passive/levels/0/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -19966,7 +20358,7 @@
       "member": "轟はじめ",
       "level": 2,
       "description": "[attribute=pure]ピュアタイプ[/attribute]3人以上で[attribute=pure]ピュアタイプ[/attribute]3人のスコアサポート効果[highlight]6[/highlight]%",
-      "source": "/cards/190/skills/passive/levels/1",
+      "source": "/cards/194/skills/passive/levels/1",
       "effect": "Support / parameter外",
       "target": "attribute members",
       "targetFacts": [
@@ -19979,7 +20371,7 @@
       "condition": "attribute count",
       "conditionFacts": {
         "state": "observed",
-        "source": "/cards/190/skills/passive/levels/1/effect/condition",
+        "source": "/cards/194/skills/passive/levels/1/effect/condition",
         "clauses": [
           {
             "number": 1,
@@ -20014,7 +20406,7 @@
       "member": "轟はじめ",
       "level": 1,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人のパフォーマンスが30%UP",
-      "source": "/cards/191/skills/passive/levels/0",
+      "source": "/cards/195/skills/passive/levels/0",
       "effect": "P up",
       "target": "attribute members",
       "targetFacts": [
@@ -20063,7 +20455,7 @@
       "member": "轟はじめ",
       "level": 2,
       "description": "[attribute=cute]キュートタイプ[/attribute]2人のパフォーマンスが[highlight]41[/highlight]%UP",
-      "source": "/cards/191/skills/passive/levels/1",
+      "source": "/cards/195/skills/passive/levels/1",
       "effect": "P up",
       "target": "attribute members",
       "targetFacts": [

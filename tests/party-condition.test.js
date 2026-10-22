@@ -7,7 +7,7 @@ catalog.cards.forEach(c=>c.skills.active.levels.forEach(l=>{l.conditionalOverrid
 const expected=JSON.parse(readFile('tests/affiliation-expected-cards.json'));
 const enabled=catalog.cards.filter(card=>card.skills.passive.levels.some(p=>UnitParameterEngine.resolveInput(p).status==='supported' && UnitParameterEngine.resolveInput(p).effect?.condition.kind==='affiliation' && UnitParameterEngine.resolveInput(p).effect.target.kind==='self')).map(c=>c.id).sort();
 check(JSON.stringify(enabled)===JSON.stringify(expected),'exact audited 12');
-const gateCounts={};for(const card of catalog.cards)for(const p of card.skills.passive.levels){const status=UnitParameterEngine.resolveInput(p).status;gateCounts[status]=(gateCounts[status]||0)+1;}
+const gateCounts={};for(const card of catalog.cards.filter(c=>releaseBaselineIds.has(c.id)))for(const p of card.skills.passive.levels){const status=UnitParameterEngine.resolveInput(p).status;gateCounts[status]=(gateCounts[status]||0)+1;}
 check(gateCounts.supported===304,'152 cards / 304 levels supported');
 const slot=id=>({cardId:id,training:0,bloom:0,short:0});
 for(const id of expected){

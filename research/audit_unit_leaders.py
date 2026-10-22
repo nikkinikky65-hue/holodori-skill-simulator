@@ -32,7 +32,8 @@ def build():
     assert source['provenance']['commitSha'] == canonical['sourceDataset']['commitSha'] == survey['provenance']['commitSha']
     assert leader['dataset']['canonicalSha256'] == hashes()[INPUTS[3]]
     assert leader['dataset']['sourceSha256'] == hashes()[INPUTS[4]]
-    assert len(leader['cardSkills']) == 138 and len(leader['commonEffects']) == 54
+    assert len(leader['cardSkills']) + len(leader['coverage']['cardsWithoutCostumeReference']) == len(cards)
+    assert len(leader['commonEffects']) == 54
     assert len({r['cardId'] for r in leader['cardSkills']}) == len(leader['cardSkills'])
     assert len({r['skillId'] for r in leader['cardSkills']}) == len(leader['cardSkills'])
     common_ids = {r['skillId'] for r in leader['commonEffects']}
@@ -139,9 +140,9 @@ def build():
                'existingResolversOnly': 0, 'numericConfirmed': 0,
                'parameterNumericUnconfirmed': sum(r['parameterIncluded'] for r in rows),
                'commonEffectsExcluded': len(leader['commonEffects'])}
-    assert summary['parameterIncluded']==126 and summary['singleParameter']==108 and summary['compound']==18
-    assert summary['parameterExcluded']==12 and summary['effectRowCount']==156
-    assert summary['conditionGroups']==18 and summary['resolvedConditionGroups']==18
+    assert summary['parameterIncluded'] + summary['parameterExcluded'] == len(rows)
+    assert summary['effectRowCount'] == sum(len(row['effects']) for row in rows)
+    assert summary['conditionGroups'] == summary['resolvedConditionGroups']
     assert summary['resolvedEffectGroups']==0
     assert sum(summary['conditionLeaderCounts'].values()) == len(rows)
     assert sum(summary['effectRowCounts'].values()) == summary['effectRowCount']

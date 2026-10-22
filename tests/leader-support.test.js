@@ -26,7 +26,7 @@ for(const l of rules.filter(l=>l.effects.some(e=>e.parameter==='score_support'))
  const party=members.map(m=>({...m,attribute:effect.condition.attribute||m.attribute}));
  const supported=LeaderSupportEngine.resolve(l,party,null);
  check(supported.sources.length===1&&supported.sources[0].status==='applied','all 30 support effects');
- check(supported.targets.every(t=>t.rate===effect.percent),'library rates');count++;
+ check(supported.targets.every(t=>t.rate===effect.percent),'library rates');if(releaseBaselineIds.has(l.cardId))count++;
  if(effect.condition.type==='attribute_count'){
   const other=effect.condition.attribute.endsWith('_1')?'CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2':'CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1';
   const inactive=LeaderSupportEngine.resolve(l,party.map(m=>({...m,attribute:other})),null);

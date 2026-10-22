@@ -1,169 +1,33 @@
 {
   "source": {
     "repository": "https://github.com/HolodoriDB/holodori-db-jpn-diff",
+    "commitSha": "ed117f1d53d4680228d22c7176e511a1c241c5fc",
+    "commitUrl": "https://github.com/HolodoriDB/holodori-db-jpn-diff/tree/ed117f1d53d4680228d22c7176e511a1c241c5fc",
+    "retrievedAtUtc": "2026-10-22T10:49:27.192127+00:00"
+  },
+  "baselineSource": {
+    "repository": "https://github.com/HolodoriDB/holodori-db-jpn-diff",
     "commitSha": "6680c7c37a8a3b3d56d919df823dca318db0d802",
     "commitUrl": "https://github.com/HolodoriDB/holodori-db-jpn-diff/tree/6680c7c37a8a3b3d56d919df823dca318db0d802",
     "retrievedAtUtc": "2026-10-13T00:26:42.944313+00:00"
   },
-  "baselineSource": {
-    "repository": "https://github.com/HolodoriDB/holodori-db-jpn-diff",
-    "commitSha": "e43f062c32ff4e04567235efcd58448cd6b10f35",
-    "commitUrl": "https://github.com/HolodoriDB/holodori-db-jpn-diff/tree/e43f062c32ff4e04567235efcd58448cd6b10f35",
-    "retrievedAtUtc": "2026-09-29T10:47:09Z"
-  },
-  "beforeCount": 185,
-  "afterCount": 192,
+  "beforeCount": 192,
+  "afterCount": 196,
   "added": [
     {
-      "cardId": "card-00023-5-uniq-0085-00",
-      "member": "宝鐘マリン",
-      "name": "お宝独占♡ウォーターキャノン",
-      "rarity": 5,
-      "passiveStatus": "supported",
-      "passiveLevels": 2,
-      "activeLevels": 2,
-      "activeConditionalRows": 0,
-      "specialLevels": 2,
-      "leaderEffects": [
-        {
-          "parameter": "S",
-          "percent": 80,
-          "target": "all_members",
-          "condition": {
-            "type": "attribute_count",
-            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2",
-            "affiliationId": null,
-            "requiredCount": 2,
-            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
-            "text": "ピュアタイプ2人以上"
-          },
-          "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のセンスが80%UP"
-        },
-        {
-          "parameter": "score_support",
-          "percent": 25,
-          "target": "all_members",
-          "condition": {
-            "type": "attribute_count",
-            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2",
-            "affiliationId": null,
-            "requiredCount": 2,
-            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
-            "text": "ピュアタイプ2人以上"
-          },
-          "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のスコアサポート効果25%"
-        }
-      ]
-    },
-    {
-      "cardId": "card-00030-5-uniq-0089-00",
-      "member": "雪花ラミィ",
-      "name": "火照りを鎮める癒しの一口",
+      "cardId": "card-00027-5-uniq-0092-00",
+      "member": "常闇トワ",
+      "name": "ゆらゆら過ごす木陰のバカンス",
       "rarity": 5,
       "passiveStatus": "supported",
       "passiveLevels": 2,
       "activeLevels": 2,
       "activeConditionalRows": 2,
-      "specialLevels": 2,
-      "leaderEffects": [
-        {
-          "parameter": "score_support",
-          "percent": 60,
-          "target": "all_members",
-          "condition": {
-            "type": "not_stated",
-            "attribute": null,
-            "affiliationId": null,
-            "requiredCount": null,
-            "referenceId": null,
-            "text": null
-          },
-          "description": "全員のスコアサポート効果60%"
-        }
-      ]
-    },
-    {
-      "cardId": "card-00034-5-uniq-0090-00",
-      "member": "尾丸ポルカ",
-      "name": "幸せ分け合うMeat For You",
-      "rarity": 5,
-      "passiveStatus": "supported",
-      "passiveLevels": 2,
-      "activeLevels": 2,
-      "activeConditionalRows": 0,
       "specialLevels": 2,
       "leaderEffects": [
         {
           "parameter": "T",
           "percent": 80,
-          "target": "all_members",
-          "condition": {
-            "type": "attribute_count",
-            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2",
-            "affiliationId": null,
-            "requiredCount": 2,
-            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
-            "text": "ピュアタイプ2人以上"
-          },
-          "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のテクニックが80%UP"
-        },
-        {
-          "parameter": "score_support",
-          "percent": 25,
-          "target": "all_members",
-          "condition": {
-            "type": "attribute_count",
-            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2",
-            "affiliationId": null,
-            "requiredCount": 2,
-            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
-            "text": "ピュアタイプ2人以上"
-          },
-          "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のスコアサポート効果25%"
-        }
-      ]
-    },
-    {
-      "cardId": "card-00037-5-uniq-0086-00",
-      "member": "博衣こより",
-      "name": "振り向きざまのaventure",
-      "rarity": 5,
-      "passiveStatus": "supported",
-      "passiveLevels": 2,
-      "activeLevels": 2,
-      "activeConditionalRows": 2,
-      "specialLevels": 2,
-      "leaderEffects": [
-        {
-          "parameter": "score_support",
-          "percent": 60,
-          "target": "all_members",
-          "condition": {
-            "type": "not_stated",
-            "attribute": null,
-            "affiliationId": null,
-            "requiredCount": null,
-            "referenceId": null,
-            "text": null
-          },
-          "description": "全員のスコアサポート効果60%"
-        }
-      ]
-    },
-    {
-      "cardId": "card-03009-5-uniq-0088-00",
-      "member": "こぼ・かなえる",
-      "name": "波間に揺れるBody ＆ Soul",
-      "rarity": 5,
-      "passiveStatus": "supported",
-      "passiveLevels": 2,
-      "activeLevels": 2,
-      "activeConditionalRows": 0,
-      "specialLevels": 2,
-      "leaderEffects": [
-        {
-          "parameter": "S",
-          "percent": 130,
           "target": "all_members",
           "condition": {
             "type": "attribute_count",
@@ -173,393 +37,126 @@
             "referenceId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
             "text": "キュートタイプ2人以上"
           },
-          "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員のセンスが130%UP"
+          "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員のテクニックが80%UP"
+        },
+        {
+          "parameter": "score_support",
+          "percent": 25,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
+            "text": "キュートタイプ2人以上"
+          },
+          "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員のスコアサポート効果25%"
         }
       ]
     },
     {
-      "cardId": "card-04012-5-uniq-0087-00",
-      "member": "ハコス・ベールズ",
-      "name": "これがボクのイチオシ！",
+      "cardId": "card-00032-5-uniq-0093-00",
+      "member": "獅白ぼたん",
+      "name": "一心不乱のちゅるタイム",
       "rarity": 5,
-      "passiveStatus": "supported",
+      "passiveStatus": "non-parameter",
       "passiveLevels": 2,
       "activeLevels": 2,
       "activeConditionalRows": 2,
       "specialLevels": 2,
       "leaderEffects": [
         {
-          "parameter": "all_parameter",
-          "percent": 50,
+          "parameter": "S",
+          "percent": 80,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
+            "text": "キュートタイプ2人以上"
+          },
+          "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員のセンスが80%UP"
+        },
+        {
+          "parameter": "score_support",
+          "percent": 25,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
+            "text": "キュートタイプ2人以上"
+          },
+          "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員のスコアサポート効果25%"
+        }
+      ]
+    },
+    {
+      "cardId": "card-03008-5-uniq-0095-00",
+      "member": "カエラ・コヴァルスキア",
+      "name": "木陰で紡ぐShiny Memory",
+      "rarity": 5,
+      "passiveStatus": "supported",
+      "passiveLevels": 2,
+      "activeLevels": 2,
+      "activeConditionalRows": 0,
+      "specialLevels": 2,
+      "leaderEffects": [
+        {
+          "parameter": "S",
+          "percent": 135,
           "target": "all_members",
           "condition": {
             "type": "affiliation_count",
             "attribute": null,
-            "affiliationId": "grp-promise",
+            "affiliationId": "grp-indonesia-gen_3",
             "requiredCount": 2,
-            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-promise-2",
-            "text": "Promiseが2人以上"
+            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-indonesia-gen_3-2",
+            "text": "ID3期生が2人以上"
           },
-          "description": "Promiseが2人以上で全員の全パラメータが50%UP"
+          "description": "ID3期生が2人以上で全員のセンスが135%UP"
         }
       ]
     },
     {
-      "cardId": "card-06003-5-uniq-0091-00",
-      "member": "一条莉々華",
-      "name": "夏夜を彩るBrilliant Smile",
+      "cardId": "card-04014-5-uniq-0094-00",
+      "member": "古石ビジュー",
+      "name": "笑顔輝くSand castle",
       "rarity": 5,
-      "passiveStatus": "supported",
+      "passiveStatus": "non-parameter",
       "passiveLevels": 2,
       "activeLevels": 2,
       "activeConditionalRows": 0,
       "specialLevels": 2,
       "leaderEffects": [
         {
-          "parameter": "T",
-          "percent": 130,
+          "parameter": "P",
+          "percent": 135,
           "target": "all_members",
           "condition": {
-            "type": "attribute_count",
-            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1",
-            "affiliationId": null,
+            "type": "affiliation_count",
+            "attribute": null,
+            "affiliationId": "grp-advent",
             "requiredCount": 2,
-            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
-            "text": "キュートタイプ2人以上"
+            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-advent-2",
+            "text": "Adventが2人以上"
           },
-          "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員のテクニックが130%UP"
+          "description": "Adventが2人以上で全員のパフォーマンスが135%UP"
         }
       ]
     }
   ],
   "updatedRuntimeCardIds": [],
   "updatedCanonicalGameplayCardIds": [],
-  "removedCardIds": [],
-  "characterMetadataChanges": [
-    {
-      "characterId": "chr-00001",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-00002",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-00004",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-00005",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-00006",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-00007",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-00010",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-00011",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-00012",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-00013",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-00014",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-00015",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-00016",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-00017",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-00018",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-00019",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-00021",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-00022",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-00023",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-00026",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-00027",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-00028",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-00030",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-00031",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-00032",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-00034",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-00035",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-00036",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-00037",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-00039",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-03001",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-03002",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-03003",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-03004",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-03005",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-03006",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-03007",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-03008",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-03009",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-04001",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-04002",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-04003",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-04007",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-04010",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-04012",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-04013",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-04014",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-04015",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-04016",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-04017",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-06002",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-06003",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-06004",
-      "fields": [
-        "color5"
-      ]
-    },
-    {
-      "characterId": "chr-06005",
-      "fields": [
-        "color5"
-      ]
-    }
+  "permittedSourceChanges": [
+    "active-description-leading-ascii-space"
   ],
-  "compatibleOldCardCount": 185
+  "removedCardIds": [],
+  "characterMetadataChanges": [],
+  "compatibleOldCardCount": 192
 }

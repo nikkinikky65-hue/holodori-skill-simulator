@@ -79,7 +79,7 @@ check(zero.sources[0].status==='resolved'&&zero.sources[0].targetSlots.length===
 let observedRows=0;
 for(const source of catalog.cards)for(const data of source.skills.passive.levels){
  if(!data.effect.raw.type.endsWith('_LIVE_ACTIVE_SKILL_EFFECT_UP_PERMIL_UP')||data.condition.state!=='observed')continue;
- observedRows++;
+ if(releaseBaselineIds.has(source.id))observedRows++;
  const clause=data.condition.clauses[0],threshold=Number(clause.threshold),selector=data.target.selectors[0];
  const isInside=c=>clause.cardAttributeType?c.classification.attributeType.raw===clause.cardAttributeType:catalog.affiliationCatalog.groups[clause.characterGroupingId].characterIds.includes(catalog.affiliationCatalog.cardCharacters[c.id]);
  const inside=catalog.cards.filter(isInside),outside=catalog.cards.filter(c=>!isInside(c));

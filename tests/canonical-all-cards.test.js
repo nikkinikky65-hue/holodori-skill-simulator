@@ -1,5 +1,5 @@
 const allCanonical = JSON.parse(readFile('data/runtime-cards.json'));
-assertCanonical(allCanonical.cards.length===192, '192 cards available');
+assertCanonical(allCanonical.cards.length===JSON.parse(readFile('research/canonical-cards.json')).cards.length, 'all source cards available');
 let activeCount=0;
 const mappedMembers=new Set();
 for(const card of allCanonical.cards){
@@ -21,7 +21,7 @@ for(const card of allCanonical.cards){
     activeCount++;
   }
 }
-assertCanonical(mappedMembers.size===54 && activeCount===384, 'all member and level coverage');
+assertCanonical(mappedMembers.size===54 && activeCount===allCanonical.cards.length*2, 'all member and level coverage');
 const full=JSON.parse(readFile('research/canonical-cards.json'));
 for(const card of allCanonical.cards){
   const original=full.cards.find(item=>item.sourceCard.sourceId===card.id);
@@ -33,4 +33,4 @@ for(const card of allCanonical.cards){
     assertCanonical(input.boost===Number(src.baseEffect.facts.find(f=>f.sourceField==='value').rawValue)/10,'only original base effect applied');
   }
 }
-print('All 192 cards / 54 members / 384 Active levels: Runtime projection equals complete Canonical PASS');
+print('All '+allCanonical.cards.length+' cards / 54 members / '+activeCount+' Active levels: Runtime projection equals complete Canonical PASS');

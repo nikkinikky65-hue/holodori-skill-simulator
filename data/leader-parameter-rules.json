@@ -1,10 +1,10 @@
 {
   "format": "leader-parameter-rules-v1",
-  "canonicalSha256": "8872740811b48d365e6d2756ec4c731006d7068a27fb8e2665cb8163aee9422f",
+  "canonicalSha256": "fe625b7f00e0f7c3c437add3557243d33595b21a11a9b77cb323b3749cc8435c",
   "inputs": {
-    "research/unit-leader-audit.json": "ef124beeef085c3fb3dead58a42cbcf3ca3c2a16376ceb0d19932c06f86cb1bf",
-    "data/runtime-leader-skills.json": "f10b972a523d3e7aaf606e551112fcc9b0c119972b376ff51176def4b4f1c78c",
-    "data/runtime-affiliations.json": "75910ec1dc221285ebb49cff515f47ce7d991ffb3fe3a35a0bda6f1e851b762e"
+    "research/unit-leader-audit.json": "be0bcc034bde15605f0c9ede364620fffe5ea0845226e57440c6c2ecc553ea67",
+    "data/runtime-leader-skills.json": "fb42016bcc4d598107d4bb9e2685c577fa53a86f2c90d3b43d81d1d7fae3bc74",
+    "data/runtime-affiliations.json": "a5cf7fc06a942a049217e7aca5d7584af9b8f9fc214e08d4be9962729602ecdc"
   },
   "leaders": [
     {
@@ -1385,6 +1385,43 @@
       ]
     },
     {
+      "id": "live_leader_skill-card-00027-5-uniq-0092-00",
+      "cardId": "card-00027-5-uniq-0092-00",
+      "name": "常闇トワ / ゆらゆら過ごす木陰のバカンス",
+      "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員のテクニックが80%UP\n[attribute=cute]キュートタイプ[/attribute]2人以上で全員のスコアサポート効果25%",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "T",
+          "percent": 80,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
+            "text": "キュートタイプ2人以上"
+          },
+          "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員のテクニックが80%UP"
+        },
+        {
+          "parameter": "score_support",
+          "percent": 25,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
+            "text": "キュートタイプ2人以上"
+          },
+          "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員のスコアサポート効果25%"
+        }
+      ]
+    },
+    {
       "id": "live_leader_skill-card-00028-4-cmmn-0000-00",
       "cardId": "card-00028-4-cmmn-0000-00",
       "name": "姫森ルーナ / ふんわりプリンセスステージ",
@@ -1611,6 +1648,43 @@
             "text": null
           },
           "description": "全員の全パラメータが45%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-00032-5-uniq-0093-00",
+      "cardId": "card-00032-5-uniq-0093-00",
+      "name": "獅白ぼたん / 一心不乱のちゅるタイム",
+      "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員のセンスが80%UP\n[attribute=cute]キュートタイプ[/attribute]2人以上で全員のスコアサポート効果25%",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "S",
+          "percent": 80,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
+            "text": "キュートタイプ2人以上"
+          },
+          "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員のセンスが80%UP"
+        },
+        {
+          "parameter": "score_support",
+          "percent": 25,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
+            "text": "キュートタイプ2人以上"
+          },
+          "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員のスコアサポート効果25%"
         }
       ]
     },
@@ -2407,6 +2481,29 @@
       ]
     },
     {
+      "id": "live_leader_skill-card-03008-5-uniq-0095-00",
+      "cardId": "card-03008-5-uniq-0095-00",
+      "name": "カエラ・コヴァルスキア / 木陰で紡ぐShiny Memory",
+      "description": "ID3期生が2人以上で全員のセンスが135%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "S",
+          "percent": 135,
+          "target": "all_members",
+          "condition": {
+            "type": "affiliation_count",
+            "attribute": null,
+            "affiliationId": "grp-indonesia-gen_3",
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-indonesia-gen_3-2",
+            "text": "ID3期生が2人以上"
+          },
+          "description": "ID3期生が2人以上で全員のセンスが135%UP"
+        }
+      ]
+    },
+    {
       "id": "live_leader_skill-card-03009-4-cmmn-0000-00",
       "cardId": "card-03009-4-cmmn-0000-00",
       "name": "こぼ・かなえる / ドタバタフルスロットルステージ",
@@ -2974,6 +3071,29 @@
             "text": null
           },
           "description": "全員のセンスが120%UP"
+        }
+      ]
+    },
+    {
+      "id": "live_leader_skill-card-04014-5-uniq-0094-00",
+      "cardId": "card-04014-5-uniq-0094-00",
+      "name": "古石ビジュー / 笑顔輝くSand castle",
+      "description": "Adventが2人以上で全員のパフォーマンスが135%UP",
+      "kind": "card",
+      "effects": [
+        {
+          "parameter": "P",
+          "percent": 135,
+          "target": "all_members",
+          "condition": {
+            "type": "affiliation_count",
+            "attribute": null,
+            "affiliationId": "grp-advent",
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-advent-2",
+            "text": "Adventが2人以上"
+          },
+          "description": "Adventが2人以上で全員のパフォーマンスが135%UP"
         }
       ]
     },

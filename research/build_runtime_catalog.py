@@ -140,12 +140,12 @@ def project(canonical, canonical_bytes, members_bytes):
                         'unresolved': canonical['conversionEvidence']['unresolvedItems']}, 'cards': cards}
     # Accept old saved references only for cards whose entire runtime payload is unchanged
     # (Canonical pointer positions are provenance, not a game-value difference).
-    from card_update_integrity import runtime_card_digest
-    baseline_path = CANONICAL.parent / 'card-library-baseline-185.json'
-    baseline = json.loads(baseline_path.read_text())
-    unchanged = [card['id'] for card in cards if baseline['runtimeCardDigests'].get(card['id']) == runtime_card_digest(card)]
-    result['dataset']['compatibleSelections'] = [{'canonicalSha256': baseline['canonicalSha256'],
-        'sourceCommit': baseline['sourceDataset']['commitSha'], 'runtimeVersions': baseline['runtimeVersions'], 'cardIds': unchanged}]
+    from card_update_integrity import compatible_selections
+    baselines = [json.loads(path.read_text()) for path in sorted(
+        CANONICAL.parent.glob('card-library-baseline-*.json'),
+        key=lambda path: int(path.stem.rsplit('-', 1)[1]))]
+    assert baselines, 'At least one preserved compatibility baseline is required'
+    result['dataset']['compatibleSelections'] = compatible_selections(cards, baselines)
     result['dataset']['version'] = sha(json.dumps(result, ensure_ascii=False, separators=(',', ':')).encode())
     return result
 

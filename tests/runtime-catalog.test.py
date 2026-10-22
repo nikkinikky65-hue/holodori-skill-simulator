@@ -9,10 +9,11 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / 'research'))
 from build_runtime_catalog import condition, project
 
+release = json.loads((ROOT / 'research/card-library-release.json').read_text())
 PROTECTED = {
-    'research/canonical-cards.json': '8872740811b48d365e6d2756ec4c731006d7068a27fb8e2665cb8163aee9422f',
+    'research/canonical-cards.json': release['sha256']['research/canonical-cards.json'],
     'research/canonical-card-schema-proposal.schema.json': 'fc9e3f37e1518895cf7a91fb846892e0b71dac0e0c73f903c57c3f809198c5d4',
-    'research/holodoridb-all-card-survey.json': 'aa7f6223aade1b40062a1f90bc309d09414275d920a7be9dd352d16585101260',
+    'research/holodoridb-all-card-survey.json': release['sha256']['research/holodoridb-all-card-survey.json'],
     'research/canonical-card-sakura-bloom.fixture.json': 'b14e8a1572079daf7dc6f0a7b75546c2fea1982496e4ba903e5d73e02cadb73e',
 }
 for path, digest in PROTECTED.items():
@@ -24,9 +25,9 @@ runtime = json.loads(runtime_bytes)
 assert runtime['dataset']['canonicalSha256'] == PROTECTED['research/canonical-cards.json']
 assert runtime['dataset']['sourceDataset'] == canonical['sourceDataset']
 assert runtime['dataset']['sourceArtifact'] == canonical['conversionEvidence']['inputArtifact']
-assert len(runtime['cards']) == 192
+assert len(runtime['cards']) == release['cardCount']
 assert {c['id'] for c in runtime['cards']} == {c['sourceCard']['sourceId'] for c in canonical['cards']}
-assert len({c['id'] for c in runtime['cards']}) == 192
+assert len({c['id'] for c in runtime['cards']}) == release['cardCount']
 
 
 def same(a, b):
@@ -145,8 +146,9 @@ for src, dst in zip(canonical['cards'], runtime['cards']):
     same(dst['progression']['parameterInputs'], {f['sourceField']: f['rawValue'] for f in src['progression']['parameterInputFacts']})
     counts['snapshots'] += len(snapshots)
     counts['excludedLevels'] += len(full_levels) - len(expected_levels)
-assert counts['overrides'] == 148 and counts['specialEffects'] == 558
-assert all(counts[k] == 384 for k in ('passive', 'active', 'special'))
+assert counts['overrides'] == sum(len(l['conditionalOverrides']) for c in canonical['cards'] for l in c['skills']['active']['levels'])
+assert counts['specialEffects'] == sum(len(l['effects']) for c in canonical['cards'] for l in c['skills']['special']['levels'])
+assert all(counts[k] == 2 * len(canonical['cards']) for k in ('passive', 'active', 'special'))
 # Explicit states must not collapse to the unobserved state, even for future data.
 assert condition({}, '/test')['state'] == 'unobserved'
 assert condition({'condition': None}, '/test')['state'] == 'explicit-null'

@@ -39,5 +39,5 @@ let refused=false;try{calculateCardParameters(invalid,0,0);}catch(e){refused=tru
 assertCanonical(refused,'invalid coefficient sum rejected');
 assertCanonical(!expandCanonicalCard(sora3,{passive:2,active:1,special:2},canonicalTestFixture.dataset).cardParameters,'legacy skill levels do not imply Bloom');
 assertCanonical(JSON.stringify(canonicalTestFixture)===originalCanonical,'parameter calculation never mutates catalog');
-assertCanonical(parameterChecks===5760,'192 cards x 5 training x 6 Bloom');
+assertCanonical(parameterChecks===allCanonical.cards.length*5*6,'192 cards x 5 training x 6 Bloom');
 print('Card parameters: 5550 states, coefficient sums, two ceilings, additive Bloom, totals and legacy isolation PASS');

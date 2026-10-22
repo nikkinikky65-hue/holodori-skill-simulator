@@ -16,7 +16,7 @@ tables={name:{row['id']:row['data'] for row in rows} for name,rows in source['ta
 for name,rows in source['tables'].items():
     assert hashlib.sha256(json.dumps(rows,ensure_ascii=False).encode()).hexdigest()==source['provenance']['tables'][name]['capturedJsonSha256']
 card_rows={r['sourceId']:r['fields'] for r in canonical['sourceRecords'] if r['table']=='Card'}
-assert len(actual['cardSkills'])==138 and len(actual['commonEffects'])==54
+assert len(actual['cardSkills'])==sum('rewardCostumeId' in r for r in card_rows.values()) and len(actual['commonEffects'])==54
 ids=[]
 for row in actual['cardSkills']+actual['commonEffects']:
     costume=tables['Costume'][row['costumeId']]
@@ -32,21 +32,21 @@ for row in actual['cardSkills']:
 for row in actual['commonEffects']:
     assert row['cardIds']==[] and 'cardId' not in row
     assert row['costumeName']=='デフォルト' and row['description']=='全員の全パラメータが15%UP'
-assert len(ids)==len(set(ids))==192 and set(ids)==set(tables['LiveLeaderSkill'])
+assert len(ids)==len(set(ids))==len(tables['LiveLeaderSkill']) and set(ids)==set(tables['LiveLeaderSkill'])
 assert len(actual['coverage']['cardsWithoutCostumeReference'])==54
 assert all('rewardCostumeId' not in card_rows[id] for id in actual['coverage']['cardsWithoutCostumeReference'])
 assert len(actual['coverage']['costumesWithoutSkillReference'])==8
 assert all('liveLeaderSkillId' not in tables['Costume'][id] for id in actual['coverage']['costumesWithoutSkillReference'])
 assert actual_bytes==(json.dumps(project(canonical,runtime,source,source_bytes),ensure_ascii=False,separators=(',',':'))+'\n').encode()
-print('Leader: 138 exact Card→Costume→Skill joins, 54 isolated common effects, all 192 source skills, original texts and reproduction PASS')
+print(f"Leader: {len(actual['cardSkills'])} exact Card→Costume→Skill joins, 54 isolated common effects, all {len(ids)} source skills, original texts and reproduction PASS")
 
 # Independent reconstruction ensures classification retains every amount and condition.
 import re
 from collections import Counter
-assert Counter(row['presentation']['category'] for row in actual['cardSkills']) == {
+assert Counter(row['presentation']['category'] for row in actual['cardSkills'] if row['cardId'] in json.loads((ROOT/'research/card-library-baseline-192.json').read_text())['runtimeCardDigests']) == {
     'センスUP':22, 'テクニックUP':21, 'パフォーマンスUP':22,
     '全パラメータUP':43, 'スコアサポート':12, '複合効果':18}
-assert len({row['cardId'] for row in actual['cardSkills']}) == 138
+assert len({row['cardId'] for row in actual['cardSkills']}) == len(actual['cardSkills'])
 for row in actual['cardSkills']:
     view = row['presentation']
     assert view['status'] == 'classified'

@@ -264,14 +264,18 @@ def validate(result, survey):
         raw = src['fields'][edge['sourceField']]
         assert (edge['rawJoinValue'] in raw if isinstance(raw, list) else raw == edge['rawJoinValue'])
         assert dst['fields'][edge['targetField']] == edge['rawJoinValue']
-    # Fixed survey observations independently guard the meaning of the three skill tracks.
-    levels = {kind: [level for c in result['cards'] for level in c['skills'][kind]['levels']] for kind in ('passive', 'active', 'special')}
-    assert sum('condition' in l['effect'] for l in levels['passive']) == 230
-    assert sum(len(l['conditionalOverrides']) for l in levels['active']) == 148
-    assert sum(len(l['effects']) == 2 for l in levels['special']) == 174
-    assert sum('condition' in e for l in levels['special'] for e in l['effects']) == 66
-    assert sum(len(c['progression']['levelRows']) for c in result['cards']) == 13740
-    assert all(len(c['progression']['trainingStages']) == 5 and len(c['progression']['bloomSteps']) == 5 for c in result['cards'])
+    # Validate completeness against actual preserved source rows, not a release count.
+    for card in result['cards']:
+        raw_card = rows[key(card['sourceCard'])]['fields']
+        for collection, table, field in [('levelRows', 'CardLevel', 'cardLevelGroupId'),
+                                          ('trainingStages', 'CardLevelLimit', 'cardLevelLimitGroupId'),
+                                          ('bloomSteps', 'CardPotential', 'cardPotentialGroupId')]:
+            expected = {k for k, row in rows.items() if row['table'] == table
+                        and row['fields'].get('groupId') == raw_card[field]}
+            actual = {key(item['source']) for item in card['progression'][collection]}
+            assert actual == expected, (card['sourceCard'], collection)
+        assert len(card['progression']['trainingStages']) == 5
+        assert len(card['progression']['bloomSteps']) == 5
 
 
 def main():

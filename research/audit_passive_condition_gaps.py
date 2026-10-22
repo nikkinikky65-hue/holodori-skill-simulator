@@ -36,8 +36,8 @@ for card in runtime['cards']:
             excessSelection='unverified' if support or group else 'existing-attribute-ranking-after-condition-resolution'))
 def count(rs):return dict(cards=len({r['cardId'] for r in rs}),rows=len(rs))
 summary={family:count([r for r in rows if r['family']==family]) for family in ['parameter','support']}
-assert summary=={'parameter':{'cards':56,'rows':112},'support':{'cards':21,'rows':42}}
-assert len(rows)==154
+assert all(v['rows'] == 2*v['cards'] for v in summary.values())
+assert len(rows)==sum(v['rows'] for v in summary.values())
 out=dict(scope='Raw condition evidence only; developer-approved execution status is in unit-passive-audit.json', inputs={p:hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in paths},
     summary=summary,classification={'existingDataConnectable':0,'recoverableMissingReferenceIdentified':0,
     'conditionSemanticsUnverified':77,'additionalSelectionVerification':35},

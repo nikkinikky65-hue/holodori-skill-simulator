@@ -19,7 +19,7 @@
    check(ActiveConditionalRules.resolve(level,[{},...members.slice(1)],affiliation).status==='unresolved','unknown');
   }else check(ActiveConditionalRules.resolve(level,members,affiliation,'auto').status===(clause.type.endsWith('_COMBO_GTE')?'base':'replaced'),'future policy');
  }
- check(count===148,'all 148');
+ check(count===catalog.cards.reduce((n,c)=>n+c.skills.active.levels.filter(l=>l.conditionalOverrides.length).length,0),'all conditional levels');
  const card=catalog.cards.find(c=>c.skills.active.levels[0].conditionalOverrides.some(o=>o.condition.clauses[0].type.endsWith('_COMBO_GTE')));
  const expansion=expandCanonicalBloom(card,0,catalog.dataset,0);
  const input={slot:1,boost:35,interval:26,duration:9,short:0,prob:'mid'};
