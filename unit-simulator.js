@@ -39,6 +39,7 @@ async function initializeUnitSimulator(){
     let specialOrder=null;
     let optimizationRun=0;
     const specialInputs=[];
+    const specialLabels=[];
     const table=(headers,rows)=>{
       const wrapper=create('div');wrapper.className='unitTableScroll';
       const result=create('table');
@@ -49,13 +50,21 @@ async function initializeUnitSimulator(){
       result.append(body);wrapper.append(result);return wrapper;
     };
     const pts=value=>['performance','technique','sense','total'].map(key=>value[key] ?? '—');
+    function slotTalent(index){
+      const card=catalog.cards.find(card=>card.id===slots[index]?.cardId);
+      return TalentPresentation.resolve(card?canonicalMemberId(card):null,card?canonicalMemberName(card):null);
+    }
+    const specialOrderText=order=>order.map(slot=>slotTalent(slot-1).displayName).join('→');
     function refresh(){
       slots.forEach((slot,i)=>{
-        const card=catalog.cards.find(card=>card.id===slot.cardId);
-        const talent=TalentPresentation.resolve(card?canonicalMemberId(card):null,card?canonicalMemberName(card):null);
+        const talent=slotTalent(i);
         optimizeLabels[i].textContent=`${talent.displayName} 上限`;
         optimizeLabels[i].parentElement.title=talent.formalName?`${talent.formalName} 上限`:'未選択 上限';
+        specialLabels[i].textContent=`${talent.displayName} (秒)`;
+        specialLabels[i].parentElement.title=talent.formalName || '未選択';
       });
+      const optimizedOrder=node('unitOptimizeStatus').querySelector('.unitOptimizedSPOrder');
+      if(optimizedOrder)optimizedOrder.textContent=specialOrder?' / SP順序 '+specialOrderText(specialOrder):'';
 
       try{
         model=UnitSimulatorEngine.build(catalog,slots,Number(node('unitDuration').value),{kind:'manual-rate',percent:node('unitMemoryPercent').value},{kind:'manual-rate',percent:node('unitEnhancementPercent').value},specialStarts,node('unitShowSP').checked,leaderRules.find(l=>l.id===node('unitLeader').value)||null,slots.every(slot=>slot.cardId)?specialOrder:null);
@@ -80,6 +89,7 @@ async function initializeUnitSimulator(){
         node('unitTimelineScore').textContent=`全発動時の暫定スコア：${model.allSuccessScore.toLocaleString(undefined,{maximumFractionDigits:2})}`;
         ActiveTimelineView.render({container:node('unitTimeline'),detail:node('unitTimelineDetail'),members:model.activeMembers,eventsByMember:model.eventsByMember,duration:model.duration,probabilities:ActivationProbabilityRules.percent,specialSchedule:model.specialEnabled?model.specialSchedule:null,segments:model.supportedSegments,activationSupport:model.activationSupport});
         specialInputs.forEach((input,i)=>{const sp=model.specialSchedule.entries.find(e=>e.slot===i+1);input.disabled=!sp||model.specialSchedule.status!=='resolved';input.value=sp?.start??'';});
+        node('unitSPCurrentOrder').textContent=model.specialSchedule.entries.length?'現在のSP順序：'+specialOrderText(model.specialSchedule.entries.map(e=>e.slot)):'';
         node('unitSPStatus').textContent=model.specialSchedule.reason || '暫定配置。重なる後続SPは後ろへ移動し、曲末で制限します。';
         node('unitSupportTrace').textContent=JSON.stringify(model.supportTrace,null,2);
         node('unitRun').disabled=model.parameters.status!=='card-only';
@@ -118,12 +128,12 @@ async function initializeUnitSimulator(){
       panel.append(filters,cardLabel,growth,preview);node('unitSlots').append(panel);
     });
     for(let i=0;i<5;i++){
-      const label=create('label',`枠${i+1} (秒)`),input=create('input');input.type='number';input.min='0';input.step='0.1';input.dataset.spSlot=String(i+1);
+      const label=create('label'),name=create('span','未選択 (秒)'),input=create('input');name.className='unitSPName';specialLabels.push(name);input.type='number';input.min='0';input.step='0.1';input.dataset.spSlot=String(i+1);
       input.addEventListener('change',()=>{
         if(!model||input.value.trim()===''||!Number.isFinite(Number(input.value))){node('unitSPStatus').textContent='開始時刻を数値で入力してください。';return;}
         specialStarts={...specialStarts,[i+1]:Number(input.value)};refresh();
       });
-      specialInputs.push(input);label.append(input);node('unitSPSchedule').append(label);
+      specialInputs.push(input);label.append(name,input);node('unitSPSchedule').append(label);
     }
     node('unitLeader').addEventListener('change',refresh);
     node('unitShowSP').addEventListener('change',refresh);
@@ -168,7 +178,8 @@ async function initializeUnitSimulator(){
         best.shorts.forEach((value,i)=>{slots[i].short=value;});
         if(startModel.specialEnabled)specialOrder=best.order;
         refresh();
-        message.textContent=`探索完了：${tested.toLocaleString()}通り / 評価値 ${best.score.toFixed(2)} / 発動頻度UP ${best.shorts.join('・')}%${best.order?' / SP順序 '+best.order.map(slot=>'枠'+slot).join('→'):''}`;
+        message.textContent=`探索完了：${tested.toLocaleString()}通り / 評価値 ${best.score.toFixed(2)} / 発動頻度UP ${best.shorts.join('・')}%`;
+        if(best.order){const order=create('span',' / SP順序 '+specialOrderText(best.order));order.className='unitOptimizedSPOrder';message.append(order);}
       }catch(error){message.textContent=`探索できませんでした：${error.message}`;}
       finally{button.disabled=false;cancel.disabled=true;}
     });

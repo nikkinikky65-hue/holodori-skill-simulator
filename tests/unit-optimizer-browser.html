@@ -16,8 +16,9 @@
    const api=await w.eval('unitSimulatorReady'),catalog=await w.loadRuntimeCardCatalog();
    const ids=['sakura_miko','kobo_kanaeru','azki','tsunomaki_watame','hoshimachi_suisei'];
    const cards=ids.map(id=>catalog.cards.find(card=>w.canonicalMemberId(card)===id&&card.classification.rarity.mapping.value===5));
+   const spLabels=()=>[...w.document.querySelectorAll('.unitSPName')].map(n=>n.textContent);
    const labels=()=>[...w.document.querySelectorAll('.unitOptimizeName')].map(n=>n.textContent);
-   check(labels().every(t=>t==='未選択 上限'),'unselected names');
+   check(labels().every(t=>t==='未選択 上限')&&spLabels().every(t=>t==='未選択 (秒)'),'unselected names');
    check([...w.document.querySelectorAll('[data-unit-optimize-limit]')].every(n=>n.value==='12'),'initial upper limit is 12');
    const selects=[...w.document.querySelectorAll('[data-unit-card]')];
    selects.forEach((select,i)=>{select.value=cards[i].id;select.dispatchEvent(new w.Event('change'));});
@@ -25,11 +26,22 @@
    check(limits.length===5,'five limits');
    const expectedLabels=['みこ 上限','こぼ 上限','AZKi 上限','わため 上限','すいせい 上限'];
    check(JSON.stringify(labels())===JSON.stringify(expectedLabels),'five explicit short names from current cards');
+   const expectedNames=['みこ','こぼ','AZKi','わため','すいせい'];
+   const checkSP=()=>{
+    const current=api.getModel();
+    const expected=current.specialSchedule.entries.map(e=>w.eval('TalentPresentation').resolve(w.canonicalMemberId(current.members[e.slot-1].card),current.members[e.slot-1].card.member.name).displayName).join('→');
+    check(w.document.querySelector('#unitSPCurrentOrder').textContent==='現在のSP順序：'+expected,'current order uses names in engine order');
+   };
+   check(JSON.stringify(spLabels())===JSON.stringify(expectedNames.map(n=>n+' (秒)')),'SP labels share short names');checkSP();
+   check([...w.document.querySelectorAll('#unitSPSchedule [data-sp-slot]')].map(n=>n.dataset.spSlot).join(',')==='1,2,3,4,5','SP inputs retain slot identities');
+   const spDetails=w.document.querySelector('#unitSPSchedule').parentElement;spDetails.open=true;
    const preserved=['0','4','8','12','4'];limits.forEach((n,i)=>n.value=preserved[i]);
    const original=api.capture();
    const longCard=catalog.cards.find(c=>w.canonicalMemberId(c)==='kaela_kovalskia');check(longCard,'long formal name card');
    selects[0].value=longCard.id;selects[0].dispatchEvent(new w.Event('change'));
-   check(labels()[0]===longCard.member.name+' 上限','undefined abbreviation uses full formal name');
+   check(labels()[0]===longCard.member.name+' 上限'&&spLabels()[0]===longCard.member.name+' (秒)','undefined abbreviation uses full formal name');checkSP();
+   const spName=w.document.querySelector('.unitSPName'),spInput=w.document.querySelector('#unitSPSchedule [data-sp-slot]');
+   check(spName.getBoundingClientRect().right<=spName.parentElement.getBoundingClientRect().right+1&&spInput.getBoundingClientRect().width>=100,'long SP name fits and input retains width');
    const nameNode=w.document.querySelector('.unitOptimizeName'),selectNode=limits[0];
    check(nameNode.getBoundingClientRect().right<=nameNode.parentElement.getBoundingClientRect().right+1&&selectNode.getBoundingClientRect().width>=100,'long name fits without shrinking control');
    check(w.document.documentElement.scrollWidth<=width,'long name viewport fit');
@@ -40,6 +52,7 @@
    selects[0].value='';selects[0].dispatchEvent(new w.Event('change'));check(labels()[0]==='未選択 上限','clearing updates name');
    w.document.querySelector('#unitFormationList').value=savedId;w.document.querySelector('#unitFormationLoad').click();
    check(JSON.stringify(labels())===JSON.stringify(expectedLabels)&&limits.every((n,i)=>n.value===preserved[i]),'saved formation load updates labels without overwriting limits');
+   check(JSON.stringify(spLabels())===JSON.stringify(expectedNames.map(n=>n+' (秒)')),'save/load updates SP names');checkSP();
    check(!Object.hasOwn(api.capture(),'optimizeLimits'),'saved format unchanged');
    limits.forEach(input=>{input.value='0';});
    const sp=w.document.querySelector('#unitShowSP'),run=w.document.querySelector('#unitOptimizeRun');
@@ -47,7 +60,7 @@
    const before=api.getModel();
    const expected=w.eval('TimelineOptimizer').optimizeActive(before.activeMembers,before.duration,[0,0,0,0,0]);
    run.click();await finish(w);
-   check(JSON.stringify(api.getModel().activeMembers.map(m=>m.short))===JSON.stringify(expected.shorts),'SP OFF matches A optimizer');
+   check(JSON.stringify(api.getModel().activeMembers.map(m=>m.short))===JSON.stringify(expected.shorts),'SP OFF matches A optimizer');checkSP();
    check(api.getModel().activeOnlyX===before.activeOnlyX,'SP OFF Active calculation unchanged');
    sp.checked=true;sp.dispatchEvent(new w.Event('change'));
    const initial=api.getModel().allSuccessScore;
@@ -56,11 +69,27 @@
    check(optimized.allSuccessScore>=initial-1e-7,'SP optimization improves or ties');
    const order=optimized.specialSchedule.entries.map(entry=>entry.slot);
    examples.push(`${width}px ${order.join('→')} (${initial.toFixed(2)}→${optimized.allSuccessScore.toFixed(2)})`);
-   check(order.length===5&&new Set(order).size===5,'SP order represented in schedule');
+   check(order.length===5&&new Set(order).size===5,'SP order represented in schedule');checkSP();
+   check(w.document.querySelector('.unitOptimizedSPOrder').textContent===' / SP順序 '+order.map(slot=>expectedNames[slot-1]).join('→'),'optimizer result uses talent names');
+   const namedSnapshot=api.capture(),rawOrder=JSON.stringify(namedSnapshot.specialOrder);
+   const renamed=JSON.parse(JSON.stringify(namedSnapshot));renamed.slots[0].cardId=longCard.id;api.restore(renamed);
+   check(JSON.stringify(api.capture().specialOrder)===rawOrder,'name refresh keeps numeric order');checkSP();
+   check(w.document.querySelector('.unitOptimizedSPOrder').textContent.includes(longCard.member.name),'result label refreshes on member change');
+   api.restore(namedSnapshot);checkSP();
+   check(api.capture().specialOrder.every(Number.isInteger),'saved order remains numeric slots');
    check(w.document.querySelector('#unitOptimizeStatus').textContent.includes('120通り'),'all 120 SP orders evaluated');
    check(api.capture().specialOrder.join(',')===order.join(','),'optimized order captured for save');
-   const snapshot=api.capture();api.restore(snapshot);
+   const snapshot=api.capture();
+   w.document.querySelector('#unitFormationNew').click();const orderedSavedId=w.document.querySelector('#unitFormationList').value;
+   const changed=api.capture();changed.slots[0].cardId=longCard.id;api.restore(changed);
+   w.document.querySelector('#unitFormationList').value=orderedSavedId;w.document.querySelector('#unitFormationLoad').click();
+   check(JSON.stringify(api.capture().specialOrder)===JSON.stringify(snapshot.specialOrder),'saved numeric order round-trip');checkSP();
+   api.restore(snapshot);
    check(api.getModel().specialSchedule.entries.map(entry=>entry.slot).join(',')===order.join(','),'SP order restored');
+   const legacy=JSON.parse(JSON.stringify(snapshot));delete legacy.specialOrder;api.restore(legacy);
+   check(api.capture().specialOrder===null,'legacy snapshot without explicit order remains compatible');checkSP();
+   check(w.document.querySelector('.unitOptimizedSPOrder').textContent==='','stale optimized order cleared on legacy restore');
+   api.restore(snapshot);checkSP();
    const simulation=w.eval('UnitSimulatorEngine'),random=w.eval('ActiveRandomSimulation');
    const seededA=simulation.simulate(api.getModel(),20,random.seededRandom(123)).values;
    const seededB=simulation.simulate(api.getModel(),20,random.seededRandom(123)).values;
@@ -89,7 +118,7 @@
     check(w.document.querySelector('#unitOptimizeStatus').textContent.includes('1,024通り'),'SP OFF uses common cap and completes');}
    check(w.document.documentElement.scrollWidth<=width,'viewport fit');
   }
-  out.textContent='PASS: 12% defaults, talent labels, formal/empty fallback, preserved limits, save/load; A parity, SP 120 orders, score and schedule reflection, cap; '+examples.join(' / ');
+  out.textContent='PASS: SP names/current/result order, numeric persistence, long labels; 12% defaults, talent labels, formal/empty fallback, preserved limits, save/load; A parity, SP 120 orders, score and schedule reflection, cap; '+examples.join(' / ');
  }catch(error){out.textContent='FAIL: '+error.stack;}
 })();
 </script>

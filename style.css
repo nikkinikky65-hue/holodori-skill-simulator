@@ -1017,7 +1017,10 @@
 .unitTimelineHeading { display:flex; justify-content:space-between; align-items:baseline; gap:12px; }
 .unitTimelineHeading label { white-space:nowrap; font-size:13px; }
 .unitTimelineHeading input { width:auto; }
-.unitSPInputs { display:grid; grid-template-columns:repeat(auto-fit,minmax(110px,1fr)); gap:8px; }
+.unitSPInputs { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr)); gap:8px; }
+.unitSPInputs label { display:grid; grid-template-rows:1fr auto; min-width:0; gap:4px; }
+.unitSPName, #unitSPCurrentOrder, .unitOptimizedSPOrder { overflow-wrap:anywhere; }
+.unitSPInputs input { min-width:0; width:100%; box-sizing:border-box; }
 #unitSupportTrace { white-space:pre-wrap; overflow-wrap:anywhere; font-size:12px; }
 
 /* Match A's axis geometry without inheriting the development panel's wrapping. */
