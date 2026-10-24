@@ -54,3 +54,9 @@ MacのJavaScriptCoreとChrome headlessを使用。ブラウザーランナーは
 - 公開側既存のカード選択、Timeline最適化（SP120順序）、編成CRUD・一覧・URL読込のブラウザーテスト。
 
 画像の実配信、R2接続、確定していないTOTAL専用補正のP/T/S配分、交代候補の編成全体貢献度評価は未実装。
+
+## Passive・Leaderの率表示
+
+Passive率の右に、適用されたParameter Leader率との単純加算値を表示する。例: `+32%（112%）`、`（80%）`、`+32%`、両方0%なら空欄（行高維持）。P/T/Sごとに判定し、Leaderが0%なら括弧を省略する。詳細表ではPassive率・Leader率・合計率を個別にも確認できる。
+
+Leader率は既存エンジンの `parameters.leaderResult.trace` のうち `status === 'applied'` かつ対象枠・Parameterが一致した効果の `effect.percent` を加算する。各メンバーに複製されたtraceを横断加算しない。未適用・未確定・Support効果は加算せず、条件判定と解放状態は既存の選択・エンジン処理に従う。最終値からの逆算や計算エンジンの変更は行わない。

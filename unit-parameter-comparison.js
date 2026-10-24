@@ -4,12 +4,16 @@ const UnitParameterComparison = (() => {
   const labels={performance:'P',technique:'T',sense:'S'};
   const number=value=>Number.isFinite(value)?value.toLocaleString('ja-JP',{maximumFractionDigits:8}):'—';
   const rate=value=>Number.isFinite(value)&&value!==0?`${value>0?'+':''}${number(value)}%`:'';
+  const correctionRate=(passive,leader=0)=>Number.isFinite(passive)?rate(passive)+(leader?`（${number(passive+leader)}%）`:''):'';
   function project(model){
+    const leaderTrace=(model?.parameters?.leaderResult?.trace || []).filter(t=>t.status==='applied');
     const sources=(model?.parameters?.members || []).flatMap(m=>m.trace || []).filter(t=>t.effect&&Array.isArray(t.targetSlots)&&t.status==='resolved');
     return Array.from({length:5},(_,index)=>{
       const member=model?.members?.[index];
       if(!member)return {slot:index+1,empty:true};
       const p=member.parameters;
+      const leaderRates=Object.fromEntries(keys.map(key=>[key,leaderTrace.filter(t=>Number.isFinite(t.effect?.percent)&&t.parameters?.some(v=>v.targetSlot===member.slot&&v.parameter===key)).reduce((sum,t)=>sum+t.effect.percent,0)]));
+      const combinedRates=Object.fromEntries(keys.map(key=>[key,p.passive.rates[key]+leaderRates[key]]));
       const memoryTrace=p.trace.find(t=>t.kind==='Memory');
       const afterBloom=Object.fromEntries(keys.map(key=>[key,memoryTrace?.parameters.find(t=>t.parameter===key)?.referenceValue ?? null]));
       afterBloom.total=p.enhancementBonus.components.cardAfterBloom;
@@ -19,8 +23,8 @@ const UnitParameterComparison = (() => {
         ratePercent:t.effect.value,description:t.description
       })));
       return {slot:member.slot,cardId:member.card.id,name:member.card.name,memberName:member.card.member.name,
-        parameters:p,afterBloom,received,
-        rows:keys.map(key=>({key,label:labels[key],afterBloom:afterBloom[key],passiveRate:p.passive.rates[key],passiveAdded:p.passive[key],final:p.subtotal[key]})),
+        parameters:p,afterBloom,received,leaderRates,combinedRates,
+        rows:keys.map(key=>({key,label:labels[key],afterBloom:afterBloom[key],passiveRate:p.passive.rates[key],leaderRate:leaderRates[key],passiveAdded:p.passive[key],final:p.subtotal[key]})),
         ptsSubtotal:keys.reduce((sum,key)=>sum+p.subtotal[key],0),total:p.subtotal.total,
         unresolved:p.corrections.map(c=>`${c.label}：${c.reason || c.status}`)};
     });
@@ -56,7 +60,7 @@ const UnitParameterComparison = (() => {
     for(const title of ['内訳','P','T','S','TOTAL']){const cell=element('th',null,title);cell.scope='col';header.append(cell);}
     thead.append(header);table.append(thead);
     const body=element('tbody');
-    const rows=[['開花後',view.afterBloom,null],['Passive率',p.passive.rates,'rate'],['Passive増分',p.passive],['Leader',p.leader],['Memory',p.memory],['Board',p.board],['衣装',p.costume],['Enhancement',p.enhancementBonus],['現在計算値',p.subtotal]];
+    const rows=[['開花後',view.afterBloom,null],['Passive率',p.passive.rates,'rate'],['Leader率',view.leaderRates,'rate'],['合計率',view.combinedRates,'rate'],['Passive増分',p.passive],['Leader',p.leader],['Memory',p.memory],['Board',p.board],['衣装',p.costume],['Enhancement',p.enhancementBonus],['現在計算値',p.subtotal]];
     for(const [label,values,format] of rows){
       const row=element('tr');const title=element('th',null,label);title.scope='row';row.append(title);
       for(const key of [...keys,'total'])row.append(element('td',null,format==='rate'?(key==='total'?'—':rate(values[key])||'0%'):number(values?.[key])));
@@ -79,7 +83,7 @@ const UnitParameterComparison = (() => {
       const row=view.empty?{label:labels[key],afterBloom:null,passiveRate:null,final:null}:view.rows.find(r=>r.key===key);
       const group=element('div','parameterMetric');group.dataset.parameter=key;
       const before=element('span','parameterBefore',number(row.afterBloom));before.setAttribute('aria-label',`開花後 ${number(row.afterBloom)}`);
-      const correction=element('span','parameterRate',rate(row.passiveRate));correction.setAttribute('aria-label',Number.isFinite(row.passiveRate)?`累計Passive ${number(row.passiveRate)}%`:'Passive未確認');
+      const correction=element('span','parameterRate',correctionRate(row.passiveRate,row.leaderRate));correction.setAttribute('aria-label',Number.isFinite(row.passiveRate)?`累計Passive ${number(row.passiveRate)}%、Leader ${number(row.leaderRate)}%、合計 ${number(row.passiveRate+row.leaderRate)}%`:'Passive未確認');
       const final=element('strong','parameterFinal',number(row.final));final.setAttribute('aria-label',`補正後の現在計算値 ${number(row.final)}`);
       group.append(element('span','parameterLabel',row.label),before,correction,final);stack.append(group);
     }
@@ -111,7 +115,7 @@ const UnitParameterComparison = (() => {
         button.addEventListener('click',()=>{detailed=value;render(current);root.querySelectorAll('.parameterMode button')[value?1:0].focus();});controls.append(button);
       }
       heading.append(title,controls);
-      const legend=element('p','parameterLegend','各P/T/Sは上から「開花後の基準値 → 累計Passive率 → 補正後の現在計算値」。0%の行は空欄です。');
+      const legend=element('p','parameterLegend','各P/T/Sは上から「開花後の基準値 → 累計Passive率（Leader込み合計率） → 補正後の現在計算値」。Leaderが0%なら括弧を省略し、両方0%の行は空欄です。');
       const note=element('p','parameterScope','最終欄は既存エンジンの現在計算値です。Board・衣装・EnhancementはTOTAL専用で、P/T/Sへの配分は未定義です。未設定・未対応値は「—」とし、推定しません。');
       const hint=element('p','parameterScrollHint','5人を編成順に表示。幅が足りない場合は左右にスクロールできます。');
       const scroll=element('div','parameterComparisonScroll');scroll.tabIndex=0;scroll.setAttribute('role','region');scroll.setAttribute('aria-label','5人のParameter比較・横スクロール');
@@ -123,5 +127,5 @@ const UnitParameterComparison = (() => {
     render(null);
     return {render,clear:()=>render(null)};
   }
-  return {project,mount,number,rate};
+  return {project,mount,number,rate,correctionRate};
 })();

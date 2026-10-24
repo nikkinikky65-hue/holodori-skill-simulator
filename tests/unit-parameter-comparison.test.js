@@ -35,5 +35,27 @@
  check(positions[1].empty&&positions[2].slot===3&&positions[4].empty,'empty slots are not compacted');
  check(UnitParameterComparison.rate(0)===''&&UnitParameterComparison.rate(58)==='+58%','zero blank and positive percent');
  check(UnitParameterComparison.number(null)==='—'&&UnitParameterComparison.number(12500)==='12,500','unknown and grouped values');
+
+ for(const [passive,leader,expected] of [[32,80,'+32%（112%）'],[0,80,'（80%）'],[32,0,'+32%'],[0,0,'']])check(UnitParameterComparison.correctionRate(passive,leader)===expected,'correction display '+expected);
+ const leader={id:'display-test',effects:[
+  {parameter:'P',percent:80,target:'all_members',condition:{type:'not_stated'}},
+  {parameter:'all_parameter',percent:20,target:'all_members',condition:{type:'not_stated'}},
+  {parameter:'S',percent:900,target:'all_members',condition:{type:'unknown'}},
+  {parameter:'score_support',percent:900,target:'all_members',condition:{type:'not_stated'}},
+  {parameter:'T',percent:900,target:'all_members',condition:{type:'attribute_count',attribute:'CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2',requiredCount:5}}
+ ]};
+ const withLeader=UnitSimulatorEngine.build(catalog,slots,120,null,null,{},true,leader);
+ const leaderBefore=JSON.stringify(withLeader);
+ for(const view of UnitParameterComparison.project(withLeader))for(const row of view.rows){
+  check(row.leaderRate===(row.key==='performance'?100:20),'only applied Parameter effects summed once for correct target/key');
+  check(view.combinedRates[row.key]===row.passiveRate+row.leaderRate,'simple sum, no reverse calculation');
+  check(row.final===withLeader.members[view.slot-1].parameters.subtotal[row.key],'leader final stays engine value');
+ }
+ check(withLeader.parameters.leaderResult.trace.some(t=>t.status==='inactive'),'inactive condition exercised');
+ check(withLeader.parameters.leaderResult.trace.some(t=>t.status==='unresolved'),'unresolved condition exercised');
+ check(withLeader.parameters.leaderResult.trace.some(t=>t.status==='unsupported'),'support effect excluded');
+ check(JSON.stringify(withLeader)===leaderBefore,'Leader projection leaves engine unchanged');
+ const sparseLeader=UnitSimulatorEngine.build(catalog,[slots[0],{cardId:''},slots[2],{cardId:''},{cardId:''}],120,null,null,{},true,leader);
+ check(UnitParameterComparison.project(sparseLeader)[2].rows[0].leaderRate===100,'sparse target slots respected');
  print('Parameter comparison: real engine values, source rates, sparse order, TOTAL-only isolation, purity, image-independent projection PASS');
 }

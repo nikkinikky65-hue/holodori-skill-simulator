@@ -18,17 +18,35 @@ check(w.document.querySelector('#unitOptimizeRun'),'public optimizer preserved')
 const state=api.capture();state.slots.forEach((s,i)=>{s.cardId=cards[i].id;s.training=2;s.bloom=3;s.totalAdjustments={board:{kind:'external-total',value:111},costume:{kind:'external-total',value:222}}});state.memoryPercent='6.4';state.enhancementPercent='2.43';state.trials='100';api.restore(state);
 const scope=()=>w.document.querySelector('#unitParameterComparison');
 const values=()=>[...scope().querySelectorAll('.parameterMember')];
+const zeroNodes=[...scope().querySelectorAll('.parameterRate')].filter(n=>!n.textContent);
+check(zeroNodes.length>0&&zeroNodes.every(n=>n.getBoundingClientRect().height>=23),'zero rates retain height before Leader selection');
+const leaders=await(await fetch('../data/leader-parameter-rules.json')).json();
+const leader=leaders.leaders.find(l=>l.effects.some(e=>e.parameter==='all_parameter'&&e.condition.type==='not_stated'));
+check(leader,'real unconditional all-Parameter Leader');
+const leaderState=api.capture();leaderState.leaderId=leader.id;api.restore(leaderState);
+const applied=api.getModel().parameters.leaderResult.trace.filter(t=>t.status==='applied');check(applied.length,'real Leader applied');
+function checkRates(){
+ const model=api.getModel();
+ for(let i=0;i<5;i++)for(const key of ['performance','technique','sense']){
+  const passive=model.members[i].parameters.passive.rates[key];
+  const leaderRate=model.parameters.leaderResult.trace.filter(t=>t.status==='applied'&&t.parameters.some(p=>p.targetSlot===i+1&&p.parameter===key)).reduce((sum,t)=>sum+t.effect.percent,0);
+  const expected=(passive?(passive>0?'+':'')+passive.toLocaleString('ja-JP')+'%':'')+(leaderRate?'（'+(passive+leaderRate).toLocaleString('ja-JP')+'%）':'');
+  const node=values()[i].querySelector('[data-parameter="'+key+'"] .parameterRate');
+  check(node.textContent===expected,'applied Passive + Leader text');
+  check(node.scrollWidth<=node.clientWidth+1,'rate fits member panel');
+ }
+}
 const evidence=[];
 for(const width of [1920,1280,768,390]){
  frame.style.width=width+'px';await new Promise(r=>setTimeout(r,50));
- const model=api.getModel();check(values().length===5,'five visible slot panels');
+ checkRates();const model=api.getModel();check(values().length===5,'five visible slot panels');
  const tops=values().map(n=>n.getBoundingClientRect().top);check(Math.max(...tops)-Math.min(...tops)<1,'never wraps '+width);
  for(let i=0;i<5;i++)for(const key of ['performance','technique','sense']){
   const row=values()[i].querySelector('[data-parameter="'+key+'"]');
   const p=model.members[i].parameters;const trace=p.trace.find(t=>t.kind==='Memory').parameters.find(t=>t.parameter===key);
   check(row.querySelector('.parameterBefore').textContent===trace.referenceValue.toLocaleString('ja-JP'),'post-Bloom engine value');
   check(row.querySelector('.parameterFinal').textContent===p.subtotal[key].toLocaleString('ja-JP'),'corrected engine value');
-  if(p.passive.rates[key]===0)check(row.querySelector('.parameterRate').textContent===''&&row.querySelector('.parameterRate').getBoundingClientRect().height>=23,'blank zero keeps height');
+  if(p.passive.rates[key]===0&&!model.parameters.leaderResult.trace.some(t=>t.status==='applied'&&t.parameters.some(p=>p.targetSlot===i+1&&p.parameter===key)))check(row.querySelector('.parameterRate').textContent===''&&row.querySelector('.parameterRate').getBoundingClientRect().height>=23,'blank zero keeps height');
  }
  for(const key of ['performance','technique','sense']){
   const y=values().map(n=>n.querySelector('[data-parameter="'+key+'"]').getBoundingClientRect().top);check(Math.max(...y)-Math.min(...y)<1,'PTS alignment '+width);
@@ -44,10 +62,11 @@ frame.style.width='1920px';await new Promise(r=>setTimeout(r,50));
 
 const unchanged=JSON.stringify(api.capture());scope().querySelectorAll('.parameterMode button')[1].click();
 check(scope().querySelectorAll('.parameterDetailTable').length===5,'details for each member');
+check(values().every(v=>v.textContent.includes('Leader率')&&v.textContent.includes('合計率')),'detail rates visible');
 check(JSON.stringify(api.capture())===unchanged,'display mode does not change saved format or inputs');
 for(const width of [1920,1280,768,390]){
  frame.style.width=width+'px';await new Promise(r=>setTimeout(r,30));
- const tops=values().map(n=>n.getBoundingClientRect().top);check(Math.max(...tops)-Math.min(...tops)<1,'details never wraps '+width);
+ checkRates();const tops=values().map(n=>n.getBoundingClientRect().top);check(Math.max(...tops)-Math.min(...tops)<1,'details never wraps '+width);
  check(values().every(n=>n.querySelector('.parameterDetailTable').getBoundingClientRect().right<=n.querySelector('.parameterMemberInfo').getBoundingClientRect().right+1),'detail tables fit their member panels '+width);
  check(w.document.documentElement.scrollWidth<=width+1,'details page does not overflow '+width);
 }
@@ -66,8 +85,8 @@ w.document.querySelector('#unitRun').click();check(w.document.querySelector('#un
 // Empty slots retain positions and aligned parameter rows.
 const sparse=api.capture();sparse.slots[1].cardId='';sparse.slots[3].cardId='';api.restore(sparse);
 check(values()[1].textContent.includes('カード未選択')&&values()[2].dataset.parameterSlot==='3','sparse slots retain order');
-api.restore(state);scope().scrollIntoView({block:'start'});
-out.textContent='PASS: '+evidence.join(' | ')+'; no image DOM/requests, engine values, zero rows, details, save/load, Active, sparse slots';
+api.restore(leaderState);checkRates();scope().scrollIntoView({block:'start'});
+out.textContent='PASS: '+evidence.join(' | ')+'; no image DOM/requests, engine values, applied Leader totals, rate clipping, details, save/load, Active, sparse slots';
 }catch(e){out.textContent='FAIL: '+e.stack}
 })();
 </script>
