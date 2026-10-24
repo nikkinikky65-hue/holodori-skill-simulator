@@ -14,11 +14,33 @@
    frame.style.width=width+'px';
    const w=await new Promise(resolve=>{frame.onload=()=>resolve(frame.contentWindow);frame.src='../unit-simulator.html?optimizer='+width;});
    const api=await w.eval('unitSimulatorReady'),catalog=await w.loadRuntimeCardCatalog();
-   const cards=catalog.cards.filter(card=>card.classification.rarity.mapping.value===5).slice(0,5);
+   const ids=['sakura_miko','kobo_kanaeru','azki','tsunomaki_watame','hoshimachi_suisei'];
+   const cards=ids.map(id=>catalog.cards.find(card=>w.canonicalMemberId(card)===id&&card.classification.rarity.mapping.value===5));
+   const labels=()=>[...w.document.querySelectorAll('.unitOptimizeName')].map(n=>n.textContent);
+   check(labels().every(t=>t==='未選択 上限'),'unselected names');
+   check([...w.document.querySelectorAll('[data-unit-optimize-limit]')].every(n=>n.value==='12'),'initial upper limit is 12');
    const selects=[...w.document.querySelectorAll('[data-unit-card]')];
    selects.forEach((select,i)=>{select.value=cards[i].id;select.dispatchEvent(new w.Event('change'));});
    const limits=[...w.document.querySelectorAll('[data-unit-optimize-limit]')];
    check(limits.length===5,'five limits');
+   const expectedLabels=['みこ 上限','こぼ 上限','AZKi 上限','わため 上限','すいせい 上限'];
+   check(JSON.stringify(labels())===JSON.stringify(expectedLabels),'five explicit short names from current cards');
+   const preserved=['0','4','8','12','4'];limits.forEach((n,i)=>n.value=preserved[i]);
+   const original=api.capture();
+   const longCard=catalog.cards.find(c=>w.canonicalMemberId(c)==='kaela_kovalskia');check(longCard,'long formal name card');
+   selects[0].value=longCard.id;selects[0].dispatchEvent(new w.Event('change'));
+   check(labels()[0]===longCard.member.name+' 上限','undefined abbreviation uses full formal name');
+   const nameNode=w.document.querySelector('.unitOptimizeName'),selectNode=limits[0];
+   check(nameNode.getBoundingClientRect().right<=nameNode.parentElement.getBoundingClientRect().right+1&&selectNode.getBoundingClientRect().width>=100,'long name fits without shrinking control');
+   check(w.document.documentElement.scrollWidth<=width,'long name viewport fit');
+   api.restore(original);check(JSON.stringify(labels())===JSON.stringify(expectedLabels),'restore refreshes names');
+   check(limits.every((n,i)=>n.value===preserved[i]),'restore and card changes preserve selected limits');
+   const save=w.document.querySelector('#unitFormationNew');w.confirm=()=>true;save.click();
+   const savedId=w.document.querySelector('#unitFormationList').value;check(savedId,'save formation for label reload');
+   selects[0].value='';selects[0].dispatchEvent(new w.Event('change'));check(labels()[0]==='未選択 上限','clearing updates name');
+   w.document.querySelector('#unitFormationList').value=savedId;w.document.querySelector('#unitFormationLoad').click();
+   check(JSON.stringify(labels())===JSON.stringify(expectedLabels)&&limits.every((n,i)=>n.value===preserved[i]),'saved formation load updates labels without overwriting limits');
+   check(!Object.hasOwn(api.capture(),'optimizeLimits'),'saved format unchanged');
    limits.forEach(input=>{input.value='0';});
    const sp=w.document.querySelector('#unitShowSP'),run=w.document.querySelector('#unitOptimizeRun');
    sp.checked=false;sp.dispatchEvent(new w.Event('change'));
@@ -62,12 +84,12 @@
    w.document.querySelector('#unitOptimizeCancel').click();await pause();
    check(!run.disabled&&w.document.querySelector('#unitOptimizeStatus').textContent.includes('中断'),'cancel restores controls');
    if(width===1100){run.click();await finish(w);
-    check(w.document.querySelector('#unitOptimizeStatus').textContent.includes('3,840通り'),'full default search completes');
+    check(w.document.querySelector('#unitOptimizeStatus').textContent.includes('3,840通り'),'full 4 percent search completes');
     sp.checked=false;sp.dispatchEvent(new w.Event('change'));limits.forEach(input=>{input.value='12';});run.click();await finish(w);
     check(w.document.querySelector('#unitOptimizeStatus').textContent.includes('1,024通り'),'SP OFF uses common cap and completes');}
    check(w.document.documentElement.scrollWidth<=width,'viewport fit');
   }
-  out.textContent='PASS: A parity, SP 120 orders, score and schedule reflection, cap; '+examples.join(' / ');
+  out.textContent='PASS: 12% defaults, talent labels, formal/empty fallback, preserved limits, save/load; A parity, SP 120 orders, score and schedule reflection, cap; '+examples.join(' / ');
  }catch(error){out.textContent='FAIL: '+error.stack;}
 })();
 </script>

@@ -6,6 +6,10 @@
  for(const plain of ['全員のセンスが100%UP','[未確認]テキスト','[unknown=x]文字[/unknown]','<img src=x onerror=alert(1)>','&lt;b&gt;文字'])check(skillDescriptionText(plain)===plain,'plain/unknown/HTML text retained');
  const leaderData=JSON.parse(readFile('data/runtime-leader-skills.json'));
  for(const row of [...leaderData.cardSkills,...leaderData.commonEffects])check(skillDescriptionText(row.description)===row.description.replace(/\[[^\]]+\]/g,''),'all actual Leader descriptions preserve visible contents');
+ for(const [id,name] of [['sakura_miko','みこ'],['kobo_kanaeru','こぼ'],['azki','AZKi'],['tsunomaki_watame','わため'],['hoshimachi_suisei','すいせい']])check(TalentPresentation.resolve(id,'正式名').displayName===name,'explicit talent ID display mapping '+id);
+ check(TalentPresentation.resolve('unknown','長い正式名・未登録タレント').displayName==='長い正式名・未登録タレント','undefined abbreviation preserves formal name');
+ check(TalentPresentation.resolve(null,null).displayName==='未選択','unselected display fallback');
+ check(TalentPresentation.resolve('sakura_miko','さくらみこ').formalName==='さくらみこ','formal name retained separately');
  const catalog=JSON.parse(readFile('data/runtime-cards.json'));catalog.affiliationCatalog=JSON.parse(readFile('data/runtime-affiliations.json'));
  const compatible=catalog.cards.filter(c=>{const g=UnitParameterEngine.resolveInput(c.skills.passive.levels[0]);return g.status==='supported'&&g.effect.condition.kind==='type'&&g.effect.target.kind==='self'&&g.effect.condition.value==='CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1'&&c.classification.attributeType.mapping.value==='cute';});
  check(compatible.length>=5,'five real applicable Passive sources');

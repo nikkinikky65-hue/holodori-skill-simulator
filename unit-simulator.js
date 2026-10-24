@@ -29,6 +29,7 @@ async function initializeUnitSimulator(){
     }catch(error){node('unitLeaderStatus').textContent=error.message;}
     const slots=Array.from({length:5},()=>({cardId:'',training:0,bloom:0,short:0,totalAdjustments:{board:{kind:'external-total',value:''},costume:{kind:'external-total',value:''}}}));
     const comparison=UnitParameterComparison.mount(node('unitParameterComparison'));
+    const optimizeLabels=[];
     const previews=[];
     const slotControls=[];
     let model=null;
@@ -49,6 +50,12 @@ async function initializeUnitSimulator(){
     };
     const pts=value=>['performance','technique','sense','total'].map(key=>value[key] ?? '—');
     function refresh(){
+      slots.forEach((slot,i)=>{
+        const card=catalog.cards.find(card=>card.id===slot.cardId);
+        const talent=TalentPresentation.resolve(card?canonicalMemberId(card):null,card?canonicalMemberName(card):null);
+        optimizeLabels[i].textContent=`${talent.displayName} 上限`;
+        optimizeLabels[i].parentElement.title=talent.formalName?`${talent.formalName} 上限`:'未選択 上限';
+      });
 
       try{
         model=UnitSimulatorEngine.build(catalog,slots,Number(node('unitDuration').value),{kind:'manual-rate',percent:node('unitMemoryPercent').value},{kind:'manual-rate',percent:node('unitEnhancementPercent').value},specialStarts,node('unitShowSP').checked,leaderRules.find(l=>l.id===node('unitLeader').value)||null,slots.every(slot=>slot.cardId)?specialOrder:null);
@@ -124,9 +131,10 @@ async function initializeUnitSimulator(){
     node('unitMemoryPercent').addEventListener('input',refresh);
     node('unitEnhancementPercent').addEventListener('input',refresh);
     for(let i=0;i<5;i++){
-      const label=create('label',`枠${i+1} 上限`),limit=create('select');limit.dataset.unitOptimizeLimit=String(i);
+      const label=create('label'),name=create('span','未選択 上限'),limit=create('select');
+      name.className='unitOptimizeName';optimizeLabels.push(name);limit.dataset.unitOptimizeLimit=String(i);
       for(const value of TimelineOptimizer.shortOptions)limit.append(new Option(`最大 ${value}%`,String(value)));
-      limit.value='4';label.append(limit);node('unitOptimizeLimits').append(label);
+      limit.value=String(Math.max(...TimelineOptimizer.shortOptions));label.append(name,limit);node('unitOptimizeLimits').append(label);
     }
     node('unitOptimizeCancel').addEventListener('click',()=>{optimizationRun++;node('unitOptimizeCancel').disabled=true;node('unitOptimizeStatus').textContent='探索を中断しました。';});
     node('unitOptimizeRun').addEventListener('click',async()=>{
