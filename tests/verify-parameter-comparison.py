@@ -10,7 +10,7 @@ files=['members.js','canonical-card-adapter.js','card-rules.js','parameter-rules
        'passive-selection-resolver.js','leader-parameter-engine.js','unit-parameter-engine.js',
        'unit-score-engine.js','support-rules.js','special-schedule-engine.js','scheduled-support-engine.js',
        'activation-probability-engine.js','leader-support-engine.js','unit-simulator-engine.js',
-       'unit-parameter-comparison.js','tests/unit-parameter-comparison.test.js']
+       'skill-description-text.js','unit-parameter-comparison.js','tests/unit-parameter-comparison.test.js']
 source="const URL=function(p,b){return p;}; const document={baseURI:'http://localhost/',addEventListener:()=>{}};\n"
 source+='\n'.join((ROOT/name).read_text() for name in files)
 with tempfile.NamedTemporaryFile(mode='w',suffix='.js') as handle:

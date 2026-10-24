@@ -60,3 +60,7 @@ MacのJavaScriptCoreとChrome headlessを使用。ブラウザーランナーは
 Passive率の右に、適用されたParameter Leader率との単純加算値を表示する。例: `+32%（112%）`、`（80%）`、`+32%`、両方0%なら空欄（行高維持）。P/T/Sごとに判定し、Leaderが0%なら括弧を省略する。詳細表ではPassive率・Leader率・合計率を個別にも確認できる。
 
 Leader率は既存エンジンの `parameters.leaderResult.trace` のうち `status === 'applied'` かつ対象枠・Parameterが一致した効果の `effect.percent` を加算する。各メンバーに複製されたtraceを横断加算しない。未適用・未確定・Support効果は加算せず、条件判定と解放状態は既存の選択・エンジン処理に従う。最終値からの逆算や計算エンジンの変更は行わない。
+
+## Leader説明文の装飾
+
+表示専用の `skillDescriptionText` をリーダー選択欄・適用状況・リーダー一覧で共用する。実データのLeader説明にはattribute=cute/happy/pure、カード説明には同種のhighlightタグを確認。attributeとhighlightの開始・終了タグだけを除去し、中の日本語・改行は維持する。未知のタグ表記は保持する。出力はOptionまたはtextContentに渡し、HTMLとして解釈しない。原文・Canonical・計算・条件判定は変更しない。

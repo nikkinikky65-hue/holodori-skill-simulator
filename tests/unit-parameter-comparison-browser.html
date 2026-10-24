@@ -36,6 +36,12 @@ function checkRates(){
   check(node.scrollWidth<=node.clientWidth+1,'rate fits member panel');
  }
 }
+check([...w.document.querySelector('#unitLeader').options].every(o=>!o.textContent.includes('[attribute=')),'Leader options contain no decoration');
+const tagged=leaders.leaders.find(l=>l.description.includes('[attribute='));check(tagged,'actual tagged Leader exists');
+const taggedState=api.capture();taggedState.leaderId=tagged.id;api.restore(taggedState);
+check(!w.document.querySelector('#unitLeaderStatus').textContent.includes('[attribute=')&&w.document.querySelector('#unitLeaderStatus').textContent.includes(w.skillDescriptionText(tagged.effects[0].description)),'applied/inactive status preserves Japanese without tags');
+const safe=w.document.createElement('p');safe.textContent=w.skillDescriptionText('[highlight]<img src=x onerror=alert(1)>[/highlight]');check(safe.children.length===0&&safe.textContent==='<img src=x onerror=alert(1)>','HTML stays inert text');
+api.restore(leaderState);
 const evidence=[];
 for(const width of [1920,1280,768,390]){
  frame.style.width=width+'px';await new Promise(r=>setTimeout(r,50));
@@ -85,6 +91,9 @@ w.document.querySelector('#unitRun').click();check(w.document.querySelector('#un
 // Empty slots retain positions and aligned parameter rows.
 const sparse=api.capture();sparse.slots[1].cardId='';sparse.slots[3].cardId='';api.restore(sparse);
 check(values()[1].textContent.includes('カード未選択')&&values()[2].dataset.parameterSlot==='3','sparse slots retain order');
+const leaderFrame=document.createElement('iframe');leaderFrame.style.display='none';document.body.append(leaderFrame);
+leaderFrame.src='../leader.html';await new Promise(r=>leaderFrame.onload=r);await leaderFrame.contentWindow.eval('leaderCatalogReady');
+const descriptions=[...leaderFrame.contentDocument.querySelectorAll('.leaderDescription')];check(descriptions.length===196&&descriptions.every(n=>!n.textContent.includes('[attribute=')),'Leader catalog normal display retained');leaderFrame.remove();
 api.restore(leaderState);checkRates();scope().scrollIntoView({block:'start'});
 out.textContent='PASS: '+evidence.join(' | ')+'; no image DOM/requests, engine values, applied Leader totals, rate clipping, details, save/load, Active, sparse slots';
 }catch(e){out.textContent='FAIL: '+e.stack}

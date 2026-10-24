@@ -1,6 +1,11 @@
 // Uses real engines and actual dataset; no presentation formulas are asserted as truth.
 {
  const check=(v,m)=>{if(!v)throw Error(m);};
+ for(const attribute of ['cute','happy','pure'])check(skillDescriptionText('[attribute='+attribute+']日本語[/attribute]')==='日本語','attribute decoration '+attribute);
+ check(skillDescriptionText('[highlight]強調[attribute=cute]キュート[/attribute][/highlight]\n通常')==='強調キュート\n通常','nested tags and newlines retained');
+ for(const plain of ['全員のセンスが100%UP','[未確認]テキスト','[unknown=x]文字[/unknown]','<img src=x onerror=alert(1)>','&lt;b&gt;文字'])check(skillDescriptionText(plain)===plain,'plain/unknown/HTML text retained');
+ const leaderData=JSON.parse(readFile('data/runtime-leader-skills.json'));
+ for(const row of [...leaderData.cardSkills,...leaderData.commonEffects])check(skillDescriptionText(row.description)===row.description.replace(/\[[^\]]+\]/g,''),'all actual Leader descriptions preserve visible contents');
  const catalog=JSON.parse(readFile('data/runtime-cards.json'));catalog.affiliationCatalog=JSON.parse(readFile('data/runtime-affiliations.json'));
  const compatible=catalog.cards.filter(c=>{const g=UnitParameterEngine.resolveInput(c.skills.passive.levels[0]);return g.status==='supported'&&g.effect.condition.kind==='type'&&g.effect.target.kind==='self'&&g.effect.condition.value==='CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1'&&c.classification.attributeType.mapping.value==='cute';});
  check(compatible.length>=5,'five real applicable Passive sources');

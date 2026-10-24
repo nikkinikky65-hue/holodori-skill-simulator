@@ -23,7 +23,7 @@ async function initializeUnitSimulator(){
       leaderRules=data.leaders;
       for(const kind of ['card','common']){
         const group=create('optgroup');group.label=kind==='card'?'カード固有リーダー':'基礎衣装 共通効果（明示選択）';
-        for(const leader of leaderRules.filter(l=>l.kind===kind))group.append(new Option(leader.name+' / '+leader.description,leader.id));
+        for(const leader of leaderRules.filter(l=>l.kind===kind))group.append(new Option(leader.name+' / '+skillDescriptionText(leader.description),leader.id));
         node('unitLeader').append(group);
       }
     }catch(error){node('unitLeaderStatus').textContent=error.message;}
@@ -54,7 +54,7 @@ async function initializeUnitSimulator(){
         model=UnitSimulatorEngine.build(catalog,slots,Number(node('unitDuration').value),{kind:'manual-rate',percent:node('unitMemoryPercent').value},{kind:'manual-rate',percent:node('unitEnhancementPercent').value},specialStarts,node('unitShowSP').checked,leaderRules.find(l=>l.id===node('unitLeader').value)||null,slots.every(slot=>slot.cardId)?specialOrder:null);
         if(accumulation.sync(simulationInput())){node('unitResult').replaceChildren();node('unitResultStatus').textContent='条件変更：累積0試行。再実行してください。';}
         if(leaderRules.length)node('unitLeaderStatus').textContent=model.parameters.leaderResult ?
-          [...model.parameters.leaderResult.trace.filter(t=>t.effect.parameter!=='score_support'),...model.leaderSupport.sources].map(t=>`${t.description}：${t.status==='applied'?'適用':t.status==='inactive'?'条件不成立':t.reason}`).join(' / ') : '未選択（共通効果も自動付与しません）';
+          [...model.parameters.leaderResult.trace.filter(t=>t.effect.parameter!=='score_support'),...model.leaderSupport.sources].map(t=>`${skillDescriptionText(t.description)}：${t.status==='applied'?'適用':t.status==='inactive'?'条件不成立':t.reason}`).join(' / ') : '未選択（共通効果も自動付与しません）';
         const rows=[];
         model.members.forEach((member,i)=>{
           previews[i].textContent=member ? canonicalEffectsText(member.expansion) : 'カード未選択';

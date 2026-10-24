@@ -13,7 +13,7 @@ async function renderLeaderCatalog(){
     const order = new Map(HOLO_MEMBERS.map((member, i) => [member.id, i]));
     const container = document.querySelector('#leaderCards');
     const common = document.querySelector('#leaderCommon');
-    const text = value => value.replace(/\[[^\]]+\]/g, '');
+    const text = skillDescriptionText;
     const skillBlock = row => {
       const article = document.createElement('article'); article.className = 'panel leaderSkill';
       article.dataset.leaderSkillId = row.skillId;
