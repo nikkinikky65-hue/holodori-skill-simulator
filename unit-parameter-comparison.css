@@ -1,0 +1,56 @@
+/* Scoped to the comparison page; all five slots always remain in one row. */
+#unitSimulator.wrap { max-width:1920px; }
+#unitParameterComparison { container-type:inline-size; container-name:parameter-comparison; min-width:0; scroll-margin-block-start:150px; }
+.parameterComparisonHeading { display:flex; align-items:center; justify-content:space-between; gap:16px; }
+.parameterComparisonHeading h3 { margin:0; font-size:17px; }
+.parameterMode { display:flex; gap:4px; }
+.parameterMode button { padding:8px 16px; min-height:44px; border:1px solid #8094af; border-radius:8px; background:#fff; color:#24354c; font:inherit; cursor:pointer; }
+.parameterMode button[aria-pressed="true"] { background:#203b60; color:#fff; border-color:#203b60; }
+.parameterMode button:focus-visible,.parameterComparisonScroll:focus-visible { outline:3px solid #578dea; outline-offset:3px; }
+.parameterLegend,.parameterScope,.parameterScrollHint { margin:10px 0; font-size:13px; line-height:1.6; color:#475569; }
+.parameterScope { padding:8px 12px; background:#f1f5f9; border-radius:8px; }
+.parameterScrollHint { font-size:12px; }
+.parameterComparisonScroll { overflow-x:auto; overscroll-behavior-x:contain; padding:3px 1px 14px; scrollbar-color:#7288a3 #e9eef4; }
+.parameterComparisonStrip { display:grid; grid-template-columns:repeat(5,minmax(196px,1fr)); gap:12px; min-width:1028px; align-items:stretch; }
+.parameterMember { position:relative; isolation:isolate; min-width:0; overflow:hidden; border:1px solid #3b526b; border-radius:12px; background:#17283e; color:#edf4ff; }
+.parameterArt { position:absolute; inset:0; z-index:-1; background:linear-gradient(155deg,#263d58,#142237); overflow:hidden; }
+.parameterArt img { width:100%; height:100%; object-fit:cover; object-position:center 15%; }
+.parameterArt::after { content:''; position:absolute; inset:0; background:linear-gradient(90deg,rgba(13,26,45,.96),rgba(13,26,45,.85) 62%,rgba(13,26,45,.58)); }
+.parameterImageStatus { position:absolute; bottom:6px; right:6px; z-index:1; font-size:10px; padding:3px 5px; border-radius:4px; background:#17283ee6; color:#c5d3e4; }
+.parameterMemberInfo { padding:14px 16px 16px; min-width:0; }
+.parameterIdentity { height:94px; overflow:hidden; }
+.parameterSlot { font-size:10px; font-weight:700; letter-spacing:.14em; color:#9eb7d5; }
+.parameterIdentity h3 { font-size:14px; line-height:1.45; margin:5px 0 3px; }
+.parameterCardName { font-size:12px; line-height:1.5; color:#c3d1e4; margin:0; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+.parameterStack { display:grid; gap:12px; }
+.parameterMetric { display:grid; grid-template-rows:21px 25px 23px 35px; font-variant-numeric:tabular-nums; padding-bottom:8px; border-bottom:1px solid #bdd2f12b; white-space:nowrap; overflow-wrap:normal; }
+.parameterLabel { font-size:14px; font-weight:800; letter-spacing:.06em; color:#9fc0f2; }
+.parameterMetric[data-parameter="technique"] .parameterLabel { color:#e1b8ef; }
+.parameterMetric[data-parameter="sense"] .parameterLabel { color:#a6dec8; }
+.parameterBefore { font-size:16px; color:#cfdbec; }
+.parameterRate { display:block; min-height:23px; font-size:14px; line-height:23px; color:#85e0bc; }
+.parameterFinal { font-size:26px; line-height:35px; letter-spacing:.01em; color:#fff; }
+.parameterTotal { display:flex; flex-wrap:wrap; justify-content:space-between; gap:4px 8px; font-variant-numeric:tabular-nums; margin:15px 0 0; }
+.parameterTotal span { font-size:11px; color:#b4c6dd; }
+.parameterTotal strong { font-size:18px; color:#fff; }
+.parameterPending { font-size:11px; color:#e3c389; margin:8px 0 0; }
+.parameterComparisonStrip.isDetailed { grid-template-columns:repeat(5,minmax(280px,1fr)); min-width:1448px; }
+.parameterDetailTable { width:100%; border-collapse:collapse; margin:18px 0 0; font-size:11px; font-variant-numeric:tabular-nums; }
+.parameterDetailTable caption { text-align:left; font-size:13px; font-weight:700; margin-bottom:8px; }
+.parameterDetailTable th,.parameterDetailTable td { text-align:right; padding:8px 2px; border-bottom:1px solid #cad8ed30; white-space:nowrap; }
+.parameterDetailTable th:first-child { text-align:left; white-space:normal; width:68px; }
+.parameterDetailTable thead th { color:#b3c7df; }
+.parameterPtsSum { font-size:12px; color:#d6e2f3; }
+.parameterMemberInfo h4 { font-size:13px; margin:18px 0 8px; }
+.parameterSources,.parameterUnknown ul { padding-left:18px; margin:8px 0; font-size:12px; line-height:1.65; }
+.parameterDetailNote { color:#b9c9df; font-size:11px; line-height:1.6; }
+.parameterUnknown { font-size:12px; margin-top:12px; }
+.parameterUnknown summary { cursor:pointer; }
+.parameterLegacy { margin-top:12px; }
+.parameterLegacy > summary { padding:10px 0; cursor:pointer; }
+@container parameter-comparison (min-width:1440px) {
+  .parameterComparisonStrip:not(.isDetailed) .parameterMember.hasParameterImage { display:grid; grid-template-columns:88px minmax(0,1fr); }
+  .parameterComparisonStrip:not(.isDetailed) .parameterArt { position:relative; z-index:0; }
+  .parameterComparisonStrip:not(.isDetailed) .parameterArt::after { background:linear-gradient(0deg,rgba(13,26,45,.5),transparent 25%); }
+  .parameterComparisonStrip:not(.isDetailed) .parameterMemberInfo { background:#17283e; padding-inline:12px; }
+}

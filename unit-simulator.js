@@ -28,6 +28,7 @@ async function initializeUnitSimulator(){
       }
     }catch(error){node('unitLeaderStatus').textContent=error.message;}
     const slots=Array.from({length:5},()=>({cardId:'',training:0,bloom:0,short:0,totalAdjustments:{board:{kind:'external-total',value:''},costume:{kind:'external-total',value:''}}}));
+    const comparison=UnitParameterComparison.mount(node('unitParameterComparison'));
     const previews=[];
     const slotControls=[];
     let model=null;
@@ -67,6 +68,7 @@ async function initializeUnitSimulator(){
           const trace=create('pre',JSON.stringify(member.trace,null,2));trace.style.whiteSpace='pre-wrap';
           details.append(summary,trace);node('unitParameters').append(details);
         }
+        comparison.render(model);
         node('unitScore').textContent=`暫定Unit Score：${model.unitScore.value.toLocaleString()}（現在計算値ベース${model.unitScore.hasUnresolved?'・未接続効果あり':''}）`;
         node('unitTimelineScore').textContent=`全発動時の暫定スコア：${model.allSuccessScore.toLocaleString(undefined,{maximumFractionDigits:2})}`;
         ActiveTimelineView.render({container:node('unitTimeline'),detail:node('unitTimelineDetail'),members:model.activeMembers,eventsByMember:model.eventsByMember,duration:model.duration,probabilities:ActivationProbabilityRules.percent,specialSchedule:model.specialEnabled?model.specialSchedule:null,segments:model.supportedSegments,activationSupport:model.activationSupport});
@@ -75,7 +77,7 @@ async function initializeUnitSimulator(){
         node('unitSupportTrace').textContent=JSON.stringify(model.supportTrace,null,2);
         node('unitRun').disabled=model.parameters.status!=='card-only';
         status.textContent=`${catalog.cards.length}枚 / 選択 ${model.activeMembers.length}人（5人でシミュレーション実行可能）`;
-      }catch(error){accumulation.reset();node('unitResult').replaceChildren();node('unitResultStatus').textContent='累積0試行';model=null;node('unitRun').disabled=true;node('unitParameters').replaceChildren();node('unitTimeline').replaceChildren();status.textContent=error.message;}
+      }catch(error){comparison.clear();accumulation.reset();node('unitResult').replaceChildren();node('unitResultStatus').textContent='累積0試行';model=null;node('unitRun').disabled=true;node('unitParameters').replaceChildren();node('unitTimeline').replaceChildren();status.textContent=error.message;}
     }
     slots.forEach((slot,i)=>{
       const panel=create('article');panel.className='unitSlot';panel.append(create('h3',`枠${i+1}`));

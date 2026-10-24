@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>ホロドリ 統合シミュレーター（開発版）</title>
-<link rel="stylesheet" href="style.css"><script src="site-navigation.js" defer></script>
+<link rel="stylesheet" href="style.css"><link rel="stylesheet" href="unit-parameter-comparison.css"><script src="site-navigation.js" defer></script>
 </head>
 <body><main class="wrap" id="unitSimulator">
 <section class="panel"><h1>統合シミュレーター（開発版）</h1>
@@ -22,7 +22,8 @@
 <section class="panel"><h2>1. 編成</h2><label>リーダー衣装（編成5枠とは独立）<select id="unitLeader"><option value="">未選択</option></select></label><p id="unitLeaderStatus" class="sub"></p><div id="unitSlots" class="unitSlots"></div></section>
 <section class="panel"><h2>2. パラメーター</h2>
 <div class="canonicalGrowth"><label>Memory (%)<input id="unitMemoryPercent" type="text" inputmode="decimal" placeholder="未設定"></label><label>Enhancement Bonus (%)<input id="unitEnhancementPercent" type="text" inputmode="decimal" placeholder="未設定"></label></div>
-<div id="unitParameters"></div></section>
+<div id="unitParameterComparison"></div>
+<details class="parameterLegacy"><summary>従来の内訳・Parameter trace</summary><div id="unitParameters"></div></details></section>
 <section class="panel"><h2>3. Unit Score</h2><p id="unitScore">暫定Unit Score</p></section>
 <section class="panel"><div class="unitTimelineHeading"><h2>4. Timeline</h2><label><input id="unitShowSP" type="checkbox" checked> SPを使用</label></div>
 <label>楽曲時間 (s)<input id="unitDuration" type="number" min="0.01" step="0.01" value="120"></label>
@@ -45,5 +46,5 @@
 <script src="card-rules.js"></script><script src="parameter-rules.js"></script>
 <script src="active-timeline-engine.js"></script><script src="active-timeline-view.js?v=66d685783815"></script><script src="timeline-optimizer.js"></script><script src="activation-probability-rules.js"></script>
 <script src="active-random-simulation.js"></script><script src="simulation-accumulator.js"></script><script src="simulation-distribution-view.js"></script><script src="passive-target-resolver.js"></script><script src="passive-selection-resolver.js"></script><script src="leader-parameter-engine.js"></script><script src="unit-parameter-engine.js"></script>
-<script src="unit-score-engine.js"></script><script src="support-rules.js?v=53c7a9c97f74"></script><script src="special-schedule-engine.js"></script><script src="scheduled-support-engine.js"></script><script src="activation-probability-engine.js"></script><script src="leader-support-engine.js"></script><script src="unit-simulator-engine.js?v=387e7d37df83"></script><script src="unit-formation-store.js"></script><script src="unit-formation-ui.js"></script><script src="unit-simulator.js?v=82a953ca7c4b"></script>
+<script src="unit-score-engine.js"></script><script src="support-rules.js?v=53c7a9c97f74"></script><script src="special-schedule-engine.js"></script><script src="scheduled-support-engine.js"></script><script src="activation-probability-engine.js"></script><script src="leader-support-engine.js"></script><script src="unit-simulator-engine.js?v=387e7d37df83"></script><script src="unit-formation-store.js"></script><script src="unit-formation-ui.js"></script><script src="unit-parameter-comparison.js"></script><script src="unit-simulator.js?v=742be70a1bd9"></script>
 </body></html>
