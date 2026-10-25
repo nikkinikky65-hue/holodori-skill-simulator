@@ -1,0 +1,87 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Talent filter regression</title>
+<style>body{margin:0;font:14px system-ui}#result{white-space:pre-wrap}iframe{border:0;width:100%;height:900px}</style>
+<pre id="result">RUNNING</pre><iframe id="page"></iframe>
+<script>
+(async()=>{
+ const out=document.querySelector('#result'),frame=document.querySelector('#page');
+ const check=(value,message)=>{if(!value)throw Error(message);};
+ const tick=()=>new Promise(r=>setTimeout(r,30));
+ try{
+  frame.src='../leader.html';await new Promise(r=>frame.onload=r);
+  const w=frame.contentWindow,d=w.document,api=await w.eval('leaderCatalogReady');check(api,'Leader page initialized');
+  const runtime=await(await fetch('../data/runtime-cards.json')).json(),leaders=await(await fetch('../data/runtime-leader-skills.json')).json();
+  const cardTalents=new Map(runtime.cards.map(c=>[c.id,c.member.mapping.id]));
+  const trigger=d.querySelector('#leaderTalentFilter button'),dialog=d.querySelector('.talentFilterDialog');
+  const input=id=>dialog.querySelector('input[value="'+id+'"]');
+  const visibleCards=()=>[...d.querySelectorAll('.leaderEntry')].filter(n=>!n.hidden).map(n=>n.dataset.cardId);
+  const baseline=visibleCards();check(baseline.length===142,'all original card leaders visible');
+  const groups=()=>[...d.querySelectorAll('.leaderCategory')].map(section=>({category:section.dataset.category,blocks:[...section.querySelectorAll('.leaderAmount')].map(block=>({amount:block.querySelector('h3').textContent,ids:[...block.querySelectorAll('.leaderEntry')].map(n=>n.dataset.cardId)}))}));
+  const baselineGroups=JSON.stringify(groups());
+  function assertFilter(ids){
+   const expected=baseline.filter(id=>!ids.length||ids.includes(cardTalents.get(id)));
+   check(JSON.stringify(visibleCards())===JSON.stringify(expected),'visible card IDs preserve original order');
+   check(JSON.stringify(groups())===baselineGroups,'category/amount/card ordering unchanged');
+   for(const section of d.querySelectorAll('.leaderCategory')){
+    const count=[...section.querySelectorAll('.leaderEntry')].filter(n=>!n.hidden).length;
+    check(section.hidden===(count===0),'empty category hidden');
+    check(section.querySelector('h2').textContent===section.dataset.category+'（'+count+'件）','category count reflects filter');
+    for(const block of section.querySelectorAll('.leaderAmount'))check(block.hidden===[...block.querySelectorAll('.leaderEntry')].every(n=>n.hidden),'empty amount hidden');
+   }
+   const common=[...d.querySelectorAll('#leaderCommon .leaderSkill')].filter(n=>!n.hidden).length;
+   check(common===leaders.commonEffects.filter(e=>!ids.length||ids.includes(e.memberId)).length,'reference common effects follow explicit member IDs');
+   check(d.querySelector('#leaderStatus').textContent.includes('カード固有 '+expected.length+'件'),'result count');
+  }
+  assertFilter([]);
+  trigger.click();await tick();check(dialog.open,'dialog opens');
+  check(new Set([...dialog.querySelectorAll('input')].map(n=>n.value)).size===54,'all talents selectable');
+  check(dialog.querySelectorAll('.talentFilterGroup').length===15,'15 affiliation rows');
+  check(input('sakura_miko').parentElement.querySelector('.talentFilterName').textContent==='みこ','same abbreviation as unit page');
+  check(input('kaela_kovalskia').parentElement.textContent.includes('カエラ・コヴァルスキア'),'formal name fallback');
+  check(dialog.querySelectorAll('[data-issue-code="missing-short-name"]').length===49,'all missing abbreviations discoverable');
+  const fubuki=[...dialog.querySelectorAll('input[value="shirakami_fubuki"]')];check(fubuki.length===2,'both affiliations shown');
+  fubuki[0].click();check(fubuki.every(n=>n.checked),'same ID synchronized across groups');fubuki[1].click();check(fubuki.every(n=>!n.checked),'deselect synchronized');
+  input('sakura_miko').click();assertFilter([]);
+  dialog.querySelector('.talentFilterHeader button').click();await tick();check(!dialog.open&&d.activeElement===trigger,'close cancels and restores focus');assertFilter([]);
+  trigger.click();await tick();check(!input('sakura_miko').checked,'unapplied edits discarded');
+  input('sakura_miko').click();dialog.querySelector('[data-talent-apply]').click();await tick();assertFilter(['sakura_miko']);
+  const copy=api.talentFilter.getSelection();copy.push('kobo_kanaeru');check(api.talentFilter.getSelection().length===1,'selection API cannot mutate committed state');
+  trigger.click();await tick();check(input('sakura_miko').checked,'committed selection restored');input('kobo_kanaeru').click();
+  dialog.dispatchEvent(new w.Event('cancel',{cancelable:true}));await tick();check(!dialog.open,'Escape cancel closes');assertFilter(['sakura_miko']);
+  trigger.click();await tick();input('kobo_kanaeru').click();const rect=dialog.getBoundingClientRect();
+  dialog.dispatchEvent(new w.MouseEvent('click',{bubbles:true,clientX:rect.left+2,clientY:rect.top+2}));check(dialog.open,'inside padding click does not dismiss');
+  dialog.dispatchEvent(new w.MouseEvent('click',{bubbles:true,clientX:0,clientY:0}));await tick();check(!dialog.open,'outside click closes');assertFilter(['sakura_miko']);
+  trigger.click();await tick();check(!input('kobo_kanaeru').checked,'outside click discards draft');input('kobo_kanaeru').click();dialog.querySelector('[data-talent-apply]').click();await tick();assertFilter(['sakura_miko','kobo_kanaeru']);
+  const retained=d.querySelector('.leaderAmount');retained.open=false;
+  trigger.click();await tick();dialog.querySelector('[data-talent-clear]').click();assertFilter(['sakura_miko','kobo_kanaeru']);dialog.querySelector('[data-talent-apply]').click();await tick();assertFilter([]);check(!retained.open,'existing expanded/collapsed comparison state retained');
+  for(const width of [1280,768,390]){
+   frame.style.width=width+'px';await tick();trigger.click();await tick();
+   const r=dialog.getBoundingClientRect(),footer=dialog.querySelector('footer').getBoundingClientRect(),body=dialog.querySelector('.talentFilterBody');
+   check(r.left>=0&&r.right<=width&&footer.bottom<=w.innerHeight,'dialog and actions fit '+width);
+   check(d.documentElement.scrollWidth<=width,'no page overflow '+width);
+   for(const row of dialog.querySelectorAll('.talentFilterChoices')){const ys=[...row.children].map(n=>n.getBoundingClientRect().top);check(Math.max(...ys)-Math.min(...ys)<1,'affiliation never wraps '+width);}
+   if(width===390){check(body.scrollWidth>body.clientWidth,'mobile horizontal scrolling');body.scrollLeft=body.scrollWidth;check(body.scrollLeft>0,'mobile can scroll to all talents');}
+   check(body.scrollHeight>body.clientHeight,'all groups reachable through vertical scrolling');body.scrollTop=body.scrollHeight;check(body.scrollTop>0,'vertical scrolling works');body.scrollTop=0;body.scrollLeft=0;
+   input('sakura_miko').click();dialog.querySelector('[data-talent-apply]').click();await tick();assertFilter(['sakura_miko']);
+   trigger.click();await tick();dialog.querySelector('[data-talent-clear]').click();dialog.querySelector('[data-talent-apply]').click();await tick();assertFilter([]);
+  }
+  // Reuse the selector on a non-Leader host, including collisions and inert markup.
+  const fixture=d.createElement('div');d.body.append(fixture);let applied=[];
+  const picker=w.eval('TalentFilter').mount(fixture,{members:[{id:'first',name:'同名',affiliations:['検証用']},{id:'second',name:'同名',affiliations:['検証用']},{id:'text',name:'<img src=x onerror=alert(1)>',affiliations:[]}],onApply:ids=>applied=ids});
+  picker.open();await tick();const pd=fixture.querySelector('dialog');check(picker.diagnostics.some(i=>i.code==='duplicate-display-name'),'duplicate names detected');
+  pd.querySelector('input[value="second"]').click();pd.querySelector('[data-talent-apply]').click();await tick();check(applied.join(',')==='second','same visible names never used as keys');check(!fixture.querySelector('img'),'names remain inert text');picker.destroy();fixture.remove();
+  // Isolated response fixtures: malformed references must not block valid ID filtering.
+  const broken=document.createElement('iframe');broken.style.display='none';document.body.append(broken);
+  const html=await(await fetch('../leader.html')).text();
+  const shim=`const realFetch=window.fetch.bind(window);window.fetch=async(...args)=>{const response=await realFetch(...args);if(String(args[0]).includes('runtime-cards.json')){const data=await response.json();const miko=data.cards.find(c=>c.member.mapping.id==='sakura_miko');miko.member.name='正式名不一致テスト';for(const card of data.cards)if(card.member.mapping.id==='kobo_kanaeru')card.member.mapping.id='unknown-id';return new Response(JSON.stringify(data),{status:200});}return response;};`;
+  broken.srcdoc=html.replace('<head>','<head><base href="'+new URL('../',location.href).href+'"><script>'+shim+'<\/script>');await new Promise(r=>broken.onload=r);
+  const bw=broken.contentWindow,bd=bw.document,ba=await bw.eval('leaderCatalogReady');check(ba,'inconsistent IDs do not stop page initialization');
+  check(ba.talentFilter.diagnostics.some(i=>i.code==='unknown-reference-id')&&ba.talentFilter.diagnostics.some(i=>i.code==='reference-name-mismatch'),'actual page reference diagnostics');
+  ba.talentFilter.open();await tick();bd.querySelector('input[value="kobo_kanaeru"]').click();bd.querySelector('[data-talent-apply]').click();await tick();
+  check(!bd.querySelector('#leaderEmpty').hidden&&[...bd.querySelectorAll('.leaderCategory')].every(n=>n.hidden),'no matching cards has clear empty state');
+  ba.talentFilter.open();await tick();bd.querySelector('[data-talent-clear]').click();bd.querySelector('input[value="sakura_miko"]').click();bd.querySelector('[data-talent-apply]').click();await tick();
+  check([...bd.querySelectorAll('.leaderEntry')].filter(n=>!n.hidden).length===baseline.filter(id=>cardTalents.get(id)==='sakura_miko').length,'known IDs remain filterable despite name mismatch');broken.remove();
+  frame.style.width='1280px';await tick();trigger.click();await tick();
+  out.textContent='PASS: single/multiple/clear, apply/cancel/outside/Escape, 54 talents/15 groups, 49 fallbacks, multi-group sync, ID diagnostics and collisions, unchanged categories/order, empty results, safe text, 1280/768/390 scrolling';
+ }catch(error){out.textContent='FAIL: '+error.stack;}
+})();
+</script>

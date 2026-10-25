@@ -1,0 +1,33 @@
+# タレント絞り込み
+
+リーダースキル画面の「タレント絞り込み」から選択する。選択なしは全件、複数選択はIDのOR条件。「適用」で確定し、閉じる・外側クリック・Escapeは未確定の変更を破棄する。確定条件は同じページ内で再度開いても維持する。ページ再読み込みをまたぐ保存は行わない。
+
+## 共通UIと接続
+
+`TalentFilter.mount(host, {members, references, selectedIds, onApply})` は選択UIだけを担当する。membersは `{id,name,affiliations}`、referencesは診断用の `{talentId,formalName,source}`。onApplyにはタレントID配列のコピーを渡す。返却APIはopen/getSelection/destroy/diagnostics。空配列は全件を意味する。複数所属のチェックボックスは同一IDとして同期する。
+
+表示名は既存TalentPresentation.resolveを使用する。inspectとhasShortNameを追加したが、SP順序・最適化上限が利用するresolveの結果は変更しない。未登録の略称は正式名で表示し、一覧の印と診断欄から確認できる。診断には略称未登録・登録先不明・ID欠落/重複・参照先不明・正式名不一致・表示名重複・所属未確認を含む。表示名はIDとして使わず、HTMLとして解釈しない。
+
+leader.jsはID配列を受けて既存DOMの表示を切り替える。効果分類・効果量・カード順序と詳細の開閉状態を保持し、該当カードのない分類/効果量グループを隠す。共通効果は既存memberIdで絞り込み、カードへの対応を推定しない。結果件数を表示し、カード0件には案内を出す。既存の検索/追加表示条件は今回の画面に存在しない。将来の条件はapplyTalentFilterの述語に合成できる。
+
+参照IDが既知なら正式名に不一致があってもIDで絞り込む。不明IDのカードは全件表示時には残し、IDを推測して選択タレントに割り当てない。ほかの識別可能なカードの絞り込みは継続する。
+
+## 既存データの確認（2026-10-25）
+
+members.jsの54人・15グループはdata/runtime-affiliations.jsonの取得済みCharacterGrouping由来データと全件一致。グループは0〜5期生、ゲーマーズ、holoX、ID1〜3期生、Myth、Promise、Advent、ReGLOSS。白上フブキの1期生/ゲーマーズ両所属も一致。不明所属・タレントID不一致・正式名不一致・表示名重複は0件。
+
+略称は5人が登録済み、49人が未登録。既存の略称を新たに推測で追加せず、未登録は正式名を使用する。診断欄で49人の正式名とIDを確認できる。これは絞り込みを妨げない。
+
+## 検証
+
+```sh
+python3 -B tests/verify-talent-filter.py
+python3 -B tests/leader-catalog.test.py
+python3 -B tests/verify.py
+python3 -B tests/verify-parameter-comparison.py
+python3 -B tests/verify-parameter-comparison-browser.py
+```
+
+ブラウザー回帰ランナーにtalent-filter-browser.htmlを追加。単一/複数/全解除、適用前の取消、再表示、重複所属、診断、空結果、表示順維持、安全なテキスト、1280/768/390pxを検証する。既存のParameter比較・SP順序・最適化・保存読込も同じランナーで確認する。
+
+所持カード条件、画像、外部URL、カードライブラリや編成画面への接続は未実装。選択UIはカード/スキルや保存形式に依存しないため、同じID配列を各画面の絞り込みに利用できる。Canonical・スキルデータ・計算処理は変更しない。

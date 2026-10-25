@@ -33,6 +33,7 @@ async function renderLeaderCatalog(){
     const groups = new Map(categories.map(label => [label, new Map()]));
     const cardNodes = entries.map(({row,card}) => {
       const article = document.createElement('article'); article.className = 'leaderSkill leaderEntry';
+      article.dataset.talentId = card.member.mapping?.id || '';
       article.dataset.cardId = card.id; article.dataset.leaderSkillId = row.skillId;
       const view = row.presentation;
       const effects = view?.status === 'classified' ? view.effects : [];
@@ -86,13 +87,34 @@ async function renderLeaderCatalog(){
       groupNodes.push(section);
     }
     const commonNodes = [...leaders.commonEffects].sort((a,b)=>(order.get(a.memberId) ?? 999)-(order.get(b.memberId) ?? 999)).map(row => {
-      const article = skillBlock(row);
+      const article = skillBlock(row);article.dataset.talentId=row.memberId || '';
       const heading = document.createElement('h3'); heading.textContent = `${row.memberName} / ${row.costumeName}`;
       article.prepend(heading);
       return article;
     });
     container.replaceChildren(...groupNodes); common.replaceChildren(...commonNodes);
-    status.textContent = `カード固有 ${cardNodes.length}件 / 共通効果 ${commonNodes.length}件。★3のカード固有衣装への参照は取得データにありません。`;
+    function applyTalentFilter(ids){
+      const selected=new Set(ids),matches=id=>!selected.size||selected.has(id);
+      // Compose any future page-specific conditions here; the selector only supplies IDs.
+      for(const node of [...cardNodes,...commonNodes])node.hidden=!matches(node.dataset.talentId);
+      for(const section of groupNodes){
+        let count=0;
+        for(const block of section.querySelectorAll('.leaderAmount')){
+          const visible=[...block.querySelectorAll('.leaderEntry')].filter(node=>!node.hidden).length;
+          block.hidden=visible===0;count+=visible;
+        }
+        section.hidden=count===0;section.querySelector('h2').textContent=`${section.dataset.category}（${count}件）`;
+      }
+      const cardCount=cardNodes.filter(node=>!node.hidden).length,commonCount=commonNodes.filter(node=>!node.hidden).length;
+      document.querySelector('#leaderEmpty').hidden=cardCount!==0;
+      document.querySelector('#leaderCommonEmpty').hidden=commonCount!==0;
+      status.textContent=`カード固有 ${cardCount}件 / 全${cardNodes.length}件・共通効果 ${commonCount}件 / 全${commonNodes.length}件。★3のカード固有衣装への参照は取得データにありません。`;
+    }
+    const references=[...cards.cards.map(card=>({talentId:card.member.mapping?.id,formalName:card.member.name,source:card.id})),
+      ...leaders.commonEffects.map(row=>({talentId:row.memberId,formalName:row.memberName,source:row.skillId}))];
+    const talentFilter=TalentFilter.mount(document.querySelector('#leaderTalentFilter'),{members:HOLO_MEMBERS,references,onApply:applyTalentFilter});
+    applyTalentFilter([]);
+    return {talentFilter};
   }catch(error){ status.textContent = `リーダースキル一覧を表示できませんでした：${error.message}`; status.dataset.error = 'true'; }
 }
 const leaderCatalogReady = renderLeaderCatalog();

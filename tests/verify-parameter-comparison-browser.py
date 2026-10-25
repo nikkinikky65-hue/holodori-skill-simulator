@@ -11,7 +11,7 @@ import json
 ROOT=Path(__file__).resolve().parent.parent
 CHROME='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
 pages=['unit-parameter-comparison-browser.html','unit-card-picker-browser.html',
-       'unit-optimizer-browser.html','unit-formation-browser.html','unit-formations-browser.html']
+       'unit-optimizer-browser.html','unit-formation-browser.html','unit-formations-browser.html','talent-filter-browser.html']
 image_requests=[]
 class Handler(http.server.SimpleHTTPRequestHandler):
     def log_message(self,*args):pass
@@ -31,6 +31,7 @@ try:
                  '--disable-component-update','--user-data-dir='+str(logs/f'profile-{index}'),
                  '--dump-dom','--window-size=1920,1200','--virtual-time-budget=60000']
         if index==0:command.append('--screenshot='+str(logs/'comparison.png'))
+        if page=='talent-filter-browser.html':command.append('--screenshot='+str(logs/'talent-filter.png'))
         command.append(f'http://127.0.0.1:{server.server_port}/tests/'+page)
         result=subprocess.run(command,capture_output=True,text=True,timeout=120)
         (logs/(page+'.dom')).write_text(result.stdout)
