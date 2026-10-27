@@ -1,0 +1,52 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><pre id="result">RUNNING</pre><iframe style="border:0;height:900px"></iframe>
+<script>
+(async()=>{
+ const out=document.querySelector('#result'),frame=document.querySelector('iframe'),check=(v,m)=>{if(!v)throw Error(m);},tick=()=>new Promise(r=>setTimeout(r,30));
+ try{
+  for(const width of [1280,768,390]){
+   frame.style.width=width+'px';frame.src='../card-catalog.html?talent-test='+width;await new Promise(r=>frame.onload=r);
+   const w=frame.contentWindow,d=w.document;await w.eval('cardCatalogReady');check(!d.querySelector('#catalogStatus').dataset.errorKind,'catalog initialized');
+   const catalog=await w.loadRuntimeCardCatalog(),members=w.eval('HOLO_MEMBERS');
+   const dialog=d.querySelector('.talentFilterDialog'),trigger=d.querySelector('#catalogTalentFilter button');
+   const input=id=>dialog.querySelector('[data-talent-id="'+id+'"]');
+   const group=name=>dialog.querySelector('[data-talent-group="'+name+'"]');
+   const search=d.querySelector('#catalogSearch'),type=d.querySelector('#catalogType');let rarity=5;
+   const ids=()=>[...d.querySelectorAll('.catalogCard')].map(n=>n.dataset.cardId);
+   const baseline=new Map();for(const r of [5,4,3]){d.querySelector('[data-catalog-rarity="'+r+'"]').click();baseline.set(r,ids());}
+   d.querySelector('[data-catalog-rarity="5"]').click();
+   const byId=new Map(catalog.cards.map(c=>[c.id,c]));
+   function assertFilter(selected){
+    const expected=baseline.get(rarity).filter(id=>{const c=byId.get(id);return (!selected.length||selected.includes(c.member.mapping.id))&&(!type.value||c.classification.attributeType.mapping.value===type.value)&&`${c.name} ${c.member.name}`.toLocaleLowerCase().includes(search.value.trim().toLocaleLowerCase());});
+    check(JSON.stringify(ids())===JSON.stringify(expected),'AND filters preserve all matching cards and original order');
+    check(d.querySelector('#catalogStatus').textContent===expected.length+' / '+catalog.cards.length+'枚','count matches');
+   }
+   assertFilter([]);trigger.click();await tick();input('sakura_miko').click();input('kobo_kanaeru').click();assertFilter([]);
+   dialog.querySelector('[data-talent-apply]').click();await tick();assertFilter(['sakura_miko','kobo_kanaeru']);
+   check(d.querySelector('.talentFilterSelection').textContent.includes('みこ')&&d.querySelector('.talentFilterSelection').textContent.includes('こぼ'),'committed conditions show names');
+   check(ids().filter(id=>byId.get(id).member.mapping.id==='sakura_miko').length>1,'multiple cards of one talent included');
+   for(const r of [5,4,3]){rarity=r;d.querySelector('[data-catalog-rarity="'+r+'"]').click();for(const t of ['','cute','happy','pure']){type.value=t;type.dispatchEvent(new w.Event('change'));assertFilter(['sakura_miko','kobo_kanaeru']);}}
+   rarity=5;d.querySelector('[data-catalog-rarity="5"]').click();type.value='';type.dispatchEvent(new w.Event('change'));search.value='さくらみこ';search.dispatchEvent(new w.Event('input'));assertFilter(['sakura_miko','kobo_kanaeru']);
+   trigger.click();await tick();dialog.querySelector('[data-talent-clear]').click();dialog.querySelector('[data-talent-apply]').click();await tick();assertFilter([]);check(search.value==='さくらみこ','clear preserves search');
+   search.value='';search.dispatchEvent(new w.Event('input'));
+   trigger.click();await tick();group('0期生').click();const zeroIds=members.filter(m=>m.affiliations.includes('0期生')).map(m=>m.id);dialog.querySelector('[data-talent-apply]').click();await tick();assertFilter(zeroIds);
+   trigger.click();await tick();check(group('0期生').checked&&!group('0期生').indeterminate,'group restored');input('sakura_miko').click();check(group('0期生').indeterminate,'mixed state');
+   dialog.querySelector('.talentFilterHeader button').click();await tick();assertFilter(zeroIds);
+   for(const mode of ['cancel','outside']){trigger.click();await tick();group('0期生').click();if(mode==='cancel')dialog.dispatchEvent(new w.Event('cancel',{cancelable:true}));else dialog.dispatchEvent(new w.MouseEvent('click',{clientX:0,clientY:0}));await tick();assertFilter(zeroIds);}
+   trigger.click();await tick();const rect=dialog.getBoundingClientRect();check(rect.left>=0&&rect.right<=width,'dialog fits width');
+   check(dialog.querySelector('footer').getBoundingClientRect().bottom<=w.innerHeight,'apply visible');
+   for(const row of dialog.querySelectorAll('.talentFilterChoices')){const y=[...row.children].map(n=>n.getBoundingClientRect().top);check(Math.max(...y)-Math.min(...y)<1,'group stays on one row');}
+   const body=dialog.querySelector('.talentFilterBody');if(width===390){body.scrollLeft=body.scrollWidth;check(body.scrollLeft>0,'mobile scroll');body.scrollLeft=0;}
+   group('0期生').click();check(!group('0期生').checked,'full group deselects');dialog.querySelector('[data-talent-apply]').click();await tick();assertFilter([]);
+   check(d.documentElement.scrollWidth<=width,'page fits');
+   // A card edit survives filtering away and back; selection itself performs no storage writes.
+   const first=d.querySelector('.catalogCard'),cardId=first.dataset.cardId,owned=first.querySelector('[data-catalog-owned]');owned.click();
+   const stored=JSON.stringify(w.localStorage);
+   trigger.click();await tick();input('kobo_kanaeru').click();dialog.querySelector('[data-talent-apply]').click();await tick();
+   trigger.click();await tick();dialog.querySelector('[data-talent-clear]').click();dialog.querySelector('[data-talent-apply]').click();await tick();
+   check(JSON.stringify(w.localStorage)===stored,'filter does not change saved settings');check(d.querySelector('[data-card-id="'+cardId+'"] [data-catalog-owned]').checked===owned.checked,'card settings retained');
+   search.value='存在しないカード名';search.dispatchEvent(new w.Event('input'));assertFilter([]);check(ids().length===0,'empty intersection supported');
+  }
+  out.textContent='PASS: group full/mixed/clear, individual + group, apply/cancel/Escape/outside, multiple cards per talent, search/rarity/type AND, original order, conditions, storage isolation, 1280/768/390';
+ }catch(e){out.textContent='FAIL: '+e.stack;}
+})();
+</script>

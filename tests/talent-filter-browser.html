@@ -33,11 +33,20 @@
   }
   assertFilter([]);
   trigger.click();await tick();check(dialog.open,'dialog opens');
-  check(new Set([...dialog.querySelectorAll('input')].map(n=>n.value)).size===54,'all talents selectable');
+  check(new Set([...dialog.querySelectorAll('[data-talent-id]')].map(n=>n.value)).size===54,'all talents selectable');
   check(dialog.querySelectorAll('.talentFilterGroup').length===15,'15 affiliation rows');
   check(input('sakura_miko').parentElement.querySelector('.talentFilterName').textContent==='みこ','same abbreviation as unit page');
   check(input('kaela_kovalskia').parentElement.textContent.includes('カエラ・コヴァルスキア'),'formal name fallback');
   check(dialog.querySelectorAll('[data-issue-code="missing-short-name"]').length===49,'all missing abbreviations discoverable');
+  const group=name=>dialog.querySelector('[data-talent-group="'+name+'"]');
+  const zero=group('0期生');check(!zero.checked&&!zero.indeterminate,'group initially unchecked');
+  input('sakura_miko').click();check(!zero.checked&&zero.indeterminate,'individual selection makes mixed state');
+  zero.parentElement.click();check(zero.checked&&!zero.indeterminate,'mixed group click selects everyone');
+  check(['tokino_sora','robocosan','azki','sakura_miko','hoshimachi_suisei'].every(id=>input(id).checked),'entire group selected');
+  input('azki').click();check(zero.indeterminate&&!zero.checked,'individual removal updates group');
+  zero.click();check(zero.checked,'mixed selects all again');zero.click();check(!zero.checked&&!zero.indeterminate,'full group click clears');
+  group('1期生').click();check(group('ゲーマーズ').indeterminate,'overlapping group has mixed state');group('ゲーマーズ').click();check(group('ゲーマーズ').checked&&group('1期生').checked,'group union by ID');group('ゲーマーズ').click();check(group('1期生').indeterminate,'overlapping removal updates other group');
+  dialog.querySelector('[data-talent-clear]').click();check([...dialog.querySelectorAll('[data-talent-group]')].every(n=>!n.checked&&!n.indeterminate),'clear resets all group states');
   const fubuki=[...dialog.querySelectorAll('input[value="shirakami_fubuki"]')];check(fubuki.length===2,'both affiliations shown');
   fubuki[0].click();check(fubuki.every(n=>n.checked),'same ID synchronized across groups');fubuki[1].click();check(fubuki.every(n=>!n.checked),'deselect synchronized');
   input('sakura_miko').click();assertFilter([]);

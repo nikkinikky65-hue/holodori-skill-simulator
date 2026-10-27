@@ -16,6 +16,7 @@ async function renderCardCatalog(){
     const search = document.querySelector('#catalogSearch');
     const rarityButtons = [...document.querySelectorAll('[data-catalog-rarity]')];
     let rarity = '5';
+    let selectedTalents=new Set();
     const type = document.querySelector('#catalogType');
     readUserCardStates(); // Validate existing settings before presenting editable controls.
     for(const [selector, element] of [['#catalogCards',container], ['#catalogSearch',search], ['#catalogType',type]]){
@@ -27,6 +28,7 @@ async function renderCardCatalog(){
       const query = search.value.trim().toLocaleLowerCase();
       const cards = sortCatalogCardsForDisplay(catalog.cards.filter(card =>
         `${card.name} ${canonicalMemberName(card)}`.toLocaleLowerCase().includes(query) &&
+        (!selectedTalents.size || selectedTalents.has(card.member.mapping?.id)) &&
         String(card.classification.rarity.mapping.value) === rarity &&
         (!type.value || card.classification.attributeType.mapping.value === type.value)), catalog.cards);
       const userStates = readUserCardStates();
@@ -102,6 +104,11 @@ async function renderCardCatalog(){
       }
       status.textContent = `${cards.length} / ${catalog.cards.length}枚`;
     };
+    TalentFilter.mount(document.querySelector('#catalogTalentFilter'),{
+      members:HOLO_MEMBERS,
+      references:catalog.cards.map(card=>({talentId:card.member.mapping?.id,formalName:card.member.name,source:card.id})),
+      onApply:ids=>{selectedTalents=new Set(ids);render();}
+    });
     search.addEventListener('input', render);
     for(const button of rarityButtons) button.addEventListener('click', () => {
       rarity = button.dataset.catalogRarity;

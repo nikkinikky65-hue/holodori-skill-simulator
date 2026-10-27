@@ -25,9 +25,13 @@ const TalentFilter = (() => {
     const close=button('閉じる',()=>dialog.close());close.autofocus=true;header.append(title,close);
     const hint=el('p','talentFilterHint','選択なしは全タレントが対象です。変更は「適用」で確定します。');hint.id=prefix+'-hint';
     const body=el('div','talentFilterBody'),groupList=el('div','talentFilterGroups');
-    const inputs=[];
+    const inputs=[],groupInputs=[];
     data.groups.forEach((group,index)=>{
-      const row=el('section','talentFilterGroup'),heading=el('h3',null,group.name);heading.id=prefix+'-group-'+index;
+      const row=el('section','talentFilterGroup'),heading=el('h3');heading.id=prefix+'-group-'+index;
+      const groupLabel=el('label','talentFilterGroupLabel'),groupInput=el('input');groupInput.type='checkbox';groupInput.dataset.talentGroup=group.name;
+      const ids=group.members.map(m=>m.id);
+      groupInput.addEventListener('change',()=>{const all=ids.every(id=>draft.has(id));for(const id of ids){if(all)draft.delete(id);else draft.add(id);}syncDraft();});
+      groupInputs.push({input:groupInput,ids});groupLabel.append(groupInput,el('span',null,group.name));heading.append(groupLabel);
       row.setAttribute('aria-labelledby',heading.id);
       const choices=el('div','talentFilterChoices');
       for(const talent of group.members){
@@ -53,8 +57,8 @@ const TalentFilter = (() => {
     const clear=button('全解除',()=>{draft.clear();syncDraft();});clear.dataset.talentClear='';
     const apply=button('適用',()=>{committed=new Set(draft);syncSelection();dialog.close();onApply([...committed]);});apply.dataset.talentApply='';
     footer.append(clear,draftStatus,apply);dialog.append(header,hint,body,footer);host.append(toolbar,dialog);
-    function syncDraft(){for(const input of inputs)input.checked=draft.has(input.value);draftStatus.textContent=draft.size?`${draft.size}人選択`:'全タレント';}
-    function syncSelection(){selection.textContent=committed.size?`${committed.size}人で絞り込み中`:'全タレント';}
+    function syncDraft(){for(const input of inputs)input.checked=draft.has(input.value);for(const {input,ids} of groupInputs){const count=ids.filter(id=>draft.has(id)).length;input.checked=count===ids.length;input.indeterminate=count>0&&count<ids.length;}draftStatus.textContent=draft.size?`${draft.size}人選択`:'全タレント';}
+    function syncSelection(){selection.textContent=committed.size?`${committed.size}人で絞り込み中：${data.members.filter(m=>committed.has(m.id)).map(m=>m.displayName).join('、')}`:'全タレント';}
     function open(){draft=new Set(committed);syncDraft();if(!dialog.open)dialog.showModal();}
     dialog.addEventListener('cancel',event=>{event.preventDefault();dialog.close();});
     dialog.addEventListener('close',()=>{draft=new Set(committed);trigger.focus();});

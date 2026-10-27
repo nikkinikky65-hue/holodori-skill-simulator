@@ -31,3 +31,8 @@
   .talentFilterFooter { padding:12px; gap:8px; }
   .talentFilterFooter button { padding-inline:12px; }
 }
+
+.talentFilterGroupLabel { display:flex; align-items:center; gap:6px; min-height:44px; cursor:pointer; }
+.talentFilterGroupLabel input { flex:0 0 18px; width:18px; height:18px; margin:0; padding:0; }
+.talentFilterGroupLabel span { overflow-wrap:anywhere; }
+.talentFilterSelection { max-width:100%; overflow-wrap:anywhere; }
