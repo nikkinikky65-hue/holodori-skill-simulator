@@ -1,0 +1,31 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><pre id="result">RUNNING</pre><iframe style="border:0;height:900px"></iframe>
+<script>
+(async()=>{
+ const out=document.querySelector('#result'),frame=document.querySelector('iframe'),check=(v,m)=>{if(!v)throw Error(m);},tick=()=>new Promise(r=>setTimeout(r,30));
+ try{
+  for(const width of [1280,768,390]){
+   frame.style.width=width+'px';frame.src='../card-catalog.html?passive-test='+width;await new Promise(r=>frame.onload=r);
+   const w=frame.contentWindow,d=w.document;await w.eval('cardCatalogReady');check(!d.querySelector('#catalogStatus').dataset.errorKind,'catalog ready');
+   const catalog=await w.loadRuntimeCardCatalog(),members=w.eval('HOLO_MEMBERS');
+   const toggle=d.querySelector('#catalogPassiveAffiliation'),search=d.querySelector('#catalogSearch'),type=d.querySelector('#catalogType');
+   const visible=()=>[...d.querySelectorAll('.catalogCard')].map(n=>n.dataset.cardId);
+   check(!toggle.checked,'default OFF');const baseline=new Map();
+   for(const r of [5,4,3]){d.querySelector('[data-catalog-rarity="'+r+'"]').click();baseline.set(r,visible());}
+   const byId=new Map(catalog.cards.map(c=>[c.id,c]));
+   const eligible=new Set(catalog.cards.filter(c=>c.skills.passive.levels.some(l=>l.target.selectors.some(s=>s.type.endsWith('_CHARACTER_GROUPING')))).map(c=>c.id));check(eligible.size===41,'audited actual count');
+   let selected=[],rarity=5;d.querySelector('[data-catalog-rarity="5"]').click();
+   function assertResults(){const expected=baseline.get(rarity).filter(id=>{const c=byId.get(id);return (!toggle.checked||eligible.has(id))&&(!selected.length||selected.includes(c.member.mapping.id))&&(!type.value||type.value===c.classification.attributeType.mapping.value)&&`${c.name} ${c.member.name}`.toLocaleLowerCase().includes(search.value.trim().toLocaleLowerCase());});check(JSON.stringify(visible())===JSON.stringify(expected),'AND filter and order');check(d.querySelector('#catalogStatus').textContent===expected.length+' / 196枚','count');}
+   toggle.click();assertResults();check(visible().length===27,'27 star-five matches');
+   for(const r of [5,4,3]){rarity=r;d.querySelector('[data-catalog-rarity="'+r+'"]').click();assertResults();check(visible().length===({5:27,4:14,3:0})[r],'audited rarity count');}
+   const trigger=d.querySelector('#catalogTalentFilter button'),dialog=d.querySelector('.talentFilterDialog');trigger.click();await tick();dialog.querySelector('[data-talent-group="0期生"]').click();dialog.querySelector('[data-talent-apply]').click();await tick();selected=members.filter(m=>m.affiliations.includes('0期生')).map(m=>m.id);
+   for(const r of [5,4,3]){rarity=r;d.querySelector('[data-catalog-rarity="'+r+'"]').click();for(const t of ['','cute','happy','pure']){type.value=t;type.dispatchEvent(new w.Event('change'));assertResults();toggle.click();assertResults();toggle.click();assertResults();}}
+   rarity=5;d.querySelector('[data-catalog-rarity="5"]').click();type.value='';type.dispatchEvent(new w.Event('change'));search.value='さくらみこ';search.dispatchEvent(new w.Event('input'));assertResults();
+   search.value='';search.dispatchEvent(new w.Event('input'));trigger.click();await tick();dialog.querySelector('[data-talent-clear]').click();dialog.querySelector('[data-talent-apply]').click();await tick();selected=[];check(toggle.checked,'talent clear keeps Passive ON');assertResults();
+   const first=d.querySelector('.catalogCard'),id=first.dataset.cardId;first.querySelector('[data-catalog-owned]').click();first.querySelector('[data-step="1"]').click();const saved=JSON.stringify(w.localStorage),training=first.querySelector('[data-catalog-training]').value;
+   toggle.click();assertResults();toggle.click();assertResults();check(JSON.stringify(w.localStorage)===saved,'toggle does not write settings');check(d.querySelector('[data-card-id="'+id+'"] [data-catalog-training]').value===training,'growth retained');
+   check(d.documentElement.scrollWidth<=width,'layout fits '+width);check(toggle.getBoundingClientRect().width>0,'checkbox visible');
+  }
+  out.textContent='PASS: 41 cards (27 star-five / 14 star-four), OFF restoration, talent/search/rarity/type AND, order, settings retained, 1280/768/390';
+ }catch(e){out.textContent='FAIL: '+e.stack;}
+})();
+</script>

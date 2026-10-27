@@ -11,7 +11,7 @@ import json
 ROOT=Path(__file__).resolve().parent.parent
 CHROME='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
 pages=['unit-parameter-comparison-browser.html','unit-card-picker-browser.html',
-       'unit-optimizer-browser.html','unit-formation-browser.html','unit-formations-browser.html','talent-filter-browser.html','catalog-talent-filter-browser.html','card-display-order-browser.html','card-export-browser.html']
+       'unit-optimizer-browser.html','unit-formation-browser.html','unit-formations-browser.html','talent-filter-browser.html','catalog-talent-filter-browser.html','catalog-passive-filter-browser.html','card-display-order-browser.html','card-export-browser.html']
 image_requests=[]
 class Handler(http.server.SimpleHTTPRequestHandler):
     def log_message(self,*args):pass
