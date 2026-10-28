@@ -50,7 +50,8 @@
   const fubuki=[...dialog.querySelectorAll('input[value="shirakami_fubuki"]')];check(fubuki.length===2,'both affiliations shown');
   fubuki[0].click();check(fubuki.every(n=>n.checked),'same ID synchronized across groups');fubuki[1].click();check(fubuki.every(n=>!n.checked),'deselect synchronized');
   input('sakura_miko').click();assertFilter([]);
-  dialog.querySelector('.talentFilterHeader button').click();await tick();check(!dialog.open&&d.activeElement===trigger,'close cancels and restores focus');assertFilter([]);
+  const closed=new Promise(resolve=>dialog.addEventListener('close',resolve,{once:true}));
+  dialog.querySelector('.talentFilterHeader button').click();await closed;check(!dialog.open&&d.activeElement===trigger,'close cancels and restores focus');assertFilter([]);
   trigger.click();await tick();check(!input('sakura_miko').checked,'unapplied edits discarded');
   input('sakura_miko').click();dialog.querySelector('[data-talent-apply]').click();await tick();assertFilter(['sakura_miko']);
   const copy=api.talentFilter.getSelection();copy.push('kobo_kanaeru');check(api.talentFilter.getSelection().length===1,'selection API cannot mutate committed state');

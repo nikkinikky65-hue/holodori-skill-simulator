@@ -6,6 +6,7 @@
 <title>ホロドリ カードライブラリ</title>
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="talent-filter.css">
+<link rel="stylesheet" href="skill-filter.css">
 <script src="site-navigation.js" defer></script>
 </head>
 <body>
@@ -22,8 +23,7 @@
     </div>
     <label>タイプ<select id="catalogType"><option value="">すべて</option><option value="cute">キュート</option><option value="happy">ハッピー</option><option value="pure">ピュア</option></select></label>
   </div>
-  <label><input id="catalogPassiveAffiliation" type="checkbox" style="width:auto"> Passive：所属対象効果</label>
-  <div id="catalogTalentFilter"></div>
+  <div class="catalogSearchActions"><div id="catalogTalentFilter"></div><div id="catalogSkillFilter"></div></div>
   <p id="catalogStatus" role="status">カードデータを読み込み中…</p>
 </section>
 <div id="catalogCards" class="catalogCards"></div>
@@ -36,7 +36,8 @@
 <script src="members.js"></script>
 <script src="canonical-card-adapter.js?v=8f18296bae96"></script>
 <script src="talent-presentation.js"></script><script src="talent-filter.js"></script>
+<script src="passive-skill-filter.js"></script><script src="skill-filter.js"></script>
 <script src="user-card-state.js"></script>
-<script src="card-catalog.js?v=50accb1182dd"></script>
+<script src="card-catalog.js?v=11ad24494612"></script>
 </body>
 </html>

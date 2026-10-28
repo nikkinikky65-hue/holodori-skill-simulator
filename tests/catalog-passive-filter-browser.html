@@ -1,31 +1,43 @@
 <!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><pre id="result">RUNNING</pre><iframe style="border:0;height:900px"></iframe>
 <script>
 (async()=>{
- const out=document.querySelector('#result'),frame=document.querySelector('iframe'),check=(v,m)=>{if(!v)throw Error(m);},tick=()=>new Promise(r=>setTimeout(r,30));
+ const out=document.querySelector('#result'),frame=document.querySelector('iframe'),check=(v,m)=>{if(!v)throw Error(m);},tick=()=>new Promise(r=>setTimeout(r,40));
  try{
   for(const width of [1280,768,390]){
-   frame.style.width=width+'px';frame.src='../card-catalog.html?passive-test='+width;await new Promise(r=>frame.onload=r);
+   frame.style.width=width+'px';frame.src='../card-catalog.html?axes='+width;await new Promise(r=>frame.onload=r);
    const w=frame.contentWindow,d=w.document;await w.eval('cardCatalogReady');check(!d.querySelector('#catalogStatus').dataset.errorKind,'catalog ready');
-   const catalog=await w.loadRuntimeCardCatalog(),members=w.eval('HOLO_MEMBERS');
-   const toggle=d.querySelector('#catalogPassiveAffiliation'),search=d.querySelector('#catalogSearch'),type=d.querySelector('#catalogType');
-   const visible=()=>[...d.querySelectorAll('.catalogCard')].map(n=>n.dataset.cardId);
-   check(!toggle.checked,'default OFF');const baseline=new Map();
-   for(const r of [5,4,3]){d.querySelector('[data-catalog-rarity="'+r+'"]').click();baseline.set(r,visible());}
-   const byId=new Map(catalog.cards.map(c=>[c.id,c]));
-   const eligible=new Set(catalog.cards.filter(c=>c.skills.passive.levels.some(l=>l.target.selectors.some(s=>s.type.endsWith('_CHARACTER_GROUPING')))).map(c=>c.id));check(eligible.size===41,'audited actual count');
-   let selected=[],rarity=5;d.querySelector('[data-catalog-rarity="5"]').click();
-   function assertResults(){const expected=baseline.get(rarity).filter(id=>{const c=byId.get(id);return (!toggle.checked||eligible.has(id))&&(!selected.length||selected.includes(c.member.mapping.id))&&(!type.value||type.value===c.classification.attributeType.mapping.value)&&`${c.name} ${c.member.name}`.toLocaleLowerCase().includes(search.value.trim().toLocaleLowerCase());});check(JSON.stringify(visible())===JSON.stringify(expected),'AND filter and order');check(d.querySelector('#catalogStatus').textContent===expected.length+' / 196枚','count');}
-   toggle.click();assertResults();check(visible().length===27,'27 star-five matches');
-   for(const r of [5,4,3]){rarity=r;d.querySelector('[data-catalog-rarity="'+r+'"]').click();assertResults();check(visible().length===({5:27,4:14,3:0})[r],'audited rarity count');}
-   const trigger=d.querySelector('#catalogTalentFilter button'),dialog=d.querySelector('.talentFilterDialog');trigger.click();await tick();dialog.querySelector('[data-talent-group="0期生"]').click();dialog.querySelector('[data-talent-apply]').click();await tick();selected=members.filter(m=>m.affiliations.includes('0期生')).map(m=>m.id);
-   for(const r of [5,4,3]){rarity=r;d.querySelector('[data-catalog-rarity="'+r+'"]').click();for(const t of ['','cute','happy','pure']){type.value=t;type.dispatchEvent(new w.Event('change'));assertResults();toggle.click();assertResults();toggle.click();assertResults();}}
-   rarity=5;d.querySelector('[data-catalog-rarity="5"]').click();type.value='';type.dispatchEvent(new w.Event('change'));search.value='さくらみこ';search.dispatchEvent(new w.Event('input'));assertResults();
-   search.value='';search.dispatchEvent(new w.Event('input'));trigger.click();await tick();dialog.querySelector('[data-talent-clear]').click();dialog.querySelector('[data-talent-apply]').click();await tick();selected=[];check(toggle.checked,'talent clear keeps Passive ON');assertResults();
-   const first=d.querySelector('.catalogCard'),id=first.dataset.cardId;first.querySelector('[data-catalog-owned]').click();first.querySelector('[data-step="1"]').click();const saved=JSON.stringify(w.localStorage),training=first.querySelector('[data-catalog-training]').value;
-   toggle.click();assertResults();toggle.click();assertResults();check(JSON.stringify(w.localStorage)===saved,'toggle does not write settings');check(d.querySelector('[data-card-id="'+id+'"] [data-catalog-training]').value===training,'growth retained');
-   check(d.documentElement.scrollWidth<=width,'layout fits '+width);check(toggle.getBoundingClientRect().width>0,'checkbox visible');
+   const catalog=await w.loadRuntimeCardCatalog(),byId=new Map(catalog.cards.map(c=>[c.id,c])),members=w.eval('HOLO_MEMBERS');
+   const trigger=d.querySelector('#catalogSkillFilter button'),dialog=d.querySelector('.skillFilterDialog'),talentTrigger=d.querySelector('#catalogTalentFilter button'),td=d.querySelector('.talentFilterDialog');
+   check(!d.querySelector('#catalogPassiveAffiliation'),'old checkbox removed');check(Math.abs(trigger.getBoundingClientRect().top-talentTrigger.getBoundingClientRect().top)<1,'filter buttons same row');
+   const input=(axis,v)=>dialog.querySelector('[data-skill-axis="'+axis+'"][value="'+v+'"]'),apply=()=>dialog.querySelector('[data-skill-apply]').click();
+   const visible=()=>[...d.querySelectorAll('.catalogCard')].map(n=>n.dataset.cardId),search=d.querySelector('#catalogSearch'),type=d.querySelector('#catalogType');
+   const baseline=new Map();for(const r of [5,4,3]){d.querySelector('[data-catalog-rarity="'+r+'"]').click();baseline.set(r,visible());}
+   let rarity=5,selected=[],criteria={condition:'',targets:[],effects:[]};d.querySelector('[data-catalog-rarity="5"]').click();
+   const effectNames={PERFORMANCE_UP_PERMIL_UP:'performance',TECHNIQUE_UP_PERMIL_UP:'technique',SENSE_UP_PERMIL_UP:'sense',ALL_PARAMETER_UP_PERMIL_UP:'all',LIVE_ACTIVE_SKILL_EFFECT_UP_PERMIL_UP:'support'};
+   function eligible(c){if(!criteria.condition&&!criteria.targets.length&&!criteria.effects.length)return true;return c.skills.passive.levels.some(l=>{const condition=l.condition.referenceState==='present'?'yes':'no';const target=l.target.selectors[0].type.split('_TYPE_')[1];const targetName={SELF:'self',ATTRIBUTE:'attribute',CHARACTER_GROUPING:'affiliation'}[target];const effect=effectNames[l.effect.raw.type.replace('LivePassiveSkillEffectType_LIVE_PASSIVE_SKILL_EFFECT_TYPE_','')];return (!criteria.condition||criteria.condition===condition)&&(!criteria.targets.length||criteria.targets.includes(targetName))&&(!criteria.effects.length||criteria.effects.includes(effect));});}
+   function assertResults(){const expected=baseline.get(rarity).filter(id=>{const c=byId.get(id);return eligible(c)&&(!selected.length||selected.includes(c.member.mapping.id))&&(!type.value||type.value===c.classification.attributeType.mapping.value)&&`${c.name} ${c.member.name}`.toLocaleLowerCase().includes(search.value.trim().toLocaleLowerCase());});check(JSON.stringify(visible())===JSON.stringify(expected),'independent expected selection/order');check(d.querySelector('#catalogStatus').textContent===expected.length+' / 196枚','count');}
+   async function select(s){trigger.click();await tick();dialog.querySelector('[data-skill-clear]').click();input('condition',s.condition).click();for(const axis of ['targets','effects'])for(const v of s[axis])input(axis,v).click();apply();await tick();criteria=s;assertResults();}
+   assertResults();
+   for(const condition of ['yes','no',''])await select({condition,targets:[],effects:[]});
+   for(const target of ['self','affiliation','attribute'])await select({condition:'',targets:[target],effects:[]});
+   for(const effect of ['performance','technique','sense','all','support'])await select({condition:'',targets:[],effects:[effect]});
+   await select({condition:'no',targets:['affiliation','attribute'],effects:['sense','all']});
+   const savedIds=visible();trigger.click();await tick();check(input('condition','no').checked&&input('effects','all').checked,'reopen restores criteria');
+   check(!dialog.textContent.includes('Active')&&!dialog.textContent.includes('SP'),'only implemented Passive UI');
+   input('condition','yes').click();check(!input('condition','no').checked,'conditions mutually exclusive');check(JSON.stringify(visible())===JSON.stringify(savedIds),'draft does not apply');dialog.querySelector('header button').click();await tick();assertResults();
+   for(const mode of ['escape','outside']){trigger.click();await tick();dialog.querySelector('[data-skill-clear]').click();if(mode==='escape')dialog.dispatchEvent(new w.Event('cancel',{cancelable:true}));else dialog.dispatchEvent(new w.MouseEvent('click',{clientX:0,clientY:0}));await tick();assertResults();check(!dialog.open,'cancel closes');}
+   await select({condition:'',targets:['affiliation'],effects:[]});for(const r of [5,4,3]){rarity=r;d.querySelector('[data-catalog-rarity="'+r+'"]').click();assertResults();check(visible().length===({5:27,4:14,3:0})[r],'old 41 membership matches');}
+   talentTrigger.click();await tick();td.querySelector('[data-talent-group="0期生"]').click();td.querySelector('[data-talent-apply]').click();await tick();selected=members.filter(m=>m.affiliations.includes('0期生')).map(m=>m.id);assertResults();
+   for(const r of [5,4,3]){rarity=r;d.querySelector('[data-catalog-rarity="'+r+'"]').click();for(const t of ['','cute','happy','pure']){type.value=t;type.dispatchEvent(new w.Event('change'));assertResults();}}
+   search.value='さくらみこ';search.dispatchEvent(new w.Event('input'));assertResults();await select({condition:'',targets:[],effects:[]});check(search.value==='さくらみこ'&&d.querySelector('.talentFilterSelection').textContent.includes('人'),'skill clear preserves other filters');
+   search.value='';search.dispatchEvent(new w.Event('input'));type.value='';type.dispatchEvent(new w.Event('change'));rarity=5;d.querySelector('[data-catalog-rarity="5"]').click();await select({condition:'',targets:['affiliation'],effects:[]});
+   talentTrigger.click();await tick();td.querySelector('[data-talent-clear]').click();td.querySelector('[data-talent-apply]').click();await tick();selected=[];assertResults();check(d.querySelector('.skillFilterSummary').textContent.includes('所属'),'talent clear preserves skill');
+   const first=d.querySelector('.catalogCard'),id=first.dataset.cardId;first.querySelector('[data-catalog-owned]').click();first.querySelector('[data-step="1"]').click();const stored=JSON.stringify(w.localStorage),training=first.querySelector('[data-catalog-training]').value;
+   await select({condition:'',targets:[],effects:[]});await select({condition:'',targets:['affiliation'],effects:[]});check(JSON.stringify(w.localStorage)===stored,'filters do not alter saved states');check(d.querySelector('[data-card-id="'+id+'"] [data-catalog-training]').value===training,'growth retained');
+   trigger.click();await tick();const rect=dialog.getBoundingClientRect();check(rect.left>=0&&rect.right<=width&&dialog.querySelector('footer').getBoundingClientRect().bottom<=w.innerHeight,'dialog actions fit viewport');check(d.documentElement.scrollWidth<=width,'no overflow');dialog.querySelector('header button').click();await tick();
   }
-  out.textContent='PASS: 41 cards (27 star-five / 14 star-four), OFF restoration, talent/search/rarity/type AND, order, settings retained, 1280/768/390';
+  frame.style.width='1280px';await tick();frame.contentDocument.querySelector('#catalogSkillFilter button').click();await tick();
+  out.textContent='PASS: all Passive axes, separate sense/all, OR/AND, old 41, talent/search/rarity/type AND, apply/cancel/clear/Escape/outside, saved state, 1280/768/390';
  }catch(e){out.textContent='FAIL: '+e.stack;}
 })();
 </script>

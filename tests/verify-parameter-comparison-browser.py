@@ -31,6 +31,7 @@ try:
                  '--disable-component-update','--user-data-dir='+str(logs/f'profile-{index}'),
                  '--dump-dom','--window-size=1920,1200','--virtual-time-budget=60000']
         if index==0:command.append('--screenshot='+str(logs/'comparison.png'))
+        if page=='catalog-passive-filter-browser.html':command.append('--screenshot='+str(logs/'passive-filter.png'))
         if page=='talent-filter-browser.html':command.append('--screenshot='+str(logs/'talent-filter.png'))
         command.append(f'http://127.0.0.1:{server.server_port}/tests/'+page)
         result=subprocess.run(command,capture_output=True,text=True,timeout=120)

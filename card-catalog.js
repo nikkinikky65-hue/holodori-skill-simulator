@@ -1,11 +1,4 @@
-// Search only: Canonical-derived target selectors, independent of trigger/engine support.
-function hasAffiliationTargetPassive(card){
-  return (card.skills?.passive?.levels || []).some(level=>
-    [1,2].includes(level.level) && typeof level.effect?.raw?.type==='string' &&
-    (level.target?.selectors || []).some(target=>
-      target.type==='LiveSkillEffectTargetType_LIVE_SKILL_EFFECT_TARGET_TYPE_CHARACTER_GROUPING' &&
-      typeof target.characterGroupingId==='string' && target.characterGroupingId.trim()!==''));
-}
+function hasAffiliationTargetPassive(card){return PassiveSkillFilter.matches(card,{condition:"",targets:["affiliation"],effects:[]});}
 // Catalog data and parameter interpretation remain shared and immutable.
 // Only independent user card settings are persisted by this page.
 async function renderCardCatalog(){
@@ -26,9 +19,9 @@ async function renderCardCatalog(){
     let rarity = '5';
     let selectedTalents=new Set();
     const type = document.querySelector('#catalogType');
-    const passiveAffiliation = document.querySelector('#catalogPassiveAffiliation');
+    let skillSelection=PassiveSkillFilter.empty();
     readUserCardStates(); // Validate existing settings before presenting editable controls.
-    for(const [selector, element] of [['#catalogCards',container], ['#catalogSearch',search], ['#catalogType',type], ['#catalogPassiveAffiliation',passiveAffiliation]]){
+    for(const [selector, element] of [['#catalogCards',container], ['#catalogSearch',search], ['#catalogType',type]]){
       if(!element) throw new Error(`必須要素がありません：${selector}`);
     }
     if(rarityButtons.map(button => button.dataset.catalogRarity).join(',') !== '5,4,3') throw new Error('レア度ボタン（★5・★4・★3）が不足、または順序が不正です。');
@@ -38,7 +31,7 @@ async function renderCardCatalog(){
       const cards = sortCatalogCardsForDisplay(catalog.cards.filter(card =>
         `${card.name} ${canonicalMemberName(card)}`.toLocaleLowerCase().includes(query) &&
         (!selectedTalents.size || selectedTalents.has(card.member.mapping?.id)) &&
-        (!passiveAffiliation.checked || hasAffiliationTargetPassive(card)) &&
+        PassiveSkillFilter.matches(card,skillSelection) &&
         String(card.classification.rarity.mapping.value) === rarity &&
         (!type.value || card.classification.attributeType.mapping.value === type.value)), catalog.cards);
       const userStates = readUserCardStates();
@@ -119,6 +112,7 @@ async function renderCardCatalog(){
       references:catalog.cards.map(card=>({talentId:card.member.mapping?.id,formalName:card.member.name,source:card.id})),
       onApply:ids=>{selectedTalents=new Set(ids);render();}
     });
+    SkillFilter.mount(document.querySelector('#catalogSkillFilter'),{onApply:selection=>{skillSelection=selection;render();}});
     search.addEventListener('input', render);
     for(const button of rarityButtons) button.addEventListener('click', () => {
       rarity = button.dataset.catalogRarity;
@@ -126,7 +120,7 @@ async function renderCardCatalog(){
       render();
     });
     type.addEventListener('change', render);
-    passiveAffiliation.addEventListener('change', render);
+
     render();
     const exportButton = document.querySelector('#catalogExport');
     const exportStatus = document.querySelector('#catalogExportStatus');

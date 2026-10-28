@@ -1,0 +1,18 @@
+.catalogSearchActions { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); align-items:start; gap:12px; margin:12px 0; }
+.catalogSearchActions > div { flex:1 1 240px; min-width:0; }
+.catalogSearchActions .talentFilterToolbar { margin:0; display:block; }
+.catalogSearchActions .talentFilterSelection,.skillFilterSummary { display:block; margin-top:8px; font-size:14px; overflow-wrap:anywhere; }
+.catalogSearchActions button,.skillFilterDialog button { font:inherit; padding:8px 16px; min-height:44px; cursor:pointer; }
+.skillFilterDialog { box-sizing:border-box; width:min(680px,calc(100% - 24px)); max-width:calc(100% - 24px); max-height:calc(100dvh - 24px); padding:0; border:1px solid #94a3b8; border-radius:12px; background:white; color:#17283e; }
+.skillFilterDialog[open] { display:flex; flex-direction:column; }
+.skillFilterDialog::backdrop { background:rgb(15 23 42 / .55); }
+.skillFilterDialog header,.skillFilterDialog footer { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px; }
+.skillFilterDialog h2 { margin:0; font-size:18px; }
+.skillFilterBody { overflow:auto; min-height:0; padding:0 16px 16px; }
+.skillFilterBody p { font-size:13px; line-height:1.6; }
+.skillFilterBody fieldset { margin:12px 0; border:1px solid #cbd5e1; min-width:0; }
+.skillFilterBody label { display:inline-flex; align-items:center; gap:8px; margin:4px; min-height:44px; cursor:pointer; }
+.skillFilterBody input { width:18px; height:18px; padding:0; margin:0; }
+.skillFilterDialog [data-skill-apply] { background:#203b60; color:white; border-radius:6px; border:1px solid #203b60; }
+
+@media(max-width:480px) { .catalogSearchActions button { font-size:14px; padding-inline:10px; max-width:100%; } .skillFilterDialog header { align-items:start; } }
