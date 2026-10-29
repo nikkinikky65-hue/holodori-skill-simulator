@@ -2,33 +2,33 @@
   "format": "holodori-leader-source-v1",
   "provenance": {
     "repository": "https://github.com/HolodoriDB/holodori-db-jpn-diff",
-    "commitSha": "ed117f1d53d4680228d22c7176e511a1c241c5fc",
+    "commitSha": "05b878b1daba99383f407dd3457eb9713f1c4632",
     "representation": "JSON values preserved; reserialized at capture, not original byte formatting",
     "tables": {
       "Costume": {
-        "url": "https://raw.githubusercontent.com/HolodoriDB/holodori-db-jpn-diff/ed117f1d53d4680228d22c7176e511a1c241c5fc/Costume.json",
-        "capturedAtUtc": "2026-10-22T10:49:27.192127+00:00",
-        "capturedJsonSha256": "178c4a28defaf160e5150111ee05c03381287799f0b2cedd5c80bd0d6edccba8"
+        "url": "https://raw.githubusercontent.com/HolodoriDB/holodori-db-jpn-diff/05b878b1daba99383f407dd3457eb9713f1c4632/Costume.json",
+        "capturedAtUtc": "2026-10-29T13:58:37.375408+00:00",
+        "capturedJsonSha256": "33693eb756625eb661597627823e715fed98cba7c561af774a6b8c3ac7e00665"
       },
       "LangCostume_Jpn": {
-        "url": "https://raw.githubusercontent.com/HolodoriDB/holodori-db-jpn-diff/ed117f1d53d4680228d22c7176e511a1c241c5fc/LangCostume_Jpn.json",
-        "capturedAtUtc": "2026-10-22T10:49:27.192127+00:00",
-        "capturedJsonSha256": "ee4822fd92b29daff4e8775072ec33226a4ee36587ecca0338fb2fdce3c3fc0c"
+        "url": "https://raw.githubusercontent.com/HolodoriDB/holodori-db-jpn-diff/05b878b1daba99383f407dd3457eb9713f1c4632/LangCostume_Jpn.json",
+        "capturedAtUtc": "2026-10-29T13:58:37.375408+00:00",
+        "capturedJsonSha256": "ec38685277f3309a1e9fa64dd04a748b1b7dc5b46574c67b2c5dd0cd79e5a3c0"
       },
       "LiveLeaderSkill": {
-        "url": "https://raw.githubusercontent.com/HolodoriDB/holodori-db-jpn-diff/ed117f1d53d4680228d22c7176e511a1c241c5fc/LiveLeaderSkill.json",
-        "capturedAtUtc": "2026-10-22T10:49:27.192127+00:00",
-        "capturedJsonSha256": "28cfd0b7749e4e8825a60c5c8b506b27654a0f43901ecbf86c0835f4eae72b81"
+        "url": "https://raw.githubusercontent.com/HolodoriDB/holodori-db-jpn-diff/05b878b1daba99383f407dd3457eb9713f1c4632/LiveLeaderSkill.json",
+        "capturedAtUtc": "2026-10-29T13:58:37.375408+00:00",
+        "capturedJsonSha256": "06fcfe5ee6bd46f2afbb269aa2bd2f16db85ca6542dbfd44e5161aecf0454026"
       },
       "LangLiveLeaderSkill_Jpn": {
-        "url": "https://raw.githubusercontent.com/HolodoriDB/holodori-db-jpn-diff/ed117f1d53d4680228d22c7176e511a1c241c5fc/LangLiveLeaderSkill_Jpn.json",
-        "capturedAtUtc": "2026-10-22T10:49:27.192127+00:00",
+        "url": "https://raw.githubusercontent.com/HolodoriDB/holodori-db-jpn-diff/05b878b1daba99383f407dd3457eb9713f1c4632/LangLiveLeaderSkill_Jpn.json",
+        "capturedAtUtc": "2026-10-29T13:58:37.375408+00:00",
         "capturedJsonSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
       },
       "LangGeneratedLiveLeaderSkill_Jpn": {
-        "url": "https://raw.githubusercontent.com/HolodoriDB/holodori-db-jpn-diff/ed117f1d53d4680228d22c7176e511a1c241c5fc/LangGeneratedLiveLeaderSkill_Jpn.json",
-        "capturedAtUtc": "2026-10-22T10:49:27.192127+00:00",
-        "capturedJsonSha256": "0129df8573f05f26b85df694b98338bb2488f8c836bf1c73a4cdf058bab1e08d"
+        "url": "https://raw.githubusercontent.com/HolodoriDB/holodori-db-jpn-diff/05b878b1daba99383f407dd3457eb9713f1c4632/LangGeneratedLiveLeaderSkill_Jpn.json",
+        "capturedAtUtc": "2026-10-29T13:58:37.375408+00:00",
+        "capturedJsonSha256": "f50d50233f37e4db812e47bb0aed92c91751519c4df0b52e2456f637fad87b31"
       }
     }
   },
@@ -1919,6 +1919,76 @@
         }
       },
       {
+        "id": "cos-00007-uniq-0096-00",
+        "data": {
+          "id": "cos-00007-uniq-0096-00",
+          "characterId": "chr-00007",
+          "nameLangId": "la-cos-00007-uniq-0096-00",
+          "liveLeaderSkillId": "live_leader_skill-card-00007-5-uniq-0096-00",
+          "assetId": "00007-uniq-0096-00",
+          "expressionAssetId": "000",
+          "liveStartCharacterVoiceId": "cv-live_cmn_chr-00007_00007-5-uniq-0096-00_start-card",
+          "rarityType": "CostumeRarityType_COSTUME_RARITY_TYPE_RARITY_5",
+          "order": 26111001
+        }
+      },
+      {
+        "id": "cos-03007-uniq-0100-00",
+        "data": {
+          "id": "cos-03007-uniq-0100-00",
+          "characterId": "chr-03007",
+          "nameLangId": "la-cos-03007-uniq-0100-00",
+          "liveLeaderSkillId": "live_leader_skill-card-03007-5-uniq-0100-00",
+          "assetId": "03007-uniq-0100-00",
+          "expressionAssetId": "000",
+          "liveStartCharacterVoiceId": "cv-live_cmn_chr-03007_03007-5-uniq-0100-00_start-card",
+          "rarityType": "CostumeRarityType_COSTUME_RARITY_TYPE_RARITY_5",
+          "order": 26111001
+        }
+      },
+      {
+        "id": "cos-04015-uniq-0099-00",
+        "data": {
+          "id": "cos-04015-uniq-0099-00",
+          "characterId": "chr-04015",
+          "nameLangId": "la-cos-04015-uniq-0099-00",
+          "liveLeaderSkillId": "live_leader_skill-card-04015-5-uniq-0099-00",
+          "assetId": "04015-uniq-0099-00",
+          "expressionAssetId": "000",
+          "liveStartCharacterVoiceId": "cv-live_cmn_chr-04015_04015-5-uniq-0099-00_start-card",
+          "rarityType": "CostumeRarityType_COSTUME_RARITY_TYPE_RARITY_5",
+          "order": 26111001
+        }
+      },
+      {
+        "id": "cos-06004-uniq-0098-00",
+        "data": {
+          "id": "cos-06004-uniq-0098-00",
+          "characterId": "chr-06004",
+          "nameLangId": "la-cos-06004-uniq-0098-00",
+          "liveLeaderSkillId": "live_leader_skill-card-06004-5-uniq-0098-00",
+          "assetId": "06004-uniq-0098-00",
+          "expressionAssetId": "000",
+          "liveStartCharacterVoiceId": "cv-live_cmn_chr-06004_06004-5-uniq-0098-00_start-card",
+          "rarityType": "CostumeRarityType_COSTUME_RARITY_TYPE_RARITY_5",
+          "order": 26111001
+        }
+      },
+      {
+        "id": "cos-06005-uniq-0097-00",
+        "data": {
+          "id": "cos-06005-uniq-0097-00",
+          "characterId": "chr-06005",
+          "nameLangId": "la-cos-06005-uniq-0097-00",
+          "liveLeaderSkillId": "live_leader_skill-card-06005-5-uniq-0097-00",
+          "assetId": "06005-uniq-0097-00",
+          "expressionAssetId": "000",
+          "liveStartCharacterVoiceId": "cv-live_cmn_chr-06005_06005-5-uniq-0097-00_start-card",
+          "rarityType": "CostumeRarityType_COSTUME_RARITY_TYPE_RARITY_5",
+          "order": 26111001
+        }
+      },
+      {
         "id": "cos-00010-cmmn-0000-00",
         "data": {
           "id": "cos-00010-cmmn-0000-00",
@@ -2909,6 +2979,13 @@
         }
       },
       {
+        "id": "la-cos-00007-uniq-0096-00",
+        "data": {
+          "id": "la-cos-00007-uniq-0096-00",
+          "text": "なりきりもふもふウルフ"
+        }
+      },
+      {
         "id": "la-cos-00009-nrml-0009-00",
         "data": {
           "id": "la-cos-00009-nrml-0009-00",
@@ -3728,6 +3805,13 @@
         }
       },
       {
+        "id": "la-cos-03007-uniq-0100-00",
+        "data": {
+          "id": "la-cos-03007-uniq-0100-00",
+          "text": "サッシーナース"
+        }
+      },
+      {
         "id": "la-cos-03008-cmmn-0000-00",
         "data": {
           "id": "la-cos-03008-cmmn-0000-00",
@@ -4036,6 +4120,13 @@
         }
       },
       {
+        "id": "la-cos-04015-uniq-0099-00",
+        "data": {
+          "id": "la-cos-04015-uniq-0099-00",
+          "text": "アリュールウィッチ"
+        }
+      },
+      {
         "id": "la-cos-04016-cmmn-0000-00",
         "data": {
           "id": "la-cos-04016-cmmn-0000-00",
@@ -4176,6 +4267,13 @@
         }
       },
       {
+        "id": "la-cos-06004-uniq-0098-00",
+        "data": {
+          "id": "la-cos-06004-uniq-0098-00",
+          "text": "ゴシックヴァンパイア"
+        }
+      },
+      {
         "id": "la-cos-06005-cmmn-0000-00",
         "data": {
           "id": "la-cos-06005-cmmn-0000-00",
@@ -4194,6 +4292,13 @@
         "data": {
           "id": "la-cos-06005-uniq-0061-00",
           "text": "スイート番長スタイル"
+        }
+      },
+      {
+        "id": "la-cos-06005-uniq-0097-00",
+        "data": {
+          "id": "la-cos-06005-uniq-0097-00",
+          "text": "さいきょうキョンシー"
         }
       }
     ],
@@ -4527,6 +4632,53 @@
           "liveSkillTriggerGroupId": "live_skill_trigger-deck_card_character_grouping-grp-advent-2",
           "livePassiveSkillEffectGroupId": "live_leader_skill_effect-performance_up_permil_up-1350-live_skill_effect_target-all",
           "descriptionLangId": "la-generated-live_leader_skill-card-04014-5-uniq-0094-00-description"
+        }
+      },
+      {
+        "id": "live_leader_skill-card-00007-5-uniq-0096-00",
+        "data": {
+          "id": "live_leader_skill-card-00007-5-uniq-0096-00",
+          "liveSkillTriggerGroupId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
+          "livePassiveSkillEffectGroupId": "live_leader_skill_effect-sense_up_permil_up-1300-live_skill_effect_target-all",
+          "descriptionLangId": "la-generated-live_leader_skill-card-00007-5-uniq-0096-00-description"
+        }
+      },
+      {
+        "id": "live_leader_skill-card-03007-5-uniq-0100-00",
+        "data": {
+          "id": "live_leader_skill-card-03007-5-uniq-0100-00",
+          "liveSkillTriggerGroupId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
+          "livePassiveSkillEffectGroupId": "live_leader_skill_effect-technique_up_permil_up-1300-live_skill_effect_target-all",
+          "descriptionLangId": "la-generated-live_leader_skill-card-03007-5-uniq-0100-00-description"
+        }
+      },
+      {
+        "id": "live_leader_skill-card-04015-5-uniq-0099-00",
+        "data": {
+          "id": "live_leader_skill-card-04015-5-uniq-0099-00",
+          "liveSkillTriggerGroupId": "live_skill_trigger-deck_card_attribute-attribute_3-2",
+          "livePassiveSkillEffectGroupId": "live_leader_skill_effect-performance_up_permil_up-800-live_skill_effect_target-all",
+          "additionalLiveSkillTriggerGroupId": "live_skill_trigger-deck_card_attribute-attribute_3-2",
+          "additionalLivePassiveSkillEffectGroupId": "live_leader_skill_effect-live_active_skill_effect_up_permil_up-250-live_skill_effect_target-all",
+          "descriptionLangId": "la-generated-live_leader_skill-card-04015-5-uniq-0099-00-description"
+        }
+      },
+      {
+        "id": "live_leader_skill-card-06004-5-uniq-0098-00",
+        "data": {
+          "id": "live_leader_skill-card-06004-5-uniq-0098-00",
+          "liveSkillTriggerGroupId": "live_skill_trigger-deck_card_character_grouping-grp-regloss-2",
+          "livePassiveSkillEffectGroupId": "live_leader_skill_effect-technique_up_permil_up-1350-live_skill_effect_target-all",
+          "descriptionLangId": "la-generated-live_leader_skill-card-06004-5-uniq-0098-00-description"
+        }
+      },
+      {
+        "id": "live_leader_skill-card-06005-5-uniq-0097-00",
+        "data": {
+          "id": "live_leader_skill-card-06005-5-uniq-0097-00",
+          "liveSkillTriggerGroupId": "live_skill_trigger-deck_card_character_grouping-grp-regloss-2",
+          "livePassiveSkillEffectGroupId": "live_leader_skill_effect-all_parameter_up_permil_up-500-live_skill_effect_target-all",
+          "descriptionLangId": "la-generated-live_leader_skill-card-06005-5-uniq-0097-00-description"
         }
       },
       {
@@ -6121,6 +6273,41 @@
         "data": {
           "id": "la-generated-live_leader_skill-card-04014-5-uniq-0094-00-description",
           "text": "Adventが2人以上で全員のパフォーマンスが135%UP"
+        }
+      },
+      {
+        "id": "la-generated-live_leader_skill-card-00007-5-uniq-0096-00-description",
+        "data": {
+          "id": "la-generated-live_leader_skill-card-00007-5-uniq-0096-00-description",
+          "text": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のセンスが130%UP"
+        }
+      },
+      {
+        "id": "la-generated-live_leader_skill-card-03007-5-uniq-0100-00-description",
+        "data": {
+          "id": "la-generated-live_leader_skill-card-03007-5-uniq-0100-00-description",
+          "text": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のテクニックが130%UP"
+        }
+      },
+      {
+        "id": "la-generated-live_leader_skill-card-04015-5-uniq-0099-00-description",
+        "data": {
+          "id": "la-generated-live_leader_skill-card-04015-5-uniq-0099-00-description",
+          "text": "[attribute=happy]ハッピータイプ[/attribute]2人以上で全員のパフォーマンスが80%UP\n[attribute=happy]ハッピータイプ[/attribute]2人以上で全員のスコアサポート効果25%"
+        }
+      },
+      {
+        "id": "la-generated-live_leader_skill-card-06004-5-uniq-0098-00-description",
+        "data": {
+          "id": "la-generated-live_leader_skill-card-06004-5-uniq-0098-00-description",
+          "text": "ReGLOSSが2人以上で全員のテクニックが135%UP"
+        }
+      },
+      {
+        "id": "la-generated-live_leader_skill-card-06005-5-uniq-0097-00-description",
+        "data": {
+          "id": "la-generated-live_leader_skill-card-06005-5-uniq-0097-00-description",
+          "text": "ReGLOSSが2人以上で全員の全パラメータが50%UP"
         }
       },
       {

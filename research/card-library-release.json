@@ -1,25 +1,26 @@
 {
-  "sourceCommit": "ed117f1d53d4680228d22c7176e511a1c241c5fc",
-  "cardCount": 196,
-  "previousCount": 192,
+  "sourceCommit": "05b878b1daba99383f407dd3457eb9713f1c4632",
+  "cardCount": 201,
+  "previousCount": 196,
   "newCardIds": [
-    "card-00027-5-uniq-0092-00",
-    "card-00032-5-uniq-0093-00",
-    "card-03008-5-uniq-0095-00",
-    "card-04014-5-uniq-0094-00"
+    "card-00007-5-uniq-0096-00",
+    "card-03007-5-uniq-0100-00",
+    "card-04015-5-uniq-0099-00",
+    "card-06004-5-uniq-0098-00",
+    "card-06005-5-uniq-0097-00"
   ],
   "sha256": {
-    "research/holodoridb-all-card-survey.json": "4e285234bd3b27e1d1dbf4ea321dc72e238cc7d33d215d31c0d64cbd3c360260",
-    "research/canonical-cards.json": "fe625b7f00e0f7c3c437add3557243d33595b21a11a9b77cb323b3749cc8435c",
-    "research/holodoridb-leader-source.json": "2922e5f642acc842df7fba6a2078050024101325c92509beb96ae83c5c766143",
-    "data/runtime-cards.json": "0b7b5479b881efedc78e304978e78faef2946c9490134acd834c36e2cfc03a64",
-    "data/runtime-affiliations.json": "a5cf7fc06a942a049217e7aca5d7584af9b8f9fc214e08d4be9962729602ecdc",
-    "data/runtime-leader-skills.json": "fb42016bcc4d598107d4bb9e2685c577fa53a86f2c90d3b43d81d1d7fae3bc74",
-    "research/unit-leader-audit.json": "be0bcc034bde15605f0c9ede364620fffe5ea0845226e57440c6c2ecc553ea67",
-    "research/unit-leader-audit.md": "1186cdbf00a3100f788b27698ca9055e1c0ce7db49ee1d41f02760af25ed23fe",
-    "data/leader-parameter-rules.json": "491f50999aa788857d96c178b40629bf60d6f14b07f2ab86f1995a832984bae1",
-    "research/unit-passive-audit.json": "f0e973d5bb42f46cb1e2d296266a1a706113d8adc0888a743ed658c98cc3c523",
-    "research/passive-condition-gaps.json": "e126047d31161e8189d1d2b207063a031abe044a5b0c4a97a1f2c8526b8b9d68",
-    "research/card-library-update.json": "79469ce11d7b09cbbeaaa6acc0417cff7d33071208a0c6ed340dc4b68d7bdcec"
+    "research/holodoridb-all-card-survey.json": "e64bb7337b60e73db0ca5d0cd4f8a45b1b5339c0c80df09558248aee238d2ad9",
+    "research/canonical-cards.json": "1c8c0c9d2f861c8f5bd5a7ca7c7177c69d902dfadc52da478ca059f30a981a1a",
+    "research/holodoridb-leader-source.json": "485cd3f25193e26b5faeb945399a734dc2bc58ee18e3d8985df9d47048c16de4",
+    "data/runtime-cards.json": "e165b89ed1d659a1cb593ef2ab604e2713e22b28ddc9ac1e623735404e6b4ad6",
+    "data/runtime-affiliations.json": "e3ff40b5f0fb0b6e952ce270fe78c40b5574cdb273f75a3ffdc677456ddeb30d",
+    "data/runtime-leader-skills.json": "60f9a7f0b76f47791bbee100b2faec3e7f4cd7593d4638ffba2f5398b8e2bdf6",
+    "research/unit-leader-audit.json": "2bc2a7e32b303741847a13427692bb1ac6df50dcd53b065359739364fb7b185d",
+    "research/unit-leader-audit.md": "ef1201b6342d8c93413343e843b1cce66d8301e1745184d8917f5711d68a408f",
+    "data/leader-parameter-rules.json": "803ceccf71ace9aa2b61cbe78ede81744f4c797c6a6992bf6110574481ac3bb6",
+    "research/unit-passive-audit.json": "ead560e3e867a505fc996c2e698fcca445b28f807b7571aea3393069f7c92030",
+    "research/passive-condition-gaps.json": "7d90f58fc2df31e06af8dfb4bd2aa314b75d34d57a08dc86adf99bfe2bbfc725",
+    "research/card-library-update.json": "d5bb36b65f0adcb8cd1e5e1f175cdc26699bd1be6b2b657865aa749b37d82e9d"
   }
 }

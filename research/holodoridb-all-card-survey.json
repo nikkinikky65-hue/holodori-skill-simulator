@@ -3,11 +3,11 @@
   "canonicalSimulatorSchema": "not-defined; no simulator conversion performed",
   "provenance": {
     "repository": "https://github.com/HolodoriDB/holodori-db-jpn-diff",
-    "commitSha": "ed117f1d53d4680228d22c7176e511a1c241c5fc",
-    "commitUrl": "https://github.com/HolodoriDB/holodori-db-jpn-diff/tree/ed117f1d53d4680228d22c7176e511a1c241c5fc",
-    "retrievedAtUtc": "2026-10-22T10:49:27.192127+00:00",
+    "commitSha": "05b878b1daba99383f407dd3457eb9713f1c4632",
+    "commitUrl": "https://github.com/HolodoriDB/holodori-db-jpn-diff/tree/05b878b1daba99383f407dd3457eb9713f1c4632",
+    "retrievedAtUtc": "2026-10-29T13:58:37.375408+00:00",
     "publicScope": {
-      "selection": "All 196 records in the pinned Card table; name joins are recorded in cardIndex.",
+      "selection": "All 201 records in the pinned Card table; name joins are recorded in cardIndex.",
       "independentPublishedCatalogCheck": "Not independently verified for this capture; repository default-branch HEAD checked separately.",
       "url": "https://www.horodori.com/cards"
     },
@@ -33,27 +33,27 @@
     ]
   },
   "coverage": {
-    "cardCount": 196,
+    "cardCount": 201,
     "cardRarityCounts": {
-      "CardRarity_CARD_RARITY_RARITY_5": 88,
+      "CardRarity_CARD_RARITY_RARITY_5": 93,
       "CardRarity_CARD_RARITY_RARITY_4": 54,
       "CardRarity_CARD_RARITY_RARITY_3": 54
     },
-    "cardLocalizedNameCoverage": 196,
-    "uniqueCardIds": 196,
+    "cardLocalizedNameCoverage": 201,
+    "uniqueCardIds": 201,
     "cardOptionalFieldCounts": {
-      "acquireReward": 88,
-      "cardDetailCharacterVoiceId": 88,
-      "gachaAnimationCharacterVoiceId": 88,
-      "liveSkillCharacterVoiceId": 88,
-      "potentialUpgrade1CharacterVoiceId": 88,
-      "potentialUpgrade2CharacterVoiceId": 88,
-      "potentialUpgrade3CharacterVoiceId": 88,
-      "potentialUpgrade4CharacterVoiceId": 88,
-      "potentialUpgrade5CharacterVoiceId": 88,
-      "rewardCostumeId": 142,
-      "rewardSdCostumeId": 142,
-      "skillTreeConnectEffectId": 142
+      "acquireReward": 93,
+      "cardDetailCharacterVoiceId": 93,
+      "gachaAnimationCharacterVoiceId": 93,
+      "liveSkillCharacterVoiceId": 93,
+      "potentialUpgrade1CharacterVoiceId": 93,
+      "potentialUpgrade2CharacterVoiceId": 93,
+      "potentialUpgrade3CharacterVoiceId": 93,
+      "potentialUpgrade4CharacterVoiceId": 93,
+      "potentialUpgrade5CharacterVoiceId": 93,
+      "rewardCostumeId": 147,
+      "rewardSdCostumeId": 147,
+      "skillTreeConnectEffectId": 147
     },
     "skillStructures": {
       "passive": {
@@ -63,19 +63,19 @@
               1,
               2
             ],
-            "cards": 196
+            "cards": 201
           }
         ],
         "levelRowPatternCounts": [
           {
             "hasTriggerReference": false,
             "hasAdditionalEffectGroup": false,
-            "levelRows": 158
+            "levelRows": 160
           },
           {
             "hasTriggerReference": true,
             "hasAdditionalEffectGroup": false,
-            "levelRows": 234
+            "levelRows": 242
           }
         ],
         "levelFieldShapes": [
@@ -86,7 +86,7 @@
               "livePassiveSkillEffectGroupId",
               "livePassiveSkillId"
             ],
-            "levelRows": 158
+            "levelRows": 160
           },
           {
             "fields": [
@@ -96,41 +96,41 @@
               "livePassiveSkillId",
               "liveSkillTriggerGroupId"
             ],
-            "levelRows": 234
+            "levelRows": 242
           }
         ],
         "primaryEffectTypeCounts": {
-          "LivePassiveSkillEffectType_LIVE_PASSIVE_SKILL_EFFECT_TYPE_ALL_PARAMETER_UP_PERMIL_UP": 86,
-          "LivePassiveSkillEffectType_LIVE_PASSIVE_SKILL_EFFECT_TYPE_LIVE_ACTIVE_SKILL_EFFECT_UP_PERMIL_UP": 84,
-          "LivePassiveSkillEffectType_LIVE_PASSIVE_SKILL_EFFECT_TYPE_SENSE_UP_PERMIL_UP": 74,
+          "LivePassiveSkillEffectType_LIVE_PASSIVE_SKILL_EFFECT_TYPE_ALL_PARAMETER_UP_PERMIL_UP": 88,
+          "LivePassiveSkillEffectType_LIVE_PASSIVE_SKILL_EFFECT_TYPE_LIVE_ACTIVE_SKILL_EFFECT_UP_PERMIL_UP": 88,
+          "LivePassiveSkillEffectType_LIVE_PASSIVE_SKILL_EFFECT_TYPE_SENSE_UP_PERMIL_UP": 76,
           "LivePassiveSkillEffectType_LIVE_PASSIVE_SKILL_EFFECT_TYPE_TECHNIQUE_UP_PERMIL_UP": 74,
-          "LivePassiveSkillEffectType_LIVE_PASSIVE_SKILL_EFFECT_TYPE_PERFORMANCE_UP_PERMIL_UP": 74
+          "LivePassiveSkillEffectType_LIVE_PASSIVE_SKILL_EFFECT_TYPE_PERFORMANCE_UP_PERMIL_UP": 76
         },
         "additionalEffectTypeCounts": {},
         "allEffectTypeCounts": {
-          "LivePassiveSkillEffectType_LIVE_PASSIVE_SKILL_EFFECT_TYPE_ALL_PARAMETER_UP_PERMIL_UP": 86,
-          "LivePassiveSkillEffectType_LIVE_PASSIVE_SKILL_EFFECT_TYPE_LIVE_ACTIVE_SKILL_EFFECT_UP_PERMIL_UP": 84,
-          "LivePassiveSkillEffectType_LIVE_PASSIVE_SKILL_EFFECT_TYPE_SENSE_UP_PERMIL_UP": 74,
+          "LivePassiveSkillEffectType_LIVE_PASSIVE_SKILL_EFFECT_TYPE_ALL_PARAMETER_UP_PERMIL_UP": 88,
+          "LivePassiveSkillEffectType_LIVE_PASSIVE_SKILL_EFFECT_TYPE_LIVE_ACTIVE_SKILL_EFFECT_UP_PERMIL_UP": 88,
+          "LivePassiveSkillEffectType_LIVE_PASSIVE_SKILL_EFFECT_TYPE_SENSE_UP_PERMIL_UP": 76,
           "LivePassiveSkillEffectType_LIVE_PASSIVE_SKILL_EFFECT_TYPE_TECHNIQUE_UP_PERMIL_UP": 74,
-          "LivePassiveSkillEffectType_LIVE_PASSIVE_SKILL_EFFECT_TYPE_PERFORMANCE_UP_PERMIL_UP": 74
+          "LivePassiveSkillEffectType_LIVE_PASSIVE_SKILL_EFFECT_TYPE_PERFORMANCE_UP_PERMIL_UP": 76
         },
         "primaryEffectCountPerLevelRow": {
-          "1": 392
+          "1": 402
         },
         "additionalEffectCountPerLevelRow": {
-          "0": 392
+          "0": 402
         },
-        "cardsWithTriggerReference": 117,
+        "cardsWithTriggerReference": 121,
         "triggerGroupReferenceCounts": {
           "live_skill_trigger-deck_card_character_grouping-grp-gen_3-2": 6,
           "live_skill_trigger-deck_card_character_grouping-grp-gen_0-2": 6,
           "live_skill_trigger-deck_card_attribute-attribute_1-2": 48,
-          "live_skill_trigger-deck_card_attribute-attribute_3-2": 44,
+          "live_skill_trigger-deck_card_attribute-attribute_3-2": 46,
           "live_skill_trigger-deck_card_character_grouping-grp-gen_1-2": 4,
           "live_skill_trigger-deck_card_attribute-attribute_1-3": 6,
           "live_skill_trigger-deck_card_attribute-attribute_2-3": 6,
           "live_skill_trigger-deck_card_character_grouping-grp-gen_2-2": 6,
-          "live_skill_trigger-deck_card_attribute-attribute_2-2": 48,
+          "live_skill_trigger-deck_card_attribute-attribute_2-2": 50,
           "live_skill_trigger-deck_card_character_grouping-grp-gamers-2": 6,
           "live_skill_trigger-deck_card_attribute-attribute_3-3": 6,
           "live_skill_trigger-deck_card_character_grouping-grp-gen_4-2": 4,
@@ -141,12 +141,12 @@
           "live_skill_trigger-deck_card_character_grouping-grp-indonesia-gen_3-2": 4,
           "live_skill_trigger-deck_card_character_grouping-grp-myth-2": 4,
           "live_skill_trigger-deck_card_character_grouping-grp-advent-2": 8,
-          "live_skill_trigger-deck_card_character_grouping-grp-regloss-2": 4,
+          "live_skill_trigger-deck_card_character_grouping-grp-regloss-2": 8,
           "live_skill_trigger-deck_card_character_grouping-grp-promise-2": 2
         },
         "triggerTypeOccurrenceCounts": {
-          "LiveSkillTriggerType_LIVE_SKILL_TRIGGER_TYPE_DECK_CARD_CHARACTER_GROUPING": 76,
-          "LiveSkillTriggerType_LIVE_SKILL_TRIGGER_TYPE_DECK_CARD_ATTRIBUTE": 158
+          "LiveSkillTriggerType_LIVE_SKILL_TRIGGER_TYPE_DECK_CARD_CHARACTER_GROUPING": 80,
+          "LiveSkillTriggerType_LIVE_SKILL_TRIGGER_TYPE_DECK_CARD_ATTRIBUTE": 162
         },
         "triggerFieldShapes": [
           {
@@ -155,7 +155,7 @@
               "threshold",
               "type"
             ],
-            "occurrences": 158
+            "occurrences": 162
           },
           {
             "fields": [
@@ -163,7 +163,7 @@
               "threshold",
               "type"
             ],
-            "occurrences": 76
+            "occurrences": 80
           }
         ],
         "effectTypeExamples": {
@@ -336,19 +336,19 @@
               1,
               2
             ],
-            "cards": 196
+            "cards": 201
           }
         ],
         "levelRowPatternCounts": [
           {
             "hasTriggerReference": false,
             "hasAdditionalEffectGroup": false,
-            "levelRows": 240
+            "levelRows": 248
           },
           {
             "hasTriggerReference": true,
             "hasAdditionalEffectGroup": true,
-            "levelRows": 152
+            "levelRows": 154
           }
         ],
         "levelFieldShapes": [
@@ -364,7 +364,7 @@
               "liveActiveSkillEffectGroupId",
               "liveActiveSkillId"
             ],
-            "levelRows": 152
+            "levelRows": 154
           },
           {
             "fields": [
@@ -376,26 +376,26 @@
               "liveActiveSkillEffectGroupId",
               "liveActiveSkillId"
             ],
-            "levelRows": 240
+            "levelRows": 248
           }
         ],
         "primaryEffectTypeCounts": {
-          "LiveActiveSkillEffectType_LIVE_ACTIVE_SKILL_EFFECT_TYPE_SCORE_UP_PERMIL_UP": 392
+          "LiveActiveSkillEffectType_LIVE_ACTIVE_SKILL_EFFECT_TYPE_SCORE_UP_PERMIL_UP": 402
         },
         "additionalEffectTypeCounts": {
-          "LiveActiveSkillEffectType_LIVE_ACTIVE_SKILL_EFFECT_TYPE_SCORE_UP_PERMIL_UP": 152
+          "LiveActiveSkillEffectType_LIVE_ACTIVE_SKILL_EFFECT_TYPE_SCORE_UP_PERMIL_UP": 154
         },
         "allEffectTypeCounts": {
-          "LiveActiveSkillEffectType_LIVE_ACTIVE_SKILL_EFFECT_TYPE_SCORE_UP_PERMIL_UP": 544
+          "LiveActiveSkillEffectType_LIVE_ACTIVE_SKILL_EFFECT_TYPE_SCORE_UP_PERMIL_UP": 556
         },
         "primaryEffectCountPerLevelRow": {
-          "1": 392
+          "1": 402
         },
         "additionalEffectCountPerLevelRow": {
-          "1": 152,
-          "0": 240
+          "1": 154,
+          "0": 248
         },
-        "cardsWithTriggerReference": 76,
+        "cardsWithTriggerReference": 77,
         "triggerGroupReferenceCounts": {
           "live_skill_trigger-combo_gte-40": 44,
           "live_skill_trigger-deck_card_attribute-attribute_3-2": 18,
@@ -403,13 +403,14 @@
           "live_skill_trigger-life_gte-600": 44,
           "live_skill_trigger-deck_card_attribute-attribute_2-2": 20,
           "live_skill_trigger-deck_card_character_grouping-grp-gamers-2": 2,
-          "live_skill_trigger-deck_card_character_grouping-grp-promise-2": 2
+          "live_skill_trigger-deck_card_character_grouping-grp-promise-2": 2,
+          "live_skill_trigger-deck_card_character_grouping-grp-regloss-2": 2
         },
         "triggerTypeOccurrenceCounts": {
           "LiveSkillTriggerType_LIVE_SKILL_TRIGGER_TYPE_COMBO_GTE": 44,
           "LiveSkillTriggerType_LIVE_SKILL_TRIGGER_TYPE_DECK_CARD_ATTRIBUTE": 60,
           "LiveSkillTriggerType_LIVE_SKILL_TRIGGER_TYPE_LIFE_GTE": 44,
-          "LiveSkillTriggerType_LIVE_SKILL_TRIGGER_TYPE_DECK_CARD_CHARACTER_GROUPING": 4
+          "LiveSkillTriggerType_LIVE_SKILL_TRIGGER_TYPE_DECK_CARD_CHARACTER_GROUPING": 6
         },
         "triggerFieldShapes": [
           {
@@ -426,7 +427,7 @@
               "threshold",
               "type"
             ],
-            "occurrences": 4
+            "occurrences": 6
           },
           {
             "fields": [
@@ -478,14 +479,14 @@
               1,
               2
             ],
-            "cards": 196
+            "cards": 201
           }
         ],
         "levelRowPatternCounts": [
           {
             "hasTriggerReference": false,
             "hasAdditionalEffectGroup": false,
-            "levelRows": 210
+            "levelRows": 218
           },
           {
             "hasTriggerReference": false,
@@ -495,7 +496,7 @@
           {
             "hasTriggerReference": true,
             "hasAdditionalEffectGroup": true,
-            "levelRows": 70
+            "levelRows": 72
           }
         ],
         "levelFieldShapes": [
@@ -509,7 +510,7 @@
               "liveActiveSkillEffectGroupId",
               "liveSpecialSkillId"
             ],
-            "levelRows": 70
+            "levelRows": 72
           },
           {
             "fields": [
@@ -530,31 +531,31 @@
               "liveActiveSkillEffectGroupId",
               "liveSpecialSkillId"
             ],
-            "levelRows": 210
+            "levelRows": 218
           }
         ],
         "primaryEffectTypeCounts": {
-          "LiveActiveSkillEffectType_LIVE_ACTIVE_SKILL_EFFECT_TYPE_SCORE_UP_EFFECT_UP_PERMIL_UP": 392
+          "LiveActiveSkillEffectType_LIVE_ACTIVE_SKILL_EFFECT_TYPE_SCORE_UP_EFFECT_UP_PERMIL_UP": 402
         },
         "additionalEffectTypeCounts": {
-          "LiveActiveSkillEffectType_LIVE_ACTIVE_SKILL_EFFECT_TYPE_LIVE_ACTIVE_SKILL_ACTIVATION_PROBABILITY_UP_PERMIL_UP": 92,
+          "LiveActiveSkillEffectType_LIVE_ACTIVE_SKILL_EFFECT_TYPE_LIVE_ACTIVE_SKILL_ACTIVATION_PROBABILITY_UP_PERMIL_UP": 94,
           "LiveActiveSkillEffectType_LIVE_ACTIVE_SKILL_EFFECT_TYPE_LIFE_RECOVERY": 46,
           "LiveActiveSkillEffectType_LIVE_ACTIVE_SKILL_EFFECT_TYPE_JUDGEMENT_ENHANCE": 44
         },
         "allEffectTypeCounts": {
-          "LiveActiveSkillEffectType_LIVE_ACTIVE_SKILL_EFFECT_TYPE_SCORE_UP_EFFECT_UP_PERMIL_UP": 392,
-          "LiveActiveSkillEffectType_LIVE_ACTIVE_SKILL_EFFECT_TYPE_LIVE_ACTIVE_SKILL_ACTIVATION_PROBABILITY_UP_PERMIL_UP": 92,
+          "LiveActiveSkillEffectType_LIVE_ACTIVE_SKILL_EFFECT_TYPE_SCORE_UP_EFFECT_UP_PERMIL_UP": 402,
+          "LiveActiveSkillEffectType_LIVE_ACTIVE_SKILL_EFFECT_TYPE_LIVE_ACTIVE_SKILL_ACTIVATION_PROBABILITY_UP_PERMIL_UP": 94,
           "LiveActiveSkillEffectType_LIVE_ACTIVE_SKILL_EFFECT_TYPE_LIFE_RECOVERY": 46,
           "LiveActiveSkillEffectType_LIVE_ACTIVE_SKILL_EFFECT_TYPE_JUDGEMENT_ENHANCE": 44
         },
         "primaryEffectCountPerLevelRow": {
-          "1": 392
+          "1": 402
         },
         "additionalEffectCountPerLevelRow": {
-          "0": 210,
-          "1": 182
+          "0": 218,
+          "1": 184
         },
-        "cardsWithTriggerReference": 35,
+        "cardsWithTriggerReference": 36,
         "triggerGroupReferenceCounts": {
           "live_skill_trigger-deck_card_character_grouping-grp-gen_3-2": 2,
           "live_skill_trigger-combo_gte-40": 6,
@@ -572,10 +573,11 @@
           "live_skill_trigger-deck_card_character_grouping-grp-holox-2": 2,
           "live_skill_trigger-deck_card_character_grouping-grp-gen_1-2": 2,
           "live_skill_trigger-deck_card_character_grouping-grp-indonesia-gen_3-2": 2,
-          "live_skill_trigger-deck_card_character_grouping-grp-advent-2": 2
+          "live_skill_trigger-deck_card_character_grouping-grp-advent-2": 2,
+          "live_skill_trigger-deck_card_character_grouping-grp-regloss-2": 2
         },
         "triggerTypeOccurrenceCounts": {
-          "LiveSkillTriggerType_LIVE_SKILL_TRIGGER_TYPE_DECK_CARD_CHARACTER_GROUPING": 20,
+          "LiveSkillTriggerType_LIVE_SKILL_TRIGGER_TYPE_DECK_CARD_CHARACTER_GROUPING": 22,
           "LiveSkillTriggerType_LIVE_SKILL_TRIGGER_TYPE_COMBO_GTE": 16,
           "LiveSkillTriggerType_LIVE_SKILL_TRIGGER_TYPE_LIFE_GTE": 14,
           "LiveSkillTriggerType_LIVE_SKILL_TRIGGER_TYPE_DECK_CARD_ATTRIBUTE": 20
@@ -595,7 +597,7 @@
               "threshold",
               "type"
             ],
-            "occurrences": 20
+            "occurrences": 22
           },
           {
             "fields": [
@@ -740,7 +742,7 @@
     "levelStructures": {
       "groupCountReferenced": 19,
       "uniqueJoinedLevelRows": 1290,
-      "cardLevelRowAssociationsAcrossCards": 14060,
+      "cardLevelRowAssociationsAcrossCards": 14460,
       "profiles": [
         {
           "rowCount": 60,
@@ -758,7 +760,7 @@
           "rowCount": 80,
           "minLevel": 1,
           "maxLevel": 80,
-          "cards": 88
+          "cards": 93
         }
       ],
       "levelLimitProfiles": [
@@ -813,7 +815,7 @@
           ]
         },
         {
-          "cards": 88,
+          "cards": 93,
           "limits": [
             {
               "limitBreakCount": 0,
@@ -841,7 +843,7 @@
     },
     "potentialStructures": [
       {
-        "cards": 142,
+        "cards": 147,
         "upgradeSteps": [
           {
             "upgradeCount": 1,
@@ -907,9 +909,9 @@
       "LiveSkillEffectTargetType_LIVE_SKILL_EFFECT_TARGET_TYPE_SELF": 1
     },
     "targetOccurrenceTypes": {
-      "LiveSkillEffectTargetType_LIVE_SKILL_EFFECT_TARGET_TYPE_ATTRIBUTE": 228,
-      "LiveSkillEffectTargetType_LIVE_SKILL_EFFECT_TARGET_TYPE_CHARACTER_GROUPING": 82,
-      "LiveSkillEffectTargetType_LIVE_SKILL_EFFECT_TARGET_TYPE_SELF": 82
+      "LiveSkillEffectTargetType_LIVE_SKILL_EFFECT_TARGET_TYPE_ATTRIBUTE": 234,
+      "LiveSkillEffectTargetType_LIVE_SKILL_EFFECT_TARGET_TYPE_CHARACTER_GROUPING": 84,
+      "LiveSkillEffectTargetType_LIVE_SKILL_EFFECT_TARGET_TYPE_SELF": 84
     },
     "triggerTypes": {
       "LiveSkillTriggerType_LIVE_SKILL_TRIGGER_TYPE_COMBO_GTE": 2,
@@ -938,70 +940,70 @@
       "LangCharacterGrouping_Jpn": 2
     },
     "sourceRowsFetched": {
-      "Card": 196,
+      "Card": 201,
       "CardLevel": 1890,
       "CardLevelLimit": 45,
       "CardPotential": 15,
       "CardPotentialUpgradeItem": 1,
-      "LangCard_Jpn": 196,
+      "LangCard_Jpn": 201,
       "LangCharacter_Jpn": 402,
       "LangCharacterProduction_Jpn": 4,
       "Character": 62,
       "CharacterProduction": 4,
       "CharacterGrouping": 16,
-      "LivePassiveSkill": 196,
-      "LivePassiveSkillLevel": 392,
-      "LivePassiveSkillEffect": 192,
-      "LiveActiveSkill": 198,
-      "LiveActiveSkillLevel": 395,
+      "LivePassiveSkill": 201,
+      "LivePassiveSkillLevel": 402,
+      "LivePassiveSkillEffect": 194,
+      "LiveActiveSkill": 203,
+      "LiveActiveSkillLevel": 405,
       "LiveActiveSkillEffect": 55,
-      "LiveSpecialSkill": 196,
-      "LiveSpecialSkillLevel": 392,
+      "LiveSpecialSkill": 201,
+      "LiveSpecialSkillLevel": 402,
       "LiveSkillEffectTarget": 83,
       "LiveSkillTrigger": 215,
       "SkillTreeConnectEffect": 40,
       "SkillTreeConnectEffectExtent": 89,
-      "LangGeneratedLivePassiveSkillLevel_Jpn": 392,
-      "LangGeneratedLivePassiveSkillEffect_Jpn": 192,
-      "LangGeneratedLiveActiveSkillLevel_Jpn": 395,
+      "LangGeneratedLivePassiveSkillLevel_Jpn": 402,
+      "LangGeneratedLivePassiveSkillEffect_Jpn": 194,
+      "LangGeneratedLiveActiveSkillLevel_Jpn": 405,
       "LangGeneratedLiveActiveSkillEffect_Jpn": 55,
-      "LangGeneratedLiveSpecialSkillLevel_Jpn": 392,
+      "LangGeneratedLiveSpecialSkillLevel_Jpn": 402,
       "LangGeneratedLiveSkillEffectTarget_Jpn": 83,
       "LangGeneratedLiveSkillTrigger_Jpn": 215,
       "LangGeneratedSkillTreeConnectEffect_Jpn": 40,
       "LangCharacterGrouping_Jpn": 32
     },
     "joinedRowsStored": {
-      "Card": 196,
-      "LangCard_Jpn": 196,
+      "Card": 201,
+      "LangCard_Jpn": 201,
       "Character": 54,
       "CharacterProduction": 4,
       "CardLevel": 1290,
       "CardLevelLimit": 45,
       "CardPotential": 15,
       "CardPotentialUpgradeItem": 1,
-      "LivePassiveSkill": 196,
-      "LivePassiveSkillLevel": 392,
-      "LivePassiveSkillEffect": 167,
+      "LivePassiveSkill": 201,
+      "LivePassiveSkillLevel": 402,
+      "LivePassiveSkillEffect": 169,
       "LiveSkillEffectTarget": 22,
-      "LiveActiveSkill": 196,
-      "LiveActiveSkillLevel": 392,
+      "LiveActiveSkill": 201,
+      "LiveActiveSkillLevel": 402,
       "LiveActiveSkillEffect": 53,
       "LiveSkillTrigger": 25,
-      "LiveSpecialSkill": 196,
-      "LiveSpecialSkillLevel": 392,
+      "LiveSpecialSkill": 201,
+      "LiveSpecialSkillLevel": 402,
       "SkillTreeConnectEffect": 20,
       "SkillTreeConnectEffectExtent": 89,
       "CharacterGrouping": 15,
       "LangCharacter_Jpn": 378,
       "LangCharacterProduction_Jpn": 4,
-      "LangGeneratedLivePassiveSkillLevel_Jpn": 392,
-      "LangGeneratedLivePassiveSkillEffect_Jpn": 167,
+      "LangGeneratedLivePassiveSkillLevel_Jpn": 402,
+      "LangGeneratedLivePassiveSkillEffect_Jpn": 169,
       "LangGeneratedLiveSkillEffectTarget_Jpn": 22,
-      "LangGeneratedLiveActiveSkillLevel_Jpn": 392,
+      "LangGeneratedLiveActiveSkillLevel_Jpn": 402,
       "LangGeneratedLiveActiveSkillEffect_Jpn": 53,
       "LangGeneratedLiveSkillTrigger_Jpn": 25,
-      "LangGeneratedLiveSpecialSkillLevel_Jpn": 392,
+      "LangGeneratedLiveSpecialSkillLevel_Jpn": 402,
       "LangGeneratedSkillTreeConnectEffect_Jpn": 20,
       "LangCharacterGrouping_Jpn": 30
     },
@@ -1092,7 +1094,7 @@
             "techniquePermilMultiply",
             "verticalAnchorType"
           ],
-          "uniqueRows": 88
+          "uniqueRows": 93
         },
         {
           "fields": [
@@ -1214,7 +1216,7 @@
             "livePassiveSkillEffectGroupId",
             "livePassiveSkillId"
           ],
-          "uniqueRows": 158
+          "uniqueRows": 160
         },
         {
           "fields": [
@@ -1224,7 +1226,7 @@
             "livePassiveSkillId",
             "liveSkillTriggerGroupId"
           ],
-          "uniqueRows": 234
+          "uniqueRows": 242
         }
       ],
       "LivePassiveSkillEffect": [
@@ -1237,7 +1239,7 @@
             "type",
             "value"
           ],
-          "uniqueRows": 167
+          "uniqueRows": 169
         }
       ],
       "LiveActiveSkillLevel": [
@@ -1253,7 +1255,7 @@
             "liveActiveSkillEffectGroupId",
             "liveActiveSkillId"
           ],
-          "uniqueRows": 152
+          "uniqueRows": 154
         },
         {
           "fields": [
@@ -1265,7 +1267,7 @@
             "liveActiveSkillEffectGroupId",
             "liveActiveSkillId"
           ],
-          "uniqueRows": 240
+          "uniqueRows": 248
         }
       ],
       "LiveActiveSkillEffect": [
@@ -1300,7 +1302,7 @@
             "liveActiveSkillEffectGroupId",
             "liveSpecialSkillId"
           ],
-          "uniqueRows": 70
+          "uniqueRows": 72
         },
         {
           "fields": [
@@ -1321,7 +1323,7 @@
             "liveActiveSkillEffectGroupId",
             "liveSpecialSkillId"
           ],
-          "uniqueRows": 210
+          "uniqueRows": 218
         }
       ],
       "LiveSkillEffectTarget": [
@@ -1594,7 +1596,7 @@
     },
     {
       "code": "passive.hasTriggerReference",
-      "occurrences": 117,
+      "occurrences": 121,
       "sourceTable": "LivePassiveSkillLevel",
       "examples": [
         "card-00022-5-uniq-0063-00",
@@ -1610,7 +1612,7 @@
     },
     {
       "code": "active.hasTriggerReference",
-      "occurrences": 76,
+      "occurrences": 77,
       "sourceTable": "LiveActiveSkillLevel",
       "examples": [
         "card-00012-5-uniq-0062-00",
@@ -1626,7 +1628,7 @@
     },
     {
       "code": "active.hasAdditionalEffectGroup",
-      "occurrences": 76,
+      "occurrences": 77,
       "sourceTable": "LiveActiveSkillLevel",
       "examples": [
         "card-00012-5-uniq-0062-00",
@@ -1642,7 +1644,7 @@
     },
     {
       "code": "special.hasTriggerReference",
-      "occurrences": 35,
+      "occurrences": 36,
       "sourceTable": "LiveSpecialSkillLevel",
       "examples": [
         "card-00022-5-uniq-0063-00",
@@ -1658,7 +1660,7 @@
     },
     {
       "code": "special.hasAdditionalEffectGroup",
-      "occurrences": 91,
+      "occurrences": 92,
       "sourceTable": "LiveSpecialSkillLevel",
       "examples": [
         "card-00021-5-uniq-0064-00",
@@ -2007,6 +2009,23 @@
         "liveActiveSkillId": "live_active_skill-card-00007-5-uniq-0008-00",
         "liveSpecialSkillId": "live_special_skill-card-00007-5-uniq-0008-00",
         "skillTreeConnectEffectId": "skill_tree_connect_effect-skill_tree_effect_up-skill_tree_connect_effect_extent-leader_area-001-rare_5"
+      }
+    },
+    {
+      "sourceId": "card-00007-5-uniq-0096-00",
+      "nameJa": "おてんば狼のあま～いTrick",
+      "rarityRaw": "CardRarity_CARD_RARITY_RARITY_5",
+      "attributeRaw": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2",
+      "sourceRefs": {
+        "characterId": "chr-00007",
+        "nameLangId": "la-card_flavor-00007-5-uniq-0096-00",
+        "cardLevelGroupId": "grp-card-level-rarity_5-06",
+        "cardLevelLimitGroupId": "rarity_5-attribute_2",
+        "cardPotentialGroupId": "card_potential_grp-rarity_5",
+        "livePassiveSkillId": "live_passive_skill-card-00007-5-uniq-0096-00",
+        "liveActiveSkillId": "live_active_skill-card-00007-5-uniq-0096-00",
+        "liveSpecialSkillId": "live_special_skill-card-00007-5-uniq-0096-00",
+        "skillTreeConnectEffectId": "skill_tree_connect_effect-skill_tree_effect_up-skill_tree_connect_effect_extent-content_area-001-rare_5"
       }
     },
     {
@@ -3917,6 +3936,23 @@
       }
     },
     {
+      "sourceId": "card-03007-5-uniq-0100-00",
+      "nameJa": "気まぐれガールのドキドキ診療室",
+      "rarityRaw": "CardRarity_CARD_RARITY_RARITY_5",
+      "attributeRaw": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2",
+      "sourceRefs": {
+        "characterId": "chr-03007",
+        "nameLangId": "la-card_flavor-03007-5-uniq-0100-00",
+        "cardLevelGroupId": "grp-card-level-rarity_5-06",
+        "cardLevelLimitGroupId": "rarity_5-attribute_2",
+        "cardPotentialGroupId": "card_potential_grp-rarity_5",
+        "livePassiveSkillId": "live_passive_skill-card-03007-5-uniq-0100-00",
+        "liveActiveSkillId": "live_active_skill-card-03007-5-uniq-0100-00",
+        "liveSpecialSkillId": "live_special_skill-card-03007-5-uniq-0100-00",
+        "skillTreeConnectEffectId": "skill_tree_connect_effect-skill_tree_effect_up-skill_tree_connect_effect_extent-card_area-004-rare_5"
+      }
+    },
+    {
       "sourceId": "card-03008-3-nrml-0040-00",
       "nameJa": "We are hololive!",
       "rarityRaw": "CardRarity_CARD_RARITY_RARITY_3",
@@ -4586,6 +4622,23 @@
       }
     },
     {
+      "sourceId": "card-04015-5-uniq-0099-00",
+      "nameJa": "魅惑のMagic Potion",
+      "rarityRaw": "CardRarity_CARD_RARITY_RARITY_5",
+      "attributeRaw": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3",
+      "sourceRefs": {
+        "characterId": "chr-04015",
+        "nameLangId": "la-card_flavor-04015-5-uniq-0099-00",
+        "cardLevelGroupId": "grp-card-level-rarity_5-05",
+        "cardLevelLimitGroupId": "rarity_5-attribute_3",
+        "cardPotentialGroupId": "card_potential_grp-rarity_5",
+        "livePassiveSkillId": "live_passive_skill-card-04015-5-uniq-0099-00",
+        "liveActiveSkillId": "live_active_skill-card-04015-5-uniq-0099-00",
+        "liveSpecialSkillId": "live_special_skill-card-04015-5-uniq-0099-00",
+        "skillTreeConnectEffectId": "skill_tree_connect_effect-skill_tree_effect_up-skill_tree_connect_effect_extent-leader_area-003-rare_5"
+      }
+    },
+    {
       "sourceId": "card-04016-3-nrml-0055-00",
       "nameJa": "We are hololive!",
       "rarityRaw": "CardRarity_CARD_RARITY_RARITY_3",
@@ -4904,6 +4957,23 @@
       }
     },
     {
+      "sourceId": "card-06004-5-uniq-0098-00",
+      "nameJa": "高貴なるヴァンパイアの嗜み",
+      "rarityRaw": "CardRarity_CARD_RARITY_RARITY_5",
+      "attributeRaw": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1",
+      "sourceRefs": {
+        "characterId": "chr-06004",
+        "nameLangId": "la-card_flavor-06004-5-uniq-0098-00",
+        "cardLevelGroupId": "grp-card-level-rarity_5-05",
+        "cardLevelLimitGroupId": "rarity_5-attribute_1",
+        "cardPotentialGroupId": "card_potential_grp-rarity_5",
+        "livePassiveSkillId": "live_passive_skill-card-06004-5-uniq-0098-00",
+        "liveActiveSkillId": "live_active_skill-card-06004-5-uniq-0098-00",
+        "liveSpecialSkillId": "live_special_skill-card-06004-5-uniq-0098-00",
+        "skillTreeConnectEffectId": "skill_tree_connect_effect-skill_tree_effect_up-skill_tree_connect_effect_extent-content_area-002-rare_5"
+      }
+    },
+    {
       "sourceId": "card-06005-3-nrml-0061-00",
       "nameJa": "We are hololive!",
       "rarityRaw": "CardRarity_CARD_RARITY_RARITY_3",
@@ -4951,6 +5021,23 @@
         "liveActiveSkillId": "live_active_skill-card-06005-5-uniq-0061-00",
         "liveSpecialSkillId": "live_special_skill-card-06005-5-uniq-0061-00",
         "skillTreeConnectEffectId": "skill_tree_connect_effect-skill_tree_effect_up-skill_tree_connect_effect_extent-center_area-002-rare_5"
+      }
+    },
+    {
+      "sourceId": "card-06005-5-uniq-0097-00",
+      "nameJa": "今宵開幕！あやかしダンシング",
+      "rarityRaw": "CardRarity_CARD_RARITY_RARITY_5",
+      "attributeRaw": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2",
+      "sourceRefs": {
+        "characterId": "chr-06005",
+        "nameLangId": "la-card_flavor-06005-5-uniq-0097-00",
+        "cardLevelGroupId": "grp-card-level-rarity_5-04",
+        "cardLevelLimitGroupId": "rarity_5-attribute_2",
+        "cardPotentialGroupId": "card_potential_grp-rarity_5",
+        "livePassiveSkillId": "live_passive_skill-card-06005-5-uniq-0097-00",
+        "liveActiveSkillId": "live_active_skill-card-06005-5-uniq-0097-00",
+        "liveSpecialSkillId": "live_special_skill-card-06005-5-uniq-0097-00",
+        "skillTreeConnectEffectId": "skill_tree_connect_effect-skill_tree_effect_up-skill_tree_connect_effect_extent-content_area-002-rare_5"
       }
     }
   ],
@@ -6336,6 +6423,93 @@
           "potentialUpgrade4CharacterVoiceId": "cv-cmn_chr-00007_00007-5-uniq-0008-00_card-potential-04",
           "potentialUpgrade5CharacterVoiceId": "cv-cmn_chr-00007_00007-5-uniq-0008-00_card-potential-05",
           "order": 117,
+          "potentialAlternativeReward": {
+            "resourceType": "ResourceType_RESOURCE_TYPE_ITEM",
+            "resourceId": "item-gacha-sp_sticker-01",
+            "quantity": "100"
+          },
+          "acquireReward": {
+            "resourceType": "ResourceType_RESOURCE_TYPE_ITEM",
+            "resourceId": "item-gacha-sp_sticker-01",
+            "quantity": "30"
+          }
+        }
+      },
+      {
+        "sourceId": "card-00007-5-uniq-0096-00",
+        "sourceWrapper": {
+          "id": "card-00007-5-uniq-0096-00",
+          "characterId": "chr-00007",
+          "nameLangId": "la-card_flavor-00007-5-uniq-0096-00",
+          "rarity": "CardRarity_CARD_RARITY_RARITY_5",
+          "attributeType": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2",
+          "cardLevelGroupId": "grp-card-level-rarity_5-06",
+          "performancePermilMultiply": 297,
+          "techniquePermilMultiply": 263,
+          "sensePermilMultiply": 440,
+          "cardLevelLimitGroupId": "rarity_5-attribute_2",
+          "livePassiveSkillId": "live_passive_skill-card-00007-5-uniq-0096-00",
+          "liveActiveSkillId": "live_active_skill-card-00007-5-uniq-0096-00",
+          "liveSpecialSkillId": "live_special_skill-card-00007-5-uniq-0096-00",
+          "cardPotentialGroupId": "card_potential_grp-rarity_5",
+          "assetId": "00007-5-uniq-0096-00",
+          "liveSkillCharacterVoiceId": "cv-live_cmn_chr-00007_00007-5-uniq-0096-00_skill-card",
+          "skillTreeConnectEffectId": "skill_tree_connect_effect-skill_tree_effect_up-skill_tree_connect_effect_extent-content_area-001-rare_5",
+          "rewardCostumeId": "cos-00007-uniq-0096-00",
+          "rewardSdCostumeId": "sdcos-00007-uniq-0096-00",
+          "assetType": "CardAssetType_CARD_ASSET_TYPE_IMAGE_AND_MOVIE",
+          "verticalAnchorType": "CardVerticalAnchorType_CARD_VERTICAL_ANCHOR_TYPE_CENTER",
+          "horizontalAnchorType": "CardHorizontalAnchorType_CARD_HORIZONTAL_ANCHOR_TYPE_CENTER",
+          "gachaAnimationCharacterVoiceId": "cv-cmn_chr-00007_00007-5-uniq-0096-00_card-get",
+          "cardDetailCharacterVoiceId": "cv-cmn_chr-00007_00007-5-uniq-0096-00_card-detail",
+          "potentialUpgrade1CharacterVoiceId": "cv-cmn_chr-00007_00007-5-uniq-0096-00_card-potential-01",
+          "potentialUpgrade2CharacterVoiceId": "cv-cmn_chr-00007_00007-5-uniq-0096-00_card-potential-02",
+          "potentialUpgrade3CharacterVoiceId": "cv-cmn_chr-00007_00007-5-uniq-0096-00_card-potential-03",
+          "potentialUpgrade4CharacterVoiceId": "cv-cmn_chr-00007_00007-5-uniq-0096-00_card-potential-04",
+          "potentialUpgrade5CharacterVoiceId": "cv-cmn_chr-00007_00007-5-uniq-0096-00_card-potential-05",
+          "order": 197,
+          "potentialAlternativeReward": {
+            "resourceType": "ResourceType_RESOURCE_TYPE_ITEM",
+            "resourceId": "item-gacha-sp_sticker-01",
+            "quantity": "100"
+          },
+          "acquireReward": {
+            "resourceType": "ResourceType_RESOURCE_TYPE_ITEM",
+            "resourceId": "item-gacha-sp_sticker-01",
+            "quantity": "30"
+          }
+        },
+        "fields": {
+          "id": "card-00007-5-uniq-0096-00",
+          "characterId": "chr-00007",
+          "nameLangId": "la-card_flavor-00007-5-uniq-0096-00",
+          "rarity": "CardRarity_CARD_RARITY_RARITY_5",
+          "attributeType": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2",
+          "cardLevelGroupId": "grp-card-level-rarity_5-06",
+          "performancePermilMultiply": 297,
+          "techniquePermilMultiply": 263,
+          "sensePermilMultiply": 440,
+          "cardLevelLimitGroupId": "rarity_5-attribute_2",
+          "livePassiveSkillId": "live_passive_skill-card-00007-5-uniq-0096-00",
+          "liveActiveSkillId": "live_active_skill-card-00007-5-uniq-0096-00",
+          "liveSpecialSkillId": "live_special_skill-card-00007-5-uniq-0096-00",
+          "cardPotentialGroupId": "card_potential_grp-rarity_5",
+          "assetId": "00007-5-uniq-0096-00",
+          "liveSkillCharacterVoiceId": "cv-live_cmn_chr-00007_00007-5-uniq-0096-00_skill-card",
+          "skillTreeConnectEffectId": "skill_tree_connect_effect-skill_tree_effect_up-skill_tree_connect_effect_extent-content_area-001-rare_5",
+          "rewardCostumeId": "cos-00007-uniq-0096-00",
+          "rewardSdCostumeId": "sdcos-00007-uniq-0096-00",
+          "assetType": "CardAssetType_CARD_ASSET_TYPE_IMAGE_AND_MOVIE",
+          "verticalAnchorType": "CardVerticalAnchorType_CARD_VERTICAL_ANCHOR_TYPE_CENTER",
+          "horizontalAnchorType": "CardHorizontalAnchorType_CARD_HORIZONTAL_ANCHOR_TYPE_CENTER",
+          "gachaAnimationCharacterVoiceId": "cv-cmn_chr-00007_00007-5-uniq-0096-00_card-get",
+          "cardDetailCharacterVoiceId": "cv-cmn_chr-00007_00007-5-uniq-0096-00_card-detail",
+          "potentialUpgrade1CharacterVoiceId": "cv-cmn_chr-00007_00007-5-uniq-0096-00_card-potential-01",
+          "potentialUpgrade2CharacterVoiceId": "cv-cmn_chr-00007_00007-5-uniq-0096-00_card-potential-02",
+          "potentialUpgrade3CharacterVoiceId": "cv-cmn_chr-00007_00007-5-uniq-0096-00_card-potential-03",
+          "potentialUpgrade4CharacterVoiceId": "cv-cmn_chr-00007_00007-5-uniq-0096-00_card-potential-04",
+          "potentialUpgrade5CharacterVoiceId": "cv-cmn_chr-00007_00007-5-uniq-0096-00_card-potential-05",
+          "order": 197,
           "potentialAlternativeReward": {
             "resourceType": "ResourceType_RESOURCE_TYPE_ITEM",
             "resourceId": "item-gacha-sp_sticker-01",
@@ -14469,6 +14643,93 @@
         }
       },
       {
+        "sourceId": "card-03007-5-uniq-0100-00",
+        "sourceWrapper": {
+          "id": "card-03007-5-uniq-0100-00",
+          "characterId": "chr-03007",
+          "nameLangId": "la-card_flavor-03007-5-uniq-0100-00",
+          "rarity": "CardRarity_CARD_RARITY_RARITY_5",
+          "attributeType": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2",
+          "cardLevelGroupId": "grp-card-level-rarity_5-06",
+          "performancePermilMultiply": 297,
+          "techniquePermilMultiply": 440,
+          "sensePermilMultiply": 263,
+          "cardLevelLimitGroupId": "rarity_5-attribute_2",
+          "livePassiveSkillId": "live_passive_skill-card-03007-5-uniq-0100-00",
+          "liveActiveSkillId": "live_active_skill-card-03007-5-uniq-0100-00",
+          "liveSpecialSkillId": "live_special_skill-card-03007-5-uniq-0100-00",
+          "cardPotentialGroupId": "card_potential_grp-rarity_5",
+          "assetId": "03007-5-uniq-0100-00",
+          "liveSkillCharacterVoiceId": "cv-live_cmn_chr-03007_03007-5-uniq-0100-00_skill-card",
+          "skillTreeConnectEffectId": "skill_tree_connect_effect-skill_tree_effect_up-skill_tree_connect_effect_extent-card_area-004-rare_5",
+          "rewardCostumeId": "cos-03007-uniq-0100-00",
+          "rewardSdCostumeId": "sdcos-03007-uniq-0100-00",
+          "assetType": "CardAssetType_CARD_ASSET_TYPE_IMAGE_AND_MOVIE",
+          "verticalAnchorType": "CardVerticalAnchorType_CARD_VERTICAL_ANCHOR_TYPE_CENTER",
+          "horizontalAnchorType": "CardHorizontalAnchorType_CARD_HORIZONTAL_ANCHOR_TYPE_LEFT",
+          "gachaAnimationCharacterVoiceId": "cv-cmn_chr-03007_03007-5-uniq-0100-00_card-get",
+          "cardDetailCharacterVoiceId": "cv-cmn_chr-03007_03007-5-uniq-0100-00_card-detail",
+          "potentialUpgrade1CharacterVoiceId": "cv-cmn_chr-03007_03007-5-uniq-0100-00_card-potential-01",
+          "potentialUpgrade2CharacterVoiceId": "cv-cmn_chr-03007_03007-5-uniq-0100-00_card-potential-02",
+          "potentialUpgrade3CharacterVoiceId": "cv-cmn_chr-03007_03007-5-uniq-0100-00_card-potential-03",
+          "potentialUpgrade4CharacterVoiceId": "cv-cmn_chr-03007_03007-5-uniq-0100-00_card-potential-04",
+          "potentialUpgrade5CharacterVoiceId": "cv-cmn_chr-03007_03007-5-uniq-0100-00_card-potential-05",
+          "order": 198,
+          "potentialAlternativeReward": {
+            "resourceType": "ResourceType_RESOURCE_TYPE_ITEM",
+            "resourceId": "item-gacha-sp_sticker-01",
+            "quantity": "100"
+          },
+          "acquireReward": {
+            "resourceType": "ResourceType_RESOURCE_TYPE_ITEM",
+            "resourceId": "item-gacha-sp_sticker-01",
+            "quantity": "30"
+          }
+        },
+        "fields": {
+          "id": "card-03007-5-uniq-0100-00",
+          "characterId": "chr-03007",
+          "nameLangId": "la-card_flavor-03007-5-uniq-0100-00",
+          "rarity": "CardRarity_CARD_RARITY_RARITY_5",
+          "attributeType": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2",
+          "cardLevelGroupId": "grp-card-level-rarity_5-06",
+          "performancePermilMultiply": 297,
+          "techniquePermilMultiply": 440,
+          "sensePermilMultiply": 263,
+          "cardLevelLimitGroupId": "rarity_5-attribute_2",
+          "livePassiveSkillId": "live_passive_skill-card-03007-5-uniq-0100-00",
+          "liveActiveSkillId": "live_active_skill-card-03007-5-uniq-0100-00",
+          "liveSpecialSkillId": "live_special_skill-card-03007-5-uniq-0100-00",
+          "cardPotentialGroupId": "card_potential_grp-rarity_5",
+          "assetId": "03007-5-uniq-0100-00",
+          "liveSkillCharacterVoiceId": "cv-live_cmn_chr-03007_03007-5-uniq-0100-00_skill-card",
+          "skillTreeConnectEffectId": "skill_tree_connect_effect-skill_tree_effect_up-skill_tree_connect_effect_extent-card_area-004-rare_5",
+          "rewardCostumeId": "cos-03007-uniq-0100-00",
+          "rewardSdCostumeId": "sdcos-03007-uniq-0100-00",
+          "assetType": "CardAssetType_CARD_ASSET_TYPE_IMAGE_AND_MOVIE",
+          "verticalAnchorType": "CardVerticalAnchorType_CARD_VERTICAL_ANCHOR_TYPE_CENTER",
+          "horizontalAnchorType": "CardHorizontalAnchorType_CARD_HORIZONTAL_ANCHOR_TYPE_LEFT",
+          "gachaAnimationCharacterVoiceId": "cv-cmn_chr-03007_03007-5-uniq-0100-00_card-get",
+          "cardDetailCharacterVoiceId": "cv-cmn_chr-03007_03007-5-uniq-0100-00_card-detail",
+          "potentialUpgrade1CharacterVoiceId": "cv-cmn_chr-03007_03007-5-uniq-0100-00_card-potential-01",
+          "potentialUpgrade2CharacterVoiceId": "cv-cmn_chr-03007_03007-5-uniq-0100-00_card-potential-02",
+          "potentialUpgrade3CharacterVoiceId": "cv-cmn_chr-03007_03007-5-uniq-0100-00_card-potential-03",
+          "potentialUpgrade4CharacterVoiceId": "cv-cmn_chr-03007_03007-5-uniq-0100-00_card-potential-04",
+          "potentialUpgrade5CharacterVoiceId": "cv-cmn_chr-03007_03007-5-uniq-0100-00_card-potential-05",
+          "order": 198,
+          "potentialAlternativeReward": {
+            "resourceType": "ResourceType_RESOURCE_TYPE_ITEM",
+            "resourceId": "item-gacha-sp_sticker-01",
+            "quantity": "100"
+          },
+          "acquireReward": {
+            "resourceType": "ResourceType_RESOURCE_TYPE_ITEM",
+            "resourceId": "item-gacha-sp_sticker-01",
+            "quantity": "30"
+          }
+        }
+      },
+      {
         "sourceId": "card-03008-3-nrml-0040-00",
         "sourceWrapper": {
           "id": "card-03008-3-nrml-0040-00",
@@ -17311,6 +17572,93 @@
         }
       },
       {
+        "sourceId": "card-04015-5-uniq-0099-00",
+        "sourceWrapper": {
+          "id": "card-04015-5-uniq-0099-00",
+          "characterId": "chr-04015",
+          "nameLangId": "la-card_flavor-04015-5-uniq-0099-00",
+          "rarity": "CardRarity_CARD_RARITY_RARITY_5",
+          "attributeType": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3",
+          "cardLevelGroupId": "grp-card-level-rarity_5-05",
+          "performancePermilMultiply": 430,
+          "techniquePermilMultiply": 268,
+          "sensePermilMultiply": 302,
+          "cardLevelLimitGroupId": "rarity_5-attribute_3",
+          "livePassiveSkillId": "live_passive_skill-card-04015-5-uniq-0099-00",
+          "liveActiveSkillId": "live_active_skill-card-04015-5-uniq-0099-00",
+          "liveSpecialSkillId": "live_special_skill-card-04015-5-uniq-0099-00",
+          "cardPotentialGroupId": "card_potential_grp-rarity_5",
+          "assetId": "04015-5-uniq-0099-00",
+          "liveSkillCharacterVoiceId": "cv-live_cmn_chr-04015_04015-5-uniq-0099-00_skill-card",
+          "skillTreeConnectEffectId": "skill_tree_connect_effect-skill_tree_effect_up-skill_tree_connect_effect_extent-leader_area-003-rare_5",
+          "rewardCostumeId": "cos-04015-uniq-0099-00",
+          "rewardSdCostumeId": "sdcos-04015-uniq-0099-00",
+          "assetType": "CardAssetType_CARD_ASSET_TYPE_IMAGE_AND_MOVIE",
+          "verticalAnchorType": "CardVerticalAnchorType_CARD_VERTICAL_ANCHOR_TYPE_CENTER",
+          "horizontalAnchorType": "CardHorizontalAnchorType_CARD_HORIZONTAL_ANCHOR_TYPE_LEFT",
+          "gachaAnimationCharacterVoiceId": "cv-cmn_chr-04015_04015-5-uniq-0099-00_card-get",
+          "cardDetailCharacterVoiceId": "cv-cmn_chr-04015_04015-5-uniq-0099-00_card-detail",
+          "potentialUpgrade1CharacterVoiceId": "cv-cmn_chr-04015_04015-5-uniq-0099-00_card-potential-01",
+          "potentialUpgrade2CharacterVoiceId": "cv-cmn_chr-04015_04015-5-uniq-0099-00_card-potential-02",
+          "potentialUpgrade3CharacterVoiceId": "cv-cmn_chr-04015_04015-5-uniq-0099-00_card-potential-03",
+          "potentialUpgrade4CharacterVoiceId": "cv-cmn_chr-04015_04015-5-uniq-0099-00_card-potential-04",
+          "potentialUpgrade5CharacterVoiceId": "cv-cmn_chr-04015_04015-5-uniq-0099-00_card-potential-05",
+          "order": 199,
+          "potentialAlternativeReward": {
+            "resourceType": "ResourceType_RESOURCE_TYPE_ITEM",
+            "resourceId": "item-gacha-sp_sticker-01",
+            "quantity": "100"
+          },
+          "acquireReward": {
+            "resourceType": "ResourceType_RESOURCE_TYPE_ITEM",
+            "resourceId": "item-gacha-sp_sticker-01",
+            "quantity": "30"
+          }
+        },
+        "fields": {
+          "id": "card-04015-5-uniq-0099-00",
+          "characterId": "chr-04015",
+          "nameLangId": "la-card_flavor-04015-5-uniq-0099-00",
+          "rarity": "CardRarity_CARD_RARITY_RARITY_5",
+          "attributeType": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3",
+          "cardLevelGroupId": "grp-card-level-rarity_5-05",
+          "performancePermilMultiply": 430,
+          "techniquePermilMultiply": 268,
+          "sensePermilMultiply": 302,
+          "cardLevelLimitGroupId": "rarity_5-attribute_3",
+          "livePassiveSkillId": "live_passive_skill-card-04015-5-uniq-0099-00",
+          "liveActiveSkillId": "live_active_skill-card-04015-5-uniq-0099-00",
+          "liveSpecialSkillId": "live_special_skill-card-04015-5-uniq-0099-00",
+          "cardPotentialGroupId": "card_potential_grp-rarity_5",
+          "assetId": "04015-5-uniq-0099-00",
+          "liveSkillCharacterVoiceId": "cv-live_cmn_chr-04015_04015-5-uniq-0099-00_skill-card",
+          "skillTreeConnectEffectId": "skill_tree_connect_effect-skill_tree_effect_up-skill_tree_connect_effect_extent-leader_area-003-rare_5",
+          "rewardCostumeId": "cos-04015-uniq-0099-00",
+          "rewardSdCostumeId": "sdcos-04015-uniq-0099-00",
+          "assetType": "CardAssetType_CARD_ASSET_TYPE_IMAGE_AND_MOVIE",
+          "verticalAnchorType": "CardVerticalAnchorType_CARD_VERTICAL_ANCHOR_TYPE_CENTER",
+          "horizontalAnchorType": "CardHorizontalAnchorType_CARD_HORIZONTAL_ANCHOR_TYPE_LEFT",
+          "gachaAnimationCharacterVoiceId": "cv-cmn_chr-04015_04015-5-uniq-0099-00_card-get",
+          "cardDetailCharacterVoiceId": "cv-cmn_chr-04015_04015-5-uniq-0099-00_card-detail",
+          "potentialUpgrade1CharacterVoiceId": "cv-cmn_chr-04015_04015-5-uniq-0099-00_card-potential-01",
+          "potentialUpgrade2CharacterVoiceId": "cv-cmn_chr-04015_04015-5-uniq-0099-00_card-potential-02",
+          "potentialUpgrade3CharacterVoiceId": "cv-cmn_chr-04015_04015-5-uniq-0099-00_card-potential-03",
+          "potentialUpgrade4CharacterVoiceId": "cv-cmn_chr-04015_04015-5-uniq-0099-00_card-potential-04",
+          "potentialUpgrade5CharacterVoiceId": "cv-cmn_chr-04015_04015-5-uniq-0099-00_card-potential-05",
+          "order": 199,
+          "potentialAlternativeReward": {
+            "resourceType": "ResourceType_RESOURCE_TYPE_ITEM",
+            "resourceId": "item-gacha-sp_sticker-01",
+            "quantity": "100"
+          },
+          "acquireReward": {
+            "resourceType": "ResourceType_RESOURCE_TYPE_ITEM",
+            "resourceId": "item-gacha-sp_sticker-01",
+            "quantity": "30"
+          }
+        }
+      },
+      {
         "sourceId": "card-04016-3-nrml-0055-00",
         "sourceWrapper": {
           "id": "card-04016-3-nrml-0055-00",
@@ -18674,6 +19022,93 @@
         }
       },
       {
+        "sourceId": "card-06004-5-uniq-0098-00",
+        "sourceWrapper": {
+          "id": "card-06004-5-uniq-0098-00",
+          "characterId": "chr-06004",
+          "nameLangId": "la-card_flavor-06004-5-uniq-0098-00",
+          "rarity": "CardRarity_CARD_RARITY_RARITY_5",
+          "attributeType": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1",
+          "cardLevelGroupId": "grp-card-level-rarity_5-05",
+          "performancePermilMultiply": 302,
+          "techniquePermilMultiply": 430,
+          "sensePermilMultiply": 268,
+          "cardLevelLimitGroupId": "rarity_5-attribute_1",
+          "livePassiveSkillId": "live_passive_skill-card-06004-5-uniq-0098-00",
+          "liveActiveSkillId": "live_active_skill-card-06004-5-uniq-0098-00",
+          "liveSpecialSkillId": "live_special_skill-card-06004-5-uniq-0098-00",
+          "cardPotentialGroupId": "card_potential_grp-rarity_5",
+          "assetId": "06004-5-uniq-0098-00",
+          "liveSkillCharacterVoiceId": "cv-live_cmn_chr-06004_06004-5-uniq-0098-00_skill-card",
+          "skillTreeConnectEffectId": "skill_tree_connect_effect-skill_tree_effect_up-skill_tree_connect_effect_extent-content_area-002-rare_5",
+          "rewardCostumeId": "cos-06004-uniq-0098-00",
+          "rewardSdCostumeId": "sdcos-06004-uniq-0098-00",
+          "assetType": "CardAssetType_CARD_ASSET_TYPE_IMAGE_AND_MOVIE",
+          "verticalAnchorType": "CardVerticalAnchorType_CARD_VERTICAL_ANCHOR_TYPE_CENTER",
+          "horizontalAnchorType": "CardHorizontalAnchorType_CARD_HORIZONTAL_ANCHOR_TYPE_RIGHT",
+          "gachaAnimationCharacterVoiceId": "cv-cmn_chr-06004_06004-5-uniq-0098-00_card-get",
+          "cardDetailCharacterVoiceId": "cv-cmn_chr-06004_06004-5-uniq-0098-00_card-detail",
+          "potentialUpgrade1CharacterVoiceId": "cv-cmn_chr-06004_06004-5-uniq-0098-00_card-potential-01",
+          "potentialUpgrade2CharacterVoiceId": "cv-cmn_chr-06004_06004-5-uniq-0098-00_card-potential-02",
+          "potentialUpgrade3CharacterVoiceId": "cv-cmn_chr-06004_06004-5-uniq-0098-00_card-potential-03",
+          "potentialUpgrade4CharacterVoiceId": "cv-cmn_chr-06004_06004-5-uniq-0098-00_card-potential-04",
+          "potentialUpgrade5CharacterVoiceId": "cv-cmn_chr-06004_06004-5-uniq-0098-00_card-potential-05",
+          "order": 200,
+          "potentialAlternativeReward": {
+            "resourceType": "ResourceType_RESOURCE_TYPE_ITEM",
+            "resourceId": "item-gacha-sp_sticker-01",
+            "quantity": "100"
+          },
+          "acquireReward": {
+            "resourceType": "ResourceType_RESOURCE_TYPE_ITEM",
+            "resourceId": "item-gacha-sp_sticker-01",
+            "quantity": "30"
+          }
+        },
+        "fields": {
+          "id": "card-06004-5-uniq-0098-00",
+          "characterId": "chr-06004",
+          "nameLangId": "la-card_flavor-06004-5-uniq-0098-00",
+          "rarity": "CardRarity_CARD_RARITY_RARITY_5",
+          "attributeType": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1",
+          "cardLevelGroupId": "grp-card-level-rarity_5-05",
+          "performancePermilMultiply": 302,
+          "techniquePermilMultiply": 430,
+          "sensePermilMultiply": 268,
+          "cardLevelLimitGroupId": "rarity_5-attribute_1",
+          "livePassiveSkillId": "live_passive_skill-card-06004-5-uniq-0098-00",
+          "liveActiveSkillId": "live_active_skill-card-06004-5-uniq-0098-00",
+          "liveSpecialSkillId": "live_special_skill-card-06004-5-uniq-0098-00",
+          "cardPotentialGroupId": "card_potential_grp-rarity_5",
+          "assetId": "06004-5-uniq-0098-00",
+          "liveSkillCharacterVoiceId": "cv-live_cmn_chr-06004_06004-5-uniq-0098-00_skill-card",
+          "skillTreeConnectEffectId": "skill_tree_connect_effect-skill_tree_effect_up-skill_tree_connect_effect_extent-content_area-002-rare_5",
+          "rewardCostumeId": "cos-06004-uniq-0098-00",
+          "rewardSdCostumeId": "sdcos-06004-uniq-0098-00",
+          "assetType": "CardAssetType_CARD_ASSET_TYPE_IMAGE_AND_MOVIE",
+          "verticalAnchorType": "CardVerticalAnchorType_CARD_VERTICAL_ANCHOR_TYPE_CENTER",
+          "horizontalAnchorType": "CardHorizontalAnchorType_CARD_HORIZONTAL_ANCHOR_TYPE_RIGHT",
+          "gachaAnimationCharacterVoiceId": "cv-cmn_chr-06004_06004-5-uniq-0098-00_card-get",
+          "cardDetailCharacterVoiceId": "cv-cmn_chr-06004_06004-5-uniq-0098-00_card-detail",
+          "potentialUpgrade1CharacterVoiceId": "cv-cmn_chr-06004_06004-5-uniq-0098-00_card-potential-01",
+          "potentialUpgrade2CharacterVoiceId": "cv-cmn_chr-06004_06004-5-uniq-0098-00_card-potential-02",
+          "potentialUpgrade3CharacterVoiceId": "cv-cmn_chr-06004_06004-5-uniq-0098-00_card-potential-03",
+          "potentialUpgrade4CharacterVoiceId": "cv-cmn_chr-06004_06004-5-uniq-0098-00_card-potential-04",
+          "potentialUpgrade5CharacterVoiceId": "cv-cmn_chr-06004_06004-5-uniq-0098-00_card-potential-05",
+          "order": 200,
+          "potentialAlternativeReward": {
+            "resourceType": "ResourceType_RESOURCE_TYPE_ITEM",
+            "resourceId": "item-gacha-sp_sticker-01",
+            "quantity": "100"
+          },
+          "acquireReward": {
+            "resourceType": "ResourceType_RESOURCE_TYPE_ITEM",
+            "resourceId": "item-gacha-sp_sticker-01",
+            "quantity": "30"
+          }
+        }
+      },
+      {
         "sourceId": "card-06005-3-nrml-0061-00",
         "sourceWrapper": {
           "id": "card-06005-3-nrml-0061-00",
@@ -18864,6 +19299,93 @@
           "potentialUpgrade4CharacterVoiceId": "cv-cmn_chr-06005_06005-5-uniq-0061-00_card-potential-04",
           "potentialUpgrade5CharacterVoiceId": "cv-cmn_chr-06005_06005-5-uniq-0061-00_card-potential-05",
           "order": 162,
+          "potentialAlternativeReward": {
+            "resourceType": "ResourceType_RESOURCE_TYPE_ITEM",
+            "resourceId": "item-gacha-sp_sticker-01",
+            "quantity": "100"
+          },
+          "acquireReward": {
+            "resourceType": "ResourceType_RESOURCE_TYPE_ITEM",
+            "resourceId": "item-gacha-sp_sticker-01",
+            "quantity": "30"
+          }
+        }
+      },
+      {
+        "sourceId": "card-06005-5-uniq-0097-00",
+        "sourceWrapper": {
+          "id": "card-06005-5-uniq-0097-00",
+          "characterId": "chr-06005",
+          "nameLangId": "la-card_flavor-06005-5-uniq-0097-00",
+          "rarity": "CardRarity_CARD_RARITY_RARITY_5",
+          "attributeType": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2",
+          "cardLevelGroupId": "grp-card-level-rarity_5-04",
+          "performancePermilMultiply": 278,
+          "techniquePermilMultiply": 420,
+          "sensePermilMultiply": 302,
+          "cardLevelLimitGroupId": "rarity_5-attribute_2",
+          "livePassiveSkillId": "live_passive_skill-card-06005-5-uniq-0097-00",
+          "liveActiveSkillId": "live_active_skill-card-06005-5-uniq-0097-00",
+          "liveSpecialSkillId": "live_special_skill-card-06005-5-uniq-0097-00",
+          "cardPotentialGroupId": "card_potential_grp-rarity_5",
+          "assetId": "06005-5-uniq-0097-00",
+          "liveSkillCharacterVoiceId": "cv-live_cmn_chr-06005_06005-5-uniq-0097-00_skill-card",
+          "skillTreeConnectEffectId": "skill_tree_connect_effect-skill_tree_effect_up-skill_tree_connect_effect_extent-content_area-002-rare_5",
+          "rewardCostumeId": "cos-06005-uniq-0097-00",
+          "rewardSdCostumeId": "sdcos-06005-uniq-0097-00",
+          "assetType": "CardAssetType_CARD_ASSET_TYPE_IMAGE_AND_MOVIE",
+          "verticalAnchorType": "CardVerticalAnchorType_CARD_VERTICAL_ANCHOR_TYPE_CENTER",
+          "horizontalAnchorType": "CardHorizontalAnchorType_CARD_HORIZONTAL_ANCHOR_TYPE_CENTER",
+          "gachaAnimationCharacterVoiceId": "cv-cmn_chr-06005_06005-5-uniq-0097-00_card-get",
+          "cardDetailCharacterVoiceId": "cv-cmn_chr-06005_06005-5-uniq-0097-00_card-detail",
+          "potentialUpgrade1CharacterVoiceId": "cv-cmn_chr-06005_06005-5-uniq-0097-00_card-potential-01",
+          "potentialUpgrade2CharacterVoiceId": "cv-cmn_chr-06005_06005-5-uniq-0097-00_card-potential-02",
+          "potentialUpgrade3CharacterVoiceId": "cv-cmn_chr-06005_06005-5-uniq-0097-00_card-potential-03",
+          "potentialUpgrade4CharacterVoiceId": "cv-cmn_chr-06005_06005-5-uniq-0097-00_card-potential-04",
+          "potentialUpgrade5CharacterVoiceId": "cv-cmn_chr-06005_06005-5-uniq-0097-00_card-potential-05",
+          "order": 201,
+          "potentialAlternativeReward": {
+            "resourceType": "ResourceType_RESOURCE_TYPE_ITEM",
+            "resourceId": "item-gacha-sp_sticker-01",
+            "quantity": "100"
+          },
+          "acquireReward": {
+            "resourceType": "ResourceType_RESOURCE_TYPE_ITEM",
+            "resourceId": "item-gacha-sp_sticker-01",
+            "quantity": "30"
+          }
+        },
+        "fields": {
+          "id": "card-06005-5-uniq-0097-00",
+          "characterId": "chr-06005",
+          "nameLangId": "la-card_flavor-06005-5-uniq-0097-00",
+          "rarity": "CardRarity_CARD_RARITY_RARITY_5",
+          "attributeType": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2",
+          "cardLevelGroupId": "grp-card-level-rarity_5-04",
+          "performancePermilMultiply": 278,
+          "techniquePermilMultiply": 420,
+          "sensePermilMultiply": 302,
+          "cardLevelLimitGroupId": "rarity_5-attribute_2",
+          "livePassiveSkillId": "live_passive_skill-card-06005-5-uniq-0097-00",
+          "liveActiveSkillId": "live_active_skill-card-06005-5-uniq-0097-00",
+          "liveSpecialSkillId": "live_special_skill-card-06005-5-uniq-0097-00",
+          "cardPotentialGroupId": "card_potential_grp-rarity_5",
+          "assetId": "06005-5-uniq-0097-00",
+          "liveSkillCharacterVoiceId": "cv-live_cmn_chr-06005_06005-5-uniq-0097-00_skill-card",
+          "skillTreeConnectEffectId": "skill_tree_connect_effect-skill_tree_effect_up-skill_tree_connect_effect_extent-content_area-002-rare_5",
+          "rewardCostumeId": "cos-06005-uniq-0097-00",
+          "rewardSdCostumeId": "sdcos-06005-uniq-0097-00",
+          "assetType": "CardAssetType_CARD_ASSET_TYPE_IMAGE_AND_MOVIE",
+          "verticalAnchorType": "CardVerticalAnchorType_CARD_VERTICAL_ANCHOR_TYPE_CENTER",
+          "horizontalAnchorType": "CardHorizontalAnchorType_CARD_HORIZONTAL_ANCHOR_TYPE_CENTER",
+          "gachaAnimationCharacterVoiceId": "cv-cmn_chr-06005_06005-5-uniq-0097-00_card-get",
+          "cardDetailCharacterVoiceId": "cv-cmn_chr-06005_06005-5-uniq-0097-00_card-detail",
+          "potentialUpgrade1CharacterVoiceId": "cv-cmn_chr-06005_06005-5-uniq-0097-00_card-potential-01",
+          "potentialUpgrade2CharacterVoiceId": "cv-cmn_chr-06005_06005-5-uniq-0097-00_card-potential-02",
+          "potentialUpgrade3CharacterVoiceId": "cv-cmn_chr-06005_06005-5-uniq-0097-00_card-potential-03",
+          "potentialUpgrade4CharacterVoiceId": "cv-cmn_chr-06005_06005-5-uniq-0097-00_card-potential-04",
+          "potentialUpgrade5CharacterVoiceId": "cv-cmn_chr-06005_06005-5-uniq-0097-00_card-potential-05",
+          "order": 201,
           "potentialAlternativeReward": {
             "resourceType": "ResourceType_RESOURCE_TYPE_ITEM",
             "resourceId": "item-gacha-sp_sticker-01",
@@ -43420,6 +43942,17 @@
         }
       },
       {
+        "sourceId": "la-card_flavor-00007-5-uniq-0096-00",
+        "sourceWrapper": {
+          "id": "la-card_flavor-00007-5-uniq-0096-00",
+          "text": "おてんば狼のあま～いTrick"
+        },
+        "fields": {
+          "id": "la-card_flavor-00007-5-uniq-0096-00",
+          "text": "おてんば狼のあま～いTrick"
+        }
+      },
+      {
         "sourceId": "la-card_flavor-00010-5-uniq-0069-00",
         "sourceWrapper": {
           "id": "la-card_flavor-00010-5-uniq-0069-00",
@@ -43651,6 +44184,17 @@
         }
       },
       {
+        "sourceId": "la-card_flavor-03007-5-uniq-0100-00",
+        "sourceWrapper": {
+          "id": "la-card_flavor-03007-5-uniq-0100-00",
+          "text": "気まぐれガールのドキドキ診療室"
+        },
+        "fields": {
+          "id": "la-card_flavor-03007-5-uniq-0100-00",
+          "text": "気まぐれガールのドキドキ診療室"
+        }
+      },
+      {
         "sourceId": "la-card_flavor-03008-5-uniq-0095-00",
         "sourceWrapper": {
           "id": "la-card_flavor-03008-5-uniq-0095-00",
@@ -43728,6 +44272,17 @@
         }
       },
       {
+        "sourceId": "la-card_flavor-04015-5-uniq-0099-00",
+        "sourceWrapper": {
+          "id": "la-card_flavor-04015-5-uniq-0099-00",
+          "text": "魅惑のMagic Potion"
+        },
+        "fields": {
+          "id": "la-card_flavor-04015-5-uniq-0099-00",
+          "text": "魅惑のMagic Potion"
+        }
+      },
+      {
         "sourceId": "la-card_flavor-04016-5-uniq-0079-00",
         "sourceWrapper": {
           "id": "la-card_flavor-04016-5-uniq-0079-00",
@@ -43769,6 +44324,28 @@
         "fields": {
           "id": "la-card_flavor-06003-5-uniq-0091-00",
           "text": "夏夜を彩るBrilliant Smile"
+        }
+      },
+      {
+        "sourceId": "la-card_flavor-06004-5-uniq-0098-00",
+        "sourceWrapper": {
+          "id": "la-card_flavor-06004-5-uniq-0098-00",
+          "text": "高貴なるヴァンパイアの嗜み"
+        },
+        "fields": {
+          "id": "la-card_flavor-06004-5-uniq-0098-00",
+          "text": "高貴なるヴァンパイアの嗜み"
+        }
+      },
+      {
+        "sourceId": "la-card_flavor-06005-5-uniq-0097-00",
+        "sourceWrapper": {
+          "id": "la-card_flavor-06005-5-uniq-0097-00",
+          "text": "今宵開幕！あやかしダンシング"
+        },
+        "fields": {
+          "id": "la-card_flavor-06005-5-uniq-0097-00",
+          "text": "今宵開幕！あやかしダンシング"
         }
       },
       {
@@ -51119,6 +51696,28 @@
         }
       },
       {
+        "sourceId": "la-generated-live_active_skill-card-00007-5-uniq-0096-00.1-description",
+        "sourceWrapper": {
+          "id": "la-generated-live_active_skill-card-00007-5-uniq-0096-00.1-description",
+          "text": "26秒毎に中確率で10秒間スコアが90%UP"
+        },
+        "fields": {
+          "id": "la-generated-live_active_skill-card-00007-5-uniq-0096-00.1-description",
+          "text": "26秒毎に中確率で10秒間スコアが90%UP"
+        }
+      },
+      {
+        "sourceId": "la-generated-live_active_skill-card-00007-5-uniq-0096-00.2-description",
+        "sourceWrapper": {
+          "id": "la-generated-live_active_skill-card-00007-5-uniq-0096-00.2-description",
+          "text": "26秒毎に中確率で10秒間スコアが[highlight]110[/highlight]%UP"
+        },
+        "fields": {
+          "id": "la-generated-live_active_skill-card-00007-5-uniq-0096-00.2-description",
+          "text": "26秒毎に中確率で10秒間スコアが[highlight]110[/highlight]%UP"
+        }
+      },
+      {
         "sourceId": "la-generated-live_active_skill-card-00010-3-nrml-0010-00.1-description",
         "sourceWrapper": {
           "id": "la-generated-live_active_skill-card-00010-3-nrml-0010-00.1-description",
@@ -53627,6 +54226,28 @@
         }
       },
       {
+        "sourceId": "la-generated-live_active_skill-card-03007-5-uniq-0100-00.1-description",
+        "sourceWrapper": {
+          "id": "la-generated-live_active_skill-card-03007-5-uniq-0100-00.1-description",
+          "text": "27秒毎に中確率で10秒間スコアが95%UP"
+        },
+        "fields": {
+          "id": "la-generated-live_active_skill-card-03007-5-uniq-0100-00.1-description",
+          "text": "27秒毎に中確率で10秒間スコアが95%UP"
+        }
+      },
+      {
+        "sourceId": "la-generated-live_active_skill-card-03007-5-uniq-0100-00.2-description",
+        "sourceWrapper": {
+          "id": "la-generated-live_active_skill-card-03007-5-uniq-0100-00.2-description",
+          "text": "27秒毎に中確率で10秒間スコアが[highlight]115[/highlight]%UP"
+        },
+        "fields": {
+          "id": "la-generated-live_active_skill-card-03007-5-uniq-0100-00.2-description",
+          "text": "27秒毎に中確率で10秒間スコアが[highlight]115[/highlight]%UP"
+        }
+      },
+      {
         "sourceId": "la-generated-live_active_skill-card-03008-3-nrml-0040-00.1-description",
         "sourceWrapper": {
           "id": "la-generated-live_active_skill-card-03008-3-nrml-0040-00.1-description",
@@ -54507,6 +55128,28 @@
         }
       },
       {
+        "sourceId": "la-generated-live_active_skill-card-04015-5-uniq-0099-00.1-description",
+        "sourceWrapper": {
+          "id": "la-generated-live_active_skill-card-04015-5-uniq-0099-00.1-description",
+          "text": "29秒毎に高確率で10秒間スコアが95%UP"
+        },
+        "fields": {
+          "id": "la-generated-live_active_skill-card-04015-5-uniq-0099-00.1-description",
+          "text": "29秒毎に高確率で10秒間スコアが95%UP"
+        }
+      },
+      {
+        "sourceId": "la-generated-live_active_skill-card-04015-5-uniq-0099-00.2-description",
+        "sourceWrapper": {
+          "id": "la-generated-live_active_skill-card-04015-5-uniq-0099-00.2-description",
+          "text": "29秒毎に高確率で[highlight]11[/highlight]秒間スコアが[highlight]105[/highlight]%UP"
+        },
+        "fields": {
+          "id": "la-generated-live_active_skill-card-04015-5-uniq-0099-00.2-description",
+          "text": "29秒毎に高確率で[highlight]11[/highlight]秒間スコアが[highlight]105[/highlight]%UP"
+        }
+      },
+      {
         "sourceId": "la-generated-live_active_skill-card-04016-3-nrml-0055-00.1-description",
         "sourceWrapper": {
           "id": "la-generated-live_active_skill-card-04016-3-nrml-0055-00.1-description",
@@ -54925,6 +55568,28 @@
         }
       },
       {
+        "sourceId": "la-generated-live_active_skill-card-06004-5-uniq-0098-00.1-description",
+        "sourceWrapper": {
+          "id": "la-generated-live_active_skill-card-06004-5-uniq-0098-00.1-description",
+          "text": "23秒毎に中確率で8秒間スコアが100%UP"
+        },
+        "fields": {
+          "id": "la-generated-live_active_skill-card-06004-5-uniq-0098-00.1-description",
+          "text": "23秒毎に中確率で8秒間スコアが100%UP"
+        }
+      },
+      {
+        "sourceId": "la-generated-live_active_skill-card-06004-5-uniq-0098-00.2-description",
+        "sourceWrapper": {
+          "id": "la-generated-live_active_skill-card-06004-5-uniq-0098-00.2-description",
+          "text": "23秒毎に中確率で8秒間スコアが[highlight]120[/highlight]%UP"
+        },
+        "fields": {
+          "id": "la-generated-live_active_skill-card-06004-5-uniq-0098-00.2-description",
+          "text": "23秒毎に中確率で8秒間スコアが[highlight]120[/highlight]%UP"
+        }
+      },
+      {
         "sourceId": "la-generated-live_active_skill-card-06005-3-nrml-0061-00.1-description",
         "sourceWrapper": {
           "id": "la-generated-live_active_skill-card-06005-3-nrml-0061-00.1-description",
@@ -54988,6 +55653,28 @@
         "fields": {
           "id": "la-generated-live_active_skill-card-06005-5-uniq-0061-00.2-description",
           "text": "26秒毎に高確率で9秒間スコアが[highlight]60[/highlight]%UP\n40コンボ以上でスコアが[highlight]120[/highlight]%UP"
+        }
+      },
+      {
+        "sourceId": "la-generated-live_active_skill-card-06005-5-uniq-0097-00.1-description",
+        "sourceWrapper": {
+          "id": "la-generated-live_active_skill-card-06005-5-uniq-0097-00.1-description",
+          "text": "32秒毎に中確率で11秒間スコアが55%UP\nReGLOSSが2人以上でスコアが110%UP"
+        },
+        "fields": {
+          "id": "la-generated-live_active_skill-card-06005-5-uniq-0097-00.1-description",
+          "text": "32秒毎に中確率で11秒間スコアが55%UP\nReGLOSSが2人以上でスコアが110%UP"
+        }
+      },
+      {
+        "sourceId": "la-generated-live_active_skill-card-06005-5-uniq-0097-00.2-description",
+        "sourceWrapper": {
+          "id": "la-generated-live_active_skill-card-06005-5-uniq-0097-00.2-description",
+          "text": "32秒毎に中確率で11秒間スコアが[highlight]65[/highlight]%UP\nReGLOSSが2人以上でスコアが[highlight]130[/highlight]%UP"
+        },
+        "fields": {
+          "id": "la-generated-live_active_skill-card-06005-5-uniq-0097-00.2-description",
+          "text": "32秒毎に中確率で11秒間スコアが[highlight]65[/highlight]%UP\nReGLOSSが2人以上でスコアが[highlight]130[/highlight]%UP"
         }
       }
     ],
@@ -55224,6 +55911,17 @@
         }
       },
       {
+        "sourceId": "la-generated-live_passive_skill_effect-live_active_skill_effect_up_permil_up-120-live_skill_effect_target-character_grouping-grp-regloss-2.1-description",
+        "sourceWrapper": {
+          "id": "la-generated-live_passive_skill_effect-live_active_skill_effect_up_permil_up-120-live_skill_effect_target-character_grouping-grp-regloss-2.1-description",
+          "text": "ReGLOSS2人のスコアサポート効果12%"
+        },
+        "fields": {
+          "id": "la-generated-live_passive_skill_effect-live_active_skill_effect_up_permil_up-120-live_skill_effect_target-character_grouping-grp-regloss-2.1-description",
+          "text": "ReGLOSS2人のスコアサポート効果12%"
+        }
+      },
+      {
         "sourceId": "la-generated-live_passive_skill_effect-live_active_skill_effect_up_permil_up-40-live_skill_effect_target-attribute-attribute_1-3.1-description",
         "sourceWrapper": {
           "id": "la-generated-live_passive_skill_effect-live_active_skill_effect_up_permil_up-40-live_skill_effect_target-attribute-attribute_1-3.1-description",
@@ -55452,6 +56150,17 @@
         "fields": {
           "id": "la-generated-live_passive_skill_effect-live_active_skill_effect_up_permil_up-90-live_skill_effect_target-character_grouping-grp-myth-2.1-description",
           "text": "Myth2人のスコアサポート効果9%"
+        }
+      },
+      {
+        "sourceId": "la-generated-live_passive_skill_effect-live_active_skill_effect_up_permil_up-90-live_skill_effect_target-character_grouping-grp-regloss-2.1-description",
+        "sourceWrapper": {
+          "id": "la-generated-live_passive_skill_effect-live_active_skill_effect_up_permil_up-90-live_skill_effect_target-character_grouping-grp-regloss-2.1-description",
+          "text": "ReGLOSS2人のスコアサポート効果9%"
+        },
+        "fields": {
+          "id": "la-generated-live_passive_skill_effect-live_active_skill_effect_up_permil_up-90-live_skill_effect_target-character_grouping-grp-regloss-2.1-description",
+          "text": "ReGLOSS2人のスコアサポート効果9%"
         }
       },
       {
@@ -57269,6 +57978,28 @@
         "fields": {
           "id": "la-generated-live_passive_skill-card-00007-5-uniq-0008-00.2-description",
           "text": "1期生2人のパフォーマンスが[highlight]43[/highlight]%UP"
+        }
+      },
+      {
+        "sourceId": "la-generated-live_passive_skill-card-00007-5-uniq-0096-00.1-description",
+        "sourceWrapper": {
+          "id": "la-generated-live_passive_skill-card-00007-5-uniq-0096-00.1-description",
+          "text": "[attribute=pure]ピュアタイプ[/attribute]2人以上で[attribute=pure]ピュアタイプ[/attribute]2人のセンスが32%UP"
+        },
+        "fields": {
+          "id": "la-generated-live_passive_skill-card-00007-5-uniq-0096-00.1-description",
+          "text": "[attribute=pure]ピュアタイプ[/attribute]2人以上で[attribute=pure]ピュアタイプ[/attribute]2人のセンスが32%UP"
+        }
+      },
+      {
+        "sourceId": "la-generated-live_passive_skill-card-00007-5-uniq-0096-00.2-description",
+        "sourceWrapper": {
+          "id": "la-generated-live_passive_skill-card-00007-5-uniq-0096-00.2-description",
+          "text": "[attribute=pure]ピュアタイプ[/attribute]2人以上で[attribute=pure]ピュアタイプ[/attribute]2人のセンスが[highlight]43[/highlight]%UP"
+        },
+        "fields": {
+          "id": "la-generated-live_passive_skill-card-00007-5-uniq-0096-00.2-description",
+          "text": "[attribute=pure]ピュアタイプ[/attribute]2人以上で[attribute=pure]ピュアタイプ[/attribute]2人のセンスが[highlight]43[/highlight]%UP"
         }
       },
       {
@@ -59780,6 +60511,28 @@
         }
       },
       {
+        "sourceId": "la-generated-live_passive_skill-card-03007-5-uniq-0100-00.1-description",
+        "sourceWrapper": {
+          "id": "la-generated-live_passive_skill-card-03007-5-uniq-0100-00.1-description",
+          "text": "[attribute=pure]ピュアタイプ[/attribute]2人のスコアサポート効果8%"
+        },
+        "fields": {
+          "id": "la-generated-live_passive_skill-card-03007-5-uniq-0100-00.1-description",
+          "text": "[attribute=pure]ピュアタイプ[/attribute]2人のスコアサポート効果8%"
+        }
+      },
+      {
+        "sourceId": "la-generated-live_passive_skill-card-03007-5-uniq-0100-00.2-description",
+        "sourceWrapper": {
+          "id": "la-generated-live_passive_skill-card-03007-5-uniq-0100-00.2-description",
+          "text": "[attribute=pure]ピュアタイプ[/attribute]2人のスコアサポート効果[highlight]11[/highlight]%"
+        },
+        "fields": {
+          "id": "la-generated-live_passive_skill-card-03007-5-uniq-0100-00.2-description",
+          "text": "[attribute=pure]ピュアタイプ[/attribute]2人のスコアサポート効果[highlight]11[/highlight]%"
+        }
+      },
+      {
         "sourceId": "la-generated-live_passive_skill-card-03008-3-nrml-0040-00.1-description",
         "sourceWrapper": {
           "id": "la-generated-live_passive_skill-card-03008-3-nrml-0040-00.1-description",
@@ -60660,6 +61413,28 @@
         }
       },
       {
+        "sourceId": "la-generated-live_passive_skill-card-04015-5-uniq-0099-00.1-description",
+        "sourceWrapper": {
+          "id": "la-generated-live_passive_skill-card-04015-5-uniq-0099-00.1-description",
+          "text": "[attribute=happy]ハッピータイプ[/attribute]2人以上で[attribute=happy]ハッピータイプ[/attribute]2人のパフォーマンスが32%UP"
+        },
+        "fields": {
+          "id": "la-generated-live_passive_skill-card-04015-5-uniq-0099-00.1-description",
+          "text": "[attribute=happy]ハッピータイプ[/attribute]2人以上で[attribute=happy]ハッピータイプ[/attribute]2人のパフォーマンスが32%UP"
+        }
+      },
+      {
+        "sourceId": "la-generated-live_passive_skill-card-04015-5-uniq-0099-00.2-description",
+        "sourceWrapper": {
+          "id": "la-generated-live_passive_skill-card-04015-5-uniq-0099-00.2-description",
+          "text": "[attribute=happy]ハッピータイプ[/attribute]2人以上で[attribute=happy]ハッピータイプ[/attribute]2人のパフォーマンスが[highlight]43[/highlight]%UP"
+        },
+        "fields": {
+          "id": "la-generated-live_passive_skill-card-04015-5-uniq-0099-00.2-description",
+          "text": "[attribute=happy]ハッピータイプ[/attribute]2人以上で[attribute=happy]ハッピータイプ[/attribute]2人のパフォーマンスが[highlight]43[/highlight]%UP"
+        }
+      },
+      {
         "sourceId": "la-generated-live_passive_skill-card-04016-3-nrml-0055-00.1-description",
         "sourceWrapper": {
           "id": "la-generated-live_passive_skill-card-04016-3-nrml-0055-00.1-description",
@@ -61078,6 +61853,28 @@
         }
       },
       {
+        "sourceId": "la-generated-live_passive_skill-card-06004-5-uniq-0098-00.1-description",
+        "sourceWrapper": {
+          "id": "la-generated-live_passive_skill-card-06004-5-uniq-0098-00.1-description",
+          "text": "ReGLOSSが2人以上でReGLOSS2人のスコアサポート効果9%"
+        },
+        "fields": {
+          "id": "la-generated-live_passive_skill-card-06004-5-uniq-0098-00.1-description",
+          "text": "ReGLOSSが2人以上でReGLOSS2人のスコアサポート効果9%"
+        }
+      },
+      {
+        "sourceId": "la-generated-live_passive_skill-card-06004-5-uniq-0098-00.2-description",
+        "sourceWrapper": {
+          "id": "la-generated-live_passive_skill-card-06004-5-uniq-0098-00.2-description",
+          "text": "ReGLOSSが2人以上でReGLOSS2人のスコアサポート効果[highlight]12[/highlight]%"
+        },
+        "fields": {
+          "id": "la-generated-live_passive_skill-card-06004-5-uniq-0098-00.2-description",
+          "text": "ReGLOSSが2人以上でReGLOSS2人のスコアサポート効果[highlight]12[/highlight]%"
+        }
+      },
+      {
         "sourceId": "la-generated-live_passive_skill-card-06005-3-nrml-0061-00.1-description",
         "sourceWrapper": {
           "id": "la-generated-live_passive_skill-card-06005-3-nrml-0061-00.1-description",
@@ -61141,6 +61938,28 @@
         "fields": {
           "id": "la-generated-live_passive_skill-card-06005-5-uniq-0061-00.2-description",
           "text": "[attribute=cute]キュートタイプ[/attribute]2人のパフォーマンスが[highlight]41[/highlight]%UP"
+        }
+      },
+      {
+        "sourceId": "la-generated-live_passive_skill-card-06005-5-uniq-0097-00.1-description",
+        "sourceWrapper": {
+          "id": "la-generated-live_passive_skill-card-06005-5-uniq-0097-00.1-description",
+          "text": "ReGLOSSが2人以上で自身の全パラメータが25%UP"
+        },
+        "fields": {
+          "id": "la-generated-live_passive_skill-card-06005-5-uniq-0097-00.1-description",
+          "text": "ReGLOSSが2人以上で自身の全パラメータが25%UP"
+        }
+      },
+      {
+        "sourceId": "la-generated-live_passive_skill-card-06005-5-uniq-0097-00.2-description",
+        "sourceWrapper": {
+          "id": "la-generated-live_passive_skill-card-06005-5-uniq-0097-00.2-description",
+          "text": "ReGLOSSが2人以上で自身の全パラメータが[highlight]33[/highlight]%UP"
+        },
+        "fields": {
+          "id": "la-generated-live_passive_skill-card-06005-5-uniq-0097-00.2-description",
+          "text": "ReGLOSSが2人以上で自身の全パラメータが[highlight]33[/highlight]%UP"
         }
       }
     ],
@@ -62104,6 +62923,28 @@
         "fields": {
           "id": "la-generated-live_special_skill-card-00007-5-uniq-0008-00.2-description",
           "text": "[highlight]11[/highlight]秒間スコアサポート効果[highlight]145[/highlight]%"
+        }
+      },
+      {
+        "sourceId": "la-generated-live_special_skill-card-00007-5-uniq-0096-00.1-description",
+        "sourceWrapper": {
+          "id": "la-generated-live_special_skill-card-00007-5-uniq-0096-00.1-description",
+          "text": "14秒間スコアサポート効果95%"
+        },
+        "fields": {
+          "id": "la-generated-live_special_skill-card-00007-5-uniq-0096-00.1-description",
+          "text": "14秒間スコアサポート効果95%"
+        }
+      },
+      {
+        "sourceId": "la-generated-live_special_skill-card-00007-5-uniq-0096-00.2-description",
+        "sourceWrapper": {
+          "id": "la-generated-live_special_skill-card-00007-5-uniq-0096-00.2-description",
+          "text": "14秒間スコアサポート効果[highlight]115[/highlight]%"
+        },
+        "fields": {
+          "id": "la-generated-live_special_skill-card-00007-5-uniq-0096-00.2-description",
+          "text": "14秒間スコアサポート効果[highlight]115[/highlight]%"
         }
       },
       {
@@ -64615,6 +65456,28 @@
         }
       },
       {
+        "sourceId": "la-generated-live_special_skill-card-03007-5-uniq-0100-00.1-description",
+        "sourceWrapper": {
+          "id": "la-generated-live_special_skill-card-03007-5-uniq-0100-00.1-description",
+          "text": "12秒間スコアサポート効果110%"
+        },
+        "fields": {
+          "id": "la-generated-live_special_skill-card-03007-5-uniq-0100-00.1-description",
+          "text": "12秒間スコアサポート効果110%"
+        }
+      },
+      {
+        "sourceId": "la-generated-live_special_skill-card-03007-5-uniq-0100-00.2-description",
+        "sourceWrapper": {
+          "id": "la-generated-live_special_skill-card-03007-5-uniq-0100-00.2-description",
+          "text": "12秒間スコアサポート効果[highlight]135[/highlight]%"
+        },
+        "fields": {
+          "id": "la-generated-live_special_skill-card-03007-5-uniq-0100-00.2-description",
+          "text": "12秒間スコアサポート効果[highlight]135[/highlight]%"
+        }
+      },
+      {
         "sourceId": "la-generated-live_special_skill-card-03008-3-nrml-0040-00.1-description",
         "sourceWrapper": {
           "id": "la-generated-live_special_skill-card-03008-3-nrml-0040-00.1-description",
@@ -65495,6 +66358,28 @@
         }
       },
       {
+        "sourceId": "la-generated-live_special_skill-card-04015-5-uniq-0099-00.1-description",
+        "sourceWrapper": {
+          "id": "la-generated-live_special_skill-card-04015-5-uniq-0099-00.1-description",
+          "text": "15秒間スコアサポート効果90%"
+        },
+        "fields": {
+          "id": "la-generated-live_special_skill-card-04015-5-uniq-0099-00.1-description",
+          "text": "15秒間スコアサポート効果90%"
+        }
+      },
+      {
+        "sourceId": "la-generated-live_special_skill-card-04015-5-uniq-0099-00.2-description",
+        "sourceWrapper": {
+          "id": "la-generated-live_special_skill-card-04015-5-uniq-0099-00.2-description",
+          "text": "15秒間スコアサポート効果[highlight]105[/highlight]%"
+        },
+        "fields": {
+          "id": "la-generated-live_special_skill-card-04015-5-uniq-0099-00.2-description",
+          "text": "15秒間スコアサポート効果[highlight]105[/highlight]%"
+        }
+      },
+      {
         "sourceId": "la-generated-live_special_skill-card-04016-3-nrml-0055-00.1-description",
         "sourceWrapper": {
           "id": "la-generated-live_special_skill-card-04016-3-nrml-0055-00.1-description",
@@ -65913,6 +66798,28 @@
         }
       },
       {
+        "sourceId": "la-generated-live_special_skill-card-06004-5-uniq-0098-00.1-description",
+        "sourceWrapper": {
+          "id": "la-generated-live_special_skill-card-06004-5-uniq-0098-00.1-description",
+          "text": "12秒間スコアサポート効果100%\nReGLOSSが2人以上でスキル発動率が40%UP"
+        },
+        "fields": {
+          "id": "la-generated-live_special_skill-card-06004-5-uniq-0098-00.1-description",
+          "text": "12秒間スコアサポート効果100%\nReGLOSSが2人以上でスキル発動率が40%UP"
+        }
+      },
+      {
+        "sourceId": "la-generated-live_special_skill-card-06004-5-uniq-0098-00.2-description",
+        "sourceWrapper": {
+          "id": "la-generated-live_special_skill-card-06004-5-uniq-0098-00.2-description",
+          "text": "12秒間スコアサポート効果[highlight]120[/highlight]%\nReGLOSSが2人以上でスキル発動率が[highlight]45[/highlight]%UP"
+        },
+        "fields": {
+          "id": "la-generated-live_special_skill-card-06004-5-uniq-0098-00.2-description",
+          "text": "12秒間スコアサポート効果[highlight]120[/highlight]%\nReGLOSSが2人以上でスキル発動率が[highlight]45[/highlight]%UP"
+        }
+      },
+      {
         "sourceId": "la-generated-live_special_skill-card-06005-3-nrml-0061-00.1-description",
         "sourceWrapper": {
           "id": "la-generated-live_special_skill-card-06005-3-nrml-0061-00.1-description",
@@ -65976,6 +66883,28 @@
         "fields": {
           "id": "la-generated-live_special_skill-card-06005-5-uniq-0061-00.2-description",
           "text": "10秒間スコアサポート効果[highlight]145[/highlight]%\nスキル発動率が[highlight]50[/highlight]%UP"
+        }
+      },
+      {
+        "sourceId": "la-generated-live_special_skill-card-06005-5-uniq-0097-00.1-description",
+        "sourceWrapper": {
+          "id": "la-generated-live_special_skill-card-06005-5-uniq-0097-00.1-description",
+          "text": "14秒間スコアサポート効果95%"
+        },
+        "fields": {
+          "id": "la-generated-live_special_skill-card-06005-5-uniq-0097-00.1-description",
+          "text": "14秒間スコアサポート効果95%"
+        }
+      },
+      {
+        "sourceId": "la-generated-live_special_skill-card-06005-5-uniq-0097-00.2-description",
+        "sourceWrapper": {
+          "id": "la-generated-live_special_skill-card-06005-5-uniq-0097-00.2-description",
+          "text": "14秒間スコアサポート効果[highlight]115[/highlight]%"
+        },
+        "fields": {
+          "id": "la-generated-live_special_skill-card-06005-5-uniq-0097-00.2-description",
+          "text": "14秒間スコアサポート効果[highlight]115[/highlight]%"
         }
       }
     ],
@@ -66380,6 +67309,15 @@
         },
         "fields": {
           "id": "live_active_skill-card-00007-5-uniq-0008-00"
+        }
+      },
+      {
+        "sourceId": "live_active_skill-card-00007-5-uniq-0096-00",
+        "sourceWrapper": {
+          "id": "live_active_skill-card-00007-5-uniq-0096-00"
+        },
+        "fields": {
+          "id": "live_active_skill-card-00007-5-uniq-0096-00"
         }
       },
       {
@@ -67409,6 +68347,15 @@
         }
       },
       {
+        "sourceId": "live_active_skill-card-03007-5-uniq-0100-00",
+        "sourceWrapper": {
+          "id": "live_active_skill-card-03007-5-uniq-0100-00"
+        },
+        "fields": {
+          "id": "live_active_skill-card-03007-5-uniq-0100-00"
+        }
+      },
+      {
         "sourceId": "live_active_skill-card-03008-3-nrml-0040-00",
         "sourceWrapper": {
           "id": "live_active_skill-card-03008-3-nrml-0040-00"
@@ -67769,6 +68716,15 @@
         }
       },
       {
+        "sourceId": "live_active_skill-card-04015-5-uniq-0099-00",
+        "sourceWrapper": {
+          "id": "live_active_skill-card-04015-5-uniq-0099-00"
+        },
+        "fields": {
+          "id": "live_active_skill-card-04015-5-uniq-0099-00"
+        }
+      },
+      {
         "sourceId": "live_active_skill-card-04016-3-nrml-0055-00",
         "sourceWrapper": {
           "id": "live_active_skill-card-04016-3-nrml-0055-00"
@@ -67940,6 +68896,15 @@
         }
       },
       {
+        "sourceId": "live_active_skill-card-06004-5-uniq-0098-00",
+        "sourceWrapper": {
+          "id": "live_active_skill-card-06004-5-uniq-0098-00"
+        },
+        "fields": {
+          "id": "live_active_skill-card-06004-5-uniq-0098-00"
+        }
+      },
+      {
         "sourceId": "live_active_skill-card-06005-3-nrml-0061-00",
         "sourceWrapper": {
           "id": "live_active_skill-card-06005-3-nrml-0061-00"
@@ -67964,6 +68929,15 @@
         },
         "fields": {
           "id": "live_active_skill-card-06005-5-uniq-0061-00"
+        }
+      },
+      {
+        "sourceId": "live_active_skill-card-06005-5-uniq-0097-00",
+        "sourceWrapper": {
+          "id": "live_active_skill-card-06005-5-uniq-0097-00"
+        },
+        "fields": {
+          "id": "live_active_skill-card-06005-5-uniq-0097-00"
         }
       }
     ],
@@ -69045,6 +70019,22 @@
           "activationProbabilityPermilMultiply": 550,
           "effectDurationMillisecond": 8000,
           "descriptionLangId": "la-generated-live_active_skill-card-00007-5-uniq-0008-00.1-description"
+        }
+      },
+      {
+        "sourceId": "level=1;live_active_skill_id=live_active_skill-card-00007-5-uniq-0096-00",
+        "sourceWrapper": {
+          "live_active_skill_id": "live_active_skill-card-00007-5-uniq-0096-00",
+          "level": 1
+        },
+        "fields": {
+          "liveActiveSkillId": "live_active_skill-card-00007-5-uniq-0096-00",
+          "level": 1,
+          "liveActiveSkillEffectGroupId": "live_active_skill_effect-score_up_permil_up-900",
+          "coolTimeMillisecond": 26000,
+          "activationProbabilityPermilMultiply": 460,
+          "effectDurationMillisecond": 10000,
+          "descriptionLangId": "la-generated-live_active_skill-card-00007-5-uniq-0096-00.1-description"
         }
       },
       {
@@ -70962,6 +71952,22 @@
         }
       },
       {
+        "sourceId": "level=1;live_active_skill_id=live_active_skill-card-03007-5-uniq-0100-00",
+        "sourceWrapper": {
+          "live_active_skill_id": "live_active_skill-card-03007-5-uniq-0100-00",
+          "level": 1
+        },
+        "fields": {
+          "liveActiveSkillId": "live_active_skill-card-03007-5-uniq-0100-00",
+          "level": 1,
+          "liveActiveSkillEffectGroupId": "live_active_skill_effect-score_up_permil_up-950",
+          "coolTimeMillisecond": 27000,
+          "activationProbabilityPermilMultiply": 460,
+          "effectDurationMillisecond": 10000,
+          "descriptionLangId": "la-generated-live_active_skill-card-03007-5-uniq-0100-00.1-description"
+        }
+      },
+      {
         "sourceId": "level=1;live_active_skill_id=live_active_skill-card-03008-3-nrml-0040-00",
         "sourceWrapper": {
           "live_active_skill_id": "live_active_skill-card-03008-3-nrml-0040-00",
@@ -71630,6 +72636,22 @@
         }
       },
       {
+        "sourceId": "level=1;live_active_skill_id=live_active_skill-card-04015-5-uniq-0099-00",
+        "sourceWrapper": {
+          "live_active_skill_id": "live_active_skill-card-04015-5-uniq-0099-00",
+          "level": 1
+        },
+        "fields": {
+          "liveActiveSkillId": "live_active_skill-card-04015-5-uniq-0099-00",
+          "level": 1,
+          "liveActiveSkillEffectGroupId": "live_active_skill_effect-score_up_permil_up-950",
+          "coolTimeMillisecond": 29000,
+          "activationProbabilityPermilMultiply": 550,
+          "effectDurationMillisecond": 10000,
+          "descriptionLangId": "la-generated-live_active_skill-card-04015-5-uniq-0099-00.1-description"
+        }
+      },
+      {
         "sourceId": "level=1;live_active_skill_id=live_active_skill-card-04016-3-nrml-0055-00",
         "sourceWrapper": {
           "live_active_skill_id": "live_active_skill-card-04016-3-nrml-0055-00",
@@ -71948,6 +72970,22 @@
         }
       },
       {
+        "sourceId": "level=1;live_active_skill_id=live_active_skill-card-06004-5-uniq-0098-00",
+        "sourceWrapper": {
+          "live_active_skill_id": "live_active_skill-card-06004-5-uniq-0098-00",
+          "level": 1
+        },
+        "fields": {
+          "liveActiveSkillId": "live_active_skill-card-06004-5-uniq-0098-00",
+          "level": 1,
+          "liveActiveSkillEffectGroupId": "live_active_skill_effect-score_up_permil_up-1000",
+          "coolTimeMillisecond": 23000,
+          "activationProbabilityPermilMultiply": 460,
+          "effectDurationMillisecond": 8000,
+          "descriptionLangId": "la-generated-live_active_skill-card-06004-5-uniq-0098-00.1-description"
+        }
+      },
+      {
         "sourceId": "level=1;live_active_skill_id=live_active_skill-card-06005-3-nrml-0061-00",
         "sourceWrapper": {
           "live_active_skill_id": "live_active_skill-card-06005-3-nrml-0061-00",
@@ -71997,6 +73035,24 @@
           "activationProbabilityPermilMultiply": 550,
           "effectDurationMillisecond": 9000,
           "descriptionLangId": "la-generated-live_active_skill-card-06005-5-uniq-0061-00.1-description"
+        }
+      },
+      {
+        "sourceId": "level=1;live_active_skill_id=live_active_skill-card-06005-5-uniq-0097-00",
+        "sourceWrapper": {
+          "live_active_skill_id": "live_active_skill-card-06005-5-uniq-0097-00",
+          "level": 1
+        },
+        "fields": {
+          "liveActiveSkillId": "live_active_skill-card-06005-5-uniq-0097-00",
+          "level": 1,
+          "liveActiveSkillEffectGroupId": "live_active_skill_effect-score_up_permil_up-550",
+          "additionalLiveSkillTriggerGroupId": "live_skill_trigger-deck_card_character_grouping-grp-regloss-2",
+          "additionalLiveActiveSkillEffectGroupId": "live_active_skill_effect-score_up_permil_up-1100",
+          "coolTimeMillisecond": 32000,
+          "activationProbabilityPermilMultiply": 460,
+          "effectDurationMillisecond": 11000,
+          "descriptionLangId": "la-generated-live_active_skill-card-06005-5-uniq-0097-00.1-description"
         }
       },
       {
@@ -72333,6 +73389,22 @@
           "activationProbabilityPermilMultiply": 550,
           "effectDurationMillisecond": 8000,
           "descriptionLangId": "la-generated-live_active_skill-card-00007-5-uniq-0008-00.2-description"
+        }
+      },
+      {
+        "sourceId": "level=2;live_active_skill_id=live_active_skill-card-00007-5-uniq-0096-00",
+        "sourceWrapper": {
+          "live_active_skill_id": "live_active_skill-card-00007-5-uniq-0096-00",
+          "level": 2
+        },
+        "fields": {
+          "liveActiveSkillId": "live_active_skill-card-00007-5-uniq-0096-00",
+          "level": 2,
+          "liveActiveSkillEffectGroupId": "live_active_skill_effect-score_up_permil_up-1100",
+          "coolTimeMillisecond": 26000,
+          "activationProbabilityPermilMultiply": 460,
+          "effectDurationMillisecond": 10000,
+          "descriptionLangId": "la-generated-live_active_skill-card-00007-5-uniq-0096-00.2-description"
         }
       },
       {
@@ -74250,6 +75322,22 @@
         }
       },
       {
+        "sourceId": "level=2;live_active_skill_id=live_active_skill-card-03007-5-uniq-0100-00",
+        "sourceWrapper": {
+          "live_active_skill_id": "live_active_skill-card-03007-5-uniq-0100-00",
+          "level": 2
+        },
+        "fields": {
+          "liveActiveSkillId": "live_active_skill-card-03007-5-uniq-0100-00",
+          "level": 2,
+          "liveActiveSkillEffectGroupId": "live_active_skill_effect-score_up_permil_up-1150",
+          "coolTimeMillisecond": 27000,
+          "activationProbabilityPermilMultiply": 460,
+          "effectDurationMillisecond": 10000,
+          "descriptionLangId": "la-generated-live_active_skill-card-03007-5-uniq-0100-00.2-description"
+        }
+      },
+      {
         "sourceId": "level=2;live_active_skill_id=live_active_skill-card-03008-3-nrml-0040-00",
         "sourceWrapper": {
           "live_active_skill_id": "live_active_skill-card-03008-3-nrml-0040-00",
@@ -74918,6 +76006,22 @@
         }
       },
       {
+        "sourceId": "level=2;live_active_skill_id=live_active_skill-card-04015-5-uniq-0099-00",
+        "sourceWrapper": {
+          "live_active_skill_id": "live_active_skill-card-04015-5-uniq-0099-00",
+          "level": 2
+        },
+        "fields": {
+          "liveActiveSkillId": "live_active_skill-card-04015-5-uniq-0099-00",
+          "level": 2,
+          "liveActiveSkillEffectGroupId": "live_active_skill_effect-score_up_permil_up-1050",
+          "coolTimeMillisecond": 29000,
+          "activationProbabilityPermilMultiply": 550,
+          "effectDurationMillisecond": 11000,
+          "descriptionLangId": "la-generated-live_active_skill-card-04015-5-uniq-0099-00.2-description"
+        }
+      },
+      {
         "sourceId": "level=2;live_active_skill_id=live_active_skill-card-04016-3-nrml-0055-00",
         "sourceWrapper": {
           "live_active_skill_id": "live_active_skill-card-04016-3-nrml-0055-00",
@@ -75236,6 +76340,22 @@
         }
       },
       {
+        "sourceId": "level=2;live_active_skill_id=live_active_skill-card-06004-5-uniq-0098-00",
+        "sourceWrapper": {
+          "live_active_skill_id": "live_active_skill-card-06004-5-uniq-0098-00",
+          "level": 2
+        },
+        "fields": {
+          "liveActiveSkillId": "live_active_skill-card-06004-5-uniq-0098-00",
+          "level": 2,
+          "liveActiveSkillEffectGroupId": "live_active_skill_effect-score_up_permil_up-1200",
+          "coolTimeMillisecond": 23000,
+          "activationProbabilityPermilMultiply": 460,
+          "effectDurationMillisecond": 8000,
+          "descriptionLangId": "la-generated-live_active_skill-card-06004-5-uniq-0098-00.2-description"
+        }
+      },
+      {
         "sourceId": "level=2;live_active_skill_id=live_active_skill-card-06005-3-nrml-0061-00",
         "sourceWrapper": {
           "live_active_skill_id": "live_active_skill-card-06005-3-nrml-0061-00",
@@ -75285,6 +76405,24 @@
           "activationProbabilityPermilMultiply": 550,
           "effectDurationMillisecond": 9000,
           "descriptionLangId": "la-generated-live_active_skill-card-06005-5-uniq-0061-00.2-description"
+        }
+      },
+      {
+        "sourceId": "level=2;live_active_skill_id=live_active_skill-card-06005-5-uniq-0097-00",
+        "sourceWrapper": {
+          "live_active_skill_id": "live_active_skill-card-06005-5-uniq-0097-00",
+          "level": 2
+        },
+        "fields": {
+          "liveActiveSkillId": "live_active_skill-card-06005-5-uniq-0097-00",
+          "level": 2,
+          "liveActiveSkillEffectGroupId": "live_active_skill_effect-score_up_permil_up-650",
+          "additionalLiveSkillTriggerGroupId": "live_skill_trigger-deck_card_character_grouping-grp-regloss-2",
+          "additionalLiveActiveSkillEffectGroupId": "live_active_skill_effect-score_up_permil_up-1300",
+          "coolTimeMillisecond": 32000,
+          "activationProbabilityPermilMultiply": 460,
+          "effectDurationMillisecond": 11000,
+          "descriptionLangId": "la-generated-live_active_skill-card-06005-5-uniq-0097-00.2-description"
         }
       }
     ],
@@ -75467,6 +76605,15 @@
         },
         "fields": {
           "id": "live_passive_skill-card-00007-5-uniq-0008-00"
+        }
+      },
+      {
+        "sourceId": "live_passive_skill-card-00007-5-uniq-0096-00",
+        "sourceWrapper": {
+          "id": "live_passive_skill-card-00007-5-uniq-0096-00"
+        },
+        "fields": {
+          "id": "live_passive_skill-card-00007-5-uniq-0096-00"
         }
       },
       {
@@ -76496,6 +77643,15 @@
         }
       },
       {
+        "sourceId": "live_passive_skill-card-03007-5-uniq-0100-00",
+        "sourceWrapper": {
+          "id": "live_passive_skill-card-03007-5-uniq-0100-00"
+        },
+        "fields": {
+          "id": "live_passive_skill-card-03007-5-uniq-0100-00"
+        }
+      },
+      {
         "sourceId": "live_passive_skill-card-03008-3-nrml-0040-00",
         "sourceWrapper": {
           "id": "live_passive_skill-card-03008-3-nrml-0040-00"
@@ -76856,6 +78012,15 @@
         }
       },
       {
+        "sourceId": "live_passive_skill-card-04015-5-uniq-0099-00",
+        "sourceWrapper": {
+          "id": "live_passive_skill-card-04015-5-uniq-0099-00"
+        },
+        "fields": {
+          "id": "live_passive_skill-card-04015-5-uniq-0099-00"
+        }
+      },
+      {
         "sourceId": "live_passive_skill-card-04016-3-nrml-0055-00",
         "sourceWrapper": {
           "id": "live_passive_skill-card-04016-3-nrml-0055-00"
@@ -77027,6 +78192,15 @@
         }
       },
       {
+        "sourceId": "live_passive_skill-card-06004-5-uniq-0098-00",
+        "sourceWrapper": {
+          "id": "live_passive_skill-card-06004-5-uniq-0098-00"
+        },
+        "fields": {
+          "id": "live_passive_skill-card-06004-5-uniq-0098-00"
+        }
+      },
+      {
         "sourceId": "live_passive_skill-card-06005-3-nrml-0061-00",
         "sourceWrapper": {
           "id": "live_passive_skill-card-06005-3-nrml-0061-00"
@@ -77051,6 +78225,15 @@
         },
         "fields": {
           "id": "live_passive_skill-card-06005-5-uniq-0061-00"
+        }
+      },
+      {
+        "sourceId": "live_passive_skill-card-06005-5-uniq-0097-00",
+        "sourceWrapper": {
+          "id": "live_passive_skill-card-06005-5-uniq-0097-00"
+        },
+        "fields": {
+          "id": "live_passive_skill-card-06005-5-uniq-0097-00"
         }
       }
     ],
@@ -77371,6 +78554,21 @@
         }
       },
       {
+        "sourceId": "group_id=live_passive_skill_effect-live_active_skill_effect_up_permil_up-120-live_skill_effect_target-character_grouping-grp-regloss-2;number=1",
+        "sourceWrapper": {
+          "group_id": "live_passive_skill_effect-live_active_skill_effect_up_permil_up-120-live_skill_effect_target-character_grouping-grp-regloss-2",
+          "number": 1
+        },
+        "fields": {
+          "groupId": "live_passive_skill_effect-live_active_skill_effect_up_permil_up-120-live_skill_effect_target-character_grouping-grp-regloss-2",
+          "number": 1,
+          "type": "LivePassiveSkillEffectType_LIVE_PASSIVE_SKILL_EFFECT_TYPE_LIVE_ACTIVE_SKILL_EFFECT_UP_PERMIL_UP",
+          "value": "120",
+          "liveSkillEffectTargetId": "live_skill_effect_target-character_grouping-grp-regloss-2",
+          "descriptionLangId": "la-generated-live_passive_skill_effect-live_active_skill_effect_up_permil_up-120-live_skill_effect_target-character_grouping-grp-regloss-2.1-description"
+        }
+      },
+      {
         "sourceId": "group_id=live_passive_skill_effect-live_active_skill_effect_up_permil_up-40-live_skill_effect_target-attribute-attribute_1-3;number=1",
         "sourceWrapper": {
           "group_id": "live_passive_skill_effect-live_active_skill_effect_up_permil_up-40-live_skill_effect_target-attribute-attribute_1-3",
@@ -77683,6 +78881,21 @@
           "value": "90",
           "liveSkillEffectTargetId": "live_skill_effect_target-character_grouping-grp-myth-2",
           "descriptionLangId": "la-generated-live_passive_skill_effect-live_active_skill_effect_up_permil_up-90-live_skill_effect_target-character_grouping-grp-myth-2.1-description"
+        }
+      },
+      {
+        "sourceId": "group_id=live_passive_skill_effect-live_active_skill_effect_up_permil_up-90-live_skill_effect_target-character_grouping-grp-regloss-2;number=1",
+        "sourceWrapper": {
+          "group_id": "live_passive_skill_effect-live_active_skill_effect_up_permil_up-90-live_skill_effect_target-character_grouping-grp-regloss-2",
+          "number": 1
+        },
+        "fields": {
+          "groupId": "live_passive_skill_effect-live_active_skill_effect_up_permil_up-90-live_skill_effect_target-character_grouping-grp-regloss-2",
+          "number": 1,
+          "type": "LivePassiveSkillEffectType_LIVE_PASSIVE_SKILL_EFFECT_TYPE_LIVE_ACTIVE_SKILL_EFFECT_UP_PERMIL_UP",
+          "value": "90",
+          "liveSkillEffectTargetId": "live_skill_effect_target-character_grouping-grp-regloss-2",
+          "descriptionLangId": "la-generated-live_passive_skill_effect-live_active_skill_effect_up_permil_up-90-live_skill_effect_target-character_grouping-grp-regloss-2.1-description"
         }
       },
       {
@@ -79835,6 +81048,20 @@
         }
       },
       {
+        "sourceId": "level=1;live_passive_skill_id=live_passive_skill-card-00007-5-uniq-0096-00",
+        "sourceWrapper": {
+          "live_passive_skill_id": "live_passive_skill-card-00007-5-uniq-0096-00",
+          "level": 1
+        },
+        "fields": {
+          "livePassiveSkillId": "live_passive_skill-card-00007-5-uniq-0096-00",
+          "level": 1,
+          "liveSkillTriggerGroupId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
+          "livePassiveSkillEffectGroupId": "live_passive_skill_effect-sense_up_permil_up-320-live_skill_effect_target-attribute-attribute_2-2",
+          "descriptionLangId": "la-generated-live_passive_skill-card-00007-5-uniq-0096-00.1-description"
+        }
+      },
+      {
         "sourceId": "level=1;live_passive_skill_id=live_passive_skill-card-00010-3-nrml-0010-00",
         "sourceWrapper": {
           "live_passive_skill_id": "live_passive_skill-card-00010-3-nrml-0010-00",
@@ -81385,6 +82612,19 @@
         }
       },
       {
+        "sourceId": "level=1;live_passive_skill_id=live_passive_skill-card-03007-5-uniq-0100-00",
+        "sourceWrapper": {
+          "live_passive_skill_id": "live_passive_skill-card-03007-5-uniq-0100-00",
+          "level": 1
+        },
+        "fields": {
+          "livePassiveSkillId": "live_passive_skill-card-03007-5-uniq-0100-00",
+          "level": 1,
+          "livePassiveSkillEffectGroupId": "live_passive_skill_effect-live_active_skill_effect_up_permil_up-80-live_skill_effect_target-attribute-attribute_2-2",
+          "descriptionLangId": "la-generated-live_passive_skill-card-03007-5-uniq-0100-00.1-description"
+        }
+      },
+      {
         "sourceId": "level=1;live_passive_skill_id=live_passive_skill-card-03008-3-nrml-0040-00",
         "sourceWrapper": {
           "live_passive_skill_id": "live_passive_skill-card-03008-3-nrml-0040-00",
@@ -81930,6 +83170,20 @@
         }
       },
       {
+        "sourceId": "level=1;live_passive_skill_id=live_passive_skill-card-04015-5-uniq-0099-00",
+        "sourceWrapper": {
+          "live_passive_skill_id": "live_passive_skill-card-04015-5-uniq-0099-00",
+          "level": 1
+        },
+        "fields": {
+          "livePassiveSkillId": "live_passive_skill-card-04015-5-uniq-0099-00",
+          "level": 1,
+          "liveSkillTriggerGroupId": "live_skill_trigger-deck_card_attribute-attribute_3-2",
+          "livePassiveSkillEffectGroupId": "live_passive_skill_effect-performance_up_permil_up-320-live_skill_effect_target-attribute-attribute_3-2",
+          "descriptionLangId": "la-generated-live_passive_skill-card-04015-5-uniq-0099-00.1-description"
+        }
+      },
+      {
         "sourceId": "level=1;live_passive_skill_id=live_passive_skill-card-04016-3-nrml-0055-00",
         "sourceWrapper": {
           "live_passive_skill_id": "live_passive_skill-card-04016-3-nrml-0055-00",
@@ -82188,6 +83442,20 @@
         }
       },
       {
+        "sourceId": "level=1;live_passive_skill_id=live_passive_skill-card-06004-5-uniq-0098-00",
+        "sourceWrapper": {
+          "live_passive_skill_id": "live_passive_skill-card-06004-5-uniq-0098-00",
+          "level": 1
+        },
+        "fields": {
+          "livePassiveSkillId": "live_passive_skill-card-06004-5-uniq-0098-00",
+          "level": 1,
+          "liveSkillTriggerGroupId": "live_skill_trigger-deck_card_character_grouping-grp-regloss-2",
+          "livePassiveSkillEffectGroupId": "live_passive_skill_effect-live_active_skill_effect_up_permil_up-90-live_skill_effect_target-character_grouping-grp-regloss-2",
+          "descriptionLangId": "la-generated-live_passive_skill-card-06004-5-uniq-0098-00.1-description"
+        }
+      },
+      {
         "sourceId": "level=1;live_passive_skill_id=live_passive_skill-card-06005-3-nrml-0061-00",
         "sourceWrapper": {
           "live_passive_skill_id": "live_passive_skill-card-06005-3-nrml-0061-00",
@@ -82225,6 +83493,20 @@
           "level": 1,
           "livePassiveSkillEffectGroupId": "live_passive_skill_effect-performance_up_permil_up-300-live_skill_effect_target-attribute-attribute_1-2",
           "descriptionLangId": "la-generated-live_passive_skill-card-06005-5-uniq-0061-00.1-description"
+        }
+      },
+      {
+        "sourceId": "level=1;live_passive_skill_id=live_passive_skill-card-06005-5-uniq-0097-00",
+        "sourceWrapper": {
+          "live_passive_skill_id": "live_passive_skill-card-06005-5-uniq-0097-00",
+          "level": 1
+        },
+        "fields": {
+          "livePassiveSkillId": "live_passive_skill-card-06005-5-uniq-0097-00",
+          "level": 1,
+          "liveSkillTriggerGroupId": "live_skill_trigger-deck_card_character_grouping-grp-regloss-2",
+          "livePassiveSkillEffectGroupId": "live_passive_skill_effect-all_parameter_up_permil_up-250-live_skill_effect_target-self",
+          "descriptionLangId": "la-generated-live_passive_skill-card-06005-5-uniq-0097-00.1-description"
         }
       },
       {
@@ -82497,6 +83779,20 @@
           "level": 2,
           "livePassiveSkillEffectGroupId": "live_passive_skill_effect-performance_up_permil_up-430-live_skill_effect_target-character_grouping-grp-gen_1-2",
           "descriptionLangId": "la-generated-live_passive_skill-card-00007-5-uniq-0008-00.2-description"
+        }
+      },
+      {
+        "sourceId": "level=2;live_passive_skill_id=live_passive_skill-card-00007-5-uniq-0096-00",
+        "sourceWrapper": {
+          "live_passive_skill_id": "live_passive_skill-card-00007-5-uniq-0096-00",
+          "level": 2
+        },
+        "fields": {
+          "livePassiveSkillId": "live_passive_skill-card-00007-5-uniq-0096-00",
+          "level": 2,
+          "liveSkillTriggerGroupId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
+          "livePassiveSkillEffectGroupId": "live_passive_skill_effect-sense_up_permil_up-430-live_skill_effect_target-attribute-attribute_2-2",
+          "descriptionLangId": "la-generated-live_passive_skill-card-00007-5-uniq-0096-00.2-description"
         }
       },
       {
@@ -84050,6 +85346,19 @@
         }
       },
       {
+        "sourceId": "level=2;live_passive_skill_id=live_passive_skill-card-03007-5-uniq-0100-00",
+        "sourceWrapper": {
+          "live_passive_skill_id": "live_passive_skill-card-03007-5-uniq-0100-00",
+          "level": 2
+        },
+        "fields": {
+          "livePassiveSkillId": "live_passive_skill-card-03007-5-uniq-0100-00",
+          "level": 2,
+          "livePassiveSkillEffectGroupId": "live_passive_skill_effect-live_active_skill_effect_up_permil_up-110-live_skill_effect_target-attribute-attribute_2-2",
+          "descriptionLangId": "la-generated-live_passive_skill-card-03007-5-uniq-0100-00.2-description"
+        }
+      },
+      {
         "sourceId": "level=2;live_passive_skill_id=live_passive_skill-card-03008-3-nrml-0040-00",
         "sourceWrapper": {
           "live_passive_skill_id": "live_passive_skill-card-03008-3-nrml-0040-00",
@@ -84595,6 +85904,20 @@
         }
       },
       {
+        "sourceId": "level=2;live_passive_skill_id=live_passive_skill-card-04015-5-uniq-0099-00",
+        "sourceWrapper": {
+          "live_passive_skill_id": "live_passive_skill-card-04015-5-uniq-0099-00",
+          "level": 2
+        },
+        "fields": {
+          "livePassiveSkillId": "live_passive_skill-card-04015-5-uniq-0099-00",
+          "level": 2,
+          "liveSkillTriggerGroupId": "live_skill_trigger-deck_card_attribute-attribute_3-2",
+          "livePassiveSkillEffectGroupId": "live_passive_skill_effect-performance_up_permil_up-430-live_skill_effect_target-attribute-attribute_3-2",
+          "descriptionLangId": "la-generated-live_passive_skill-card-04015-5-uniq-0099-00.2-description"
+        }
+      },
+      {
         "sourceId": "level=2;live_passive_skill_id=live_passive_skill-card-04016-3-nrml-0055-00",
         "sourceWrapper": {
           "live_passive_skill_id": "live_passive_skill-card-04016-3-nrml-0055-00",
@@ -84853,6 +86176,20 @@
         }
       },
       {
+        "sourceId": "level=2;live_passive_skill_id=live_passive_skill-card-06004-5-uniq-0098-00",
+        "sourceWrapper": {
+          "live_passive_skill_id": "live_passive_skill-card-06004-5-uniq-0098-00",
+          "level": 2
+        },
+        "fields": {
+          "livePassiveSkillId": "live_passive_skill-card-06004-5-uniq-0098-00",
+          "level": 2,
+          "liveSkillTriggerGroupId": "live_skill_trigger-deck_card_character_grouping-grp-regloss-2",
+          "livePassiveSkillEffectGroupId": "live_passive_skill_effect-live_active_skill_effect_up_permil_up-120-live_skill_effect_target-character_grouping-grp-regloss-2",
+          "descriptionLangId": "la-generated-live_passive_skill-card-06004-5-uniq-0098-00.2-description"
+        }
+      },
+      {
         "sourceId": "level=2;live_passive_skill_id=live_passive_skill-card-06005-3-nrml-0061-00",
         "sourceWrapper": {
           "live_passive_skill_id": "live_passive_skill-card-06005-3-nrml-0061-00",
@@ -84890,6 +86227,20 @@
           "level": 2,
           "livePassiveSkillEffectGroupId": "live_passive_skill_effect-performance_up_permil_up-410-live_skill_effect_target-attribute-attribute_1-2",
           "descriptionLangId": "la-generated-live_passive_skill-card-06005-5-uniq-0061-00.2-description"
+        }
+      },
+      {
+        "sourceId": "level=2;live_passive_skill_id=live_passive_skill-card-06005-5-uniq-0097-00",
+        "sourceWrapper": {
+          "live_passive_skill_id": "live_passive_skill-card-06005-5-uniq-0097-00",
+          "level": 2
+        },
+        "fields": {
+          "livePassiveSkillId": "live_passive_skill-card-06005-5-uniq-0097-00",
+          "level": 2,
+          "liveSkillTriggerGroupId": "live_skill_trigger-deck_card_character_grouping-grp-regloss-2",
+          "livePassiveSkillEffectGroupId": "live_passive_skill_effect-all_parameter_up_permil_up-330-live_skill_effect_target-self",
+          "descriptionLangId": "la-generated-live_passive_skill-card-06005-5-uniq-0097-00.2-description"
         }
       }
     ],
@@ -85817,6 +87168,15 @@
         },
         "fields": {
           "id": "live_special_skill-card-00007-5-uniq-0008-00"
+        }
+      },
+      {
+        "sourceId": "live_special_skill-card-00007-5-uniq-0096-00",
+        "sourceWrapper": {
+          "id": "live_special_skill-card-00007-5-uniq-0096-00"
+        },
+        "fields": {
+          "id": "live_special_skill-card-00007-5-uniq-0096-00"
         }
       },
       {
@@ -86846,6 +88206,15 @@
         }
       },
       {
+        "sourceId": "live_special_skill-card-03007-5-uniq-0100-00",
+        "sourceWrapper": {
+          "id": "live_special_skill-card-03007-5-uniq-0100-00"
+        },
+        "fields": {
+          "id": "live_special_skill-card-03007-5-uniq-0100-00"
+        }
+      },
+      {
         "sourceId": "live_special_skill-card-03008-3-nrml-0040-00",
         "sourceWrapper": {
           "id": "live_special_skill-card-03008-3-nrml-0040-00"
@@ -87206,6 +88575,15 @@
         }
       },
       {
+        "sourceId": "live_special_skill-card-04015-5-uniq-0099-00",
+        "sourceWrapper": {
+          "id": "live_special_skill-card-04015-5-uniq-0099-00"
+        },
+        "fields": {
+          "id": "live_special_skill-card-04015-5-uniq-0099-00"
+        }
+      },
+      {
         "sourceId": "live_special_skill-card-04016-3-nrml-0055-00",
         "sourceWrapper": {
           "id": "live_special_skill-card-04016-3-nrml-0055-00"
@@ -87377,6 +88755,15 @@
         }
       },
       {
+        "sourceId": "live_special_skill-card-06004-5-uniq-0098-00",
+        "sourceWrapper": {
+          "id": "live_special_skill-card-06004-5-uniq-0098-00"
+        },
+        "fields": {
+          "id": "live_special_skill-card-06004-5-uniq-0098-00"
+        }
+      },
+      {
         "sourceId": "live_special_skill-card-06005-3-nrml-0061-00",
         "sourceWrapper": {
           "id": "live_special_skill-card-06005-3-nrml-0061-00"
@@ -87401,6 +88788,15 @@
         },
         "fields": {
           "id": "live_special_skill-card-06005-5-uniq-0061-00"
+        }
+      },
+      {
+        "sourceId": "live_special_skill-card-06005-5-uniq-0097-00",
+        "sourceWrapper": {
+          "id": "live_special_skill-card-06005-5-uniq-0097-00"
+        },
+        "fields": {
+          "id": "live_special_skill-card-06005-5-uniq-0097-00"
         }
       }
     ],
@@ -87696,6 +89092,20 @@
           "liveActiveSkillEffectGroupId": "live_special_skill_effect-score_up_effect_up_permil_up-1350",
           "effectDurationMillisecond": 10000,
           "descriptionLangId": "la-generated-live_special_skill-card-00007-5-uniq-0008-00.1-description"
+        }
+      },
+      {
+        "sourceId": "level=1;live_special_skill_id=live_special_skill-card-00007-5-uniq-0096-00",
+        "sourceWrapper": {
+          "live_special_skill_id": "live_special_skill-card-00007-5-uniq-0096-00",
+          "level": 1
+        },
+        "fields": {
+          "liveSpecialSkillId": "live_special_skill-card-00007-5-uniq-0096-00",
+          "level": 1,
+          "liveActiveSkillEffectGroupId": "live_special_skill_effect-score_up_effect_up_permil_up-950",
+          "effectDurationMillisecond": 14000,
+          "descriptionLangId": "la-generated-live_special_skill-card-00007-5-uniq-0096-00.1-description"
         }
       },
       {
@@ -89366,6 +90776,20 @@
         }
       },
       {
+        "sourceId": "level=1;live_special_skill_id=live_special_skill-card-03007-5-uniq-0100-00",
+        "sourceWrapper": {
+          "live_special_skill_id": "live_special_skill-card-03007-5-uniq-0100-00",
+          "level": 1
+        },
+        "fields": {
+          "liveSpecialSkillId": "live_special_skill-card-03007-5-uniq-0100-00",
+          "level": 1,
+          "liveActiveSkillEffectGroupId": "live_special_skill_effect-score_up_effect_up_permil_up-1100",
+          "effectDurationMillisecond": 12000,
+          "descriptionLangId": "la-generated-live_special_skill-card-03007-5-uniq-0100-00.1-description"
+        }
+      },
+      {
         "sourceId": "level=1;live_special_skill_id=live_special_skill-card-03008-3-nrml-0040-00",
         "sourceWrapper": {
           "live_special_skill_id": "live_special_skill-card-03008-3-nrml-0040-00",
@@ -89954,6 +91378,20 @@
         }
       },
       {
+        "sourceId": "level=1;live_special_skill_id=live_special_skill-card-04015-5-uniq-0099-00",
+        "sourceWrapper": {
+          "live_special_skill_id": "live_special_skill-card-04015-5-uniq-0099-00",
+          "level": 1
+        },
+        "fields": {
+          "liveSpecialSkillId": "live_special_skill-card-04015-5-uniq-0099-00",
+          "level": 1,
+          "liveActiveSkillEffectGroupId": "live_special_skill_effect-score_up_effect_up_permil_up-900",
+          "effectDurationMillisecond": 15000,
+          "descriptionLangId": "la-generated-live_special_skill-card-04015-5-uniq-0099-00.1-description"
+        }
+      },
+      {
         "sourceId": "level=1;live_special_skill_id=live_special_skill-card-04016-3-nrml-0055-00",
         "sourceWrapper": {
           "live_special_skill_id": "live_special_skill-card-04016-3-nrml-0055-00",
@@ -90232,6 +91670,22 @@
         }
       },
       {
+        "sourceId": "level=1;live_special_skill_id=live_special_skill-card-06004-5-uniq-0098-00",
+        "sourceWrapper": {
+          "live_special_skill_id": "live_special_skill-card-06004-5-uniq-0098-00",
+          "level": 1
+        },
+        "fields": {
+          "liveSpecialSkillId": "live_special_skill-card-06004-5-uniq-0098-00",
+          "level": 1,
+          "liveActiveSkillEffectGroupId": "live_special_skill_effect-score_up_effect_up_permil_up-1000",
+          "additionalLiveSkillTriggerGroupId": "live_skill_trigger-deck_card_character_grouping-grp-regloss-2",
+          "additionalLiveActiveSkillEffectGroupId": "live_special_skill_effect-live_active_skill_activation_probability_up_permil_up-400",
+          "effectDurationMillisecond": 12000,
+          "descriptionLangId": "la-generated-live_special_skill-card-06004-5-uniq-0098-00.1-description"
+        }
+      },
+      {
         "sourceId": "level=1;live_special_skill_id=live_special_skill-card-06005-3-nrml-0061-00",
         "sourceWrapper": {
           "live_special_skill_id": "live_special_skill-card-06005-3-nrml-0061-00",
@@ -90273,6 +91727,20 @@
           "additionalLiveActiveSkillEffectGroupId": "live_special_skill_effect-live_active_skill_activation_probability_up_permil_up-400",
           "effectDurationMillisecond": 10000,
           "descriptionLangId": "la-generated-live_special_skill-card-06005-5-uniq-0061-00.1-description"
+        }
+      },
+      {
+        "sourceId": "level=1;live_special_skill_id=live_special_skill-card-06005-5-uniq-0097-00",
+        "sourceWrapper": {
+          "live_special_skill_id": "live_special_skill-card-06005-5-uniq-0097-00",
+          "level": 1
+        },
+        "fields": {
+          "liveSpecialSkillId": "live_special_skill-card-06005-5-uniq-0097-00",
+          "level": 1,
+          "liveActiveSkillEffectGroupId": "live_special_skill_effect-score_up_effect_up_permil_up-950",
+          "effectDurationMillisecond": 14000,
+          "descriptionLangId": "la-generated-live_special_skill-card-06005-5-uniq-0097-00.1-description"
         }
       },
       {
@@ -90566,6 +92034,20 @@
           "liveActiveSkillEffectGroupId": "live_special_skill_effect-score_up_effect_up_permil_up-1450",
           "effectDurationMillisecond": 11000,
           "descriptionLangId": "la-generated-live_special_skill-card-00007-5-uniq-0008-00.2-description"
+        }
+      },
+      {
+        "sourceId": "level=2;live_special_skill_id=live_special_skill-card-00007-5-uniq-0096-00",
+        "sourceWrapper": {
+          "live_special_skill_id": "live_special_skill-card-00007-5-uniq-0096-00",
+          "level": 2
+        },
+        "fields": {
+          "liveSpecialSkillId": "live_special_skill-card-00007-5-uniq-0096-00",
+          "level": 2,
+          "liveActiveSkillEffectGroupId": "live_special_skill_effect-score_up_effect_up_permil_up-1150",
+          "effectDurationMillisecond": 14000,
+          "descriptionLangId": "la-generated-live_special_skill-card-00007-5-uniq-0096-00.2-description"
         }
       },
       {
@@ -92236,6 +93718,20 @@
         }
       },
       {
+        "sourceId": "level=2;live_special_skill_id=live_special_skill-card-03007-5-uniq-0100-00",
+        "sourceWrapper": {
+          "live_special_skill_id": "live_special_skill-card-03007-5-uniq-0100-00",
+          "level": 2
+        },
+        "fields": {
+          "liveSpecialSkillId": "live_special_skill-card-03007-5-uniq-0100-00",
+          "level": 2,
+          "liveActiveSkillEffectGroupId": "live_special_skill_effect-score_up_effect_up_permil_up-1350",
+          "effectDurationMillisecond": 12000,
+          "descriptionLangId": "la-generated-live_special_skill-card-03007-5-uniq-0100-00.2-description"
+        }
+      },
+      {
         "sourceId": "level=2;live_special_skill_id=live_special_skill-card-03008-3-nrml-0040-00",
         "sourceWrapper": {
           "live_special_skill_id": "live_special_skill-card-03008-3-nrml-0040-00",
@@ -92824,6 +94320,20 @@
         }
       },
       {
+        "sourceId": "level=2;live_special_skill_id=live_special_skill-card-04015-5-uniq-0099-00",
+        "sourceWrapper": {
+          "live_special_skill_id": "live_special_skill-card-04015-5-uniq-0099-00",
+          "level": 2
+        },
+        "fields": {
+          "liveSpecialSkillId": "live_special_skill-card-04015-5-uniq-0099-00",
+          "level": 2,
+          "liveActiveSkillEffectGroupId": "live_special_skill_effect-score_up_effect_up_permil_up-1050",
+          "effectDurationMillisecond": 15000,
+          "descriptionLangId": "la-generated-live_special_skill-card-04015-5-uniq-0099-00.2-description"
+        }
+      },
+      {
         "sourceId": "level=2;live_special_skill_id=live_special_skill-card-04016-3-nrml-0055-00",
         "sourceWrapper": {
           "live_special_skill_id": "live_special_skill-card-04016-3-nrml-0055-00",
@@ -93102,6 +94612,22 @@
         }
       },
       {
+        "sourceId": "level=2;live_special_skill_id=live_special_skill-card-06004-5-uniq-0098-00",
+        "sourceWrapper": {
+          "live_special_skill_id": "live_special_skill-card-06004-5-uniq-0098-00",
+          "level": 2
+        },
+        "fields": {
+          "liveSpecialSkillId": "live_special_skill-card-06004-5-uniq-0098-00",
+          "level": 2,
+          "liveActiveSkillEffectGroupId": "live_special_skill_effect-score_up_effect_up_permil_up-1200",
+          "additionalLiveSkillTriggerGroupId": "live_skill_trigger-deck_card_character_grouping-grp-regloss-2",
+          "additionalLiveActiveSkillEffectGroupId": "live_special_skill_effect-live_active_skill_activation_probability_up_permil_up-450",
+          "effectDurationMillisecond": 12000,
+          "descriptionLangId": "la-generated-live_special_skill-card-06004-5-uniq-0098-00.2-description"
+        }
+      },
+      {
         "sourceId": "level=2;live_special_skill_id=live_special_skill-card-06005-3-nrml-0061-00",
         "sourceWrapper": {
           "live_special_skill_id": "live_special_skill-card-06005-3-nrml-0061-00",
@@ -93143,6 +94669,20 @@
           "additionalLiveActiveSkillEffectGroupId": "live_special_skill_effect-live_active_skill_activation_probability_up_permil_up-500",
           "effectDurationMillisecond": 10000,
           "descriptionLangId": "la-generated-live_special_skill-card-06005-5-uniq-0061-00.2-description"
+        }
+      },
+      {
+        "sourceId": "level=2;live_special_skill_id=live_special_skill-card-06005-5-uniq-0097-00",
+        "sourceWrapper": {
+          "live_special_skill_id": "live_special_skill-card-06005-5-uniq-0097-00",
+          "level": 2
+        },
+        "fields": {
+          "liveSpecialSkillId": "live_special_skill-card-06005-5-uniq-0097-00",
+          "level": 2,
+          "liveActiveSkillEffectGroupId": "live_special_skill_effect-score_up_effect_up_permil_up-1150",
+          "effectDurationMillisecond": 14000,
+          "descriptionLangId": "la-generated-live_special_skill-card-06005-5-uniq-0097-00.2-description"
         }
       }
     ],

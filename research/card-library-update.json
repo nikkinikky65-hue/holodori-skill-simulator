@@ -1,105 +1,23 @@
 {
   "source": {
     "repository": "https://github.com/HolodoriDB/holodori-db-jpn-diff",
+    "commitSha": "05b878b1daba99383f407dd3457eb9713f1c4632",
+    "commitUrl": "https://github.com/HolodoriDB/holodori-db-jpn-diff/tree/05b878b1daba99383f407dd3457eb9713f1c4632",
+    "retrievedAtUtc": "2026-10-29T13:58:37.375408+00:00"
+  },
+  "baselineSource": {
+    "repository": "https://github.com/HolodoriDB/holodori-db-jpn-diff",
     "commitSha": "ed117f1d53d4680228d22c7176e511a1c241c5fc",
     "commitUrl": "https://github.com/HolodoriDB/holodori-db-jpn-diff/tree/ed117f1d53d4680228d22c7176e511a1c241c5fc",
     "retrievedAtUtc": "2026-10-22T10:49:27.192127+00:00"
   },
-  "baselineSource": {
-    "repository": "https://github.com/HolodoriDB/holodori-db-jpn-diff",
-    "commitSha": "6680c7c37a8a3b3d56d919df823dca318db0d802",
-    "commitUrl": "https://github.com/HolodoriDB/holodori-db-jpn-diff/tree/6680c7c37a8a3b3d56d919df823dca318db0d802",
-    "retrievedAtUtc": "2026-10-13T00:26:42.944313+00:00"
-  },
-  "beforeCount": 192,
-  "afterCount": 196,
+  "beforeCount": 196,
+  "afterCount": 201,
   "added": [
     {
-      "cardId": "card-00027-5-uniq-0092-00",
-      "member": "常闇トワ",
-      "name": "ゆらゆら過ごす木陰のバカンス",
-      "rarity": 5,
-      "passiveStatus": "supported",
-      "passiveLevels": 2,
-      "activeLevels": 2,
-      "activeConditionalRows": 2,
-      "specialLevels": 2,
-      "leaderEffects": [
-        {
-          "parameter": "T",
-          "percent": 80,
-          "target": "all_members",
-          "condition": {
-            "type": "attribute_count",
-            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1",
-            "affiliationId": null,
-            "requiredCount": 2,
-            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
-            "text": "キュートタイプ2人以上"
-          },
-          "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員のテクニックが80%UP"
-        },
-        {
-          "parameter": "score_support",
-          "percent": 25,
-          "target": "all_members",
-          "condition": {
-            "type": "attribute_count",
-            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1",
-            "affiliationId": null,
-            "requiredCount": 2,
-            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
-            "text": "キュートタイプ2人以上"
-          },
-          "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員のスコアサポート効果25%"
-        }
-      ]
-    },
-    {
-      "cardId": "card-00032-5-uniq-0093-00",
-      "member": "獅白ぼたん",
-      "name": "一心不乱のちゅるタイム",
-      "rarity": 5,
-      "passiveStatus": "non-parameter",
-      "passiveLevels": 2,
-      "activeLevels": 2,
-      "activeConditionalRows": 2,
-      "specialLevels": 2,
-      "leaderEffects": [
-        {
-          "parameter": "S",
-          "percent": 80,
-          "target": "all_members",
-          "condition": {
-            "type": "attribute_count",
-            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1",
-            "affiliationId": null,
-            "requiredCount": 2,
-            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
-            "text": "キュートタイプ2人以上"
-          },
-          "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員のセンスが80%UP"
-        },
-        {
-          "parameter": "score_support",
-          "percent": 25,
-          "target": "all_members",
-          "condition": {
-            "type": "attribute_count",
-            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_1",
-            "affiliationId": null,
-            "requiredCount": 2,
-            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_1-2",
-            "text": "キュートタイプ2人以上"
-          },
-          "description": "[attribute=cute]キュートタイプ[/attribute]2人以上で全員のスコアサポート効果25%"
-        }
-      ]
-    },
-    {
-      "cardId": "card-03008-5-uniq-0095-00",
-      "member": "カエラ・コヴァルスキア",
-      "name": "木陰で紡ぐShiny Memory",
+      "cardId": "card-00007-5-uniq-0096-00",
+      "member": "夏色まつり",
+      "name": "おてんば狼のあま～いTrick",
       "rarity": 5,
       "passiveStatus": "supported",
       "passiveLevels": 2,
@@ -109,26 +27,53 @@
       "leaderEffects": [
         {
           "parameter": "S",
-          "percent": 135,
+          "percent": 130,
           "target": "all_members",
           "condition": {
-            "type": "affiliation_count",
-            "attribute": null,
-            "affiliationId": "grp-indonesia-gen_3",
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2",
+            "affiliationId": null,
             "requiredCount": 2,
-            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-indonesia-gen_3-2",
-            "text": "ID3期生が2人以上"
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
+            "text": "ピュアタイプ2人以上"
           },
-          "description": "ID3期生が2人以上で全員のセンスが135%UP"
+          "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のセンスが130%UP"
         }
       ]
     },
     {
-      "cardId": "card-04014-5-uniq-0094-00",
-      "member": "古石ビジュー",
-      "name": "笑顔輝くSand castle",
+      "cardId": "card-03007-5-uniq-0100-00",
+      "member": "ベスティア・ゼータ",
+      "name": "気まぐれガールのドキドキ診療室",
       "rarity": 5,
       "passiveStatus": "non-parameter",
+      "passiveLevels": 2,
+      "activeLevels": 2,
+      "activeConditionalRows": 0,
+      "specialLevels": 2,
+      "leaderEffects": [
+        {
+          "parameter": "T",
+          "percent": 130,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_2-2",
+            "text": "ピュアタイプ2人以上"
+          },
+          "description": "[attribute=pure]ピュアタイプ[/attribute]2人以上で全員のテクニックが130%UP"
+        }
+      ]
+    },
+    {
+      "cardId": "card-04015-5-uniq-0099-00",
+      "member": "ネリッサ・レイヴンクロフト",
+      "name": "魅惑のMagic Potion",
+      "rarity": 5,
+      "passiveStatus": "supported",
       "passiveLevels": 2,
       "activeLevels": 2,
       "activeConditionalRows": 0,
@@ -136,27 +81,93 @@
       "leaderEffects": [
         {
           "parameter": "P",
+          "percent": 80,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_3-2",
+            "text": "ハッピータイプ2人以上"
+          },
+          "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で全員のパフォーマンスが80%UP"
+        },
+        {
+          "parameter": "score_support",
+          "percent": 25,
+          "target": "all_members",
+          "condition": {
+            "type": "attribute_count",
+            "attribute": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_3",
+            "affiliationId": null,
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_attribute-attribute_3-2",
+            "text": "ハッピータイプ2人以上"
+          },
+          "description": "[attribute=happy]ハッピータイプ[/attribute]2人以上で全員のスコアサポート効果25%"
+        }
+      ]
+    },
+    {
+      "cardId": "card-06004-5-uniq-0098-00",
+      "member": "儒烏風亭らでん",
+      "name": "高貴なるヴァンパイアの嗜み",
+      "rarity": 5,
+      "passiveStatus": "non-parameter",
+      "passiveLevels": 2,
+      "activeLevels": 2,
+      "activeConditionalRows": 0,
+      "specialLevels": 2,
+      "leaderEffects": [
+        {
+          "parameter": "T",
           "percent": 135,
           "target": "all_members",
           "condition": {
             "type": "affiliation_count",
             "attribute": null,
-            "affiliationId": "grp-advent",
+            "affiliationId": "grp-regloss",
             "requiredCount": 2,
-            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-advent-2",
-            "text": "Adventが2人以上"
+            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-regloss-2",
+            "text": "ReGLOSSが2人以上"
           },
-          "description": "Adventが2人以上で全員のパフォーマンスが135%UP"
+          "description": "ReGLOSSが2人以上で全員のテクニックが135%UP"
+        }
+      ]
+    },
+    {
+      "cardId": "card-06005-5-uniq-0097-00",
+      "member": "轟はじめ",
+      "name": "今宵開幕！あやかしダンシング",
+      "rarity": 5,
+      "passiveStatus": "supported",
+      "passiveLevels": 2,
+      "activeLevels": 2,
+      "activeConditionalRows": 2,
+      "specialLevels": 2,
+      "leaderEffects": [
+        {
+          "parameter": "all_parameter",
+          "percent": 50,
+          "target": "all_members",
+          "condition": {
+            "type": "affiliation_count",
+            "attribute": null,
+            "affiliationId": "grp-regloss",
+            "requiredCount": 2,
+            "referenceId": "live_skill_trigger-deck_card_character_grouping-grp-regloss-2",
+            "text": "ReGLOSSが2人以上"
+          },
+          "description": "ReGLOSSが2人以上で全員の全パラメータが50%UP"
         }
       ]
     }
   ],
   "updatedRuntimeCardIds": [],
   "updatedCanonicalGameplayCardIds": [],
-  "permittedSourceChanges": [
-    "active-description-leading-ascii-space"
-  ],
+  "permittedSourceChanges": [],
   "removedCardIds": [],
   "characterMetadataChanges": [],
-  "compatibleOldCardCount": 192
+  "compatibleOldCardCount": 196
 }

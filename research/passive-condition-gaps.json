@@ -1,10 +1,10 @@
 {
   "scope": "Raw condition evidence only; developer-approved execution status is in unit-passive-audit.json",
   "inputs": {
-    "research/holodoridb-all-card-survey.json": "4e285234bd3b27e1d1dbf4ea321dc72e238cc7d33d215d31c0d64cbd3c360260",
-    "research/canonical-cards.json": "fe625b7f00e0f7c3c437add3557243d33595b21a11a9b77cb323b3749cc8435c",
-    "data/runtime-cards.json": "0b7b5479b881efedc78e304978e78faef2946c9490134acd834c36e2cfc03a64",
-    "data/runtime-affiliations.json": "a5cf7fc06a942a049217e7aca5d7584af9b8f9fc214e08d4be9962729602ecdc"
+    "research/holodoridb-all-card-survey.json": "e64bb7337b60e73db0ca5d0cd4f8a45b1b5339c0c80df09558248aee238d2ad9",
+    "research/canonical-cards.json": "1c8c0c9d2f861c8f5bd5a7ca7c7177c69d902dfadc52da478ca059f30a981a1a",
+    "data/runtime-cards.json": "e165b89ed1d659a1cb593ef2ab604e2713e22b28ddc9ac1e623735404e6b4ad6",
+    "data/runtime-affiliations.json": "e3ff40b5f0fb0b6e952ce270fe78c40b5574cdb273f75a3ffdc677456ddeb30d"
   },
   "summary": {
     "parameter": {
@@ -12,8 +12,8 @@
       "rows": 114
     },
     "support": {
-      "cards": 22,
-      "rows": 44
+      "cards": 23,
+      "rows": 46
     }
   },
   "classification": {
@@ -28,8 +28,8 @@
       "rows": 84
     },
     "unverified": {
-      "cards": 37,
-      "rows": 74
+      "cards": 38,
+      "rows": 76
     }
   },
   "rows": [
@@ -4028,6 +4028,80 @@
       "family": "parameter",
       "dependency": "condition-semantics-unverified",
       "excessSelection": "existing-attribute-ranking-after-condition-resolution"
+    },
+    {
+      "cardId": "card-03007-5-uniq-0100-00",
+      "cardName": "気まぐれガールのドキドキ診療室",
+      "member": "ベスティア・ゼータ",
+      "skillId": "live_passive_skill-card-03007-5-uniq-0100-00",
+      "level": 1,
+      "description": "[attribute=pure]ピュアタイプ[/attribute]2人のスコアサポート効果8%",
+      "effect": {
+        "number": 1,
+        "type": "LivePassiveSkillEffectType_LIVE_PASSIVE_SKILL_EFFECT_TYPE_LIVE_ACTIVE_SKILL_EFFECT_UP_PERMIL_UP",
+        "value": "80"
+      },
+      "target": {
+        "type": "LiveSkillEffectTargetType_LIVE_SKILL_EFFECT_TARGET_TYPE_ATTRIBUTE",
+        "targetCount": 2,
+        "cardAttributeType": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2"
+      },
+      "source": {
+        "table": "LivePassiveSkillLevel",
+        "sourceId": "level=1;live_passive_skill_id=live_passive_skill-card-03007-5-uniq-0100-00"
+      },
+      "sourceFields": {
+        "livePassiveSkillId": "live_passive_skill-card-03007-5-uniq-0100-00",
+        "level": 1,
+        "livePassiveSkillEffectGroupId": "live_passive_skill_effect-live_active_skill_effect_up_permil_up-80-live_skill_effect_target-attribute-attribute_2-2",
+        "descriptionLangId": "la-generated-live_passive_skill-card-03007-5-uniq-0100-00.1-description"
+      },
+      "condition": {
+        "state": "unobserved",
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
+      },
+      "category": "C",
+      "family": "support",
+      "dependency": "condition-semantics-unverified",
+      "excessSelection": "unverified"
+    },
+    {
+      "cardId": "card-03007-5-uniq-0100-00",
+      "cardName": "気まぐれガールのドキドキ診療室",
+      "member": "ベスティア・ゼータ",
+      "skillId": "live_passive_skill-card-03007-5-uniq-0100-00",
+      "level": 2,
+      "description": "[attribute=pure]ピュアタイプ[/attribute]2人のスコアサポート効果[highlight]11[/highlight]%",
+      "effect": {
+        "number": 1,
+        "type": "LivePassiveSkillEffectType_LIVE_PASSIVE_SKILL_EFFECT_TYPE_LIVE_ACTIVE_SKILL_EFFECT_UP_PERMIL_UP",
+        "value": "110"
+      },
+      "target": {
+        "type": "LiveSkillEffectTargetType_LIVE_SKILL_EFFECT_TARGET_TYPE_ATTRIBUTE",
+        "targetCount": 2,
+        "cardAttributeType": "CardAttributeType_CARD_ATTRIBUTE_TYPE_ATTRIBUTE_2"
+      },
+      "source": {
+        "table": "LivePassiveSkillLevel",
+        "sourceId": "level=2;live_passive_skill_id=live_passive_skill-card-03007-5-uniq-0100-00"
+      },
+      "sourceFields": {
+        "livePassiveSkillId": "live_passive_skill-card-03007-5-uniq-0100-00",
+        "level": 2,
+        "livePassiveSkillEffectGroupId": "live_passive_skill_effect-live_active_skill_effect_up_permil_up-110-live_skill_effect_target-attribute-attribute_2-2",
+        "descriptionLangId": "la-generated-live_passive_skill-card-03007-5-uniq-0100-00.2-description"
+      },
+      "condition": {
+        "state": "unobserved",
+        "evaluationStatus": "unresolved",
+        "referenceState": "absent"
+      },
+      "category": "C",
+      "family": "support",
+      "dependency": "condition-semantics-unverified",
+      "excessSelection": "unverified"
     },
     {
       "cardId": "card-03008-5-uniq-0040-00",
