@@ -28,7 +28,7 @@ async function initializeUnitSimulator(){
       }
     }catch(error){node('unitLeaderStatus').textContent=error.message;}
     const slots=Array.from({length:5},()=>({cardId:'',training:0,bloom:0,short:0,totalAdjustments:{board:{kind:'external-total',value:''},costume:{kind:'external-total',value:''}}}));
-    const comparison=UnitParameterComparison.mount(node('unitParameterComparison'));
+    const comparison=UnitParameterComparison.mount(node('unitParameterComparison'),{imageResolver:CardImageResolver});
     const optimizeLabels=[];
     const previews=[];
     const slotControls=[];
