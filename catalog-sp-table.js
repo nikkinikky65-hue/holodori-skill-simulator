@@ -8,8 +8,31 @@ const CatalogSPTable = (() => {
     const custom=selector('開花',[['initial','初期'],['saved','保存'],['max','最大']]);custom.dataset.spCustom='';
     const note=el('p','SPに影響する開花のみを切り替えます。初期は開花0、最大は開花5。保存なしは初期値です。特訓はSP性能に影響しません。条件は評価せず併記します。発動率UPはActiveへの補正で、SP自体の発動確率ではありません。');note.className='sub';
     const sortNote=el('p','複数効果はすべて表示し、数値ソートでは表示順に比較します。「—」は昇順・降順とも末尾です。');sortNote.className='sub';
-    const scroll=el('div');scroll.className='catalogSPScroll';scroll.tabIndex=0;scroll.setAttribute('role','region');scroll.setAttribute('aria-label','SP比較表（縦横スクロール）');
-    root.append(controls,note,sortNote,scroll);
+    const scroll=el('div');scroll.className='catalogSPScroll';scroll.tabIndex=0;scroll.setAttribute('role','region');scroll.setAttribute('aria-label','SP比較表（横スクロール）');
+    const floating=el('div');floating.className='catalogSPFloating';floating.hidden=true;
+    floating.setAttribute('aria-label','SP比較の固定見出し');
+    root.append(controls,note,sortNote,scroll,floating);
+    function syncHeader(){
+      const table=scroll.querySelector('table'),head=table?.tHead;
+      if(!head||root.hidden||!table.tBodies[0]?.rows.length){floating.hidden=true;return;}
+      const nav=document.querySelector('.siteHeader'),top=Math.max(0,nav?.getBoundingClientRect().bottom||0);
+      const r=scroll.getBoundingClientRect(),hr=head.getBoundingClientRect(),height=hr.height;
+      scroll.style.setProperty('--sp-thumb-offset',head.rows[0].cells[0].getBoundingClientRect().width+'px');
+      floating.hidden=hr.top>=top || r.bottom<=top+height;
+      if(floating.hidden)return;
+      Object.assign(floating.style,{top:top+'px',left:(r.left+scroll.clientLeft)+'px',width:scroll.clientWidth+'px',height:height+'px'});
+      const copy=floating.querySelector('table');copy.style.width=table.getBoundingClientRect().width+'px';
+      copy.style.setProperty('--sp-thumb-offset',head.rows[0].cells[0].getBoundingClientRect().width+'px');
+      [...head.rows[0].cells].forEach((cell,i)=>copy.tHead.rows[0].cells[i].style.width=cell.getBoundingClientRect().width+'px');
+      floating.scrollLeft=scroll.scrollLeft;
+    }
+    const schedule=syncHeader;
+    window.addEventListener('scroll',schedule,{passive:true});window.addEventListener('resize',schedule);
+    scroll.addEventListener('scroll',syncHeader,{passive:true});
+    new ResizeObserver(schedule).observe(scroll);
+    const nav=document.querySelector('.siteHeader');if(nav)new ResizeObserver(schedule).observe(nav);
+    new MutationObserver(schedule).observe(root,{attributes:true,attributeFilter:['hidden']});
+    floating.addEventListener('click',event=>{const key=event.target.closest('[data-sp-sort]')?.dataset.spSort;if(key)scroll.querySelector('[data-sp-sort="'+key+'"]').click();});
     function render(){
       custom.parentElement.hidden=mode.value!=='custom';
       const ordered=sortKey==='name'?CatalogSPData.sortByAffiliation(cards,direction):cards;
@@ -38,7 +61,9 @@ const CatalogSPTable = (() => {
           for(const effect of row[key]){const line=el('div',effect.text);if(effect.condition)line.append(el('small',effect.condition));cell.append(line);}tr.append(cell);}
         body.append(tr);
       }
-      table.append(body);scroll.replaceChildren(table);
+      table.append(body);const left=scroll.scrollLeft;scroll.replaceChildren(table);scroll.scrollLeft=left;
+      const copy=el('table');copy.className='catalogSPTable';copy.append(head.cloneNode(true));floating.replaceChildren(copy);
+      schedule();
     }
     return {render(nextCards,nextStates){cards=nextCards;states=nextStates;render();}};
   }
