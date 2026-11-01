@@ -17,7 +17,7 @@ await wait(()=>cells()[0]?.querySelector('img')?.style.visibility==='visible'&&!
 check(cells().length===5&&cells().map(c=>c.dataset.slot).join()==='1,2,3,4,5','five slots in order');
 check(cells()[2].textContent==='未設定'&&cells()[3].textContent==='画像なし'&&cells()[1].textContent==='画像なし','empty unknown failed labels');
 check(cells()[0].querySelector('img').src.includes(mapped[0].id.slice(5))&&cells()[4].querySelector('img').src.includes(mapped[4].id.slice(5)),'image identity');
-check(w.document.querySelector('.formationThumbs').nextElementSibling.className==='formationMembers','images above member text');
+check(w.document.querySelector('.formationThumbs').compareDocumentPosition(w.document.querySelector('.formationMembers')) & 4,'images above member text');
 for(const width of [1920,1280,768,390,360]){
  frame.style.width=width+'px';await new Promise(r=>setTimeout(r,50));const boxes=cells().map(c=>c.getBoundingClientRect());
  check(boxes.every(b=>Math.abs(b.width-b.height)<1),'squares including missing');
@@ -38,19 +38,51 @@ w.confirm=()=>true;w.document.querySelectorAll('.savedFormation')[1].querySelect
 check(w.document.querySelector('.formationActions a').getAttribute('href')==='unit-simulator.html?formation='+encodeURIComponent(saved.id),'load link unchanged');
 // All success / partial failure / all failure: text visibility is independent per slot.
 const allSnapshot=JSON.parse(JSON.stringify(snapshot));allSnapshot.slots.forEach((slot,i)=>{slot.cardId=mapped[i].id;slot.training=4;slot.bloom=5;});
+const rules=await(await fetch('../data/leader-parameter-rules.json')).json();
+allSnapshot.leaderId=rules.leaders.find(l=>l.effects.some(e=>e.parameter==='all_parameter'&&e.condition.type==='not_stated')).id;
+allSnapshot.slots.forEach((slot,i)=>{slot.totalAdjustments={board:{kind:'external-total',value:100+i},costume:{kind:'external-total',value:200+i}};});
+const simulator=document.createElement('iframe');simulator.style.display='none';document.body.append(simulator);simulator.src='../unit-simulator.html';await new Promise(r=>simulator.onload=r);
+const sim=await simulator.contentWindow.eval('unitSimulatorReady');sim.restore(allSnapshot);
+const expected=sim.getModel().members.map(member=>member.parameters.subtotal.total);
 store.save('画像検証',allSnapshot,saved.id);const stored=localStorage.getItem(key);
 for(const successful of [[0,1,2,3,4],[0,2,4],[]]){
  resolver.candidates=id=>original(id).map(c=>({...c,url:c.url+(successful.includes(mapped.findIndex(card=>card.id===id))?'?image-test=thumb':'')}));
  w.dispatchEvent(new w.StorageEvent('storage',{key}));
  await wait(()=>cells().every((cell,i)=>successful.includes(i)?cell.querySelector('img')?.style.visibility==='visible':!cell.querySelector('img')));
  const list=w.document.querySelector('.formationMembers'),items=[...list.children];
+ check([...w.document.querySelectorAll('.formationMemberTotal')].every((node,i)=>node.textContent===expected[i].toLocaleString('ja-JP')),'per SLOT totals equal simulator regardless of images');
+ check(w.document.querySelector('.formationTotalWarning')?.textContent==='未反映の補正あり','unapplied corrections notice');
+ for(const width of [1920,390,360]){
+  frame.style.width=width+'px';await new Promise(r=>setTimeout(r,50));
+  const columns=[...w.document.querySelectorAll('.formationThumbColumn')];
+  check(columns.every(c=>Math.abs(c.getBoundingClientRect().top-columns[0].getBoundingClientRect().top)<1),'numeric totals keep five columns');
+  check(columns.every(c=>c.querySelector('.formationMemberTotal').getBoundingClientRect().top>=c.querySelector('.formationThumb').getBoundingClientRect().bottom),'each total below own image');
+  check(w.document.documentElement.scrollWidth<=width,'numeric totals fit mobile');
+ }
+
  check(list.hidden===(successful.length===5),'hide empty text list');
  items.forEach((item,i)=>{check(item.hidden===successful.includes(i),'per-slot text visibility');check(item.value===i+1,'original SLOT numbering');check(item.textContent.includes(mapped[i].name)&&item.textContent.includes(mapped[i].member.name),'fallback identifies card');});
  check(!/card-|特訓|開花/.test(w.document.querySelector('.savedFormation').textContent),'no card IDs or growth in display');
  check(cells().every(cell=>!cell.title.includes('card-')),'no IDs in titles');
  check(localStorage.getItem(key)===stored,'image results do not mutate storage');
 }
-out.textContent='PASS: all success/partial/all failure text, IDs/growth display-only removal, SLOT order, Thumb only, success/missing/empty, square five columns 1920/1280/768/390/360, max-width variable, unchanged storage, duplicate/delete/load link';
+// Missing card or empty SLOT invalidates the entire party calculation without altering saved data.
+for(const cardId of ['missing-card','']){
+ const incomplete=JSON.parse(JSON.stringify(allSnapshot));incomplete.slots[1].cardId=cardId;store.save('画像検証',incomplete,saved.id);w.dispatchEvent(new w.StorageEvent('storage',{key}));
+ check([...w.document.querySelectorAll('.formationMemberTotal')].every(node=>node.textContent==='—'),'no partial-party totals');
+}
+const helper=w.eval('UnitFormationTotals');
+const affiliations=await(await fetch('../data/runtime-affiliations.json')).json();
+for(const invalid of [{catalog,rules,affiliations:null},{catalog,rules,affiliations:{...affiliations,canonicalSha256:'wrong'}},{catalog,rules:null,affiliations},{catalog:null,rules,affiliations}])check(helper.calculate(invalid,allSnapshot).totals.every(v=>v===null),'missing/mismatched dependencies fail closed');
+for(const bloom of [0,5])for(const leaderId of ['',allSnapshot.leaderId]){
+ const input=JSON.parse(JSON.stringify(allSnapshot));input.leaderId=leaderId;input.slots.forEach(slot=>slot.bloom=bloom);
+ sim.restore(input);const output=helper.calculate({catalog,rules,affiliations},input);
+ check(JSON.stringify(output.totals)===JSON.stringify(sim.getModel().members.map(m=>m.parameters.subtotal.total)),'both skill levels and Leader modes match simulator');
+}
+const missingReference=JSON.parse(JSON.stringify(catalog));delete missingReference.cards.find(c=>c.id===mapped[0].id).skills.passive.levels[1].target;
+check(helper.calculate({catalog:missingReference,rules,affiliations},allSnapshot).totals.every(v=>v===null),'missing Passive target blocks entire party');
+simulator.remove();
+out.textContent='PASS: totals match simulator, missing data fail closed;  all success/partial/all failure text, IDs/growth display-only removal, SLOT order, Thumb only, success/missing/empty, square five columns 1920/1280/768/390/360, max-width variable, unchanged storage, duplicate/delete/load link';
 }catch(e){out.textContent='FAIL: '+e.stack}finally{if(backup===null)localStorage.removeItem(key);else localStorage.setItem(key,backup)}
 })();
 </script>
