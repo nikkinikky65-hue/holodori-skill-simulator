@@ -226,3 +226,6 @@ subprocess.run([jsc,'unit-formation-store.js','tests/unit-formation-store.test.j
 subprocess.run([jsc,'active-random-simulation.js','active-timeline-engine.js','simulation-accumulator.js','tests/simulation-accumulator.test.js'],check=True,cwd=root)
 
 subprocess.run([jsc,"event-search-safety.js","tests/event-search-safety.test.js"],check=True,cwd=root)
+
+# Display-only SP projection, including all current cards and both levels.
+subprocess.run(['python3',str(root/'tests/verify-catalog-sp.py')],cwd=root,check=True)

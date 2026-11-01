@@ -17,6 +17,9 @@ async function renderCardCatalog(){
     const search = document.querySelector('#catalogSearch');
     const rarityButtons = [...document.querySelectorAll('[data-catalog-rarity]')];
     let rarity = '5';
+    let view = 'detail';
+    const spRoot = document.querySelector('#catalogSP');
+    const spTable = CatalogSPTable.mount(spRoot);
     let selectedTalents=new Set();
     const type = document.querySelector('#catalogType');
     let skillSelection=PassiveSkillFilter.empty();
@@ -35,7 +38,11 @@ async function renderCardCatalog(){
         String(card.classification.rarity.mapping.value) === rarity &&
         (!type.value || card.classification.attributeType.mapping.value === type.value)), catalog.cards);
       const userStates = readUserCardStates();
+      status.textContent = `${cards.length} / ${catalog.cards.length}枚`;
+      container.hidden = view !== 'detail';
+      spRoot.hidden = view !== 'sp';
       container.replaceChildren();
+      if(view === 'sp'){ spTable.render(cards, userStates); return; }
       for(const card of cards){
         const panel = document.createElement('article');
         panel.className = 'panel catalogCard';
@@ -113,6 +120,12 @@ async function renderCardCatalog(){
       onApply:ids=>{selectedTalents=new Set(ids);render();}
     });
     SkillFilter.mount(document.querySelector('#catalogSkillFilter'),{onApply:selection=>{skillSelection=selection;render();}});
+    for(const button of document.querySelectorAll('[data-catalog-view]')) button.addEventListener('click', () => {
+      if(button.disabled) return;
+      view = button.dataset.catalogView;
+      for(const item of document.querySelectorAll('[data-catalog-view]')) item.setAttribute('aria-pressed', String(item === button));
+      render();
+    });
     search.addEventListener('input', render);
     for(const button of rarityButtons) button.addEventListener('click', () => {
       rarity = button.dataset.catalogRarity;

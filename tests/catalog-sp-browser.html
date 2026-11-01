@@ -1,0 +1,50 @@
+<!doctype html><meta charset="utf-8"><pre id="result">RUNNING</pre><iframe style="border:0;height:900px"></iframe>
+<script>
+(async()=>{
+ const out=document.querySelector('#result'),frame=document.querySelector('iframe'),check=(v,m)=>{if(!v)throw Error(m);},tick=()=>new Promise(r=>setTimeout(r,60));
+ try{
+  for(const width of [1280,768,390]){
+   frame.style.width=width+'px';frame.src='../card-catalog.html?sp-test='+width;await new Promise(r=>frame.onload=r);
+   const w=frame.contentWindow,d=w.document;await w.eval('cardCatalogReady');check(!d.querySelector('#catalogStatus').dataset.errorKind,'initialized');
+   const catalog=await w.loadRuntimeCardCatalog(),detail=()=>d.querySelector('[data-catalog-view="detail"]').click(),sp=()=>d.querySelector('[data-catalog-view="sp"]').click();
+   const ids=()=>[...d.querySelectorAll('#catalogSP tbody tr')].map(n=>n.dataset.cardId),baseline=[...d.querySelectorAll('.catalogCard')].map(n=>n.dataset.cardId);
+   check(d.querySelector('#catalogSP').hidden&&d.querySelectorAll('.catalogViewModes button:disabled').length===3,'initial detail and unavailable modes');
+   w.updateUserCardState(baseline[0],{owned:true,training:4,opening:5});const stored=JSON.stringify(w.localStorage);
+   sp();check(JSON.stringify(ids())===JSON.stringify(baseline),'same filter and order');
+   const growth=d.querySelector('[data-sp-growth]'),custom=d.querySelector('[data-sp-custom]'),set=(el,v)=>{el.value=v;el.dispatchEvent(new w.Event('change'));};
+   for(const mode of ['initial','saved','max','custom']){
+    set(growth,mode);if(mode==='custom')set(custom,'saved');
+    for(const tr of d.querySelectorAll('#catalogSP tbody tr')){
+     const card=catalog.cards.find(c=>c.id===tr.dataset.cardId),state=w.getUserCardState(card.id,w.readUserCardStates());
+     const row=w.eval('CatalogSPData').project(card,state,mode,custom.value);
+     check(Number(tr.dataset.spLevel)===row.level,'level '+mode);
+     for(const key of ['time','support','probability','life','judgement'])check(tr.querySelector('[data-sp-field="'+key+'"]').textContent===(row[key].map(x=>x.text+(x.condition||'')).join('')||'—'),'projected cell '+key);
+    }
+   }
+   check(JSON.stringify(w.localStorage)===stored,'growth previews are read-only');
+   for(const key of ['time','support','probability','life'])for(const dir of [1,-1]){
+    d.querySelector('[data-sp-sort="'+key+'"]').click();const rows=ids().map(id=>w.eval('CatalogSPData').project(catalog.cards.find(c=>c.id===id),w.getUserCardState(id,w.readUserCardStates()),growth.value,custom.value));
+    check(rows.every((r,i)=>!i||w.eval('CatalogSPData').compare(rows[i-1],r,key,dir)<=0),'sort '+key+' '+dir);
+   }
+   const search=d.querySelector('#catalogSearch');set(search,'');search.value='みこ';search.dispatchEvent(new w.Event('input'));const filtered=ids();detail();check(JSON.stringify([...d.querySelectorAll('.catalogCard')].map(n=>n.dataset.cardId).sort())===JSON.stringify([...filtered].sort()),'mode retains search');sp();
+   search.value='';search.dispatchEvent(new w.Event('input'));
+   d.querySelector('#catalogTalentFilter button').click();await tick();const dialog=d.querySelector('.talentFilterDialog');dialog.querySelector('[data-talent-id="sakura_miko"]').click();dialog.querySelector('[data-talent-apply]').click();await tick();check(ids().length>1&&ids().every(id=>catalog.cards.find(c=>c.id===id).member.mapping.id==='sakura_miko'),'shared talent filter');
+   d.querySelector('#catalogTalentFilter button').click();dialog.querySelector('[data-talent-clear]').click();dialog.querySelector('[data-talent-apply]').click();
+   d.querySelector('#catalogSkillFilter button').click();await tick();const skill=d.querySelector('.skillFilterDialog');skill.querySelector('[data-skill-axis="targets"][value="affiliation"]').click();skill.querySelector('[data-skill-apply]').click();await tick();
+   check(ids().length>0&&ids().every(id=>w.eval('PassiveSkillFilter').matches(catalog.cards.find(c=>c.id===id),{condition:'',targets:['affiliation'],effects:[]})),'shared skill filter');
+   detail();sp();check(d.querySelector('.skillFilterSummary').textContent.includes('所属'),'skill retained across modes');
+   d.querySelector('#catalogSkillFilter button').click();skill.querySelector('[data-skill-clear]').click();skill.querySelector('[data-skill-apply]').click();
+   for(const rarity of [3,4,5]){d.querySelector('[data-catalog-rarity="'+rarity+'"]').click();for(const type of ['cute','happy','pure','']){set(d.querySelector('#catalogType'),type);check(ids().length===catalog.cards.filter(c=>c.classification.rarity.mapping.value===rarity&&(!type||c.classification.attributeType.mapping.value===type)).length,'rarity/type intersection');}}
+   await tick();const scroll=d.querySelector('.catalogSPScroll'),first=()=>d.querySelector('#catalogSP tbody td'),second=()=>d.querySelector('#catalogSP tbody td:nth-child(2)');const x=[first().getBoundingClientRect().left,second().getBoundingClientRect().left];scroll.scrollLeft=300;await tick();check(Math.abs(first().getBoundingClientRect().left-x[0])<1&&Math.abs(second().getBoundingClientRect().left-x[1])<1,'two fixed columns');scroll.scrollTop=250;await tick();check(Math.abs(d.querySelector('#catalogSP th').getBoundingClientRect().top-scroll.getBoundingClientRect().top)<3,'sticky heading');check(d.documentElement.scrollWidth<=width,'page fits '+width);
+   check([...d.querySelectorAll('.catalogSPThumb')].every(box=>box.textContent==='画像なし'),'failure keeps fallback text');
+   // Deterministic missing/success images; no request to any real external image host.
+   scroll.scrollTop=0;scroll.scrollLeft=0;await tick();const firstThumb=d.querySelector('.catalogSPThumb'),img=firstThumb.querySelector('img');if(img){img.dispatchEvent(new w.Event('error'));check(!firstThumb.querySelector('img')&&firstThumb.textContent==='画像なし','failed thumb placeholder');}
+   const resolver=w.eval('CardImageResolver'),original=resolver.candidates;resolver.candidates=id=>original(id).map(c=>({...c,url:c.url+'?image-test=thumb'}));set(growth,'max');await tick();
+   const success=d.querySelector('.catalogSPThumb img');check(success,'registered thumbnail');for(let i=0;i<40&&!success.complete;i++)await tick();check(success.naturalWidth>0,'thumb success');
+   check([...d.querySelectorAll('#catalogSP img')].every(i=>i.src.includes('/cards/thumb/')),'thumb only');resolver.candidates=original;
+   detail();check(!d.querySelector('#catalogCards').hidden&&!d.querySelector('#catalogExport').disabled,'detail and export retained');check(JSON.stringify(w.localStorage)===stored,'all comparison actions preserve storage');sp();d.querySelector('#catalogSP').scrollIntoView();await tick();
+  }
+  out.textContent='PASS: initial/detail/SP, 201 data, growth and cells, saved/custom read-only, numeric sorting, shared talent/search/rarity/type filters, thumb success/failure, fixed columns/header, 1280/768/390, export retained';
+ }catch(e){out.textContent='FAIL: '+e.stack;}
+})();
+</script>
