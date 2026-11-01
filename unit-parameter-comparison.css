@@ -1,6 +1,7 @@
 /* Scoped to the comparison page; all five slots always remain in one row. */
 #unitSimulator.wrap { max-width:1920px; }
-#unitParameterComparison { container-type:inline-size; container-name:parameter-comparison; min-width:0; scroll-margin-block-start:150px; }
+/* Thin only: scale > 0 (1 = current size); opacity 0..1 (1 = current density). */
+#unitParameterComparison { --parameter-thin-scale:1; --parameter-thin-opacity:1; container-type:inline-size; container-name:parameter-comparison; min-width:0; scroll-margin-block-start:150px; }
 .parameterComparisonHeading { display:flex; align-items:center; justify-content:space-between; gap:16px; }
 .parameterComparisonHeading h3 { margin:0; font-size:17px; }
 .parameterMode { display:flex; gap:4px; }
@@ -15,6 +16,11 @@
 .parameterMember { position:relative; isolation:isolate; min-width:0; overflow:hidden; border:1px solid #3b526b; border-radius:12px; background:#17283e; color:#edf4ff; }
 .parameterArt { position:absolute; inset:0; z-index:-1; background:linear-gradient(155deg,#263d58,#142237); overflow:hidden; }
 .parameterArt img { width:100%; height:100%; object-fit:cover; object-position:center 15%; }
+.parameterArt[data-image-kind="thin"] img {
+  transform:scale(var(--parameter-thin-scale));
+  transform-origin:center 15%;
+  opacity:var(--parameter-thin-opacity);
+}
 .parameterArt::after { content:''; position:absolute; inset:0; background:linear-gradient(90deg,rgba(13,26,45,.96),rgba(13,26,45,.85) 62%,rgba(13,26,45,.58)); }
 .parameterImageStatus { position:absolute; bottom:6px; right:6px; z-index:1; font-size:10px; padding:3px 5px; border-radius:4px; background:#17283ee6; color:#c5d3e4; }
 .parameterMemberInfo { padding:14px 16px 16px; min-width:0; }
