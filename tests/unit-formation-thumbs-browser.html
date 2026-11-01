@@ -1,0 +1,42 @@
+<!doctype html><meta charset="utf-8"><pre id="result">RUNNING</pre><iframe style="border:0;height:1200px"></iframe>
+<script>
+(async()=>{
+const out=document.querySelector('pre'),frame=document.querySelector('iframe'),key='holodori-unit-formations-v1',backup=localStorage.getItem(key);
+const check=(ok,msg)=>{if(!ok)throw Error(msg)};
+const wait=async(fn)=>{for(let i=0;i<200;i++){if(fn())return;await new Promise(r=>setTimeout(r,25));}throw Error('image timeout')};
+try{
+localStorage.removeItem(key);frame.style.width='1100px';frame.src='../unit-formations.html';await new Promise(r=>frame.onload=r);
+const w=frame.contentWindow;await w.eval('unitFormationsReady');const store=w.eval('UnitFormationStore'),resolver=w.eval('CardImageResolver');
+const catalog=await(await fetch('../data/runtime-cards.json')).json();const mapped=catalog.cards.filter(c=>resolver.candidates(c.id).some(x=>x.kind==='thumb')).slice(0,5);
+const original=resolver.candidates;resolver.candidates=id=>original(id).map(c=>({...c,url:c.url+(id===mapped[1].id?'':'?image-test=thumb')}));
+const snapshot={version:1,slots:[mapped[0].id,mapped[1].id,'','missing-card',mapped[4].id].map(cardId=>({cardId,training:0,bloom:0,short:0,totalAdjustments:{board:{kind:'external-total',value:null},costume:{kind:'external-total',value:null}}})),leaderId:'',duration:'120',memoryPercent:'6.4',enhancementPercent:'2.43',trials:'100',specialEnabled:true,specialStarts:{}};
+const saved=store.save('画像検証',snapshot);const before=localStorage.getItem(key);
+w.dispatchEvent(new w.StorageEvent('storage',{key}));
+const cells=()=>[...w.document.querySelectorAll('.formationThumb')];
+await wait(()=>cells()[0]?.querySelector('img')?.style.visibility==='visible'&&!cells()[1]?.querySelector('img')&&cells()[4]?.querySelector('img')?.style.visibility==='visible');
+check(cells().length===5&&cells().map(c=>c.dataset.slot).join()==='1,2,3,4,5','five slots in order');
+check(cells()[2].textContent==='未設定'&&cells()[3].textContent==='画像なし'&&cells()[1].textContent==='画像なし','empty unknown failed labels');
+check(cells()[0].querySelector('img').src.includes(mapped[0].id.slice(5))&&cells()[4].querySelector('img').src.includes(mapped[4].id.slice(5)),'image identity');
+check(w.document.querySelector('.formationThumbs').nextElementSibling.className==='formationMembers','images above member text');
+for(const width of [1920,1280,768,390,360]){
+ frame.style.width=width+'px';await new Promise(r=>setTimeout(r,50));const boxes=cells().map(c=>c.getBoundingClientRect());
+ check(boxes.every(b=>Math.abs(b.width-b.height)<1),'squares including missing');
+ check(boxes.every(b=>Math.abs(b.top-boxes[0].top)<1),'five columns no wrapping');
+ check(w.document.documentElement.scrollWidth<=width,'no page overflow');
+ check(w.document.querySelector('.formationThumbs').getBoundingClientRect().width<=560.1,'max width');
+}
+frame.style.width='1280px';await new Promise(r=>setTimeout(r,50));w.document.getElementById('formationCards').style.setProperty('--formation-thumbs-max-width','420px');
+check(Math.abs(w.document.querySelector('.formationThumbs').getBoundingClientRect().width-420)<1,'single max-width variable');
+check(w.getComputedStyle(cells()[0].querySelector('img')).objectFit==='contain','contain');
+check(localStorage.getItem(key)===before,'image loading does not change stored snapshots');
+const requests=w.performance.getEntriesByType('resource').filter(r=>r.initiatorType==='img');
+check(requests.length>=3&&requests.every(r=>r.name.includes('/cards/thumb/')),'Thumb only; no thin/full attempts');
+check(!requests.some(r=>r.name.includes('missing-card')),'unknown has no inferred URL');
+let panel=w.document.querySelector('.savedFormation');w.prompt=()=> '画像検証コピー';panel.querySelectorAll('button')[1].click();
+check(store.read().formations.length===2&&JSON.stringify(store.read().formations[1].snapshot)===JSON.stringify(snapshot),'duplicate snapshot intact');
+w.confirm=()=>true;w.document.querySelectorAll('.savedFormation')[1].querySelectorAll('button')[2].click();check(store.read().formations.length===1,'delete');
+check(w.document.querySelector('.formationActions a').getAttribute('href')==='unit-simulator.html?formation='+encodeURIComponent(saved.id),'load link unchanged');
+out.textContent='PASS: SLOT order, Thumb only, success/missing/empty, square five columns 1920/1280/768/390/360, max-width variable, unchanged storage, duplicate/delete/load link';
+}catch(e){out.textContent='FAIL: '+e.stack}finally{if(backup===null)localStorage.removeItem(key);else localStorage.setItem(key,backup)}
+})();
+</script>

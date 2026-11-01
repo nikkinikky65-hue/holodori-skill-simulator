@@ -7,12 +7,30 @@ const unitFormationsReady=(async()=>{
     if(responses.some(r=>!r.ok))throw Error('カード情報を取得できませんでした。');
     const [catalog,rules]=await Promise.all(responses.map(r=>r.json()));cards=catalog.cards;leaders=rules.leaders;
   }catch(error){status.textContent=error.message+' IDを表示します。';}
+  function thumbnails(slots){
+    const row=el('div');row.className='formationThumbs';row.setAttribute('role','group');row.setAttribute('aria-label','SLOT 1〜5のカード画像');
+    slots.forEach((slot,index)=>{
+      const card=cards.find(c=>c.id===slot.cardId),cell=el('div');cell.className='formationThumb';cell.dataset.slot=String(index+1);
+      cell.title=`SLOT ${index+1}：${card ? card.member.name+' / '+card.name : slot.cardId||'未設定'}`;
+      const fallback=el('span',slot.cardId?'画像なし':'未設定');fallback.setAttribute('aria-label',cell.title+'・'+fallback.textContent);cell.append(fallback);
+      const thumb=slot.cardId?CardImageResolver.candidates(slot.cardId).find(candidate=>candidate.kind==='thumb'):null;
+      if(thumb){
+        const image=el('img');image.alt=cell.title;image.loading='lazy';image.decoding='async';image.style.visibility='hidden';
+        image.onload=()=>{image.style.visibility='visible';fallback.hidden=true;};
+        image.onerror=()=>{image.remove();};
+        image.src=thumb.url;cell.append(image);
+      }
+      row.append(cell);
+    });
+    return row;
+  }
   function render(){
     const formations=UnitFormationStore.read().formations;container.replaceChildren();
     if(!formations.length){container.append(el('p','保存済み編成はありません。開発中の統合シミュレーターで編成を保存してください。'));return;}
     for(const f of formations){
       const panel=el('section');panel.className='panel savedFormation';panel.dataset.id=f.id;
       panel.append(el('h2',f.name),el('p','リーダー：'+(leaders.find(l=>l.id===f.snapshot.leaderId)?.name||f.snapshot.leaderId||'未設定')));
+      panel.append(thumbnails(f.snapshot.slots));
       const members=el('ol');members.className='formationMembers';
       for(const slot of f.snapshot.slots){const card=cards.find(c=>c.id===slot.cardId);members.append(el('li',card?`${card.member?.name||""} / ${card.name} / ${slot.cardId} / 特訓 ${slot.training}・開花 ${slot.bloom}`:slot.cardId||'未設定'));}
       panel.append(members,el('p','更新：'+f.updatedAt));
