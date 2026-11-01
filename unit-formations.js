@@ -6,18 +6,19 @@ const unitFormationsReady=(async()=>{
     const responses=await Promise.all([fetch('data/runtime-cards.json'),fetch('data/leader-parameter-rules.json')]);
     if(responses.some(r=>!r.ok))throw Error('カード情報を取得できませんでした。');
     const [catalog,rules]=await Promise.all(responses.map(r=>r.json()));cards=catalog.cards;leaders=rules.leaders;
-  }catch(error){status.textContent=error.message+' IDを表示します。';}
-  function thumbnails(slots){
+  }catch(error){status.textContent=error.message+' カード名を確認できません。保存データは保持しています。';}
+  const memberLabel=slot=>{const card=cards.find(c=>c.id===slot.cardId);return card?[card.member?.name,card.name].filter(Boolean).join(' / '):slot.cardId?'カード情報を取得できません':'未設定';};
+  function thumbnails(slots,members){
     const row=el('div');row.className='formationThumbs';row.setAttribute('role','group');row.setAttribute('aria-label','SLOT 1〜5のカード画像');
     slots.forEach((slot,index)=>{
-      const card=cards.find(c=>c.id===slot.cardId),cell=el('div');cell.className='formationThumb';cell.dataset.slot=String(index+1);
-      cell.title=`SLOT ${index+1}：${card ? card.member.name+' / '+card.name : slot.cardId||'未設定'}`;
+      const cell=el('div');cell.className='formationThumb';cell.dataset.slot=String(index+1);
+      cell.title=`SLOT ${index+1}：${memberLabel(slot)}`;
       const fallback=el('span',slot.cardId?'画像なし':'未設定');fallback.setAttribute('aria-label',cell.title+'・'+fallback.textContent);cell.append(fallback);
       const thumb=slot.cardId?CardImageResolver.candidates(slot.cardId).find(candidate=>candidate.kind==='thumb'):null;
       if(thumb){
         const image=el('img');image.alt=cell.title;image.loading='lazy';image.decoding='async';image.style.visibility='hidden';
-        image.onload=()=>{image.style.visibility='visible';fallback.hidden=true;};
-        image.onerror=()=>{image.remove();};
+        image.onload=()=>{image.style.visibility='visible';fallback.hidden=true;members.children[index].hidden=true;members.hidden=[...members.children].every(item=>item.hidden);};
+        image.onerror=()=>{image.remove();fallback.hidden=false;members.children[index].hidden=false;members.hidden=false;};
         image.src=thumb.url;cell.append(image);
       }
       row.append(cell);
@@ -29,10 +30,10 @@ const unitFormationsReady=(async()=>{
     if(!formations.length){container.append(el('p','保存済み編成はありません。開発中の統合シミュレーターで編成を保存してください。'));return;}
     for(const f of formations){
       const panel=el('section');panel.className='panel savedFormation';panel.dataset.id=f.id;
-      panel.append(el('h2',f.name),el('p','リーダー：'+(leaders.find(l=>l.id===f.snapshot.leaderId)?.name||f.snapshot.leaderId||'未設定')));
-      panel.append(thumbnails(f.snapshot.slots));
+      panel.append(el('h2',f.name),el('p','リーダー：'+(leaders.find(l=>l.id===f.snapshot.leaderId)?.name||(f.snapshot.leaderId?'リーダー情報を取得できません':'未設定'))));
       const members=el('ol');members.className='formationMembers';
-      for(const slot of f.snapshot.slots){const card=cards.find(c=>c.id===slot.cardId);members.append(el('li',card?`${card.member?.name||""} / ${card.name} / ${slot.cardId} / 特訓 ${slot.training}・開花 ${slot.bloom}`:slot.cardId||'未設定'));}
+      f.snapshot.slots.forEach((slot,index)=>{const item=el('li',memberLabel(slot));item.value=index+1;members.append(item);});
+      panel.append(thumbnails(f.snapshot.slots,members));
       panel.append(members,el('p','更新：'+f.updatedAt));
       const actions=el('div');actions.className='formationActions';
       const link=el('a','読み込む');link.href='unit-simulator.html?formation='+encodeURIComponent(f.id);link.target='_blank';link.rel='noopener';actions.append(link);

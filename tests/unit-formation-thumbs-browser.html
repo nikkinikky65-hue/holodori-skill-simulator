@@ -36,7 +36,21 @@ let panel=w.document.querySelector('.savedFormation');w.prompt=()=> '画像検�
 check(store.read().formations.length===2&&JSON.stringify(store.read().formations[1].snapshot)===JSON.stringify(snapshot),'duplicate snapshot intact');
 w.confirm=()=>true;w.document.querySelectorAll('.savedFormation')[1].querySelectorAll('button')[2].click();check(store.read().formations.length===1,'delete');
 check(w.document.querySelector('.formationActions a').getAttribute('href')==='unit-simulator.html?formation='+encodeURIComponent(saved.id),'load link unchanged');
-out.textContent='PASS: SLOT order, Thumb only, success/missing/empty, square five columns 1920/1280/768/390/360, max-width variable, unchanged storage, duplicate/delete/load link';
+// All success / partial failure / all failure: text visibility is independent per slot.
+const allSnapshot=JSON.parse(JSON.stringify(snapshot));allSnapshot.slots.forEach((slot,i)=>{slot.cardId=mapped[i].id;slot.training=4;slot.bloom=5;});
+store.save('画像検証',allSnapshot,saved.id);const stored=localStorage.getItem(key);
+for(const successful of [[0,1,2,3,4],[0,2,4],[]]){
+ resolver.candidates=id=>original(id).map(c=>({...c,url:c.url+(successful.includes(mapped.findIndex(card=>card.id===id))?'?image-test=thumb':'')}));
+ w.dispatchEvent(new w.StorageEvent('storage',{key}));
+ await wait(()=>cells().every((cell,i)=>successful.includes(i)?cell.querySelector('img')?.style.visibility==='visible':!cell.querySelector('img')));
+ const list=w.document.querySelector('.formationMembers'),items=[...list.children];
+ check(list.hidden===(successful.length===5),'hide empty text list');
+ items.forEach((item,i)=>{check(item.hidden===successful.includes(i),'per-slot text visibility');check(item.value===i+1,'original SLOT numbering');check(item.textContent.includes(mapped[i].name)&&item.textContent.includes(mapped[i].member.name),'fallback identifies card');});
+ check(!/card-|特訓|開花/.test(w.document.querySelector('.savedFormation').textContent),'no card IDs or growth in display');
+ check(cells().every(cell=>!cell.title.includes('card-')),'no IDs in titles');
+ check(localStorage.getItem(key)===stored,'image results do not mutate storage');
+}
+out.textContent='PASS: all success/partial/all failure text, IDs/growth display-only removal, SLOT order, Thumb only, success/missing/empty, square five columns 1920/1280/768/390/360, max-width variable, unchanged storage, duplicate/delete/load link';
 }catch(e){out.textContent='FAIL: '+e.stack}finally{if(backup===null)localStorage.removeItem(key);else localStorage.setItem(key,backup)}
 })();
 </script>

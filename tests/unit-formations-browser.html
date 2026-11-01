@@ -18,7 +18,7 @@ try{for(const width of [1100,360]){
  const saved=JSON.parse(localStorage.getItem(key)).formations.at(-1),snap=JSON.stringify(saved.snapshot);
  const buttons=[...d.querySelectorAll('.unitFormationActions button')];assert(buttons.every((b,i)=>!i||b.getBoundingClientRect().top>=buttons[i-1].getBoundingClientRect().bottom),'vertical actions');
  w=await open('unit-formations.html');await w.eval('unitFormationsReady');d=w.document;
- assert(d.querySelectorAll('.savedFormation').length===4,'list all');assert(d.querySelectorAll('.savedFormation ol li').length===20,'five ordered slots');assert(d.documentElement.scrollWidth<=width,'list fits');assert(d.querySelector('.formationMembers').textContent.includes('card-'),'real card information');
+ assert(d.querySelectorAll('.savedFormation').length===4,'list all');assert(d.querySelectorAll('.savedFormation ol li').length===20,'five ordered slots');assert(d.documentElement.scrollWidth<=width,'list fits');assert(!d.querySelector('.formationMembers').textContent.includes('card-')&&!/特訓|開花/.test(d.querySelector('.formationMembers').textContent),'IDs and growth hidden');
  let panel=[...d.querySelectorAll('.savedFormation')].find(p=>p.dataset.id===saved.id);
  const link=panel.querySelector('a');assert(link.target==='_blank'&&link.rel==='noopener','preserve open draft');const href=link.getAttribute('href');
  w.prompt=()=> '改名';panel.querySelectorAll('button')[0].click();assert(JSON.stringify(JSON.parse(localStorage.getItem(key)).formations.find(f=>f.id===saved.id).snapshot)===snap,'rename snapshot intact');
