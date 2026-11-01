@@ -427,6 +427,51 @@ const CardImageResolver = (() => {
     "thin": "assets/cards/thin/img_card_thin_06005-5-uniq-0061-00.png",
     "thumb": "assets/cards/thumb/img_card_thumb_06005-5-uniq-0061-00.png",
     "full": "assets/cards/full/img_card_full_06005-5-uniq-0061-00.png"
+  },
+  "card-00007-5-uniq-0096-00": {
+    "thin": "assets/cards/thin/img_card_thin_00007-5-uniq-0096-00.png",
+    "thumb": "assets/cards/thumb/img_card_thumb_00007-5-uniq-0096-00.png",
+    "full": "assets/cards/full/img_card_full_00007-5-uniq-0096-00.png"
+  },
+  "card-00027-5-uniq-0092-00": {
+    "thin": "assets/cards/thin/img_card_thin_00027-5-uniq-0092-00.png",
+    "thumb": "assets/cards/thumb/img_card_thumb_00027-5-uniq-0092-00.png",
+    "full": "assets/cards/full/img_card_full_00027-5-uniq-0092-00.png"
+  },
+  "card-00032-5-uniq-0093-00": {
+    "thin": "assets/cards/thin/img_card_thin_00032-5-uniq-0093-00.png",
+    "thumb": "assets/cards/thumb/img_card_thumb_00032-5-uniq-0093-00.png",
+    "full": "assets/cards/full/img_card_full_00032-5-uniq-0093-00.png"
+  },
+  "card-03007-5-uniq-0100-00": {
+    "thin": "assets/cards/thin/img_card_thin_03007-5-uniq-0100-00.png",
+    "thumb": "assets/cards/thumb/img_card_thumb_03007-5-uniq-0100-00.png",
+    "full": "assets/cards/full/img_card_full_03007-5-uniq-0100-00.png"
+  },
+  "card-03008-5-uniq-0095-00": {
+    "thin": "assets/cards/thin/img_card_thin_03008-5-uniq-0095-00.png",
+    "thumb": "assets/cards/thumb/img_card_thumb_03008-5-uniq-0095-00.png",
+    "full": "assets/cards/full/img_card_full_03008-5-uniq-0095-00.png"
+  },
+  "card-04014-5-uniq-0094-00": {
+    "thin": "assets/cards/thin/img_card_thin_04014-5-uniq-0094-00.png",
+    "thumb": "assets/cards/thumb/img_card_thumb_04014-5-uniq-0094-00.png",
+    "full": "assets/cards/full/img_card_full_04014-5-uniq-0094-00.png"
+  },
+  "card-04015-5-uniq-0099-00": {
+    "thin": "assets/cards/thin/img_card_thin_04015-5-uniq-0099-00.png",
+    "thumb": "assets/cards/thumb/img_card_thumb_04015-5-uniq-0099-00.png",
+    "full": "assets/cards/full/img_card_full_04015-5-uniq-0099-00.png"
+  },
+  "card-06004-5-uniq-0098-00": {
+    "thin": "assets/cards/thin/img_card_thin_06004-5-uniq-0098-00.png",
+    "thumb": "assets/cards/thumb/img_card_thumb_06004-5-uniq-0098-00.png",
+    "full": "assets/cards/full/img_card_full_06004-5-uniq-0098-00.png"
+  },
+  "card-06005-5-uniq-0097-00": {
+    "thin": "assets/cards/thin/img_card_thin_06005-5-uniq-0097-00.png",
+    "thumb": "assets/cards/thumb/img_card_thumb_06005-5-uniq-0097-00.png",
+    "full": "assets/cards/full/img_card_full_06005-5-uniq-0097-00.png"
   }
 };
   function candidates(cardId){
