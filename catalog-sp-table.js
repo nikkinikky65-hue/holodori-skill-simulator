@@ -12,13 +12,16 @@ const CatalogSPTable = (() => {
     root.append(controls,note,sortNote,scroll);
     function render(){
       custom.parentElement.hidden=mode.value!=='custom';
-      const rows=cards.map(card=>CatalogSPData.project(card,getUserCardState(card.id,states),mode.value,custom.value));
-      if(sortKey)rows.sort((a,b)=>CatalogSPData.compare(a,b,sortKey,direction));
+      const ordered=sortKey==='name'?CatalogSPData.sortByAffiliation(cards,direction):cards;
+      const rows=ordered.map(card=>CatalogSPData.project(card,getUserCardState(card.id,states),mode.value,custom.value));
+      if(sortKey && sortKey!=='name')rows.sort((a,b)=>CatalogSPData.compare(a,b,sortKey,direction));
       const table=el('table');table.className='catalogSPTable';const caption=el('caption','SP比較（原データの効果量。編成内での発動・適用結果ではありません）');table.append(caption);
       const head=el('thead'),tr=el('tr');
-      for(const [key,label] of [['image','Thumb'],['name','カード名／タレント名'],['time','効果時間'],['support','効果量（スコアサポート）'],['probability','発動率UP（%）'],['life','ライフ回復'],['judgement','判定強化']]){
+      for(const [key,label] of [['image',''],['name','カード名／タレント名'],['time','効果時間'],['support','効果量（スコアサポート）'],['probability','発動率UP（%）'],['life','ライフ回復'],['judgement','判定強化']]){
         const th=el('th');th.scope='col';
-        if(['time','support','probability','life'].includes(key)){const button=el('button',label+(sortKey===key?(direction===1?' ▲':' ▼'):''));button.type='button';button.dataset.spSort=key;button.addEventListener('click',()=>{direction=sortKey===key?-direction:1;sortKey=key;render();});th.setAttribute('aria-sort',sortKey===key?(direction===1?'ascending':'descending'):'none');th.append(button);}else th.textContent=label;
+        if(['name','time','support','probability','life'].includes(key)){const button=el('button',label+(sortKey===key?(direction===1?' ▲':' ▼'):''));button.type='button';button.dataset.spSort=key;button.addEventListener('click',()=>{direction=sortKey===key?-direction:1;sortKey=key;render();});th.setAttribute('aria-sort',sortKey===key?(direction===1?'ascending':'descending'):'none');th.append(button);}else th.textContent=label;
+        if(key==='image')th.setAttribute('aria-label','カード画像');
+        if(key==='name')th.title='所属・期生順（同一期生内は図鑑順を維持）';
         tr.append(th);
       }
       head.append(tr);table.append(head);const body=el('tbody');
@@ -27,7 +30,7 @@ const CatalogSPTable = (() => {
         const picture=el('td'),box=el('div','画像なし');box.className='catalogSPThumb';picture.append(box);
         const thumb=CardImageResolver.candidates(row.card.id).find(c=>c.kind==='thumb');
         if(thumb){const image=el('img');image.alt='';image.loading='lazy';image.decoding='async';image.onload=()=>box.replaceChildren(image);image.onerror=()=>image.remove();image.src=thumb.url;box.append(image);}
-        const name=el('td');name.append(el('strong',row.card.name),el('span',row.card.member.name),el('small',row.level===null?'SP未確認':`SP Lv.${row.level}`));
+        const name=el('td');name.append(el('strong',row.card.name),el('span',row.card.member.name));
         for(const message of [row.error,...row.unknown].filter(Boolean)){const warning=el('small','未対応：'+message);name.append(warning);}
         tr.append(picture,name);
         for(const key of ['time','support','probability','life','judgement']){const cell=el('td');cell.dataset.spField=key;

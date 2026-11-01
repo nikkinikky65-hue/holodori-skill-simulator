@@ -44,3 +44,9 @@ SPレベルは既存 `canonicalBloomLevels(card, opening).special` で選択す�
 - SPブラウザ検証成功。既存ブラウザ検証は編成Thumb／TOTAL、Parameter比較、最適化、編成CRUD、編成一覧、カードのタレント絞り込みが成功。
 - 既存の `unit-card-picker-browser`、`talent-filter-browser`、`catalog-passive-filter-browser`、`card-display-order-browser`、`card-export-browser` は旧ライブラリ件数の固定期待値で失敗。変更前の公開用でも同じ5件が失敗することを確認。期待値・検証条件は本作業では変更していない。
 - 新規データテストの初回実行はJavaScriptCoreにブラウザのURLがないため失敗。既存テストと同じURL／documentスタブを追加後に成功。実装や実データの期待値は緩和していない。
+
+## SP表UIの調整（2026-11-01）
+
+画像列の見出し文字と各カードのSPレベル表示を省略。ソートはキーボード操作可能なbuttonを保ち、背景・枠・影のないテキスト見出しとする。カード名は太字、タレント名は通常文字。表幅1020px、名前列300px（狭幅180px）、数値列80〜140px、セル余白6px。固定列・見出し、数値ソート、育成プレビューは維持する。
+
+名前見出しで所属・期生順を切り替える。昇順は既存sortCatalogCardsForDisplayを再利用。降順は所属ブロックだけを反転し、同一期生内のタレント順・同一タレントのカード順を保持する。所属はHOLO_MEMBERSの先頭登録所属を使用（フブキは1期生、ゲーマーズの順なので1期生に配置）。未確認所属は推測せず末尾。独自の所属順位表は作成しない。

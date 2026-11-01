@@ -31,5 +31,11 @@
  const a={life:[{value:2},{value:5}]},b={life:[{value:2},{value:8}]},missing={life:[]};
  check(CatalogSPData.compare(a,b,'life',1)<0&&CatalogSPData.compare(a,b,'life',-1)>0,'lexicographic sort');
  for(const dir of [1,-1])check(CatalogSPData.compare(a,missing,'life',dir)<0,'missing last');
+ const asc=CatalogSPData.sortByAffiliation(cards,1),desc=CatalogSPData.sortByAffiliation(cards,-1);
+ check(JSON.stringify(asc.map(c=>c.id))===JSON.stringify(sortCatalogCardsForDisplay(cards).map(c=>c.id)),'ascending is catalog order');
+ const group=c=>HOLO_MEMBERS.find(m=>m.id===canonicalMemberId(c)).affiliations[0];
+ const groups=[...new Set(asc.map(group))];
+ check(JSON.stringify([...new Set(desc.map(group))])===JSON.stringify([...groups].reverse()),'descending groups');
+ for(const g of groups)check(JSON.stringify(asc.filter(c=>group(c)===g).map(c=>c.id))===JSON.stringify(desc.filter(c=>group(c)===g).map(c=>c.id)),'stable within group '+g);
  print('PASS: '+cards.length+' cards, both SP levels, growth, units, conditions, multiple effects, unknown/missing, sorting, immutability; effects '+JSON.stringify(counts));
 }

@@ -11,6 +11,15 @@
    check(d.querySelector('#catalogSP').hidden&&d.querySelectorAll('.catalogViewModes button:disabled').length===3,'initial detail and unavailable modes');
    w.updateUserCardState(baseline[0],{owned:true,training:4,opening:5});const stored=JSON.stringify(w.localStorage);
    sp();check(JSON.stringify(ids())===JSON.stringify(baseline),'same filter and order');
+   check(d.querySelector('#catalogSP th').textContent==='', 'no Thumb caption');
+   check(!d.querySelector('#catalogSP tbody').textContent.includes('SP Lv.'),'no displayed SP level');
+   for(const dir of [1,-1]){
+    d.querySelector('[data-sp-sort="name"]').click();
+    const expected=w.eval('CatalogSPData').sortByAffiliation(baseline.map(id=>catalog.cards.find(c=>c.id===id)),dir).map(c=>c.id);
+    check(JSON.stringify(ids())===JSON.stringify(expected),'affiliation direction '+dir);
+   }
+   const headerStyle=w.getComputedStyle(d.querySelector('[data-sp-sort="name"]'));
+   check(headerStyle.borderTopWidth==='0px'&&headerStyle.backgroundColor==='rgba(0, 0, 0, 0)','text header decoration');
    const growth=d.querySelector('[data-sp-growth]'),custom=d.querySelector('[data-sp-custom]'),set=(el,v)=>{el.value=v;el.dispatchEvent(new w.Event('change'));};
    for(const mode of ['initial','saved','max','custom']){
     set(growth,mode);if(mode==='custom')set(custom,'saved');
