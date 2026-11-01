@@ -1,7 +1,7 @@
 /* Scoped to the comparison page; all five slots always remain in one row. */
 #unitSimulator.wrap { max-width:1920px; }
 /* Thin only: scale > 0 (1 = current size); opacity 0..1 (1 = current density). */
-#unitParameterComparison { --parameter-thin-scale:1; --parameter-thin-opacity:1; container-type:inline-size; container-name:parameter-comparison; min-width:0; scroll-margin-block-start:150px; }
+#unitParameterComparison { --parameter-thin-scale:0.85; --parameter-thin-opacity:1; container-type:inline-size; container-name:parameter-comparison; min-width:0; scroll-margin-block-start:150px; }
 .parameterComparisonHeading { display:flex; align-items:center; justify-content:space-between; gap:16px; }
 .parameterComparisonHeading h3 { margin:0; font-size:17px; }
 .parameterMode { display:flex; gap:4px; }
