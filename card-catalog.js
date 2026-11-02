@@ -20,6 +20,8 @@ async function renderCardCatalog(){
     let view = 'detail';
     const spRoot = document.querySelector('#catalogSP');
     const spTable = CatalogSPTable.mount(spRoot);
+    const statusRoot = document.querySelector('#catalogStats');
+    const statusTable = CatalogStatusTable.mount(statusRoot);
     let selectedTalents=new Set();
     const type = document.querySelector('#catalogType');
     let skillSelection=PassiveSkillFilter.empty();
@@ -41,8 +43,10 @@ async function renderCardCatalog(){
       status.textContent = `${cards.length} / ${catalog.cards.length}枚`;
       container.hidden = view !== 'detail';
       spRoot.hidden = view !== 'sp';
+      statusRoot.hidden = view !== 'status';
       container.replaceChildren();
       if(view === 'sp'){ spTable.render(cards, userStates); return; }
+      if(view === 'status'){ statusTable.render(cards, userStates); return; }
       for(const card of cards){
         const panel = document.createElement('article');
         panel.className = 'panel catalogCard';
