@@ -40,7 +40,7 @@ const CatalogSPTable = (() => {
       if(sortKey && sortKey!=='name')rows.sort((a,b)=>CatalogSPData.compare(a,b,sortKey,direction));
       const table=el('table');table.className='catalogSPTable';const caption=el('caption','SP比較（原データの効果量。編成内での発動・適用結果ではありません）');table.append(caption);
       const head=el('thead'),tr=el('tr');
-      for(const [key,label] of [['image',''],['name','カード名／タレント名'],['time','効果時間'],['support','効果量（スコアサポート）'],['probability','発動率UP（%）'],['life','ライフ回復'],['judgement','判定強化']]){
+      for(const [key,label] of [['image',''],['name','カード名／タレント名'],['time','効果時間'],['support','効果量'],['probability','発動率UP（%）'],['life','ライフ回復'],['judgement','判定強化']]){
         const th=el('th');th.scope='col';
         if(['name','time','support','probability','life'].includes(key)){const button=el('button',label+(sortKey===key?(direction===1?' ▲':' ▼'):''));button.type='button';button.dataset.spSort=key;button.addEventListener('click',()=>{direction=sortKey===key?-direction:1;sortKey=key;render();});th.setAttribute('aria-sort',sortKey===key?(direction===1?'ascending':'descending'):'none');th.append(button);}else th.textContent=label;
         if(key==='image')th.setAttribute('aria-label','カード画像');
@@ -50,9 +50,15 @@ const CatalogSPTable = (() => {
       head.append(tr);table.append(head);const body=el('tbody');
       for(const row of rows){
         const tr=el('tr');tr.dataset.cardId=row.card.id;tr.dataset.spLevel=row.level??'';
-        const picture=el('td'),box=el('div','画像なし');box.className='catalogSPThumb';picture.append(box);
+        const picture=el('td'),box=el('div'),placeholder=el('span','画像なし');box.className='catalogSPThumb';box.append(placeholder);picture.append(box);
         const thumb=CardImageResolver.candidates(row.card.id).find(c=>c.kind==='thumb');
-        if(thumb){const image=el('img');image.alt='';image.loading='lazy';image.decoding='async';image.onload=()=>box.replaceChildren(image);image.onerror=()=>image.remove();image.src=thumb.url;box.append(image);}
+        if(thumb){
+          const image=el('img');image.alt='';image.width=32;image.height=32;image.loading='lazy';image.decoding='async';
+          // Keep the loaded node attached; only change the placeholder, not the image DOM.
+          image.onload=()=>{if(image.naturalWidth>0)placeholder.remove();};
+          image.onerror=()=>{image.remove();if(!placeholder.isConnected)box.append(placeholder);};
+          box.append(image);image.src=thumb.url;
+        }
         const name=el('td');name.append(el('strong',row.card.name),el('span',row.card.member.name));
         for(const message of [row.error,...row.unknown].filter(Boolean)){const warning=el('small','未対応：'+message);name.append(warning);}
         tr.append(picture,name);

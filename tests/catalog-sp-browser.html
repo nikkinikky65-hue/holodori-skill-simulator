@@ -21,6 +21,7 @@
    }
    const headerStyle=w.getComputedStyle(d.querySelector('[data-sp-sort="name"]'));
    check(headerStyle.borderTopWidth==='0px'&&headerStyle.backgroundColor==='rgba(0, 0, 0, 0)','text header decoration');
+   check(d.querySelector('.catalogSPScroll [data-sp-sort="support"]').textContent==='効果量','short effect heading');
    const growth=d.querySelector('[data-sp-growth]'),custom=d.querySelector('[data-sp-custom]'),set=(el,v)=>{el.value=v;el.dispatchEvent(new w.Event('change'));};
    for(const mode of ['initial','saved','max','custom']){
     set(growth,mode);if(mode==='custom')set(custom,'saved');
@@ -67,6 +68,15 @@
    w.scrollTo(0,w.scrollY+scroll.getBoundingClientRect().top-100);scroll.scrollLeft=0;await tick();const firstThumb=d.querySelector('.catalogSPThumb'),img=firstThumb.querySelector('img');if(img){img.dispatchEvent(new w.Event('error'));check(!firstThumb.querySelector('img')&&firstThumb.textContent==='画像なし','failed thumb placeholder');}
    const resolver=w.eval('CardImageResolver'),original=resolver.candidates;resolver.candidates=id=>original(id).map(c=>({...c,url:c.url+'?image-test=thumb'}));set(growth,'max');await tick();
    const success=d.querySelector('.catalogSPThumb img');check(success,'registered thumbnail');for(let i=0;i<40&&!success.complete;i++)await tick();check(success.naturalWidth>0,'thumb success');
+   success.scrollIntoView({block:'center'});w.dispatchEvent(new w.Event('scroll'));await tick();
+   const imageRect=success.getBoundingClientRect(),imageStyle=w.getComputedStyle(success);
+   check(imageRect.width===32&&imageRect.height===32,'loaded image has 32px square');
+   check(imageStyle.display!=='none'&&imageStyle.visibility==='visible'&&Number(imageStyle.opacity)>0,'loaded image visible');
+   check(d.elementFromPoint(imageRect.left+16,imageRect.top+16)===success,'loaded image not covered');
+   check(success.parentElement.textContent==='','success clears placeholder');
+   let childMutations=0;const observer=new w.MutationObserver(xs=>{childMutations+=xs.length;});observer.observe(success.parentElement,{childList:true});
+   success.dispatchEvent(new w.Event('load'));await tick();observer.disconnect();check(childMutations===0,'repeat load does not detach image');
+   const box=success.parentElement;success.dispatchEvent(new w.Event('error'));check(!box.querySelector('img')&&box.textContent==='画像なし','error hides loaded image');
    check([...d.querySelectorAll('#catalogSP img')].every(i=>i.src.includes('/cards/thumb/')),'thumb only');resolver.candidates=original;
    detail();check(!d.querySelector('#catalogCards').hidden&&!d.querySelector('#catalogExport').disabled,'detail and export retained');check(JSON.stringify(w.localStorage)===stored,'all comparison actions preserve storage');check(d.querySelector('.catalogSPFloating').getBoundingClientRect().height===0,'floating hidden in detail');sp();d.querySelector('#catalogSP').scrollIntoView();await tick();
   }
