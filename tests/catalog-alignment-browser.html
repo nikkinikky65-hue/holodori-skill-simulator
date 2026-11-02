@@ -1,0 +1,51 @@
+<!doctype html><meta charset="utf-8"><pre id="result">RUNNING</pre><iframe style="border:0;height:900px"></iframe>
+<script>
+(async()=>{
+ const out=document.querySelector('#result'),frame=document.querySelector('iframe'),check=(v,m)=>{if(!v)throw Error(m);},tick=()=>new Promise(r=>setTimeout(r,60));
+ const reports=[];
+ try{
+  for(const width of [1280,768,390]){
+   frame.style.width=width+'px';frame.src='../card-catalog.html';await new Promise(r=>frame.onload=r);
+   const w=frame.contentWindow,d=w.document;await w.eval('cardCatalogReady');
+   for(const mode of ['sp','status']){
+    d.querySelector('[data-catalog-view="'+mode+'"]').click();await tick();
+    const root=d.querySelector(mode==='sp'?'#catalogSP':'#catalogStats'),scroll=root.querySelector('.catalogSPScroll');
+    const center=n=>{const r=n.getBoundingClientRect();return r.left+r.width/2;};
+    function assertText(n,cell){
+     const walker=d.createTreeWalker(n,w.NodeFilter.SHOW_TEXT);let text;
+     while(text=walker.nextNode()){
+      if(!text.textContent.trim())continue;
+      const range=d.createRange();range.selectNodeContents(text);
+      for(const r of range.getClientRects())if(r.width>0)check(Math.abs(r.left+r.width/2-center(cell))<1.1,'text center '+mode+' '+width+' '+text.textContent);
+     }
+    }
+    function assertTable(table){
+     for(const th of table.querySelectorAll('th'))assertText(th,th);
+     for(const tr of [...table.querySelectorAll('tbody tr')].slice(0,12)){
+      for(const td of [...tr.cells].slice(2))assertText(td,td);
+      const name=tr.cells[1];check(w.getComputedStyle(name).textAlign==='left','names stay left');
+      const thumb=tr.querySelector('.catalogSPThumb');check(Math.abs(center(thumb)-center(tr.cells[0]))<.6,'thumb centered');
+     }
+    }
+    let table=scroll.querySelector('table');assertTable(table);
+    const originalWidths=[...table.tHead.rows[0].cells].map(c=>c.getBoundingClientRect().width);
+    const keys=[...table.querySelectorAll('[data-sp-sort]')].map(b=>b.dataset.spSort);
+    for(const key of keys)for(const arrow of ['▲','▼']){
+     scroll.querySelector('[data-sp-sort="'+key+'"]').click();await tick();table=scroll.querySelector('table');
+     check(table.querySelector('[data-sp-sort="'+key+'"]').textContent.endsWith(arrow),'sort arrow');assertTable(table);
+     check([...table.tHead.rows[0].cells].every((c,i)=>Math.abs(c.getBoundingClientRect().width-originalWidths[i])<.1),'sort does not alter widths');
+    }
+    const nav=d.querySelector('.siteHeader');w.scrollTo(0,w.scrollY+table.tHead.getBoundingClientRect().top-nav.getBoundingClientRect().bottom+100);w.dispatchEvent(new w.Event('scroll'));await tick();
+    const floating=root.querySelector('.catalogSPFloating');check(!floating.hidden,'floating active');assertTable(floating.querySelector('table'));
+    scroll.scrollLeft=999;scroll.dispatchEvent(new w.Event('scroll'));await tick();
+    const live=[...table.tHead.rows[0].cells],copy=[...floating.querySelectorAll('th')];
+    check(copy.every((c,i)=>Math.abs(center(c)-center(live[i]))<1),'floating column centers track horizontal scroll');
+    check(scroll.scrollHeight===scroll.clientHeight,'page-only vertical scroll');check(d.documentElement.scrollWidth<=width,'page fits');
+    reports.push({mode,width,table:table.getBoundingClientRect().width,horizontal:scroll.scrollWidth-scroll.clientWidth});
+    d.querySelector('[data-catalog-view="detail"]').click();w.scrollTo(0,0);await tick();check(floating.hidden,'detail hides floating');
+   }
+  }
+  out.textContent='PASS: text-range centers including ▲▼, numeric and SP effect cells, name left, thumb center, stable widths, floating header/columns, page scroll; '+JSON.stringify(reports);
+ }catch(e){out.textContent='FAIL: '+e.stack;}
+})();
+</script>
