@@ -9,7 +9,7 @@
    const w=frame.contentWindow,d=w.document;await w.eval('cardCatalogReady');check(!d.querySelector('#catalogStatus').dataset.errorKind,'initialized');
    const catalog=await w.loadRuntimeCardCatalog(),detail=()=>d.querySelector('[data-catalog-view="detail"]').click(),sp=()=>d.querySelector('[data-catalog-view="sp"]').click();
    const ids=()=>[...d.querySelectorAll('#catalogSP tbody tr')].map(n=>n.dataset.cardId),baseline=[...d.querySelectorAll('.catalogCard')].map(n=>n.dataset.cardId);
-   check(d.querySelector('#catalogSP').hidden&&d.querySelectorAll('.catalogViewModes button:disabled').length===2,'initial detail and unavailable modes');
+   check(d.querySelector('#catalogSP').hidden&&d.querySelectorAll('.catalogViewModes button:disabled').length===1,'initial detail and unavailable modes');
    w.updateUserCardState(baseline[0],{owned:true,training:4,opening:5});const stored=JSON.stringify(w.localStorage);
    sp();check(JSON.stringify(ids())===JSON.stringify(baseline),'same filter and order');
    check(d.querySelector('#catalogSP th').textContent==='', 'no Thumb caption');

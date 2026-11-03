@@ -22,6 +22,8 @@ async function renderCardCatalog(){
     const spTable = CatalogSPTable.mount(spRoot);
     const statusRoot = document.querySelector('#catalogStats');
     const statusTable = CatalogStatusTable.mount(statusRoot);
+    const activeRoot = document.querySelector('#catalogActive');
+    const activeTable = CatalogActiveTable.mount(activeRoot);
     let selectedTalents=new Set();
     const type = document.querySelector('#catalogType');
     let skillSelection=PassiveSkillFilter.empty();
@@ -44,9 +46,11 @@ async function renderCardCatalog(){
       container.hidden = view !== 'detail';
       spRoot.hidden = view !== 'sp';
       statusRoot.hidden = view !== 'status';
+      activeRoot.hidden = view !== 'active';
       container.replaceChildren();
       if(view === 'sp'){ spTable.render(cards, userStates); return; }
       if(view === 'status'){ statusTable.render(cards, userStates); return; }
+      if(view === 'active'){ activeTable.render(cards, userStates); return; }
       for(const card of cards){
         const panel = document.createElement('article');
         panel.className = 'panel catalogCard';

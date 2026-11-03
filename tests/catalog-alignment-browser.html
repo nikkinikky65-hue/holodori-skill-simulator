@@ -7,9 +7,9 @@
   for(const width of [1280,768,390]){
    frame.style.width=width+'px';frame.src='../card-catalog.html';await new Promise(r=>frame.onload=r);
    const w=frame.contentWindow,d=w.document;await w.eval('cardCatalogReady');
-   for(const mode of ['sp','status']){
+   for(const mode of ['sp','status','active']){
     d.querySelector('[data-catalog-view="'+mode+'"]').click();await tick();
-    const root=d.querySelector(mode==='sp'?'#catalogSP':'#catalogStats'),scroll=root.querySelector('.catalogSPScroll');
+    const root=d.querySelector(({sp:'#catalogSP',status:'#catalogStats',active:'#catalogActive'})[mode]),scroll=root.querySelector('.catalogSPScroll');
     const center=n=>{const r=n.getBoundingClientRect();return r.left+r.width/2;};
     function assertText(n,cell){
      const walker=d.createTreeWalker(n,w.NodeFilter.SHOW_TEXT);let text;

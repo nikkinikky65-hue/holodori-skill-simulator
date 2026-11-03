@@ -1,0 +1,56 @@
+<!doctype html><meta charset="utf-8"><pre id="result">RUNNING</pre><iframe style="border:0;height:900px"></iframe>
+<script>
+(async()=>{
+ const out=document.querySelector('#result'),frame=document.querySelector('iframe'),check=(v,m)=>{if(!v)throw Error(m);},tick=()=>new Promise(r=>setTimeout(r,60)),measurements=[];
+ try{
+  for(const width of [1280,768,390]){
+   frame.style.width=width+'px';frame.src='../card-catalog.html';await new Promise(r=>frame.onload=r);
+   const w=frame.contentWindow,d=w.document;await w.eval('cardCatalogReady');check(!d.querySelector('#catalogStatus').dataset.errorKind,'initialized');
+   const catalog=await w.loadRuntimeCardCatalog(),root=d.querySelector('#catalogActive'),mode=v=>d.querySelector('[data-catalog-view="'+v+'"]').click();
+   const rows=()=>[...root.querySelectorAll('tbody tr')],ids=()=>rows().map(r=>r.dataset.cardId);
+   w.updateUserCardState(catalog.cards[0].id,{owned:true,training:4,opening:5});const stored=JSON.stringify(w.localStorage);
+   mode('active');check(!root.hidden&&d.querySelector('#catalogSP').hidden&&d.querySelector('#catalogStats').hidden,'exclusive active');
+   const growth=root.querySelector('[data-sp-growth]'),opening=root.querySelector('[data-sp-custom]');
+   const set=(n,v)=>{n.value=v;n.dispatchEvent(new w.Event('change'));};
+   for(const rarity of [5,4,3]){
+    d.querySelector('[data-catalog-rarity="'+rarity+'"]').click();
+    for(const policy of ['initial','saved','max','custom']){
+     set(growth,policy);if(policy==='custom')set(opening,'saved');
+     check(rows().length===catalog.cards.filter(c=>c.classification.rarity.mapping.value===rarity).length,'all cards per rarity');
+     for(const tr of rows()){
+      const card=catalog.cards.find(c=>c.id===tr.dataset.cardId),expected=w.eval('CatalogActiveData').project(card,w.getUserCardState(card.id,w.readUserCardStates()),policy,opening.value);
+      check(tr.cells.length===7&&Number(tr.dataset.spLevel)===expected.level,'columns and level');
+      for(const key of ['interval','time','amount','probability','content'])check(tr.querySelector('[data-sp-field="'+key+'"]').textContent===(expected[key].map(e=>e.text+(e.condition||'')).join('')||'—'),'rendered '+key);
+     }
+    }
+   }
+   d.querySelector('[data-catalog-rarity="5"]').click();const baseline=ids();
+   for(const key of ['interval','time','amount','probability','name'])for(const dir of [-1,1]){
+    root.querySelector('[data-sp-sort="'+key+'"]').click();
+    let expected;if(key==='name')expected=w.eval('CatalogComparisonOrder').sortByAffiliation(baseline.map(id=>catalog.cards.find(c=>c.id===id)),dir).map(c=>c.id);
+    else expected=baseline.map(id=>w.eval('CatalogActiveData').project(catalog.cards.find(c=>c.id===id),w.getUserCardState(id,w.readUserCardStates()),growth.value,opening.value)).sort((a,b)=>w.eval('CatalogComparisonOrder').compare(a,b,key,dir)).map(r=>r.card.id);
+    check(JSON.stringify(ids())===JSON.stringify(expected),'descending/ascending stable sort '+key);
+   }
+   d.querySelector('#catalogTalentFilter button').click();const td=d.querySelector('.talentFilterDialog');td.querySelector('[data-talent-id="sakura_miko"]').click();td.querySelector('[data-talent-apply]').click();
+   d.querySelector('#catalogSkillFilter button').click();const sd=d.querySelector('.skillFilterDialog');sd.querySelector('[data-skill-axis="targets"][value="affiliation"]').click();sd.querySelector('[data-skill-apply]').click();
+   const search=d.querySelector('#catalogSearch');search.value='みこ';search.dispatchEvent(new w.Event('input'));set(d.querySelector('#catalogType'),'cute');
+   const expected=catalog.cards.filter(c=>c.classification.rarity.mapping.value===5&&c.member.mapping.id==='sakura_miko'&&c.classification.attributeType.mapping.value==='cute'&&w.eval('PassiveSkillFilter').matches(c,{condition:'',targets:['affiliation'],effects:[]})).map(c=>c.id).sort();
+   check(JSON.stringify(ids().sort())===JSON.stringify(expected),'AND filters');
+   for(const [view,selector] of [['sp','#catalogSP tbody tr'],['status','#catalogStats tbody tr'],['detail','.catalogCard']]){mode(view);check(JSON.stringify([...d.querySelectorAll(selector)].map(r=>r.dataset.cardId).sort())===JSON.stringify(expected),'shared matching '+view);}
+   mode('active');check(growth.value==='custom'&&opening.value==='saved','growth retained');
+   d.querySelector('#catalogTalentFilter button').click();td.querySelector('[data-talent-clear]').click();td.querySelector('[data-talent-apply]').click();d.querySelector('#catalogSkillFilter button').click();sd.querySelector('[data-skill-clear]').click();sd.querySelector('[data-skill-apply]').click();search.value='';search.dispatchEvent(new w.Event('input'));set(d.querySelector('#catalogType'),'');
+   await tick();const scroll=root.querySelector('.catalogSPScroll'),head=scroll.querySelector('thead'),nav=d.querySelector('.siteHeader');check(scroll.scrollHeight===scroll.clientHeight,'page-only vertical');
+   const x=rows()[0].cells[1].getBoundingClientRect().left;scroll.scrollLeft=999;await tick();check(Math.abs(rows()[0].cells[1].getBoundingClientRect().left-x)<1,'fixed name column');
+   w.scrollTo(0,w.scrollY+head.getBoundingClientRect().top-nav.getBoundingClientRect().bottom+100);w.dispatchEvent(new w.Event('scroll'));await tick();
+   // Sample after layout/scroll anchoring settles in the virtual-time iframe.
+   w.dispatchEvent(new w.Event('scroll'));await tick();
+   const floating=root.querySelector('.catalogSPFloating');check(!floating.hidden&&Math.abs(floating.getBoundingClientRect().top-nav.getBoundingClientRect().bottom)<1,'fixed header');check(floating.scrollLeft===scroll.scrollLeft,'horizontal sync');
+   floating.querySelector('[data-sp-sort="probability"]').click();await tick();check(scroll.querySelector('[data-sp-sort="probability"]').parentElement.getAttribute('aria-sort')==='descending','fixed header sorting');
+   check(d.documentElement.scrollWidth<=width,'page fits');if(width===1280)check(scroll.scrollWidth===scroll.clientWidth,'desktop fits');
+   measurements.push({width,table:scroll.querySelector('table').getBoundingClientRect().width,horizontal:scroll.scrollWidth-scroll.clientWidth});
+   check(JSON.stringify(w.localStorage)===stored,'no storage writes');mode('detail');await tick();check(d.querySelector('main').getBoundingClientRect().width<=1180&&floating.hidden,'detail restored');
+  }
+  out.textContent='PASS: Active 201 cards, growth/custom, source values/full effects, stable sorting, shared filters/modes, fixed header/columns, read-only, 1280/768/390 '+JSON.stringify(measurements);
+ }catch(e){out.textContent='FAIL: '+e.stack;}
+})();
+</script>

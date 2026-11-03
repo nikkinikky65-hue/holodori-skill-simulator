@@ -231,3 +231,5 @@ subprocess.run([jsc,"event-search-safety.js","tests/event-search-safety.test.js"
 subprocess.run(['python3',str(root/'tests/verify-catalog-sp.py')],cwd=root,check=True)
 
 subprocess.run(['python3',str(root/'tests/verify-catalog-status.py')],cwd=root,check=True)
+
+subprocess.run(['python3',str(root/'tests/verify-catalog-active.py')],cwd=root,check=True)

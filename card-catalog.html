@@ -18,7 +18,7 @@
     <button type="button" data-catalog-view="detail" aria-pressed="true">詳細</button>
     <button type="button" data-catalog-view="status" aria-pressed="false">ステータス</button>
     <button type="button" data-catalog-view="sp" aria-pressed="false">SP</button>
-    <button type="button" disabled>Active（未実装）</button>
+    <button type="button" data-catalog-view="active" aria-pressed="false">Active</button>
     <button type="button" disabled>Passive（未実装）</button>
   </div>
   <div class="catalogExport"><button id="catalogExport" type="button" disabled>所持・育成JSONを出力</button><span id="catalogExportStatus" role="status"></span></div>
@@ -36,6 +36,7 @@
 </section>
 <div id="catalogCards" class="catalogCards"></div>
 <section id="catalogStats" class="panel catalogStatus" hidden aria-label="ステータス比較"></section>
+<section id="catalogActive" class="panel catalogActive" hidden aria-label="Active比較"></section>
 <section id="catalogSP" class="panel" hidden aria-label="SP比較"></section>
 <section class="panel" aria-label="データについて">
   <h2>データについて</h2>
@@ -55,8 +56,10 @@
 <script src="catalog-comparison-table.js"></script>
 <script src="catalog-status-data.js"></script>
 <script src="catalog-status-table.js"></script>
+<script src="catalog-active-data.js"></script>
+<script src="catalog-active-table.js"></script>
 <script src="catalog-sp-data.js"></script>
 <script src="catalog-sp-table.js"></script>
-<script src="card-catalog.js?v=554923864a43"></script>
+<script src="card-catalog.js?v=3ff3bf7ad076"></script>
 </body>
 </html>
