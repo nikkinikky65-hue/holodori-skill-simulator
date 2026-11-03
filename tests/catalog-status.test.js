@@ -13,7 +13,7 @@
    const selected=canonicalBloomLevels(card,opening).passive;
    const original=byId.get(card.id).skills.passive.levels.find(l=>l.levelFact.rawValue===selected);
    const texts=original.facts.filter(f=>f.source.table==='LangGeneratedLivePassiveSkillLevel_Jpn'&&f.sourceField==='text').map(f=>f.rawValue);
-   check(texts.length===1&&row.passive.length===1&&row.passive[0].text===texts[0],'exact Canonical full text '+card.id);
+   check(texts.length===1&&row.passive.length===1&&row.passive[0].text===skillDescriptionText(texts[0]),'Canonical text with display tags removed '+card.id);
    check(row.passiveLevel===selected,'passive growth level');combinations++;
   }
   for(const mode of ['initial','saved','max']){
@@ -29,9 +29,9 @@
  const multiple=JSON.parse(JSON.stringify(catalog.cards[0]));
  const text='[attribute=cute]キュート[/attribute]のPが10%UP\n全員のSが20%UP <b>原文</b>';
  multiple.skills.passive.levels[0].description=text;
- check(CatalogStatusData.project(multiple,state).passive[0].text===text,'all effects, tags and newlines retained');
+ check(CatalogStatusData.project(multiple,state).passive[0].text==='キュートのPが10%UP\n全員のSが20%UP <b>原文</b>','all effects and newlines retained; decoration removed; HTML remains literal');
  delete multiple.skills.passive;check(CatalogStatusData.project(multiple,state).passive.length===0,'absent passive');
  const effectCounts=canonical.cards.flatMap(c=>c.skills.passive.levels.map(l=>l.sourceReferences.filter(r=>r.target.table==='LivePassiveSkillEffect').length));
- print('Passive audit: '+effectCounts.length+' levels, maximum effect references '+Math.max(...effectCounts)+'; exact full-text equality across growth states PASS');
+ print('Passive audit: '+effectCounts.length+' levels, maximum effect references '+Math.max(...effectCounts)+'; full-text display equality across growth states PASS');
  print('PASS status: '+catalog.cards.length+' cards / '+combinations+' growth combinations match detail; TOTAL sum, policies, custom, missing, immutable');
 }

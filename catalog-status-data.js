@@ -13,7 +13,7 @@ const CatalogStatusData = (() => {
    row.passiveLevel=level;
    const description=card.skills.passive?.levels?.find(item=>item.level===level)?.description;
    // Whole localized skill text, not interpreted or reconstructed effect fragments.
-   if(typeof description==='string'&&description.length)row.passive=[{text:description}];
+   if(typeof description==='string'&&description.length)row.passive=[{text:skillDescriptionText(description)}];
   }catch(error){row.error=[row.error,error.message].filter(Boolean).join(' / ');}
   return row;
  }
