@@ -7,7 +7,9 @@
    const row=CatalogActiveData.project(card,{opening,training:4},'saved'),level=card.skills.active.levels.find(l=>l.level===row.level),original=resolve(level.source);
    check(!row.error&&!row.unknown.length,'known data '+card.id);
    check(row.level===canonicalBloomLevels(card,opening).active,'existing opening rule');
-   for(const [key,field,divisor] of [['interval','coolTimeMillisecond',1000],['time','effectDurationMillisecond',1000],['probability','activationProbabilityPermilMultiply',10]])check(row[key][0].value===fact(original,field)/divisor,'Canonical '+field);
+   for(const [key,field,divisor] of [['interval','coolTimeMillisecond',1000],['time','effectDurationMillisecond',1000]])check(row[key][0].value===fact(original,field)/divisor,'Canonical '+field);
+   const expectedQuality={low:[1,'小'],mid:[2,'中'],high:[3,'大']}[/高確率/.test(fact(original,'text'))?'high':/中確率/.test(fact(original,'text'))?'mid':/低確率/.test(fact(original,'text'))?'low':null];
+   check(row.probability[0].value===expectedQuality[0]&&row.probability[0].text===expectedQuality[1],'Canonical qualitative probability');
    const effects=[level.baseEffect,...level.conditionalOverrides.map(e=>e.replacementEffect)];
    const expected=Math.max(...effects.map(e=>Number(fact(resolve(e.source),'value'))))/10;
    check(row.amount.length===1&&row.amount[0].value===expected,'Canonical maximum effect, not sum');
@@ -24,8 +26,9 @@
  }
  check(JSON.stringify(catalog)===before,'immutable source');
  const fake=JSON.parse(JSON.stringify(catalog.cards[0])),l=fake.skills.active.levels[0];
- l.raw.activationProbabilityPermilMultiply=null;l.raw.effectDurationMillisecond=null;l.baseEffect.raw.type='UNKNOWN';
+ l.qualitativeProbability={value:'unknown'};l.raw.activationProbabilityPermilMultiply=999;l.raw.effectDurationMillisecond=null;l.baseEffect.raw.type='UNKNOWN';
  let row=CatalogActiveData.project(fake,{opening:0});check(row.probability[0].text==='—'&&row.time[0].text==='—'&&row.amount[0].text==='—','missing/unknown values never estimated');check(row.unknown.length>0,'unknown maximum reported');
+ for(const [value,text,rank] of [['low','小',1],['mid','中',2],['high','大',3]]){l.qualitativeProbability={value};const q=CatalogActiveData.project(fake,{opening:0}).probability[0];check(q.text===text&&q.value===rank,'qualitative display and sort rank independent of raw percent');}
  l.evaluationScope='one-active-effect-select-base-or-matching-override';l.baseEffect.raw.type='LiveActiveSkillEffectType_LIVE_ACTIVE_SKILL_EFFECT_TYPE_SCORE_UP_PERMIL_UP';l.conditionalOverrides=[{condition:{description:'条件A'},replacementEffect:{...l.baseEffect,raw:{...l.baseEffect.raw,value:'1230'}}},{condition:{description:'条件B'},replacementEffect:{...l.baseEffect,raw:{...l.baseEffect.raw,value:'4560'}}}];l.description+='\n条件A：123%\n条件B：456%';
  row=CatalogActiveData.project(fake,{opening:0});check(row.amount.length===1&&row.amount[0].value===456,'multiple alternatives choose max');check(row.conditions.map(e=>e.text).join('/')==='条件A/条件B','all conditions remain');
  l.conditionalOverrides[1].replacementEffect.raw.value=null;check(CatalogActiveData.project(fake,{opening:0}).amount[0].text==='—','missing alternative prevents inferred max');

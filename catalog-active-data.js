@@ -9,11 +9,12 @@ const CatalogActiveData = (() => {
    row.level=canonicalBloomLevels(card,opening).active;
    const level=card.skills.active.levels.find(l=>l.level===row.level);
    if(!level)throw Error('Activeレベルの原データがありません');
-   for(const [key,field,divisor,unit] of [['interval','coolTimeMillisecond',1000,'秒'],['time','effectDurationMillisecond',1000,'秒'],['probability','activationProbabilityPermilMultiply',10,'%']]){
+   for(const [key,field,divisor,unit] of [['interval','coolTimeMillisecond',1000,'秒'],['time','effectDurationMillisecond',1000,'秒']]){
     let value=number(level.raw?.[field]);
-    if(key==='probability'&&value>1000)value=null;
     row[key]=[cell(value===null?null:value/divisor,unit)];
    }
+   const quality={low:{value:1,text:'小'},mid:{value:2,text:'中'},high:{value:3,text:'大'}}[level.qualitativeProbability?.value];
+   row.probability=[quality||{value:null,text:'—'}];
    const overrides=level.conditionalOverrides||[];
    const effects=[level.baseEffect,...overrides.map(e=>e.replacementEffect)];
    // Compare alternatives of the same supported score effect, never sum them.
