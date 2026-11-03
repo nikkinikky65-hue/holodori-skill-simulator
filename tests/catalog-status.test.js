@@ -13,7 +13,7 @@
    const selected=canonicalBloomLevels(card,opening).passive;
    const original=byId.get(card.id).skills.passive.levels.find(l=>l.levelFact.rawValue===selected);
    const texts=original.facts.filter(f=>f.source.table==='LangGeneratedLivePassiveSkillLevel_Jpn'&&f.sourceField==='text').map(f=>f.rawValue);
-   check(texts.length===1&&row.passive.length===1&&row.passive[0].text===skillDescriptionText(texts[0]),'Canonical text with display tags removed '+card.id);
+   check(texts.length===1&&row.passive.length===1&&row.passive[0].text===skillDescriptionText(original.effect.effect.facts.find(f=>f.sourceField==='text').rawValue)+(original.effect.condition?.sourceFacts?.length?' ※':''),'Canonical effect text and condition marker '+card.id);
    check(row.passiveLevel===selected,'passive growth level');combinations++;
   }
   for(const mode of ['initial','saved','max']){
@@ -32,6 +32,15 @@
  check(CatalogStatusData.project(multiple,state).passive[0].text==='キュートのPが10%UP\n全員のSが20%UP <b>原文</b>','all effects and newlines retained; decoration removed; HTML remains literal');
  delete multiple.skills.passive;check(CatalogStatusData.project(multiple,state).passive.length===0,'absent passive');
  const effectCounts=canonical.cards.flatMap(c=>c.skills.passive.levels.map(l=>l.sourceReferences.filter(r=>r.target.table==='LivePassiveSkillEffect').length));
- print('Passive audit: '+effectCounts.length+' levels, maximum effect references '+Math.max(...effectCounts)+'; full-text display equality across growth states PASS');
+ const effect={description:'[attribute=pure]ピュアタイプ[/attribute]2人のパフォーマンスが43%UP'};
+ const conditional={description:'ピュアタイプ2人以上でピュアタイプ2人のパフォーマンスが43%UP',effect,condition:{state:'observed',referenceState:'present',clauses:[{type:'condition'}],description:'ピュアタイプ2人以上で'}};
+ check(CatalogStatusData.passiveText(conditional)[0].text==='ピュアタイプ2人のパフォーマンスが43%UP ※','condition removed without losing target/count/amount');
+ const unknown={...conditional,condition:{state:'unobserved'}};
+ check(CatalogStatusData.passiveText(unknown)[0].text===conditional.description,'unknown condition preserves full text');
+ const extra={...conditional,description:conditional.description+'\n全員のセンスが20%UP'};
+ check(CatalogStatusData.passiveText(extra)[0].text===extra.description,'additional effect never lost');
+ const multi={...extra,effects:[conditional,{description:'全員のセンスが20%UP'}]};
+ check(CatalogStatusData.passiveText(multi)[0].text===multi.description,'unknown multi-effect schema preserves all original conditions');
+ print('Passive audit: '+effectCounts.length+' levels, maximum effect references '+Math.max(...effectCounts)+'; structured effect display and marker equality across growth states PASS');
  print('PASS status: '+catalog.cards.length+' cards / '+combinations+' growth combinations match detail; TOTAL sum, policies, custom, missing, immutable');
 }

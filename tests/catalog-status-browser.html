@@ -20,7 +20,7 @@
      for(const tr of rows()){
       const card=catalog.cards.find(c=>c.id===tr.dataset.cardId),expected=w.eval('CatalogStatusData').project(card,w.getUserCardState(card.id,w.readUserCardStates()),policy,opening.value,training.value);
       check(tr.cells.length===7,'seven columns');
-      check(tr.querySelector('[data-sp-field="passive"]').textContent===(expected.passive.map(e=>e.text).join('')||'—'),'full Passive text at selected level');
+      check(tr.querySelector('[data-sp-field="passive"]').textContent===(expected.passive.map(e=>e.text).join('')||'—'),'formatted Passive at selected level');
       check(!/\[(?:attribute=|\/attribute|highlight|\/highlight)/.test(tr.querySelector('[data-sp-field="passive"]').textContent),'no internal decoration tags');
       for(const key of ['performance','technique','sense','total'])check(tr.querySelector('[data-sp-field="'+key+'"]').textContent===expected[key][0].text,'rendered stat '+key);
      }
