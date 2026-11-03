@@ -30,7 +30,7 @@
     let table=scroll.querySelector('table');assertTable(table);
     const originalWidths=[...table.tHead.rows[0].cells].map(c=>c.getBoundingClientRect().width);
     const keys=[...table.querySelectorAll('[data-sp-sort]')].map(b=>b.dataset.spSort);
-    for(const key of keys)for(const arrow of ['▲','▼']){
+    for(const key of keys)for(const arrow of ['▼','▲']){
      scroll.querySelector('[data-sp-sort="'+key+'"]').click();await tick();table=scroll.querySelector('table');
      check(table.querySelector('[data-sp-sort="'+key+'"]').textContent.endsWith(arrow),'sort arrow');assertTable(table);
      check([...table.tHead.rows[0].cells].every((c,i)=>Math.abs(c.getBoundingClientRect().width-originalWidths[i])<.1),'sort does not alter widths');

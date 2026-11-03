@@ -1,7 +1,7 @@
 const CatalogComparisonTable = (() => {
   const el=(tag,text)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;return n;};
   function mount(root,config){
-    let cards=[],states={},sortKey=null,direction=1;
+    let cards=[],states={},sortKey=null,direction=-1;
     const controls=el('div');controls.className='catalogSPControls';
     function selector(caption,options){const label=el('label',caption+' '),select=el('select');for(const [value,text] of options)select.append(new Option(text,value));label.append(select);controls.append(label);select.addEventListener('change',render);return select;}
     const mode=selector('育成状態',[['initial','初期値'],['saved','保存状態'],['max','最大育成'],['custom','カスタム']]);mode.dataset.spGrowth='';
@@ -45,7 +45,7 @@ const CatalogComparisonTable = (() => {
       const head=el('thead'),tr=el('tr');
       for(const [key,label] of [['image',''],['name','カード名／タレント名'],...config.columns]){
         const th=el('th');th.scope='col';
-        if(key==='name'||config.numeric.includes(key)){const button=el('button',label+(sortKey===key?(direction===1?' ▲':' ▼'):''));button.type='button';button.dataset.spSort=key;button.addEventListener('click',()=>{direction=sortKey===key?-direction:1;sortKey=key;render();});th.setAttribute('aria-sort',sortKey===key?(direction===1?'ascending':'descending'):'none');th.append(button);}else th.textContent=label;
+        if(key==='name'||config.numeric.includes(key)){const button=el('button',label+(sortKey===key?(direction===1?' ▲':' ▼'):''));button.type='button';button.dataset.spSort=key;button.addEventListener('click',()=>{direction=sortKey===key?-direction:-1;sortKey=key;render();});th.setAttribute('aria-sort',sortKey===key?(direction===1?'ascending':'descending'):'none');th.append(button);}else th.textContent=label;
         if(key==='image')th.setAttribute('aria-label','カード画像');
         if(key==='name')th.title='所属・期生順（同一期生内は図鑑順を維持）';
         tr.append(th);

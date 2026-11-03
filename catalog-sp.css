@@ -40,10 +40,12 @@ main.wrap:has(#catalogSP:not([hidden]),#catalogStats:not([hidden])) > .panel:not
 .catalogSPControls label { white-space:nowrap; }
 .catalogViewModes button { min-height:36px; padding:6px 12px; border:1px solid #94a3b8; border-radius:6px; }
 
-/* Six-column status layout; all interaction and density rules above are shared. */
-.catalogStatus .catalogSPTable { min-width:424px; }
-.catalogStatus .catalogSPTable th:nth-child(n+3) { width:14%; }
-@media(max-width:600px){ .catalogStatus .catalogSPTable th:nth-child(n+3) { width:64px; } }
+/* Status layout with full Passive text; all interaction and density rules above are shared. */
+.catalogStatus .catalogSPTable { min-width:744px; }
+.catalogStatus .catalogSPTable th:nth-child(n+3):nth-child(-n+6) { width:64px; }
+.catalogStatus .catalogSPTable th:nth-child(7) { width:320px; }
+.catalogStatus [data-sp-field="passive"] { white-space:pre-wrap; overflow-wrap:anywhere; }
+
 
 /* Center bounded condition text within its shared data column as well. */
 .catalogSPTable td:nth-child(n+3) small { margin-inline:auto; }

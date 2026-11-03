@@ -19,17 +19,20 @@
      check(rows().length===catalog.cards.filter(c=>c.classification.rarity.mapping.value===rarity).length,'all cards per rarity');
      for(const tr of rows()){
       const card=catalog.cards.find(c=>c.id===tr.dataset.cardId),expected=w.eval('CatalogStatusData').project(card,w.getUserCardState(card.id,w.readUserCardStates()),policy,opening.value,training.value);
-      check(tr.cells.length===6,'six columns');
+      check(tr.cells.length===7,'seven columns');
+      check(tr.querySelector('[data-sp-field="passive"]').textContent===(expected.passive.map(e=>e.text).join('')||'—'),'full Passive text at selected level');
       for(const key of ['performance','technique','sense','total'])check(tr.querySelector('[data-sp-field="'+key+'"]').textContent===expected[key][0].text,'rendered stat '+key);
      }
     }
    }
    d.querySelector('[data-catalog-rarity="5"]').click();
-   for(const key of ['performance','technique','sense','total'])for(const dir of [1,-1]){
+   const baseline=w.sortCatalogCardsForDisplay(catalog.cards.filter(c=>c.classification.rarity.mapping.value===5)).map(c=>c.id);
+   for(const key of ['performance','technique','sense','total'])for(const dir of [-1,1]){
     root.querySelector('[data-sp-sort="'+key+'"]').click();const nums=rows().map(r=>Number(r.querySelector('[data-sp-field="'+key+'"]').textContent.replaceAll(',','')));
     check(nums.every((n,i)=>!i||dir*(n-nums[i-1])>=0),'numeric sort '+key);
+    check(nums.every((n,i)=>!i||n!==nums[i-1]||baseline.indexOf(ids()[i-1])<baseline.indexOf(ids()[i])),'equal values retain catalog order');
    }
-   for(const dir of [1,-1]){root.querySelector('[data-sp-sort="name"]').click();const cards=catalog.cards.filter(c=>c.classification.rarity.mapping.value===5);const expected=w.eval('CatalogComparisonOrder').sortByAffiliation(cards,dir).map(c=>c.id);check(JSON.stringify(ids())===JSON.stringify(expected),'shared affiliation sort');}
+   for(const dir of [-1,1]){root.querySelector('[data-sp-sort="name"]').click();const cards=catalog.cards.filter(c=>c.classification.rarity.mapping.value===5);const expected=w.eval('CatalogComparisonOrder').sortByAffiliation(cards,dir).map(c=>c.id);check(JSON.stringify(ids())===JSON.stringify(expected),'shared affiliation sort');}
    // Filters are independent of mode and retain the same matching card set.
    d.querySelector('#catalogTalentFilter button').click();const td=d.querySelector('.talentFilterDialog');td.querySelector('[data-talent-id="sakura_miko"]').click();td.querySelector('[data-talent-apply]').click();
    d.querySelector('#catalogSkillFilter button').click();const sd=d.querySelector('.skillFilterDialog');sd.querySelector('[data-skill-axis="targets"][value="affiliation"]').click();sd.querySelector('[data-skill-apply]').click();
@@ -41,12 +44,12 @@
    const x=rows()[0].cells[1].getBoundingClientRect().left;scroll.scrollLeft=999;await tick();check(Math.abs(rows()[0].cells[1].getBoundingClientRect().left-x)<1,'fixed name column');
    w.scrollTo(0,w.scrollY+head.getBoundingClientRect().top-nav.getBoundingClientRect().bottom+100);w.dispatchEvent(new w.Event('scroll'));await tick();
    const floating=root.querySelector('.catalogSPFloating');check(!floating.hidden&&Math.abs(floating.getBoundingClientRect().top-nav.getBoundingClientRect().bottom)<1,'fixed header below nav');check(floating.scrollLeft===scroll.scrollLeft,'header synced');
-   floating.querySelector('[data-sp-sort="total"]').click();await tick();check(scroll.querySelector('[data-sp-sort="total"]').parentElement.getAttribute('aria-sort')==='ascending','fixed header sort');
+   floating.querySelector('[data-sp-sort="total"]').click();await tick();check(scroll.querySelector('[data-sp-sort="total"]').parentElement.getAttribute('aria-sort')==='descending','fixed header sort');
    check(d.documentElement.scrollWidth<=width,'page fits');if(width===1280)check(scroll.scrollWidth===scroll.clientWidth,'desktop fits');
    measurements.push({width,table:scroll.querySelector('table').getBoundingClientRect().width,horizontal:scroll.scrollWidth-scroll.clientWidth});
    check(JSON.stringify(w.localStorage)===stored,'no storage writes');mode('detail');await tick();check(d.querySelector('main').getBoundingClientRect().width<=1180&&floating.hidden,'detail restored');mode('status');root.scrollIntoView();w.dispatchEvent(new w.Event('scroll'));await tick();
   }
-  out.textContent='PASS: 201 cards, six columns, growth, custom, stats, sort, AND filters, shared SP/detail selection, fixed header/columns, read-only, 1280/768/390 '+JSON.stringify(measurements);
+  out.textContent='PASS: 201 cards, seven columns, growth, custom, stats, sort, AND filters, shared SP/detail selection, fixed header/columns, read-only, 1280/768/390 '+JSON.stringify(measurements);
  }catch(e){out.textContent='FAIL: '+e.stack;}
 })();
 </script>

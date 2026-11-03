@@ -14,7 +14,7 @@
    sp();check(JSON.stringify(ids())===JSON.stringify(baseline),'same filter and order');
    check(d.querySelector('#catalogSP th').textContent==='', 'no Thumb caption');
    check(!d.querySelector('#catalogSP tbody').textContent.includes('SP Lv.'),'no displayed SP level');
-   for(const dir of [1,-1]){
+   for(const dir of [-1,1]){
     d.querySelector('[data-sp-sort="name"]').click();
     const expected=w.eval('CatalogSPData').sortByAffiliation(baseline.map(id=>catalog.cards.find(c=>c.id===id)),dir).map(c=>c.id);
     check(JSON.stringify(ids())===JSON.stringify(expected),'affiliation direction '+dir);
@@ -33,7 +33,7 @@
     }
    }
    check(JSON.stringify(w.localStorage)===stored,'growth previews are read-only');
-   for(const key of ['time','support','probability','life'])for(const dir of [1,-1]){
+   for(const key of ['time','support','probability','life'])for(const dir of [-1,1]){
     d.querySelector('[data-sp-sort="'+key+'"]').click();const rows=ids().map(id=>w.eval('CatalogSPData').project(catalog.cards.find(c=>c.id===id),w.getUserCardState(id,w.readUserCardStates()),growth.value,custom.value));
     check(rows.every((r,i)=>!i||w.eval('CatalogSPData').compare(rows[i-1],r,key,dir)<=0),'sort '+key+' '+dir);
    }
@@ -62,7 +62,7 @@
    check(d.documentElement.scrollWidth<=width,'page fits '+width);
    const rows=[...scroll.querySelectorAll('tbody tr')],top=floating.getBoundingClientRect().bottom;
    measurements.push({width,viewportHeight:w.innerHeight,main:d.querySelector('main').clientWidth,scrollWidth:scroll.clientWidth,table:scroll.querySelector('table').getBoundingClientRect().width,columns:cols.map(v=>Math.round(v*100)/100),horizontal:scroll.scrollWidth-scroll.clientWidth,rowHeight:rows[0].getBoundingClientRect().height,fullRows:rows.filter(n=>{const r=n.getBoundingClientRect();return r.top>=top&&r.bottom<=w.innerHeight;}).length});
-   floating.querySelector('[data-sp-sort="time"]').click();await tick();check(scroll.querySelector('[data-sp-sort="time"]').parentElement.getAttribute('aria-sort')==='ascending','floating header sort');
+   floating.querySelector('[data-sp-sort="time"]').click();await tick();check(scroll.querySelector('[data-sp-sort="time"]').parentElement.getAttribute('aria-sort')==='descending','floating header sort');
    check([...d.querySelectorAll('.catalogSPThumb')].every(box=>box.textContent==='画像なし'),'failure keeps fallback text');
    // Deterministic missing/success images; no request to any real external image host.
    w.scrollTo(0,w.scrollY+scroll.getBoundingClientRect().top-100);scroll.scrollLeft=0;await tick();const firstThumb=d.querySelector('#catalogSP .catalogSPThumb'),img=firstThumb.querySelector('img');if(img){img.dispatchEvent(new w.Event('error'));check(!firstThumb.querySelector('img')&&firstThumb.textContent==='画像なし','failed thumb placeholder');}
