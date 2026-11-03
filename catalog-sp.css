@@ -53,4 +53,4 @@ main.wrap:has(#catalogSP:not([hidden]),#catalogStats:not([hidden]),#catalogActiv
 .catalogActive .catalogSPTable { min-width:744px; }
 .catalogActive .catalogSPTable th:nth-child(n+3):nth-child(-n+6) { width:64px; }
 .catalogActive .catalogSPTable th:nth-child(7) { width:320px; }
-.catalogActive [data-sp-field="content"] { white-space:pre-wrap; overflow-wrap:anywhere; }
+.catalogActive [data-sp-field="conditions"] { white-space:pre-wrap; overflow-wrap:anywhere; }

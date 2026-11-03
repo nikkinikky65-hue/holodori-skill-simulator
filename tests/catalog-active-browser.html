@@ -20,7 +20,7 @@
      for(const tr of rows()){
       const card=catalog.cards.find(c=>c.id===tr.dataset.cardId),expected=w.eval('CatalogActiveData').project(card,w.getUserCardState(card.id,w.readUserCardStates()),policy,opening.value);
       check(tr.cells.length===7&&Number(tr.dataset.spLevel)===expected.level,'columns and level');
-      for(const key of ['interval','time','amount','probability','content'])check(tr.querySelector('[data-sp-field="'+key+'"]').textContent===(expected[key].map(e=>e.text+(e.condition||'')).join('')||'—'),'rendered '+key);
+      for(const key of ['interval','time','amount','probability','conditions'])check(tr.querySelector('[data-sp-field="'+key+'"]').textContent===(expected[key].map(e=>e.text+(e.condition||'')).join('')||'—'),'rendered '+key);
      }
     }
    }
@@ -50,7 +50,7 @@
    measurements.push({width,table:scroll.querySelector('table').getBoundingClientRect().width,horizontal:scroll.scrollWidth-scroll.clientWidth});
    check(JSON.stringify(w.localStorage)===stored,'no storage writes');mode('detail');await tick();check(d.querySelector('main').getBoundingClientRect().width<=1180&&floating.hidden,'detail restored');
   }
-  out.textContent='PASS: Active 201 cards, growth/custom, source values/full effects, stable sorting, shared filters/modes, fixed header/columns, read-only, 1280/768/390 '+JSON.stringify(measurements);
+  out.textContent='PASS: Active 201 cards, growth/custom, maximum effect/source conditions, stable sorting, shared filters/modes, fixed header/columns, read-only, 1280/768/390 '+JSON.stringify(measurements);
  }catch(e){out.textContent='FAIL: '+e.stack;}
 })();
 </script>
