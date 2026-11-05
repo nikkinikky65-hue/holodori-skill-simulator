@@ -1074,3 +1074,10 @@
 .formationTotalLabel { display:block; font-size:10px; color:#475569; margin-top:5px; }
 .formationMemberTotal { display:block; font-size:14px; font-variant-numeric:tabular-nums; overflow-wrap:anywhere; }
 .formationTotalWarning,.formationTotalStatus { font-size:12px; color:#475569; }
+
+/* Full artwork is decoration for catalog detail cards only. */
+#catalogCards > .catalogCard.catalogFullBackground {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}

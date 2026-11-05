@@ -55,6 +55,21 @@ async function renderCardCatalog(){
         const panel = document.createElement('article');
         panel.className = 'panel catalogCard';
         panel.dataset.cardId = card.id;
+        // Detail-only decoration: reveal only a successfully decoded Full image.
+        const full = CardImageResolver.candidates(card.id).find(candidate => candidate.kind === 'full');
+        if(full){
+          const background = new Image();
+          background.onload = () => {
+            if(!panel.isConnected) return;
+            panel.style.backgroundImage = `linear-gradient(rgba(255,255,255,.88), rgba(255,255,255,.88)), url(${JSON.stringify(full.url)})`;
+            panel.classList.add('catalogFullBackground');
+          };
+          background.onerror = () => {
+            panel.style.removeProperty('background-image');
+            panel.classList.remove('catalogFullBackground');
+          };
+          background.src = full.url;
+        }
         let userState = getUserCardState(card.id, userStates);
         const ownedLabel = document.createElement('label'); ownedLabel.className = 'catalogOwned';
         const owned = document.createElement('input'); owned.type = 'checkbox'; owned.dataset.catalogOwned = '';

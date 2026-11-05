@@ -1,0 +1,30 @@
+<!doctype html><meta charset="utf-8"><pre id="result">RUNNING</pre><iframe style="border:0;height:1000px"></iframe>
+<script>
+(async()=>{
+const result=document.querySelector('pre'),frame=document.querySelector('iframe');
+const check=(v,m)=>{if(!v)throw Error(m)},tick=()=>new Promise(r=>setTimeout(r,60));
+try{
+frame.style.width='1280px';frame.src='../card-catalog.html';await new Promise(r=>frame.onload=r);
+const w=frame.contentWindow,d=w.document;await w.eval('cardCatalogReady');
+const resolver=w.eval('CardImageResolver'),original=resolver.candidates,cards=[...d.querySelectorAll('.catalogCard')];
+const ids=cards.slice(0,3).map(c=>c.dataset.cardId),before=JSON.stringify(w.localStorage);
+const calls=[];resolver.candidates=id=>{calls.push(id);return id===ids[2]?[]:original(id).map(c=>({...c,url:c.url+(id===ids[0]?'?image-test=full':'')}));};
+const search=d.querySelector('#catalogSearch');search.dispatchEvent(new w.Event('input'));
+for(let n=0;n<150&&!d.querySelector('.catalogFullBackground');n++)await tick();
+const find=id=>[...d.querySelectorAll('.catalogCard')].find(c=>c.dataset.cardId===id);
+check(find(ids[0]).classList.contains('catalogFullBackground'),'successful Full background');
+check(find(ids[0]).style.backgroundImage.includes('linear-gradient')&&find(ids[0]).style.backgroundImage.includes('/cards/full/'),'overlay and Full only');
+check(!find(ids[1]).style.backgroundImage&&!find(ids[2]).style.backgroundImage,'failed/unregistered original background');
+check(ids.every(id=>find(id).textContent.includes('TOTAL')),'information independent of images');
+for(const width of [1280,768,390]){
+frame.style.width=width+'px';await tick();check(d.documentElement.scrollWidth<=width,'page width '+width);
+check(w.getComputedStyle(find(ids[0])).backgroundSize.split(',').every(value=>value.trim()==='cover'),'cover '+width);
+check(find(ids[0]).getBoundingClientRect().height>0,'card visible');
+}
+check(JSON.stringify(w.localStorage)===before,'loading does not change saved state');
+for(const mode of ['sp','status','active']){d.querySelector(`[data-catalog-view="${mode}"]`).click();await tick();check(d.querySelector('#catalogCards').hidden&&!d.querySelector('.catalogFullBackground'),'comparison untouched '+mode);}
+d.querySelector('[data-catalog-view="detail"]').click();for(let n=0;n<150&&!d.querySelector('.catalogFullBackground');n++)await tick();check(!!d.querySelector('.catalogFullBackground'),'detail reentry');
+result.textContent='PASS: Full success, failure/unregistered fallback, overlay, numeric text, no storage mutation, detail reentry, comparison isolation, 1280/768/390';
+}catch(e){result.textContent='FAIL: '+e.stack;}
+})();
+</script>
