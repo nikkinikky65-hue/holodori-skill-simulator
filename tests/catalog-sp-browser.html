@@ -77,7 +77,7 @@
    let childMutations=0;const observer=new w.MutationObserver(xs=>{childMutations+=xs.length;});observer.observe(success.parentElement,{childList:true});
    success.dispatchEvent(new w.Event('load'));await tick();observer.disconnect();check(childMutations===0,'repeat load does not detach image');
    const box=success.parentElement;success.dispatchEvent(new w.Event('error'));check(!box.querySelector('img')&&box.textContent==='画像なし','error hides loaded image');
-   check([...d.querySelectorAll('#catalogSP img')].every(i=>i.src.includes('/cards/webp/thumb/')),'thumb only');resolver.candidates=original;
+   check([...d.querySelectorAll('#catalogSP img')].every(i=>i.src.includes('/cards/thumb/')),'thumb only');resolver.candidates=original;
    detail();check(!d.querySelector('#catalogCards').hidden&&!d.querySelector('#catalogExport').disabled,'detail and export retained');check(JSON.stringify(w.localStorage)===stored,'all comparison actions preserve storage');check(d.querySelector('#catalogSP .catalogSPFloating').getBoundingClientRect().height===0,'floating hidden in detail');sp();d.querySelector('#catalogSP').scrollIntoView();await tick();
   }
   out.textContent='PASS: initial/detail/SP, 201 data, growth and cells, saved/custom read-only, numeric sorting, shared talent/search/rarity/type filters, thumb success/failure, fixed columns/header, 1280/768/390, export retained; MEASUREMENTS '+JSON.stringify(measurements);

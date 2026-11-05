@@ -30,7 +30,7 @@ check(Math.abs(w.document.querySelector('.formationThumbs').getBoundingClientRec
 check(w.getComputedStyle(cells()[0].querySelector('img')).objectFit==='contain','contain');
 check(localStorage.getItem(key)===before,'image loading does not change stored snapshots');
 const requests=w.performance.getEntriesByType('resource').filter(r=>r.initiatorType==='img');
-check(requests.length>=3&&requests.every(r=>r.name.includes('/cards/webp/thumb/')),'Thumb only; no thin/full attempts');
+check(requests.length>=3&&requests.every(r=>r.name.includes('/cards/thumb/')),'Thumb only; no thin/full attempts');
 check(!requests.some(r=>r.name.includes('missing-card')),'unknown has no inferred URL');
 let panel=w.document.querySelector('.savedFormation');w.prompt=()=> '画像検証コピー';panel.querySelectorAll('button')[1].click();
 check(store.read().formations.length===2&&JSON.stringify(store.read().formations[1].snapshot)===JSON.stringify(snapshot),'duplicate snapshot intact');

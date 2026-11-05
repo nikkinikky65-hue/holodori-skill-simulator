@@ -32,3 +32,7 @@ R2キーはユーザー訂正確認による（Thinの格納先はportrait/）�
 ### R2階層の訂正
 
 ユーザー確認済みの実キーは `cards/webp/full/`・`cards/webp/thumb/`・`cards/webp/portrait/`。公開Resolverの全279パスにwebp/を追加する。Thinの論理種別とフォールバック順は維持。旧節のwebp/なしのURLは本節で置き換える。Worker・Access設定は変更しない。実配信の認証後確認は別途必要。
+
+### 確定したWebP配信構造（過去の階層訂正に優先）
+
+Worker URLは `/cards/full/{公開名}.webp`・`/cards/thumb/{公開名}.webp`・`/cards/portrait/{公開名}.webp`。Workerがassets/を付加し、R2の `assets/cards/{full|thumb|portrait}/{公開名}.webp` を参照する（ユーザーが正常動作確認済み）。Resolverは先頭assets/のみ除去し、Worker URLにassets/やwebp/を含めない。内部画像種別thinとThin→Thumb→Fullの順序は維持し、thinのURLディレクトリだけportraitにする。93枚の公開名は変更しない。WORKSPACE側のResolver・画像参照は変更しない。
