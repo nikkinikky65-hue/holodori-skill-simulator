@@ -15,7 +15,7 @@ for card, entries in images.items():
     names=set()
     for kind,path in entries.items():
         directory='portrait' if kind=='thin' else kind
-        assert path.startswith(f'assets/cards/{directory}/'),path
+        assert path.startswith(f'assets/cards/webp/{directory}/'),path
         assert re.fullmatch(re.escape(slug)+r'-r5-c[0-9]{3,}\.webp',Path(path).name),path
         names.add(Path(path).name);paths.append(path)
     assert len(names)==1,card

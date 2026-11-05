@@ -28,3 +28,7 @@ python3 -B tests/verify-parameter-comparison-browser.py --page unit-parameter-co
 公開Resolverは非公開変換台帳の93枚・279公開名に切替。source=workerを維持し、Full/Thumb/Thinはcards/full/・cards/thumb/・cards/portrait/のWebPを参照する。Thin→Thumb→Full優先順とThumb限定UIは変更しない。カードIDは保存互換性のため維持、画像パスの内部asset IDは除去。上記旧84枚・PNGパスの記述は本節で置き換える。
 
 R2キーはユーザー訂正確認による（Thinの格納先はportrait/）。独立したWorker取得確認は全候補HTTP403のため未完了で、画像本体の存在・Content-Type・Access認証後の表示は断定しない。Cloudflare設定変更や認証回避は行っていない。台帳とmanifest、共通assetsのWebPハッシュを279件照合（ローカルThumb相当はportrait/へ移動済み）。localモードは公開名のassets/cards/{kind}パスを返すが、公開リポジトリへ画像は配置しない。
+
+### R2階層の訂正
+
+ユーザー確認済みの実キーは `cards/webp/full/`・`cards/webp/thumb/`・`cards/webp/portrait/`。公開Resolverの全279パスにwebp/を追加する。Thinの論理種別とフォールバック順は維持。旧節のwebp/なしのURLは本節で置き換える。Worker・Access設定は変更しない。実配信の認証後確認は別途必要。
