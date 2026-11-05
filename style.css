@@ -1079,6 +1079,6 @@
 #catalogCards > .catalogCard.catalogFullBackground {
   /* Overlay covers the card; artwork fits its width without changing aspect ratio. */
   background-size: 100% 100%, 100% auto;
-  background-position: center;
+  background-position: center top;
   background-repeat: no-repeat;
 }

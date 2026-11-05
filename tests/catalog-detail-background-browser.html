@@ -21,6 +21,7 @@ frame.style.width=width+'px';await tick();check(d.documentElement.scrollWidth<=w
 const backgroundStyle=w.getComputedStyle(find(ids[0]));
 const sizes=backgroundStyle.backgroundSize.split(',').map(value=>value.trim());
 check(sizes[0]==='100% 100%'&&['100%', '100% auto'].includes(sizes[1]),'full overlay and width-fit artwork '+width);
+check(backgroundStyle.backgroundPosition.split(',').every(value=>value.trim()==='50% 0%'),'top-centered background '+width);
 check(backgroundStyle.backgroundRepeat.split(',').every(value=>value.trim()==='no-repeat'),'no background tiling '+width);
 check(backgroundStyle.backgroundImage.includes('0.88'),'white 88% overlay retained '+width);
 check(find(ids[0]).getBoundingClientRect().height>0,'card visible');
@@ -28,7 +29,7 @@ check(find(ids[0]).getBoundingClientRect().height>0,'card visible');
 check(JSON.stringify(w.localStorage)===before,'loading does not change saved state');
 for(const mode of ['sp','status','active']){d.querySelector(`[data-catalog-view="${mode}"]`).click();await tick();check(d.querySelector('#catalogCards').hidden&&!d.querySelector('.catalogFullBackground'),'comparison untouched '+mode);}
 d.querySelector('[data-catalog-view="detail"]').click();for(let n=0;n<150&&!d.querySelector('.catalogFullBackground');n++)await tick();check(!!d.querySelector('.catalogFullBackground'),'detail reentry');
-result.textContent='PASS: Full success, failure/unregistered fallback, width-fit artwork, full overlay, numeric text, no storage mutation, detail reentry, comparison isolation, 1280/768/390';
+result.textContent='PASS: Full success, failure/unregistered fallback, top-aligned width-fit artwork, full overlay, numeric text, no storage mutation, detail reentry, comparison isolation, 1280/768/390';
 }catch(e){result.textContent='FAIL: '+e.stack;}
 })();
 </script>
