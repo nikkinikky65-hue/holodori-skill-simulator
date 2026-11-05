@@ -16,7 +16,7 @@ const cells=()=>[...w.document.querySelectorAll('.formationThumb')];
 await wait(()=>cells()[0]?.querySelector('img')?.style.visibility==='visible'&&!cells()[1]?.querySelector('img')&&cells()[4]?.querySelector('img')?.style.visibility==='visible');
 check(cells().length===5&&cells().map(c=>c.dataset.slot).join()==='1,2,3,4,5','five slots in order');
 check(cells()[2].textContent==='未設定'&&cells()[3].textContent==='画像なし'&&cells()[1].textContent==='画像なし','empty unknown failed labels');
-check(cells()[0].querySelector('img').src.includes(mapped[0].id.slice(5))&&cells()[4].querySelector('img').src.includes(mapped[4].id.slice(5)),'image identity');
+check([0,4].every(i=>cells()[i].querySelector('img').src===new URL(resolver.candidates(mapped[i].id).find(c=>c.kind==='thumb').url,w.document.baseURI).href),'image identity matches each slot Thumb URL');
 check(w.document.querySelector('.formationThumbs').compareDocumentPosition(w.document.querySelector('.formationMembers')) & 4,'images above member text');
 for(const width of [1920,1280,768,390,360]){
  frame.style.width=width+'px';await new Promise(r=>setTimeout(r,50));const boxes=cells().map(c=>c.getBoundingClientRect());

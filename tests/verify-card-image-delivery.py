@@ -5,11 +5,21 @@ ROOT=Path(__file__).resolve().parent.parent
 JSC='/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Helpers/jsc'
 source=(ROOT/'card-image-resolver.js').read_text()
 images=json.loads(re.search(r'const images = (\{.*?\});',source,re.S).group(1))
-canonical=json.loads((ROOT/'research/canonical-cards.json').read_text())
-raw={r['sourceId']:r['fields'] for r in canonical['sourceRecords'] if r['table']=='Card'}
+catalog=json.loads((ROOT/'data/runtime-cards.json').read_text())
+cards={c['id']:c for c in catalog['cards']}
+assert len(images)==93
+paths=[]
 for card, entries in images.items():
+    assert card in cards and set(entries)=={'thin','thumb','full'}
+    slug=cards[card]['member']['mapping']['id'].replace('_','-')
+    names=set()
     for kind,path in entries.items():
-        assert Path(path).name==f"img_card_{kind}_{raw[card]['assetId']}.png",card
+        directory='portrait' if kind=='thin' else kind
+        assert path.startswith(f'assets/cards/{directory}/'),path
+        assert re.fullmatch(re.escape(slug)+r'-r5-c[0-9]{3,}\.webp',Path(path).name),path
+        names.add(Path(path).name);paths.append(path)
+    assert len(names)==1,card
+assert len(paths)==len(set(paths))==279
 for mode in ['local','worker']:
     script=source.replace("const source = 'worker';",f"const source = '{mode}';")
     script+='\nconst ids='+json.dumps(list(images))+';print(JSON.stringify(ids.map(id=>CardImageResolver.candidates(id))));\n'

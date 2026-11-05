@@ -28,7 +28,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         if self.path.startswith('/image-test/cards/'):
             worker_requests.append(self.path)
             kind=self.path.split('/')[3]
-            allowed={'thin':'thin','thumb':'thumb','full':'full'}
+            allowed={'portrait':'thin','thumb':'thumb','full':'full'}
             if 'image-test='+allowed.get(kind,'invalid') in self.path:
                 self.send_response(200);self.send_header('Content-Type','image/svg+xml');self.end_headers();self.wfile.write(b'<svg xmlns="http://www.w3.org/2000/svg" width="88" height="400"><rect width="88" height="400" fill="#467a90"/></svg>');return
             self.send_error(404);return

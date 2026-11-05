@@ -22,3 +22,9 @@ python3 -B tests/verify-parameter-comparison-browser.py --page unit-parameter-co
 ブラウザーテストはテスト用HTTPサーバーがWorker URLだけをローカルの模擬レスポンスに置き換える。通常404、画像成功テストではメモリ上の小さなSVGを返す。カード画像ファイルは不要。これは実Worker・Accessの認証成功を確認するものではない。
 
 2026-10-31: 画像表示テストは201枚に合わせ、成功・Thumb/Fullへのフォールバック・全失敗、1920/1280/768/390px、計算値・保存・Active操作を検証。既存の他画面のブラウザーテストには196枚を期待するものが残り、今回の変更前から件数で失敗する。これらの期待値は本変更では修正しない。
+
+## 2026-11-05 公開用WebPへの参照切替
+
+公開Resolverは非公開変換台帳の93枚・279公開名に切替。source=workerを維持し、Full/Thumb/Thinはcards/full/・cards/thumb/・cards/portrait/のWebPを参照する。Thin→Thumb→Full優先順とThumb限定UIは変更しない。カードIDは保存互換性のため維持、画像パスの内部asset IDは除去。上記旧84枚・PNGパスの記述は本節で置き換える。
+
+R2キーはユーザー訂正確認による（Thinの格納先はportrait/）。独立したWorker取得確認は全候補HTTP403のため未完了で、画像本体の存在・Content-Type・Access認証後の表示は断定しない。Cloudflare設定変更や認証回避は行っていない。台帳とmanifest、共通assetsのWebPハッシュを279件照合（ローカルThumb相当はportrait/へ移動済み）。localモードは公開名のassets/cards/{kind}パスを返すが、公開リポジトリへ画像は配置しない。
