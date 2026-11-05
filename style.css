@@ -1077,7 +1077,8 @@
 
 /* Full artwork is decoration for catalog detail cards only. */
 #catalogCards > .catalogCard.catalogFullBackground {
-  background-size: cover;
+  /* Overlay covers the card; artwork fits its width without changing aspect ratio. */
+  background-size: 100% 100%, 100% auto;
   background-position: center;
   background-repeat: no-repeat;
 }
